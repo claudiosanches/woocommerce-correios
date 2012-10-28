@@ -3,7 +3,7 @@ Contributors: claudiosanches, rodrigoprior
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,9 +48,16 @@ You should have received a copy of the GNU General Public License along with Aut
 == Changelog ==
 
 = 1.0 =
-* Initial plugin release.
+* Adicionado sistema de verificação e notificação sobre a falta de SOAP no servidor.
+* Melhorada a inclusão das classes dos Correios no plugin.
+
+= 1.0 =
+* Versão incial do plugin.
 
 == Upgrade Notice ==
+
+= 1.1 =
+* Fixed soap error.
 
 = 1.0 =
 * Enjoy it.
