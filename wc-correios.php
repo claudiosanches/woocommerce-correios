@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.0
+ * Version: 1.0.1
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -14,17 +14,22 @@
 define( 'WOO_CORREIOS_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
- * Classes.
- */
-include_once WOO_CORREIOS_PATH . 'correios/SOAP.php';
-include_once WOO_CORREIOS_PATH . 'correios/Cubage.php';
-
-/**
  * WooCommerce fallback notice.
  */
 function wccorreios_woocommerce_fallback_notice(){
     $message = '<div class="error">';
         $message .= '<p>' . __( 'WooCommerce Correios depends on <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to work!' , 'wccorreios' ) . '</p>';
+    $message .= '</div>';
+
+    echo $message;
+}
+
+/**
+ * WooCommerce SOAP missing notice.
+ */
+function wccorreios_woocommerce_soap_missing_notice(){
+    $message = '<div class="error">';
+        $message .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> to work!' , 'wccorreios' ) . '</p>';
     $message .= '</div>';
 
     echo $message;
@@ -39,6 +44,12 @@ function wccorreios_shipping_load() {
 
     if ( !class_exists( 'WC_Shipping_Method' ) ) {
         add_action( 'admin_notices', 'wccorreios_woocommerce_fallback_notice' );
+
+        return;
+    }
+
+    if ( !extension_loaded( 'soap' ) ) {
+        add_action( 'admin_notices', 'wccorreios_woocommerce_soap_missing_notice' );
 
         return;
     }
@@ -467,6 +478,9 @@ function wccorreios_shipping_load() {
          */
         function correios_connect( $package ) {
             global $woocommerce;
+
+            include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
+            include_once WOO_CORREIOS_PATH . 'Correios/Cubage.php';
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
