@@ -16,7 +16,7 @@ define( 'WOO_CORREIOS_PATH', plugin_dir_path( __FILE__ ) );
 /**
  * WooCommerce fallback notice.
  */
-function wccorreios_woocommerce_fallback_notice(){
+function wccorreios_woocommerce_fallback_notice() {
     $message = '<div class="error">';
         $message .= '<p>' . __( 'WooCommerce Correios depends on <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to work!' , 'wccorreios' ) . '</p>';
     $message .= '</div>';
@@ -27,7 +27,7 @@ function wccorreios_woocommerce_fallback_notice(){
 /**
  * WooCommerce SOAP missing notice.
  */
-function wccorreios_woocommerce_soap_missing_notice(){
+function wccorreios_woocommerce_soap_missing_notice() {
     $message = '<div class="error">';
         $message .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> to work!' , 'wccorreios' ) . '</p>';
     $message .= '</div>';
