@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.0.1
+ * Version: 1.1
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -350,7 +350,6 @@ function wccorreios_shipping_load() {
                         )
                     );
                 }
-
             }
 
             // Register the rate
@@ -379,18 +378,23 @@ function wccorreios_shipping_load() {
                 $product = $values['data'];
                 $qty = $values['quantity'];
 
-                if ( $qty > 0 && $product->needs_shipping() ) {
-                    $height[$count] = $product->height;
-                    $width[$count]  = $product->width;
-                    $length[$count] = $product->length;
+                if ( $qty > 0 && $product->needs_shipping() && !empty( $product->height ) && !empty( $product->width ) && !empty( $product->length ) && !empty( $product->weight ) ) {
+
+                    $_height = woocommerce_get_dimension( $product->height, 'cm' );
+                    $_width  = woocommerce_get_dimension( $product->width, 'cm' );
+                    $_length = woocommerce_get_dimension( $product->length, 'cm' );
+
+                    $height[$count] = $_height;
+                    $width[$count]  = $_width;
+                    $length[$count] = $_length;
                     $weight        += $product->weight;
 
                     if ( $qty > 1 ) {
                         $n = $count;
                         for ($i = 0; $i < $qty; $i++) {
-                            $height[$n] = $product->height;
-                            $width[$n]  = $product->width;
-                            $length[$n] = $product->length;
+                            $height[$n] = $_height;
+                            $width[$n]  = $_width;
+                            $length[$n] = $_length;
                             $weight    += $product->weight;
                             $n++;
                         }
@@ -402,10 +406,10 @@ function wccorreios_shipping_load() {
             }
 
             return array(
-                'height' => $height,
-                'length' => $length,
-                'width'  => $width,
-                'weight' => $weight,
+                'height' => array_values( $height ),
+                'length' => array_values( $length ),
+                'width'  => array_values( $width ),
+                'weight' => woocommerce_get_weight( $weight, 'kg' ),
             );
         }
 
@@ -463,7 +467,7 @@ function wccorreios_shipping_load() {
             $msg = $label;
 
             if ( $date > 0 ) {
-                $msg = $label . ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days' ,$date , 'wccorreios' ),  $date ) . ')';
+                $msg = $label . ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days' , $date, 'wccorreios' ),  $date ) . ')';
             }
 
             return $msg;
@@ -484,6 +488,12 @@ function wccorreios_shipping_load() {
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
+
+echo '<pre>';
+print_r($measures);
+echo '</pre>';
+
+
             $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
             $totalcubage = $cubage->cubage();
 

@@ -3,7 +3,7 @@ Contributors: claudiosanches, rodrigoprior
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,7 +47,13 @@ You should have received a copy of the GNU General Public License along with Aut
 
 == Changelog ==
 
-= 1.0 =
+== 1.1 - 05/09/2012  =
+* Adicionada conversão de pesos para kg (padrão dos Correios).
+* Adicionada conversão de medidas para cm (padrão dos Correios).
+* Cubagem: removido os produtos que não possuem pesos ou medidas.
+* Correção do index do array de medidas (causava erro no carrinho quando tinha um segundo produto com quantidade maior do que 1).
+
+= 1.0.1 =
 * Adicionado sistema de verificação e notificação sobre a falta de SOAP no servidor.
 * Melhorada a inclusão das classes dos Correios no plugin.
 
@@ -57,6 +63,9 @@ You should have received a copy of the GNU General Public License along with Aut
 == Upgrade Notice ==
 
 = 1.1 =
+* Fixed several errors, upgrade recommended.
+
+= 1.0.1 =
 * Fixed soap error.
 
 = 1.0 =
