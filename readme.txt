@@ -1,6 +1,6 @@
 === WooCommerce Correios ===
 Contributors: claudiosanches, rodrigoprior
-Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce
+Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
 Requires at least: 3.0
 Tested up to: 3.4.2
 Stable tag: 1.1

@@ -391,7 +391,7 @@ function wccorreios_shipping_load() {
 
                     if ( $qty > 1 ) {
                         $n = $count;
-                        for ($i = 0; $i < $qty; $i++) {
+                        for ( $i = 0; $i < $qty; $i++ ) {
                             $height[$n] = $_height;
                             $width[$n]  = $_width;
                             $length[$n] = $_length;
@@ -488,11 +488,6 @@ function wccorreios_shipping_load() {
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
-
-echo '<pre>';
-print_r($measures);
-echo '</pre>';
-
 
             $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
             $totalcubage = $cubage->cubage();
