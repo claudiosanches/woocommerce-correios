@@ -3,7 +3,7 @@ Contributors: claudiosanches, rodrigoprior
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.1
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,7 +47,10 @@ You should have received a copy of the GNU General Public License along with Aut
 
 == Changelog ==
 
-== 1.2 - 12/09/2012  =
+== 1.2.1 - 12/09/2012  =
+* Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
+
+== 1.2 - 11/09/2012  =
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
@@ -65,6 +68,9 @@ You should have received a copy of the GNU General Public License along with Aut
 * Versão incial do plugin.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+* Fixed virtual product errors.
 
 = 1.2 =
 * Added optional class with SimpleXML.

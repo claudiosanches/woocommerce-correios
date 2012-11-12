@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.2
+ * Version: 1.2.1
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -104,7 +104,7 @@ function wccorreios_shipping_load() {
             // Load the settings.
             $this->init_settings();
 
-            // Define user set variables
+            // Define user set variables.
             $this->enabled            = $this->settings['enabled'];
             $this->title              = $this->settings['title'];
             $this->declare_value      = $this->settings['declare_value'];
@@ -324,7 +324,7 @@ function wccorreios_shipping_load() {
          * calculate_shipping function.
          *
          * @access public
-         * @param array $package (default: array())
+         * @param array $package (default: array()).
          * @return void
          */
         function calculate_shipping( $package = array() ) {
@@ -352,7 +352,7 @@ function wccorreios_shipping_load() {
                 }
             }
 
-            // Register the rate
+            // Register the rate.
             foreach ( $rate as $key => $value) {
                 $this->add_rate( $value );
             }
@@ -373,7 +373,7 @@ function wccorreios_shipping_load() {
             $length    = array();
             $weight    = '';
 
-            // Shipping per item
+            // Shipping per item.
             foreach ( $package['contents'] as $item_id => $values ) {
                 $product = $values['data'];
                 $qty = $values['quantity'];
@@ -421,13 +421,13 @@ function wccorreios_shipping_load() {
          */
         function correios_services_list() {
             $list = array(
-                '41106' => 'PAC',        // sem contrato
-                '40010' => 'SEDEX',      // sem contrato
-                '40215' => 'SEDEX 10',   // sem contrato
-                '40290' => 'SEDEX Hoje', // sem contrato
-                '41068' => 'PAC',        // com contrato
-                '40096' => 'SEDEX',      // com contrato
-                '81019' => 'e-SEDEX',    // com contrato
+                '41106' => 'PAC',        // sem contrato.
+                '40010' => 'SEDEX',      // sem contrato.
+                '40215' => 'SEDEX 10',   // sem contrato.
+                '40290' => 'SEDEX Hoje', // sem contrato.
+                '41068' => 'PAC',        // com contrato.
+                '40096' => 'SEDEX',      // com contrato.
+                '81019' => 'e-SEDEX',    // com contrato.
             );
 
             return $list;
@@ -489,65 +489,79 @@ function wccorreios_shipping_load() {
             // Proccess measures.
             $measures = $this->order_shipping( $package );
 
-            $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
-            $totalcubage = $cubage->cubage();
+            // Checks if the cart is not just virtual goods.
+            if ( !empty( $measures['height'] ) && !empty( $measures['width'] ) && !empty( $measures['length'] ) ) {
 
-            $services = array_values( $this->correios_services() );
-            $zipDestination = $package['destination']['postcode'];
+                // Get the Cubage.
+                $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
+                $totalcubage = $cubage->cubage();
 
-            // Test min values
-            $min_height = $this->minimum_height;
-            $min_width  = $this->minimum_width;
-            $min_length = $this->minimum_length;
+                $services = array_values( $this->correios_services() );
+                $zipDestination = $package['destination']['postcode'];
 
-            $height = ( $totalcubage['height'] < $min_height ) ? $min_height : $totalcubage['height'];
-            $width  = ( $totalcubage['width'] < $min_width ) ? $min_width : $totalcubage['width'];
-            $length = ( $totalcubage['length'] < $min_length ) ? $min_length : $totalcubage['length'];
+                // Test min values.
+                $min_height = $this->minimum_height;
+                $min_width  = $this->minimum_width;
+                $min_length = $this->minimum_length;
 
-            $declared = '0';
-            if ( $this->declare_value == 'declare' ) {
-                $declared = $woocommerce->cart->cart_contents_total;
-            }
+                $height = ( $totalcubage['height'] < $min_height ) ? $min_height : $totalcubage['height'];
+                $width  = ( $totalcubage['width'] < $min_width ) ? $min_width : $totalcubage['width'];
+                $length = ( $totalcubage['length'] < $min_length ) ? $min_length : $totalcubage['length'];
 
-            if ( extension_loaded( 'soap' ) ) {
+                $declared = '0';
+                if ( $this->declare_value == 'declare' ) {
+                    $declared = $woocommerce->cart->cart_contents_total;
+                }
 
-                $quotes = new Correios_SOAP(
-                    $services,
-                    $this->zip_origin,
-                    $zipDestination,
-                    $height,
-                    $width,
-                    0,
-                    $length,
-                    $measures['weight'],
-                    $this->login,
-                    $this->password,
-                    $declared
-                );
+                if ( extension_loaded( 'soap' ) ) {
+
+                    $quotes = new Correios_SOAP(
+                        $services,
+                        $this->zip_origin,
+                        $zipDestination,
+                        $height,
+                        $width,
+                        0,
+                        $length,
+                        $measures['weight'],
+                        $this->login,
+                        $this->password,
+                        $declared
+                    );
+
+                } else {
+
+                    include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
+
+                    $quotes = new Correios_SimpleXML(
+                        $services,
+                        $this->zip_origin,
+                        $zipDestination,
+                        $height,
+                        $width,
+                        0,
+                        $length,
+                        $measures['weight'],
+                        $this->login,
+                        $this->password,
+                        $declared
+                    );
+
+                }
+
+                return $quotes->calculateShipping();
 
             } else {
 
-                include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
+                // Cart only with virtual products.
+                $error = new stdClass();
 
-                $quotes = new Correios_SimpleXML(
-                    $services,
-                    $this->zip_origin,
-                    $zipDestination,
-                    $height,
-                    $width,
-                    0,
-                    $length,
-                    $measures['weight'],
-                    $this->login,
-                    $this->password,
-                    $declared
-                );
+                $error->NoCubage->Erro = 99999;
 
+                return $error;
             }
-
-            return $quotes->calculateShipping();
         }
 
-    } // class WC_Correios
+    } // class WC_Correios.
 
-} // function wccorreios_shipping_load
+} // function wccorreios_shipping_load.
