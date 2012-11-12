@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios v1.0.1\n"
+"Project-Id-Version: WooCommerce Correios v1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-10-28 03:17:38+0000\n"
+"PO-Revision-Date: 2012-11-12 03:13:28+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -255,7 +255,7 @@ msgstr "Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm"
 msgid "Correios is a brazilian delivery method."
 msgstr "Correios é um método de entrega brasileiro."
 
-#: wc-correios.php:466
+#: wc-correios.php:470
 #, php-format
 #@ wccorreios
 msgid "Delivery in %d working day"
@@ -274,14 +274,14 @@ msgstr "WooCommerce Correios"
 msgid "WooCommerce Correios depends on <a href=\"http://wordpress.org/extend/plugins/woocommerce/\">WooCommerce</a> to work!"
 msgstr "WooCommerce Correios precisa do plugin <a href=\"http://wordpress.org/extend/plugins/woocommerce/\">WooCommerce</a> para funcionar!"
 
+#: wc-correios.php:32
+#@ wccorreios
+msgid "WooCommerce Correios depends to <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> or <a href=\"http://php.net/manual/en/book.simplexml.php\">SimpleXML</a> to work!"
+msgstr "WooCommerce Correios precisa de <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> ou <a href=\"http://php.net/manual/en/book.simplexml.php\">SimpleXML</a> para funcionar!"
+
 #. translators: plugin header field 'Version'
 #: wc-correios.php:0
 #@ wccorreios
-msgid "1.0.1"
-msgstr "1.0.1"
-
-#: wc-correios.php:32
-#@ wccorreios
-msgid "WooCommerce Correios depends to <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> to work!"
-msgstr "WooCommerce Correios precisa de <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> para funcionar!"
+msgid "1.2"
+msgstr "1.2"
 

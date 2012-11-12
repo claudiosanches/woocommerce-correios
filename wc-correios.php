@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.1
+ * Version: 1.2
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -25,11 +25,11 @@ function wccorreios_woocommerce_fallback_notice() {
 }
 
 /**
- * WooCommerce SOAP missing notice.
+ * SOAP and SimpleXML missing notice.
  */
-function wccorreios_woocommerce_soap_missing_notice() {
+function wccorreios_extensions_missing_notice() {
     $message = '<div class="error">';
-        $message .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> to work!' , 'wccorreios' ) . '</p>';
+        $message .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> or <a href="http://php.net/manual/en/book.simplexml.php">SimpleXML</a> to work!' , 'wccorreios' ) . '</p>';
     $message .= '</div>';
 
     echo $message;
@@ -48,8 +48,8 @@ function wccorreios_shipping_load() {
         return;
     }
 
-    if ( !extension_loaded( 'soap' ) ) {
-        add_action( 'admin_notices', 'wccorreios_woocommerce_soap_missing_notice' );
+    if ( !extension_loaded( 'soap' ) && !extension_loaded( 'simplexml' ) ) {
+        add_action( 'admin_notices', 'wccorreios_extensions_missing_notice' );
 
         return;
     }
@@ -483,8 +483,8 @@ function wccorreios_shipping_load() {
         function correios_connect( $package ) {
             global $woocommerce;
 
-            include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
             include_once WOO_CORREIOS_PATH . 'Correios/Cubage.php';
+            include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
@@ -509,19 +509,41 @@ function wccorreios_shipping_load() {
                 $declared = $woocommerce->cart->cart_contents_total;
             }
 
-            $quotes = new Correios_SOAP(
-                $services,
-                $this->zip_origin,
-                $zipDestination,
-                $height,
-                $width,
-                0,
-                $length,
-                $measures['weight'],
-                $this->login,
-                $this->password,
-                $declared
-            );
+            if ( extension_loaded( 'soap' ) ) {
+
+                $quotes = new Correios_SOAP(
+                    $services,
+                    $this->zip_origin,
+                    $zipDestination,
+                    $height,
+                    $width,
+                    0,
+                    $length,
+                    $measures['weight'],
+                    $this->login,
+                    $this->password,
+                    $declared
+                );
+
+            } else {
+
+                include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
+
+                $quotes = new Correios_SimpleXML(
+                    $services,
+                    $this->zip_origin,
+                    $zipDestination,
+                    $height,
+                    $width,
+                    0,
+                    $length,
+                    $measures['weight'],
+                    $this->login,
+                    $this->password,
+                    $declared
+                );
+
+            }
 
             return $quotes->calculateShipping();
         }

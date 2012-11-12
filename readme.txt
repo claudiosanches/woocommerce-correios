@@ -47,6 +47,10 @@ You should have received a copy of the GNU General Public License along with Aut
 
 == Changelog ==
 
+== 1.2 - 12/09/2012  =
+* Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
+* Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
+
 == 1.1 - 05/09/2012  =
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
@@ -61,6 +65,9 @@ You should have received a copy of the GNU General Public License along with Aut
 * Versão incial do plugin.
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Added optional class with SimpleXML.
 
 = 1.1 =
 * Fixed several errors, upgrade recommended.
