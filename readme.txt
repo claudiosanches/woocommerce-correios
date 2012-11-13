@@ -133,14 +133,14 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Changelog ==
 
-== 1.2.1 - 12/09/2012  =
+= 1.2.1 - 12/09/2012  =
 * Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
 
-== 1.2 - 11/09/2012  =
+= 1.2 - 11/09/2012  =
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
-== 1.1 - 05/09/2012  =
+= 1.1 - 05/09/2012  =
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
 * Cubagem: removido os produtos que não possuem pesos ou medidas.
