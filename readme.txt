@@ -3,7 +3,7 @@ Contributors: claudiosanches, rodrigoprior
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.2.1
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ You should have received a copy of the GNU General Public License along with Aut
 == Frequently Asked Questions ==
 
 = What is the plugin license? =
+
 * This plugin is released under a GPL license.
 
 ### FAQ em Português:
@@ -133,41 +134,61 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Changelog ==
 
+= 1.3 - 30/11/2012 =
+
+* Adicionada opção para logs de erro.
+* Adiciona opção para selecionar o tipo de conexão (SOAP ou SimpleXML) caso esteja disponível mais de uma opção no servidor.
+
 = 1.2.1 - 12/09/2012  =
+
 * Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
 
 = 1.2 - 11/09/2012  =
+
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
 = 1.1 - 05/09/2012  =
+
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
 * Cubagem: removido os produtos que não possuem pesos ou medidas.
 * Correção do index do array de medidas (causava erro no carrinho quando tinha um segundo produto com quantidade maior do que 1).
 
 = 1.0.1 =
+
 * Adicionado sistema de verificação e notificação sobre a falta de SOAP no servidor.
 * Melhorada a inclusão das classes dos Correios no plugin.
 
 = 1.0 =
-* Versão incial do plugin.
+
+* Versão inicial do plugin.
 
 == Upgrade Notice ==
 
+= 1.3 =
+
+* Added error logs.
+* Added option to sets connection method.
+
 = 1.2.1 =
+
 * Fixed virtual product errors.
 
 = 1.2 =
+
 * Added optional class with SimpleXML.
 
 = 1.1 =
+
 * Fixed several errors, upgrade recommended.
 
 = 1.0.1 =
+
 * Fixed soap error.
 
 = 1.0 =
+
 * Enjoy it.
 
 == Screenshots ==
