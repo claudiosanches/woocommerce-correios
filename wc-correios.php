@@ -134,8 +134,8 @@ function wccorreios_shipping_load() {
                 $this->log = $woocommerce->logger();
             }
 
-            // Acitions.
-            add_action( 'woocommerce_update_options_shipping_'.$this->id, array( &$this, 'process_admin_options' ) );
+            // Actions.
+            add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
         }
 
         /**
