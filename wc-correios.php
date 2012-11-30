@@ -62,9 +62,8 @@ function wccorreios_shipping_load() {
     /**
      * wccorreios_add_method function.
      *
-     * @package     WooCommerce/Classes/Shipping
-     * @access public
      * @param array $methods
+     *
      * @return array
      */
     function wccorreios_add_method( $methods ) {
@@ -82,10 +81,9 @@ function wccorreios_shipping_load() {
         /**
          * __construct function.
          *
-         * @access public
          * @return void
          */
-        function __construct() {
+        public function __construct() {
             $this->id           = 'correios';
             $this->method_title = __('Correios', 'wccorreios');
             $this->init();
@@ -94,10 +92,9 @@ function wccorreios_shipping_load() {
         /**
          * init function.
          *
-         * @access public
          * @return void
          */
-        function init() {
+        public function init() {
             global $woocommerce;
 
             // Load the form fields.
@@ -127,23 +124,28 @@ function wccorreios_shipping_load() {
             $this->minimum_length     = $this->settings['minimum_length'];
             $this->debug              = $this->settings['debug'];
 
-            add_action( 'woocommerce_update_options_shipping_'.$this->id, array( &$this, 'process_admin_options' ) );
+            // Connection method.
+            if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
+                $this->connection_method = $this->settings['connection_method'];
+            }
 
             // Active logs.
             if ( $this->debug == 'yes' ) {
                 $this->log = $woocommerce->logger();
             }
+
+            // Acitions.
+            add_action( 'woocommerce_update_options_shipping_'.$this->id, array( &$this, 'process_admin_options' ) );
         }
 
         /**
          * init_form_fields function.
          *
-         * @access public
          * @return void
          */
-        function init_form_fields() {
+        public function init_form_fields() {
             global $woocommerce;
-            $this->form_fields = array(
+            $form_fields = array(
                 'enabled' => array(
                     'title'            => __( 'Enable', 'wccorreios' ),
                     'type'             => 'checkbox',
@@ -279,27 +281,47 @@ function wccorreios_shipping_load() {
                     'default'          => '16',
                 ),
                 'testing' => array(
-                    'title' => __( 'Testing', 'wccorreios' ),
-                    'type' => 'title',
-                    'description' => '',
+                    'title'            => __( 'Testing', 'wccorreios' ),
+                    'type'             => 'title',
+                    'description'      => '',
                 ),
                 'debug' => array(
-                    'title' => __( 'Debug Log', 'wccorreios' ),
-                    'type' => 'checkbox',
-                    'label' => __( 'Enable logging', 'wccorreios' ),
-                    'default' => 'no',
-                    'description' => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wccorreios' ),
+                    'title'            => __( 'Debug Log', 'wccorreios' ),
+                    'type'             => 'checkbox',
+                    'label'            => __( 'Enable logging', 'wccorreios' ),
+                    'default'          => 'no',
+                    'description'      => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wccorreios' ),
                 )
             );
+
+            if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
+                $form_fields['connection'] = array(
+                    'title'       => __( 'Connection', 'wccorreios' ),
+                    'type'        => 'title',
+                    'description' => ''
+                );
+
+                $form_fields['connection_method'] = array(
+                    'title'       => __( 'Connection method', 'wccorreios' ),
+                    'type'        => 'select',
+                    'description' => __( 'Choose between SOAP or SimpleXML method', 'wccorreios' ),
+                    'default'     => 'soap',
+                    'options'     => array(
+                        'soap'      => __( 'SOAP', 'wccorreios' ),
+                        'simplexml' => __( 'SimpleXML', 'wccorreios' ),
+                    )
+                );
+            }
+
+            $this->form_fields = $form_fields;
         }
 
         /**
          * admin_options function.
          *
-         * @access public
          * @return void
          */
-        function admin_options() {
+        public function admin_options() {
             global $woocommerce; ?>
             <h3><?php echo $this->method_title; ?></h3>
             <p><?php _e( 'Correios is a brazilian delivery method.', 'wccorreios' ); ?></p>
@@ -313,11 +335,11 @@ function wccorreios_shipping_load() {
         /**
          * is_available function.
          *
-         * @access public
          * @param array $package
+         *
          * @return bool
          */
-        function is_available( $package ) {
+        public function is_available( $package ) {
             global $woocommerce;
             $is_available = true;
 
@@ -343,11 +365,11 @@ function wccorreios_shipping_load() {
         /**
          * calculate_shipping function.
          *
-         * @access public
          * @param array $package (default: array()).
+         *
          * @return void
          */
-        function calculate_shipping( $package = array() ) {
+        public function calculate_shipping( $package = array() ) {
             global $woocommerce;
 
             $rate = array();
@@ -387,11 +409,11 @@ function wccorreios_shipping_load() {
         /**
          * order_shipping function.
          *
-         * @access public
          * @param array $package
+         *
          * @return float
          */
-        function order_shipping( $package ) {
+        protected function order_shipping( $package ) {
             $count     = 0;
             $height    = array();
             $width     = array();
@@ -441,10 +463,9 @@ function wccorreios_shipping_load() {
         /**
          * correios_services_list function.
          *
-         * @access public
          * @return array
          */
-        function correios_services_list() {
+        protected function correios_services_list() {
             $list = array(
                 '41106' => 'PAC',        // sem contrato.
                 '40010' => 'SEDEX',      // sem contrato.
@@ -460,10 +481,9 @@ function wccorreios_shipping_load() {
         /**
          * correios_services function.
          *
-         * @access public
          * @return array
          */
-        function correios_services() {
+        protected function correios_services() {
             $services = array();
 
             $services['PAC'] = ( $this->service_pac == 'yes' ) ? '41106' : '';
@@ -483,12 +503,12 @@ function wccorreios_shipping_load() {
         /**
          * estimating_delivery function.
          *
-         * @access public
          * @param string $label
          * @param string $date
+         *
          * @return string
          */
-        function estimating_delivery( $label, $date ) {
+        protected function estimating_delivery( $label, $date ) {
             $msg = $label;
 
             if ( $date > 0 ) {
@@ -499,17 +519,118 @@ function wccorreios_shipping_load() {
         }
 
         /**
+         * Connection method.
+         *
+         * @param  array $services         Services to quote.
+         * @param  string $zip_origin      Zip code of origin.
+         * @param  string $zip_destination Zip code of destination.
+         * @param  mixed $height           Order height.
+         * @param  mixed $width            Order width.
+         * @param  mixed $diameter         Order diameter.
+         * @param  mixed $length           Order length.
+         * @param  mixed $weight           Order weight.
+         * @param  string $login           User login.
+         * @param  string $password        User password.
+         * @param  string $declared        Value declared.
+         *
+         * @return object                  Total quote.
+         */
+        protected function connection_method(
+            $services,
+            $zip_origin,
+            $zip_destination,
+            $height,
+            $width,
+            $diameter,
+            $length,
+            $weight,
+            $login,
+            $password,
+            $declared ) {
+
+            // Include Correios classes.
+            include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
+            include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
+
+            $quotes = '';
+
+            // Connection method.
+            if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
+                $this->connection_method = $this->settings['connection_method'];
+
+                if ( $this->connection_method == 'soap' ) {
+                    $quotes = new Correios_SOAP(
+                        $services,
+                        $zip_origin,
+                        $zip_destination,
+                        $height,
+                        $width,
+                        $diameter,
+                        $length,
+                        $weight,
+                        $login,
+                        $password,
+                        $declared
+                    );
+                } else {
+                    $quotes = new Correios_SimpleXML(
+                        $services,
+                        $zip_origin,
+                        $zip_destination,
+                        $height,
+                        $width,
+                        $diameter,
+                        $length,
+                        $weight,
+                        $login,
+                        $password,
+                        $declared
+                    );
+                }
+            } else if ( extension_loaded( 'soap' ) ) {
+                $quotes = new Correios_SOAP(
+                    $services,
+                    $zip_origin,
+                    $zip_destination,
+                    $height,
+                    $width,
+                    $diameter,
+                    $length,
+                    $weight,
+                    $login,
+                    $password,
+                    $declared
+                );
+            } else {
+                $quotes = new Correios_SimpleXML(
+                    $services,
+                    $zip_origin,
+                    $zip_destination,
+                    $height,
+                    $width,
+                    $diameter,
+                    $length,
+                    $weight,
+                    $login,
+                    $password,
+                    $declared
+                );
+            }
+
+            return $quotes;
+        }
+
+        /**
          * correios_connect function.
          *
          * @access public
          * @param array $package (default: array())
          * @return object
          */
-        function correios_connect( $package ) {
+        protected function correios_connect( $package ) {
             global $woocommerce;
 
             include_once WOO_CORREIOS_PATH . 'Correios/Cubage.php';
-            include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
@@ -522,7 +643,7 @@ function wccorreios_shipping_load() {
                 $totalcubage = $cubage->cubage();
 
                 $services = array_values( $this->correios_services() );
-                $zipDestination = $package['destination']['postcode'];
+                $zip_destination = $package['destination']['postcode'];
 
                 // Test min values.
                 $min_height = $this->minimum_height;
@@ -549,41 +670,20 @@ function wccorreios_shipping_load() {
                     $declared = $woocommerce->cart->cart_contents_total;
                 }
 
-                if ( extension_loaded( 'soap' ) ) {
-
-                    $quotes = new Correios_SOAP(
-                        $services,
-                        $this->zip_origin,
-                        $zipDestination,
-                        $height,
-                        $width,
-                        0,
-                        $length,
-                        $measures['weight'],
-                        $this->login,
-                        $this->password,
-                        $declared
-                    );
-
-                } else {
-
-                    include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
-
-                    $quotes = new Correios_SimpleXML(
-                        $services,
-                        $this->zip_origin,
-                        $zipDestination,
-                        $height,
-                        $width,
-                        0,
-                        $length,
-                        $measures['weight'],
-                        $this->login,
-                        $this->password,
-                        $declared
-                    );
-
-                }
+                // Get quotes.
+                $quotes = $this->connection_method(
+                    $services,
+                    $this->zip_origin,
+                    $zip_destination,
+                    $height,
+                    $width,
+                    0,
+                    $length,
+                    $measures['weight'],
+                    $this->login,
+                    $this->password,
+                    $declared
+                );
 
                 return $quotes->calculateShipping();
 
