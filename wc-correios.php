@@ -279,16 +279,16 @@ function wccorreios_shipping_load() {
                     'default'          => '16',
                 ),
                 'testing' => array(
-                    'title' => __( 'Testing', 'wcbcash' ),
+                    'title' => __( 'Testing', 'wccorreios' ),
                     'type' => 'title',
                     'description' => '',
                 ),
                 'debug' => array(
-                    'title' => __( 'Debug Log', 'wcbcash' ),
+                    'title' => __( 'Debug Log', 'wccorreios' ),
                     'type' => 'checkbox',
-                    'label' => __( 'Enable logging', 'wcbcash' ),
+                    'label' => __( 'Enable logging', 'wccorreios' ),
                     'default' => 'no',
-                    'description' => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wcbcash' ),
+                    'description' => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wccorreios' ),
                 )
             );
         }
