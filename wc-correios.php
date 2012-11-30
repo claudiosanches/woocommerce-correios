@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.2.1
+ * Version: 1.3
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -98,6 +98,8 @@ function wccorreios_shipping_load() {
          * @return void
          */
         function init() {
+            global $woocommerce;
+
             // Load the form fields.
             $this->init_form_fields();
 
@@ -123,8 +125,14 @@ function wccorreios_shipping_load() {
             $this->minimum_height     = $this->settings['minimum_height'];
             $this->minimum_width      = $this->settings['minimum_width'];
             $this->minimum_length     = $this->settings['minimum_length'];
+            $this->debug              = $this->settings['debug'];
 
             add_action( 'woocommerce_update_options_shipping_'.$this->id, array( &$this, 'process_admin_options' ) );
+
+            // Active logs.
+            if ( $this->debug == 'yes' ) {
+                $this->log = $woocommerce->logger();
+            }
         }
 
         /**
@@ -269,6 +277,18 @@ function wccorreios_shipping_load() {
                     'type'             => 'text',
                     'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm', 'wccorreios' ),
                     'default'          => '16',
+                ),
+                'testing' => array(
+                    'title' => __( 'Testing', 'wcbcash' ),
+                    'type' => 'title',
+                    'description' => '',
+                ),
+                'debug' => array(
+                    'title' => __( 'Debug Log', 'wcbcash' ),
+                    'type' => 'checkbox',
+                    'label' => __( 'Enable logging', 'wcbcash' ),
+                    'default' => 'no',
+                    'description' => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wcbcash' ),
                 )
             );
         }
@@ -333,6 +353,11 @@ function wccorreios_shipping_load() {
             $rate = array();
 
             $quotes = $this->correios_connect( $package );
+
+            if ( $this->debug == 'yes' ) {
+                $this->log->add( 'correios', 'Correios WebServices response: ' . print_r( $quotes, true ) );
+            }
+
             $list = $this->correios_services_list();
 
             foreach ( $quotes as $key => $value ) {
@@ -353,7 +378,7 @@ function wccorreios_shipping_load() {
             }
 
             // Register the rate.
-            foreach ( $rate as $key => $value) {
+            foreach ( $rate as $key => $value ) {
                 $this->add_rate( $value );
             }
 
@@ -508,6 +533,17 @@ function wccorreios_shipping_load() {
                 $width  = ( $totalcubage['width'] < $min_width ) ? $min_width : $totalcubage['width'];
                 $length = ( $totalcubage['length'] < $min_length ) ? $min_length : $totalcubage['length'];
 
+                if ( $this->debug == 'yes' ) {
+                    $weight_cubage = array(
+                        'weight' => $measures['weight'],
+                        'height' => $height,
+                        'width'  => $width,
+                        'length' => $length
+                    );
+
+                    $this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $weight_cubage, true ) );
+                }
+
                 $declared = '0';
                 if ( $this->declare_value == 'declare' ) {
                     $declared = $woocommerce->cart->cart_contents_total;
@@ -557,6 +593,10 @@ function wccorreios_shipping_load() {
                 $error = new stdClass();
 
                 $error->NoCubage->Erro = 99999;
+
+                if ( $this->debug == 'yes' ) {
+                    $this->log->add( 'correios', 'Cart only with virtual products.' );
+                }
 
                 return $error;
             }
