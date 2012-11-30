@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3
+ * Version: 1.3.1
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -556,7 +556,6 @@ function wccorreios_shipping_load() {
 
             // Connection method.
             if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
-                $this->connection_method = $this->settings['connection_method'];
 
                 if ( $this->connection_method == 'soap' ) {
                     $quotes = new Correios_SOAP(
