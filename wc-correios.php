@@ -407,11 +407,24 @@ function wccorreios_shipping_load() {
         }
 
         /**
+         * Replace comma by dot.
+         *
+         * @param  mixed $value Value to fix.
+         *
+         * @return mixed
+         */
+        private function fix_format( $value ) {
+            $value = str_replace( ',', '.', $value );
+
+            return $value;
+        }
+
+        /**
          * order_shipping function.
          *
          * @param array $package
          *
-         * @return float
+         * @return array
          */
         protected function order_shipping( $package ) {
             $count     = 0;
@@ -427,14 +440,14 @@ function wccorreios_shipping_load() {
 
                 if ( $qty > 0 && $product->needs_shipping() && !empty( $product->height ) && !empty( $product->width ) && !empty( $product->length ) && !empty( $product->weight ) ) {
 
-                    $_height = woocommerce_get_dimension( $product->height, 'cm' );
-                    $_width  = woocommerce_get_dimension( $product->width, 'cm' );
-                    $_length = woocommerce_get_dimension( $product->length, 'cm' );
+                    $_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
+                    $_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
+                    $_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
 
                     $height[$count] = $_height;
                     $width[$count]  = $_width;
                     $length[$count] = $_length;
-                    $weight        += $product->weight;
+                    $weight        += $this->fix_format( $product->weight );
 
                     if ( $qty > 1 ) {
                         $n = $count;
@@ -456,7 +469,7 @@ function wccorreios_shipping_load() {
                 'height' => array_values( $height ),
                 'length' => array_values( $length ),
                 'width'  => array_values( $width ),
-                'weight' => woocommerce_get_weight( $weight, 'kg' ),
+                'weight' => woocommerce_get_weight(  $weight, 'kg' ),
             );
         }
 
