@@ -555,38 +555,7 @@ function wccorreios_shipping_load() {
             $quotes = '';
 
             // Connection method.
-            if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
-
-                if ( $this->connection_method == 'soap' ) {
-                    $quotes = new Correios_SOAP(
-                        $services,
-                        $zip_origin,
-                        $zip_destination,
-                        $height,
-                        $width,
-                        $diameter,
-                        $length,
-                        $weight,
-                        $login,
-                        $password,
-                        $declared
-                    );
-                } else {
-                    $quotes = new Correios_SimpleXML(
-                        $services,
-                        $zip_origin,
-                        $zip_destination,
-                        $height,
-                        $width,
-                        $diameter,
-                        $length,
-                        $weight,
-                        $login,
-                        $password,
-                        $declared
-                    );
-                }
-            } else if ( extension_loaded( 'soap' ) ) {
+            if ( extension_loaded( 'soap' ) && $this->connection_method == 'soap' ) {
                 $quotes = new Correios_SOAP(
                     $services,
                     $zip_origin,
