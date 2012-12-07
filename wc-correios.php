@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3.1
+ * Version: 1.3.2
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -431,23 +431,24 @@ function wccorreios_shipping_load() {
             $height    = array();
             $width     = array();
             $length    = array();
-            $weight    = '';
+            $weight    = array();
 
             // Shipping per item.
             foreach ( $package['contents'] as $item_id => $values ) {
                 $product = $values['data'];
                 $qty = $values['quantity'];
 
-                if ( $qty > 0 && $product->needs_shipping() && !empty( $product->height ) && !empty( $product->width ) && !empty( $product->length ) && !empty( $product->weight ) ) {
+                if ( $qty > 0 && $product->needs_shipping() && $product->has_dimensions() ) {
 
                     $_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
                     $_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
                     $_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
+                    $_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
 
                     $height[$count] = $_height;
                     $width[$count]  = $_width;
                     $length[$count] = $_length;
-                    $weight        += $this->fix_format( $product->weight );
+                    $weight[$count] = $_weight;
 
                     if ( $qty > 1 ) {
                         $n = $count;
@@ -455,7 +456,7 @@ function wccorreios_shipping_load() {
                             $height[$n] = $_height;
                             $width[$n]  = $_width;
                             $length[$n] = $_length;
-                            $weight    += $product->weight;
+                            $weight[$n] = $_weight;
                             $n++;
                         }
                         $count = $n;
@@ -469,7 +470,7 @@ function wccorreios_shipping_load() {
                 'height' => array_values( $height ),
                 'length' => array_values( $length ),
                 'width'  => array_values( $width ),
-                'weight' => woocommerce_get_weight(  $weight, 'kg' ),
+                'weight' => array_sum( $weight ),
             );
         }
 
@@ -615,6 +616,10 @@ function wccorreios_shipping_load() {
 
             // Proccess measures.
             $measures = $this->order_shipping( $package );
+
+            echo '<pre>';
+            print_r($measures);
+            echo '</pre>';
 
             // Checks if the cart is not just virtual goods.
             if ( !empty( $measures['height'] ) && !empty( $measures['width'] ) && !empty( $measures['length'] ) ) {
