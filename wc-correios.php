@@ -617,10 +617,6 @@ function wccorreios_shipping_load() {
             // Proccess measures.
             $measures = $this->order_shipping( $package );
 
-            echo '<pre>';
-            print_r($measures);
-            echo '</pre>';
-
             // Checks if the cart is not just virtual goods.
             if ( !empty( $measures['height'] ) && !empty( $measures['width'] ) && !empty( $measures['length'] ) ) {
 
