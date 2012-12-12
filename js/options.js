@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
     }
     correiosActive(correios_val);
 
-    correios_select.change(function() {
+    correios_select.on('change', function() {
         var service = $(this).val();
         correiosActive(service);
     });
