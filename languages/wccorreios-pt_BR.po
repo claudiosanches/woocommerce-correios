@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios v1.3\n"
+"Project-Id-Version: WooCommerce Correios v1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-30 18:54:07+0000\n"
+"PO-Revision-Date: 2012-12-12 03:30:44+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,223 +39,153 @@ msgid "claudiosanches, rodrigoprior"
 msgstr "claudiosanches, rodrigoprior"
 
 #: wc-correios.php:88
-#: wc-correios.php:159
+#: wc-correios.php:160
 #@ wccorreios
 msgid "Correios"
 msgstr "Correios"
 
-#: wc-correios.php:150
+#: wc-correios.php:151
 #@ wccorreios
 msgid "Enable"
 msgstr "Habilita"
 
-#: wc-correios.php:152
+#: wc-correios.php:153
 #@ wccorreios
 msgid "Enable Correios"
 msgstr "Habilitar Correios"
 
-#: wc-correios.php:156
+#: wc-correios.php:157
 #@ wccorreios
 msgid "Title"
 msgstr "Título"
 
-#: wc-correios.php:158
+#: wc-correios.php:159
 #@ wccorreios
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isto controla o título que o usuário vê durante o checkout."
 
-#: wc-correios.php:162
+#: wc-correios.php:163
 #@ wccorreios
 msgid "Method availability"
 msgstr "Método disponível"
 
-#: wc-correios.php:167
+#: wc-correios.php:168
 #@ wccorreios
 msgid "All allowed countries"
 msgstr "Países permitidos"
 
-#: wc-correios.php:168
-#: wc-correios.php:172
+#: wc-correios.php:169
+#: wc-correios.php:173
 #@ wccorreios
 msgid "Specific Countries"
 msgstr "Países específicos"
 
-#: wc-correios.php:180
+#: wc-correios.php:181
 #@ wccorreios
 msgid "Origin Zip Code"
 msgstr "CEP de origem"
 
-#: wc-correios.php:182
-#@ wccorreios
-msgid "Zip Code from where the requests are sent"
-msgstr "CEP de onde os pedidos são enviados"
-
-#: wc-correios.php:186
+#: wc-correios.php:187
 #@ wccorreios
 msgid "Declare value"
 msgstr "Declarar valor"
 
-#: wc-correios.php:191
+#: wc-correios.php:192
 #@ wccorreios
 msgid "Declare"
 msgstr "Declarar"
 
-#: wc-correios.php:192
+#: wc-correios.php:193
 #@ wccorreios
 msgid "None"
 msgstr "Não"
 
-#: wc-correios.php:196
+#: wc-correios.php:197
 #@ wccorreios
 msgid "Estimated delivery"
 msgstr "Estimativa de entrega"
 
-#: wc-correios.php:198
-#@ wccorreios
-msgid "Display date of estimated delivery"
-msgstr "Exibe a data de entrega estimada"
-
-#: wc-correios.php:202
+#: wc-correios.php:209
 #@ wccorreios
 msgid "Correios Services"
 msgstr "Serviços"
 
-#: wc-correios.php:208
+#: wc-correios.php:215
 #@ wccorreios
 msgid "Corporate Service"
 msgstr "Serviço corporativo"
 
-#: wc-correios.php:210
-#@ wccorreios
-msgid "Choose between conventional or corporate service"
-msgstr "Escolha entre o serviço convencional ou corporativo"
-
-#: wc-correios.php:213
+#: wc-correios.php:220
 #@ wccorreios
 msgid "Conventional"
 msgstr "Convencional"
 
-#: wc-correios.php:214
+#: wc-correios.php:221
 #@ wccorreios
 msgid "Corporate"
 msgstr "Corporativo"
 
-#: wc-correios.php:218
+#: wc-correios.php:225
 #@ wccorreios
 msgid "Administrative Code"
 msgstr "Código Administrativo"
 
-#: wc-correios.php:220
-#@ wccorreios
-msgid "Your Correios login"
-msgstr "Seu login nos Correios"
-
-#: wc-correios.php:224
+#: wc-correios.php:231
 #@ wccorreios
 msgid "Administrative Password"
 msgstr "Senha Administrativa"
 
-#: wc-correios.php:226
-#@ wccorreios
-msgid "Your Correios password"
-msgstr "Sua senha nos Correios"
-
-#: wc-correios.php:230
+#: wc-correios.php:237
 #@ wccorreios
 msgid "PAC"
 msgstr "PAC"
 
-#: wc-correios.php:232
-#@ wccorreios
-msgid "Shipping via PAC"
-msgstr "Entrega via PAC"
-
-#: wc-correios.php:236
+#: wc-correios.php:243
 #@ wccorreios
 msgid "SEDEX"
 msgstr "SEDEX"
 
-#: wc-correios.php:238
-#@ wccorreios
-msgid "Shipping via SEDEX"
-msgstr "Entrega via SEDEX"
-
-#: wc-correios.php:242
+#: wc-correios.php:249
 #@ wccorreios
 msgid "SEDEX 10"
 msgstr "SEDEX 10"
 
-#: wc-correios.php:244
-#@ wccorreios
-msgid "Shipping via SEDEX 10"
-msgstr "Entrega via SEDEX 10"
-
-#: wc-correios.php:248
+#: wc-correios.php:255
 #@ wccorreios
 msgid "SEDEX Hoje"
 msgstr "SEDEX Hoje"
 
-#: wc-correios.php:250
-#@ wccorreios
-msgid "Shipping via SEDEX Hoje"
-msgstr "Entrega via SEDEX Hoje"
-
-#: wc-correios.php:254
+#: wc-correios.php:261
 #@ wccorreios
 msgid "e-SEDEX"
 msgstr "e-SEDEX"
 
-#: wc-correios.php:256
-#@ wccorreios
-msgid "Shipping via e-SEDEX"
-msgstr "Entrega via e-SEDEX"
-
-#: wc-correios.php:260
+#: wc-correios.php:267
 #@ wccorreios
 msgid "Package Standard"
 msgstr "Pacote Padrão"
 
-#: wc-correios.php:262
-#@ wccorreios
-msgid "Sets a minimum measure for the package"
-msgstr "Defina uma medida mínima para o pacote"
-
-#: wc-correios.php:266
+#: wc-correios.php:273
 #@ wccorreios
 msgid "Minimum Height"
 msgstr "Altura Mínima"
 
-#: wc-correios.php:268
-#@ wccorreios
-msgid "Minimum height of the package. Correios needs at least 2 cm"
-msgstr "A altura mínima da embalagem. Os Correios precisam de pelo menos 2 cm"
-
-#: wc-correios.php:272
+#: wc-correios.php:279
 #@ wccorreios
 msgid "Minimum Width"
 msgstr "Largura Mínima"
 
-#: wc-correios.php:274
-#@ wccorreios
-msgid "Minimum width of the package. Correios needs at least 11 cm"
-msgstr "A largura mínima do pacote. Os Correios precisam de pelo menos 11 cm"
-
-#: wc-correios.php:278
+#: wc-correios.php:285
 #@ wccorreios
 msgid "Minimum Length"
 msgstr "Comprimento Mínimo"
 
-#: wc-correios.php:280
-#@ wccorreios
-msgid "Minimum length of the package. Correios needs at least 16 cm"
-msgstr "Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm"
-
-#: wc-correios.php:327
+#: wc-correios.php:334
 #@ wccorreios
 msgid "Correios is a brazilian delivery method."
 msgstr "Correios é um método de entrega brasileiro."
 
-#: wc-correios.php:515
+#: wc-correios.php:540
 #, php-format
 #@ wccorreios
 msgid "Delivery in %d working day"
@@ -279,54 +209,134 @@ msgstr "WooCommerce Correios precisa do plugin <a href=\"http://wordpress.org/ex
 msgid "WooCommerce Correios depends to <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> or <a href=\"http://php.net/manual/en/book.simplexml.php\">SimpleXML</a> to work!"
 msgstr "WooCommerce Correios precisa de <a href=\"http://php.net/manual/en/book.soap.php\">SOAP</a> ou <a href=\"http://php.net/manual/en/book.simplexml.php\">SimpleXML</a> para funcionar!"
 
-#. translators: plugin header field 'Version'
-#: wc-correios.php:0
-#@ wccorreios
-msgid "1.3"
-msgstr "1.3"
-
-#: wc-correios.php:284
+#: wc-correios.php:291
 #@ wccorreios
 msgid "Testing"
 msgstr "Teste"
 
-#: wc-correios.php:289
+#: wc-correios.php:296
 #@ wccorreios
 msgid "Debug Log"
 msgstr "Log de depuração"
 
-#: wc-correios.php:291
+#: wc-correios.php:298
 #@ wccorreios
 msgid "Enable logging"
 msgstr "Habilitar log"
 
-#: wc-correios.php:293
-#@ wccorreios
-msgid "Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>"
-msgstr "Registrar log de eventos do Correios, como solicitações no Correios WebServices, dentro do arquivo <code>woocommerce/logs/correios.txt</code>"
-
-#: wc-correios.php:299
+#: wc-correios.php:306
 #@ wccorreios
 msgid "Connection"
 msgstr "Conexão"
 
-#: wc-correios.php:305
+#: wc-correios.php:312
 #@ wccorreios
 msgid "Connection method"
 msgstr "Método de Conexão"
 
-#: wc-correios.php:307
-#@ wccorreios
-msgid "Choose between SOAP or SimpleXML method"
-msgstr "Escolha entre SOAP ou SimpleXML"
-
-#: wc-correios.php:310
+#: wc-correios.php:317
 #@ wccorreios
 msgid "SOAP"
 msgstr "SOAP"
 
-#: wc-correios.php:311
+#: wc-correios.php:318
 #@ wccorreios
 msgid "SimpleXML"
 msgstr "SimpleXML"
+
+#. translators: plugin header field 'Version'
+#: wc-correios.php:0
+#@ wccorreios
+msgid "1.3.3"
+msgstr "1.3.3"
+
+#: wc-correios.php:183
+#@ wccorreios
+msgid "Zip Code from where the requests are sent."
+msgstr "CEP de onde os pedidos são enviados."
+
+#: wc-correios.php:199
+#@ wccorreios
+msgid "Display date of estimated delivery."
+msgstr "Exibe a data de entrega estimada."
+
+#: wc-correios.php:203
+#@ wccorreios
+msgid "Additional days"
+msgstr "Dias adicionais"
+
+#: wc-correios.php:205
+#@ wccorreios
+msgid "Additional days to the estimated delivery."
+msgstr "Dias adicionais para a entrega estimada."
+
+#: wc-correios.php:217
+#@ wccorreios
+msgid "Choose between conventional or corporate service."
+msgstr "Escolha entre o serviço convencional ou corporativo."
+
+#: wc-correios.php:227
+#@ wccorreios
+msgid "Your Correios login."
+msgstr "Seu login nos Correios."
+
+#: wc-correios.php:233
+#@ wccorreios
+msgid "Your Correios password."
+msgstr "Sua senha nos Correios."
+
+#: wc-correios.php:239
+#@ wccorreios
+msgid "Shipping via PAC."
+msgstr "Entrega via PAC."
+
+#: wc-correios.php:245
+#@ wccorreios
+msgid "Shipping via SEDEX."
+msgstr "Entrega via SEDEX."
+
+#: wc-correios.php:251
+#@ wccorreios
+msgid "Shipping via SEDEX 10."
+msgstr "Entrega via SEDEX 10."
+
+#: wc-correios.php:257
+#@ wccorreios
+msgid "Shipping via SEDEX Hoje."
+msgstr "Entrega via SEDEX Hoje."
+
+#: wc-correios.php:263
+#@ wccorreios
+msgid "Shipping via e-SEDEX."
+msgstr "Entrega via e-SEDEX."
+
+#: wc-correios.php:269
+#@ wccorreios
+msgid "Sets a minimum measure for the package."
+msgstr "Defina uma medida mínima para o pacote."
+
+#: wc-correios.php:275
+#@ wccorreios
+msgid "Minimum height of the package. Correios needs at least 2 cm."
+msgstr "A altura mínima da embalagem. Os Correios precisam de pelo menos 2 cm."
+
+#: wc-correios.php:281
+#@ wccorreios
+msgid "Minimum width of the package. Correios needs at least 11 cm."
+msgstr "A largura mínima do pacote. Os Correios precisam de pelo menos 11 cm."
+
+#: wc-correios.php:287
+#@ wccorreios
+msgid "Minimum length of the package. Correios needs at least 16 cm."
+msgstr "Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm."
+
+#: wc-correios.php:300
+#@ wccorreios
+msgid "Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>."
+msgstr "Registrar log de eventos do Correios, como solicitações no Correios WebServices, dentro do arquivo <code>woocommerce/logs/correios.txt</code>."
+
+#: wc-correios.php:314
+#@ wccorreios
+msgid "Choose between SOAP or SimpleXML method."
+msgstr "Escolha entre SOAP ou SimpleXML."
 

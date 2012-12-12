@@ -3,7 +3,7 @@ Contributors: claudiosanches, rodrigoprior
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Changelog ==
 
+= 1.3.3 - 12/12/2012 =
+
+* Adicionada opção para inserir dias extras na **Estimativa de Entrega**.
+
 = 1.3.2 - 06/12/2012 =
 
 * Melhoria no método connection_method().
@@ -176,9 +180,13 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Upgrade Notice ==
 
+= 1.3.3 =
+
+* Added Aditional Days option.
+
 = 1.3.2 =
 
-* Fixed options and formats
+* Fixed options and formats.
 
 = 1.3.1 =
 

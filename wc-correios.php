@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3.2
+ * Version: 1.3.3
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -108,6 +108,7 @@ function wccorreios_shipping_load() {
             $this->title              = $this->settings['title'];
             $this->declare_value      = $this->settings['declare_value'];
             $this->display_date       = $this->settings['display_date'];
+            $this->additional_time    = $this->settings['additional_time'];
             $this->availability       = $this->settings['availability'];
             $this->zip_origin         = $this->settings['zip_origin'];
             $this->countries          = $this->settings['countries'];
@@ -179,7 +180,7 @@ function wccorreios_shipping_load() {
                 'zip_origin' => array(
                     'title'            => __( 'Origin Zip Code', 'wccorreios' ),
                     'type'             => 'text',
-                    'description'      => __( 'Zip Code from where the requests are sent', 'wccorreios' ),
+                    'description'      => __( 'Zip Code from where the requests are sent.', 'wccorreios' ),
                     'default'          => '',
                 ),
                 'declare_value' => array(
@@ -195,8 +196,14 @@ function wccorreios_shipping_load() {
                 'display_date' => array(
                     'title'            => __( 'Estimated delivery', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Display date of estimated delivery', 'wccorreios' ),
+                    'description'      => __( 'Display date of estimated delivery.', 'wccorreios' ),
                     'default'          => 'no',
+                ),
+                'additional_time' => array(
+                    'title'            => __( 'Additional days', 'wccorreios' ),
+                    'type'             => 'text',
+                    'description'      => __( 'Additional days to the estimated delivery.', 'wccorreios' ),
+                    'default'          => '0',
                 ),
                 'services' => array(
                     'title'            => __( 'Correios Services', 'wccorreios' ),
@@ -207,7 +214,7 @@ function wccorreios_shipping_load() {
                 'corporate_service' => array(
                     'title'            => __( 'Corporate Service', 'wccorreios' ),
                     'type'             => 'select',
-                    'description'      => __( 'Choose between conventional or corporate service', 'wccorreios' ),
+                    'description'      => __( 'Choose between conventional or corporate service.', 'wccorreios' ),
                     'default'          => 'conventional',
                     'options'          => array(
                         'conventional' => __( 'Conventional', 'wccorreios' ),
@@ -217,67 +224,67 @@ function wccorreios_shipping_load() {
                 'login' => array(
                     'title'            => __( 'Administrative Code', 'wccorreios' ),
                     'type'             => 'text',
-                    'description'      => __( 'Your Correios login', 'wccorreios' ),
+                    'description'      => __( 'Your Correios login.', 'wccorreios' ),
                     'default'          => '',
                 ),
                 'password' => array(
                     'title'            => __( 'Administrative Password', 'wccorreios' ),
                     'type'             => 'password',
-                    'description'      => __( 'Your Correios password', 'wccorreios' ),
+                    'description'      => __( 'Your Correios password.', 'wccorreios' ),
                     'default'          => '',
                 ),
                 'service_pac' => array(
                     'title'            => __( 'PAC', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Shipping via PAC', 'wccorreios' ),
+                    'description'      => __( 'Shipping via PAC.', 'wccorreios' ),
                     'default'          => 'no',
                 ),
                 'service_sedex' => array(
                     'title'            => __( 'SEDEX', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Shipping via SEDEX', 'wccorreios' ),
+                    'description'      => __( 'Shipping via SEDEX.', 'wccorreios' ),
                     'default'          => 'no',
                 ),
                 'service_sedex_10' => array(
                     'title'            => __( 'SEDEX 10', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Shipping via SEDEX 10', 'wccorreios' ),
+                    'description'      => __( 'Shipping via SEDEX 10.', 'wccorreios' ),
                     'default'          => 'no',
                 ),
                 'service_sedex_hoje' => array(
                     'title'            => __( 'SEDEX Hoje', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Shipping via SEDEX Hoje', 'wccorreios' ),
+                    'description'      => __( 'Shipping via SEDEX Hoje.', 'wccorreios' ),
                     'default'          => 'no',
                 ),
                 'service_esedex' => array(
                     'title'            => __( 'e-SEDEX', 'wccorreios' ),
                     'type'             => 'checkbox',
-                    'description'      => __( 'Shipping via e-SEDEX', 'wccorreios' ),
+                    'description'      => __( 'Shipping via e-SEDEX.', 'wccorreios' ),
                     'default'          => 'no',
                 ),
                 'package_standard' => array(
                     'title' => __( 'Package Standard', 'wccorreios' ),
                     'type' => 'title',
-                    'description' => __( 'Sets a minimum measure for the package', 'wccorreios' ),
+                    'description' => __( 'Sets a minimum measure for the package.', 'wccorreios' ),
                     'default' => ''
                 ),
                 'minimum_height' => array(
                     'title'            => __( 'Minimum Height', 'wccorreios' ),
                     'type'             => 'text',
-                    'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm', 'wccorreios' ),
+                    'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm.', 'wccorreios' ),
                     'default'          => '2',
                 ),
                 'minimum_width' => array(
                     'title'            => __( 'Minimum Width', 'wccorreios' ),
                     'type'             => 'text',
-                    'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm', 'wccorreios' ),
+                    'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm.', 'wccorreios' ),
                     'default'          => '11',
                 ),
                 'minimum_length' => array(
                     'title'            => __( 'Minimum Length', 'wccorreios' ),
                     'type'             => 'text',
-                    'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm', 'wccorreios' ),
+                    'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', 'wccorreios' ),
                     'default'          => '16',
                 ),
                 'testing' => array(
@@ -290,7 +297,7 @@ function wccorreios_shipping_load() {
                     'type'             => 'checkbox',
                     'label'            => __( 'Enable logging', 'wccorreios' ),
                     'default'          => 'no',
-                    'description'      => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>', 'wccorreios' ),
+                    'description'      => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>.', 'wccorreios' ),
                 )
             );
 
@@ -304,7 +311,7 @@ function wccorreios_shipping_load() {
                 $form_fields['connection_method'] = array(
                     'title'       => __( 'Connection method', 'wccorreios' ),
                     'type'        => 'select',
-                    'description' => __( 'Choose between SOAP or SimpleXML method', 'wccorreios' ),
+                    'description' => __( 'Choose between SOAP or SimpleXML method.', 'wccorreios' ),
                     'default'     => 'soap',
                     'options'     => array(
                         'soap'      => __( 'SOAP', 'wccorreios' ),
@@ -525,8 +532,12 @@ function wccorreios_shipping_load() {
         protected function estimating_delivery( $label, $date ) {
             $msg = $label;
 
+            if ( $this->additional_time > 0 ) {
+                $date += (int) $this->additional_time;
+            }
+
             if ( $date > 0 ) {
-                $msg = $label . ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days' , $date, 'wccorreios' ),  $date ) . ')';
+                $msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days' , $date, 'wccorreios' ),  $date ) . ')';
             }
 
             return $msg;
