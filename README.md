@@ -1,16 +1,16 @@
-=== WooCommerce Correios ===
-Contributors: claudiosanches, rodrigoprior
-Donate link: http://claudiosmweb.com/doacoes/
-Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
-Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.3.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# WooCommerce Correios #
+**Contributors:** claudiosanches, rodrigoprior  
+**Donate link:** http://claudiosmweb.com/doacoes/  
+**Tags:** ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios  
+**Requires at least:** 3.0  
+**Tested up to:** 3.5  
+**Stable tag:** 1.3.3  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 Adds Correios shipping to the WooCommerce plugin
 
-== Description ==
+## Description ##
 
 ### Add Correios shipping to WooCommerce ###
 
@@ -30,7 +30,7 @@ Este plugin foi feito baseado na documentação do [Webservices Correios](http:/
 
 E com apoio da [Infranology](http://infranology.com.br/) na construção das classes de SOAP, SimpleXML e Cubagem que possuem este plugin.
 
-= Métodos de entrega aceitos: =
+### Métodos de entrega aceitos: ###
 
 * PAC (com ou sem contrato).
 * SEDEX (com ou sem contrato).
@@ -38,11 +38,11 @@ E com apoio da [Infranology](http://infranology.com.br/) na construção das cla
 * SEDEX Hoje.
 * e-SEDEX (apenas com contrato).
 
-= Instalação: =
+### Instalação: ###
 
 Confira o nosso guia de instalação e configuração do Correios na aba [Installation](http://wordpress.org/extend/plugins/woocommerce-correios/installation/).
 
-= Dúvidas? =
+### Dúvidas? ###
 
 Você pode esclarecer suas dúvidas usando:
 
@@ -50,7 +50,7 @@ Você pode esclarecer suas dúvidas usando:
 * Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/woocommerce-correios) (apenas em inglês).
 * Ou entre em contato com os desenvolvedores do plugin em nossa [página](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
 
-== Installation ==
+## Installation ##
 
 * Upload plugin files to your plugins folder, or install using WordPress built-in Add New Plugin installer;
 * Activate the plugin;
@@ -58,16 +58,16 @@ Você pode esclarecer suas dúvidas usando:
 
 ### Instalação e configuração em Português: ###
 
-= Instalação do plugin: =
+### Instalação do plugin: ###
 
 * Envie os arquivos do plugin para a pasta wp-content/plugins, ou instale usando o instalador de plugins do WordPress.
 * Ative o plugin.
 
-= Requerimentos: =
+### Requerimentos: ###
 
 Possuir instalado a extensão SOAP instalada no servidor ou como alternativa SimpleXML (que já é instalado por padrão com o PHP 5).
 
-= Configurações no Correios: =
+### Configurações no Correios: ###
 
 Com o plugin instalado navegue até "WooCommerce" > "Configurações" > "Entrega" > "Correios".
 
@@ -77,26 +77,26 @@ Nesta tela configure o seu **CEP de origem**, e ative os serviços que você des
 
 Também existe a possibilidade de definir um tamanho mínimo para o pacote das suas encomendas. Por padrão o plugin vem configurado com as medidas mínimas requeridas pelos Correios.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
-= What is the plugin license? =
+### What is the plugin license? ###
 
 * This plugin is released under a GPL license.
 
 ### FAQ em Português: ###
 
-= Qual é a licença do plugin? =
+### Qual é a licença do plugin? ###
 
 Este plugin esta licenciado como GPL.
 
-= O que eu preciso para utilizar este plugin? =
+### O que eu preciso para utilizar este plugin? ###
 
 * Ter instalado o plugin WooCommerce.
 * Possuir instalado em sua hospedagem a extensão de SOAP ou SimpleXML.
 * Configurar o seu CEP de origem nas configurações do plugin.
 * Adicionar peso e medidas nos produtos que pretende entregar.
 
-= Quais são os métodos de entrega que o plugin aceita? =
+### Quais são os métodos de entrega que o plugin aceita? ###
 
 São aceitos os métodos:
 
@@ -106,9 +106,9 @@ São aceitos os métodos:
 * SEDEX Hoje (código 40290).
 * e-SEDEX (apenas com contrato, código 81019).
 
-Para mais informações sobre os métodos de entrega dos Correios visite: [Encomendas - Correios](http://www.correios.com.br/voce/enviar/encomendas.cfm).
+**Para mais informações sobre os métodos de entrega dos Correios visite:** [Encomendas - Correios](http://www.correios.com.br/voce/enviar/encomendas.cfm).  
 
-= Como é feita a cotação do frete? =
+### Como é feita a cotação do frete? ###
 
 A cotação do frete é feita utilizando o [Webservices dos Correios](http://www.correios.com.br/webservices/).
 
@@ -116,108 +116,112 @@ A cotação do frete é feita utilizando o [Webservices dos Correios](http://www
 
 Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e a cubagem total dos produtos mais o peso. Desta forma o valor cotado sera o mais próximo possível do real.
 
-= É possível calcular frete para quais países? =
+### É possível calcular frete para quais países? ###
 
 No momento o Webservices faz cotação apenas para dentro do Brasil.
 
-= Mais dúvidas relacionadas ao funcionamento do plugin? =
+### Mais dúvidas relacionadas ao funcionamento do plugin? ###
 
 Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
 
-== Screenshots ==
+## Screenshots ##
 
-1. Settings page.
-2. Checkout page.
+###1. Settings page.###
+![Settings page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-1.png)
 
-== Changelog ==
+###2. Checkout page.###
+![Checkout page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-2.png)
 
-= 1.3.3 - 12/12/2012 =
+
+## Changelog ##
+
+### 1.3.3 - 12/12/2012 ###
 
 * Adicionada opção para inserir dias extras na **Estimativa de Entrega**.
 
-= 1.3.2 - 06/12/2012 =
+### 1.3.2 - 06/12/2012 ###
 
 * Melhoria no método connection_method().
 * Adicionado método (fix_format()) para corrigir o formato das medidas.
 * Correção do método order_shipping().
 
-= 1.3.1 - 30/11/2012 =
+### 1.3.1 - 30/11/2012 ###
 
 * Corrigido o método connection_method().
 
-= 1.3 - 30/11/2012 =
+### 1.3 - 30/11/2012 ###
 
 * Adicionada opção para logs de erro.
 * Adiciona opção para selecionar o tipo de conexão (SOAP ou SimpleXML) caso esteja disponível mais de uma opção no servidor.
 
-= 1.2.1 - 12/09/2012  =
+### 1.2.1 - 12/09/2012  ###
 
 * Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
 
-= 1.2 - 11/09/2012  =
+### 1.2 - 11/09/2012  ###
 
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
-= 1.1 - 05/09/2012  =
+### 1.1 - 05/09/2012  ###
 
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
-* Cubagem: removido os produtos que não possuem pesos ou medidas.
+*** Cubagem:** removido os produtos que não possuem pesos ou medidas.  
 * Correção do index do array de medidas (causava erro no carrinho quando tinha um segundo produto com quantidade maior do que 1).
 
-= 1.0.1 =
+### 1.0.1 ###
 
 * Adicionado sistema de verificação e notificação sobre a falta de SOAP no servidor.
 * Melhorada a inclusão das classes dos Correios no plugin.
 
-= 1.0 =
+### 1.0 ###
 
 * Versão inicial do plugin.
 
-== Upgrade Notice ==
+## Upgrade Notice ##
 
-= 1.3.3 =
+### 1.3.3 ###
 
 * Added Aditional Days option.
 
-= 1.3.2 =
+### 1.3.2 ###
 
 * Fixed options and formats.
 
-= 1.3.1 =
+### 1.3.1 ###
 
 * Fixed connection method variable
 
-= 1.3 =
+### 1.3 ###
 
 * Added error logs.
 * Added option to sets connection method.
 
-= 1.2.1 =
+### 1.2.1 ###
 
 * Fixed virtual product errors.
 
-= 1.2 =
+### 1.2 ###
 
 * Added optional class with SimpleXML.
 
-= 1.1 =
+### 1.1 ###
 
 * Fixed several errors, upgrade recommended.
 
-= 1.0.1 =
+### 1.0.1 ###
 
 * Fixed soap error.
 
-= 1.0 =
+### 1.0 ###
 
 * Enjoy it.
 
-== License ==
+## License ##
 
 This file is part of WooCommerce Correios.
-WooCommerce Correios is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published
+**WooCommerce Correios is free software:** you can redistribute it and/or modify it under the terms of the GNU General Public License as published  
 by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 WooCommerce Correios is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
