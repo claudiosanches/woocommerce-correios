@@ -4,7 +4,7 @@
 **Tags:** ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.0  
 **Tested up to:** 3.5  
-**Stable tag:** 1.3.3  
+**Stable tag:** 1.3.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -126,14 +126,18 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 ## Screenshots ##
 
-###1. Settings page.###
-![Settings page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-1.png)
+### 1. Settings page. ###
+![1. Settings page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-1.png)
 
-###2. Checkout page.###
-![Checkout page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-2.png)
+### 2. Checkout page. ###
+![2. Checkout page.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-2.png)
 
 
 ## Changelog ##
+
+### 1.3.4 - 17/12/2012 ###
+
+* Adicionado o filtro **wccorreios_default_package** para definir um padrão de medidas para a cubagem.
 
 ### 1.3.3 - 12/12/2012 ###
 
@@ -180,6 +184,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 * Versão inicial do plugin.
 
 ## Upgrade Notice ##
+
+### 1.3.4 ###
+
+* Added wccorreios_default_package filter.
 
 ### 1.3.3 ###
 

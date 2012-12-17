@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3.3
+ * Version: 1.3.4
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -626,7 +626,7 @@ function wccorreios_shipping_load() {
             include_once WOO_CORREIOS_PATH . 'Correios/Cubage.php';
 
             // Proccess measures.
-            $measures = $this->order_shipping( $package );
+            $measures = apply_filters( 'wccorreios_default_package', $this->order_shipping( $package ) );
 
             // Checks if the cart is not just virtual goods.
             if ( !empty( $measures['height'] ) && !empty( $measures['width'] ) && !empty( $measures['length'] ) ) {
