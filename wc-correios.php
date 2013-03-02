@@ -616,8 +616,7 @@ function wccorreios_shipping_load() {
         /**
          * correios_connect function.
          *
-         * @access public
-         * @param array $package (default: array())
+         * @param  array $package
          * @return object
          */
         protected function correios_connect( $package ) {
@@ -684,6 +683,8 @@ function wccorreios_shipping_load() {
 
                 // Cart only with virtual products.
                 $error = new stdClass();
+
+                $error->NoCubage = new stdClass();
 
                 $error->NoCubage->Erro = 99999;
 
