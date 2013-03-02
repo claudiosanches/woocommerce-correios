@@ -42,13 +42,13 @@ add_action( 'plugins_loaded', 'wccorreios_shipping_load', 0 );
 
 function wccorreios_shipping_load() {
 
-    if ( !class_exists( 'WC_Shipping_Method' ) ) {
+    if ( ! class_exists( 'WC_Shipping_Method' ) ) {
         add_action( 'admin_notices', 'wccorreios_woocommerce_fallback_notice' );
 
         return;
     }
 
-    if ( !extension_loaded( 'soap' ) && !extension_loaded( 'simplexml' ) ) {
+    if ( ! extension_loaded( 'soap' ) && ! extension_loaded( 'simplexml' ) ) {
         add_action( 'admin_notices', 'wccorreios_extensions_missing_notice' );
 
         return;
@@ -131,7 +131,7 @@ function wccorreios_shipping_load() {
             }
 
             // Active logs.
-            if ( $this->debug == 'yes' ) {
+            if ( 'yes' == $this->debug ) {
                 $this->log = $woocommerce->logger();
             }
 
@@ -350,14 +350,14 @@ function wccorreios_shipping_load() {
             global $woocommerce;
             $is_available = true;
 
-            if ( $this->enabled == 'no' ) {
+            if ( 'no' == $this->enabled ) {
                 $is_available = false;
             } else {
                 $ship_to_countries = '';
 
-                if ( $this->availability == 'specific' ) {
+                if ( 'specific' == $this->availability ) {
                     $ship_to_countries = $this->countries;
-                } elseif ( get_option( 'woocommerce_allowed_countries' ) == 'specific' ) {
+                } elseif ( 'specific' == get_option( 'woocommerce_allowed_countries' ) ) {
                     $ship_to_countries = get_option( 'woocommerce_specific_allowed_countries' );
                 }
 
@@ -383,7 +383,7 @@ function wccorreios_shipping_load() {
 
             $quotes = $this->correios_connect( $package );
 
-            if ( $this->debug == 'yes' ) {
+            if ( 'yes' == $this->debug ) {
                 $this->log->add( 'correios', 'Correios WebServices response: ' . print_r( $quotes, true ) );
             }
 
@@ -391,9 +391,9 @@ function wccorreios_shipping_load() {
 
             foreach ( $quotes as $key => $value ) {
 
-                if ( $value->Erro == 0 ) {
+                if ( 0 == $value->Erro ) {
 
-                    $label = ( $this->display_date == 'yes' ) ? $this->estimating_delivery( $list[$key], $value->PrazoEntrega ) : $list[$key];
+                    $label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $list[$key], $value->PrazoEntrega ) : $list[$key];
 
                     array_push(
                         $rate,
@@ -507,15 +507,15 @@ function wccorreios_shipping_load() {
         protected function correios_services() {
             $services = array();
 
-            $services['PAC'] = ( $this->service_pac == 'yes' ) ? '41106' : '';
-            $services['SEDEX'] = ( $this->service_sedex == 'yes' ) ? '40010' : '';
-            $services['SEDEX 10'] = ( $this->service_sedex_10 == 'yes' ) ? '40215' : '';
-            $services['SEDEX Hoje'] = ( $this->service_sedex_hoje == 'yes' ) ? '40290' : '';
+            $services['PAC'] = ( 'yes' == $this->service_pac ) ? '41106' : '';
+            $services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40010' : '';
+            $services['SEDEX 10'] = ( 'yes' == $this->service_sedex_10 ) ? '40215' : '';
+            $services['SEDEX Hoje'] = ( 'yes' == $this->service_sedex_hoje ) ? '40290' : '';
 
-            if ( $this->corporate_service == 'corporate' ) {
-                $services['PAC'] = ( $this->service_pac == 'yes' ) ? '41068' : '';
-                $services['SEDEX'] = ( $this->service_sedex == 'yes' ) ? '40096' : '';
-                $services['e-SEDEX'] = ( $this->service_esedex == 'yes' ) ? '81019' : '';
+            if ( 'corporate' == $this->corporate_service ) {
+                $services['PAC'] = ( 'yes' == $this->service_pac ) ? '41068' : '';
+                $services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40096' : '';
+                $services['e-SEDEX'] = ( 'yes' == $this->service_esedex ) ? '81019' : '';
             }
 
             return array_filter( $services );
@@ -580,7 +580,7 @@ function wccorreios_shipping_load() {
             $quotes = '';
 
             // Connection method.
-            if ( extension_loaded( 'soap' ) && $this->connection_method == 'soap' ) {
+            if ( extension_loaded( 'soap' ) && 'soap' == $this->connection_method ) {
                 $quotes = new Correios_SOAP(
                     $services,
                     $zip_origin,
@@ -628,7 +628,7 @@ function wccorreios_shipping_load() {
             $measures = apply_filters( 'wccorreios_default_package', $this->order_shipping( $package ) );
 
             // Checks if the cart is not just virtual goods.
-            if ( !empty( $measures['height'] ) && !empty( $measures['width'] ) && !empty( $measures['length'] ) ) {
+            if ( ! empty( $measures['height'] ) && ! empty( $measures['width'] ) && ! empty( $measures['length'] ) ) {
 
                 // Get the Cubage.
                 $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
@@ -646,7 +646,7 @@ function wccorreios_shipping_load() {
                 $width  = ( $totalcubage['width'] < $min_width ) ? $min_width : $totalcubage['width'];
                 $length = ( $totalcubage['length'] < $min_length ) ? $min_length : $totalcubage['length'];
 
-                if ( $this->debug == 'yes' ) {
+                if ( 'yes' == $this->debug ) {
                     $weight_cubage = array(
                         'weight' => $measures['weight'],
                         'height' => $height,
@@ -658,7 +658,7 @@ function wccorreios_shipping_load() {
                 }
 
                 $declared = '0';
-                if ( $this->declare_value == 'declare' ) {
+                if ( 'declare' == $this->declare_value ) {
                     $declared = $woocommerce->cart->cart_contents_total;
                 }
 
@@ -688,7 +688,7 @@ function wccorreios_shipping_load() {
 
                 $error->NoCubage->Erro = 99999;
 
-                if ( $this->debug == 'yes' ) {
+                if ( 'yes' == $this->debug ) {
                     $this->log->add( 'correios', 'Cart only with virtual products.' );
                 }
 
