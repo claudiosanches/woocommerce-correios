@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3.4
+ * Version: 1.3.5
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -427,6 +427,19 @@ function wccorreios_shipping_load() {
         }
 
         /**
+         * Fix number format for SimpleXML.
+         *
+         * @param  float $value  Value with dot.
+         *
+         * @return string        Value with comma.
+         */
+        private function fix_simplexml_format( $value ) {
+            $value = str_replace( '.', ',', $value );
+
+            return $value;
+        }
+
+        /**
          * order_shipping function.
          *
          * @param array $package
@@ -599,11 +612,11 @@ function wccorreios_shipping_load() {
                     $services,
                     $zip_origin,
                     $zip_destination,
-                    $height,
-                    $width,
+                    $this->fix_simplexml_format( $height ),
+                    $this->fix_simplexml_format( $width ),
                     $diameter,
-                    $length,
-                    $weight,
+                    $this->fix_simplexml_format( $length ),
+                    $this->fix_simplexml_format( $weight ),
                     $login,
                     $password,
                     $declared

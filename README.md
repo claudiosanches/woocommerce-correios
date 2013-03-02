@@ -106,7 +106,7 @@ São aceitos os métodos:
 * SEDEX Hoje (código 40290).
 * e-SEDEX (apenas com contrato, código 81019).
 
-**Para mais informações sobre os métodos de entrega dos Correios visite:** [Encomendas - Correios](http://www.correios.com.br/voce/enviar/encomendas.cfm).  
+Para mais informações sobre os métodos de entrega dos Correios visite: [Encomendas - Correios](http://www.correios.com.br/voce/enviar/encomendas.cfm).
 
 ### Como é feita a cotação do frete? ###
 
@@ -119,6 +119,26 @@ Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e 
 ### É possível calcular frete para quais países? ###
 
 No momento o Webservices faz cotação apenas para dentro do Brasil.
+
+### Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? ###
+
+No seu `functions.php` adicione:
+
+    function cs_default_correios_package( $measures ) {
+        // Gets Correios settings.
+        $default = get_option( 'woocommerce_correios_settings' );
+
+        // Sets default package for dimensions.
+        $measures['height'] = array( $default['minimum_height'] );
+        $measures['length'] = array( $default['minimum_length'] );
+        $measures['width']  = array( $default['minimum_width'] );
+
+        return $measures;
+    }
+
+    add_filter( 'wccorreios_default_package', 'cs_default_correios_package' );
+
+Desta forma serão usadas as dimensões padrões que estão nas configurações do plugin.
 
 ### Mais dúvidas relacionadas ao funcionamento do plugin? ###
 
@@ -134,6 +154,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 
 ## Changelog ##
+
+### 1.3.5 - 02/03/2013 ###
+
+* Correção do formato de número enviado pelo metodo de SimpleXML.
 
 ### 1.3.4 - 17/12/2012 ###
 
@@ -171,7 +195,7 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
-*** Cubagem:** removido os produtos que não possuem pesos ou medidas.  
+* Cubagem: removido os produtos que não possuem pesos ou medidas.
 * Correção do index do array de medidas (causava erro no carrinho quando tinha um segundo produto com quantidade maior do que 1).
 
 ### 1.0.1 ###
@@ -189,47 +213,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 * Added wccorreios_default_package filter.
 
-### 1.3.3 ###
-
-* Added Aditional Days option.
-
-### 1.3.2 ###
-
-* Fixed options and formats.
-
-### 1.3.1 ###
-
-* Fixed connection method variable
-
-### 1.3 ###
-
-* Added error logs.
-* Added option to sets connection method.
-
-### 1.2.1 ###
-
-* Fixed virtual product errors.
-
-### 1.2 ###
-
-* Added optional class with SimpleXML.
-
-### 1.1 ###
-
-* Fixed several errors, upgrade recommended.
-
-### 1.0.1 ###
-
-* Fixed soap error.
-
-### 1.0 ###
-
-* Enjoy it.
-
 ## License ##
 
 This file is part of WooCommerce Correios.
-**WooCommerce Correios is free software:** you can redistribute it and/or modify it under the terms of the GNU General Public License as published  
+WooCommerce Correios is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published
 by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 WooCommerce Correios is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.

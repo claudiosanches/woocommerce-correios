@@ -120,6 +120,26 @@ Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e 
 
 No momento o Webservices faz cotação apenas para dentro do Brasil.
 
+= Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? =
+
+No seu `functions.php` adicione:
+
+    function cs_default_correios_package( $measures ) {
+        // Gets Correios settings.
+        $default = get_option( 'woocommerce_correios_settings' );
+
+        // Sets default package for dimensions.
+        $measures['height'] = array( $default['minimum_height'] );
+        $measures['length'] = array( $default['minimum_length'] );
+        $measures['width']  = array( $default['minimum_width'] );
+
+        return $measures;
+    }
+
+    add_filter( 'wccorreios_default_package', 'cs_default_correios_package' );
+
+Desta forma serão usadas as dimensões padrões que estão nas configurações do plugin.
+
 = Mais dúvidas relacionadas ao funcionamento do plugin? =
 
 Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
@@ -130,6 +150,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 2. Checkout page.
 
 == Changelog ==
+
+= 1.3.5 - 02/03/2013 =
+
+* Correção do formato de número enviado pelo metodo de SimpleXML.
 
 = 1.3.4 - 17/12/2012 =
 
@@ -184,43 +208,6 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 = 1.3.4 =
 
 * Added wccorreios_default_package filter.
-
-= 1.3.3 =
-
-* Added Aditional Days option.
-
-= 1.3.2 =
-
-* Fixed options and formats.
-
-= 1.3.1 =
-
-* Fixed connection method variable
-
-= 1.3 =
-
-* Added error logs.
-* Added option to sets connection method.
-
-= 1.2.1 =
-
-* Fixed virtual product errors.
-
-= 1.2 =
-
-* Added optional class with SimpleXML.
-
-= 1.1 =
-
-* Fixed several errors, upgrade recommended.
-
-= 1.0.1 =
-
-* Fixed soap error.
-
-= 1.0 =
-
-* Enjoy it.
 
 == License ==
 
