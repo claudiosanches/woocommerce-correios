@@ -3,8 +3,8 @@
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.0  
-**Tested up to:** 3.5  
-**Stable tag:** 1.3.5  
+**Tested up to:** 3.5.1  
+**Stable tag:** 1.3.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -155,6 +155,10 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 ## Changelog ##
 
+### 1.3.6 - 17/03/2013 ###
+
+* Correção do formato de moeda que é recebido dos Correios.
+
 ### 1.3.5 - 02/03/2013 ###
 
 * Correção do formato de número enviado pelo metodo de SimpleXML.
@@ -209,9 +213,9 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 ## Upgrade Notice ##
 
-### 1.3.4 ###
+### 1.3.6 ###
 
-* Added wccorreios_default_package filter.
+* Correção do formato de moeda.
 
 ## License ##
 

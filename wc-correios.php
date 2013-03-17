@@ -400,7 +400,7 @@ function wccorreios_shipping_load() {
                         array(
                             'id'    => $list[$key],
                             'label' => $label,
-                            'cost'  => esc_attr( $value->Valor ),
+                            'cost'  => $this->fix_format( esc_attr( $value->Valor ) ),
                         )
                     );
                 }
