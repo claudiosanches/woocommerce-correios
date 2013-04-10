@@ -17,22 +17,22 @@ define( 'WOO_CORREIOS_PATH', plugin_dir_path( __FILE__ ) );
  * WooCommerce fallback notice.
  */
 function wccorreios_woocommerce_fallback_notice() {
-    $message = '<div class="error">';
-        $message .= '<p>' . __( 'WooCommerce Correios depends on <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to work!' , 'wccorreios' ) . '</p>';
-    $message .= '</div>';
+    $html = '<div class="error">';
+        $html .= '<p>' . __( 'WooCommerce Correios depends on <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to work!', 'wccorreios' ) . '</p>';
+    $html .= '</div>';
 
-    echo $message;
+    echo $html;
 }
 
 /**
  * SOAP and SimpleXML missing notice.
  */
 function wccorreios_extensions_missing_notice() {
-    $message = '<div class="error">';
-        $message .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> or <a href="http://php.net/manual/en/book.simplexml.php">SimpleXML</a> to work!' , 'wccorreios' ) . '</p>';
-    $message .= '</div>';
+    $html = '<div class="error">';
+        $html .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> or <a href="http://php.net/manual/en/book.simplexml.php">SimpleXML</a> to work!', 'wccorreios' ) . '</p>';
+    $html .= '</div>';
 
-    echo $message;
+    echo $html;
 }
 
 /**
@@ -550,7 +550,7 @@ function wccorreios_shipping_load() {
             }
 
             if ( $date > 0 ) {
-                $msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days' , $date, 'wccorreios' ),  $date ) . ')';
+                $msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, 'wccorreios' ),  $date ) . ')';
             }
 
             return $msg;
