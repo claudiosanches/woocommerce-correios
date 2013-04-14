@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 1.3.6
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,9 +26,7 @@ Adicione os Correios como método de entrega em sua loja WooCommerce.
 
 O plugin WooCommerce Correios foi desenvolvido sem nenhum isentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa.
 
-Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/).
-
-E com apoio da [Infranology](http://infranology.com.br/) na construção das classes de SOAP, SimpleXML e Cubagem que possuem este plugin.
+Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de SOAP, SimpleXML e Cubagem que possuem este plugin.
 
 = Métodos de entrega aceitos: =
 
@@ -151,6 +149,11 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Changelog ==
 
+= 1.4 14/04/2013 =
+
+* Adicionada opção para enviar o código de rastreamento dos Correios.
+* Adicionado o filtro `woocommerce_correios_shipping_methods` para manipular os métodos de entrega do plugin.
+
 = 1.3.6 - 17/03/2013 =
 
 * Correção do formato de moeda que é recebido dos Correios.
@@ -209,9 +212,9 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 == Upgrade Notice ==
 
-= 1.3.6 =
+= 1.4 =
 
-* Correção do formato de moeda.
+* Adicionada opção para enviar o código de rastreamento dos Correios.
 
 == License ==
 
