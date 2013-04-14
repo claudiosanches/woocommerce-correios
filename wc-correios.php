@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: WooCommerce Correios
- * Plugin URI: http://www.claudiosmweb.com/
+ * Plugin URI: https://github.com/claudiosmweb/woocommerce-correios
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
- * Author URI: http://www.claudiosmweb.com/
- * Version: 1.3.5
+ * Author URI: http://claudiosmweb.com/
+ * Version: 1.4
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -379,7 +379,7 @@ function wccorreios_shipping_load() {
         public function calculate_shipping( $package = array() ) {
             global $woocommerce;
 
-            $rate = array();
+            $rates = array();
 
             $quotes = $this->correios_connect( $package );
 
@@ -396,7 +396,7 @@ function wccorreios_shipping_load() {
                     $label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $list[$key], $value->PrazoEntrega ) : $list[$key];
 
                     array_push(
-                        $rate,
+                        $rates,
                         array(
                             'id'    => $list[$key],
                             'label' => $label,
@@ -405,6 +405,8 @@ function wccorreios_shipping_load() {
                     );
                 }
             }
+
+            $rate = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
 
             // Register the rate.
             foreach ( $rate as $key => $value ) {
@@ -710,5 +712,9 @@ function wccorreios_shipping_load() {
         }
 
     } // class WC_Correios.
+
+    // Metabox.
+    include_once WOO_CORREIOS_PATH . 'includes/tracking.php';
+    $wc_correios_metabox = new WC_Correios_Tracking;
 
 } // function wccorreios_shipping_load.
