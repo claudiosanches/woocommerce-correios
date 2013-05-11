@@ -24,7 +24,7 @@ Adicione os Correios como método de entrega em sua loja WooCommerce.
 
 [Correios](http://www.correios.com.br/) é um método de entrega brasileiro.
 
-O plugin WooCommerce Correios foi desenvolvido sem nenhum isentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa.
+O plugin WooCommerce Correios foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa.
 
 Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de SOAP, SimpleXML e Cubagem que possuem este plugin.
 
