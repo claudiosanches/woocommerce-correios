@@ -118,6 +118,17 @@ Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e 
 
 No momento o Webservices faz cotação apenas para dentro do Brasil.
 
+= Como resolver o erro *"Nenhum método de envio encontrado. Por favor, recalcule seu frete informando seu estado/país e o CEP para verificar se há algum método de envio disponível para sua região."*? =
+
+Esta é uma mensagem de erro padrão do WooCommerce, ela pode ser gerada por vários problemas.
+
+Segue uma lista dos prováveis erros:
+
+* Os produtos foram cadastros sem peso e dimensões.
+* O peso e as dimensões foram cadastrados de forma errada, verifique as configurações de medidas em `WooCommerce > Configurações > Catalogo`.
+
+É possível identificar o erro ligando a opção **Log de depuração** nas configurações dos **Correios**. Desta forma é gerado um log dentro da pasta `wp-content/plugins/woocommerce/logs/`. Ao ativar esta opção, tente realizar uma cotação de frete e depois verique o arquivo gerado.
+
 = Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? =
 
 No seu `functions.php` adicione:
