@@ -129,6 +129,10 @@ Segue uma lista dos prováveis erros:
 
 É possível identificar o erro ligando a opção **Log de depuração** nas configurações dos **Correios**. Desta forma é gerado um log dentro da pasta `wp-content/plugins/woocommerce/logs/`. Ao ativar esta opção, tente realizar uma cotação de frete e depois verique o arquivo gerado.
 
+### Quais são os limites de dimensões e peso do plugin? ###
+
+Veja quais são os limites em [Correios - limites de dimensões e peso](http://www.correios.com.br/produtosaz/produto.cfm?id=8560360B-5056-9163-895DA62922306ECA).
+
 ### Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? ###
 
 No seu `functions.php` adicione:
