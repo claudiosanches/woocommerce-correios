@@ -131,7 +131,7 @@ Segue uma lista dos prováveis erros:
 
 ### Quais são os limites de dimensões e peso do plugin? ###
 
-Veja quais são os limites em [Correios - limites de dimensões e peso](http://www.correios.com.br/produtosaz/produto.cfm?id=8560360B-5056-9163-895DA62922306ECA).
+Veja quais são os limites em: [Correios - limites de dimensões e peso](http://www.correios.com.br/produtosaz/produto.cfm?id=8560360B-5056-9163-895DA62922306ECA).
 
 ### Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? ###
 
