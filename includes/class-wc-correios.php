@@ -555,7 +555,7 @@ class WC_Correios extends WC_Shipping_Method {
     protected function correios_connect( $package ) {
         global $woocommerce;
 
-        include_once WOO_CORREIOS_PATH . 'Correios/Cubage.php';
+        include_once WOO_CORREIOS_PATH . 'class-correios-cubage.php';
 
         // Proccess measures.
         $measures = apply_filters( 'wccorreios_default_package', $this->order_shipping( $package ) );
