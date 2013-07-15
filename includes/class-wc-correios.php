@@ -12,7 +12,7 @@ class WC_Correios extends WC_Shipping_Method {
      */
     public function __construct() {
         $this->id           = 'correios';
-        $this->method_title = __('Correios', 'wccorreios');
+        $this->method_title = __( 'Correios', 'wccorreios' );
         $this->init();
     }
 
@@ -53,14 +53,12 @@ class WC_Correios extends WC_Shipping_Method {
         $this->debug              = $this->settings['debug'];
 
         // Connection method.
-        if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
+        if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) )
             $this->connection_method = $this->settings['connection_method'];
-        }
 
         // Active logs.
-        if ( 'yes' == $this->debug ) {
+        if ( 'yes' == $this->debug )
             $this->log = $woocommerce->logger();
-        }
 
         // Actions.
         add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
@@ -282,15 +280,13 @@ class WC_Correios extends WC_Shipping_Method {
         } else {
             $ship_to_countries = '';
 
-            if ( 'specific' == $this->availability ) {
+            if ( 'specific' == $this->availability )
                 $ship_to_countries = $this->countries;
-            } elseif ( 'specific' == get_option( 'woocommerce_allowed_countries' ) ) {
+            elseif ( 'specific' == get_option( 'woocommerce_allowed_countries' ) )
                 $ship_to_countries = get_option( 'woocommerce_specific_allowed_countries' );
-            }
 
-            if ( is_array( $ship_to_countries ) && ! in_array( $package['destination']['country'], $ship_to_countries ) ) {
+            if ( is_array( $ship_to_countries ) && ! in_array( $package['destination']['country'], $ship_to_countries ) )
                 $is_available = false;
-            }
         }
 
         return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', $is_available, $package );
@@ -310,9 +306,8 @@ class WC_Correios extends WC_Shipping_Method {
 
         $quotes = $this->correios_connect( $package );
 
-        if ( 'yes' == $this->debug ) {
+        if ( 'yes' == $this->debug )
             $this->log->add( 'correios', 'Correios WebServices response: ' . print_r( $quotes, true ) );
-        }
 
         $list = $this->correios_services_list();
 
@@ -336,10 +331,8 @@ class WC_Correios extends WC_Shipping_Method {
         $rate = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
 
         // Register the rate.
-        foreach ( $rate as $key => $value ) {
+        foreach ( $rate as $key => $value )
             $this->add_rate( $value );
-        }
-
     }
 
     /**
@@ -376,11 +369,11 @@ class WC_Correios extends WC_Shipping_Method {
      * @return array
      */
     protected function order_shipping( $package ) {
-        $count     = 0;
-        $height    = array();
-        $width     = array();
-        $length    = array();
-        $weight    = array();
+        $count  = 0;
+        $height = array();
+        $width  = array();
+        $length = array();
+        $weight = array();
 
         // Shipping per item.
         foreach ( $package['contents'] as $item_id => $values ) {
@@ -474,13 +467,11 @@ class WC_Correios extends WC_Shipping_Method {
     protected function estimating_delivery( $label, $date ) {
         $msg = $label;
 
-        if ( $this->additional_time > 0 ) {
+        if ( $this->additional_time > 0 )
             $date += (int) $this->additional_time;
-        }
 
-        if ( $date > 0 ) {
+        if ( $date > 0 )
             $msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, 'wccorreios' ),  $date ) . ')';
-        }
 
         return $msg;
     }
@@ -600,9 +591,8 @@ class WC_Correios extends WC_Shipping_Method {
             }
 
             $declared = '0';
-            if ( 'declare' == $this->declare_value ) {
+            if ( 'declare' == $this->declare_value )
                 $declared = $woocommerce->cart->cart_contents_total;
-            }
 
             // Get quotes.
             $quotes = $this->connection_method(
@@ -630,9 +620,8 @@ class WC_Correios extends WC_Shipping_Method {
 
             $error->NoCubage->Erro = 99999;
 
-            if ( 'yes' == $this->debug ) {
+            if ( 'yes' == $this->debug )
                 $this->log->add( 'correios', 'Cart only with virtual products.' );
-            }
 
             return $error;
         }
