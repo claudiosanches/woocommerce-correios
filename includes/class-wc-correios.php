@@ -17,12 +17,15 @@ class WC_Correios extends WC_Shipping_Method {
     }
 
     /**
-     * init function.
+     * Initializes the method.
      *
      * @return void
      */
     public function init() {
         global $woocommerce;
+
+        // Correios Web Service.
+        $this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
         // Load the form fields.
         $this->init_form_fields();
@@ -52,10 +55,6 @@ class WC_Correios extends WC_Shipping_Method {
         $this->minimum_length     = $this->settings['minimum_length'];
         $this->debug              = $this->settings['debug'];
 
-        // Connection method.
-        if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) )
-            $this->connection_method = $this->settings['connection_method'];
-
         // Active logs.
         if ( 'yes' == $this->debug )
             $this->log = $woocommerce->logger();
@@ -65,13 +64,14 @@ class WC_Correios extends WC_Shipping_Method {
     }
 
     /**
-     * init_form_fields function.
+     * Admin options fields.
      *
      * @return void
      */
     public function init_form_fields() {
         global $woocommerce;
-        $form_fields = array(
+
+        $this->form_fields = array(
             'enabled' => array(
                 'title'            => __( 'Enable', 'wccorreios' ),
                 'type'             => 'checkbox',
@@ -222,39 +222,18 @@ class WC_Correios extends WC_Shipping_Method {
                 'type'             => 'checkbox',
                 'label'            => __( 'Enable logging', 'wccorreios' ),
                 'default'          => 'no',
-                'description'      => __( 'Log Correios events, such as WebServices requests, inside <code>woocommerce/logs/correios.txt</code>.', 'wccorreios' ),
+                'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'wccorreios' ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' ),
             )
         );
-
-        if ( extension_loaded( 'soap' ) && extension_loaded( 'simplexml' ) ) {
-            $form_fields['connection'] = array(
-                'title'       => __( 'Connection', 'wccorreios' ),
-                'type'        => 'title',
-                'description' => ''
-            );
-
-            $form_fields['connection_method'] = array(
-                'title'       => __( 'Connection method', 'wccorreios' ),
-                'type'        => 'select',
-                'description' => __( 'Choose between SOAP or SimpleXML method.', 'wccorreios' ),
-                'default'     => 'soap',
-                'options'     => array(
-                    'soap'      => __( 'SOAP', 'wccorreios' ),
-                    'simplexml' => __( 'SimpleXML', 'wccorreios' ),
-                )
-            );
-        }
-
-        $this->form_fields = $form_fields;
     }
 
     /**
-     * admin_options function.
+     * Correios options page.
      *
      * @return void
      */
     public function admin_options() {
-        global $woocommerce; ?>
+        ?>
         <h3><?php echo $this->method_title; ?></h3>
         <p><?php _e( 'Correios is a brazilian delivery method.', 'wccorreios' ); ?></p>
         <table class="form-table">
@@ -265,9 +244,9 @@ class WC_Correios extends WC_Shipping_Method {
     }
 
     /**
-     * is_available function.
+     * Checks if the method is available.
      *
-     * @param array $package
+     * @param array $package Order package.
      *
      * @return bool
      */
@@ -290,49 +269,6 @@ class WC_Correios extends WC_Shipping_Method {
         }
 
         return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', $is_available, $package );
-    }
-
-    /**
-     * calculate_shipping function.
-     *
-     * @param array $package (default: array()).
-     *
-     * @return void
-     */
-    public function calculate_shipping( $package = array() ) {
-        global $woocommerce;
-
-        $rates = array();
-
-        $quotes = $this->correios_connect( $package );
-
-        if ( 'yes' == $this->debug )
-            $this->log->add( 'correios', 'Correios WebServices response: ' . print_r( $quotes, true ) );
-
-        $list = $this->correios_services_list();
-
-        foreach ( $quotes as $key => $value ) {
-
-            if ( 0 == $value->Erro ) {
-
-                $label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $list[$key], $value->PrazoEntrega ) : $list[$key];
-
-                array_push(
-                    $rates,
-                    array(
-                        'id'    => $list[$key],
-                        'label' => $label,
-                        'cost'  => $this->fix_format( esc_attr( $value->Valor ) ),
-                    )
-                );
-            }
-        }
-
-        $rate = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
-
-        // Register the rate.
-        foreach ( $rate as $key => $value )
-            $this->add_rate( $value );
     }
 
     /**
@@ -359,6 +295,19 @@ class WC_Correios extends WC_Shipping_Method {
         $value = str_replace( '.', ',', $value );
 
         return $value;
+    }
+
+    /**
+     * Fix Zip Code format.
+     *
+     * @param mixed $zip Zip Code.
+     *
+     * @return int
+     */
+    protected function fix_zip_code( $zip ) {
+        $fixed = preg_replace( '([^0-9])', '', $zip );
+
+        return $fixed;
     }
 
     /**
@@ -417,26 +366,26 @@ class WC_Correios extends WC_Shipping_Method {
     }
 
     /**
-     * correios_services_list function.
+     * Gets the service name.
      *
      * @return array
      */
-    protected function correios_services_list() {
-        $list = array(
-            '41106' => 'PAC',        // sem contrato.
-            '40010' => 'SEDEX',      // sem contrato.
-            '40215' => 'SEDEX 10',   // sem contrato.
-            '40290' => 'SEDEX Hoje', // sem contrato.
-            '41068' => 'PAC',        // com contrato.
-            '40096' => 'SEDEX',      // com contrato.
-            '81019' => 'e-SEDEX',    // com contrato.
+    protected function get_service_name( $service ) {
+        $name = array(
+            '41106' => 'PAC',        // no contract.
+            '40010' => 'SEDEX',      // no contract.
+            '40215' => 'SEDEX 10',   // no contract.
+            '40290' => 'SEDEX Hoje', // no contract.
+            '41068' => 'PAC',        // with contract.
+            '40096' => 'SEDEX',      // with contract.
+            '81019' => 'e-SEDEX',    // with contract.
         );
 
-        return $list;
+        return $name[ $service ];
     }
 
     /**
-     * correios_services function.
+     * Gets the services IDs.
      *
      * @return array
      */
@@ -480,21 +429,24 @@ class WC_Correios extends WC_Shipping_Method {
     /**
      * Connection method.
      *
-     * @param  array $services         Services to quote.
-     * @param  string $zip_origin      Zip code of origin.
-     * @param  string $zip_destination Zip code of destination.
-     * @param  mixed $height           Order height.
-     * @param  mixed $width            Order width.
-     * @param  mixed $diameter         Order diameter.
-     * @param  mixed $length           Order length.
-     * @param  mixed $weight           Order weight.
-     * @param  string $login           User login.
-     * @param  string $password        User password.
-     * @param  string $declared        Value declared.
+     * @param array  $services        Correios services.
+     * @param mixed  $zip_origin      Zip Code of the origin.
+     * @param mixed  $zip_destination Zip Code of the destination.
+     * @param float  $height          Height total.
+     * @param float  $width           Width total.
+     * @param float  $diameter        Diamenter total.
+     * @param float  $length          Length total.
+     * @param float  $weight          Weight total.
+     * @param string $login           Correios user.
+     * @param string $password        Correios user password.
+     * @param float  $declared        Declared value.
+     * @param int    $format          Format.
+     * @param string $own_hand        Own hand option.
+     * @param string $receipt_notice  Notice.
      *
-     * @return object                  Total quote.
+     * @return array                  Quotes.
      */
-    protected function connection_method(
+    protected function correios_connect(
         $services,
         $zip_origin,
         $zip_destination,
@@ -503,57 +455,66 @@ class WC_Correios extends WC_Shipping_Method {
         $diameter,
         $length,
         $weight,
-        $login,
-        $password,
-        $declared ) {
+        $login          = null,
+        $password       = null,
+        $declared       = '0',
+        $format         = '1',
+        $own_hand       = 'N',
+        $receipt_notice = 'N' ) {
 
-        // Include Correios classes.
-        include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-connect.php';
-        include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
+        $quotes = array();
 
-        $quotes = '';
+        foreach ( $services as $service ) {
 
-        // Connection method.
-        if ( extension_loaded( 'soap' ) && 'soap' == $this->connection_method ) {
-            $quotes = new Correios_SOAP(
-                $services,
-                $zip_origin,
-                $zip_destination,
-                $height,
-                $width,
-                $diameter,
-                $length,
-                $weight,
-                $login,
-                $password,
-                $declared
-            );
-        } else {
-            $quotes = new Correios_SimpleXML(
-                $services,
-                $zip_origin,
-                $zip_destination,
-                $this->fix_simplexml_format( $height ),
-                $this->fix_simplexml_format( $width ),
-                $diameter,
-                $this->fix_simplexml_format( $length ),
-                $this->fix_simplexml_format( $weight ),
-                $login,
-                $password,
-                $declared
-            );
+            // Sets the get query.
+            $query = http_build_query( array(
+                'nCdServico' => $service,
+                'nCdEmpresa' => $login,
+                'sDsSenha' => $password,
+                'sCepDestino' => $this->fix_zip_code( $zip_destination ),
+                'sCepOrigem' => $this->fix_zip_code( $zip_origin ),
+                'nVlAltura' => $this->fix_simplexml_format( $height ),
+                'nVlLargura' => $this->fix_simplexml_format( $width ),
+                'nVlDiametro' => $this->fix_simplexml_format( $diameter ),
+                'nVlComprimento' => $this->fix_simplexml_format( $length ),
+                'nVlPeso' => $this->fix_simplexml_format( $weight ),
+                'nCdFormato' => $format,
+                'sCdMaoPropria' => $own_hand,
+                'nVlValorDeclarado' => $declared,
+                'sCdAvisoRecebimento' => $receipt_notice,
+                'StrRetorno' => 'xml'
+            ), '', '&' );
+
+            if ( 'yes' == $this->debug )
+                $this->log->add( 'correios', 'Requesting the Correios WebServices...' );
+
+            // Gets the WebServices response.
+            $response = wp_remote_get( $this->webservice . $query, array( 'sslverify' => false, 'timeout' => 30 ) );
+
+            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+                $result = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
+
+                if ( 'yes' == $this->debug )
+                    $this->log->add( 'correios', 'Correios WebServices response [' . $this->get_service_name( $service ) . ']: ' . print_r( $result->cServico, true ) );
+
+                $quotes[ $service ] = $result->cServico;
+            } else {
+                if ( 'yes' == $this->debug )
+                    $this->log->add( 'correios', 'Error accessing the Correios WebServices [' . $this->get_service_name( $service ) . ']: ' . $response['response']['code'] . ' - ' . $response['response']['message'] );
+            }
         }
 
         return $quotes;
     }
 
     /**
-     * correios_connect function.
+     * Gets the price of shipping.
      *
-     * @param  array $package
-     * @return object
+     * @param  array $package Order package.
+     *
+     * @return array          Correios Quotes.
      */
-    protected function correios_connect( $package ) {
+    protected function correios_quote( $package ) {
         global $woocommerce;
 
         include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-cubage.php';
@@ -591,12 +552,12 @@ class WC_Correios extends WC_Shipping_Method {
                 $this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $weight_cubage, true ) );
             }
 
-            $declared = '0';
+            $declared = 0;
             if ( 'declare' == $this->declare_value )
                 $declared = $woocommerce->cart->cart_contents_total;
 
             // Get quotes.
-            $quotes = $this->connection_method(
+            $quotes = $this->correios_connect(
                 $services,
                 $this->zip_origin,
                 $zip_destination,
@@ -610,21 +571,56 @@ class WC_Correios extends WC_Shipping_Method {
                 $declared
             );
 
-            return $quotes->calculateShipping();
+            return $quotes;
 
         } else {
 
             // Cart only with virtual products.
-            $error = new stdClass();
-
-            $error->NoCubage = new stdClass();
-
-            $error->NoCubage->Erro = 99999;
-
             if ( 'yes' == $this->debug )
                 $this->log->add( 'correios', 'Cart only with virtual products.' );
 
-            return $error;
+            return array();
+        }
+    }
+
+    /**
+     * Calculates the shipping rate.
+     *
+     * @param array $package Order package.
+     *
+     * @return void
+     */
+    public function calculate_shipping( $package = array() ) {
+        global $woocommerce;
+
+        $rates = array();
+
+        $quotes = $this->correios_quote( $package );
+
+        if ( $quotes ) {
+            foreach ( $quotes as $key => $value ) {
+                $name = $this->get_service_name( $key );
+
+                if ( 0 == $value->Erro ) {
+
+                    $label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $value->PrazoEntrega ) : $name;
+
+                    array_push(
+                        $rates,
+                        array(
+                            'id'    => $name,
+                            'label' => $label,
+                            'cost'  => $this->fix_format( esc_attr( $value->Valor ) ),
+                        )
+                    );
+                }
+            }
+
+            $rate = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
+
+            // Register the rate.
+            foreach ( $rate as $key => $value )
+                $this->add_rate( $value );
         }
     }
 
