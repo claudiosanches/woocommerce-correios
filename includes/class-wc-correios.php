@@ -362,13 +362,13 @@ class WC_Correios extends WC_Shipping_Method {
     }
 
     /**
-     * order_shipping function.
+     * Gets the weight and dimensions of the order.
      *
      * @param array $package
      *
      * @return array
      */
-    protected function order_shipping( $package ) {
+    protected function order_weight_dimensions( $package ) {
         $count  = 0;
         $height = array();
         $width  = array();
@@ -434,6 +434,7 @@ class WC_Correios extends WC_Shipping_Method {
 
         return $list;
     }
+
     /**
      * correios_services function.
      *
@@ -507,7 +508,7 @@ class WC_Correios extends WC_Shipping_Method {
         $declared ) {
 
         // Include Correios classes.
-        include_once WOO_CORREIOS_PATH . 'Correios/SOAP.php';
+        include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-connect.php';
         include_once WOO_CORREIOS_PATH . 'Correios/SimpleXML.php';
 
         $quotes = '';
@@ -555,10 +556,10 @@ class WC_Correios extends WC_Shipping_Method {
     protected function correios_connect( $package ) {
         global $woocommerce;
 
-        include_once WOO_CORREIOS_PATH . 'class-correios-cubage.php';
+        include_once WOO_CORREIOS_PATH . 'includes/class-correios-cubage.php';
 
         // Proccess measures.
-        $measures = apply_filters( 'wccorreios_default_package', $this->order_shipping( $package ) );
+        $measures = apply_filters( 'wccorreios_default_package', $this->order_weight_dimensions( $package ) );
 
         // Checks if the cart is not just virtual goods.
         if ( ! empty( $measures['height'] ) && ! empty( $measures['width'] ) && ! empty( $measures['length'] ) ) {
