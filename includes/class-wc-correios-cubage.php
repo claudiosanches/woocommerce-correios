@@ -1,8 +1,8 @@
 <?php
 /**
- * Correios Cubage class.
+ * WC_Correios_Cubage class.
  */
-class Correios_Cubage {
+class WC_Correios_Cubage {
 
     /**
      * __construct function.

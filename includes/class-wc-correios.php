@@ -556,7 +556,7 @@ class WC_Correios extends WC_Shipping_Method {
     protected function correios_connect( $package ) {
         global $woocommerce;
 
-        include_once WOO_CORREIOS_PATH . 'includes/class-correios-cubage.php';
+        include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-cubage.php';
 
         // Proccess measures.
         $measures = apply_filters( 'wccorreios_default_package', $this->order_weight_dimensions( $package ) );
@@ -565,7 +565,7 @@ class WC_Correios extends WC_Shipping_Method {
         if ( ! empty( $measures['height'] ) && ! empty( $measures['width'] ) && ! empty( $measures['length'] ) ) {
 
             // Get the Cubage.
-            $cubage = new Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
+            $cubage = new WC_Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
             $totalcubage = $cubage->cubage();
 
             $services = array_values( $this->correios_services() );
