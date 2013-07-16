@@ -232,13 +232,15 @@ class WC_Correios extends WC_Shipping_Method {
      * @return void
      */
     public function admin_options() {
+        // Call the admin scripts.
+        wp_enqueue_script( 'wc-correios', WOO_CORREIOS_URL . 'js/admin.js', array( 'jquery' ), '', true );
+
         ?>
         <h3><?php echo $this->method_title; ?></h3>
         <p><?php _e( 'Correios is a brazilian delivery method.', 'wccorreios' ); ?></p>
         <table class="form-table">
             <?php $this->generate_settings_html(); ?>
         </table>
-        <script src="<?php echo plugins_url( 'js/options.js', __FILE__ ); ?>" type="text/javascript"></script>
         <?php
     }
 

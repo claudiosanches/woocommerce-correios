@@ -1,4 +1,8 @@
 jQuery(document).ready(function($) {
+    var correios_select = $('#woocommerce_correios_corporate_service'),
+        correios_val = correios_select.val(),
+        display_date = $('#woocommerce_correios_display_date');
+
     correios_adddays = $('.form-table:eq(0) tr:eq(7)');
     correios_login = $('.form-table:eq(1) tr:eq(1)');
     correios_password = $('.form-table:eq(1) tr:eq(2)');
@@ -8,10 +12,6 @@ jQuery(document).ready(function($) {
     correios_login.hide();
     correios_password.hide();
     correios_esedex.hide();
-
-    var correios_select = $('#woocommerce_correios_corporate_service');
-    var correios_val = correios_select.val();
-    var display_date = $('#woocommerce_correios_display_date');
 
     function addtionalDaysDisplay() {
 
@@ -41,7 +41,6 @@ jQuery(document).ready(function($) {
     correiosActive(correios_val);
 
     correios_select.on('change', function() {
-        var service = $(this).val();
-        correiosActive(service);
+        correiosActive($(this).val());
     });
 });
