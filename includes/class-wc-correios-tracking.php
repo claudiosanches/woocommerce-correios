@@ -2,7 +2,6 @@
 /**
  * Correios tracking code.
  */
-
 class WC_Correios_Tracking {
 
     public function __construct() {

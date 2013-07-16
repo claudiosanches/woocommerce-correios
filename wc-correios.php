@@ -78,7 +78,7 @@ function wccorreios_shipping_load() {
     include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios.php';
 
     // Metabox.
-    include_once WOO_CORREIOS_PATH . 'includes/tracking.php';
+    include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-tracking.php';
     $wc_correios_metabox = new WC_Correios_Tracking;
 
 } // function wccorreios_shipping_load.
