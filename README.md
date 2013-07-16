@@ -3,8 +3,8 @@
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.0  
-**Tested up to:** 3.5.1  
-**Stable tag:** 1.4  
+**Tested up to:** 3.6  
+**Stable tag:** 1.5.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -26,7 +26,7 @@ Adicione os Correios como método de entrega em sua loja WooCommerce.
 
 O plugin WooCommerce Correios foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa.
 
-Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de SOAP, SimpleXML e Cubagem que possuem este plugin.
+Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de Cubagem que possuem este plugin.
 
 ### Métodos de entrega aceitos: ###
 
@@ -63,7 +63,7 @@ Você pode esclarecer suas dúvidas usando:
 
 ### Requerimentos: ###
 
-Possuir instalado a extensão SOAP instalada no servidor ou como alternativa SimpleXML (que já é instalado por padrão com o PHP 5).
+Possuir instalado a extensão SimpleXML (que já é instalado por padrão com o PHP 5).
 
 ### Configurações no Correios: ###
 
@@ -90,7 +90,7 @@ Este plugin esta licenciado como GPL.
 ### O que eu preciso para utilizar este plugin? ###
 
 * Ter instalado o plugin WooCommerce.
-* Possuir instalado em sua hospedagem a extensão de SOAP ou SimpleXML.
+* Possuir instalado em sua hospedagem a extensão de SimpleXML.
 * Configurar o seu CEP de origem nas configurações do plugin.
 * Adicionar peso e medidas nos produtos que pretende entregar.
 
@@ -108,9 +108,7 @@ Para mais informações sobre os métodos de entrega dos Correios visite: [Encom
 
 ### Como é feita a cotação do frete? ###
 
-A cotação do frete é feita utilizando o [Webservices dos Correios](http://www.correios.com.br/webservices/).
-
-É usado o Protocolo SOAP para fazer a conexão. Entretanto algumas empresas de hospedagem não tem em seus servidores a extensão do SOAP ativa por padrão. Desta forma é usado também como alternativa o método de SimpleXML (que é nativo do PHP 5).
+A cotação do frete é feita utilizando o [Webservices dos Correios](http://www.correios.com.br/webservices/) utilizando SimpleXML (que é nativo do PHP 5).
 
 Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e a cubagem total dos produtos mais o peso. Desta forma o valor cotado sera o mais próximo possível do real.
 
@@ -128,6 +126,8 @@ Segue uma lista dos prováveis erros:
 * O peso e as dimensões foram cadastrados de forma errada, verifique as configurações de medidas em `WooCommerce > Configurações > Catalogo`.
 
 É possível identificar o erro ligando a opção **Log de depuração** nas configurações dos **Correios**. Desta forma é gerado um log dentro da pasta `wp-content/plugins/woocommerce/logs/`. Ao ativar esta opção, tente realizar uma cotação de frete e depois verique o arquivo gerado.
+
+Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer do site dos Correios ter caido ou o seu servidor estar com pouca memoria.
 
 ### Quais são os limites de dimensões e peso do plugin? ###
 
@@ -168,7 +168,16 @@ Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-w
 
 ## Changelog ##
 
-### 1.4 14/04/2013 ###
+### 1.5.0 - 15/07/2013 ###
+
+* Removida a classe de conexão com SOAP.
+* Melhoria do código.
+* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXmlElement`.
+* Adicionado opção de taxa de manuseio.
+* Melhoria das descrições na página de configuração.
+* Melhoria no tratamento de erros.
+
+### 1.4 - 14/04/2013 ###
 
 * Adicionada opção para enviar o código de rastreamento dos Correios.
 * Adicionado o filtro `woocommerce_correios_shipping_methods` para manipular os métodos de entrega do plugin.

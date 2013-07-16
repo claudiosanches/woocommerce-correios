@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios v1.4\n"
+"Project-Id-Version: WooCommerce Correios v1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-07-16 01:45:20+0000\n"
+"PO-Revision-Date: 2013-07-16 02:25:58+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -329,12 +329,6 @@ msgstr "https://github.com/claudiosmweb/woocommerce-correios"
 msgid "http://claudiosmweb.com/"
 msgstr "http://claudiosmweb.com/"
 
-#. translators: plugin header field 'Version'
-#: wc-correios.php:0
-#@ wccorreios
-msgid "1.4"
-msgstr "1.4"
-
 #: includes/class-wc-correios.php:76
 #@ wccorreios
 msgid "Enable/Disable"
@@ -377,4 +371,10 @@ msgstr "WooCommerce Correios depende de %s para funcionar!"
 #@ wccorreios
 msgid "Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable."
 msgstr "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%. Deixe em branco para desabilitar."
+
+#. translators: plugin header field 'Version'
+#: wc-correios.php:0
+#@ wccorreios
+msgid "1.5.0"
+msgstr "1.5.0"
 
