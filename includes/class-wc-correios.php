@@ -491,7 +491,10 @@ class WC_Correios extends WC_Shipping_Method {
             // Gets the WebServices response.
             $response = wp_remote_get( $this->webservice . $query, array( 'sslverify' => false, 'timeout' => 30 ) );
 
-            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+            if ( is_wp_error( $response ) ) {
+                if ( 'yes' == $this->debug )
+                    $this->log->add( 'correios', 'WP_Error: ' . $response->get_error_message() );
+            } elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
                 $result = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
 
                 if ( 'yes' == $this->debug )
