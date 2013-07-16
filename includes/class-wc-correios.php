@@ -73,9 +73,9 @@ class WC_Correios extends WC_Shipping_Method {
 
         $this->form_fields = array(
             'enabled' => array(
-                'title'            => __( 'Enable', 'wccorreios' ),
+                'title'            => __( 'Enable/Disable', 'wccorreios' ),
                 'type'             => 'checkbox',
-                'label'            => __( 'Enable Correios', 'wccorreios' ),
+                'label'            => __( 'Enable this shipping method', 'wccorreios' ),
                 'default'          => 'no'
             ),
             'title' => array(
@@ -86,13 +86,13 @@ class WC_Correios extends WC_Shipping_Method {
                 'default'          => __( 'Correios', 'wccorreios' )
             ),
             'availability' => array(
-                'title'            => __( 'Method availability', 'wccorreios' ),
+                'title'            => __( 'Availability', 'wccorreios' ),
                 'type'             => 'select',
                 'default'          => 'all',
                 'class'            => 'availability',
                 'options'          => array(
-                    'all'          => __('All allowed countries', 'wccorreios'),
-                    'specific'     => __('Specific Countries', 'wccorreios')
+                    'all'          => __( 'All allowed countries', 'wccorreios' ),
+                    'specific'     => __( 'Specific Countries', 'wccorreios' )
                 )
             ),
             'countries' => array(
@@ -136,7 +136,7 @@ class WC_Correios extends WC_Shipping_Method {
             'fee' => array(
                 'title'            => __( 'Handling Fee', 'wccorreios' ),
                 'type'             => 'text',
-                'description'      => __( 'Fee excluding tax. Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable', 'wccorreios' ),
+                'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'wccorreios' ),
                 'desc_tip'         => true,
                 'placeholder'      => '0.00'
             ),
