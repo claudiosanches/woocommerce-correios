@@ -17,29 +17,19 @@ define( 'WOO_CORREIOS_PATH', plugin_dir_path( __FILE__ ) );
  * WooCommerce fallback notice.
  */
 function wccorreios_woocommerce_fallback_notice() {
-    $html = '<div class="error">';
-        $html .= '<p>' . __( 'WooCommerce Correios depends on <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to work!', 'wccorreios' ) . '</p>';
-    $html .= '</div>';
-
-    echo $html;
+    echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on %s to work!', 'wccorreios' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a>' ) . '</p></div>';
 }
 
 /**
- * SOAP and SimpleXML missing notice.
+ * SimpleXML missing notice.
  */
 function wccorreios_extensions_missing_notice() {
-    $html = '<div class="error">';
-        $html .= '<p>' . __( 'WooCommerce Correios depends to <a href="http://php.net/manual/en/book.soap.php">SOAP</a> or <a href="http://php.net/manual/en/book.simplexml.php">SimpleXML</a> to work!', 'wccorreios' ) . '</p>';
-    $html .= '</div>';
-
-    echo $html;
+    echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends to %s to work!', 'wccorreios' ), '<a href="http://php.net/manual/en/book.simplexml.php">SimpleXML</a>' ) . '</p></div>';
 }
 
 /**
  * Load functions.
  */
-add_action( 'plugins_loaded', 'wccorreios_shipping_load', 0 );
-
 function wccorreios_shipping_load() {
 
     if ( ! class_exists( 'WC_Shipping_Method' ) ) {
@@ -48,7 +38,7 @@ function wccorreios_shipping_load() {
         return;
     }
 
-    if ( ! extension_loaded( 'soap' ) && ! extension_loaded( 'simplexml' ) ) {
+    if ( ! class_exists( 'SimpleXmlElement' ) ) {
         add_action( 'admin_notices', 'wccorreios_extensions_missing_notice' );
 
         return;
@@ -80,5 +70,6 @@ function wccorreios_shipping_load() {
     // Metabox.
     include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-tracking.php';
     $wc_correios_metabox = new WC_Correios_Tracking;
+}
 
-} // function wccorreios_shipping_load.
+add_action( 'plugins_loaded', 'wccorreios_shipping_load', 0 );
