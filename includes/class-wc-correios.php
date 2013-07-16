@@ -39,6 +39,7 @@ class WC_Correios extends WC_Shipping_Method {
         $this->display_date       = $this->settings['display_date'];
         $this->additional_time    = $this->settings['additional_time'];
         $this->availability       = $this->settings['availability'];
+        $this->fee                = $this->settings['fee'];
         $this->zip_origin         = $this->settings['zip_origin'];
         $this->countries          = $this->settings['countries'];
         $this->corporate_service  = $this->settings['corporate_service'];
@@ -81,6 +82,7 @@ class WC_Correios extends WC_Shipping_Method {
                 'title'            => __( 'Title', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'This controls the title which the user sees during checkout.', 'wccorreios' ),
+                'desc_tip'         => true,
                 'default'          => __( 'Correios', 'wccorreios' )
             ),
             'availability' => array(
@@ -98,130 +100,150 @@ class WC_Correios extends WC_Shipping_Method {
                 'type'             => 'multiselect',
                 'class'            => 'chosen_select',
                 'css'              => 'width: 450px;',
-                'default'          => '',
                 'options'          => $woocommerce->countries->countries
             ),
             'zip_origin' => array(
                 'title'            => __( 'Origin Zip Code', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Zip Code from where the requests are sent.', 'wccorreios' ),
-                'default'          => '',
+                'desc_tip'         => true
             ),
             'declare_value' => array(
                 'title'            => __( 'Declare value', 'wccorreios' ),
                 'type'             => 'select',
-                'description'      => '',
                 'default'          => 'none',
                 'options'          => array(
                     'declare'      => __( 'Declare', 'wccorreios' ),
-                    'none'         => __( 'None', 'wccorreios' ),
+                    'none'         => __( 'None', 'wccorreios' )
                 ),
             ),
             'display_date' => array(
                 'title'            => __( 'Estimated delivery', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Display date of estimated delivery.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'additional_time' => array(
                 'title'            => __( 'Additional days', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Additional days to the estimated delivery.', 'wccorreios' ),
+                'desc_tip'         => true,
                 'default'          => '0',
+                'placeholder'      => '0'
+            ),
+            'fee' => array(
+                'title'            => __( 'Handling Fee', 'wccorreios' ),
+                'type'             => 'text',
+                'description'      => __( 'Fee excluding tax. Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable', 'wccorreios' ),
+                'desc_tip'         => true,
+                'placeholder'      => '0.00'
             ),
             'services' => array(
                 'title'            => __( 'Correios Services', 'wccorreios' ),
-                'type'             => 'title',
-                'description'      => '',
-                'default'          => ''
+                'type'             => 'title'
             ),
             'corporate_service' => array(
                 'title'            => __( 'Corporate Service', 'wccorreios' ),
                 'type'             => 'select',
                 'description'      => __( 'Choose between conventional or corporate service.', 'wccorreios' ),
+                'desc_tip'         => true,
                 'default'          => 'conventional',
                 'options'          => array(
                     'conventional' => __( 'Conventional', 'wccorreios' ),
-                    'corporate'    => __( 'Corporate', 'wccorreios' ),
+                    'corporate'    => __( 'Corporate', 'wccorreios' )
                 ),
             ),
             'login' => array(
                 'title'            => __( 'Administrative Code', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Your Correios login.', 'wccorreios' ),
-                'default'          => '',
+                'desc_tip'         => true
             ),
             'password' => array(
                 'title'            => __( 'Administrative Password', 'wccorreios' ),
                 'type'             => 'password',
                 'description'      => __( 'Your Correios password.', 'wccorreios' ),
-                'default'          => '',
+                'desc_tip'         => true
             ),
             'service_pac' => array(
                 'title'            => __( 'PAC', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Shipping via PAC.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'service_sedex' => array(
                 'title'            => __( 'SEDEX', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Shipping via SEDEX.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'service_sedex_10' => array(
                 'title'            => __( 'SEDEX 10', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Shipping via SEDEX 10.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'service_sedex_hoje' => array(
                 'title'            => __( 'SEDEX Hoje', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Shipping via SEDEX Hoje.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'service_esedex' => array(
                 'title'            => __( 'e-SEDEX', 'wccorreios' ),
                 'type'             => 'checkbox',
+                'label'            => __( 'Enable', 'wccorreios' ),
                 'description'      => __( 'Shipping via e-SEDEX.', 'wccorreios' ),
-                'default'          => 'no',
+                'desc_tip'         => true,
+                'default'          => 'no'
             ),
             'package_standard' => array(
-                'title' => __( 'Package Standard', 'wccorreios' ),
-                'type' => 'title',
-                'description' => __( 'Sets a minimum measure for the package.', 'wccorreios' ),
-                'default' => ''
+                'title'            => __( 'Package Standard', 'wccorreios' ),
+                'type'             => 'title',
+                'description'      => __( 'Sets a minimum measure for the package.', 'wccorreios' ),
+                'desc_tip'         => true,
             ),
             'minimum_height' => array(
                 'title'            => __( 'Minimum Height', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm.', 'wccorreios' ),
-                'default'          => '2',
+                'desc_tip'         => true,
+                'default'          => '2'
             ),
             'minimum_width' => array(
                 'title'            => __( 'Minimum Width', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm.', 'wccorreios' ),
-                'default'          => '11',
+                'desc_tip'         => true,
+                'default'          => '11'
             ),
             'minimum_length' => array(
                 'title'            => __( 'Minimum Length', 'wccorreios' ),
                 'type'             => 'text',
                 'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', 'wccorreios' ),
-                'default'          => '16',
+                'desc_tip'         => true,
+                'default'          => '16'
             ),
             'testing' => array(
                 'title'            => __( 'Testing', 'wccorreios' ),
-                'type'             => 'title',
-                'description'      => '',
+                'type'             => 'title'
             ),
             'debug' => array(
                 'title'            => __( 'Debug Log', 'wccorreios' ),
                 'type'             => 'checkbox',
                 'label'            => __( 'Enable logging', 'wccorreios' ),
                 'default'          => 'no',
-                'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'wccorreios' ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' ),
+                'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'wccorreios' ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' )
             )
         );
     }
@@ -606,13 +628,15 @@ class WC_Correios extends WC_Shipping_Method {
                 if ( 0 == $value->Erro ) {
 
                     $label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $value->PrazoEntrega ) : $name;
+                    $cust = $this->fix_format( esc_attr( $value->Valor ) );
+                    $fee = $this->get_fee( $this->fix_format( $this->fee ), $cust );
 
                     array_push(
                         $rates,
                         array(
                             'id'    => $name,
                             'label' => $label,
-                            'cost'  => $this->fix_format( esc_attr( $value->Valor ) ),
+                            'cost'  => $cust + $fee,
                         )
                     );
                 }
