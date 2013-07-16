@@ -235,13 +235,11 @@ class WC_Correios extends WC_Shipping_Method {
         // Call the admin scripts.
         wp_enqueue_script( 'wc-correios', WOO_CORREIOS_URL . 'js/admin.js', array( 'jquery' ), '', true );
 
-        ?>
-        <h3><?php echo $this->method_title; ?></h3>
-        <p><?php _e( 'Correios is a brazilian delivery method.', 'wccorreios' ); ?></p>
-        <table class="form-table">
-            <?php $this->generate_settings_html(); ?>
-        </table>
-        <?php
+        echo '<h3>' . $this->method_title . '</h3>';
+        echo '<p>' . __( 'Correios is a brazilian delivery method.', 'wccorreios' ) . '</p>';
+        echo '<table class="form-table">';
+            $this->generate_settings_html();
+        echo '</table>';
     }
 
     /**
@@ -337,18 +335,18 @@ class WC_Correios extends WC_Shipping_Method {
                 $_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
                 $_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
 
-                $height[$count] = $_height;
-                $width[$count]  = $_width;
-                $length[$count] = $_length;
-                $weight[$count] = $_weight;
+                $height[ $count ] = $_height;
+                $width[ $count ]  = $_width;
+                $length[ $count ] = $_length;
+                $weight[ $count ] = $_weight;
 
                 if ( $qty > 1 ) {
                     $n = $count;
                     for ( $i = 0; $i < $qty; $i++ ) {
-                        $height[$n] = $_height;
-                        $width[$n]  = $_width;
-                        $length[$n] = $_length;
-                        $weight[$n] = $_weight;
+                        $height[ $n ] = $_height;
+                        $width[ $n ]  = $_width;
+                        $length[ $n ] = $_length;
+                        $weight[ $n ] = $_weight;
                         $n++;
                     }
                     $count = $n;
@@ -627,5 +625,4 @@ class WC_Correios extends WC_Shipping_Method {
                 $this->add_rate( $value );
         }
     }
-
 }
