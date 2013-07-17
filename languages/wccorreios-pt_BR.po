@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Correios v1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-07-16 02:25:58+0000\n"
+"PO-Revision-Date: 2013-07-17 03:36:18+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -377,4 +377,9 @@ msgstr "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%.
 #@ wccorreios
 msgid "1.5.0"
 msgstr "1.5.0"
+
+#: wc-correios.php:91
+#@ wccorreios
+msgid "Settings"
+msgstr "Configurações"
 
