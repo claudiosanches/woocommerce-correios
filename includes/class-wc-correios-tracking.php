@@ -58,20 +58,18 @@ class WC_Correios_Tracking {
      */
     public function save( $post_id ) {
         // Verify nonce.
-        if ( ! isset( $_POST['wc_correios_nonce'] ) || ! wp_verify_nonce( $_POST['wc_correios_nonce'], basename( __FILE__ ) ) ) {
+        if ( ! isset( $_POST['wc_correios_nonce'] ) || ! wp_verify_nonce( $_POST['wc_correios_nonce'], basename( __FILE__ ) ) )
             return $post_id;
-        }
 
         // Verify if this is an auto save routine.
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
             return $post_id;
-        }
 
         // Check permissions.
         if ( 'shop_order' == $_POST['post_type'] ) {
-            if ( ! current_user_can( 'edit_page', $post_id ) ) {
+            if ( ! current_user_can( 'edit_page', $post_id ) )
                 return $post_id;
-            }
+
         } elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
             return $post_id;
         }
