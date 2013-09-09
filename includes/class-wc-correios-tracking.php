@@ -43,7 +43,7 @@ class WC_Correios_Tracking {
         // Use nonce for verification.
         wp_nonce_field( basename( __FILE__ ), 'wc_correios_nonce' );
 
-        $html = '<label for="correios_code">' . __( 'Tracking code:', 'wccorreios' ) . '</label><br />';
+        $html = '<label for="correios_tracking">' . __( 'Tracking code:', 'wccorreios' ) . '</label><br />';
         $html .= '<input type="text" id="correios_tracking" name="correios_tracking" value="' . get_post_meta( $post->ID, 'correios_tracking', true ) . '" style="width: 100%;" />';
 
         echo $html;
