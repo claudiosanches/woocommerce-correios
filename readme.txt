@@ -133,7 +133,7 @@ Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer 
 
 Veja quais são os limites em: [Correios - limites de dimensões e peso](http://www.correios.com.br/produtosaz/produto.cfm?id=8560360B-5056-9163-895DA62922306ECA).
 
-= Os métodos de entrega dos Correios não aparecem durante o checkout ou no carrinho =
+= Os métodos de entrega dos Correios não aparecem durante o checkout ou no carrinho? =
 
 Verifique se você realmente ativou as opções de entrega do plugin e faça o mesmo procedimento da questão a cima.
 
