@@ -1,9 +1,9 @@
 === WooCommerce Correios ===
 Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
-Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, shipping, delivery, woocommerce, correios
-Requires at least: 3.0
-Tested up to: 3.6
+Tags: shipping, delivery, woocommerce, correios
+Requires at least: 3.5
+Tested up to: 3.6.1
 Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -133,6 +133,10 @@ Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer 
 
 Veja quais são os limites em: [Correios - limites de dimensões e peso](http://www.correios.com.br/produtosaz/produto.cfm?id=8560360B-5056-9163-895DA62922306ECA).
 
+= Os métodos de entrega dos Correios não aparecem durante o checkout ou no carrinho =
+
+Verifique se você realmente ativou as opções de entrega do plugin e faça o mesmo procedimento da questão a cima.
+
 = Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? =
 
 No seu `functions.php` adicione:
@@ -155,7 +159,8 @@ Desta forma serão usadas as dimensões padrões que estão nas configurações 
 
 = Mais dúvidas relacionadas ao funcionamento do plugin? =
 
-Entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
+Ative a opção de **Log de depuração** do plugin e entre em contato [clicando aqui](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
+**Atenção!** Não adianta pedir ajuda se não tiver o log em mãos.
 
 == Screenshots ==
 
