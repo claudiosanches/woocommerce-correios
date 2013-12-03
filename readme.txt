@@ -141,19 +141,19 @@ Verifique se você realmente ativou as opções de entrega do plugin e faça o m
 
 No seu `functions.php` adicione:
 
-    function cs_default_correios_package( $measures ) {
-        // Gets Correios settings.
-        $default = get_option( 'woocommerce_correios_settings' );
+	function cs_default_correios_package( $measures ) {
+		// Gets Correios settings.
+		$default = get_option( 'woocommerce_correios_settings' );
 
-        // Sets default package for dimensions.
-        $measures['height'] = array( $default['minimum_height'] );
-        $measures['length'] = array( $default['minimum_length'] );
-        $measures['width']  = array( $default['minimum_width'] );
+		// Sets default package for dimensions.
+		$measures['height'] = array( $default['minimum_height'] );
+		$measures['length'] = array( $default['minimum_length'] );
+		$measures['width']  = array( $default['minimum_width'] );
 
-        return $measures;
-    }
+		return $measures;
+	}
 
-    add_filter( 'wccorreios_default_package', 'cs_default_correios_package' );
+	add_filter( 'wccorreios_default_package', 'cs_default_correios_package' );
 
 Desta forma serão usadas as dimensões padrões que estão nas configurações do plugin.
 

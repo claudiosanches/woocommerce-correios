@@ -1,46 +1,44 @@
-jQuery(document).ready(function($) {
-    var correios_select = $('#woocommerce_correios_corporate_service'),
-        correios_val = correios_select.val(),
-        display_date = $('#woocommerce_correios_display_date');
+jQuery( document ).ready( function( $ ) {
+	var correiosSelect = $( '#woocommerce_correios_corporate_service' ),
+		correios_val = correiosSelect.val(),
+		display_date = $( '#woocommerce_correios_display_date' ),
+		correiosAddDays = $( '.form-table:eq(0) tr:eq(7)' ),
+		correiosLogin = $( '.form-table:eq(1) tr:eq(1)' ),
+		correiosPassword = $( '.form-table:eq(1) tr:eq(2)' ),
+		correiosEsedex = $( '.form-table:eq(1) tr:eq(7)' );
 
-    correios_adddays = $('.form-table:eq(0) tr:eq(7)');
-    correios_login = $('.form-table:eq(1) tr:eq(1)');
-    correios_password = $('.form-table:eq(1) tr:eq(2)');
-    correios_esedex = $('.form-table:eq(1) tr:eq(7)');
+	correiosAddDays.hide();
+	correiosLogin.hide();
+	correiosPassword.hide();
+	correiosEsedex.hide();
 
-    correios_adddays.hide();
-    correios_login.hide();
-    correios_password.hide();
-    correios_esedex.hide();
+	function addtionalDaysDisplay() {
+		if ( display_date.is( ':checked' ) ) {
+			correiosAddDays.show();
+		} else {
+			correiosAddDays.hide();
+		}
+	}
+	addtionalDaysDisplay();
 
-    function addtionalDaysDisplay() {
+	display_date.on( 'click', function() {
+		addtionalDaysDisplay();
+	} );
 
-        if ( display_date.is(':checked') ) {
-            correios_adddays.show();
-        } else {
-            correios_adddays.hide();
-        }
-    }
-    addtionalDaysDisplay();
+	function correiosActive( correios ) {
+		if ( 'corporate' === correios ) {
+			correiosLogin.show();
+			correiosPassword.show();
+			correiosEsedex.show();
+		} else {
+			correiosLogin.hide();
+			correiosPassword.hide();
+			correiosEsedex.hide();
+		}
+	}
+	correiosActive( correios_val );
 
-    display_date.on('click', function() {
-        addtionalDaysDisplay();
-    });
-
-    function correiosActive(correios) {
-        if (correios == 'corporate') {
-            correios_login.show();
-            correios_password.show();
-            correios_esedex.show();
-        } else {
-            correios_login.hide();
-            correios_password.hide();
-            correios_esedex.hide();
-        }
-    }
-    correiosActive(correios_val);
-
-    correios_select.on('change', function() {
-        correiosActive($(this).val());
-    });
+	correiosSelect.on( 'change', function() {
+		correiosActive( $( this ).val() );
+	} );
 });
