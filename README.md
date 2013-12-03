@@ -116,7 +116,7 @@ Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e 
 
 No momento o Webservices faz cotação apenas para dentro do Brasil.
 
-### Como resolver o erro *"Nenhum método de envio encontrado. Por favor, recalcule seu frete informando seu estado/país e o CEP para verificar se há algum método de envio disponível para sua região."*? ###
+### Como resolver o erro *"Nenhum método de envio encontrado. Por favor, recalcule seu frete informando seu estado/país e o CEP para verificar se há algum método de envio disponível para sua região."* ou *"Desculpe, aparentemente não existem métodos de entrega disponíveis para sua localidade (Brasil). Se você precisa de ajuda ou deseja fazer uma negociação para realizar a entrega, entre em contato conosco."*? ###
 
 Esta é uma mensagem de erro padrão do WooCommerce, ela pode ser gerada por vários problemas.
 
