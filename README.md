@@ -3,8 +3,8 @@
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
-**Tested up to:** 3.6.1  
-**Stable tag:** 1.5.0  
+**Tested up to:** 3.8  
+**Stable tag:** 1.6.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -173,6 +173,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 1.6.0 - 03/12/2013 ###
+
+* Adicionado suporte para as versões 2.1.x do WooCommerce.
+
 ### 1.5.0 - 15/07/2013 ###
 
 * Removida a classe de conexão com SOAP.
@@ -182,7 +186,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 * Melhoria das descrições na página de configuração.
 * Melhoria no tratamento de erros.
 
-### 1.4 - 14/04/2013 ###
+### 1.4.0 - 14/04/2013 ###
 
 * Adicionada opção para enviar o código de rastreamento dos Correios.
 * Adicionado o filtro `woocommerce_correios_shipping_methods` para manipular os métodos de entrega do plugin.
@@ -222,12 +226,12 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 * Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
 
-### 1.2 - 11/09/2012  ###
+### 1.2.0 - 11/09/2012  ###
 
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
-### 1.1 - 05/09/2012  ###
+### 1.1.0 - 05/09/2012  ###
 
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
@@ -239,15 +243,15 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 * Adicionado sistema de verificação e notificação sobre a falta de SOAP no servidor.
 * Melhorada a inclusão das classes dos Correios no plugin.
 
-### 1.0 ###
+### 1.0.0 ###
 
 * Versão inicial do plugin.
 
 ## Upgrade Notice ##
 
-### 1.4 ###
+### 1.6.0 ###
 
-* Adicionada opção para enviar o código de rastreamento dos Correios.
+* Adicionado suporte para as versões 2.1.x do WooCommerce.
 
 ## License ##
 
