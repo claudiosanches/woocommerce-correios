@@ -110,11 +110,15 @@ class WC_Correios_Tracking {
 	 * @return void
 	 */
 	protected function email_notification( $order, $tracking_code ) {
-		global $woocommerce;
+		// Backwards compatibility.
+		if ( function_exists( 'WC' ) ) {
+			$mailer = WC()->mailer();
+		} else {
+			global $woocommerce;
+			$mailer = $woocommerce->mailer();
+		}
 
 		$subject = sprintf( __( 'Your the Correios tracking code of the order #%s', 'wccorreios' ), $order->id );
-
-		$mailer = $woocommerce->mailer();
 
 		// Mail headers.
 		$headers = array();

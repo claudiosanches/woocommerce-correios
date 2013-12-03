@@ -21,8 +21,6 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function init() {
-		global $woocommerce;
-
 		// Correios Web Service.
 		$this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
@@ -60,7 +58,7 @@ class WC_Correios extends WC_Shipping_Method {
 			if ( class_exists( 'WC_Logger' ) ) {
 				$this->log = new WC_Logger();
 			} else {
-				$this->log = $woocommerce->logger();
+				$this->log = $this->woocommerce_method()->logger();
 			}
 		}
 
@@ -69,13 +67,25 @@ class WC_Correios extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Backwards compatibility with version prior to 2.1.
+	 *
+	 * @return object Returns the main instance of WooCommerce class.
+	 */
+	protected function woocommerce_method() {
+		if ( function_exists( 'WC' ) ) {
+			return WC();
+		} else {
+			global $woocommerce;
+			return $woocommerce;
+		}
+	}
+
+	/**
 	 * Admin options fields.
 	 *
 	 * @return void
 	 */
 	public function init_form_fields() {
-		global $woocommerce;
-
 		$this->form_fields = array(
 			'enabled' => array(
 				'title'            => __( 'Enable/Disable', 'wccorreios' ),
@@ -105,7 +115,7 @@ class WC_Correios extends WC_Shipping_Method {
 				'type'             => 'multiselect',
 				'class'            => 'chosen_select',
 				'css'              => 'width: 450px;',
-				'options'          => $woocommerce->countries->countries
+				'options'          => $this->woocommerce_method()->countries->countries
 			),
 			'zip_origin' => array(
 				'title'            => __( 'Origin Zip Code', 'wccorreios' ),
@@ -277,7 +287,6 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return bool
 	 */
 	public function is_available( $package ) {
-		global $woocommerce;
 		$is_available = true;
 
 		if ( 'no' == $this->enabled ) {
@@ -359,10 +368,17 @@ class WC_Correios extends WC_Shipping_Method {
 
 			if ( $qty > 0 && $product->needs_shipping() && $product->has_dimensions() ) {
 
-				$_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
-				$_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
-				$_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
-				$_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
+				if ( version_compare( WOOCOMMERCE_VERSION, '2.1', '>=' ) ) {
+					$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
+					$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
+					$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
+					$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
+				} else {
+					$_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
+					$_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
+					$_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
+					$_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
+				}
 
 				$height[ $count ] = $_height;
 				$width[ $count ]  = $_width;
@@ -552,8 +568,6 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return array          Correios Quotes.
 	 */
 	protected function correios_quote( $package ) {
-		global $woocommerce;
-
 		include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-cubage.php';
 
 		// Proccess measures.
@@ -591,7 +605,7 @@ class WC_Correios extends WC_Shipping_Method {
 
 			$declared = 0;
 			if ( 'declare' == $this->declare_value ) {
-				$declared = $woocommerce->cart->cart_contents_total;
+				$declared = $this->woocommerce_method()->cart->cart_contents_total;
 			}
 
 			// Get quotes.
@@ -630,10 +644,7 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = array() ) {
-		global $woocommerce;
-
-		$rates = array();
-
+		$rates  = array();
 		$quotes = $this->correios_quote( $package );
 
 		if ( $quotes ) {
