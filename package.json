@@ -1,7 +1,7 @@
 {
 	"name": "woocommerce-correios",
 	"description": "Correios para WooCommerce",
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"main": "Gruntfile.js",
 	"dependencies": {
 		"grunt": "~0.4.1",
