@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.8  
-**Stable tag:** 1.6.0  
+**Stable tag:** 1.6.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -65,7 +65,7 @@ Você pode esclarecer suas dúvidas usando:
 
 Possuir instalado a extensão SimpleXML (que já é instalado por padrão com o PHP 5).
 
-### Configurações no Correios: ###
+### Configurações do plugin: ###
 
 Com o plugin instalado navegue até "WooCommerce" > "Configurações" > "Entrega" > "Correios".
 
@@ -73,7 +73,14 @@ Nesta tela configure o seu **CEP de origem**, e ative os serviços que você des
 
 É possível escolher o tipo de **Serviço Corporativo** que irá ativar o *e-SEDEX*. Você precisa apenas ser cadastrado nos Correios e informar o seu *Código Administrativo* e *Senha Administrativa*.
 
-Também existe a possibilidade de definir um tamanho mínimo para o pacote das suas encomendas. Por padrão o plugin vem configurado com as medidas mínimas requeridas pelos Correios.
+Também é possível configurar um **Pacote Padrão** que será utilizando para definir as medidas mínimas do pacote de entraga.
+
+### Configurações dos produtos ###
+
+Para que seja possível cotar o frete, os seus produtos precisam ser do tipo **simples** ou **variável** e não estarem marcados com *virtual* ou *baixável* (qualquer outro tipo de produto será ignorado na cotação).
+
+É necessário configurar o **peso** e **dimensões** de todos os seus produtos, caso você queria que a cotação de frete seja exata.  
+Alternativamente, você pode configurar apenas o peso e deixar as dimensões em branco, pois neste caso serão utilizadas as configurações do **Pacote Padrão** para as dimensões (neste caso pode ocorrer uma variação pequena no valor do frete, pois os Correios consideram mais o peso do que as dimensões para a cotação).
 
 ## Frequently Asked Questions ##
 
@@ -92,7 +99,9 @@ Este plugin esta licenciado como GPL.
 * Ter instalado o plugin WooCommerce.
 * Possuir instalado em sua hospedagem a extensão de SimpleXML.
 * Configurar o seu CEP de origem nas configurações do plugin.
-* Adicionar peso e medidas nos produtos que pretende entregar.
+* Adicionar peso e dimensões nos produtos que pretende entregar.
+
+**Atenção**: É obrigatório ter o **peso** configurado em cada produto para que seja possível cotar o frete de forma eficiente. As dimensões podem ficar em branco e neste caso, serão utilizadas as medidas da opção **Pacote Padrão** da configuração do plugin, mas é **recomendado** que cada produto tenha suas configurações próprias de **peso** e **dimensões**.
 
 ### Quais são os métodos de entrega que o plugin aceita? ###
 
@@ -111,6 +120,8 @@ Para mais informações sobre os métodos de entrega dos Correios visite: [Encom
 A cotação do frete é feita utilizando o [Webservices dos Correios](http://www.correios.com.br/webservices/) utilizando SimpleXML (que é nativo do PHP 5).
 
 Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente e a cubagem total dos produtos mais o peso. Desta forma o valor cotado sera o mais próximo possível do real.
+
+Desta forma é necessário adicionar pelo menos o peso em cada produto, pois na falta de dimensões serão utilizadas as configurações do pacote padrão.
 
 ### É possível calcular frete para quais países? ###
 
@@ -137,25 +148,16 @@ Veja quais são os limites em: [Correios - limites de dimensões e peso](http://
 
 Verifique se você realmente ativou as opções de entrega do plugin e faça o mesmo procedimento da questão a cima.
 
-### Não uso dimensões na minha loja, apenas peso. Como configurar o pacote padrão para todos os produtos? ###
+Além de conferir se o carrinho possue produtos do tipo **simples** e **variável** e não estarem marcados com *virtual* ou *baixável*.
 
-No seu `functions.php` adicione:
+### O valor do frete calculado não bateu com a da loja dos Correios? ###
 
-	function cs_default_correios_package( $measures ) {
-		// Gets Correios settings.
-		$default = get_option( 'woocommerce_correios_settings' );
+Este plugin utiliza o Webservices dos Correios para calcular o frete e quando este tipo de problema acontece geralmente é porque:
 
-		// Sets default package for dimensions.
-		$measures['height'] = array( $default['minimum_height'] );
-		$measures['length'] = array( $default['minimum_length'] );
-		$measures['width']  = array( $default['minimum_width'] );
+1. Foram configuradas de forma errada as opções de peso e dimensões dos produtos na loja.
+2. O Webservices dos Correios enviou um valor errado! Sim isso acontece e na página da documentação do Webservices tem o seguinte alerta:
 
-		return $measures;
-	}
-
-	add_filter( 'wccorreios_default_package', 'cs_default_correios_package' );
-
-Desta forma serão usadas as dimensões padrões que estão nas configurações do plugin.
+>Os valores obtidos pelos simuladores aqui disponíveis são uma estimativa e deverão ser confirmados no ato da postagem.
 
 ### Mais dúvidas relacionadas ao funcionamento do plugin? ###
 
@@ -172,6 +174,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 
 ## Changelog ##
+
+### 1.6.1 - 06/12/2013 ###
+
+* Atualizado o método que extrai as médidas dos pedidos (agora ele é menos restrito).
 
 ### 1.6.0 - 03/12/2013 ###
 
@@ -249,9 +255,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 1.6.0 ###
+### 1.6.1 ###
 
-* Adicionado suporte para as versões 2.1.x do WooCommerce.
+*  Atualizado o método que extrai as médidas dos pedidos (agora ele é menos restrito), veja mais detalhes no readme.txt do plugin, na sessão Installation.
 
 ## License ##
 
