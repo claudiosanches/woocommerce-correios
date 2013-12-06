@@ -348,13 +348,13 @@ class WC_Correios extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Gets the weight and dimensions of the order.
+	 * Extracts the weight and dimensions from the order.
 	 *
 	 * @param array $package
 	 *
 	 * @return array
 	 */
-	protected function order_weight_dimensions( $package ) {
+	protected function measures_extract( $package ) {
 		$count  = 0;
 		$height = array();
 		$width  = array();
@@ -366,7 +366,7 @@ class WC_Correios extends WC_Shipping_Method {
 			$product = $values['data'];
 			$qty = $values['quantity'];
 
-			if ( $qty > 0 && $product->needs_shipping() && $product->has_dimensions() ) {
+			if ( $qty > 0 && $product->needs_shipping() ) {
 
 				if ( version_compare( WOOCOMMERCE_VERSION, '2.1', '>=' ) ) {
 					$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
@@ -571,7 +571,7 @@ class WC_Correios extends WC_Shipping_Method {
 		include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-cubage.php';
 
 		// Proccess measures.
-		$measures = apply_filters( 'wccorreios_default_package', $this->order_weight_dimensions( $package ) );
+		$measures = apply_filters( 'wccorreios_default_package', $this->measures_extract( $package ) );
 
 		// Checks if the cart is not just virtual goods.
 		if ( ! empty( $measures['height'] ) && ! empty( $measures['width'] ) && ! empty( $measures['length'] ) ) {
