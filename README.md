@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.8  
-**Stable tag:** 1.6.1  
+**Stable tag:** 1.6.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -175,6 +175,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 1.6.2 - 20/12/2013 ###
+
+* Correção no valor declarado que era passado com valor errado para os Correios.
+
 ### 1.6.1 - 06/12/2013 ###
 
 * Atualizado o método que extrai as médidas dos pedidos (agora ele é menos restrito).
@@ -255,9 +259,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 1.6.1 ###
+### 1.6.2 ###
 
-*  Atualizado o método que extrai as médidas dos pedidos (agora ele é menos restrito), veja mais detalhes no readme.txt do plugin, na sessão Installation.
+* Correção no valor declarado que era passado com valor errado para os Correios.
 
 ## License ##
 
