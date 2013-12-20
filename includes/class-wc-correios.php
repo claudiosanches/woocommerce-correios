@@ -605,7 +605,7 @@ class WC_Correios extends WC_Shipping_Method {
 
 			$declared = 0;
 			if ( 'declare' == $this->declare_value ) {
-				$declared = $this->woocommerce_method()->cart->cart_contents_total;
+				$declared = number_format( $this->woocommerce_method()->cart->cart_contents_total, 2, ',', '' );
 			}
 
 			// Get quotes.
