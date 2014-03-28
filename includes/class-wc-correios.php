@@ -270,7 +270,7 @@ class WC_Correios extends WC_Shipping_Method {
 	 */
 	public function admin_options() {
 		// Call the admin scripts.
-		wp_enqueue_script( 'wc-correios', WOO_CORREIOS_URL . 'js/admin.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'wc-correios', plugins_url( 'js/admin.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
 
 		echo '<h3>' . $this->method_title . '</h3>';
 		echo '<p>' . __( 'Correios is a brazilian delivery method.', 'wccorreios' ) . '</p>';
@@ -568,7 +568,7 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return array          Correios Quotes.
 	 */
 	protected function correios_quote( $package ) {
-		include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-cubage.php';
+		include_once 'class-wc-correios-cubage.php';
 
 		// Proccess measures.
 		$measures = apply_filters( 'wccorreios_default_package', $this->measures_extract( $package ) );

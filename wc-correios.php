@@ -11,9 +11,6 @@
  * Domain Path: /languages/
  */
 
-define( 'WOO_CORREIOS_PATH', plugin_dir_path( __FILE__ ) );
-define( 'WOO_CORREIOS_URL', plugin_dir_url( __FILE__ ) );
-
 /**
  * WooCommerce fallback notice.
  */
@@ -66,10 +63,10 @@ function wccorreios_shipping_load() {
 	add_filter( 'woocommerce_shipping_methods', 'wccorreios_add_method' );
 
 	// WC_Correios class.
-	include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios.php';
+	include_once 'includes/class-wc-correios.php';
 
 	// Metabox.
-	include_once WOO_CORREIOS_PATH . 'includes/class-wc-correios-tracking.php';
+	include_once 'includes/class-wc-correios-tracking.php';
 	$wc_correios_metabox = new WC_Correios_Tracking;
 }
 
