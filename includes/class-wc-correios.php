@@ -10,8 +10,16 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->id           = 'correios';
-		$this->method_title = __( 'Correios', 'wccorreios' );
+		$this->id                 = 'correios';
+		$this->method_title       = __( 'Correios', 'wccorreios' );
+		$this->method_description = __( 'Correios is a brazilian delivery method.', 'wccorreios' );
+
+		// API.
+		$this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
+
+		// Actions.
+		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
+
 		$this->init();
 	}
 
@@ -21,9 +29,6 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function init() {
-		// Correios Web Service.
-		$this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
-
 		// Load the form fields.
 		$this->init_form_fields();
 
@@ -31,27 +36,27 @@ class WC_Correios extends WC_Shipping_Method {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->enabled            = $this->settings['enabled'];
-		$this->title              = $this->settings['title'];
-		$this->declare_value      = $this->settings['declare_value'];
-		$this->display_date       = $this->settings['display_date'];
-		$this->additional_time    = $this->settings['additional_time'];
-		$this->availability       = $this->settings['availability'];
-		$this->fee                = $this->settings['fee'];
-		$this->zip_origin         = $this->settings['zip_origin'];
-		$this->countries          = $this->settings['countries'];
-		$this->corporate_service  = $this->settings['corporate_service'];
-		$this->login              = $this->settings['login'];
-		$this->password           = $this->settings['password'];
-		$this->service_pac        = $this->settings['service_pac'];
-		$this->service_sedex      = $this->settings['service_sedex'];
-		$this->service_sedex_10   = $this->settings['service_sedex_10'];
-		$this->service_sedex_hoje = $this->settings['service_sedex_hoje'];
-		$this->service_esedex     = $this->settings['service_esedex'];
-		$this->minimum_height     = $this->settings['minimum_height'];
-		$this->minimum_width      = $this->settings['minimum_width'];
-		$this->minimum_length     = $this->settings['minimum_length'];
-		$this->debug              = $this->settings['debug'];
+		$this->enabled            = $this->get_option( 'enabled' );
+		$this->title              = $this->get_option( 'title' );
+		$this->declare_value      = $this->get_option( 'declare_value' );
+		$this->display_date       = $this->get_option( 'display_date' );
+		$this->additional_time    = $this->get_option( 'additional_time' );
+		$this->availability       = $this->get_option( 'availability' );
+		$this->fee                = $this->get_option( 'fee' );
+		$this->zip_origin         = $this->get_option( 'zip_origin' );
+		$this->countries          = $this->get_option( 'countries' );
+		$this->corporate_service  = $this->get_option( 'corporate_service' );
+		$this->login              = $this->get_option( 'login' );
+		$this->password           = $this->get_option( 'password' );
+		$this->service_pac        = $this->get_option( 'service_pac' );
+		$this->service_sedex      = $this->get_option( 'service_sedex' );
+		$this->service_sedex_10   = $this->get_option( 'service_sedex_10' );
+		$this->service_sedex_hoje = $this->get_option( 'service_sedex_hoje' );
+		$this->service_esedex     = $this->get_option( 'service_esedex' );
+		$this->minimum_height     = $this->get_option( 'minimum_height' );
+		$this->minimum_width      = $this->get_option( 'minimum_width' );
+		$this->minimum_length     = $this->get_option( 'minimum_length' );
+		$this->debug              = $this->get_option( 'debug' );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -61,9 +66,6 @@ class WC_Correios extends WC_Shipping_Method {
 				$this->log = $this->woocommerce_method()->logger();
 			}
 		}
-
-		// Actions.
-		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( &$this, 'process_admin_options' ) );
 	}
 
 	/**
@@ -273,7 +275,7 @@ class WC_Correios extends WC_Shipping_Method {
 		wp_enqueue_script( 'wc-correios', plugins_url( 'js/admin.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
 
 		echo '<h3>' . $this->method_title . '</h3>';
-		echo '<p>' . __( 'Correios is a brazilian delivery method.', 'wccorreios' ) . '</p>';
+		echo '<p>' . $this->method_description . '</p>';
 		echo '<table class="form-table">';
 			$this->generate_settings_html();
 		echo '</table>';
