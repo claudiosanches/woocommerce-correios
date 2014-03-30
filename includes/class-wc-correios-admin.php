@@ -1,13 +1,25 @@
 <?php
 /**
- * Correios tracking code.
+ * Correios admin.
  */
-class WC_Correios_Tracking {
+class WC_Correios_Admin {
 
 	/**
-	 * Initialize the tracking metabox.
+	 * Instance of this class.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @var   object
 	 */
-	public function __construct() {
+	protected static $instance = null;
+
+	/**
+	 * Initialize the plugin admin.
+	 *
+	 * @since 1.7.0
+	 */
+	private function __construct() {
+		$this->plugin_slug = WC_Correios::get_plugin_slug();
 
 		// Add metabox.
 		add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
@@ -17,6 +29,22 @@ class WC_Correios_Tracking {
 
 		// Show tracking code in order details.
 		add_action( 'woocommerce_view_order', array( $this, 'view_order_tracking_code' ), 1 );
+	}
+
+	/**
+	 * Return an instance of this class.
+	 *
+	 * @since  1.7.0
+	 *
+	 * @return object A single instance of this class.
+	 */
+	public static function get_instance() {
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
 	}
 
 	/**
@@ -46,7 +74,7 @@ class WC_Correios_Tracking {
 		// Use nonce for verification.
 		wp_nonce_field( basename( __FILE__ ), 'wc_correios_nonce' );
 
-		$html = '<label for="correios_tracking">' . __( 'Tracking code:', 'wccorreios' ) . '</label><br />';
+		$html = '<label for="correios_tracking">' . __( 'Tracking code:', $this->plugin_slug ) . '</label><br />';
 		$html .= '<input type="text" id="correios_tracking" name="correios_tracking" value="' . get_post_meta( $post->ID, 'correios_tracking', true ) . '" style="width: 100%;" />';
 
 		echo $html;
@@ -70,12 +98,11 @@ class WC_Correios_Tracking {
 			return $post_id;
 		}
 
-		// Check permissions.
-		if ( 'shop_order' == $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) ) {
-				return $post_id;
-			}
-		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return $post_id;
+		}
+
+		if ( 'shop_order' != $_POST['post_type'] ) {
 			return $post_id;
 		}
 
@@ -91,7 +118,7 @@ class WC_Correios_Tracking {
 				$order = new WC_Order( $post_id );
 
 				// Add order note.
-				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'wccorreios' ), $new ) );
+				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', $this->plugin_slug ), $new ) );
 
 				// Send email notification.
 				$this->email_notification( $order, $new );
@@ -118,7 +145,7 @@ class WC_Correios_Tracking {
 			$mailer = $woocommerce->mailer();
 		}
 
-		$subject = sprintf( __( 'Your the Correios tracking code of the order #%s', 'wccorreios' ), $order->id );
+		$subject = sprintf( __( 'Your the Correios tracking code of the order #%s', $this->plugin_slug ), $order->id );
 
 		// Mail headers.
 		$headers = array();
@@ -126,10 +153,10 @@ class WC_Correios_Tracking {
 
 		// Body message.
 		$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
-		$main_message = '<p>' . sprintf( __( 'Track the delivery of your purchase at the Correios: %s', 'wccorreios' ), $url ) . '</p>';
+		$main_message = '<p>' . sprintf( __( 'Track the delivery of your purchase at the Correios: %s', $this->plugin_slug ), $url ) . '</p>';
 
 		// Sets message template.
-		$message = $mailer->wrap_message( __( 'Your the Correios tracking code', 'wccorreios' ), $main_message );
+		$message = $mailer->wrap_message( __( 'Your the Correios tracking code', $this->plugin_slug ), $main_message );
 
 		// Send email.
 		$mailer->send( $order->billing_email, $subject, $message, $headers, '' );
@@ -147,7 +174,7 @@ class WC_Correios_Tracking {
 
 		if ( ! empty( $tracking_code ) ) {
 			$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
-			echo '<p>' . sprintf( __( 'Your the Correios tracking code: %s.', 'wccorreios' ), $url ) . '</p>';
+			echo '<p>' . sprintf( __( 'Your the Correios tracking code: %s.', $this->plugin_slug ), $url ) . '</p>';
 		}
 	}
 }

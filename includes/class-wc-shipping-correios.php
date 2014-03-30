@@ -1,8 +1,8 @@
 <?php
 /**
- * WC_Correios class.
+ * WC_Shipping_Correios class.
  */
-class WC_Correios extends WC_Shipping_Method {
+class WC_Shipping_Correios extends WC_Shipping_Method {
 
 	/**
 	 * Initialize the Correios shipping method.
@@ -10,9 +10,10 @@ class WC_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->id                 = 'correios';
-		$this->method_title       = __( 'Correios', 'wccorreios' );
-		$this->method_description = __( 'Correios is a brazilian delivery method.', 'wccorreios' );
+		$this->id                 = WC_Correios::get_method_id();
+		$this->plugin_slug        = WC_Correios::get_plugin_slug();
+		$this->method_title       = __( 'Correios', $this->plugin_slug );
+		$this->method_description = __( 'Correios is a brazilian delivery method.', $this->plugin_slug );
 
 		// API.
 		$this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
@@ -90,177 +91,177 @@ class WC_Correios extends WC_Shipping_Method {
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled' => array(
-				'title'            => __( 'Enable/Disable', 'wccorreios' ),
+				'title'            => __( 'Enable/Disable', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable this shipping method', 'wccorreios' ),
+				'label'            => __( 'Enable this shipping method', $this->plugin_slug ),
 				'default'          => 'no'
 			),
 			'title' => array(
-				'title'            => __( 'Title', 'wccorreios' ),
+				'title'            => __( 'Title', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'This controls the title which the user sees during checkout.', 'wccorreios' ),
+				'description'      => __( 'This controls the title which the user sees during checkout.', $this->plugin_slug ),
 				'desc_tip'         => true,
-				'default'          => __( 'Correios', 'wccorreios' )
+				'default'          => __( 'Correios', $this->plugin_slug )
 			),
 			'availability' => array(
-				'title'            => __( 'Availability', 'wccorreios' ),
+				'title'            => __( 'Availability', $this->plugin_slug ),
 				'type'             => 'select',
 				'default'          => 'all',
 				'class'            => 'availability',
 				'options'          => array(
-					'all'          => __( 'All allowed countries', 'wccorreios' ),
-					'specific'     => __( 'Specific Countries', 'wccorreios' )
+					'all'          => __( 'All allowed countries', $this->plugin_slug ),
+					'specific'     => __( 'Specific Countries', $this->plugin_slug )
 				)
 			),
 			'countries' => array(
-				'title'            => __( 'Specific Countries', 'wccorreios' ),
+				'title'            => __( 'Specific Countries', $this->plugin_slug ),
 				'type'             => 'multiselect',
 				'class'            => 'chosen_select',
 				'css'              => 'width: 450px;',
 				'options'          => $this->woocommerce_method()->countries->countries
 			),
 			'zip_origin' => array(
-				'title'            => __( 'Origin Zip Code', 'wccorreios' ),
+				'title'            => __( 'Origin Zip Code', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Zip Code from where the requests are sent.', 'wccorreios' ),
+				'description'      => __( 'Zip Code from where the requests are sent.', $this->plugin_slug ),
 				'desc_tip'         => true
 			),
 			'declare_value' => array(
-				'title'            => __( 'Declare value', 'wccorreios' ),
+				'title'            => __( 'Declare value', $this->plugin_slug ),
 				'type'             => 'select',
 				'default'          => 'none',
 				'options'          => array(
-					'declare'      => __( 'Declare', 'wccorreios' ),
-					'none'         => __( 'None', 'wccorreios' )
+					'declare'      => __( 'Declare', $this->plugin_slug ),
+					'none'         => __( 'None', $this->plugin_slug )
 				),
 			),
 			'display_date' => array(
-				'title'            => __( 'Estimated delivery', 'wccorreios' ),
+				'title'            => __( 'Estimated delivery', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Display date of estimated delivery.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Display date of estimated delivery.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'additional_time' => array(
-				'title'            => __( 'Additional days', 'wccorreios' ),
+				'title'            => __( 'Additional days', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Additional days to the estimated delivery.', 'wccorreios' ),
+				'description'      => __( 'Additional days to the estimated delivery.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => '0',
 				'placeholder'      => '0'
 			),
 			'fee' => array(
-				'title'            => __( 'Handling Fee', 'wccorreios' ),
+				'title'            => __( 'Handling Fee', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'wccorreios' ),
+				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'placeholder'      => '0.00'
 			),
 			'services' => array(
-				'title'            => __( 'Correios Services', 'wccorreios' ),
+				'title'            => __( 'Correios Services', $this->plugin_slug ),
 				'type'             => 'title'
 			),
 			'corporate_service' => array(
-				'title'            => __( 'Corporate Service', 'wccorreios' ),
+				'title'            => __( 'Corporate Service', $this->plugin_slug ),
 				'type'             => 'select',
-				'description'      => __( 'Choose between conventional or corporate service.', 'wccorreios' ),
+				'description'      => __( 'Choose between conventional or corporate service.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'conventional',
 				'options'          => array(
-					'conventional' => __( 'Conventional', 'wccorreios' ),
-					'corporate'    => __( 'Corporate', 'wccorreios' )
+					'conventional' => __( 'Conventional', $this->plugin_slug ),
+					'corporate'    => __( 'Corporate', $this->plugin_slug )
 				),
 			),
 			'login' => array(
-				'title'            => __( 'Administrative Code', 'wccorreios' ),
+				'title'            => __( 'Administrative Code', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Your Correios login.', 'wccorreios' ),
+				'description'      => __( 'Your Correios login.', $this->plugin_slug ),
 				'desc_tip'         => true
 			),
 			'password' => array(
-				'title'            => __( 'Administrative Password', 'wccorreios' ),
+				'title'            => __( 'Administrative Password', $this->plugin_slug ),
 				'type'             => 'password',
-				'description'      => __( 'Your Correios password.', 'wccorreios' ),
+				'description'      => __( 'Your Correios password.', $this->plugin_slug ),
 				'desc_tip'         => true
 			),
 			'service_pac' => array(
-				'title'            => __( 'PAC', 'wccorreios' ),
+				'title'            => __( 'PAC', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Shipping via PAC.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Shipping via PAC.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'service_sedex' => array(
-				'title'            => __( 'SEDEX', 'wccorreios' ),
+				'title'            => __( 'SEDEX', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Shipping via SEDEX.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Shipping via SEDEX.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'service_sedex_10' => array(
-				'title'            => __( 'SEDEX 10', 'wccorreios' ),
+				'title'            => __( 'SEDEX 10', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Shipping via SEDEX 10.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Shipping via SEDEX 10.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'service_sedex_hoje' => array(
-				'title'            => __( 'SEDEX Hoje', 'wccorreios' ),
+				'title'            => __( 'SEDEX Hoje', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Shipping via SEDEX Hoje.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Shipping via SEDEX Hoje.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'service_esedex' => array(
-				'title'            => __( 'e-SEDEX', 'wccorreios' ),
+				'title'            => __( 'e-SEDEX', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'wccorreios' ),
-				'description'      => __( 'Shipping via e-SEDEX.', 'wccorreios' ),
+				'label'            => __( 'Enable', $this->plugin_slug ),
+				'description'      => __( 'Shipping via e-SEDEX.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
 			'package_standard' => array(
-				'title'            => __( 'Package Standard', 'wccorreios' ),
+				'title'            => __( 'Package Standard', $this->plugin_slug ),
 				'type'             => 'title',
-				'description'      => __( 'Sets a minimum measure for the package.', 'wccorreios' ),
+				'description'      => __( 'Sets a minimum measure for the package.', $this->plugin_slug ),
 				'desc_tip'         => true,
 			),
 			'minimum_height' => array(
-				'title'            => __( 'Minimum Height', 'wccorreios' ),
+				'title'            => __( 'Minimum Height', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm.', 'wccorreios' ),
+				'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => '2'
 			),
 			'minimum_width' => array(
-				'title'            => __( 'Minimum Width', 'wccorreios' ),
+				'title'            => __( 'Minimum Width', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm.', 'wccorreios' ),
+				'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => '11'
 			),
 			'minimum_length' => array(
-				'title'            => __( 'Minimum Length', 'wccorreios' ),
+				'title'            => __( 'Minimum Length', $this->plugin_slug ),
 				'type'             => 'text',
-				'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', 'wccorreios' ),
+				'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'default'          => '16'
 			),
 			'testing' => array(
-				'title'            => __( 'Testing', 'wccorreios' ),
+				'title'            => __( 'Testing', $this->plugin_slug ),
 				'type'             => 'title'
 			),
 			'debug' => array(
-				'title'            => __( 'Debug Log', 'wccorreios' ),
+				'title'            => __( 'Debug Log', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => __( 'Enable logging', 'wccorreios' ),
+				'label'            => __( 'Enable logging', $this->plugin_slug ),
 				'default'          => 'no',
-				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'wccorreios' ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' )
+				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', $this->plugin_slug ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' )
 			)
 		);
 	}
@@ -468,7 +469,7 @@ class WC_Correios extends WC_Shipping_Method {
 		}
 
 		if ( $date > 0 ) {
-			$msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, 'wccorreios' ),  $date ) . ')';
+			$msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, $this->plugin_slug ),  $date ) . ')';
 		}
 
 		return $msg;
