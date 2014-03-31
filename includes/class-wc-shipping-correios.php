@@ -516,24 +516,24 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	 */
 	public function calculate_shipping( $package = array() ) {
 		$rates  = array();
-		$quotes = $this->correios_calculate( $package );
+		$shipping_values = $this->correios_calculate( $package );
 
-		if ( $quotes ) {
-			foreach ( $quotes as $key => $value ) {
+		if ( $shipping_values ) {
+			foreach ( $shipping_values as $key => $value ) {
 				$name = WC_Correios_API::get_service_name( $key );
 
 				if ( 0 == $value->Erro ) {
 
 					$label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $value->PrazoEntrega ) : $name;
-					$cust = $this->fix_format( esc_attr( $value->Valor ) );
-					$fee = $this->get_fee( $this->fix_format( $this->fee ), $cust );
+					$cost = $this->fix_format( esc_attr( $value->Valor ) );
+					$fee = $this->get_fee( $this->fix_format( $this->fee ), $cost );
 
 					array_push(
 						$rates,
 						array(
 							'id'    => $name,
 							'label' => $label,
-							'cost'  => $cust + $fee,
+							'cost'  => $cost + $fee,
 						)
 					);
 				}
