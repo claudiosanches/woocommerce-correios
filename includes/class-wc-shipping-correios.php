@@ -518,15 +518,13 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 		$rates  = array();
 		$shipping_values = $this->correios_calculate( $package );
 
-		if ( $shipping_values ) {
-			foreach ( $shipping_values as $key => $value ) {
-				$name = WC_Correios_API::get_service_name( $key );
-
-				if ( 0 == $value->Erro ) {
-
-					$label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $value->PrazoEntrega ) : $name;
-					$cost = $this->fix_format( esc_attr( $value->Valor ) );
-					$fee = $this->get_fee( $this->fix_format( $this->fee ), $cost );
+		if ( ! empty( $shipping_values ) ) {
+			foreach ( $shipping_values as $code => $shipping ) {
+				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
+					$name  = WC_Correios_API::get_service_name( $code );
+					$label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
+					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
+					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
 
 					array_push(
 						$rates,
@@ -539,11 +537,12 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				}
 			}
 
-			$rate = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
+			$rates = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
 
-			// Register the rate.
-			foreach ( $rate as $key => $value )
-				$this->add_rate( $value );
+			// Add rates.
+			foreach ( $rates as $rate ) {
+				$this->add_rate( $rate );
+			}
 		}
 	}
 }
