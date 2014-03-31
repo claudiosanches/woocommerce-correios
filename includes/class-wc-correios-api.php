@@ -322,7 +322,13 @@ class WC_Correios_API {
 	public function get_shipping() {
 		$values = array();
 
-		if ( ! is_array( $this->services ) || empty( $this->services ) ) {
+		// Checks if services and zipcode is empty.
+		if (
+			! is_array( $this->services )
+			|| empty( $this->services )
+			|| empty( $this->zip_destination )
+			|| empty( $this->zip_origin )
+		) {
 			return $values;
 		}
 

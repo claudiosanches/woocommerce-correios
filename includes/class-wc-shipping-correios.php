@@ -19,9 +19,6 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 		$this->method_title       = __( 'Correios', $this->plugin_slug );
 		$this->method_description = __( 'Correios is a brazilian delivery method.', $this->plugin_slug );
 
-		// API.
-		$this->webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
-
 		// Actions.
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 
