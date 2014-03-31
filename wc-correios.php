@@ -70,7 +70,8 @@ class WC_Correios {
 		if ( class_exists( 'SimpleXmlElement' ) ) {
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
-				// Include the WC_Shipping_Correios class.
+				include_once 'includes/class-wc-correios-api.php';
+				include_once 'includes/class-wc-correios-cubage.php';
 				include_once 'includes/class-wc-shipping-correios.php';
 
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
