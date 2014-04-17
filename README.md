@@ -3,7 +3,7 @@
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
-**Tested up to:** 3.8  
+**Tested up to:** 3.9  
 **Stable tag:** 1.6.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
