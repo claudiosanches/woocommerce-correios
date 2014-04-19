@@ -48,6 +48,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 		$this->fee                = $this->get_option( 'fee' );
 		$this->zip_origin         = $this->get_option( 'zip_origin' );
 		$this->countries          = $this->get_option( 'countries' );
+		$this->simulator          = $this->get_option( 'simulator', 'no' );
 		$this->corporate_service  = $this->get_option( 'corporate_service' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
@@ -159,6 +160,13 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'placeholder'      => '0.00'
+			),
+			'simulator' => array(
+				'title'            => __( 'Simulator', $this->plugin_slug ),
+				'type'             => 'checkbox',
+				'label'            => 'Enable product shipping simulator',
+				'description'      => __( 'Displays a button on the product page to simulate the calculation of shipping the product.', $this->plugin_slug ),
+				'default'          => 'no'
 			),
 			'services' => array(
 				'title'            => __( 'Correios Services', $this->plugin_slug ),
