@@ -74,6 +74,7 @@ class WC_Correios {
 				include_once 'includes/class-wc-correios-cubage.php';
 				include_once 'includes/class-wc-shipping-correios.php';
 				include_once 'includes/class-wc-correios-product-shipping-simulator.php';
+				// WC_Correios_Product_Shipping_Simulator::init();
 
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
 			} else {
