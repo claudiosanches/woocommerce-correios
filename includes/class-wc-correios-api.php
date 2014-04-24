@@ -128,13 +128,20 @@ class WC_Correios_API {
 	/**
 	 * Initialize the API class.
 	 *
-	 * @param string    $debug Debug mode.
-	 * @param WC_Logger $log   Logger class.
+	 * @param string $debug Debug mode.
 	 */
-	public function __construct( $debug, $log ) {
+	public function __construct( $debug ) {
 		$this->id    = WC_Correios::get_method_id();
 		$this->debug = $debug;
-		$this->log   = $log;
+
+		// Active logs.
+		if ( 'yes' == $this->debug ) {
+			if ( class_exists( 'WC_Logger' ) ) {
+				$this->log = new WC_Logger();
+			} else {
+				$this->log = $this->woocommerce_method()->logger();
+			}
+		}
 	}
 
 	/**

@@ -423,21 +423,23 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	 *
 	 * @param string $label
 	 * @param string $date
+	 * @param int    $additional_time
 	 *
 	 * @return string
 	 */
-	protected function estimating_delivery( $label, $date ) {
-		$msg = $label;
+	protected function estimating_delivery( $label, $date, $additional_time = 0 ) {
+		$name = $label;
+		$additional_time = intval( $additional_time );
 
-		if ( $this->additional_time > 0 ) {
-			$date += (int) $this->additional_time;
+		if ( $additional_time > 0 ) {
+			$date += intval( $additional_time );
 		}
 
 		if ( $date > 0 ) {
-			$msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, $this->plugin_slug ),  $date ) . ')';
+			$name .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, $this->plugin_slug ),  $date ) . ')';
 		}
 
-		return $msg;
+		return $name;
 	}
 
 	/**
@@ -481,7 +483,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $weight_cubage, true ) );
 			}
 
-			$api = new WC_Correios_API( $this->debug, $this->log );
+			$api = new WC_Correios_API( $this->debug );
 			$api->set_services( $services );
 			$api->set_zip_origin( $this->zip_origin );
 			$api->set_zip_destination( $zip_destination );
