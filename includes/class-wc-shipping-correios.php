@@ -483,7 +483,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $weight_cubage, true ) );
 			}
 
-			$api = new WC_Correios_API( $this->debug );
+			$api = new WC_Correios_API;
 			$api->set_services( $services );
 			$api->set_zip_origin( $this->zip_origin );
 			$api->set_zip_destination( $zip_destination );
@@ -491,6 +491,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 			$api->set_width( $width );
 			$api->set_length( $length );
 			$api->set_weight( $measures['weight'] );
+			$api->set_debug( $this->debug );
 
 			if ( 'declare' == $this->declare_value ) {
 				$declared_value = number_format( $this->woocommerce_method()->cart->cart_contents_total, 2, ',', '' );

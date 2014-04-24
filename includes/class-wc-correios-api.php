@@ -126,21 +126,26 @@ class WC_Correios_API {
 	protected $receipt_notice = 'N';
 
 	/**
+	 * Debug mode.
+	 *
+	 * @var string
+	 */
+	protected $debug = 'no';
+
+	/**
 	 * Initialize the API class.
 	 *
 	 * @param string $debug Debug mode.
 	 */
-	public function __construct( $debug ) {
+	public function __construct() {
 		$this->id    = WC_Correios::get_method_id();
 		$this->debug = $debug;
 
-		// Active logs.
-		if ( 'yes' == $this->debug ) {
-			if ( class_exists( 'WC_Logger' ) ) {
-				$this->log = new WC_Logger();
-			} else {
-				$this->log = $this->woocommerce_method()->logger();
-			}
+		// Logger.
+		if ( class_exists( 'WC_Logger' ) ) {
+			$this->log = new WC_Logger();
+		} else {
+			$this->log = $this->woocommerce_method()->logger();
 		}
 	}
 
@@ -268,6 +273,15 @@ class WC_Correios_API {
 	 */
 	public function set_receipt_notice( $receipt_notice = 'N' ) {
 		$this->receipt_notice = $receipt_notice;
+	}
+
+	/**
+	 * Set the debug mode.
+	 *
+	 * @param string $debug yes or no.
+	 */
+	public function set_debug( $debug = 'no' ) {
+		$this->debug = $debug;
 	}
 
 	/**
