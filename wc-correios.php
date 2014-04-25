@@ -71,7 +71,7 @@ class WC_Correios {
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
 				include_once 'includes/class-wc-correios-api.php';
-				include_once 'includes/class-wc-correios-cubage.php';
+				include_once 'includes/class-wc-correios-package.php';
 				include_once 'includes/class-wc-shipping-correios.php';
 				include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 

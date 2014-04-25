@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WC_Correios_Cubage class.
+ * WC_Correios_Package class.
  */
-class WC_Correios_Cubage {
+class WC_Correios_Package {
 
 	protected $package = array();
 	protected $height = array();
