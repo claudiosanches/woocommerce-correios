@@ -335,68 +335,6 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Extracts the weight and dimensions from the order.
-	 *
-	 * @param array $package
-	 *
-	 * @return array
-	 */
-	protected function measures_extract( $package ) {
-		$count  = 0;
-		$height = array();
-		$width  = array();
-		$length = array();
-		$weight = array();
-
-		// Shipping per item.
-		foreach ( $package['contents'] as $item_id => $values ) {
-			$product = $values['data'];
-			$qty = $values['quantity'];
-
-			if ( $qty > 0 && $product->needs_shipping() ) {
-
-				if ( version_compare( WOOCOMMERCE_VERSION, '2.1', '>=' ) ) {
-					$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				} else {
-					$_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				}
-
-				$height[ $count ] = $_height;
-				$width[ $count ]  = $_width;
-				$length[ $count ] = $_length;
-				$weight[ $count ] = $_weight;
-
-				if ( $qty > 1 ) {
-					$n = $count;
-					for ( $i = 0; $i < $qty; $i++ ) {
-						$height[ $n ] = $_height;
-						$width[ $n ]  = $_width;
-						$length[ $n ] = $_length;
-						$weight[ $n ] = $_weight;
-						$n++;
-					}
-					$count = $n;
-				}
-
-				$count++;
-			}
-		}
-
-		return array(
-			'height' => array_values( $height ),
-			'length' => array_values( $length ),
-			'width'  => array_values( $width ),
-			'weight' => array_sum( $weight ),
-		);
-	}
-
-	/**
 	 * Gets the services IDs.
 	 *
 	 * @return array
