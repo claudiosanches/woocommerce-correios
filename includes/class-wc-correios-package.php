@@ -9,9 +9,32 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WC_Correios_Package {
 
+	/**
+	 * Order package.
+	 *
+	 * @var array
+	 */
 	protected $package = array();
+
+	/**
+	 * Package minimum height.
+	 *
+	 * @var integer
+	 */
 	protected $minimum_height = 2;
+
+	/**
+	 * Package minimum width.
+	 *
+	 * @var integer
+	 */
 	protected $minimum_width = 11;
+
+	/**
+	 * Package minimum length.
+	 *
+	 * @var integer
+	 */
 	protected $minimum_length = 16;
 
 	/**
@@ -25,16 +48,31 @@ class WC_Correios_Package {
 		$this->package = $package;
 	}
 
+	/**
+	 * Set the package minimum height.
+	 *
+	 * @param int $minimum_height
+	 */
 	public function set_minimum_height( $minimum_height ) {
-		$this->minimum_height = $minimum_height;
+		$this->minimum_height = intval( $minimum_height );
 	}
 
+	/**
+	 * Set the package minimum width.
+	 *
+	 * @param int $minimum_width
+	 */
 	public function set_minimum_width( $minimum_width ) {
-		$this->minimum_width = $minimum_width;
+		$this->minimum_width = intval( $minimum_width );
 	}
 
+	/**
+	 * Set the package minimum length.
+	 *
+	 * @param int $minimum_length
+	 */
 	public function set_minimum_length( $minimum_length ) {
-		$this->minimum_length = $minimum_length;
+		$this->minimum_length = intval( $minimum_length );
 	}
 
 	/**
@@ -115,12 +153,16 @@ class WC_Correios_Package {
 	/**
 	 * Calculates the cubage of all products.
 	 *
-	 * @return array
+	 * @param  array $height
+	 * @param  array $width
+	 * @param  array $length
+	 *
+	 * @return int
 	 */
 	protected function cubage_total( $height, $width, $length ) {
 		// Sets the cubage of all products.
 		$all   = array();
-		$total = '';
+		$total = 0;
 
 		for ( $i = 0; $i < count( $height ); $i++ ) {
 			$all[ $i ] = $height[ $i ] * $width[ $i ] * $length[ $i ];
@@ -135,6 +177,10 @@ class WC_Correios_Package {
 
 	/**
 	 * Get the max values.
+	 *
+	 * @param  array $height
+	 * @param  array $width
+	 * @param  array $length
 	 *
 	 * @return array
 	 */
@@ -151,16 +197,20 @@ class WC_Correios_Package {
 	/**
 	 * Calculates the square root of the scaling of all products.
 	 *
+	 * @param  array $height
+	 * @param  array $width
+	 * @param  array $length
+	 *
 	 * @return float
 	 */
 	protected function calculate_root( $height, $width, $length, $max_values ) {
-		$cubageTotal = $this->cubage_total( $height, $width, $length );
+		$cubage_total = $this->cubage_total( $height, $width, $length );
 		$root        = 0;
 
-		if ( 0 != $cubageTotal ) {
+		if ( 0 != $cubage_total ) {
 			// Dividing the value of scaling of all products.
 			// With the measured value of greater.
-			$division = $cubageTotal / max( $max_values );
+			$division = $cubage_total / max( $max_values );
 			// Total square root.
 			$root = round( sqrt( $division ), 1 );
 		}
@@ -170,6 +220,10 @@ class WC_Correios_Package {
 
 	/**
 	 * Sets the final cubage.
+	 *
+	 * @param  array $height
+	 * @param  array $width
+	 * @param  array $length
 	 *
 	 * @return array
 	 */
@@ -214,6 +268,11 @@ class WC_Correios_Package {
 		return $cubage;
 	}
 
+	/**
+	 * Get the package data.
+	 *
+	 * @return array
+	 */
 	public function get_data() {
 		// Get the package data.
 		$data = apply_filters( 'woocommerce_correios_default_package', $this->get_package_data() );
