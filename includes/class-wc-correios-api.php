@@ -31,6 +31,13 @@ class WC_Correios_API {
 	protected $services = array();
 
 	/**
+	 * Products package.
+	 *
+	 * @var array
+	 */
+	protected $package = array();
+
+	/**
 	 * Origin zipcode.
 	 *
 	 * @var string
@@ -156,6 +163,15 @@ class WC_Correios_API {
 	 */
 	public function set_services( $services = array() ) {
 		$this->services = $services;
+	}
+
+	/**
+	 * Set the package.
+	 *
+	 * @param array $package
+	 */
+	public function set_package( $package = array() ) {
+		$this->package = new WC_Correios_Package( $package );
 	}
 
 	/**
