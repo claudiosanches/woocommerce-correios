@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WC_Correios_API class.
+ * WC_Correios_Connect class.
  */
-class WC_Correios_API {
+class WC_Correios_Connect {
 
 	/**
 	 * Webservice URL.
@@ -140,13 +140,12 @@ class WC_Correios_API {
 	protected $debug = 'no';
 
 	/**
-	 * Initialize the API class.
+	 * Initialize the Connect class.
 	 *
 	 * @param string $debug Debug mode.
 	 */
 	public function __construct() {
-		$this->id    = WC_Correios::get_method_id();
-		$this->debug = $debug;
+		$this->id = WC_Correios::get_method_id();
 
 		// Logger.
 		if ( class_exists( 'WC_Logger' ) ) {
@@ -169,9 +168,13 @@ class WC_Correios_API {
 	 * Set the package.
 	 *
 	 * @param array $package
+	 *
+	 * @return WC_Correios_Package
 	 */
 	public function set_package( $package = array() ) {
 		$this->package = new WC_Correios_Package( $package );
+
+		return $this->package;
 	}
 
 	/**
@@ -367,6 +370,36 @@ class WC_Correios_API {
 			|| empty( $this->zip_origin )
 		) {
 			return $values;
+		}
+
+		if (
+			0 == $this->height
+			&& 0 == $this->width
+			&& 0 == $this->diameter
+			&& 0 == $this->length
+			&& 0 == $this->weight
+			&& ! empty( $this->package )
+		) {
+			$package = $this->package->get_data();
+			$this->height = $package['height'];
+			$this->width  = $package['width'];
+			$this->length = $package['length'];
+			$this->weight = $package['weight'];
+
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $package, true ) );
+			}
+		} else {
+			if ( 'yes' == $this->debug ) {
+				$package = array(
+					'weight' => $this->weight,
+					'height' => $this->height,
+					'width'  => $this->width,
+					'length' => $this->length
+				);
+
+				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $package, true ) );
+			}
 		}
 
 		foreach ( $this->services as $service ) {
