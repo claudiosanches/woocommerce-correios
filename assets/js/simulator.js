@@ -19,10 +19,11 @@ jQuery( document ).ready( function ( $ ) {
 		content.empty();
 
 		$.ajax({
-			type: 'POST',
-			url: woocommerce_correios_simulator.ajax_url,
-			cache: false,
-			data: {
+			type:     'GET',
+			url:      woocommerce_correios_simulator.ajax_url,
+			cache:    false,
+			dataType: 'json',
+			data:     {
 				action:       'wc_correios_simulator',
 				security:     woocommerce_correios_simulator.security,
 				zipcode:      $( '#wc-correios-simulator #zipcode' ).val(),
@@ -31,11 +32,14 @@ jQuery( document ).ready( function ( $ ) {
 			},
 			success: function ( data ) {
 				button.removeClass( 'loading' );
-				content.prepend( data );
+
+				if ( 0 < data.error.length ) {
+					content.prepend( '<p>' + data.error + '</p>' );
+				}
 			},
 			error: function () {
 				button.removeClass( 'loading' );
-				content.prepend( woocommerce_correios_simulator.error_message );
+				content.prepend( '<p>' + woocommerce_correios_simulator.error_message + '</p>' );
 			}
 		});
 

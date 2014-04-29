@@ -107,66 +107,78 @@ class WC_Correios_Product_Shipping_Simulator {
 		check_ajax_referer( 'woocommerce_correios_simulator', 'security' );
 
 		// Validate the data.
-		if ( ! isset( $_POST['product_id'] ) ) {
-			echo json_encode( array( 'error' => __( 'error', 'woocommerce-correios' ) ) );
+		if ( ! isset( $_GET['product_id'] ) || empty( $_GET['product_id'] ) ) {
+			echo json_encode( array( 'error' => __( 'Error to identify the product.', 'woocommerce-correios' ), 'content' => '' ) );
 			die();
 		}
 
-		if ( ! isset( $_POST['zipcode'] ) ) {
-			echo json_encode( array( 'error' => __( 'error', 'woocommerce-correios' ) ) );
+		if ( ! isset( $_GET['zipcode'] ) || empty( $_GET['zipcode'] ) ) {
+			echo json_encode( array( 'error' => __( 'Please enter with your zipcode.', 'woocommerce-correios' ), 'content' => '' ) );
 			die();
 		}
 
-		// $product_id = absint( $_POST['product_id'] );
-		// // $height = sanitize_text_field( $_POST['height'] );
-		// // $width = sanitize_text_field( $_POST['width'] );
-		// // $length = sanitize_text_field( $_POST['length'] );
-		// // $weight = sanitize_text_field( $_POST['weight'] );
-		// $zip_destination = $_POST['zipcode'];
+		// Get the product data.
+		$product_id = absint( $_GET['product_id'] );
+		$product    = get_product( $product_id );
 
-		// $options = get_option( 'woocommerce_correios_settings' );
+		// Test with the product exist.
+		if ( ! $product ) {
+			echo json_encode( array( 'error' => __( 'Invalid product!', 'woocommerce-correios' ), 'content' => '' ) );
+			die();
+		}
 
-		// $services = self::correios_services( $options );
+		// Set the shipping params.
+		$product_price     = $product->get_price();
+		$zip_destination   = $_GET['zipcode'];
+		$options           = get_option( 'woocommerce_correios_settings' );
+		$minimum_height    = isset( $options['minimum_height'] ) ? $options['minimum_height'] : '';
+		$minimum_width     = isset( $options['minimum_width'] ) ? $options['minimum_width'] : '';
+		$minimum_length    = isset( $options['minimum_length'] ) ? $options['minimum_length'] : '';
+		$zip_origin        = isset( $options['zip_origin'] ) ? $options['zip_origin'] : '';
+		$display_date      = isset( $options['display_date'] ) ? $options['display_date'] : '';
+		$additional_time   = isset( $options['additional_time'] ) ? $options['additional_time'] : '';
+		$declare_value     = isset( $options['declare_value'] ) ? $options['declare_value'] : '';
+		$corporate_service = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
+		$login             = isset( $options['login'] ) ? $options['login'] : '';
+		$password          = isset( $options['password'] ) ? $options['password'] : '';
+		$fee               = isset( $options['fee'] ) ? $options['fee'] : '';
+		$debug             = isset( $options['debug'] ) ? $options['debug'] : '';
+		$package           = array(
+			'contents' => array(
+				array(
+					'data' => $product,
+					'quantity'  => 1
+				)
+			)
+		);
 
-		// $zip_origin = isset( $options['zip_origin'] ) ? $options['zip_origin'] : '';
-		// $display_date = isset( $options['display_date'] ) ? $options['display_date'] : '';
-		// $additional_time = isset( $options['additional_time'] ) ? $options['additional_time'] : '';
-		// $declare_value = isset( $options['declare_value'] ) ? $options['declare_value'] : '';
-		// $corporate_service = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
-		// $login = isset( $options['login'] ) ? $options['login'] : '';
-		// $password = isset( $options['password'] ) ? $options['password'] : '';
-		// $fee = isset( $options['fee'] ) ? $options['fee'] : '';
+		// Get the shipping.
+		$services = array_values( self::correios_services( $options ) );
+		$connect  = new WC_Correios_Connect;
+		$connect->set_services( $services );
+		$_package = $connect->set_package( $package );
+		$_package->set_minimum_height( $minimum_height );
+		$_package->set_minimum_width( $minimum_width );
+		$_package->set_minimum_width( $minimum_length );
+		$connect->set_zip_origin( $zip_origin );
+		$connect->set_zip_destination( $zip_destination );
+		$connect->set_debug( $debug );
+		if ( 'declare' == $declare_value ) {
+			$declared_value = number_format( $product_price, 2, ',', '' );
+			$connect->set_declared_value( $declared_value );
+		}
+		if ( 'corporate' == $corporate_service ) {
+			$connect->set_login( $login );
+			$connect->set_password( $password );
+		}
 
-		// $minimum_height = isset( $options['minimum_height'] ) ? $options['minimum_height'] : '';
-		// $minimum_width = isset( $options['minimum_width'] ) ? $options['minimum_width'] : '';
-		// $minimum_length = isset( $options['minimum_length'] ) ? $options['minimum_length'] : '';
+		$shipping = $connect->get_shipping();
 
-		// $debug = isset( $options['debug'] ) ? $options['debug'] : '';
-
-		// $api = new WC_Correios_API( $debug );
-		// $api->set_services( $services );
-		// $api->set_zip_origin( $zip_origin );
-		// $api->set_zip_destination( $zip_destination );
-		// $api->set_height( $height );
-		// $api->set_width( $width );
-		// $api->set_length( $length );
-		// $api->set_weight( $weight );
-
-		// if ( 'declare' == $declare_value ) {
-		// 	// $declared_value = number_format( $woocommerce_method()->cart->cart_contents_total, 2, ',', '' );
-		// 	// $api->set_declared_value( $declared_value );
-		// }
-
-		// if ( 'corporate' == $corporate_service ) {
-		// 	$api->set_login( $login );
-		// 	$api->set_password( $password );
-		// }
-
-		// $response = $api->get_shipping();
-
-		// error_log( print_r( $response, true ) );
-
-		// echo json_encode( $response );
+		if ( ! empty( $shipping ) ) {
+			// return $shipping;
+		} else {
+			// return array();
+		}
 
 		die();
 	}
