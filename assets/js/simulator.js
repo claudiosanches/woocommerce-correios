@@ -28,7 +28,8 @@ jQuery( document ).ready( function ( $ ) {
 				security:     woocommerce_correios_simulator.security,
 				zipcode:      $( '#wc-correios-simulator #zipcode' ).val(),
 				product_id:   $( '.cart input[name="add-to-cart"]' ).val(),
-				variation_id: $( '.cart input[name="variation_id"]' ).val()
+				variation_id: $( '.cart input[name="variation_id"]' ).val(),
+				quantity:     $( '.cart input[name="quantity"]' ).val()
 			},
 			success: function ( data ) {
 				button.removeClass( 'loading' );

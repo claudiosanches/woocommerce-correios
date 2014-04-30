@@ -156,6 +156,7 @@ class WC_Correios_Product_Shipping_Simulator {
 		$id         = ( isset( $_GET['variation_id'] ) && ! empty( $_GET['variation_id'] ) ) ? $_GET['variation_id'] : $_GET['product_id'];
 		$product_id = absint( $id );
 		$product    = get_product( $product_id );
+		$quantity   = ( isset( $_GET['quantity'] ) && ! empty( $_GET['quantity'] ) ) ? $_GET['quantity'] : 1;
 
 		// Test with the product exist.
 		if ( ! $product ) {
@@ -182,8 +183,8 @@ class WC_Correios_Product_Shipping_Simulator {
 		$package           = array(
 			'contents' => array(
 				array(
-					'data' => $product,
-					'quantity'  => 1
+					'data'     => $product,
+					'quantity' => $quantity
 				)
 			)
 		);
