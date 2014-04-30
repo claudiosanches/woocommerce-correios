@@ -329,6 +329,22 @@ class WC_Correios_Connect {
 		return $fixed;
 	}
 
+    /**
+     * Get fee.
+     *
+     * @param  mixed $fee
+     * @param  mixed $total
+     *
+     * @return float
+     */
+    public static function get_fee( $fee, $total ) {
+		if ( strstr( $fee, '%' ) ) {
+			$fee = ( $total / 100 ) * str_replace( '%', '', $fee );
+		}
+
+		return $fee;
+	}
+
 	/**
 	 * Gets the service name.
 	 *
@@ -352,6 +368,30 @@ class WC_Correios_Connect {
 		}
 
 		return $name[ $service ];
+	}
+
+	/**
+	 * Estimating Delivery.
+	 *
+	 * @param string $label
+	 * @param string $date
+	 * @param int    $additional_time
+	 *
+	 * @return string
+	 */
+	public static function estimating_delivery( $label, $date, $additional_time = 0 ) {
+		$name = $label;
+		$additional_time = intval( $additional_time );
+
+		if ( $additional_time > 0 ) {
+			$date += intval( $additional_time );
+		}
+
+		if ( $date > 0 ) {
+			$name .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, 'woocommerce-correios' ),  $date ) . ')';
+		}
+
+		return $name;
 	}
 
 	/**

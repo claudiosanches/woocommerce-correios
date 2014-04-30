@@ -28,7 +28,7 @@ class WC_Correios_Product_Shipping_Simulator {
 			array(
 				'ajax_url'      => admin_url( 'admin-ajax.php' ),
 				'security'      => wp_create_nonce( 'woocommerce_correios_simulator' ),
-				'error_message' => __( 'Error while getting the values', 'woocommerce-correios' )
+				'error_message' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' )
 			)
 		);
 	}
@@ -103,17 +103,52 @@ class WC_Correios_Product_Shipping_Simulator {
 		}
 	}
 
+	protected static function get_price_html( $value ) {
+		if ( function_exists( 'wc_price' ) ) {
+			return wc_price( $value );
+		} else {
+			return woocommerce_price( $value );
+		}
+	}
+
+	protected static function get_the_shipping( $shipping_values, $options, $package ) {
+		$rates = array();
+
+		if ( ! empty( $shipping_values ) ) {
+			foreach ( $shipping_values as $code => $shipping ) {
+				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
+					$date  = isset( $options['display_date'] ) ? $options['display_date'] : 'no';
+					$fee   = isset( $options['fee'] ) ? $options['fee'] : 0;
+					$name  = WC_Correios_Connect::get_service_name( $code );
+					$label = ( 'yes' == $date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
+					$cost  = str_replace( ',', '.', esc_attr( $shipping->Valor ) );
+					$fee   = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
+
+					$rates[] = array(
+						'id'    => $name,
+						'label' => $label,
+						'cost'  => self::get_price_html( $cost + $fee ),
+					);
+				}
+			}
+		}
+
+		$rates = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
+
+		return $rates;
+	}
+
 	public static function ajax_simulator() {
 		check_ajax_referer( 'woocommerce_correios_simulator', 'security' );
 
 		// Validate the data.
 		if ( ! isset( $_GET['product_id'] ) || empty( $_GET['product_id'] ) ) {
-			echo json_encode( array( 'error' => __( 'Error to identify the product.', 'woocommerce-correios' ), 'content' => '' ) );
+			echo json_encode( array( 'error' => __( 'Error to identify the product.', 'woocommerce-correios' ), 'rates' => '' ) );
 			die();
 		}
 
 		if ( ! isset( $_GET['zipcode'] ) || empty( $_GET['zipcode'] ) ) {
-			echo json_encode( array( 'error' => __( 'Please enter with your zipcode.', 'woocommerce-correios' ), 'content' => '' ) );
+			echo json_encode( array( 'error' => __( 'Please enter with your zipcode.', 'woocommerce-correios' ), 'rates' => '' ) );
 			die();
 		}
 
@@ -123,7 +158,7 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		// Test with the product exist.
 		if ( ! $product ) {
-			echo json_encode( array( 'error' => __( 'Invalid product!', 'woocommerce-correios' ), 'content' => '' ) );
+			echo json_encode( array( 'error' => __( 'Invalid product!', 'woocommerce-correios' ), 'rates' => '' ) );
 			die();
 		}
 
@@ -175,9 +210,12 @@ class WC_Correios_Product_Shipping_Simulator {
 		$shipping = $connect->get_shipping();
 
 		if ( ! empty( $shipping ) ) {
-			// return $shipping;
+			$_shipping = self::get_the_shipping( $shipping, $options, $package );
+			echo json_encode( array( 'error' => '', 'rates' => $_shipping ) );
+			die();
 		} else {
-			// return array();
+			echo array( 'error' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' ), 'rates' => '' );
+			die();
 		}
 
 		die();

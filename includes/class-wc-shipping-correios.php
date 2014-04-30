@@ -357,30 +357,6 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Estimating Delivery.
-	 *
-	 * @param string $label
-	 * @param string $date
-	 * @param int    $additional_time
-	 *
-	 * @return string
-	 */
-	protected function estimating_delivery( $label, $date, $additional_time = 0 ) {
-		$name = $label;
-		$additional_time = intval( $additional_time );
-
-		if ( $additional_time > 0 ) {
-			$date += intval( $additional_time );
-		}
-
-		if ( $date > 0 ) {
-			$name .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, $this->plugin_slug ),  $date ) . ')';
-		}
-
-		return $name;
-	}
-
-	/**
 	 * Gets the price of shipping.
 	 *
 	 * @param  array $package Order package.
@@ -437,7 +413,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 			foreach ( $shipping_values as $code => $shipping ) {
 				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
 					$name  = WC_Correios_Connect::get_service_name( $code );
-					$label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
+					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
 					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
 					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
 

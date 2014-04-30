@@ -35,6 +35,18 @@ jQuery( document ).ready( function ( $ ) {
 
 				if ( 0 < data.error.length ) {
 					content.prepend( '<p>' + data.error + '</p>' );
+				} else if ( 0 < data.rates.length ) {
+					var shipping = '<ul id="shipping-rates">';
+
+					$.each( data.rates, function( key, value ) {
+						shipping += '<li>' + value.label + ': ' + value.cost + '</li>';
+					});
+
+					shipping += '</ul>';
+
+					content.prepend( shipping );
+				} else {
+					content.prepend( '<p>' + woocommerce_correios_simulator.error_message + '</p>' );
 				}
 			},
 			error: function () {
