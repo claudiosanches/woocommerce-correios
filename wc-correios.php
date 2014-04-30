@@ -70,11 +70,14 @@ class WC_Correios {
 		if ( class_exists( 'SimpleXmlElement' ) ) {
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
-				include_once 'includes/class-wc-correios-api.php';
-				include_once 'includes/class-wc-correios-cubage.php';
+				include_once 'includes/class-wc-correios-package.php';
+				include_once 'includes/class-wc-correios-connect.php';
 				include_once 'includes/class-wc-shipping-correios.php';
+				include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
+				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
+				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 			} else {
 				add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
 			}

@@ -1,4 +1,5 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -47,6 +48,7 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 		$this->fee                = $this->get_option( 'fee' );
 		$this->zip_origin         = $this->get_option( 'zip_origin' );
 		$this->countries          = $this->get_option( 'countries' );
+		$this->simulator          = $this->get_option( 'simulator', 'no' );
 		$this->corporate_service  = $this->get_option( 'corporate_service' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
@@ -158,6 +160,13 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', $this->plugin_slug ),
 				'desc_tip'         => true,
 				'placeholder'      => '0.00'
+			),
+			'simulator' => array(
+				'title'            => __( 'Simulator', $this->plugin_slug ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Enable product shipping simulator', 'woocommerce-correios' ),
+				'description'      => __( 'Displays a shipping simulator in the product page.', $this->plugin_slug ),
+				'default'          => 'no'
 			),
 			'services' => array(
 				'title'            => __( 'Correios Services', $this->plugin_slug ),
@@ -326,68 +335,6 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Extracts the weight and dimensions from the order.
-	 *
-	 * @param array $package
-	 *
-	 * @return array
-	 */
-	protected function measures_extract( $package ) {
-		$count  = 0;
-		$height = array();
-		$width  = array();
-		$length = array();
-		$weight = array();
-
-		// Shipping per item.
-		foreach ( $package['contents'] as $item_id => $values ) {
-			$product = $values['data'];
-			$qty = $values['quantity'];
-
-			if ( $qty > 0 && $product->needs_shipping() ) {
-
-				if ( version_compare( WOOCOMMERCE_VERSION, '2.1', '>=' ) ) {
-					$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				} else {
-					$_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				}
-
-				$height[ $count ] = $_height;
-				$width[ $count ]  = $_width;
-				$length[ $count ] = $_length;
-				$weight[ $count ] = $_weight;
-
-				if ( $qty > 1 ) {
-					$n = $count;
-					for ( $i = 0; $i < $qty; $i++ ) {
-						$height[ $n ] = $_height;
-						$width[ $n ]  = $_width;
-						$length[ $n ] = $_length;
-						$weight[ $n ] = $_weight;
-						$n++;
-					}
-					$count = $n;
-				}
-
-				$count++;
-			}
-		}
-
-		return array(
-			'height' => array_values( $height ),
-			'length' => array_values( $length ),
-			'width'  => array_values( $width ),
-			'weight' => array_sum( $weight ),
-		);
-	}
-
-	/**
 	 * Gets the services IDs.
 	 *
 	 * @return array
@@ -410,28 +357,6 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Estimating Delivery.
-	 *
-	 * @param string $label
-	 * @param string $date
-	 *
-	 * @return string
-	 */
-	protected function estimating_delivery( $label, $date ) {
-		$msg = $label;
-
-		if ( $this->additional_time > 0 ) {
-			$date += (int) $this->additional_time;
-		}
-
-		if ( $date > 0 ) {
-			$msg .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, $this->plugin_slug ),  $date ) . ')';
-		}
-
-		return $msg;
-	}
-
-	/**
 	 * Gets the price of shipping.
 	 *
 	 * @param  array $package Order package.
@@ -439,62 +364,31 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	 * @return array          Correios Quotes.
 	 */
 	protected function correios_calculate( $package ) {
-		// Proccess measures.
-		$measures = apply_filters( 'woocommerce_correios_default_package', $this->measures_extract( $package ) );
+		$services = array_values( $this->correios_services() );
+		$connect = new WC_Correios_Connect;
+		$connect->set_services( $services );
+		$_package = $connect->set_package( $package );
+		$_package->set_minimum_height( $this->minimum_height );
+		$_package->set_minimum_width( $this->minimum_width );
+		$_package->set_minimum_width( $this->minimum_length );
+		$connect->set_zip_origin( $this->zip_origin );
+		$connect->set_zip_destination( $package['destination']['postcode'] );
+		$connect->set_debug( $this->debug );
+		if ( 'declare' == $this->declare_value ) {
+			$declared_value = number_format( $this->woocommerce_method()->cart->cart_contents_total, 2, ',', '' );
+			$connect->set_declared_value( $declared_value );
+		}
 
-		// Checks if the cart is not just virtual goods.
-		if ( ! empty( $measures['height'] ) && ! empty( $measures['width'] ) && ! empty( $measures['length'] ) ) {
+		if ( 'corporate' == $this->corporate_service ) {
+			$connect->set_login( $this->login );
+			$connect->set_password( $this->password );
+		}
 
-			// Get the Cubage.
-			$cubage = new WC_Correios_Cubage( $measures['height'], $measures['width'], $measures['length'] );
-			$totalcubage = $cubage->cubage();
+		$shipping = $connect->get_shipping();
 
-			$services = array_values( $this->correios_services() );
-			$zip_destination = $package['destination']['postcode'];
-
-			// Test min values.
-			$min_height = $this->minimum_height;
-			$min_width  = $this->minimum_width;
-			$min_length = $this->minimum_length;
-
-			$height = ( $totalcubage['height'] < $min_height ) ? $min_height : $totalcubage['height'];
-			$width  = ( $totalcubage['width'] < $min_width ) ? $min_width : $totalcubage['width'];
-			$length = ( $totalcubage['length'] < $min_length ) ? $min_length : $totalcubage['length'];
-
-			if ( 'yes' == $this->debug ) {
-				$weight_cubage = array(
-					'weight' => $measures['weight'],
-					'height' => $height,
-					'width'  => $width,
-					'length' => $length
-				);
-
-				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $weight_cubage, true ) );
-			}
-
-			$api = new WC_Correios_API( $this->debug, $this->log );
-			$api->set_services( $services );
-			$api->set_zip_origin( $this->zip_origin );
-			$api->set_zip_destination( $zip_destination );
-			$api->set_height( $height );
-			$api->set_width( $width );
-			$api->set_length( $length );
-			$api->set_weight( $measures['weight'] );
-
-			if ( 'declare' == $this->declare_value ) {
-				$declared_value = number_format( $this->woocommerce_method()->cart->cart_contents_total, 2, ',', '' );
-				$api->set_declared_value( $declared_value );
-			}
-
-			if ( 'corporate' == $this->corporate_service ) {
-				$api->set_login( $this->login );
-				$api->set_password( $this->password );
-			}
-
-			return $api->get_shipping();
-
+		if ( ! empty( $shipping ) ) {
+			return $shipping;
 		} else {
-
 			// Cart only with virtual products.
 			if ( 'yes' == $this->debug ) {
 				$this->log->add( 'correios', 'Cart only with virtual products.' );
@@ -518,8 +412,8 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 		if ( ! empty( $shipping_values ) ) {
 			foreach ( $shipping_values as $code => $shipping ) {
 				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
-					$name  = WC_Correios_API::get_service_name( $code );
-					$label = ( 'yes' == $this->display_date ) ? $this->estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
+					$name  = WC_Correios_Connect::get_service_name( $code );
+					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
 					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
 					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
 

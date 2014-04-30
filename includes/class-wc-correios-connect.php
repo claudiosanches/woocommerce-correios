@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WC_Correios_API class.
+ * WC_Correios_Connect class.
  */
-class WC_Correios_API {
+class WC_Correios_Connect {
 
 	/**
 	 * Webservice URL.
@@ -29,6 +29,13 @@ class WC_Correios_API {
 	 * @var array
 	 */
 	protected $services = array();
+
+	/**
+	 * Products package.
+	 *
+	 * @var array
+	 */
+	protected $package = array();
 
 	/**
 	 * Origin zipcode.
@@ -126,15 +133,26 @@ class WC_Correios_API {
 	protected $receipt_notice = 'N';
 
 	/**
-	 * Initialize the API class.
+	 * Debug mode.
 	 *
-	 * @param string    $debug Debug mode.
-	 * @param WC_Logger $log   Logger class.
+	 * @var string
 	 */
-	public function __construct( $debug, $log ) {
-		$this->id    = WC_Correios::get_method_id();
-		$this->debug = $debug;
-		$this->log   = $log;
+	protected $debug = 'no';
+
+	/**
+	 * Initialize the Connect class.
+	 *
+	 * @param string $debug Debug mode.
+	 */
+	public function __construct() {
+		$this->id = WC_Correios::get_method_id();
+
+		// Logger.
+		if ( class_exists( 'WC_Logger' ) ) {
+			$this->log = new WC_Logger();
+		} else {
+			$this->log = $this->woocommerce_method()->logger();
+		}
 	}
 
 	/**
@@ -144,6 +162,19 @@ class WC_Correios_API {
 	 */
 	public function set_services( $services = array() ) {
 		$this->services = $services;
+	}
+
+	/**
+	 * Set the package.
+	 *
+	 * @param array $package
+	 *
+	 * @return WC_Correios_Package
+	 */
+	public function set_package( $package = array() ) {
+		$this->package = new WC_Correios_Package( $package );
+
+		return $this->package;
 	}
 
 	/**
@@ -264,6 +295,15 @@ class WC_Correios_API {
 	}
 
 	/**
+	 * Set the debug mode.
+	 *
+	 * @param string $debug yes or no.
+	 */
+	public function set_debug( $debug = 'no' ) {
+		$this->debug = $debug;
+	}
+
+	/**
 	 * Fix number format for SimpleXML.
 	 *
 	 * @param  float $value  Value with dot.
@@ -287,6 +327,22 @@ class WC_Correios_API {
 		$fixed = preg_replace( '([^0-9])', '', $zip );
 
 		return $fixed;
+	}
+
+    /**
+     * Get fee.
+     *
+     * @param  mixed $fee
+     * @param  mixed $total
+     *
+     * @return float
+     */
+    public static function get_fee( $fee, $total ) {
+		if ( strstr( $fee, '%' ) ) {
+			$fee = ( $total / 100 ) * str_replace( '%', '', $fee );
+		}
+
+		return $fee;
 	}
 
 	/**
@@ -315,6 +371,30 @@ class WC_Correios_API {
 	}
 
 	/**
+	 * Estimating Delivery.
+	 *
+	 * @param string $label
+	 * @param string $date
+	 * @param int    $additional_time
+	 *
+	 * @return string
+	 */
+	public static function estimating_delivery( $label, $date, $additional_time = 0 ) {
+		$name = $label;
+		$additional_time = intval( $additional_time );
+
+		if ( $additional_time > 0 ) {
+			$date += intval( $additional_time );
+		}
+
+		if ( $date > 0 ) {
+			$name .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $date, 'woocommerce-correios' ),  $date ) . ')';
+		}
+
+		return $name;
+	}
+
+	/**
 	 * Get shipping prices.
 	 *
 	 * @return array
@@ -330,6 +410,36 @@ class WC_Correios_API {
 			|| empty( $this->zip_origin )
 		) {
 			return $values;
+		}
+
+		if (
+			0 == $this->height
+			&& 0 == $this->width
+			&& 0 == $this->diameter
+			&& 0 == $this->length
+			&& 0 == $this->weight
+			&& ! empty( $this->package )
+		) {
+			$package = $this->package->get_data();
+			$this->height = $package['height'];
+			$this->width  = $package['width'];
+			$this->length = $package['length'];
+			$this->weight = $package['weight'];
+
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $package, true ) );
+			}
+		} else {
+			if ( 'yes' == $this->debug ) {
+				$package = array(
+					'weight' => $this->weight,
+					'height' => $this->height,
+					'width'  => $this->width,
+					'length' => $this->length
+				);
+
+				$this->log->add( 'correios', 'Weight and cubage of the order: ' . print_r( $package, true ) );
+			}
 		}
 
 		foreach ( $this->services as $service ) {
