@@ -1,12 +1,19 @@
 /* global woocommerce_correios_simulator */
 jQuery( document ).ready( function ( $ ) {
 
+	function simulatorClean() {
+		$( '#wc-correios-simulator #simulator-data' ).empty();
+		$( '#wc-correios-simulator #zipcode' ).val( '' );
+	}
+
 	$( 'body' ).on( 'show_variation', function () {
 		$( '#wc-correios-simulator' ).slideDown( 200 );
+		simulatorClean();
 	});
 
 	$( 'body' ).on( 'reset_image', function () {
 		$( '#wc-correios-simulator' ).slideUp( 200 );
+		simulatorClean();
 	});
 
 	$( '#wc-correios-simulator' ).on( 'click', '.button', function ( e ) {
