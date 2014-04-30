@@ -22,8 +22,12 @@ class WC_Correios_Product_Shipping_Simulator {
 	 */
 	public function init() {
 		if ( is_product() ) {
-			add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'simulator' ), 45 );
-			add_action( 'wp_enqueue_scripts', array( $this, 'scritps' ) );
+			$options = get_option( 'woocommerce_correios_settings' );
+
+			if ( isset( $options['simulator'] ) && 'yes' == $options['simulator'] ) {
+				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'simulator' ), 45 );
+				add_action( 'wp_enqueue_scripts', array( $this, 'scritps' ) );
+			}
 		}
 	}
 
