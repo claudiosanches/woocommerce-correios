@@ -6,12 +6,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WC_Correios_Product_Shipping_Simulator {
 
+	/**
+	 * Shipping simulator actions.
+	 */
 	public function __construct() {
 		if ( ! is_admin() ) {
 			add_action( 'get_header', array( $this, 'init' ) );
 		}
 	}
 
+	/**
+	 * Initialize the shipping simulator.
+	 *
+	 * @return void
+	 */
 	public function init() {
 		if ( is_product() ) {
 			add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'simulator' ), 45 );
@@ -19,6 +27,11 @@ class WC_Correios_Product_Shipping_Simulator {
 		}
 	}
 
+	/**
+	 * Shipping simulator scripts.
+	 *
+	 * @return void
+	 */
 	public function scritps() {
 		wp_enqueue_style( 'woocommerce-correios-simulator', plugins_url( 'assets/css/simulator.css', plugin_dir_path( __FILE__ ) ), array(), WC_Correios::VERSION, 'all' );
 		wp_enqueue_script( 'woocommerce-correios-simulator', plugins_url( 'assets/js/simulator.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
@@ -33,6 +46,11 @@ class WC_Correios_Product_Shipping_Simulator {
 		);
 	}
 
+	/**
+	 * Display the simulator.
+	 *
+	 * @return string Simulator HTML.
+	 */
 	public static function simulator() {
 		global $product;
 
@@ -55,7 +73,14 @@ class WC_Correios_Product_Shipping_Simulator {
 		}
 	}
 
-	protected static function correios_services( $options ) {
+	/**
+	 * Get the correios services.
+	 *
+	 * @param  array $options Plugin options.
+	 *
+	 * @return array          Correios services.
+	 */
+	protected static function get_correios_services( $options ) {
 		$corporate_service  = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
 		$service_pac        = isset( $options['service_pac'] ) ? $options['service_pac'] : '';
 		$service_sedex      = isset( $options['service_sedex'] ) ? $options['service_sedex'] : '';
@@ -78,41 +103,32 @@ class WC_Correios_Product_Shipping_Simulator {
 		return array_filter( $services );
 	}
 
-	protected static function calcule_measures( $height, $width, $length, $weight, $qty, $options ) {
-		$count   = 0;
-		$_height = array();
-		$_width  = array();
-		$_length = array();
-		$_weight = array();
-
-		$_height[ $count ] = $height;
-		$_width[ $count ]  = $width;
-		$_length[ $count ] = $length;
-		$_weight[ $count ] = $weight;
-
-		if ( $qty > 1 ) {
-			$n = $count;
-			for ( $i = 0; $i < $qty; $i++ ) {
-				$height[ $n ] = $_height;
-				$width[ $n ]  = $_width;
-				$length[ $n ] = $_length;
-				$weight[ $n ] = $_weight;
-				$n++;
-			}
-			$count = $n;
-		}
-	}
-
-	protected static function get_price_html( $value ) {
+	/**
+	 * Get the price.
+	 *
+	 * @param  int    $value Shipping price.
+	 *
+	 * @return string        Formated shipping price.
+	 */
+	protected static function get_price( $value ) {
 		if ( function_exists( 'wc_price' ) ) {
-			return wc_price( $value );
+			return sanitize_text_field( wc_price( $value ) );
 		} else {
-			return woocommerce_price( $value );
+			return sanitize_text_field( woocommerce_price( $value ) );
 		}
 	}
 
+	/**
+	 * Get the shipping rates.
+	 *
+	 * @param  object $shipping_values Shipping values.
+	 * @param  array  $options         Plugin options.
+	 * @param  array  $package         Product package.
+	 *
+	 * @return array                   Shipping rates.
+	 */
 	protected static function get_the_shipping( $shipping_values, $options, $package ) {
-		$rates = array();
+		$_rates = array();
 
 		if ( ! empty( $shipping_values ) ) {
 			foreach ( $shipping_values as $code => $shipping ) {
@@ -124,20 +140,35 @@ class WC_Correios_Product_Shipping_Simulator {
 					$cost  = str_replace( ',', '.', esc_attr( $shipping->Valor ) );
 					$fee   = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
 
-					$rates[] = array(
+					$_rates[] = array(
 						'id'    => $name,
 						'label' => $label,
-						'cost'  => self::get_price_html( $cost + $fee ),
+						'cost'  => $cost + $fee
 					);
 				}
 			}
 		}
 
-		$rates = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
+		$_rates = apply_filters( 'woocommerce_correios_shipping_methods', $_rates, $package );
+
+		// Format the cost.
+		$rates = array();
+		foreach ( $_rates as $rate ) {
+			$rates[] = array(
+				'id'    => $rate['id'],
+				'label' => $rate['label'],
+				'cost'  => self::get_price( $rate['cost'] )
+			);
+		}
 
 		return $rates;
 	}
 
+	/**
+	 * Simulator ajax response.
+	 *
+	 * @return string
+	 */
 	public static function ajax_simulator() {
 		check_ajax_referer( 'woocommerce_correios_simulator', 'security' );
 
@@ -190,7 +221,7 @@ class WC_Correios_Product_Shipping_Simulator {
 		);
 
 		// Get the shipping.
-		$services = array_values( self::correios_services( $options ) );
+		$services = array_values( self::get_correios_services( $options ) );
 		$connect  = new WC_Correios_Connect;
 		$connect->set_services( $services );
 		$_package = $connect->set_package( $package );
