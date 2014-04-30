@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Correios v1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-03-31 00:29:41+0000\n"
+"PO-Revision-Date: 2014-04-30 02:59:54+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,149 +32,149 @@ msgstr "Correios para WooCommerce"
 msgid "claudiosanches, rodrigoprior"
 msgstr "claudiosanches, rodrigoprior"
 
-#: includes/class-wc-shipping-correios.php:19
-#: includes/class-wc-shipping-correios.php:108
+#: includes/class-wc-shipping-correios.php:20
+#: includes/class-wc-shipping-correios.php:107
 #@ woocommerce-correios
 msgid "Correios"
 msgstr "Correios"
 
-#: includes/class-wc-shipping-correios.php:145
-#: includes/class-wc-shipping-correios.php:195
-#: includes/class-wc-shipping-correios.php:203
-#: includes/class-wc-shipping-correios.php:211
-#: includes/class-wc-shipping-correios.php:219
-#: includes/class-wc-shipping-correios.php:227
+#: includes/class-wc-shipping-correios.php:144
+#: includes/class-wc-shipping-correios.php:201
+#: includes/class-wc-shipping-correios.php:209
+#: includes/class-wc-shipping-correios.php:217
+#: includes/class-wc-shipping-correios.php:225
+#: includes/class-wc-shipping-correios.php:233
 #@ woocommerce-correios
 msgid "Enable"
 msgstr "Habilitar"
 
-#: includes/class-wc-shipping-correios.php:104
+#: includes/class-wc-shipping-correios.php:103
 #@ woocommerce-correios
 msgid "Title"
 msgstr "Título"
 
-#: includes/class-wc-shipping-correios.php:106
+#: includes/class-wc-shipping-correios.php:105
 #@ woocommerce-correios
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isto controla o título que o usuário vê durante o checkout."
 
-#: includes/class-wc-shipping-correios.php:116
+#: includes/class-wc-shipping-correios.php:115
 #@ woocommerce-correios
 msgid "All allowed countries"
 msgstr "Países permitidos"
 
-#: includes/class-wc-shipping-correios.php:117
-#: includes/class-wc-shipping-correios.php:121
+#: includes/class-wc-shipping-correios.php:116
+#: includes/class-wc-shipping-correios.php:120
 #@ woocommerce-correios
 msgid "Specific Countries"
 msgstr "Países específicos"
 
-#: includes/class-wc-shipping-correios.php:128
+#: includes/class-wc-shipping-correios.php:127
 #@ woocommerce-correios
 msgid "Origin Zip Code"
 msgstr "CEP de origem"
 
-#: includes/class-wc-shipping-correios.php:134
+#: includes/class-wc-shipping-correios.php:133
 #@ woocommerce-correios
 msgid "Declare value"
 msgstr "Declarar valor"
 
-#: includes/class-wc-shipping-correios.php:138
+#: includes/class-wc-shipping-correios.php:137
 #@ woocommerce-correios
 msgid "Declare"
 msgstr "Declarar"
 
-#: includes/class-wc-shipping-correios.php:139
+#: includes/class-wc-shipping-correios.php:138
 #@ woocommerce-correios
 msgid "None"
 msgstr "Não"
 
-#: includes/class-wc-shipping-correios.php:143
+#: includes/class-wc-shipping-correios.php:142
 #@ woocommerce-correios
 msgid "Estimated delivery"
 msgstr "Estimativa de entrega"
 
-#: includes/class-wc-shipping-correios.php:166
+#: includes/class-wc-shipping-correios.php:172
 #@ woocommerce-correios
 msgid "Correios Services"
 msgstr "Serviços"
 
-#: includes/class-wc-shipping-correios.php:170
+#: includes/class-wc-shipping-correios.php:176
 #@ woocommerce-correios
 msgid "Corporate Service"
 msgstr "Serviço corporativo"
 
-#: includes/class-wc-shipping-correios.php:176
+#: includes/class-wc-shipping-correios.php:182
 #@ woocommerce-correios
 msgid "Conventional"
 msgstr "Convencional"
 
-#: includes/class-wc-shipping-correios.php:177
+#: includes/class-wc-shipping-correios.php:183
 #@ woocommerce-correios
 msgid "Corporate"
 msgstr "Corporativo"
 
-#: includes/class-wc-shipping-correios.php:181
+#: includes/class-wc-shipping-correios.php:187
 #@ woocommerce-correios
 msgid "Administrative Code"
 msgstr "Código Administrativo"
 
-#: includes/class-wc-shipping-correios.php:187
+#: includes/class-wc-shipping-correios.php:193
 #@ woocommerce-correios
 msgid "Administrative Password"
 msgstr "Senha Administrativa"
 
-#: includes/class-wc-shipping-correios.php:193
+#: includes/class-wc-shipping-correios.php:199
 #@ woocommerce-correios
 msgid "PAC"
 msgstr "PAC"
 
-#: includes/class-wc-shipping-correios.php:201
+#: includes/class-wc-shipping-correios.php:207
 #@ woocommerce-correios
 msgid "SEDEX"
 msgstr "SEDEX"
 
-#: includes/class-wc-shipping-correios.php:209
+#: includes/class-wc-shipping-correios.php:215
 #@ woocommerce-correios
 msgid "SEDEX 10"
 msgstr "SEDEX 10"
 
-#: includes/class-wc-shipping-correios.php:217
+#: includes/class-wc-shipping-correios.php:223
 #@ woocommerce-correios
 msgid "SEDEX Hoje"
 msgstr "SEDEX Hoje"
 
-#: includes/class-wc-shipping-correios.php:225
+#: includes/class-wc-shipping-correios.php:231
 #@ woocommerce-correios
 msgid "e-SEDEX"
 msgstr "e-SEDEX"
 
-#: includes/class-wc-shipping-correios.php:233
+#: includes/class-wc-shipping-correios.php:239
 #@ woocommerce-correios
 msgid "Package Standard"
 msgstr "Pacote Padrão"
 
-#: includes/class-wc-shipping-correios.php:239
+#: includes/class-wc-shipping-correios.php:245
 #@ woocommerce-correios
 msgid "Minimum Height"
 msgstr "Altura Mínima"
 
-#: includes/class-wc-shipping-correios.php:246
+#: includes/class-wc-shipping-correios.php:252
 #@ woocommerce-correios
 msgid "Minimum Width"
 msgstr "Largura Mínima"
 
-#: includes/class-wc-shipping-correios.php:253
+#: includes/class-wc-shipping-correios.php:259
 #@ woocommerce-correios
 msgid "Minimum Length"
 msgstr "Comprimento Mínimo"
 
-#: includes/class-wc-shipping-correios.php:20
+#: includes/class-wc-shipping-correios.php:21
 #@ woocommerce-correios
 msgid "Correios is a brazilian delivery method."
 msgstr "Correios é um método de entrega brasileiro."
 
-#: includes/class-wc-shipping-correios.php:431
+#: includes/class-wc-correios-connect.php:391
 #, php-format
 #@ woocommerce-correios
 msgid "Delivery in %d working day"
@@ -188,97 +188,97 @@ msgstr[1] "Entrega em %d dias úteis"
 msgid "WooCommerce Correios"
 msgstr "WooCommerce Correios"
 
-#: includes/class-wc-shipping-correios.php:260
+#: includes/class-wc-shipping-correios.php:266
 #@ woocommerce-correios
 msgid "Testing"
 msgstr "Teste"
 
-#: includes/class-wc-shipping-correios.php:264
+#: includes/class-wc-shipping-correios.php:270
 #@ woocommerce-correios
 msgid "Debug Log"
 msgstr "Log de depuração"
 
-#: includes/class-wc-shipping-correios.php:266
+#: includes/class-wc-shipping-correios.php:272
 #@ woocommerce-correios
 msgid "Enable logging"
 msgstr "Habilitar log"
 
-#: includes/class-wc-shipping-correios.php:130
+#: includes/class-wc-shipping-correios.php:129
 #@ woocommerce-correios
 msgid "Zip Code from where the requests are sent."
 msgstr "CEP de onde os pedidos são enviados."
 
-#: includes/class-wc-shipping-correios.php:146
+#: includes/class-wc-shipping-correios.php:145
 #@ woocommerce-correios
 msgid "Display date of estimated delivery."
 msgstr "Exibe a data de entrega estimada."
 
-#: includes/class-wc-shipping-correios.php:151
+#: includes/class-wc-shipping-correios.php:150
 #@ woocommerce-correios
 msgid "Additional days"
 msgstr "Dias adicionais"
 
-#: includes/class-wc-shipping-correios.php:153
+#: includes/class-wc-shipping-correios.php:152
 #@ woocommerce-correios
 msgid "Additional days to the estimated delivery."
 msgstr "Dias adicionais para a entrega estimada."
 
-#: includes/class-wc-shipping-correios.php:172
+#: includes/class-wc-shipping-correios.php:178
 #@ woocommerce-correios
 msgid "Choose between conventional or corporate service."
 msgstr "Escolha entre o serviço convencional ou corporativo."
 
-#: includes/class-wc-shipping-correios.php:183
+#: includes/class-wc-shipping-correios.php:189
 #@ woocommerce-correios
 msgid "Your Correios login."
 msgstr "Seu login nos Correios."
 
-#: includes/class-wc-shipping-correios.php:189
+#: includes/class-wc-shipping-correios.php:195
 #@ woocommerce-correios
 msgid "Your Correios password."
 msgstr "Sua senha nos Correios."
 
-#: includes/class-wc-shipping-correios.php:196
+#: includes/class-wc-shipping-correios.php:202
 #@ woocommerce-correios
 msgid "Shipping via PAC."
 msgstr "Entrega via PAC."
 
-#: includes/class-wc-shipping-correios.php:204
+#: includes/class-wc-shipping-correios.php:210
 #@ woocommerce-correios
 msgid "Shipping via SEDEX."
 msgstr "Entrega via SEDEX."
 
-#: includes/class-wc-shipping-correios.php:212
+#: includes/class-wc-shipping-correios.php:218
 #@ woocommerce-correios
 msgid "Shipping via SEDEX 10."
 msgstr "Entrega via SEDEX 10."
 
-#: includes/class-wc-shipping-correios.php:220
+#: includes/class-wc-shipping-correios.php:226
 #@ woocommerce-correios
 msgid "Shipping via SEDEX Hoje."
 msgstr "Entrega via SEDEX Hoje."
 
-#: includes/class-wc-shipping-correios.php:228
+#: includes/class-wc-shipping-correios.php:234
 #@ woocommerce-correios
 msgid "Shipping via e-SEDEX."
 msgstr "Entrega via e-SEDEX."
 
-#: includes/class-wc-shipping-correios.php:235
+#: includes/class-wc-shipping-correios.php:241
 #@ woocommerce-correios
 msgid "Sets a minimum measure for the package."
 msgstr "Defina uma medida mínima para o pacote."
 
-#: includes/class-wc-shipping-correios.php:241
+#: includes/class-wc-shipping-correios.php:247
 #@ woocommerce-correios
 msgid "Minimum height of the package. Correios needs at least 2 cm."
 msgstr "A altura mínima da embalagem. Os Correios precisam de pelo menos 2 cm."
 
-#: includes/class-wc-shipping-correios.php:248
+#: includes/class-wc-shipping-correios.php:254
 #@ woocommerce-correios
 msgid "Minimum width of the package. Correios needs at least 11 cm."
 msgstr "A largura mínima do pacote. Os Correios precisam de pelo menos 11 cm."
 
-#: includes/class-wc-shipping-correios.php:255
+#: includes/class-wc-shipping-correios.php:261
 #@ woocommerce-correios
 msgid "Minimum length of the package. Correios needs at least 16 cm."
 msgstr "Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm."
@@ -329,39 +329,39 @@ msgstr "https://github.com/claudiosmweb/woocommerce-correios"
 msgid "http://claudiosmweb.com/"
 msgstr "http://claudiosmweb.com/"
 
-#: includes/class-wc-shipping-correios.php:98
+#: includes/class-wc-shipping-correios.php:97
 #@ woocommerce-correios
 msgid "Enable/Disable"
 msgstr "Habilita/Desabilita"
 
-#: includes/class-wc-shipping-correios.php:100
+#: includes/class-wc-shipping-correios.php:99
 #@ woocommerce-correios
 msgid "Enable this shipping method"
 msgstr "Ativar este método de envio"
 
-#: includes/class-wc-shipping-correios.php:111
+#: includes/class-wc-shipping-correios.php:110
 #@ woocommerce-correios
 msgid "Availability"
 msgstr "Disponibilidade"
 
-#: includes/class-wc-shipping-correios.php:159
+#: includes/class-wc-shipping-correios.php:158
 #@ woocommerce-correios
 msgid "Handling Fee"
 msgstr "Taxa de manuseio"
 
-#: includes/class-wc-shipping-correios.php:268
+#: includes/class-wc-shipping-correios.php:274
 #, php-format
 #@ woocommerce-correios
 msgid "Log Correios events, such as WebServices requests, inside %s."
 msgstr "Registrar log de eventos dos Correios, como solicitações de API, dentro do arquivo %s."
 
-#: wc-correios.php:173
+#: wc-correios.php:176
 #, php-format
 #@ woocommerce-correios
 msgid "WooCommerce Correios depends to %s to work!"
 msgstr "WooCommerce Correios depende de %s para funcionar!"
 
-#: includes/class-wc-shipping-correios.php:161
+#: includes/class-wc-shipping-correios.php:160
 #@ woocommerce-correios
 msgid "Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable."
 msgstr "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%. Deixe em branco para desabilitar."
@@ -372,19 +372,80 @@ msgstr "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%.
 msgid "1.7.0"
 msgstr "1.7.0"
 
-#: wc-correios.php:162
+#: wc-correios.php:165
 #, php-format
 #@ woocommerce-correios
 msgid "WooCommerce Correios depends on the last version of %s to work!"
 msgstr "WooCommerce Correios depende da última versão do %s para funcionar!"
 
-#: wc-correios.php:162
+#: wc-correios.php:165
 #@ woocommerce-correios
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: wc-correios.php:173
+#: wc-correios.php:176
 #@ woocommerce-correios
 msgid "SimpleXML"
 msgstr "SimpleXML"
+
+#: includes/class-wc-correios-product-shipping-simulator.php:48
+#: includes/class-wc-correios-product-shipping-simulator.php:262
+#@ woocommerce-correios
+msgid "It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value."
+msgstr "Não foi possível calcular o frete, por favor, tente adicionar o produto ao carrinho e prossiga para o pagamento para tentar ver o valor do frete."
+
+#: includes/class-wc-correios-product-shipping-simulator.php:78
+#@ woocommerce-correios
+msgid "Calculate"
+msgstr "Calcular"
+
+#: includes/class-wc-correios-product-shipping-simulator.php:189
+#@ woocommerce-correios
+msgid "Error to identify the product."
+msgstr "Erro ao identificar o produto."
+
+#: includes/class-wc-correios-product-shipping-simulator.php:194
+#@ woocommerce-correios
+msgid "Please enter with your zipcode."
+msgstr "Por favor, informe o seu CEP."
+
+#: includes/class-wc-correios-product-shipping-simulator.php:206
+#@ woocommerce-correios
+msgid "Invalid product!"
+msgstr "Produto inválido!"
+
+#: includes/class-wc-shipping-correios.php:165
+#@ woocommerce-correios
+msgid "Simulator"
+msgstr "Simulador"
+
+#: includes/class-wc-shipping-correios.php:167
+#@ woocommerce-correios
+msgid "Enable product shipping simulator"
+msgstr "Ativar o simulador de frete"
+
+#: includes/class-wc-shipping-correios.php:168
+#@ woocommerce-correios
+msgid "Displays a shipping simulator in the product page."
+msgstr "Exibe um simulador de frete na página do produto."
+
+#: includes/class-wc-correios-product-shipping-simulator.php:66
+#@ woocommerce-correios
+msgid "Shipping and delivery time"
+msgstr "Frete e prazo de entrega"
+
+#: includes/class-wc-correios-product-shipping-simulator.php:67
+#@ woocommerce-correios
+msgid "Calculate the shipping and delivery time estimated to your region."
+msgstr "Calcule o valor do frete e o prazo estimado de entrega para a sua região."
+
+#: includes/class-wc-correios-product-shipping-simulator.php:69
+#@ woocommerce-correios
+msgid "Shipping"
+msgstr "Entrega"
+
+#: includes/class-wc-correios-product-shipping-simulator.php:70
+#@ woocommerce-correios
+msgid "Calculate shipping estimated to your region."
+msgstr "Calcule o valor do frete estimado para a sua região."
 

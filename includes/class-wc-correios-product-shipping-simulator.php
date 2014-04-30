@@ -59,12 +59,20 @@ class WC_Correios_Product_Shipping_Simulator {
 		global $product;
 
 		if ( $product->needs_shipping() && in_array( $product->product_type, array( 'simple', 'variable' ) ) ) {
+			$options = get_option( 'woocommerce_correios_settings' );
+			$style   = ( 'variable' == $product->product_type ) ? 'display: none' : '';
 
-			$style = ( 'variable' == $product->product_type ) ? 'display: none' : '';
+			if ( isset( $options['display_date'] ) && 'yes' == $options['display_date'] ) {
+				$title       = __( 'Shipping and delivery time', 'woocommerce-correios' );
+				$description = __( 'Calculate the shipping and delivery time estimated to your region.', 'woocommerce-correios' );
+			} else {
+				$title       = __( 'Shipping', 'woocommerce-correios' );
+				$description = __( 'Calculate shipping estimated to your region.', 'woocommerce-correios' );
+			}
 
 			$html = '<div id="wc-correios-simulator" style="' . $style . '">';
-			$html .= '<strong>' . __( 'Shipping and Delivery Time.', 'woocommerce-correios' ) . '</strong>';
-			$html .= '<p>' . __( 'Calculate shipping and delivery time estimated to your region.', 'woocommerce-correios' ) . '</p>';
+			$html .= '<strong>' . $title  . '</strong>';
+			$html .= '<p>' . $description . '</p>';
 			$html .= '<form method="post" class="cart">';
 			$html .= '<input type="text" size="9" class="input-text text" placeholder="00000-000" id="zipcode" name="zipcode" />';
 			$html .= '<button class="button" type="submit">' . __( 'Calculate', 'woocommerce-correios' ) .'</button>';

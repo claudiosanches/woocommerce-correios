@@ -164,8 +164,8 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 			'simulator' => array(
 				'title'            => __( 'Simulator', $this->plugin_slug ),
 				'type'             => 'checkbox',
-				'label'            => 'Enable product shipping simulator',
-				'description'      => __( 'Displays a button on the product page to simulate the calculation of shipping the product.', $this->plugin_slug ),
+				'label'            => __( 'Enable product shipping simulator', 'woocommerce-correios' ),
+				'description'      => __( 'Displays a shipping simulator in the product page.', $this->plugin_slug ),
 				'default'          => 'no'
 			),
 			'services' => array(
