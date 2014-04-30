@@ -153,7 +153,8 @@ class WC_Correios_Product_Shipping_Simulator {
 		}
 
 		// Get the product data.
-		$product_id = absint( $_GET['product_id'] );
+		$id         = ( isset( $_GET['variation_id'] ) && ! empty( $_GET['variation_id'] ) ) ? $_GET['variation_id'] : $_GET['product_id'];
+		$product_id = absint( $id );
 		$product    = get_product( $product_id );
 
 		// Test with the product exist.
