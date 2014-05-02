@@ -70,6 +70,7 @@ class WC_Correios {
 		if ( class_exists( 'SimpleXmlElement' ) ) {
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
+				include_once 'includes/class-wc-correios-error.php';
 				include_once 'includes/class-wc-correios-package.php';
 				include_once 'includes/class-wc-correios-connect.php';
 				include_once 'includes/class-wc-shipping-correios.php';

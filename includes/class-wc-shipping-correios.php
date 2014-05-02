@@ -406,7 +406,8 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = array() ) {
-		$rates  = array();
+		$rates           = array();
+		$errors          = array();
 		$shipping_values = $this->correios_calculate( $package );
 
 		if ( ! empty( $shipping_values ) ) {
@@ -427,6 +428,8 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 					);
 				}
 			}
+
+			// wc_add_notice( $errors, 'error' );
 
 			$rates = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
 
