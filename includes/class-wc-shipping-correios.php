@@ -412,8 +412,16 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 
 		if ( ! empty( $shipping_values ) ) {
 			foreach ( $shipping_values as $code => $shipping ) {
-				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
-					$name  = WC_Correios_Connect::get_service_name( $code );
+				if ( ! isset( $shipping->Erro ) ) {
+					continue;
+				}
+
+				$name     = WC_Correios_Connect::get_service_name( $code );
+				$errors[] = array(
+					'service' => $name,
+					'error'   => WC_Correios_Error::get_message( $shipping->Erro )
+				);
+				if ( 0 == $shipping->Erro ) {
 					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
 					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
 					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
@@ -429,7 +437,14 @@ class WC_Shipping_Correios extends WC_Shipping_Method {
 				}
 			}
 
-			// wc_add_notice( $errors, 'error' );
+			// Display correios errors.
+			if ( ! empty( $errors ) ) {
+				foreach ( $errors as $error ) {
+					if ( '' != $error['error'] ) {
+						wc_add_notice( '<strong>' . $error['service'] . ':</strong> ' . $error['error'] . '.', 'error' );
+					}
+				}
+			}
 
 			$rates = apply_filters( 'woocommerce_correios_shipping_methods', $rates, $package );
 
