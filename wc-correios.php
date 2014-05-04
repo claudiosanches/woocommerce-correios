@@ -73,7 +73,7 @@ class WC_Correios {
 				include_once 'includes/class-wc-correios-error.php';
 				include_once 'includes/class-wc-correios-package.php';
 				include_once 'includes/class-wc-correios-connect.php';
-				include_once 'includes/class-wc-shipping-correios.php';
+				include_once 'includes/class-wc-correios-shipping.php';
 				include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
@@ -150,7 +150,7 @@ class WC_Correios {
 	 * @return  array          Payment methods with Correios.
 	 */
 	public function add_method( $methods ) {
-		$methods[] = 'WC_Shipping_Correios';
+		$methods[] = 'WC_Correios_Shipping';
 
 		return $methods;
 	}

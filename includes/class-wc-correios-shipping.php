@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WC_Shipping_Correios class.
+ * WC_Correios_Shipping class.
  */
-class WC_Shipping_Correios extends WC_Shipping_Method {
+class WC_Correios_Shipping extends WC_Shipping_Method {
 
 	/**
 	 * Initialize the Correios shipping method.
