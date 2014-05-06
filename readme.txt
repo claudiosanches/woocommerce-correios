@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
 Tested up to: 3.9
-Stable tag: 1.6.2
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,8 +168,15 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 1. Settings page.
 2. Checkout page.
+2. Product shipping simulator.
 
 == Changelog ==
+
+= 2.0.0 - 06/05/2014 =
+
+* Adicionado simulador de frete na página do produto.
+* Adicionado tratamento de erro que exibe alguns erros úteis para o cliente na página do carrinho.
+* Melhorias no código do plugin.
 
 = 1.6.2 - 20/12/2013 =
 
