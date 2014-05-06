@@ -415,12 +415,16 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 					continue;
 				}
 
-				$name     = WC_Correios_Connect::get_service_name( $code );
-				$errors[] = array(
-					'service' => $name,
-					'error'   => WC_Correios_Error::get_message( $shipping->Erro )
+				$name          = WC_Correios_Connect::get_service_name( $code );
+				$error_number  = (string) $shipping->Erro;
+				$error_message = WC_Correios_Error::get_message( $shipping->Erro );
+				$errors[ $error_number ] = array(
+					'error'   => $error_message,
+					'number'  => $error_number
 				);
-				if ( 0 == $shipping->Erro ) {
+
+				// Set the shipping rates.
+				if ( in_array( $error_number, array( '0', '010' ) ) ) {
 					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
 					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
 					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
@@ -440,7 +444,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 			if ( ! empty( $errors ) ) {
 				foreach ( $errors as $error ) {
 					if ( '' != $error['error'] ) {
-						wc_add_notice( '<strong>' . $error['service'] . ':</strong> ' . $error['error'] . '.', 'error' );
+						$type = ( '010' == $error['number'] ) ? 'notice' : 'error';
+						wc_add_notice( '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . $error['error'], $type );
 					}
 				}
 			}

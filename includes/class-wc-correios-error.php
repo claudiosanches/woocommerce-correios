@@ -19,7 +19,7 @@ class WC_Correios_Error {
 		$code = (string) $code;
 
 		$messages = array(
-			'-3'  => __( 'Invalid zip code', 'woocommerce-correios' ),
+			'-3'  => __( 'Invalid zip code', 'woocommerce-correios.' ),
 			'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
 			'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
 		);
