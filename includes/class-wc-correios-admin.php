@@ -7,20 +7,14 @@ class WC_Correios_Admin {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since 1.7.0
-	 *
 	 * @var   object
 	 */
 	protected static $instance = null;
 
 	/**
 	 * Initialize the plugin admin.
-	 *
-	 * @since 1.7.0
 	 */
 	private function __construct() {
-		$this->plugin_slug = WC_Correios::get_plugin_slug();
-
 		// Add metabox.
 		add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
 
@@ -33,8 +27,6 @@ class WC_Correios_Admin {
 
 	/**
 	 * Return an instance of this class.
-	 *
-	 * @since  1.7.0
 	 *
 	 * @return object A single instance of this class.
 	 */
@@ -74,7 +66,7 @@ class WC_Correios_Admin {
 		// Use nonce for verification.
 		wp_nonce_field( basename( __FILE__ ), 'wc_correios_nonce' );
 
-		$html = '<label for="correios_tracking">' . __( 'Tracking code:', $this->plugin_slug ) . '</label><br />';
+		$html = '<label for="correios_tracking">' . __( 'Tracking code:', 'woocommerce-correios' ) . '</label><br />';
 		$html .= '<input type="text" id="correios_tracking" name="correios_tracking" value="' . get_post_meta( $post->ID, 'correios_tracking', true ) . '" style="width: 100%;" />';
 
 		echo $html;
@@ -118,7 +110,7 @@ class WC_Correios_Admin {
 				$order = new WC_Order( $post_id );
 
 				// Add order note.
-				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', $this->plugin_slug ), $new ) );
+				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $new ) );
 
 				// Send email notification.
 				$this->email_notification( $order, $new );
@@ -145,7 +137,7 @@ class WC_Correios_Admin {
 			$mailer = $woocommerce->mailer();
 		}
 
-		$subject = sprintf( __( 'Your the Correios tracking code of the order #%s', $this->plugin_slug ), $order->id );
+		$subject = sprintf( __( 'Your the Correios tracking code of the order #%s', 'woocommerce-correios' ), $order->id );
 
 		// Mail headers.
 		$headers = array();
@@ -153,10 +145,10 @@ class WC_Correios_Admin {
 
 		// Body message.
 		$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
-		$main_message = '<p>' . sprintf( __( 'Track the delivery of your purchase at the Correios: %s', $this->plugin_slug ), $url ) . '</p>';
+		$main_message = '<p>' . sprintf( __( 'Track the delivery of your purchase at the Correios: %s', 'woocommerce-correios' ), $url ) . '</p>';
 
 		// Sets message template.
-		$message = $mailer->wrap_message( __( 'Your the Correios tracking code', $this->plugin_slug ), $main_message );
+		$message = $mailer->wrap_message( __( 'Your the Correios tracking code', 'woocommerce-correios' ), $main_message );
 
 		// Send email.
 		$mailer->send( $order->billing_email, $subject, $message, $headers, '' );
@@ -174,7 +166,7 @@ class WC_Correios_Admin {
 
 		if ( ! empty( $tracking_code ) ) {
 			$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
-			echo '<p>' . sprintf( __( 'Your the Correios tracking code: %s.', $this->plugin_slug ), $url ) . '</p>';
+			echo '<p>' . sprintf( __( 'Your the Correios tracking code: %s.', 'woocommerce-correios' ), $url ) . '</p>';
 		}
 	}
 }
