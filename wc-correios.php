@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: claudiosanches, rodrigoprior
  * Author URI: http://claudiosmweb.com/
- * Version: 1.7.0
+ * Version: 2.0.0
  * License: GPLv2 or later
  * Text Domain: wccorreios
  * Domain Path: /languages/
@@ -25,21 +25,21 @@ class WC_Correios {
 	/**
 	 * Plugin version.
 	 *
-	 * @var   string
+	 * @var string
 	 */
-	const VERSION = '1.7.0';
+	const VERSION = '2.0.0';
 
 	/**
 	 * Integration id.
 	 *
-	 * @var   string
+	 * @var string
 	 */
 	protected static $method_id = 'correios';
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @var   object
+	 * @var object
 	 */
 	protected static $instance = null;
 
@@ -99,11 +99,10 @@ class WC_Correios {
 	 * @return void
 	 */
 	public function load_plugin_textdomain() {
-		$domain = 'woocommerce-correios';
-		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-correios' );
 
-		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_textdomain( 'woocommerce-correios', trailingslashit( WP_LANG_DIR ) . 'woocommerce-correios/woocommerce-correios-' . $locale . '.mo' );
+		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
