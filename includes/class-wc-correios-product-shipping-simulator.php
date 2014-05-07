@@ -145,12 +145,13 @@ class WC_Correios_Product_Shipping_Simulator {
 		if ( ! empty( $shipping_values ) ) {
 			foreach ( $shipping_values as $code => $shipping ) {
 				if ( isset( $shipping->Erro ) && 0 == $shipping->Erro ) {
-					$date  = isset( $options['display_date'] ) ? $options['display_date'] : 'no';
-					$fee   = isset( $options['fee'] ) ? $options['fee'] : 0;
-					$name  = WC_Correios_Connect::get_service_name( $code );
-					$label = ( 'yes' == $date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega ) : $name;
-					$cost  = str_replace( ',', '.', esc_attr( $shipping->Valor ) );
-					$fee   = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
+					$date     = isset( $options['display_date'] ) ? $options['display_date'] : 'no';
+					$fee      = isset( $options['fee'] ) ? $options['fee'] : 0;
+					$add_time = isset( $options['additional_time'] ) ? $options['additional_time'] : 0;
+					$name     = WC_Correios_Connect::get_service_name( $code );
+					$label    = ( 'yes' == $date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $add_time ) : $name;
+					$cost     = str_replace( ',', '.', esc_attr( $shipping->Valor ) );
+					$fee      = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
 
 					$_rates[] = array(
 						'id'    => $name,
