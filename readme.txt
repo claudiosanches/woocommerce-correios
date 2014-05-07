@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
 Tested up to: 3.9
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 2. Product shipping simulator.
 
 == Changelog ==
+
+= 2.0.1 - 06/05/2014 =
+
+* Correção da soma da opção "Dias adicionais".
 
 = 2.0.0 - 06/05/2014 =
 
