@@ -42,7 +42,7 @@ jQuery( document ).ready( function ( $ ) {
 				button.removeClass( 'loading' );
 
 				if ( 0 < data.error.length ) {
-					content.prepend( '<p>' + data.error + '</p>' );
+					content.prepend( '<p class="error">' + data.error + '</p>' );
 				} else if ( 0 < data.rates.length ) {
 					var shipping = '<ul id="shipping-rates">';
 
@@ -54,12 +54,12 @@ jQuery( document ).ready( function ( $ ) {
 
 					content.prepend( shipping );
 				} else {
-					content.prepend( '<p>' + woocommerce_correios_simulator.error_message + '</p>' );
+					content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 				}
 			},
 			error: function () {
 				button.removeClass( 'loading' );
-				content.prepend( '<p>' + woocommerce_correios_simulator.error_message + '</p>' );
+				content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 			}
 		});
 
