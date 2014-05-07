@@ -58,7 +58,7 @@ class WC_Correios_Product_Shipping_Simulator {
 	public static function simulator() {
 		global $product;
 
-		if ( $product->needs_shipping() && in_array( $product->product_type, array( 'simple', 'variable' ) ) ) {
+		if ( $product->needs_shipping() && $product->is_in_stock() && in_array( $product->product_type, array( 'simple', 'variable' ) ) ) {
 			$options = get_option( 'woocommerce_correios_settings' );
 			$style   = ( 'variable' == $product->product_type ) ? 'display: none' : '';
 
