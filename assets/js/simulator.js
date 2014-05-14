@@ -23,8 +23,7 @@ jQuery( document ).ready( function ( $ ) {
 			button = $( this );
 
 		button.addClass( 'loading' );
-		content.empty();
-
+		
 		$.ajax({
 			type:     'GET',
 			url:      woocommerce_correios_simulator.ajax_url,
@@ -40,6 +39,7 @@ jQuery( document ).ready( function ( $ ) {
 			},
 			success: function ( data ) {
 				button.removeClass( 'loading' );
+				content.empty();
 
 				if ( 0 < data.error.length ) {
 					content.prepend( '<p class="error">' + data.error + '</p>' );
@@ -59,7 +59,7 @@ jQuery( document ).ready( function ( $ ) {
 			},
 			error: function () {
 				button.removeClass( 'loading' );
-				content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
+				content.empty().prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 			}
 		});
 
