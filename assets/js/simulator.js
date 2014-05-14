@@ -23,7 +23,6 @@ jQuery( document ).ready( function ( $ ) {
 			button = $( this );
 
 		button.addClass( 'loading' );
-		content.empty();
 
 		$.ajax({
 			type:     'GET',
@@ -42,7 +41,7 @@ jQuery( document ).ready( function ( $ ) {
 				button.removeClass( 'loading' );
 
 				if ( 0 < data.error.length ) {
-					content.prepend( '<p class="error">' + data.error + '</p>' );
+					content.html( '<p class="error">' + data.error + '</p>' );
 				} else if ( 0 < data.rates.length ) {
 					var shipping = '<ul id="shipping-rates">';
 
@@ -52,14 +51,14 @@ jQuery( document ).ready( function ( $ ) {
 
 					shipping += '</ul>';
 
-					content.prepend( shipping );
+					content.html( shipping );
 				} else {
-					content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
+					content.html( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 				}
 			},
 			error: function () {
 				button.removeClass( 'loading' );
-				content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
+				content.html( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 			}
 		});
 
