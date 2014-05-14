@@ -23,7 +23,7 @@ jQuery( document ).ready( function ( $ ) {
 			button = $( this );
 
 		button.addClass( 'loading' );
-		
+
 		$.ajax({
 			type:     'GET',
 			url:      woocommerce_correios_simulator.ajax_url,
