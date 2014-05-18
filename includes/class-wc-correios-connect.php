@@ -348,11 +348,11 @@ class WC_Correios_Connect {
 	/**
 	 * Gets the service name.
 	 *
-	 * @param  int   $service Correios service ID.
+	 * @param  int   $code Correios service ID.
 	 *
-	 * @return array          Correios service name.
+	 * @return array       Correios service name.
 	 */
-	public static function get_service_name( $service ) {
+	public static function get_service_name( $code ) {
 		$name = array(
 			'41106' => 'PAC',
 			'40010' => 'SEDEX',
@@ -363,11 +363,11 @@ class WC_Correios_Connect {
 			'81019' => 'e-SEDEX',
 		);
 
-		if ( ! isset( $name[ $service ] ) ) {
+		if ( ! isset( $name[ $code ] ) ) {
 			return '';
 		}
 
-		return $name[ $service ];
+		return $name[ $code ];
 	}
 
 	/**
@@ -442,51 +442,52 @@ class WC_Correios_Connect {
 			}
 		}
 
-		foreach ( $this->services as $service ) {
+		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
+			'nCdServico'          => implode( ',', $this->services ),
+			'nCdEmpresa'          => $this->login,
+			'sDsSenha'            => $this->password,
+			'sCepDestino'         => $this->clean_zipcode( $this->zip_destination ),
+			'sCepOrigem'          => $this->clean_zipcode( $this->zip_origin ),
+			'nVlAltura'           => $this->float_to_string( $this->height ),
+			'nVlLargura'          => $this->float_to_string( $this->width ),
+			'nVlDiametro'         => $this->float_to_string( $this->diameter ),
+			'nVlComprimento'      => $this->float_to_string( $this->length ),
+			'nVlPeso'             => $this->float_to_string( $this->weight ),
+			'nCdFormato'          => $this->format,
+			'sCdMaoPropria'       => $this->own_hand,
+			'nVlValorDeclarado'   => $this->declared_value,
+			'sCdAvisoRecebimento' => $this->receipt_notice,
+			'StrRetorno'          => 'xml'
+		) );
 
-			$args = apply_filters( 'woocommerce_correios_shipping_args', array(
-				'nCdServico'          => $service,
-				'nCdEmpresa'          => $this->login,
-				'sDsSenha'            => $this->password,
-				'sCepDestino'         => $this->clean_zipcode( $this->zip_destination ),
-				'sCepOrigem'          => $this->clean_zipcode( $this->zip_origin ),
-				'nVlAltura'           => $this->float_to_string( $this->height ),
-				'nVlLargura'          => $this->float_to_string( $this->width ),
-				'nVlDiametro'         => $this->float_to_string( $this->diameter ),
-				'nVlComprimento'      => $this->float_to_string( $this->length ),
-				'nVlPeso'             => $this->float_to_string( $this->weight ),
-				'nCdFormato'          => $this->format,
-				'sCdMaoPropria'       => $this->own_hand,
-				'nVlValorDeclarado'   => $this->declared_value,
-				'sCdAvisoRecebimento' => $this->receipt_notice,
-				'StrRetorno'          => 'xml'
-			) );
+		$url = add_query_arg( $args, $this->_webservice );
 
-			$url = add_query_arg( $args, $this->_webservice );
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Requesting the Correios WebServices...' );
+		}
 
+		// Gets the WebServices response.
+		$response = wp_remote_get( $url, array( 'sslverify' => false, 'timeout' => 30 ) );
+
+		if ( is_wp_error( $response ) ) {
 			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'Requesting the Correios WebServices...' );
+				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 			}
+		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+			$result = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
 
-			// Gets the WebServices response.
-			$response = wp_remote_get( $url, array( 'sslverify' => false, 'timeout' => 30 ) );
-
-			if ( is_wp_error( $response ) ) {
-				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
-				}
-			} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
-				$result = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
+			foreach ( $result->cServico as $service ) {
+				$code = (string) $service->Codigo;
 
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response [' . self::get_service_name( $service ) . ']: ' . print_r( $result->cServico, true ) );
+					$this->log->add( $this->id, 'Correios WebServices response [' . self::get_service_name( $code ) . ']: ' . print_r( $service, true ) );
 				}
 
-				$values[ $service ] = $result->cServico;
-			} else {
-				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Error accessing the Correios WebServices [' . self::get_service_name( $service ) . ']: ' . $response['response']['code'] . ' - ' . $response['response']['message'] );
-				}
+				$values[ $code ] = $service;
+			}
+		} else {
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . $response['response']['code'] . ' - ' . $response['response']['message'] );
 			}
 		}
 
