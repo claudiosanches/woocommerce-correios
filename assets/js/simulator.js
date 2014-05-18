@@ -38,8 +38,12 @@ jQuery( document ).ready( function ( $ ) {
 				variation_id: $( '.cart input[name="variation_id"]' ).val(),
 				quantity:     $( '.cart input[name="quantity"]' ).val()
 			},
+			beforeSend: function () {
+				button.attr( 'disabled', 'disabled' );
+			},
 			success: function ( data ) {
 				button.removeClass( 'loading' );
+				button.removeAttr( 'disabled' );
 
 				if ( 0 < data.error.length ) {
 					content.prepend( '<p class="error">' + data.error + '</p>' );
@@ -59,6 +63,7 @@ jQuery( document ).ready( function ( $ ) {
 			},
 			error: function () {
 				button.removeClass( 'loading' );
+				button.removeAttr( 'disabled' );
 				content.prepend( '<p class="error">' + woocommerce_correios_simulator.error_message + '</p>' );
 			}
 		});
