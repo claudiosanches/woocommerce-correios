@@ -3,8 +3,8 @@ Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
-Tested up to: 3.9
-Stable tag: 2.0.2
+Tested up to: 3.9.1
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,11 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Changelog ==
 
+= 2.0.3 - 18/05/2014 =
+
+* Melhorada a perfomance na hora de calcular o frete enviando todos os códigos para serem calculados com apenas uma consulta.
+* Melhorado o simulador, agora impede o cliente de clicar várias vezes ao mesmo tempo enquanto esta simulando o frete.
+
 = 2.0.2 - 06/05/2014 =
 
 * Melhoradas as classes do simulador.
@@ -271,9 +276,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 1.6.2 =
+= 2.0.3 =
 
-* Correção no valor declarado que era passado com valor errado para os Correios.
+* Melhorada a perfomance na hora de calcular o frete enviando todos os códigos para serem calculados com apenas uma consulta.
+* Melhorado o simulador, agora impede o cliente de clicar várias vezes ao mesmo tempo enquanto esta simulando o frete.
 
 == License ==
 
