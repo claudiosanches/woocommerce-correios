@@ -7,7 +7,13 @@ jQuery( document ).ready( function ( $ ) {
 	}
 
 	$( 'body' ).on( 'show_variation', function () {
-		$( '#wc-correios-simulator' ).slideDown( 200 );
+		var ids          = $( '#wc-correios-simulator' ).data( 'product-ids' ).toString().split( ',' ),
+			variation_id = $( '.cart input[name="variation_id"]' ).val().toString();
+
+		if ( -1 < $.inArray( variation_id, ids ) ) {
+			$( '#wc-correios-simulator' ).slideDown( 200 );
+		}
+
 		simulatorClean();
 	});
 

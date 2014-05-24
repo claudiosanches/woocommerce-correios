@@ -60,7 +60,20 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		if ( $product->needs_shipping() && $product->is_in_stock() && in_array( $product->product_type, array( 'simple', 'variable' ) ) ) {
 			$options = get_option( 'woocommerce_correios_settings' );
-			$style   = ( 'variable' == $product->product_type ) ? 'display: none' : '';
+			if ( 'variable' == $product->product_type ) {
+				$style = 'display: none';
+				$ids   = array();
+
+				foreach ( $product->children as $variation_id ) {
+					$variation = get_product( $variation_id );
+					$ids[] = ( $variation->needs_shipping() ) ? $variation->variation_id : '';
+				}
+
+				$ids = implode( ',', array_filter( $ids ) );
+			} else {
+				$style = '';
+				$ids   = $product->id;
+			}
 
 			if ( isset( $options['display_date'] ) && 'yes' == $options['display_date'] ) {
 				$title       = __( 'Shipping and delivery time', 'woocommerce-correios' );
@@ -70,7 +83,7 @@ class WC_Correios_Product_Shipping_Simulator {
 				$description = __( 'Calculate shipping estimated to your region.', 'woocommerce-correios' );
 			}
 
-			$html = '<div id="wc-correios-simulator" style="' . $style . '">';
+			$html = '<div id="wc-correios-simulator" style="' . $style . '" data-product-ids="' . $ids . '">';
 			$html .= '<strong>' . $title  . '</strong>';
 			$html .= '<p>' . $description . '</p>';
 			$html .= '<form method="post" class="cart">';
