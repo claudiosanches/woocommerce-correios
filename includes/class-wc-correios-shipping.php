@@ -405,6 +405,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = array() ) {
+		global $woocommerce;
+
 		$rates           = array();
 		$errors          = array();
 		$shipping_values = $this->correios_calculate( $package );
@@ -445,7 +447,16 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				foreach ( $errors as $error ) {
 					if ( '' != $error['error'] ) {
 						$type = ( '010' == $error['number'] ) ? 'notice' : 'error';
-						wc_add_notice( '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . $error['error'], $type );
+						$message = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_attr( $error['error'] );
+						if ( function_exists( 'wc_add_notice' ) ) {
+							wc_add_notice( $message, $type );
+						} else {
+							if ( 'error' == $type ) {
+								$woocommerce->add_error( $message );
+							} else {
+								$woocommerce->add_message( $message );
+							}
+						}
 					}
 				}
 			}
