@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.9.1  
-**Stable tag:** 2.0.3  
+**Stable tag:** 2.0.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -178,6 +178,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.0.4 - 24/05/2014 ###
+
+* Melhorada a compatibilidade com o WooCommerce 2.0.x.
+
 ### 2.0.3 - 18/05/2014 ###
 
 * Melhorada a perfomance na hora de calcular o frete enviando todos os códigos para serem calculados com apenas uma consulta.
@@ -282,10 +286,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.0.3 ###
+### 2.0.4 ###
 
-* Melhorada a perfomance na hora de calcular o frete enviando todos os códigos para serem calculados com apenas uma consulta.
-* Melhorado o simulador, agora impede o cliente de clicar várias vezes ao mesmo tempo enquanto esta simulando o frete.
+* Melhorada a compatibilidade com o WooCommerce 2.0.x.
 
 ## License ##
 
