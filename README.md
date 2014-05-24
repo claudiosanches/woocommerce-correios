@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.9.1  
-**Stable tag:** 2.0.4  
+**Stable tag:** 2.0.5  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -178,6 +178,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.0.5 - 24/05/2014 ###
+
+* Correção da exibição do simulador para produtos virtuais.
+
 ### 2.0.4 - 24/05/2014 ###
 
 * Melhorada a compatibilidade com o WooCommerce 2.0.x.
@@ -286,9 +290,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.0.4 ###
+### 2.0.5 ###
 
 * Melhorada a compatibilidade com o WooCommerce 2.0.x.
+* Correção da exibição do simulador para produtos virtuais.
 
 ## License ##
 

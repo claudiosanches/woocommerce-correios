@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios v2.0.0\n"
+"Project-Id-Version: WooCommerce Correios v2.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-05-06 03:09:15+0000\n"
+"PO-Revision-Date: 2014-05-24 20:19:28+0000\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "claudiosanches, rodrigoprior"
 
 #: includes/class-wc-correios-shipping.php:19
 #: includes/class-wc-correios-shipping.php:106
-#: includes/class-wc-correios-shipping.php:448
+#: includes/class-wc-correios-shipping.php:450
 #@ woocommerce-correios
 msgid "Correios"
 msgstr "Correios"
@@ -384,27 +384,27 @@ msgid "SimpleXML"
 msgstr "SimpleXML"
 
 #: includes/class-wc-correios-product-shipping-simulator.php:48
-#: includes/class-wc-correios-product-shipping-simulator.php:262
+#: includes/class-wc-correios-product-shipping-simulator.php:276
 #@ woocommerce-correios
 msgid "It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value."
 msgstr "Não foi possível calcular o frete, por favor, tente adicionar o produto ao carrinho e prossiga para o pagamento para tentar ver o valor do frete."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:78
+#: includes/class-wc-correios-product-shipping-simulator.php:91
 #@ woocommerce-correios
 msgid "Calculate"
 msgstr "Calcular"
 
-#: includes/class-wc-correios-product-shipping-simulator.php:189
+#: includes/class-wc-correios-product-shipping-simulator.php:203
 #@ woocommerce-correios
 msgid "Error to identify the product."
 msgstr "Erro ao identificar o produto."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:194
+#: includes/class-wc-correios-product-shipping-simulator.php:208
 #@ woocommerce-correios
 msgid "Please enter with your zipcode."
 msgstr "Por favor, informe o seu CEP."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:206
+#: includes/class-wc-correios-product-shipping-simulator.php:220
 #@ woocommerce-correios
 msgid "Invalid product!"
 msgstr "Produto inválido!"
@@ -424,22 +424,22 @@ msgstr "Ativar o simulador de frete"
 msgid "Displays a shipping simulator in the product page."
 msgstr "Exibe um simulador de frete na página do produto."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:66
+#: includes/class-wc-correios-product-shipping-simulator.php:79
 #@ woocommerce-correios
 msgid "Shipping and delivery time"
 msgstr "Frete e prazo de entrega"
 
-#: includes/class-wc-correios-product-shipping-simulator.php:67
+#: includes/class-wc-correios-product-shipping-simulator.php:80
 #@ woocommerce-correios
 msgid "Calculate the shipping and delivery time estimated to your region."
 msgstr "Calcule o valor do frete e o prazo estimado de entrega para a sua região."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:69
+#: includes/class-wc-correios-product-shipping-simulator.php:82
 #@ woocommerce-correios
 msgid "Shipping"
 msgstr "Entrega"
 
-#: includes/class-wc-correios-product-shipping-simulator.php:70
+#: includes/class-wc-correios-product-shipping-simulator.php:83
 #@ woocommerce-correios
 msgid "Calculate shipping estimated to your region."
 msgstr "Calcule o valor do frete estimado para a sua região."
@@ -462,6 +462,6 @@ msgstr "CEP inválido."
 #. translators: plugin header field 'Version'
 #: wc-correios.php:0
 #@ woocommerce-correios
-msgid "2.0.0"
-msgstr "2.0.0"
+msgid "2.0.5"
+msgstr "2.0.5"
 
