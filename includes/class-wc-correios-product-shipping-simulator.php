@@ -64,9 +64,9 @@ class WC_Correios_Product_Shipping_Simulator {
 				$style = 'display: none';
 				$ids   = array();
 
-				foreach ( $product->children as $variation_id ) {
-					$variation = get_product( $variation_id );
-					$ids[] = ( $variation->needs_shipping() ) ? $variation->variation_id : '';
+				foreach ( $product->get_available_variations() as $variation ) {
+					$_variation = get_product( $variation['variation_id'] );
+					$ids[] = ( $_variation->needs_shipping() ) ? $_variation->variation_id : '';
 				}
 
 				$ids = implode( ',', array_filter( $ids ) );
