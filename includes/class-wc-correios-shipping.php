@@ -369,7 +369,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$_package = $connect->set_package( $package );
 		$_package->set_minimum_height( $this->minimum_height );
 		$_package->set_minimum_width( $this->minimum_width );
-		$_package->set_minimum_width( $this->minimum_length );
+		$_package->set_minimum_length( $this->minimum_length );
 		$connect->set_zip_origin( $this->zip_origin );
 		$connect->set_zip_destination( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );

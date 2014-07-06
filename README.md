@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.9.1  
-**Stable tag:** 2.0.6  
+**Stable tag:** 2.0.7  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -178,6 +178,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.0.7 - 05/07/2014 ###
+
+* Pequena correção nos dados antes de passar para fazer o calculo de cubagem.
+
 ### 2.0.6 - 25/05/2014 ###
 
 * Correção do método que pega os produtos variáveis no simulador de frete.
@@ -294,11 +298,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.0.6 ###
+### 2.0.7 ###
 
-* Melhorada a compatibilidade com o WooCommerce 2.0.x.
-* Correção da exibição do simulador para produtos virtuais.
-* Correção do método que pega os produtos variáveis no simulador de frete.
+* Pequena correção nos dados antes de passar para fazer o calculo de cubagem.
 
 ## License ##
 
