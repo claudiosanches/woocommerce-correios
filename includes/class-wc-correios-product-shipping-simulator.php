@@ -83,7 +83,7 @@ class WC_Correios_Product_Shipping_Simulator {
 				$description = __( 'Calculate shipping estimated to your region.', 'woocommerce-correios' );
 			}
 
-			$html = '<div id="wc-correios-simulator" style="' . $style . '" data-product-ids="' . $ids . '">';
+			$html = '<div id="wc-correios-simulator" style="' . $style . '" data-product-ids="' . $ids . '" data-product-type="' . esc_attr( $product->product_type ) . '">';
 			$html .= '<strong>' . $title  . '</strong>';
 			$html .= '<p>' . $description . '</p>';
 			$html .= '<form method="post" class="cart">';

@@ -25,11 +25,19 @@ jQuery( document ).ready( function ( $ ) {
 	$( '#wc-correios-simulator' ).on( 'click', '.button', function ( e ) {
 		e.preventDefault();
 
-		var content = $( '#wc-correios-simulator #simulator-data' ),
-			button = $( this );
+		var simulator  = $( '#wc-correios-simulator' ),
+			content    = $( '#wc-correios-simulator #simulator-data' ),
+			button     = $( this ),
+			type       = simulator.data( 'product-type' ),
+			product_id = $( '.cart input[name="add-to-cart"]' ).val();
 
 		button.addClass( 'loading' );
 		content.empty();
+
+		// Support for old templates.
+		if ( 'simple' === type && ! product_id ) {
+			product_id = simulator.data( 'product-ids' );
+		}
 
 		$.ajax({
 			type:     'GET',
@@ -40,7 +48,7 @@ jQuery( document ).ready( function ( $ ) {
 				action:       'wc_correios_simulator',
 				security:     woocommerce_correios_simulator.security,
 				zipcode:      $( '#wc-correios-simulator #zipcode' ).val(),
-				product_id:   $( '.cart input[name="add-to-cart"]' ).val(),
+				product_id:   product_id,
 				variation_id: $( '.cart input[name="variation_id"]' ).val(),
 				quantity:     $( '.cart input[name="quantity"]' ).val()
 			},
