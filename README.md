@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.9.1  
-**Stable tag:** 2.0.7  
+**Stable tag:** 2.0.8  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -178,6 +178,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.0.8 - 02/08/2014 ###
+
+* Adicionado suporte para templates antigos no simulador.
+
 ### 2.0.7 - 05/07/2014 ###
 
 * Pequena correção nos dados antes de passar para fazer o calculo de cubagem.
@@ -298,9 +302,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.0.7 ###
+### 2.0.8 ###
 
-* Pequena correção nos dados antes de passar para fazer o calculo de cubagem.
+* Adicionado suporte para templates antigos no simulador.
 
 ## License ##
 
