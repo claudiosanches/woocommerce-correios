@@ -53,11 +53,7 @@ class WC_Correios {
 		if ( class_exists( 'SimpleXmlElement' ) ) {
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
-				include_once 'includes/class-wc-correios-error.php';
-				include_once 'includes/class-wc-correios-package.php';
-				include_once 'includes/class-wc-correios-connect.php';
-				include_once 'includes/class-wc-correios-shipping.php';
-				include_once 'includes/class-wc-correios-product-shipping-simulator.php';
+				$this->includes();
 
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
 				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
@@ -103,6 +99,20 @@ class WC_Correios {
 
 		load_textdomain( 'woocommerce-correios', trailingslashit( WP_LANG_DIR ) . 'woocommerce-correios/woocommerce-correios-' . $locale . '.mo' );
 		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	}
+
+	/**
+	 * Includes.
+	 *
+	 * @return void.
+	 */
+	private function includes() {
+		include_once 'includes/class-wc-correios-error.php';
+		include_once 'includes/class-wc-correios-package.php';
+		include_once 'includes/class-wc-correios-connect.php';
+		include_once 'includes/class-wc-correios-shipping.php';
+		include_once 'includes/class-wc-correios-product-shipping-simulator.php';
+		include_once 'includes/class-wc-correios-emails.php';
 	}
 
 	/**
