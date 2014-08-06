@@ -21,14 +21,11 @@ class WC_Email_Correios_Tracking extends WC_Email {
 		$this->template_html  = 'emails/correios-tracking-code.php';
 		$this->template_plain = 'emails/plain/correios-tracking-code.php';
 
-		// Triggers for this email.
-		add_action( 'woocommerce_correios_tracking_code_notification', array( $this, 'trigger' ) );
-
 		// Call parent constructor.
 		parent::__construct();
 
 		// Other settings.
-		$this->template_base = plugin_dir_path( dirname( __FILE__ ) );
+		$this->template_base = plugin_dir_path( dirname( __FILE__ ) ) . 'views/';
 	}
 
 	/**
@@ -70,11 +67,13 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	/**
 	 * Trigger email.
 	 *
+	 * @param  WC_Order $order         Order data.
+	 * @param  string   $tracking_code Tracking code.
+	 *
 	 * @return void
 	 */
-	public function trigger( $order_id ) {
-		if ( $order_id ) {
-			$order           = new WC_Order( $order_id );
+	public function trigger( $order, $tracking_code ) {
+		if ( is_object( $order ) ) {
 			$this->recipient = $order->billing_email;
 
 			$this->find[]    = '{order_number}';
@@ -84,7 +83,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			$this->replace[] = date_i18n( woocommerce_date_format(), time() );
 
 			$this->find[]    = '{tracking_code}';
-			$this->replace[] = get_post_meta( $order_id, 'correios_tracking', true );
+			$this->replace[] = $tracking_code;
 		}
 
 		if ( ! $this->get_recipient() ) {
@@ -106,7 +105,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => false
-		), 'views/', $this->template_base );
+		), 'templates/emails/', $this->template_base );
 
 		return ob_get_clean();
 	}
@@ -123,7 +122,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => true
-		), 'views/', $this->template_base );
+		), 'templates/emails/', $this->template_base );
 
 		return ob_get_clean();
 	}

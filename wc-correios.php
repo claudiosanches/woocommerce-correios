@@ -113,6 +113,7 @@ class WC_Correios {
 		include_once 'includes/class-wc-correios-shipping.php';
 		include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 		include_once 'includes/class-wc-correios-emails.php';
+		include_once 'includes/class-wc-correios-orders.php';
 	}
 
 	/**
@@ -148,14 +149,5 @@ class WC_Correios {
 }
 
 add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ), 0 );
-
-/**
- * Plugin admin.
- */
-if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-	require_once 'includes/class-wc-correios-admin.php';
-
-	add_action( 'plugins_loaded', array( 'WC_Correios_Admin', 'get_instance' ) );
-}
 
 endif;
