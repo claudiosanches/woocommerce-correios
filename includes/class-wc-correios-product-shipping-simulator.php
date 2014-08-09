@@ -44,7 +44,6 @@ class WC_Correios_Product_Shipping_Simulator {
 			'woocommerce_correios_simulator',
 			array(
 				'ajax_url'      => admin_url( 'admin-ajax.php' ),
-				'security'      => wp_create_nonce( 'woocommerce_correios_simulator' ),
 				'error_message' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' )
 			)
 		);
@@ -196,7 +195,6 @@ class WC_Correios_Product_Shipping_Simulator {
 	 * @return string
 	 */
 	public static function ajax_simulator() {
-		check_ajax_referer( 'woocommerce_correios_simulator', 'security' );
 
 		// Validate the data.
 		if ( ! isset( $_GET['product_id'] ) || empty( $_GET['product_id'] ) ) {
