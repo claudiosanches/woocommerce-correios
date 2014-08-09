@@ -93,7 +93,7 @@ class WC_Correios_Product_Shipping_Simulator {
 			$html .= '</form>';
 			$html .= '</div>';
 
-			echo $html;
+			echo apply_filters( 'woocommerce_correios_simulator_output_html', $html );
 		}
 	}
 
