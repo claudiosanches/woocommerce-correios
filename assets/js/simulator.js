@@ -1,6 +1,10 @@
 /* global woocommerce_correios_simulator */
 jQuery( document ).ready( function ( $ ) {
 
+   $( '#zipcode' ).click(function () {
+		$('#zipcode').mask('99999-999');
+	});
+	   
 	function simulatorClean() {
 		$( '#wc-correios-simulator #simulator-data' ).empty();
 		$( '#wc-correios-simulator #zipcode' ).val( '' );
