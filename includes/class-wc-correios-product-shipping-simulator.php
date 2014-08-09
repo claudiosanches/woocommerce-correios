@@ -47,6 +47,7 @@ class WC_Correios_Product_Shipping_Simulator {
 				'error_message' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' )
 			)
 		);
+		wp_enqueue_script( 'correios-jquery-mask', plugins_url( 'assets/js/jquery.maskedinput.min.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
 	}
 
 	/**
