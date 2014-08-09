@@ -12,20 +12,28 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	 * Initialize tracking template.
 	 */
 	public function __construct() {
-		$this->id             = 'correios_tracking';
-		$this->title          = __( 'Correios Tracking Code', 'woocommerce-correios' );
-		$this->enabled        = 'yes';
-		$this->description    = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
-		$this->heading        = __( 'Your the Correios tracking code', 'woocommerce-correios' );
-		$this->subject        = __( '[{blogname}] Your tracking code from order {order_number} at the Correios', 'woocommerce-correios' );
-		$this->template_html  = 'emails/correios-tracking-code.php';
-		$this->template_plain = 'emails/plain/correios-tracking-code.php';
+		$this->id               = 'correios_tracking';
+		$this->title            = __( 'Correios Tracking Code', 'woocommerce-correios' );
+		$this->enabled          = 'yes';
+		$this->description      = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
+		$this->heading          = __( 'Your order has been sent', 'woocommerce-correios' );
+		$this->subject          = __( '[{blogname}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
+		$this->message          = __( 'Hi there. Your recent order on {blogname} has been sent by Correios.', 'woocommerce-correios' )
+									. PHP_EOL . PHP_EOL
+									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
+									. PHP_EOL . PHP_EOL
+									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' )
+									. PHP_EOL . PHP_EOL
+									. __( 'Your order details are shown below for your reference:', 'woocommerce-correios' );
+		$this->tracking_message = $this->get_option( 'text', $this->message );
+		$this->template_html    = 'emails/correios-tracking-code.php';
+		$this->template_plain   = 'emails/plain/correios-tracking-code.php';
 
 		// Call parent constructor.
 		parent::__construct();
 
 		// Other settings.
-		$this->template_base = plugin_dir_path( dirname( __FILE__ ) ) . 'views/';
+		$this->template_base = plugin_dir_path( dirname( dirname( __FILE__ ) ) ) . 'templates/';
 	}
 
 	/**
@@ -45,7 +53,14 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'heading' => array(
 				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
 				'type'        => 'text',
-				'description' => sprintf( __( 'This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
+				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
+				'placeholder' => '',
+				'default'     => ''
+			),
+			'tracking_message' => array(
+				'title'       => __( 'Email Content', 'woocommerce-correios' ),
+				'type'        => 'textarea',
+				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
 				'placeholder' => '',
 				'default'     => ''
 			),
@@ -74,16 +89,17 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	 */
 	public function trigger( $order, $tracking_code ) {
 		if ( is_object( $order ) ) {
-			$this->recipient = $order->billing_email;
+			$this->object    = $order;
+			$this->recipient = $this->object->billing_email;
 
 			$this->find[]    = '{order_number}';
-			$this->replace[] = $order->get_order_number();
+			$this->replace[] = $this->object->get_order_number();
 
 			$this->find[]    = '{date}';
 			$this->replace[] = date_i18n( woocommerce_date_format(), time() );
 
 			$this->find[]    = '{tracking_code}';
-			$this->replace[] = $tracking_code;
+			$this->replace[] = $this->get_tracking_code_url( $tracking_code );
 		}
 
 		if ( ! $this->get_recipient() ) {
@@ -91,6 +107,26 @@ class WC_Email_Correios_Tracking extends WC_Email {
 		}
 
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+	}
+
+	/**
+	 * Get email tracking message.
+	 *
+	 * @return string
+	 */
+	public function get_tracking_message() {
+		return apply_filters( 'woocommerce_correios_email_tracking_message', $this->format_string( $this->tracking_message ), $this->object );
+	}
+
+	/**
+	 * Get tracking code url.
+	 *
+	 * @param  string $tracking_code
+	 *
+	 * @return string
+	 */
+	public function get_tracking_code_url( $tracking_code ) {
+		return apply_filters( 'woocommerce_correios_email_tracking_core_url', sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code ), $tracking_code, $this->object );
 	}
 
 	/**
@@ -102,9 +138,11 @@ class WC_Email_Correios_Tracking extends WC_Email {
 		ob_start();
 
 		woocommerce_get_template( $this->template_html, array(
-			'email_heading' => $this->get_heading(),
-			'sent_to_admin' => false,
-			'plain_text'    => false
+			'order'            => $this->object,
+			'email_heading'    => $this->get_heading(),
+			'tracking_message' => $this->get_tracking_message(),
+			'sent_to_admin'    => false,
+			'plain_text'       => false
 		), 'templates/emails/', $this->template_base );
 
 		return ob_get_clean();
@@ -119,9 +157,11 @@ class WC_Email_Correios_Tracking extends WC_Email {
 		ob_start();
 
 		woocommerce_get_template( $this->template_plain, array(
-			'email_heading' => $this->get_heading(),
-			'sent_to_admin' => false,
-			'plain_text'    => true
+			'order'            => $this->object,
+			'email_heading'    => $this->get_heading(),
+			'tracking_message' => $this->get_tracking_message(),
+			'sent_to_admin'    => false,
+			'plain_text'       => true
 		), 'templates/emails/', $this->template_base );
 
 		return ob_get_clean();
