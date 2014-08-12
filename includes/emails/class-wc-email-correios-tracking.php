@@ -22,9 +22,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 									. PHP_EOL . PHP_EOL
 									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
 									. PHP_EOL . PHP_EOL
-									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' )
-									. PHP_EOL . PHP_EOL
-									. __( 'Your order details are shown below for your reference:', 'woocommerce-correios' );
+									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
 		$this->tracking_message = $this->get_option( 'text', $this->message );
 		$this->template_html    = 'emails/correios-tracking-code.php';
 		$this->template_plain   = 'emails/plain/correios-tracking-code.php';

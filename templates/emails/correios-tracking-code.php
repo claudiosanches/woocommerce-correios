@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php echo wptexturize( wpautop( $tracking_message ) ); ?>
 
+<p><?php _e( 'Your order details are shown below for your reference:', 'woocommerce-correios' ); ?></p>
+
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); ?>
 
 <h2><?php echo __( 'Order:', 'woocommerce-correios' ) . ' ' . $order->get_order_number(); ?></h2>
