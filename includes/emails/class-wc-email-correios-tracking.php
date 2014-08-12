@@ -138,7 +138,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
 			'plain_text'       => false
-		), 'templates/emails/', WC_Correios::get_templates_path() );
+		), '', WC_Correios::get_templates_path() );
 
 		return ob_get_clean();
 	}
@@ -157,7 +157,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
 			'plain_text'       => true
-		), 'templates/emails/', WC_Correios::get_templates_path() );
+		), '', WC_Correios::get_templates_path() );
 
 		return ob_get_clean();
 	}
