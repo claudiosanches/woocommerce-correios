@@ -1,4 +1,12 @@
 <?php
+/**
+ * Tracking code plain email notification.
+ *
+ * @author  Claudio_Sanches
+ * @package WooCommerce_Correios/Templates
+ * @version 2.1.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
