@@ -281,8 +281,10 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function admin_options() {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		// Call the admin scripts.
-		wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
+		wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
 
 		echo '<h3>' . $this->method_title . '</h3>';
 		echo '<p>' . $this->method_description . '</p>';

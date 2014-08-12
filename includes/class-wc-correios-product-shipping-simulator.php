@@ -31,8 +31,10 @@ class WC_Correios_Product_Shipping_Simulator {
 			self::$activated = isset( $options['simulator'] ) && 'yes' == $options['simulator'] && 'yes' == $options['enabled'];
 
 			if ( self::$activated ) {
-				wp_enqueue_style( 'woocommerce-correios-simulator', plugins_url( 'assets/css/simulator.css', plugin_dir_path( __FILE__ ) ), array(), WC_Correios::VERSION, 'all' );
-				wp_enqueue_script( 'woocommerce-correios-simulator', plugins_url( 'assets/js/simulator.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
+				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+				wp_enqueue_style( 'woocommerce-correios-simulator', plugins_url( 'assets/css/simulator' . $suffix . '.css', plugin_dir_path( __FILE__ ) ), array(), WC_Correios::VERSION, 'all' );
+				wp_enqueue_script( 'woocommerce-correios-simulator', plugins_url( 'assets/js/simulator' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
 				wp_localize_script(
 					'woocommerce-correios-simulator',
 					'woocommerce_correios_simulator',

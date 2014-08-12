@@ -235,7 +235,8 @@ module.exports = function( grunt ) {
 	// Register tasks
 	grunt.registerTask( 'default', [
 		'jshint',
-		'uglify'
+		'uglify',
+		'cssmin'
 	]);
 
 	// Deploy task
