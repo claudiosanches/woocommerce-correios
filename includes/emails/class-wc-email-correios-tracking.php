@@ -29,9 +29,6 @@ class WC_Email_Correios_Tracking extends WC_Email {
 
 		// Call parent constructor.
 		parent::__construct();
-
-		// Other settings.
-		$this->template_base = plugin_dir_path( dirname( dirname( __FILE__ ) ) ) . 'templates/';
 	}
 
 	/**
@@ -141,7 +138,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
 			'plain_text'       => false
-		), 'templates/emails/', $this->template_base );
+		), 'templates/emails/', WC_Correios::get_templates_path() );
 
 		return ob_get_clean();
 	}
@@ -160,7 +157,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
 			'plain_text'       => true
-		), 'templates/emails/', $this->template_base );
+		), 'templates/emails/', WC_Correios::get_templates_path() );
 
 		return ob_get_clean();
 	}
