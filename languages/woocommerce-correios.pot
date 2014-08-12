@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Correios 2.1.0\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/woocommerce-correios/\n"
-"POT-Creation-Date: 2014-08-12 02:35:25+00:00\n"
+"POT-Creation-Date: 2014-08-12 04:05:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: includes/class-wc-correios-orders.php:151
 #: includes/class-wc-correios-shipping.php:19
 #: includes/class-wc-correios-shipping.php:106
-#: includes/class-wc-correios-shipping.php:450
+#: includes/class-wc-correios-shipping.php:452
 msgid "Correios"
 msgstr ""
 
@@ -51,42 +51,38 @@ msgstr ""
 msgid "Your the tracking code: %s."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:47
-#: includes/class-wc-correios-product-shipping-simulator.php:274
+#: includes/class-wc-correios-product-shipping-simulator.php:43
+#: includes/class-wc-correios-product-shipping-simulator.php:270
 msgid ""
 "It was not possible to simulate the shipping, please try adding the product "
 "to cart and proceed to try to get the value."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:78
+#: includes/class-wc-correios-product-shipping-simulator.php:80
 msgid "Shipping and delivery time"
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:79
+#: includes/class-wc-correios-product-shipping-simulator.php:81
 msgid "Calculate the shipping and delivery time estimated to your region."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:81
+#: includes/class-wc-correios-product-shipping-simulator.php:83
 msgid "Shipping"
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:82
+#: includes/class-wc-correios-product-shipping-simulator.php:84
 msgid "Calculate shipping estimated to your region."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:90
-msgid "Calculate"
-msgstr ""
-
-#: includes/class-wc-correios-product-shipping-simulator.php:201
+#: includes/class-wc-correios-product-shipping-simulator.php:198
 msgid "Error to identify the product."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:206
+#: includes/class-wc-correios-product-shipping-simulator.php:202
 msgid "Please enter with your zipcode."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:218
+#: includes/class-wc-correios-product-shipping-simulator.php:213
 msgid "Invalid product!"
 msgstr ""
 
@@ -346,115 +342,120 @@ msgid ""
 "any questions, please contact us."
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:27
-msgid "Your order details are shown below for your reference:"
-msgstr ""
-
-#: includes/emails/class-wc-email-correios-tracking.php:47
+#: includes/emails/class-wc-email-correios-tracking.php:42
 msgid "Subject"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:49
+#: includes/emails/class-wc-email-correios-tracking.php:44
 msgid ""
 "This controls the email subject line. Leave blank to use the default "
 "subject: <code>%s</code>."
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:54
+#: includes/emails/class-wc-email-correios-tracking.php:49
 msgid "Email Heading"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:56
+#: includes/emails/class-wc-email-correios-tracking.php:51
 msgid ""
 "This controls the main heading contained within the email. Leave blank to "
 "use the default heading: <code>%s</code>."
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:61
+#: includes/emails/class-wc-email-correios-tracking.php:56
 msgid "Email Content"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:63
+#: includes/emails/class-wc-email-correios-tracking.php:58
 msgid ""
 "This controls the initial content of the email. Leave blank to use the "
 "default content: <code>%s</code>."
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:68
+#: includes/emails/class-wc-email-correios-tracking.php:63
 msgid "Email type"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:70
+#: includes/emails/class-wc-email-correios-tracking.php:65
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:74
+#: includes/emails/class-wc-email-correios-tracking.php:69
 msgid "Plain text"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:75
+#: includes/emails/class-wc-email-correios-tracking.php:70
 msgid "HTML"
 msgstr ""
 
-#: includes/emails/class-wc-email-correios-tracking.php:76
+#: includes/emails/class-wc-email-correios-tracking.php:71
 msgid "Multipart"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:13
+#: templates/emails/correios-tracking-code.php:19
+#: templates/emails/plain/correios-tracking-code.php:18
+msgid "Your order details are shown below for your reference:"
+msgstr ""
+
+#: templates/emails/correios-tracking-code.php:23
 msgid "Order:"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:18
+#: templates/emails/correios-tracking-code.php:28
 msgid "Product"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:19
+#: templates/emails/correios-tracking-code.php:29
 msgid "Quantity"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:20
+#: templates/emails/correios-tracking-code.php:30
 msgid "Price"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:48
+#: templates/emails/correios-tracking-code.php:58
 msgid "Customer details"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:51
-#: templates/emails/plain/correios-tracking-code.php:36
+#: templates/emails/correios-tracking-code.php:61
+#: templates/emails/plain/correios-tracking-code.php:46
 msgid "Email:"
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:55
-#: templates/emails/plain/correios-tracking-code.php:40
+#: templates/emails/correios-tracking-code.php:65
+#: templates/emails/plain/correios-tracking-code.php:50
 msgid "Tel:"
 msgstr ""
 
-#: templates/emails/plain/correios-tracking-code.php:14
+#: templates/emails/plain/correios-tracking-code.php:24
 msgid "Order number: %s"
 msgstr ""
 
-#: templates/emails/plain/correios-tracking-code.php:15
+#: templates/emails/plain/correios-tracking-code.php:25
 msgid "Order date: %s"
 msgstr ""
 
-#: templates/emails/plain/correios-tracking-code.php:33
+#: templates/emails/plain/correios-tracking-code.php:43
 msgid "Your details"
 msgstr ""
 
-#: wc-correios.php:138
+#: templates/single-product/correios-simulator.php:22
+msgid "Calculate"
+msgstr ""
+
+#: woocommerce-correios.php:147
 msgid "WooCommerce Correios depends on the last version of %s to work!"
 msgstr ""
 
-#: wc-correios.php:138
+#: woocommerce-correios.php:147
 msgid "WooCommerce"
 msgstr ""
 
-#: wc-correios.php:147
+#: woocommerce-correios.php:156
 msgid "WooCommerce Correios depends to %s to work!"
 msgstr ""
 
-#: wc-correios.php:147
+#: woocommerce-correios.php:156
 msgid "SimpleXML"
 msgstr ""
 
