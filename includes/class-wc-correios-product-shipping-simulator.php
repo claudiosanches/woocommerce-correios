@@ -82,18 +82,13 @@ class WC_Correios_Product_Shipping_Simulator {
 				$description = __( 'Calculate shipping estimated to your region.', 'woocommerce-correios' );
 			}
 
-			$html = '<div id="wc-correios-simulator" style="' . $style . '" data-product-ids="' . $ids . '" data-product-type="' . esc_attr( $product->product_type ) . '">';
-			$html .= '<strong>' . $title  . '</strong>';
-			$html .= '<p>' . $description . '</p>';
-			$html .= '<form method="post" class="cart">';
-			$html .= '<input type="text" size="9" class="input-text text" placeholder="00000-000" id="zipcode" name="zipcode" />';
-			$html .= '<button class="button" type="submit">' . __( 'Calculate', 'woocommerce-correios' ) .'</button>';
-			$html .= '<br class="clear" />';
-			$html .= '<div id="simulator-data"></div>';
-			$html .= '</form>';
-			$html .= '</div>';
-
-			echo $html;
+			woocommerce_get_template( 'single-product/correios-simulator.php', array(
+				'product'     => $product,
+				'style'       => $style,
+				'ids'         => $ids,
+				'title'       => $title,
+				'description' => $description,
+			), 'templates/single-product/', WC_Correios::get_templates_path() );
 		}
 	}
 
