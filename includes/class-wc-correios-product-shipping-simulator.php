@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -7,28 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Product_Shipping_Simulator {
 
 	/**
+	 * Simulator is activated.
+	 *
+	 * @var bool
+	 */
+	private static $activated = false;
+
+	/**
 	 * Shipping simulator actions.
 	 */
 	public function __construct() {
-		if ( ! is_admin() ) {
-			add_action( 'get_header', array( $this, 'init' ) );
-		}
-	}
-
-	/**
-	 * Initialize the shipping simulator.
-	 *
-	 * @return void
-	 */
-	public function init() {
-		if ( is_product() ) {
-			$options = get_option( 'woocommerce_correios_settings' );
-
-			if ( isset( $options['simulator'] ) && 'yes' == $options['simulator'] ) {
-				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'simulator' ), 45 );
-				add_action( 'wp_enqueue_scripts', array( $this, 'scritps' ) );
-			}
-		}
+		add_action( 'wp_enqueue_scripts', array( $this, 'scritps' ) );
+		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'simulator' ), 45 );
 	}
 
 	/**
@@ -37,16 +26,23 @@ class WC_Correios_Product_Shipping_Simulator {
 	 * @return void
 	 */
 	public function scritps() {
-		wp_enqueue_style( 'woocommerce-correios-simulator', plugins_url( 'assets/css/simulator.css', plugin_dir_path( __FILE__ ) ), array(), WC_Correios::VERSION, 'all' );
-		wp_enqueue_script( 'woocommerce-correios-simulator', plugins_url( 'assets/js/simulator.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
-		wp_localize_script(
-			'woocommerce-correios-simulator',
-			'woocommerce_correios_simulator',
-			array(
-				'ajax_url'      => admin_url( 'admin-ajax.php' ),
-				'error_message' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' )
-			)
-		);
+		if ( is_product() ) {
+			$options         = get_option( 'woocommerce_correios_settings' );
+			self::$activated = isset( $options['simulator'] ) && 'yes' == $options['simulator'] && 'yes' == $options['enabled'];
+
+			if ( self::$activated ) {
+				wp_enqueue_style( 'woocommerce-correios-simulator', plugins_url( 'assets/css/simulator.css', plugin_dir_path( __FILE__ ) ), array(), WC_Correios::VERSION, 'all' );
+				wp_enqueue_script( 'woocommerce-correios-simulator', plugins_url( 'assets/js/simulator.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
+				wp_localize_script(
+					'woocommerce-correios-simulator',
+					'woocommerce_correios_simulator',
+					array(
+						'ajax_url'      => admin_url( 'admin-ajax.php' ),
+						'error_message' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' )
+					)
+				);
+			}
+		}
 	}
 
 	/**
@@ -56,6 +52,10 @@ class WC_Correios_Product_Shipping_Simulator {
 	 */
 	public static function simulator() {
 		global $product;
+
+		if ( ! is_product() || ! self::$activated ) {
+			return;
+		}
 
 		if ( $product->needs_shipping() && $product->is_in_stock() && in_array( $product->product_type, array( 'simple', 'variable' ) ) ) {
 			$options = get_option( 'woocommerce_correios_settings' );
@@ -88,7 +88,7 @@ class WC_Correios_Product_Shipping_Simulator {
 				'ids'         => $ids,
 				'title'       => $title,
 				'description' => $description,
-			), 'templates/single-product/', WC_Correios::get_templates_path() );
+			), '', WC_Correios::get_templates_path() );
 		}
 	}
 
@@ -193,13 +193,11 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		// Validate the data.
 		if ( ! isset( $_GET['product_id'] ) || empty( $_GET['product_id'] ) ) {
-			echo json_encode( array( 'error' => __( 'Error to identify the product.', 'woocommerce-correios' ), 'rates' => '' ) );
-			die();
+			wp_send_json( array( 'error' => __( 'Error to identify the product.', 'woocommerce-correios' ), 'rates' => '' ) );
 		}
 
 		if ( ! isset( $_GET['zipcode'] ) || empty( $_GET['zipcode'] ) ) {
-			echo json_encode( array( 'error' => __( 'Please enter with your zipcode.', 'woocommerce-correios' ), 'rates' => '' ) );
-			die();
+			wp_send_json( array( 'error' => __( 'Please enter with your zipcode.', 'woocommerce-correios' ), 'rates' => '' ) );
 		}
 
 		// Get the product data.
@@ -210,8 +208,7 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		// Test with the product exist.
 		if ( ! $product ) {
-			echo json_encode( array( 'error' => __( 'Invalid product!', 'woocommerce-correios' ), 'rates' => '' ) );
-			die();
+			wp_send_json( array( 'error' => __( 'Invalid product!', 'woocommerce-correios' ), 'rates' => '' ) );
 		}
 
 		// Set the shipping params.
@@ -261,17 +258,15 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		$shipping = $connect->get_shipping();
 
+		// Send shipping rates.
 		if ( ! empty( $shipping ) ) {
 			$_shipping = self::get_the_shipping( $shipping, $options, $package );
-			echo json_encode( array( 'error' => '', 'rates' => $_shipping ) );
-			die();
-		} else {
-			echo array( 'error' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' ), 'rates' => '' );
-			die();
+			wp_send_json( array( 'error' => '', 'rates' => $_shipping ) );
 		}
 
-		die();
+		// Error.
+		wp_send_json( array( 'error' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' ), 'rates' => '' ) );
 	}
 }
 
-return new WC_Correios_Product_Shipping_Simulator;
+new WC_Correios_Product_Shipping_Simulator();
