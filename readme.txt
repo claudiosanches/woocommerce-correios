@@ -3,8 +3,8 @@ Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
-Tested up to: 3.9.1
-Stable tag: 2.0.8
+Tested up to: 3.9.2
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,11 +166,24 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Screenshots ==
 
-1. Settings page.
-2. Checkout page.
-2. Product shipping simulator.
+1. Configurações do plugin.
+2. Seleção de frete na finalização do pedido.
+3. Simulador de frete na página do produto.
+4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido)
+5. Opções para personalizar os e-mails do código de rastreamento.
+6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end.
 
 == Changelog ==
+
+= 2.1.0 - 13/08/2014 =
+
+* Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
+* Adicionado suporte para a API de templates do WooCommerce para personalizar os templates de e-mails e do simulador de frete.
+* Adicionado o filtro `woocommerce_correios_webservice_url` para tornar possível personalizar o link do WebService.
+* Adicionada versões comprimidas dos arquivos de CSS e JavaScript do plugin.
+* Melhorado o script que exibe e oculta os campos das opções do plugin.
+* Corrigida a exibição do link do código de rastreamento dentro de cada pedido em "Minha Conta".
+* Corrigido o simulador de produtos que tinha problemas com páginas com cache.
 
 = 2.0.8 - 02/08/2014 =
 
@@ -296,9 +309,15 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.0.8 =
+= 2.1.0 =
 
-* Adicionado suporte para templates antigos no simulador.
+* Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
+* Adicionado suporte para a API de templates do WooCommerce para personalizar os templates de e-mails e do simulador de frete.
+* Adicionado o filtro `woocommerce_correios_webservice_url` para tornar possível personalizar o link do WebService.
+* Adicionada versões comprimidas dos arquivos de CSS e JavaScript do plugin.
+* Melhorado o script que exibe e oculta os campos das opções do plugin.
+* Corrigida a exibição do link do código de rastreamento dentro de cada pedido em "Minha Conta".
+* Corrigido o simulador de produtos que tinha problemas com páginas com cache.
 
 == License ==
 
