@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
 **Tested up to:** 3.9.2  
-**Stable tag:** 2.1.0  
+**Stable tag:** 2.1.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -187,6 +187,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.1.1 - 14/08/2014 ###
+
+* Corrigida a opção que manipula o conteúdo do e-mail sobre o código de rastreamento.
+
 ### 2.1.0 - 13/08/2014 ###
 
 * Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
@@ -321,7 +325,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.1.0 ###
+### 2.1.1 ###
 
 * Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
 * Adicionado suporte para a API de templates do WooCommerce para personalizar os templates de e-mails e do simulador de frete.
@@ -330,6 +334,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 * Melhorado o script que exibe e oculta os campos das opções do plugin.
 * Corrigida a exibição do link do código de rastreamento dentro de cada pedido em "Minha Conta".
 * Corrigido o simulador de produtos que tinha problemas com páginas com cache.
+* Corrigida a opção que manipula o conteúdo do e-mail sobre o código de rastreamento.
 
 ## License ##
 
