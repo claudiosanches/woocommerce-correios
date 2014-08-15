@@ -23,7 +23,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
 									. PHP_EOL . PHP_EOL
 									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
-		$this->tracking_message = $this->get_option( 'text', $this->message );
+		$this->tracking_message = $this->get_option( 'tracking_message', $this->message );
 		$this->template_html    = 'emails/correios-tracking-code.php';
 		$this->template_plain   = 'emails/plain/correios-tracking-code.php';
 
@@ -77,6 +77,26 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	}
 
 	/**
+	 * Get email tracking message.
+	 *
+	 * @return string
+	 */
+	public function get_tracking_message() {
+		return apply_filters( 'woocommerce_correios_email_tracking_message', $this->format_string( $this->tracking_message ), $this->object );
+	}
+
+	/**
+	 * Get tracking code url.
+	 *
+	 * @param  string $tracking_code
+	 *
+	 * @return string
+	 */
+	public function get_tracking_code_url( $tracking_code ) {
+		return apply_filters( 'woocommerce_correios_email_tracking_core_url', sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code ), $tracking_code, $this->object );
+	}
+
+	/**
 	 * Trigger email.
 	 *
 	 * @param  WC_Order $order         Order data.
@@ -104,26 +124,6 @@ class WC_Email_Correios_Tracking extends WC_Email {
 		}
 
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-	}
-
-	/**
-	 * Get email tracking message.
-	 *
-	 * @return string
-	 */
-	public function get_tracking_message() {
-		return apply_filters( 'woocommerce_correios_email_tracking_message', $this->format_string( $this->tracking_message ), $this->object );
-	}
-
-	/**
-	 * Get tracking code url.
-	 *
-	 * @param  string $tracking_code
-	 *
-	 * @return string
-	 */
-	public function get_tracking_code_url( $tracking_code ) {
-		return apply_filters( 'woocommerce_correios_email_tracking_core_url', sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code ), $tracking_code, $this->object );
 	}
 
 	/**
