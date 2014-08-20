@@ -38,28 +38,29 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->enabled            = $this->get_option( 'enabled' );
-		$this->title              = $this->get_option( 'title' );
-		$this->declare_value      = $this->get_option( 'declare_value' );
-		$this->display_date       = $this->get_option( 'display_date' );
-		$this->additional_time    = $this->get_option( 'additional_time' );
-		$this->availability       = $this->get_option( 'availability' );
-		$this->fee                = $this->get_option( 'fee' );
-		$this->zip_origin         = $this->get_option( 'zip_origin' );
-		$this->countries          = $this->get_option( 'countries' );
-		$this->simulator          = $this->get_option( 'simulator', 'no' );
-		$this->corporate_service  = $this->get_option( 'corporate_service' );
-		$this->login              = $this->get_option( 'login' );
-		$this->password           = $this->get_option( 'password' );
-		$this->service_pac        = $this->get_option( 'service_pac' );
-		$this->service_sedex      = $this->get_option( 'service_sedex' );
-		$this->service_sedex_10   = $this->get_option( 'service_sedex_10' );
-		$this->service_sedex_hoje = $this->get_option( 'service_sedex_hoje' );
-		$this->service_esedex     = $this->get_option( 'service_esedex' );
-		$this->minimum_height     = $this->get_option( 'minimum_height' );
-		$this->minimum_width      = $this->get_option( 'minimum_width' );
-		$this->minimum_length     = $this->get_option( 'minimum_length' );
-		$this->debug              = $this->get_option( 'debug' );
+		$this->enabled               = $this->get_option( 'enabled' );
+		$this->title                 = $this->get_option( 'title' );
+		$this->declare_value         = $this->get_option( 'declare_value' );
+		$this->display_date          = $this->get_option( 'display_date' );
+		$this->additional_time       = $this->get_option( 'additional_time' );
+		$this->availability          = $this->get_option( 'availability' );
+		$this->fee                   = $this->get_option( 'fee' );
+		$this->zip_origin            = $this->get_option( 'zip_origin' );
+		$this->countries             = $this->get_option( 'countries' );
+		$this->simulator             = $this->get_option( 'simulator', 'no' );
+		$this->corporate_service     = $this->get_option( 'corporate_service' );
+		$this->login                 = $this->get_option( 'login' );
+		$this->password              = $this->get_option( 'password' );
+		$this->service_pac           = $this->get_option( 'service_pac' );
+		$this->service_sedex         = $this->get_option( 'service_sedex' );
+		$this->service_sedex_10      = $this->get_option( 'service_sedex_10' );
+		$this->service_sedex_hoje    = $this->get_option( 'service_sedex_hoje' );
+		$this->service_esedex        = $this->get_option( 'service_esedex' );
+		$this->minimum_height        = $this->get_option( 'minimum_height' );
+		$this->minimum_width         = $this->get_option( 'minimum_width' );
+		$this->minimum_length        = $this->get_option( 'minimum_length' );
+		$this->tracking_orders_table = $this->get_option( 'tracking_orders_table', 'yes' );
+		$this->debug                 = $this->get_option( 'debug' );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -260,6 +261,16 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
 				'default'          => '16'
+			),
+			'orders_table' => array(
+				'title'            => __( 'Orders table', 'woocommerce-correios' ),
+				'type'             => 'title'
+			),
+			'tracking_orders_table' => array(
+				'title'            => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Edit the tracking code in the orders table?', 'woocommerce-correios' ),
+				'default'          => 'yes'
 			),
 			'testing' => array(
 				'title'            => __( 'Testing', 'woocommerce-correios' ),

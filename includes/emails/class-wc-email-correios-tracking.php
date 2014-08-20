@@ -102,7 +102,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	 * @param  WC_Order $order         Order data.
 	 * @param  string   $tracking_code Tracking code.
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	public function trigger( $order, $tracking_code ) {
 		if ( is_object( $order ) ) {
@@ -119,11 +119,11 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			$this->replace[] = $this->get_tracking_code_url( $tracking_code );
 		}
 
-		if ( ! $this->get_recipient() ) {
-			return;
+		if ( $this->get_recipient() ) {
+			return $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 		}
 
-		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+		return false;
 	}
 
 	/**
