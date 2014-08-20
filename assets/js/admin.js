@@ -24,4 +24,38 @@ jQuery( document ).ready( function( $ ) {
 			eSedex.hide();
 		}
 	}).change();
+
+	$( 'td.order_tracking_code .save' ).on( 'click', function(){
+		var self = $( this ),
+			id   = self.data( 'id' );
+		$.ajax({
+			type:     'POST',
+			url:      wc_correios.ajax_url,
+			cache:    false,
+			dataType: 'json',
+			data:     {
+				action 				: 'wc_correios_save_tracking_code',
+				security 			: wc_correios.security,
+				order_id 			: id,
+				post_type			: $('[name="post_type"]').val(),
+				correios_tracking 	: $('#wc-correios-tracking-'+id).val()
+			},
+			beforeSend: function () {
+				self.attr( 'disabled', 'disabled' )
+					.addClass( 'button-primary' );
+			},
+			success: function ( data ) {
+				self.removeAttr( 'disabled' )
+					.removeClass( 'button-primary' );
+				if(data.error){
+					window.alert( data.error );
+				}
+			},
+			error: function () {
+				self.removeAttr( 'disabled' );
+				window.alert( wc_correios.error_message );
+			}
+		});
+		return false;
+	});
 });

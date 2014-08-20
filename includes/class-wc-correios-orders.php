@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WC_Correios_Orders {
 
+	private $tracking_code;
+
 	/**
 	 * Initialize the order actions.
 	 */
@@ -19,6 +21,20 @@ class WC_Correios_Orders {
 
 			// Save Metabox.
 			add_action( 'save_post', array( $this, 'save_metabox_data' ) );
+
+			$options = get_option( 'woocommerce_correios_settings' );
+
+			if( isset( $options['tracking_orders_table'] ) && 'yes' == $options['tracking_orders_table'] ) {
+				
+				add_filter( 'manage_edit-shop_order_columns', array( $this, 'column_order_tracking_code' ), 20, 2 );
+				add_action( 'manage_shop_order_posts_custom_column', array( $this, 'row_order_tracking_code' ), 10, 2 );
+
+				add_action( 'admin_enqueue_scripts', array( $this, 'scritps' ) );
+				
+				add_action( 'wp_ajax_wc_correios_save_tracking_code', array( $this, 'ajax_save_tracking_code' ) );
+				add_action( 'wp_ajax_nopriv_wc_correios_save_tracking_code', array( $this, 'ajax_save_tracking_code' ) );
+			}
+
 		}
 
 		// Show tracking code in order details.
@@ -38,6 +54,68 @@ class WC_Correios_Orders {
 
 		return self::$instance;
 	}
+
+	/**
+	 * Tracking code scripts.
+	 *
+	 * @return void
+	 */
+	public function scritps() {
+		if ( is_admin() ) {
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			wp_enqueue_style( 'wc-correios', plugins_url( 'assets/css/admin' . $suffix . '.css', plugin_dir_path( __FILE__ ) ), array(), '', 'all' );
+			wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
+			wp_localize_script(
+				'wc-correios',
+				'wc_correios',
+				array(
+					'ajax_url'      => admin_url( 'admin-ajax.php' ),
+					'error_message' => __( 'Error', 'woocommerce-correios' )
+				)
+			);
+		}
+	}
+
+	protected function get_tracking_code( $post ){
+		$this->tracking_code = get_post_meta( $post->ID, 'correios_tracking', true );
+    	return $this->tracking_code;
+    }
+
+    protected function get_html_input( $post ){
+    	$this->get_tracking_code( $post );
+    	return '<input type="text" id="wc-correios-tracking-' . $post->ID . '" name="correios_tracking" value="' . $this->tracking_code . '" style="width: 100%;" />';
+    }
+
+    public function column_order_tracking_code( $columns ) {
+    	if ( !is_array( $columns ) ){
+    		$columns = array();
+    	}
+
+    	if ( $columns && array_key_exists( 'order_actions', $columns ) ) {
+	    	foreach( ( array ) $columns as $k => $v ) {
+	    		if ( 'order_actions' == $k ) {
+	    			unset( $columns[$k] );
+	        		$columns['order_tracking_code']  = __( 'Tracking code', 'woocommerce-correios' );
+	        		$columns[$k] = $v;
+	        		break;
+	    		}
+	    	}		    		
+    	} else {
+    		$columns['order_tracking_code']  = __( 'Tracking code', 'woocommerce-correios' );
+    	}
+
+        return $columns;
+    }
+
+    public function row_order_tracking_code( $column ) {
+     	global $post;
+
+     	if( 'order_tracking_code' == $column ) {
+     		echo $this->get_html_input( $post );
+     		echo '<button href="javascript:;" class="button save" data-id="' . $post->ID . '">' . __( 'Save', 'woocommerce-correios' ) . '</button>';
+     	}
+
+    }
 
 	/**
 	 * Register tracking code metabox.
@@ -67,7 +145,7 @@ class WC_Correios_Orders {
 		wp_nonce_field( basename( __FILE__ ), 'wc_correios_nonce' );
 
 		$html = '<label for="correios_tracking">' . __( 'Tracking code:', 'woocommerce-correios' ) . '</label><br />';
-		$html .= '<input type="text" id="correios_tracking" name="correios_tracking" value="' . get_post_meta( $post->ID, 'correios_tracking', true ) . '" style="width: 100%;" />';
+		$html .= $this->get_html_input( $post );
 
 		echo $html;
 	}
@@ -99,26 +177,67 @@ class WC_Correios_Orders {
 		}
 
 		if ( isset( $_POST['correios_tracking'] ) ) {
+			$this->save_tracking_code( $post_id, $_POST['correios_tracking'] );
+		}
+	}
+
+	public function ajax_save_tracking_code() {
+		if ( isset( $_POST['order_id'] ) && is_numeric( $_POST['order_id'] ) ) {
+			$order_id = absint( $_POST['order_id'] );
+		}
+
+		if ( isset( $_POST['correios_tracking'] ) && $_POST['correios_tracking'] ) {
+			$tracking_code = $_POST['correios_tracking'];
+		}
+
+		if ( isset( $_POST['post_type'] ) && $_POST['post_type'] ) {
+			$post_type = $_POST['post_type'];
+		}
+
+		if ( !$order_id || 'shop_order' != $post_type ) {
+			wp_send_json( array( 'error' => __( 'Error to identify the order.', 'woocommerce-correios' ) ) );
+		}else{
+			if ( !$this->save_tracking_code( $order_id, $tracking_code ) ) {
+				$message = 'The tracking code has been sent.';
+			} else {
+				$message = '';
+			}
+
+			wp_send_json( array( 'error' => __( $message, 'woocommerce-correios' ) ) );
+		}
+		exit;
+	}
+
+	/**
+	 * Save tracking code.
+	 *
+	 * @param  object $order         Order data.
+	 * @param  string $tracking_code The Correios tracking code.
+	 *
+	 * @return boolean
+	 */
+	protected function save_tracking_code( $post_id, $tracking_code ) {
+		if( current_user_can( 'manage_woocommerce' ) && is_numeric( $post_id ) && $post_id ){
 			$old = get_post_meta( $post_id, 'correios_tracking', true );
 
-			$new = $_POST['correios_tracking'];
-
-			if ( $new && $new != $old ) {
-				update_post_meta( $post_id, 'correios_tracking', $new );
+			if ( $tracking_code && $tracking_code != $old ) {
+				update_post_meta( $post_id, 'correios_tracking', $tracking_code );
 
 				// Gets order data.
 				$order = new WC_Order( $post_id );
 
 				// Add order note.
-				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $new ) );
+				$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
 
 				// Send email notification.
-				$this->trigger_email_notification( $order, $new );
-			} elseif ( '' == $new && $old ) {
-				delete_post_meta( $post_id, 'correios_tracking', $old );
-			}
+				return $this->trigger_email_notification( $order, $tracking_code );
+			} elseif ( '' == $tracking_code && $old ) {
+				return delete_post_meta( $post_id, 'correios_tracking', $old );
+			}		
 		}
+		return false;
 	}
+
 
 	/**
 	 * Trigger email notification.
@@ -126,14 +245,14 @@ class WC_Correios_Orders {
 	 * @param  object $order         Order data.
 	 * @param  string $tracking_code The Correios tracking code.
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	protected function trigger_email_notification( $order, $tracking_code ) {
 		global $woocommerce;
 
 		$mailer       = $woocommerce->mailer();
 		$notification = $mailer->emails['WC_Email_Correios_Tracking'];
-		$notification->trigger( $order, $tracking_code );
+		return $notification->trigger( $order, $tracking_code );
 	}
 
 	/**
