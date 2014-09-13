@@ -3,7 +3,7 @@
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 3.5  
-**Tested up to:** 3.9.2  
+**Tested up to:** 4.0  
 **Stable tag:** 2.1.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -167,22 +167,22 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 ## Screenshots ##
 
 ### 1. Configurações do plugin. ###
-![1. Configurações do plugin.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-1.png)
+![1. Configurações do plugin.](http://ps.w.org/woocommerce-correios/assets/screenshot-1.png)
 
 ### 2. Seleção de frete na finalização do pedido. ###
-![2. Seleção de frete na finalização do pedido.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-2.png)
+![2. Seleção de frete na finalização do pedido.](http://ps.w.org/woocommerce-correios/assets/screenshot-2.png)
 
 ### 3. Simulador de frete na página do produto. ###
-![3. Simulador de frete na página do produto.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-3.png)
+![3. Simulador de frete na página do produto.](http://ps.w.org/woocommerce-correios/assets/screenshot-3.png)
 
 ### 4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido) ###
-![4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido)](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-4.png)
+![4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido)](http://ps.w.org/woocommerce-correios/assets/screenshot-4.png)
 
 ### 5. Opções para personalizar os e-mails do código de rastreamento. ###
-![5. Opções para personalizar os e-mails do código de rastreamento.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-5.png)
+![5. Opções para personalizar os e-mails do código de rastreamento.](http://ps.w.org/woocommerce-correios/assets/screenshot-5.png)
 
 ### 6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end. ###
-![6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end.](http://s.wordpress.org/extend/plugins/woocommerce-correios/screenshot-6.png)
+![6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end.](http://ps.w.org/woocommerce-correios/assets/screenshot-6.png)
 
 
 ## Changelog ##
