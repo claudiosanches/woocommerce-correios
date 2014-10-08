@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 2.1.0
+ * @version 2.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( $order->billing_phone ) {
 	echo __( 'Tel:', 'woocommerce-correios' ) . ' ' . $order->billing_phone . "\n";
 }
 
-wc_get_template( 'emails/plain/email-addresses.php', array( 'order' => $order ) );
+woocommerce_get_template( 'emails/plain/email-addresses.php', array( 'order' => $order ) );
 
 echo "\n****************************************************\n\n";
 

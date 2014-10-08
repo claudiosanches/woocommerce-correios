@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 2.1.0
+ * @version 2.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -65,6 +65,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<p><strong><?php _e( 'Tel:', 'woocommerce-correios' ); ?></strong> <?php echo $order->billing_phone; ?></p>
 <?php endif; ?>
 
-<?php wc_get_template( 'emails/email-addresses.php', array( 'order' => $order ) ); ?>
+<?php woocommerce_get_template( 'emails/email-addresses.php', array( 'order' => $order ) ); ?>
 
 <?php do_action( 'woocommerce_email_footer' ); ?>
