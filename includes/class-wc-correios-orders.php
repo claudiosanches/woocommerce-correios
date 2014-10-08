@@ -18,25 +18,11 @@ class WC_Correios_Orders {
 			add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
 
 			// Save Metabox.
-			add_action( 'save_post', array( $this, 'save_metabox_data' ) );
+			add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_tracking_code' ) );
 		}
 
 		// Show tracking code in order details.
 		add_action( 'woocommerce_view_order', array( $this, 'view_order_tracking_code' ), 1 );
-	}
-
-	/**
-	 * Return an instance of this class.
-	 *
-	 * @return object A single instance of this class.
-	 */
-	public static function get_instance() {
-		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
 	}
 
 	/**
@@ -63,9 +49,6 @@ class WC_Correios_Orders {
 	 * @return string       Metabox HTML.
 	 */
 	public function metabox_content( $post ) {
-		// Use nonce for verification.
-		wp_nonce_field( basename( __FILE__ ), 'wc_correios_nonce' );
-
 		$html = '<label for="correios_tracking">' . __( 'Tracking code:', 'woocommerce-correios' ) . '</label><br />';
 		$html .= '<input type="text" id="correios_tracking" name="correios_tracking" value="' . get_post_meta( $post->ID, 'correios_tracking', true ) . '" style="width: 100%;" />';
 
@@ -73,31 +56,13 @@ class WC_Correios_Orders {
 	}
 
 	/**
-	 * Save metabox data.
+	 * Save tracking code.
 	 *
 	 * @param  int $post_id Current post type ID.
 	 *
 	 * @return void
 	 */
-	public function save_metabox_data( $post_id ) {
-		// Verify nonce.
-		if ( ! isset( $_POST['wc_correios_nonce'] ) || ! wp_verify_nonce( $_POST['wc_correios_nonce'], basename( __FILE__ ) ) ) {
-			return $post_id;
-		}
-
-		// Verify if this is an auto save routine.
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return $post_id;
-		}
-
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			return $post_id;
-		}
-
-		if ( 'shop_order' != $_POST['post_type'] ) {
-			return $post_id;
-		}
-
+	public function save_tracking_code( $post_id ) {
 		if ( isset( $_POST['correios_tracking'] ) ) {
 			$old = get_post_meta( $post_id, 'correios_tracking', true );
 
