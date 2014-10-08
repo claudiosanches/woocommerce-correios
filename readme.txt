@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,7 @@ Adicione os Correios como método de entrega em sua loja WooCommerce.
 
 O plugin WooCommerce Correios foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa.
 
-Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de Cubagem que possuem este plugin.
+Este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
 
 = Métodos de entrega aceitos: =
 
@@ -45,8 +45,8 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 Você pode esclarecer suas dúvidas usando:
 
 * A nossa sessão de [FAQ](http://wordpress.org/extend/plugins/woocommerce-correios/faq/).
-* Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/woocommerce-correios) (apenas em inglês).
-* Ou entre em contato com os desenvolvedores do plugin em nossa [página](http://claudiosmweb.com/plugins/correios-para-woocommerce/).
+* Utilizando o nosso [fórum no Github](https://github.com/claudiosmweb/woocommerce-correios).
+* Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/woocommerce-correios).
 
 == Installation ==
 
@@ -174,6 +174,11 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end.
 
 == Changelog ==
+
+= 2.1.2 - 08/10/2014 =
+
+* Melhorado o salvamento dos códigos de rastremento utilizando o action `woocommerce_process_shop_order_meta`.
+* Corrigido o suporte com o WooCommerce 2.0 nos templates de e-mail.
 
 = 2.1.1 - 14/08/2014 =
 
@@ -313,16 +318,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.1.1 =
+= 2.1.2 =
 
-* Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
-* Adicionado suporte para a API de templates do WooCommerce para personalizar os templates de e-mails e do simulador de frete.
-* Adicionado o filtro `woocommerce_correios_webservice_url` para tornar possível personalizar o link do WebService.
-* Adicionada versões comprimidas dos arquivos de CSS e JavaScript do plugin.
-* Melhorado o script que exibe e oculta os campos das opções do plugin.
-* Corrigida a exibição do link do código de rastreamento dentro de cada pedido em "Minha Conta".
-* Corrigido o simulador de produtos que tinha problemas com páginas com cache.
-* Corrigida a opção que manipula o conteúdo do e-mail sobre o código de rastreamento.
+* Melhorado o salvamento dos códigos de rastremento utilizando o action `woocommerce_process_shop_order_meta`.
+* Corrigido o suporte com o WooCommerce 2.0 nos templates de e-mail.
 
 == License ==
 
