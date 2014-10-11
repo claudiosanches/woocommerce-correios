@@ -487,7 +487,7 @@ class WC_Correios_Connect {
 			}
 		} else {
 			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . $response['response']['code'] . ' - ' . $response['response']['message'] );
+				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 			}
 		}
 
