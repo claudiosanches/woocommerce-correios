@@ -46,7 +46,6 @@ jQuery( document ).ready( function ( $ ) {
 			dataType: 'json',
 			data:     {
 				action:       'wc_correios_simulator',
-				security:     woocommerce_correios_simulator.security,
 				zipcode:      $( '#wc-correios-simulator #zipcode' ).val(),
 				product_id:   product_id,
 				variation_id: $( '.cart input[name="variation_id"]' ).val(),
