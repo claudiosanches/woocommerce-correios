@@ -19,18 +19,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
 		$this->method_description = __( 'Correios is a brazilian delivery method.', 'woocommerce-correios' );
 
-		// Actions.
-		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
-
-		$this->init();
-	}
-
-	/**
-	 * Initializes the method.
-	 *
-	 * @return void
-	 */
-	public function init() {
 		// Load the form fields.
 		$this->init_form_fields();
 
@@ -43,10 +31,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->declare_value      = $this->get_option( 'declare_value' );
 		$this->display_date       = $this->get_option( 'display_date' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
-		$this->availability       = $this->get_option( 'availability' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->zip_origin         = $this->get_option( 'zip_origin' );
-		$this->countries          = $this->get_option( 'countries' );
 		$this->simulator          = $this->get_option( 'simulator', 'no' );
 		$this->corporate_service  = $this->get_option( 'corporate_service' );
 		$this->login              = $this->get_option( 'login' );
@@ -60,6 +46,13 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->minimum_width      = $this->get_option( 'minimum_width' );
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
 		$this->debug              = $this->get_option( 'debug' );
+
+		// Method variables.
+		$this->availability       = 'specific';
+		$this->countries          = array( 'BR' );
+
+		// Actions.
+		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -104,23 +97,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'description'      => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
 				'default'          => __( 'Correios', 'woocommerce-correios' )
-			),
-			'availability' => array(
-				'title'            => __( 'Availability', 'woocommerce-correios' ),
-				'type'             => 'select',
-				'default'          => 'all',
-				'class'            => 'availability',
-				'options'          => array(
-					'all'          => __( 'All allowed countries', 'woocommerce-correios' ),
-					'specific'     => __( 'Specific Countries', 'woocommerce-correios' )
-				)
-			),
-			'countries' => array(
-				'title'            => __( 'Specific Countries', 'woocommerce-correios' ),
-				'type'             => 'multiselect',
-				'class'            => 'chosen_select',
-				'css'              => 'width: 450px;',
-				'options'          => $this->woocommerce_method()->countries->countries
 			),
 			'zip_origin' => array(
 				'title'            => __( 'Origin Zip Code', 'woocommerce-correios' ),
@@ -291,35 +267,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		echo '<table class="form-table">';
 			$this->generate_settings_html();
 		echo '</table>';
-	}
-
-	/**
-	 * Checks if the method is available.
-	 *
-	 * @param array $package Order package.
-	 *
-	 * @return bool
-	 */
-	public function is_available( $package ) {
-		$is_available = true;
-
-		if ( 'no' == $this->enabled ) {
-			$is_available = false;
-		} else {
-			$ship_to_countries = '';
-
-			if ( 'specific' == $this->availability ) {
-				$ship_to_countries = $this->countries;
-			} elseif ( 'specific' == get_option( 'woocommerce_allowed_countries' ) ) {
-				$ship_to_countries = get_option( 'woocommerce_specific_allowed_countries' );
-			}
-
-			if ( is_array( $ship_to_countries ) && ! in_array( $package['destination']['country'], $ship_to_countries ) ) {
-				$is_available = false;
-			}
-		}
-
-		return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', $is_available, $package );
 	}
 
 	/**
