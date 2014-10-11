@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -175,6 +175,11 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Changelog ==
 
+= 2.1.3 - 11/10/2014 =
+
+* Removida as opções de "Disponibilidade" e "Países Permitidos", pois funciona apenas no Brasil.
+* Melhorado o relatório de erro quando os Correios retorna status 404.
+
 = 2.1.2 - 08/10/2014 =
 
 * Melhorado o salvamento dos códigos de rastremento utilizando o action `woocommerce_process_shop_order_meta`.
@@ -318,10 +323,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.1.2 =
+= 2.1.3 =
 
-* Melhorado o salvamento dos códigos de rastremento utilizando o action `woocommerce_process_shop_order_meta`.
-* Corrigido o suporte com o WooCommerce 2.0 nos templates de e-mail.
+* Removida as opções de "Disponibilidade" e "Países Permitidos", pois funciona apenas no Brasil.
+* Melhorado o relatório de erro quando os Correios retorna status 404.
 
 == License ==
 
