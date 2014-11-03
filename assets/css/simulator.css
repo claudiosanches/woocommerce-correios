@@ -12,6 +12,7 @@
 #wc-correios-simulator {
     *zoom: 1;
     margin-top: 20px;
+    display: inline-block;
 }
 
 #wc-correios-simulator p {
