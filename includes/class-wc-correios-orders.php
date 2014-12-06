@@ -12,7 +12,7 @@ class WC_Correios_Orders {
 	 * Initialize the order actions.
 	 */
 	public function __construct() {
-            
+
 		if ( is_admin() ) {
 			// Add metabox.
 			add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
