@@ -23,6 +23,7 @@ class WC_Correios_Orders {
 
 		// Show tracking code in order details.
 		add_action( 'woocommerce_view_order', array( $this, 'view_order_tracking_code' ), 1 );
+                
 	}
 
 	/**
@@ -103,6 +104,7 @@ class WC_Correios_Orders {
 
 	/**
 	 * Display the order tracking code in order details.
+         * Display tracking history
 	 *
 	 * @param  int    $order_id Order ID.
 	 *
@@ -114,8 +116,68 @@ class WC_Correios_Orders {
 		if ( ! empty( $tracking_code ) ) {
 			$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
 			echo '<div class="woocommerce-info"><strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . sprintf( __( 'Your the tracking code: %s.', 'woocommerce-correios' ), $url ) . '</div>';
+            
+			$xmltracking = $this->tracking_history( $tracking_code );
+
+                        $html = '';
+			$html = '<table class="shop_table"><tbody><tr><th>' . __('DATE', 'woocommerce-correios') . '</th><th>' . __('TIME', 'woocommerce-correios') . '</th>';
+			$html .= '<th>' . __('POSITION', 'woocommerce-correios') . '</th><th>' . __('PLACE', 'woocommerce-correios') . '</th><th>' . __('CITY', 'woocommerce-correios') . '</th><th>' . __('UF', 'woocommerce-correios') . '</th></tr>';
+			
+                        /* Reading all objects */
+			foreach ( $xmltracking->objeto as $objeto ):
+                                /* Reading all events*/    
+				foreach( $objeto->evento as $evento ):				
+                                    $html .= '<tr><td>' . $evento->data . '</td><td>' . $evento->hora . '</td><td>' . $evento->descricao . '</td><td>' . $evento->local . '</td><td>';
+                                    $html .= $evento->cidade . '</td><td>' . $evento->uf . '</td></tr>';
+                                    /* Reading all destinations */
+				   foreach( $evento->destino as $destino ):				   
+  					$html .= '<tr><td></td><td></td><td>Em trânsito para</td>';
+					$html .= '<td>' . $destino->local . '</td><td>' . $destino->cidade . '</td><td>' . $destino->uf . '</td></tr>';				
+				   endforeach;				   
+				endforeach;				
+			endforeach;			
+			$html .= '</tbody></table>';
+			echo $html;			
 		}
 	}
+
+	/**
+	 * Access API Correios.
+	 *
+	 * @param  string    $tracking_code.
+	 *
+	 * @return string    History Tracking code.
+	 */        
+        
+        public function tracking_history( $tracking_code ) {
+			
+                $options           = get_option( 'woocommerce_correios_settings' );	
+                $login             = empty( $options['login'] ) ? 'ECT' : $options['login'];
+                $password          = empty( $options['password'] ) ? 'SRO' : $options['password'];
+            						
+                $parametros = array(
+                        'Usuario' => $login, 
+                        'Senha' => $password,   
+                        'Tipo' => 'L',                  /* L - List of objects | F - Object Range */
+                        'Resultado' => 'T',             /* T - Returns all the object's events | U - Returns only last event object */
+                        'Objetos' => $tracking_code, 
+		);            
+
+                $url = "http://websro.correios.com.br/sro_bin/sroii_xml.eventos";
+                
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($parametros));
+                $result = curl_exec($curl); 		
+                curl_close($curl);
+                $response = simplexml_load_string($result);
+
+                return $response;                                
+
+        }
+        
 }
 
 new WC_Correios_Orders();
