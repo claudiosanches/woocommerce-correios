@@ -23,7 +23,6 @@ class WC_Correios_Orders {
 
 		// Show tracking code in order details.
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view_order_tracking_code' ), 1 );
-
 	}
 
 	/**
@@ -140,7 +139,7 @@ class WC_Correios_Orders {
 			'Objetos'   => $tracking_code,
 		) );
 
-		$url = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos?' . http_build_query( $args );
+		$url = add_query_arg( $args, 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos' );
 
 		$params = array(
 			'sslverify' => false,
