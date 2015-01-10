@@ -55,6 +55,10 @@ class WC_Correios {
 			if ( class_exists( 'WC_Shipping_Method' ) ) {
 				$this->includes();
 
+				if ( is_admin() ) {
+					$this->admin_includes();
+				}
+
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
 				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
@@ -100,8 +104,6 @@ class WC_Correios {
 
 	/**
 	 * Load the plugin text domain for translation.
-	 *
-	 * @return void
 	 */
 	public function load_plugin_textdomain() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-correios' );
@@ -112,8 +114,6 @@ class WC_Correios {
 
 	/**
 	 * Includes.
-	 *
-	 * @return void.
 	 */
 	private function includes() {
 		include_once 'includes/class-wc-correios-error.php';
@@ -122,7 +122,14 @@ class WC_Correios {
 		include_once 'includes/class-wc-correios-shipping.php';
 		include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 		include_once 'includes/class-wc-correios-emails.php';
-		include_once 'includes/class-wc-correios-orders.php';
+		include_once 'includes/class-wc-correios-tracking-history.php';
+	}
+
+	/**
+	 * Admin includes.
+	 */
+	private function admin_includes() {
+		include_once 'includes/admin-class-wc-correios-admin-orders.php';
 	}
 
 	/**
