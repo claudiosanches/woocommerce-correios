@@ -17,8 +17,16 @@ class WC_Correios_Tracking_History {
 	}
 
 	/**
-	 * Display the order tracking code in order details.
-		 * Display tracking history
+	 * Get the tracing history API URL.
+	 *
+	 * @return string
+	 */
+	protected function get_tracking_history_api_url() {
+		return apply_filters( 'woocommerce_correios_tracking_api_url', 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos' );
+	}
+
+	/**
+	 * Display the order tracking code in order details and the tracking history.
 	 *
 	 * @param  int    $order_id Order ID.
 	 *
@@ -41,7 +49,7 @@ class WC_Correios_Tracking_History {
 	 *
 	 * @return SimpleXmlElement|stdClass History Tracking code.
 	 */
-	public function get_tracking_history( $tracking_code ) {
+	protected function get_tracking_history( $tracking_code ) {
 		$options  = get_option( 'woocommerce_correios_settings', array() );
 		$login    = empty( $options['login'] ) ? 'ECT' : $options['login'];
 		$password = empty( $options['password'] ) ? 'SRO' : $options['password'];
@@ -54,7 +62,8 @@ class WC_Correios_Tracking_History {
 			'Objetos'   => $tracking_code,
 		) );
 
-		$url = add_query_arg( $args, 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos' );
+		$api_url     = $this->get_tracking_history_api_url();
+		$request_url = add_query_arg( $args, $api );
 
 		$params = array(
 			'sslverify' => false,
