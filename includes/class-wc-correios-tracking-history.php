@@ -13,7 +13,7 @@ class WC_Correios_Tracking_History {
 	 */
 	public function __construct() {
 		// Show tracking code in order details.
-		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view_order_tracking_code' ), 1 );
+		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view' ), 1 );
 	}
 
 	/**
@@ -23,23 +23,6 @@ class WC_Correios_Tracking_History {
 	 */
 	protected function get_tracking_history_api_url() {
 		return apply_filters( 'woocommerce_correios_tracking_api_url', 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos' );
-	}
-
-	/**
-	 * Display the order tracking code in order details and the tracking history.
-	 *
-	 * @param  int    $order_id Order ID.
-	 *
-	 * @return string           Tracking code as link.
-	 */
-	public function view_order_tracking_code( $order ) {
-		$tracking_code = get_post_meta( $order->id, 'correios_tracking', true );
-
-		if ( ! empty( $tracking_code ) ) {
-			$tracking_data = $this->get_tracking_history( $tracking_code );
-
-			include_once 'views/html-tracking-table.php';
-		}
 	}
 
 	/**
@@ -81,4 +64,42 @@ class WC_Correios_Tracking_History {
 
 		return $tracking_history;
 	}
+
+	/**
+	 * Display the order tracking code in order details and the tracking history.
+	 *
+	 * @param WC_Order $order_id Order data.
+	 */
+	public function view( $order ) {
+		$tracking_code = get_post_meta( $order->id, 'correios_tracking', true );
+
+		if ( ! $tracking_code ) {
+			return;
+		}
+
+		$tracking = $this->get_tracking_history( $tracking_code );
+
+		if ( isset( $tracking->objeto->evento ) ) {
+
+			woocommerce_get_template(
+				'myaccount/tracking-history-table.php',
+				array(
+					'events' => $tracking->objeto->evento
+				),
+				'',
+				WC_Correios::get_templates_path()
+			);
+		} else {
+			woocommerce_get_template(
+				'myaccount/tracking-code.php',
+				array(
+					'code' => $tracking_code
+				),
+				'',
+				WC_Correios::get_templates_path()
+			);
+		}
+	}
 }
+
+new WC_Correios_Tracking_History();
