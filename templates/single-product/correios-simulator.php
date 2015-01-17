@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div id="wc-correios-simulator" style="<?php echo $style; ?>" data-product-ids="<?php echo $ids; ?>" data-product-type="<?php echo esc_attr( $product->product_type ); ?>">
+<div id="wc-correios-simulator" style="<?php echo esc_attr( $style ); ?>" data-product-ids="<?php echo esc_attr( $ids ); ?>" data-product-type="<?php echo esc_attr( $product->product_type ); ?>">
 
-	<strong><?php echo $title; ?></strong>
-	<p><?php echo $description; ?></p>
+	<strong><?php echo esc_html( $title ); ?></strong>
+	<p><?php echo esc_html( $description ); ?></p>
 
 	<form method="post" class="cart">
 		<input type="text" size="9" class="input-text text" placeholder="00000-000" id="zipcode" name="zipcode" />
