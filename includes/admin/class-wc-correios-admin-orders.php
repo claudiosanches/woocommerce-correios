@@ -96,4 +96,4 @@ class WC_Correios_Admin_Orders {
 	}
 }
 
-new WC_Correios_Orders();
+new WC_Correios_Admin_Orders();
