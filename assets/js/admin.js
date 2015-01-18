@@ -1,6 +1,6 @@
 jQuery( document ).ready( function( $ ) {
 	$( '#woocommerce_correios_display_date' ).on( 'change', function() {
-		var field = $( '.form-table:eq(0) tr:eq(7)' );
+		var field = $( this ).closest( 'tr' ).next( 'tr' );
 
 		if ( $( this ).is( ':checked' ) ) {
 			field.show();
