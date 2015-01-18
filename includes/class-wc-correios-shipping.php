@@ -34,6 +34,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->fee                = $this->get_option( 'fee' );
 		$this->zip_origin         = $this->get_option( 'zip_origin' );
 		$this->simulator          = $this->get_option( 'simulator', 'no' );
+		$this->tracking_history   = $this->get_option( 'tracking_history', 'no' );
 		$this->corporate_service  = $this->get_option( 'corporate_service' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
@@ -137,6 +138,13 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable product shipping simulator', 'woocommerce-correios' ),
 				'description'      => __( 'Displays a shipping simulator in the product page.', 'woocommerce-correios' ),
+				'default'          => 'no'
+			),
+			'tracking_history' => array(
+				'title'            => __( 'Tracking History Table', 'woocommerce-correios' ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Enable Tracking History Table in view order page on frontend', 'woocommerce-correios' ),
+				'description'      => __( 'Displays a table with the tracking history in My Account > View Order page.', 'woocommerce-correios' ),
 				'default'          => 'no'
 			),
 			'services' => array(
@@ -309,7 +317,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 */
 	protected function correios_calculate( $package ) {
 		$services = array_values( $this->correios_services() );
-		$connect = new WC_Correios_Connect;
+		$connect  = new WC_Correios_Connect;
 		$connect->set_services( $services );
 		$_package = $connect->set_package( $package );
 		$_package->set_minimum_height( $this->minimum_height );

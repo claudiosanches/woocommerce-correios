@@ -87,9 +87,7 @@ class WC_Correios_Tracking_History {
 		) );
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
-
-
-		$params = array(
+		$params      = array(
 			'sslverify' => false,
 			'timeout'   => 30
 		);
@@ -116,20 +114,29 @@ class WC_Correios_Tracking_History {
 	 * @param WC_Order $order_id Order data.
 	 */
 	public function view( $order ) {
+		$events        = false;
 		$tracking_code = get_post_meta( $order->id, 'correios_tracking', true );
 
+		// Check if exist a tracking code for the order.
 		if ( ! $tracking_code ) {
 			return;
 		}
 
-		$tracking = $this->get_tracking_history( $tracking_code );
+		// Get the shipping method options.
+		$options = $this->get_method_options();
 
-		if ( isset( $tracking->objeto->evento ) ) {
+		// Try to connect to Correios Webservices and get the tracking history.
+		if ( ! empty( $options['tracking_history'] ) && 'yes' == $options['tracking_history'] ) {
+			$tracking = $this->get_tracking_history( $tracking_code );
+			$events   = isset( $tracking->objeto->evento ) ? $tracking->objeto->evento : false;
+		}
 
+		// Display the right template for show the tracking code or tracking history.
+		if ( $events ) {
 			woocommerce_get_template(
 				'myaccount/tracking-history-table.php',
 				array(
-					'events' => $tracking->objeto->evento,
+					'events' => $events,
 					'code'   => $tracking_code
 				),
 				'',
