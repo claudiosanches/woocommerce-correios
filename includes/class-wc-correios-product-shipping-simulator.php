@@ -132,6 +132,10 @@ class WC_Correios_Product_Shipping_Simulator {
 	 * @return string        Formated shipping price.
 	 */
 	protected static function get_price( $value ) {
+		if ( 0 == $value ) {
+			return __( '(Free)', 'woocommerce-correios' );
+		}
+
 		if ( function_exists( 'wc_price' ) ) {
 			return sanitize_text_field( wc_price( $value ) );
 		} else {
