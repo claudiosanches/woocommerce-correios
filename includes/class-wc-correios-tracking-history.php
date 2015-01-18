@@ -26,6 +26,36 @@ class WC_Correios_Tracking_History {
 	}
 
 	/**
+	 * Get method options
+	 *
+	 * @return array
+	 */
+	protected function get_method_options() {
+		return get_option( 'woocommerce_correios_settings', array() );
+	}
+
+	/**
+	 * Get user data.
+	 *
+	 * @return array
+	 */
+	protected function get_user_data() {
+		$options  = $this->get_method_options();
+		$login    = 'ECT';
+		$password = 'SRO';
+
+		if ( 'corporate' == $options['corporate_service'] ) {
+			$login    = empty( $options['login'] ) ? 'ECT' : $options['login'];
+			$password = empty( $options['password'] ) ? 'SRO' : $options['password'];
+		}
+
+		return array(
+			'login'    => $login,
+			'password' => $password
+		);
+	}
+
+	/**
 	 * Access API Correios.
 	 *
 	 * @param  string $tracking_code.
@@ -33,18 +63,14 @@ class WC_Correios_Tracking_History {
 	 * @return SimpleXmlElement|stdClass History Tracking code.
 	 */
 	protected function get_tracking_history( $tracking_code ) {
-		$options  = get_option( 'woocommerce_correios_settings', array() );
-		$login    = empty( $options['login'] ) ? 'ECT' : $options['login'];
-		$password = empty( $options['password'] ) ? 'SRO' : $options['password'];
-
-		$args = apply_filters( 'woocommerce_correios_tracking_args', array(
-			'Usuario'   => $login,
-			'Senha'     => $password,
+		$user_data   = $this->get_user_data();
+		$args        = apply_filters( 'woocommerce_correios_tracking_args', array(
+			'Usuario'   => $user_data['login'],
+			'Senha'     => $user_data['password'],
 			'Tipo'      => 'L', /* L - List of objects | F - Object Range */
 			'Resultado' => 'T', /* T - Returns all the object's events | U - Returns only last event object */
 			'Objetos'   => $tracking_code,
 		) );
-
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
 
@@ -78,6 +104,7 @@ class WC_Correios_Tracking_History {
 		}
 
 		$tracking = $this->get_tracking_history( $tracking_code );
+		error_log( print_r( $tracking, true ) );
 
 		if ( isset( $tracking->objeto->evento ) ) {
 
