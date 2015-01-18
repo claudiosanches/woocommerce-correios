@@ -129,7 +129,7 @@ class WC_Correios {
 	 * Admin includes.
 	 */
 	private function admin_includes() {
-		include_once 'includes/admin-class-wc-correios-admin-orders.php';
+		include_once 'includes/admin/class-wc-correios-admin-orders.php';
 	}
 
 	/**
