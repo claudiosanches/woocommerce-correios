@@ -38,5 +38,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php echo esc_html( $event->descricao ); ?>
 			</td>
 		</tr>
-	<?php endforeach ?>
+	<?php endforeach; ?>
 </table>

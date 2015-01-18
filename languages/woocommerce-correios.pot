@@ -1,18 +1,26 @@
-# Copyright (C) 2014 claudiosanches, rodrigoprior
+# Copyright (C) 2015 claudiosanches, rodrigoprior
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios 2.1.3\n"
+"Project-Id-Version: WooCommerce Correios 2.2.0\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/woocommerce-correios/\n"
-"POT-Creation-Date: 2014-10-11 20:52:56+00:00\n"
+"POT-Creation-Date: 2015-01-18 21:16:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"X-Generator: grunt-wp-i18n 0.4.7\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+
+#: includes/admin/class-wc-correios-admin-orders.php:46
+msgid "Tracking code:"
+msgstr ""
+
+#: includes/admin/class-wc-correios-admin-orders.php:72
+msgid "Added a Correios tracking code: %s"
+msgstr ""
 
 #: includes/class-wc-correios-connect.php:391
 msgid "Delivery in %d working day"
@@ -32,27 +40,8 @@ msgstr ""
 msgid "Area with delivery temporarily subjected to different periods."
 msgstr ""
 
-#: includes/class-wc-correios-orders.php:52
-msgid "Tracking code:"
-msgstr ""
-
-#: includes/class-wc-correios-orders.php:78
-msgid "Added a Correios tracking code: %s"
-msgstr ""
-
-#: includes/class-wc-correios-orders.php:116
-#: includes/class-wc-correios-shipping.php:19
-#: includes/class-wc-correios-shipping.php:99
-#: includes/class-wc-correios-shipping.php:399
-msgid "Correios"
-msgstr ""
-
-#: includes/class-wc-correios-orders.php:116
-msgid "Your the tracking code: %s."
-msgstr ""
-
 #: includes/class-wc-correios-product-shipping-simulator.php:43
-#: includes/class-wc-correios-product-shipping-simulator.php:270
+#: includes/class-wc-correios-product-shipping-simulator.php:274
 msgid ""
 "It was not possible to simulate the shipping, please try adding the product "
 "to cart and proceed to try to get the value."
@@ -74,226 +63,249 @@ msgstr ""
 msgid "Calculate shipping estimated to your region."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:198
-msgid "Error to identify the product."
+#: includes/class-wc-correios-product-shipping-simulator.php:136
+msgid "(Free)"
 msgstr ""
 
 #: includes/class-wc-correios-product-shipping-simulator.php:202
+msgid "Error to identify the product."
+msgstr ""
+
+#: includes/class-wc-correios-product-shipping-simulator.php:206
 msgid "Please enter with your zipcode."
 msgstr ""
 
-#: includes/class-wc-correios-product-shipping-simulator.php:213
+#: includes/class-wc-correios-product-shipping-simulator.php:217
 msgid "Invalid product!"
+msgstr ""
+
+#: includes/class-wc-correios-shipping.php:19
+#: includes/class-wc-correios-shipping.php:96
+#: includes/class-wc-correios-shipping.php:403
+#: templates/myaccount/tracking-code.php:15
+msgid "Correios"
 msgstr ""
 
 #: includes/class-wc-correios-shipping.php:20
 msgid "Correios is a brazilian delivery method."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:89
+#: includes/class-wc-correios-shipping.php:86
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:91
+#: includes/class-wc-correios-shipping.php:88
 msgid "Enable this shipping method"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:95
+#: includes/class-wc-correios-shipping.php:92
 msgid "Title"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:97
+#: includes/class-wc-correios-shipping.php:94
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:102
+#: includes/class-wc-correios-shipping.php:99
 msgid "Origin Zip Code"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:104
+#: includes/class-wc-correios-shipping.php:101
 msgid "Zip Code from where the requests are sent."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:108
+#: includes/class-wc-correios-shipping.php:105
 msgid "Declare value"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:112
+#: includes/class-wc-correios-shipping.php:109
 msgid "Declare"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:113
+#: includes/class-wc-correios-shipping.php:110
 msgid "None"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:117
+#: includes/class-wc-correios-shipping.php:114
 msgid "Estimated delivery"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:119
-#: includes/class-wc-correios-shipping.php:176
-#: includes/class-wc-correios-shipping.php:184
-#: includes/class-wc-correios-shipping.php:192
-#: includes/class-wc-correios-shipping.php:200
-#: includes/class-wc-correios-shipping.php:208
+#: includes/class-wc-correios-shipping.php:116
+#: includes/class-wc-correios-shipping.php:180
+#: includes/class-wc-correios-shipping.php:188
+#: includes/class-wc-correios-shipping.php:196
+#: includes/class-wc-correios-shipping.php:204
+#: includes/class-wc-correios-shipping.php:212
 msgid "Enable"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:120
+#: includes/class-wc-correios-shipping.php:117
 msgid "Display date of estimated delivery."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:125
+#: includes/class-wc-correios-shipping.php:122
 msgid "Additional days"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:127
+#: includes/class-wc-correios-shipping.php:124
 msgid "Additional days to the estimated delivery."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:133
+#: includes/class-wc-correios-shipping.php:130
 msgid "Handling Fee"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:135
+#: includes/class-wc-correios-shipping.php:132
 msgid ""
 "Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to "
 "disable."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:140
+#: includes/class-wc-correios-shipping.php:137
 msgid "Simulator"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:142
+#: includes/class-wc-correios-shipping.php:139
 msgid "Enable product shipping simulator"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:143
+#: includes/class-wc-correios-shipping.php:140
 msgid "Displays a shipping simulator in the product page."
 msgstr ""
 
+#: includes/class-wc-correios-shipping.php:144
+msgid "Tracking History Table"
+msgstr ""
+
+#: includes/class-wc-correios-shipping.php:146
+msgid "Enable Tracking History Table in view order page on frontend"
+msgstr ""
+
 #: includes/class-wc-correios-shipping.php:147
-msgid "Correios Services"
+msgid "Displays a table with the tracking history in My Account > View Order page."
 msgstr ""
 
 #: includes/class-wc-correios-shipping.php:151
+msgid "Correios Services"
+msgstr ""
+
+#: includes/class-wc-correios-shipping.php:155
 msgid "Corporate Service"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:153
+#: includes/class-wc-correios-shipping.php:157
 msgid "Choose between conventional or corporate service."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:157
+#: includes/class-wc-correios-shipping.php:161
 msgid "Conventional"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:158
+#: includes/class-wc-correios-shipping.php:162
 msgid "Corporate"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:162
+#: includes/class-wc-correios-shipping.php:166
 msgid "Administrative Code"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:164
+#: includes/class-wc-correios-shipping.php:168
 msgid "Your Correios login."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:168
+#: includes/class-wc-correios-shipping.php:172
 msgid "Administrative Password"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:170
+#: includes/class-wc-correios-shipping.php:174
 msgid "Your Correios password."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:174
+#: includes/class-wc-correios-shipping.php:178
 msgid "PAC"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:177
+#: includes/class-wc-correios-shipping.php:181
 msgid "Shipping via PAC."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:182
+#: includes/class-wc-correios-shipping.php:186
 msgid "SEDEX"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:185
+#: includes/class-wc-correios-shipping.php:189
 msgid "Shipping via SEDEX."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:190
+#: includes/class-wc-correios-shipping.php:194
 msgid "SEDEX 10"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:193
+#: includes/class-wc-correios-shipping.php:197
 msgid "Shipping via SEDEX 10."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:198
+#: includes/class-wc-correios-shipping.php:202
 msgid "SEDEX Hoje"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:201
+#: includes/class-wc-correios-shipping.php:205
 msgid "Shipping via SEDEX Hoje."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:206
+#: includes/class-wc-correios-shipping.php:210
 msgid "e-SEDEX"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:209
+#: includes/class-wc-correios-shipping.php:213
 msgid "Shipping via e-SEDEX."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:214
+#: includes/class-wc-correios-shipping.php:218
 msgid "Package Standard"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:216
+#: includes/class-wc-correios-shipping.php:220
 msgid "Sets a minimum measure for the package."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:220
+#: includes/class-wc-correios-shipping.php:224
 msgid "Minimum Height"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:222
+#: includes/class-wc-correios-shipping.php:226
 msgid "Minimum height of the package. Correios needs at least 2 cm."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:227
+#: includes/class-wc-correios-shipping.php:231
 msgid "Minimum Width"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:229
+#: includes/class-wc-correios-shipping.php:233
 msgid "Minimum width of the package. Correios needs at least 11 cm."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:234
+#: includes/class-wc-correios-shipping.php:238
 msgid "Minimum Length"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:236
+#: includes/class-wc-correios-shipping.php:240
 msgid "Minimum length of the package. Correios needs at least 16 cm."
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:241
+#: includes/class-wc-correios-shipping.php:245
 msgid "Testing"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:245
+#: includes/class-wc-correios-shipping.php:249
 msgid "Debug Log"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:247
+#: includes/class-wc-correios-shipping.php:251
 msgid "Enable logging"
 msgstr ""
 
-#: includes/class-wc-correios-shipping.php:249
+#: includes/class-wc-correios-shipping.php:253
 msgid "Log Correios events, such as WebServices requests, inside %s."
 msgstr ""
 
@@ -426,23 +438,51 @@ msgstr ""
 msgid "Your details"
 msgstr ""
 
+#: templates/myaccount/tracking-code.php:15
+msgid "Your the tracking code: %s."
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:15
+msgid "Correios Delivery History"
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:17
+msgid "History for the tracking code: %s."
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:21
+msgid "Date"
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:22
+msgid "Location"
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:23
+msgid "Status"
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:34
+msgid "In transit to %s"
+msgstr ""
+
 #: templates/single-product/correios-simulator.php:22
 msgid "Calculate"
 msgstr ""
 
-#: woocommerce-correios.php:147
+#: woocommerce-correios.php:154
 msgid "WooCommerce Correios depends on the last version of %s to work!"
 msgstr ""
 
-#: woocommerce-correios.php:147
+#: woocommerce-correios.php:154
 msgid "WooCommerce"
 msgstr ""
 
-#: woocommerce-correios.php:156
+#: woocommerce-correios.php:163
 msgid "WooCommerce Correios depends to %s to work!"
 msgstr ""
 
-#: woocommerce-correios.php:156
+#: woocommerce-correios.php:163
 msgid "SimpleXML"
 msgstr ""
 
