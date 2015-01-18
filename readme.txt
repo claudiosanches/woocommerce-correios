@@ -2,9 +2,9 @@
 Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
-Requires at least: 3.5
-Tested up to: 4.0
-Stable tag: 2.1.3
+Requires at least: 3.8
+Tested up to: 4.1
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,10 @@ Este plugin foi feito baseado na documentação do [Webservices Correios](http:/
 = Instalação: =
 
 Confira o nosso guia de instalação e configuração do Correios na aba [Installation](http://wordpress.org/extend/plugins/woocommerce-correios/installation/).
+
+= Compatibilidade =
+
+Compatível com as versões 2.1.x, 2.2.x e 2.3.x do WooCommerce.
 
 = Dúvidas? =
 
@@ -169,27 +173,34 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 1. Configurações do plugin.
 2. Seleção de frete na finalização do pedido.
 3. Simulador de frete na página do produto.
-4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido)
+4. Campo para adicionar o código de rastreamento (aparece na tela de gerenciamento do pedido).
 5. Opções para personalizar os e-mails do código de rastreamento.
-6. Aviso sobre o código de rastreamento dentro dos detalhes do pedido no front-end.
+6. Alerta exibindo o código de rastreamento dentro da página de detalhes do pedido na página "Minha conta".
+7. Tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações do plugin.
 
 == Changelog ==
 
-= 2.1.3 - 11/10/2014 =
+= 2.2.0 - 2015/01/18 =
+
+* Adicionada API para consulta do objeto no site dos Correios (Agradecimentos para [Edison Costa](https://github.com/claudiosmweb/woocommerce-correios/pull/24)).
+* Adicionada opção para mostrar histórico do rastreamento do pedido no site dos Correios.
+* Adicionado templates para a exibição do histórico de rastreamento.
+
+= 2.1.3 - 2014/10/11 =
 
 * Removida as opções de "Disponibilidade" e "Países Permitidos", pois funciona apenas no Brasil.
 * Melhorado o relatório de erro quando os Correios retorna status 404.
 
-= 2.1.2 - 08/10/2014 =
+= 2.1.2 - 2014/10/08 =
 
 * Melhorado o salvamento dos códigos de rastremento utilizando o action `woocommerce_process_shop_order_meta`.
 * Corrigido o suporte com o WooCommerce 2.0 nos templates de e-mail.
 
-= 2.1.1 - 14/08/2014 =
+= 2.1.1 - 2014/08/14 =
 
 * Corrigida a opção que manipula o conteúdo do e-mail sobre o código de rastreamento.
 
-= 2.1.0 - 13/08/2014 =
+= 2.1.0 - 2014/08/13 =
 
 * Adicionado suporte para a API de e-mails do WooCommerce para enviar as notificações sobre o código de rastreamento.
 * Adicionado suporte para a API de templates do WooCommerce para personalizar os templates de e-mails e do simulador de frete.
@@ -199,59 +210,59 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 * Corrigida a exibição do link do código de rastreamento dentro de cada pedido em "Minha Conta".
 * Corrigido o simulador de produtos que tinha problemas com páginas com cache.
 
-= 2.0.8 - 02/08/2014 =
+= 2.0.8 - 2014/08/02 =
 
 * Adicionado suporte para templates antigos no simulador.
 
-= 2.0.7 - 05/07/2014 =
+= 2.0.7 - 2014/07/05 =
 
 * Pequena correção nos dados antes de passar para fazer o calculo de cubagem.
 
-= 2.0.6 - 25/05/2014 =
+= 2.0.6 - 2014/05/25 =
 
 * Correção do método que pega os produtos variáveis no simulador de frete.
 
-= 2.0.5 - 24/05/2014 =
+= 2.0.5 - 2014/05/24 =
 
 * Correção da exibição do simulador para produtos virtuais.
 
-= 2.0.4 - 24/05/2014 =
+= 2.0.4 - 2014/05/24 =
 
 * Melhorada a compatibilidade com o WooCommerce 2.0.x.
 
-= 2.0.3 - 18/05/2014 =
+= 2.0.3 - 2014/05/18 =
 
 * Melhorada a perfomance na hora de calcular o frete enviando todos os códigos para serem calculados com apenas uma consulta.
 * Melhorado o simulador, agora impede o cliente de clicar várias vezes ao mesmo tempo enquanto esta simulando o frete.
 
-= 2.0.2 - 06/05/2014 =
+= 2.0.2 - 2014/05/06 =
 
 * Melhoradas as classes do simulador.
 * Melhorada a exibição do simulador, agora não é exibido quando o produto esta fora de estoque.
 
-= 2.0.1 - 06/05/2014 =
+= 2.0.1 - 2014/05/06 =
 
 * Correção da soma da opção "Dias adicionais".
 
-= 2.0.0 - 06/05/2014 =
+= 2.0.0 - 2014/05/06 =
 
 * Adicionado simulador de frete na página do produto.
 * Adicionado tratamento de erro que exibe alguns erros úteis para o cliente na página do carrinho.
 * Melhorias no código do plugin.
 
-= 1.6.2 - 20/12/2013 =
+= 1.6.2 - 2013/12/20 =
 
 * Correção no valor declarado que era passado com valor errado para os Correios.
 
-= 1.6.1 - 06/12/2013 =
+= 1.6.1 - 2013/12/06 =
 
 * Atualizado o método que extrai as médidas dos pedidos (agora ele é menos restrito).
 
-= 1.6.0 - 03/12/2013 =
+= 1.6.0 - 2013/12/03 =
 
 * Adicionado suporte para as versões 2.1.x do WooCommerce.
 
-= 1.5.0 - 15/07/2013 =
+= 1.5.0 - 2013/07/15 =
 
 * Removida a classe de conexão com SOAP.
 * Melhoria do código.
@@ -260,52 +271,52 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 * Melhoria das descrições na página de configuração.
 * Melhoria no tratamento de erros.
 
-= 1.4.0 - 14/04/2013 =
+= 1.4.0 - 2013/04/14 =
 
 * Adicionada opção para enviar o código de rastreamento dos Correios.
 * Adicionado o filtro `woocommerce_correios_shipping_methods` para manipular os métodos de entrega do plugin.
 
-= 1.3.6 - 17/03/2013 =
+= 1.3.6 - 2013/03/17 =
 
 * Correção do formato de moeda que é recebido dos Correios.
 
-= 1.3.5 - 02/03/2013 =
+= 1.3.5 - 2013/03/02 =
 
 * Correção do formato de número enviado pelo metodo de SimpleXML.
 
-= 1.3.4 - 17/12/2012 =
+= 1.3.4 - 2012/12/17 =
 
 * Adicionado o filtro **wccorreios_default_package** para definir um padrão de medidas para a cubagem.
 
-= 1.3.3 - 12/12/2012 =
+= 1.3.3 - 2012/12/12 =
 
 * Adicionada opção para inserir dias extras na **Estimativa de Entrega**.
 
-= 1.3.2 - 06/12/2012 =
+= 1.3.2 - 2012/12/06 =
 
 * Melhoria no método connection_method().
 * Adicionado método (fix_format()) para corrigir o formato das medidas.
 * Correção do método order_shipping().
 
-= 1.3.1 - 30/11/2012 =
+= 1.3.1 - 2012/11/30 =
 
 * Corrigido o método connection_method().
 
-= 1.3 - 30/11/2012 =
+= 1.3 - 2012/11/30 =
 
 * Adicionada opção para logs de erro.
 * Adiciona opção para selecionar o tipo de conexão (SOAP ou SimpleXML) caso esteja disponível mais de uma opção no servidor.
 
-= 1.2.1 - 12/09/2012  =
+= 1.2.1 - 2012/09/12 =
 
 * Adicionada prevenção de erros quando o carrinho possui apenas produtos que não requerem entrega.
 
-= 1.2.0 - 11/09/2012  =
+= 1.2.0 - 2012/09/11 =
 
 * Adicionada classe alternativa para fazer a consulta com os correios utilizando SimpleXML.
 * Adicionada mensagem de notificação sobre a falta das extensões de SOAP e SimpleXML no servidor.
 
-= 1.1.0 - 05/09/2012  =
+= 1.1.0 - 2012/09/05 =
 
 * Adicionada conversão de pesos para kg (padrão dos Correios).
 * Adicionada conversão de medidas para cm (padrão dos Correios).
@@ -323,10 +334,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.1.3 =
+= 2.2.0 =
 
-* Removida as opções de "Disponibilidade" e "Países Permitidos", pois funciona apenas no Brasil.
-* Melhorado o relatório de erro quando os Correios retorna status 404.
+* Adicionada opção para exibir uma tabela com o histórico do rastreamento do pedido pelos Correios.
 
 == License ==
 
