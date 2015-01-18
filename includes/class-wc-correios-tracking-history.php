@@ -46,14 +46,14 @@ class WC_Correios_Tracking_History {
 		) );
 
 		$api_url     = $this->get_tracking_history_api_url();
-		$request_url = add_query_arg( $args, $api );
+		$request_url = add_query_arg( $args, $api_url );
 
 		$params = array(
 			'sslverify' => false,
 			'timeout'   => 30
 		);
 
-		$response = wp_remote_get( $url, $params );
+		$response = wp_remote_get( $request_url, $params );
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			$tracking_history = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
