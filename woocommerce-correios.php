@@ -162,6 +162,20 @@ class WC_Correios {
 	public function simplexmlelement_missing_notice() {
 		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends to %s to work!', 'woocommerce-correios' ), '<a href="http://php.net/manual/en/book.simplexml.php">' . __( 'SimpleXML', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
 	}
+
+	/**
+	 * Plugin logger
+	 *
+	 * @return WC_Logger
+	 */
+	public static function logger() {
+		if ( class_exists( 'WC_Logger' ) ) {
+			return new WC_Logger();
+		} else {
+			global $woocommerce;
+			return $woocommerce->logger();
+		}
+	}
 }
 
 add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ), 0 );

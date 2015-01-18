@@ -56,6 +56,20 @@ class WC_Correios_Tracking_History {
 	}
 
 	/**
+	 * Logger.
+	 *
+	 * @param string $data
+	 */
+	protected function logger( $data ) {
+		$options = $this->get_method_options();
+
+		if ( ! empty( $options ) && 'yes' == $options['debug'] ) {
+			$logger = WC_Correios::logger();
+			$logger->add( 'correios', $data );
+		}
+	}
+
+	/**
 	 * Access API Correios.
 	 *
 	 * @param  string $tracking_code.
@@ -74,10 +88,13 @@ class WC_Correios_Tracking_History {
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
 
+
 		$params = array(
 			'sslverify' => false,
 			'timeout'   => 30
 		);
+
+		$this->logger( 'Requesting tracking history in: ' . print_r( $request_url, true ) );
 
 		$response = wp_remote_get( $request_url, $params );
 
@@ -87,6 +104,8 @@ class WC_Correios_Tracking_History {
 			$tracking_history = new stdClass();
 			$tracking_history->error = true;
 		}
+
+		$this->logger( 'Tracking history response: ' . print_r( $tracking_history, true ) );
 
 		return $tracking_history;
 	}
@@ -104,14 +123,14 @@ class WC_Correios_Tracking_History {
 		}
 
 		$tracking = $this->get_tracking_history( $tracking_code );
-		error_log( print_r( $tracking, true ) );
 
 		if ( isset( $tracking->objeto->evento ) ) {
 
 			woocommerce_get_template(
 				'myaccount/tracking-history-table.php',
 				array(
-					'events' => $tracking->objeto->evento
+					'events' => $tracking->objeto->evento,
+					'code'   => $tracking_code
 				),
 				'',
 				WC_Correios::get_templates_path()

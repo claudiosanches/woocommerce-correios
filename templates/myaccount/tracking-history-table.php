@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php _e( 'Delivery History', 'woocommerce-correios' ); ?></h2>
 
+<p><?php printf( __( 'History for the tracking code: %s.', 'woocommerce-correios' ), sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $code ) ); ?></p>
+
 <table class="shop_table shop_table_responsive">
 	<tr>
 		<th><?php _e( 'Date', 'woocommerce-correios' ); ?></th>

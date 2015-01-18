@@ -56,11 +56,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
-			if ( class_exists( 'WC_Logger' ) ) {
-				$this->log = new WC_Logger();
-			} else {
-				$this->log = $this->woocommerce_method()->logger();
-			}
+			$this->log = WC_Correios::logger();
 		}
 	}
 
