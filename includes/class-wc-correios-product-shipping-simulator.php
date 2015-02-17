@@ -108,12 +108,14 @@ class WC_Correios_Product_Shipping_Simulator {
 		$service_sedex_10   = isset( $options['service_sedex_10'] ) ? $options['service_sedex_10'] : '';
 		$service_sedex_hoje = isset( $options['service_sedex_hoje'] ) ? $options['service_sedex_hoje'] : '';
 		$service_esedex     = isset( $options['service_esedex'] ) ? $options['service_esedex'] : '';
+		$service_carta_reg  = isset( $options['service_carta_reg'] ) ? $options['service_carta_reg'] : '';
 
 		$services = array();
-		$services['PAC']        = ( 'yes' == $service_pac ) ? '41106' : '';
-		$services['SEDEX']      = ( 'yes' == $service_sedex ) ? '40010' : '';
-		$services['SEDEX 10']   = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
-		$services['SEDEX Hoje'] = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['PAC']              = ( 'yes' == $service_pac ) ? '41106' : '';
+		$services['SEDEX']            = ( 'yes' == $service_sedex ) ? '40010' : '';
+		$services['SEDEX 10']         = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
+		$services['SEDEX Hoje']       = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['Carta Registrada'] = ( 'yes' == $service_carta_reg ) ? '10014' : '';
 
 		if ( 'corporate' == $corporate_service ) {
 			$services['PAC']     = ( 'yes' == $service_pac ) ? '41068' : '';
