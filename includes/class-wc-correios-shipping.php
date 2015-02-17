@@ -439,7 +439,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		$shipping = $connect->get_shipping();
-    $shipping_final = array();
+    $shipping_values = array();
 		$allow_carta_reg = $this->allow_carta_reg( $package );
 
 		foreach ( $shipping as $code => $shipping_item ) {
