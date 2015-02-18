@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,11 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Changelog ==
 
+= 2.2.1 - 2015/02/18 =
+
+* Removido os decimais do valor declarado, o valor agora é arredondado (Os Correios passou a ter problemas com valores declarados com decimais e a calcular o valor do frete de forma incorreta).
+* Adicionado filtro `woocommerce_correios_tracking_user_data`.
+
 = 2.2.0 - 2015/01/18 =
 
 * Adicionada API para consulta do objeto no site dos Correios (Agradecimentos para [Edison Costa](https://github.com/claudiosmweb/woocommerce-correios/pull/24)).
@@ -334,9 +339,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.2.0 =
+= 2.2.1 =
 
-* Adicionada opção para exibir uma tabela com o histórico do rastreamento do pedido pelos Correios.
+* Removido os decimais do valor declarado, o valor agora é arredondado (Os Correios passou a ter problemas com valores declarados com decimais e a calcular o valor do frete de forma incorreta).
+* Adicionado filtro `woocommerce_correios_tracking_user_data`.
 
 == License ==
 

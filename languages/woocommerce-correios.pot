@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios 2.2.0\n"
+"Project-Id-Version: WooCommerce Correios 2.2.1\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/woocommerce-correios/\n"
-"POT-Creation-Date: 2015-01-18 21:16:35+00:00\n"
+"POT-Creation-Date: 2015-02-18 14:59:12+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgid "Area with delivery temporarily subjected to different periods."
 msgstr ""
 
 #: includes/class-wc-correios-product-shipping-simulator.php:43
-#: includes/class-wc-correios-product-shipping-simulator.php:274
+#: includes/class-wc-correios-product-shipping-simulator.php:273
 msgid ""
 "It was not possible to simulate the shipping, please try adding the product "
 "to cart and proceed to try to get the value."
