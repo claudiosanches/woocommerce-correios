@@ -40,19 +40,9 @@ class WC_Correios_Tracking_History {
 	 * @return array
 	 */
 	protected function get_user_data() {
-		$options  = $this->get_method_options();
-		$login    = 'ECT';
-		$password = 'SRO';
+		$user_data = apply_filters( 'woocommerce_correios_tracking_user_data', array( 'login' => 'ECT', 'password' => 'SRO' ) );
 
-		if ( 'corporate' == $options['corporate_service'] ) {
-			$login    = empty( $options['login'] ) ? 'ECT' : $options['login'];
-			$password = empty( $options['password'] ) ? 'SRO' : $options['password'];
-		}
-
-		return array(
-			'login'    => $login,
-			'password' => $password
-		);
+		return $user_data;
 	}
 
 	/**
