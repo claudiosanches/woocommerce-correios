@@ -9,6 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Tracking_History {
 
 	/**
+	 * Tracking API URL.
+	 *
+	 * @var string
+	 */
+	private $_api_url = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos';
+
+	/**
 	 * Initialize the order actions.
 	 */
 	public function __construct() {
@@ -22,7 +29,9 @@ class WC_Correios_Tracking_History {
 	 * @return string
 	 */
 	protected function get_tracking_history_api_url() {
-		return apply_filters( 'woocommerce_correios_tracking_api_url', 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos' );
+		$url = $this->_api_url;
+
+		return apply_filters( 'woocommerce_correios_tracking_api_url', $url );
 	}
 
 	/**
