@@ -254,8 +254,7 @@ class WC_Correios_Product_Shipping_Simulator {
 		$connect->set_zip_destination( $zip_destination );
 		$connect->set_debug( $debug );
 		if ( 'declare' == $declare_value ) {
-			$declared_value = number_format( $product_price, 2, ',', '' );
-			$connect->set_declared_value( $declared_value );
+			$connect->set_declared_value( $product_price );
 		}
 		if ( 'corporate' == $corporate_service ) {
 			$connect->set_login( $login );

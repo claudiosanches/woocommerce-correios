@@ -455,7 +455,7 @@ class WC_Correios_Connect {
 			'nVlPeso'             => $this->float_to_string( $this->weight ),
 			'nCdFormato'          => $this->format,
 			'sCdMaoPropria'       => $this->own_hand,
-			'nVlValorDeclarado'   => $this->declared_value,
+			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
 			'sCdAvisoRecebimento' => $this->receipt_notice,
 			'StrRetorno'          => 'xml'
 		) );

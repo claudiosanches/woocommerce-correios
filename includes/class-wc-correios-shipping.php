@@ -327,7 +327,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$connect->set_zip_destination( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );
 		if ( 'declare' == $this->declare_value ) {
-			$declared_value = number_format( $this->woocommerce_method()->cart->cart_contents_total, 2, ',', '' );
+			$declared_value = $this->woocommerce_method()->cart->cart_contents_total;
 			$connect->set_declared_value( $declared_value );
 		}
 
