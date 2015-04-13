@@ -54,20 +54,20 @@ class WC_Correios_Connect {
 		  ADDITIONAL_SERVICE_RECEIPT_NOTICE_TELEGRAM        = 16;
 
 	 protected $additional_services = array(
-	 	1  => array('label' => 'Registro Nacional', 'price' => 3.20),
-		2  => array('label' => 'Registro Módico', 'price' => 1.60),
-		3  => array('label' => 'Mão Própria', 'price' => 4.30),
-		4  => array('label' => 'Aviso de Recebimento', 'price' => 3.20),
-		5  => array('label' => 'Posta Restante Pedida', 'price' => 0.80),
-		6  => array('label' => 'Valor Declarado Máximo Nacional (Encomendas)', 'price' => 10000.00),
-		7  => array('label' => 'Valor Declarado Máximo Nacional (Mensagem)', 'price' => 500.00),
-		8  => array('label' => 'Multa por omissão de valor declarado', 'price' => 35.00),
-		9  => array('label' => 'Achados e Perdidos', 'price' => 4.30),
-		10 => array('label' => 'Armazenagem (por kg ou fração por dia)', 'price' => 0.80),
-		11 => array('label' => 'Pedido de modificação de nome/endereço, reexpedição e retirada (Via Postal)', 'price' => 2.50),
-		12 => array('label' => 'Indenização', 'price' => 6.80),
-		15 => array('label' => 'Serviços relacionados ao CPF', 'price' => 5.70),
-		16 => array('label' => 'Pedido de confirmação de entrega (Telegrama)', 'price' => 3.24),
+	 	1  => array( 'label' => 'Registro Nacional', 'price' => 3.20 ),
+		2  => array( 'label' => 'Registro Módico', 'price' => 1.60 ),
+		3  => array( 'label' => 'Mão Própria', 'price' => 4.30 ),
+		4  => array( 'label' => 'Aviso de Recebimento', 'price' => 3.20 ),
+		5  => array( 'label' => 'Posta Restante Pedida', 'price' => 0.80 ),
+		6  => array( 'label' => 'Valor Declarado Máximo Nacional (Encomendas)', 'price' => 10000.00 ),
+		7  => array( 'label' => 'Valor Declarado Máximo Nacional (Mensagem)', 'price' => 500.00 ),
+		8  => array( 'label' => 'Multa por omissão de valor declarado', 'price' => 35.00 ),
+		9  => array( 'label' => 'Achados e Perdidos', 'price' => 4.30 ),
+		10 => array( 'label' => 'Armazenagem (por kg ou fração por dia)', 'price' => 0.80 ),
+		11 => array( 'label' => 'Pedido de modificação de nome/endereço, reexpedição e retirada (Via Postal)', 'price' => 2.50 ),
+		12 => array( 'label' => 'Indenização', 'price' => 6.80 ),
+		15 => array( 'label' => 'Serviços relacionados ao CPF', 'price' => 5.70 ),
+		16 => array( 'label' => 'Pedido de confirmação de entrega (Telegrama)', 'price' => 3.24 ),
 	 );
 
 	/**
@@ -84,27 +84,27 @@ class WC_Correios_Connect {
 		 *
 		 */
 		99998 => array(
-			array('from' => 0.000, 'to' => 0.020, 'price' => 0.85),
-			array('from' => 0.021, 'to' => 0.050, 'price' => 1.30),
-			array('from' => 0.051, 'to' => 0.100, 'price' => 1.75),
-			array('from' => 0.101, 'to' => 0.150, 'price' => 2.15),
-			array('from' => 0.151, 'to' => 0.200, 'price' => 2.50),
-			array('from' => 0.201, 'to' => 0.250, 'price' => 2.90),
-			array('from' => 0.251, 'to' => 0.300, 'price' => 3.30),
-			array('from' => 0.301, 'to' => 0.350, 'price' => 3.70),
-			array('from' => 0.351, 'to' => 0.400, 'price' => 4.10),
-			array('from' => 0.401, 'to' => 0.450, 'price' => 4.50),
-			array('from' => 0.451, 'to' => 0.500, 'price' => 4.90),
-			array('from' => 0.501, 'to' => 0.550, 'price' => 5.20),
-			array('from' => 0.551, 'to' => 0.600, 'price' => 5.60),
-			array('from' => 0.601, 'to' => 0.650, 'price' => 5.95),
-			array('from' => 0.651, 'to' => 0.700, 'price' => 6.25),
-			array('from' => 0.701, 'to' => 0.750, 'price' => 6.60),
-			array('from' => 0.751, 'to' => 0.800, 'price' => 6.95),
-			array('from' => 0.801, 'to' => 0.850, 'price' => 7.30),
-			array('from' => 0.851, 'to' => 0.900, 'price' => 7.70),
-			array('from' => 0.901, 'to' => 0.950, 'price' => 8.05),
-			array('from' => 0.951, 'to' => 1.000, 'price' => 8.40),
+			array( 'from' => 0.000, 'to' => 0.020, 'price' => 0.85 ),
+			array( 'from' => 0.021, 'to' => 0.050, 'price' => 1.30 ),
+			array( 'from' => 0.051, 'to' => 0.100, 'price' => 1.75 ),
+			array( 'from' => 0.101, 'to' => 0.150, 'price' => 2.15 ),
+			array( 'from' => 0.151, 'to' => 0.200, 'price' => 2.50 ),
+			array( 'from' => 0.201, 'to' => 0.250, 'price' => 2.90 ),
+			array( 'from' => 0.251, 'to' => 0.300, 'price' => 3.30 ),
+			array( 'from' => 0.301, 'to' => 0.350, 'price' => 3.70 ),
+			array( 'from' => 0.351, 'to' => 0.400, 'price' => 4.10 ),
+			array( 'from' => 0.401, 'to' => 0.450, 'price' => 4.50 ),
+			array( 'from' => 0.451, 'to' => 0.500, 'price' => 4.90 ),
+			array( 'from' => 0.501, 'to' => 0.550, 'price' => 5.20 ),
+			array( 'from' => 0.551, 'to' => 0.600, 'price' => 5.60 ),
+			array( 'from' => 0.601, 'to' => 0.650, 'price' => 5.95 ),
+			array( 'from' => 0.651, 'to' => 0.700, 'price' => 6.25 ),
+			array( 'from' => 0.701, 'to' => 0.750, 'price' => 6.60 ),
+			array( 'from' => 0.751, 'to' => 0.800, 'price' => 6.95 ),
+			array( 'from' => 0.801, 'to' => 0.850, 'price' => 7.30 ),
+			array( 'from' => 0.851, 'to' => 0.900, 'price' => 7.70 ),
+			array( 'from' => 0.901, 'to' => 0.950, 'price' => 8.05 ),
+			array( 'from' => 0.951, 'to' => 1.000, 'price' => 8.40 ),
 			'additional_per_kg' => 3.35,
 			'weight_limit' => 20.000,
 			'delivery_days' => 15
@@ -118,17 +118,17 @@ class WC_Correios_Connect {
 		 *
 		 */
 		99999 => array(
-			array('from' => 0.000, 'to' => 0.020, 'price' => 1.25),
-			array('from' => 0.021, 'to' => 0.050, 'price' => 1.75),
-			array('from' => 0.051, 'to' => 0.100, 'price' => 2.35),
-			array('from' => 0.101, 'to' => 0.150, 'price' => 2.90),
-			array('from' => 0.151, 'to' => 0.200, 'price' => 3.40),
-			array('from' => 0.201, 'to' => 0.250, 'price' => 4.00),
-			array('from' => 0.251, 'to' => 0.300, 'price' => 4.50),
-			array('from' => 0.301, 'to' => 0.350, 'price' => 5.05),
-			array('from' => 0.351, 'to' => 0.400, 'price' => 5.50),
-			array('from' => 0.401, 'to' => 0.450, 'price' => 6.10),
-			array('from' => 0.451, 'to' => 0.500, 'price' => 6.60),
+			array( 'from' => 0.000, 'to' => 0.020, 'price' => 1.25 ),
+			array( 'from' => 0.021, 'to' => 0.050, 'price' => 1.75 ),
+			array( 'from' => 0.051, 'to' => 0.100, 'price' => 2.35 ),
+			array( 'from' => 0.101, 'to' => 0.150, 'price' => 2.90 ),
+			array( 'from' => 0.151, 'to' => 0.200, 'price' => 3.40 ),
+			array( 'from' => 0.201, 'to' => 0.250, 'price' => 4.00 ),
+			array( 'from' => 0.251, 'to' => 0.300, 'price' => 4.50 ),
+			array( 'from' => 0.301, 'to' => 0.350, 'price' => 5.05 ),
+			array( 'from' => 0.351, 'to' => 0.400, 'price' => 5.50 ),
+			array( 'from' => 0.401, 'to' => 0.450, 'price' => 6.10 ),
+			array( 'from' => 0.451, 'to' => 0.500, 'price' => 6.60 ),
 			'weight_limit' => 20.000,
 			'delivery_days' => 12
 		)
@@ -617,37 +617,37 @@ class WC_Correios_Connect {
 				$code = (string) $service->Codigo;
 
 				//  Obtain the price by using the prices per weight table  //
-				if (in_array($code, array_keys($this->prices_per_weight)) && (!isset($this->prices_per_weight[$code]['weight_limit']) || $this->weight <= $this->prices_per_weight[$code]['weight_limit'])) {
+				if ( in_array ( $code, array_keys( $this->prices_per_weight ) ) && ( !isset( $this->prices_per_weight[$code]['weight_limit'] ) || $this->weight <= $this->prices_per_weight[$code]['weight_limit'] ) ) {
 					$freight_price =
 					$biggest_price =
 					$biggest_weight = NULL;
 
-					foreach ($this->prices_per_weight[$code] as $k2 => $v2) {
-						if (($from = @$v2['from']) !== NULL && ($to = @$v2['to']) !== NULL && ($price = @$v2['price']) !== NULL) {
+					foreach ( $this->prices_per_weight[$code] as $k2 => $v2 ) {
+						if ( ( $from = @$v2['from'] ) !== NULL && ( $to = @$v2['to'] ) !== NULL && ( $price = @$v2['price'] ) !== NULL ) {
 							$biggest_weight = $to;
 							$biggest_price = $price;
 
-							if ($this->weight >= $from && $this->weight <= $to) {
+							if ( $this->weight >= $from && $this->weight <= $to ) {
 								$freight_price = $price;
 								break;
 							}
 						}
 					}
 
-					if ($freight_price === NULL) {
-						if (($additional_per_kg = @$this->prices_per_weight[$code]['additional_per_kg']) !== NULL) {
+					if ( $freight_price === NULL ) {
+						if ( ( $additional_per_kg = @$this->prices_per_weight[$code]['additional_per_kg'] ) !== NULL ) {
 							$freight_price = $biggest_price;
 
-							if ($this->weight > $biggest_weight) $freight_price += (ceil($this->weight) - 1) * $additional_per_kg;
+							if ( $this->weight > $biggest_weight ) $freight_price += ( ceil( $this->weight ) - 1 ) * $additional_per_kg;
 						}
 					}
 
-					if ($freight_price !== NULL) {
+					if ( $freight_price !== NULL ) {
 						$freight_price += $this->additional_services[$this->registry_type]['price'];
-						if ( !('N' == $this->own_hand) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
-						if ( !('N' == $this->receipt_notice) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
+						if ( !( 'N' == $this->own_hand ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
+						if ( !( 'N' == $this->receipt_notice ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
 
-						$service->Valor = number_format($freight_price, 2, ',', '');
+						$service->Valor = number_format( $freight_price, 2, ',', '' );
 						$service->PrazoEntrega = $this->prices_per_weight[$code]['delivery_days'];
 						$service->Erro = 0;
 						$service->MsgErro = NULL;

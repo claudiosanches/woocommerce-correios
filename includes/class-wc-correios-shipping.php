@@ -238,11 +238,10 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 			'registry_type' => array(
 				'title'            => __( 'Tipo de Registro', 'woocommerce-correios' ),
 				'type'             => 'select',
-				'description'      => __( 'Usado nas modalidades sem web service (impresso).', 'woocommerce-correios' ),
 				'default'          => WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL,
 				'options'          => array(
-					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL => __( 'Registro Nacional', 'woocommerce-correios' ) . ' (R$ ' . number_format($connect->get_additional_service_price(WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL), 2, ',', '.') . ')',
-					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO   => __( 'Registro Módico', 'woocommerce-correios' ) . ' (R$ ' . number_format($connect->get_additional_service_price(WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO), 2, ',', '.') . ')'
+					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL => __( 'Registro Nacional', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL ), 2, ',', '.' ) . ')',
+					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO   => __( 'Registro Módico', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO ), 2, ',', '.' ) . ')'
 				),
 			),
 			'package_standard' => array(
