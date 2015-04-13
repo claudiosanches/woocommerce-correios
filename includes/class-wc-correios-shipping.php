@@ -220,7 +220,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'default'          => 'no'
 			),
 			'service_impresso_normal' => array(
-				'title'            => __( 'Impresso Normal', 'woocommerce-correios' ),
+				'title'            => __( 'Printed Normal', 'woocommerce-correios' ),
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via Printed Normal.', 'woocommerce-correios' ),
@@ -228,7 +228,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'default'          => 'no'
 			),
 			'service_impresso_urgente' => array(
-				'title'            => __( 'Impresso Urgente', 'woocommerce-correios' ),
+				'title'            => __( 'Printed Urgent', 'woocommerce-correios' ),
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via Printed Urgent.', 'woocommerce-correios' ),
@@ -236,13 +236,13 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'default'          => 'no'
 			),
 			'registry_type' => array(
-				'title'            => __( 'Tipo de Registro', 'woocommerce-correios' ),
+				'title'            => __( 'Registry Type', 'woocommerce-correios' ),
 				'type'             => 'select',
-				'description'      => __( 'Used in the modalities without webservice (Impresso Normal, Impresso Urgente).', 'woocommerce-correios' ),
-				'default'          => WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL,
+				'description'      => __( 'Used in the modalities without webservice (Printed Normal, Printed Urgent).', 'woocommerce-correios' ),
+				'default'          => WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY,
 				'options'          => array(
-					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL => __( 'Registro Nacional', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL ), 2, ',', '.' ) . ')',
-					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO   => __( 'Registro Módico', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_MODICO ), 2, ',', '.' ) . ')'
+					WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY   => __( 'National Registry', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY ), 2, ',', '.' ) . ')',
+					WC_Correios_Connect::ADDITIONAL_SERVICE_REASONABLE_REGISTRY => __( 'Reasonable Registry', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REASONABLE_REGISTRY ), 2, ',', '.' ) . ')'
 				),
 			),
 			'package_standard' => array(
