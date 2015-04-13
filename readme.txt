@@ -35,6 +35,8 @@ Este plugin foi feito baseado na documentação do [Webservices Correios](http:/
 * SEDEX 10.
 * SEDEX Hoje.
 * e-SEDEX (apenas com contrato).
+* Impresso Normal
+* Impresso Urgente
 
 = Instalação: =
 
@@ -116,6 +118,8 @@ São aceitos os métodos:
 * SEDEX 10 (código 40215).
 * SEDEX Hoje (código 40290).
 * e-SEDEX (apenas com contrato, código 81019).
+* Impresso Normal (99998).
+* Impresso Urgente (99999).
 
 Para mais informações sobre os métodos de entrega dos Correios visite: [Encomendas - Correios](http://www.correios.com.br/voce/enviar/encomendas.cfm).
 
