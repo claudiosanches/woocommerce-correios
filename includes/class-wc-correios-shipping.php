@@ -238,6 +238,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 			'registry_type' => array(
 				'title'            => __( 'Tipo de Registro', 'woocommerce-correios' ),
 				'type'             => 'select',
+				'description'      => __( 'Used in the modalities without webservice (Impresso Normal, Impresso Urgente).', 'woocommerce-correios' ),
 				'default'          => WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL,
 				'options'          => array(
 					WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL => __( 'Registro Nacional', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REGISTRO_NACIONAL ), 2, ',', '.' ) . ')',
