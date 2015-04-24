@@ -51,7 +51,9 @@ class WC_Correios_Connect {
 		  ADDITIONAL_SERVICE_SHIPPING_MODIFICATION          = 11,
 		  ADDITIONAL_SERVICE_INDEMNIFICATION                = 12,
 		  ADDITIONAL_SERVICE_CPF_RELATED_SERVICES           = 15,
-		  ADDITIONAL_SERVICE_RECEIPT_NOTICE_TELEGRAM        = 16;
+		  ADDITIONAL_SERVICE_RECEIPT_NOTICE_TELEGRAM        = 16,
+
+		  ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT = 0.500;
 
 	 protected $additional_services = array(
 	 	1  => array( 'label' => 'National Registry', 'price' => 3.20 ),
@@ -107,7 +109,7 @@ class WC_Correios_Connect {
 			array( 'from' => 0.951, 'to' => 1.000, 'price' => 8.40 ),
 			'additional_per_kg' => 3.35,
 			'weight_limit' => 20.000,
-			'delivery_days' => 15
+			'delivery_days' => 7
 		),
 
 		/**
@@ -129,8 +131,7 @@ class WC_Correios_Connect {
 			array( 'from' => 0.351, 'to' => 0.400, 'price' => 5.50 ),
 			array( 'from' => 0.401, 'to' => 0.450, 'price' => 6.10 ),
 			array( 'from' => 0.451, 'to' => 0.500, 'price' => 6.60 ),
-			'weight_limit' => 20.000,
-			'delivery_days' => 12
+			'delivery_days' => 3
 		)
 	);
 
@@ -383,7 +384,7 @@ class WC_Correios_Connect {
 	 *
 	 * @param int $registry_type
 	 */
-	public function set_registry_type( $registry_type = 1 ) {
+	public function set_registry_type( $registry_type = self::ADDITIONAL_SERVICE_NATIONAL_REGISTRY ) {
 		$this->registry_type = $registry_type;
 	}
 
@@ -643,7 +644,7 @@ class WC_Correios_Connect {
 					}
 
 					if ( $freight_price !== NULL ) {
-						$freight_price += $this->additional_services[$this->registry_type]['price'];
+						$freight_price += $this->additional_services[$this->weight <= self::ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT ? $this->registry_type : self::ADDITIONAL_SERVICE_NATIONAL_REGISTRY]['price'];
 						if ( !( 'N' == $this->own_hand ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
 						if ( !( 'N' == $this->receipt_notice ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
 
