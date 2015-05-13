@@ -636,22 +636,43 @@ class WC_Correios_Connect {
 					}
 
 					if ( $freight_price === NULL ) {
+						//  Adds the additional price per kg  //
 						if ( ( $additional_per_kg = @$this->prices_per_weight[$code]['additional_per_kg'] ) !== NULL ) {
 							$freight_price = $biggest_price;
 
 							if ( $this->weight > $biggest_weight ) $freight_price += ( ceil( $this->weight ) - 1 ) * $additional_per_kg;
 						}
+						//  ================================  //
 					}
 
 					if ( $freight_price !== NULL ) {
+						//  Adds the registry price to the final freight price  //
 						$freight_price += $this->additional_services[$this->weight <= self::ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT ? $this->registry_type : self::ADDITIONAL_SERVICE_NATIONAL_REGISTRY]['price'];
+
+						//  Adds the own hand price to the final freight price  //
 						if ( !( 'N' == $this->own_hand ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
+
+						//  Adds the receipt notice price to the final freight price  //
 						if ( !( 'N' == $this->receipt_notice ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
 
-						$service->Valor = number_format( $freight_price, 2, ',', '' );
-						$service->PrazoEntrega = $this->prices_per_weight[$code]['delivery_days'];
-						$service->Erro = 0;
-						$service->MsgErro = NULL;
+						//  Verify if this freight is more expensive than any one of the other services returned by the web service  //
+						$more_expensive = false;
+						foreach ( $values as $k3 => $v3 ) {
+							if ( $v3->Valor <= $freight_price ) {
+								$more_expensive = true;
+								break;
+							}
+						}
+						//  =======================================================================================================  //
+
+						//  Adds the service to the function result  //
+						if ( !$more_expensive ) {
+							$service->Valor = number_format( $freight_price, 2, ',', '' );
+							$service->PrazoEntrega = $this->prices_per_weight[$code]['delivery_days'];
+							$service->Erro = 0;
+							$service->MsgErro = NULL;
+						}
+						//  =======================================  //
 					}
 				}
 				//  =====================================================  //
