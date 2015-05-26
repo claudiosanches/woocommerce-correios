@@ -34,6 +34,8 @@ class WC_Correios_Connect {
 
 	/**
 	 * Additional Services
+	 * Last Update: 2015-04-10
+	 * Source: http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var array
 	 */
@@ -56,16 +58,16 @@ class WC_Correios_Connect {
 		  ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT = 0.500;
 
 	 protected $additional_services = array(
-	 	1  => array( 'label' => 'National Registry', 'price' => 3.20 ),
-		2  => array( 'label' => 'Reasonable Registry', 'price' => 1.60 ),
-		3  => array( 'label' => 'Own Hand', 'price' => 4.30 ),
-		4  => array( 'label' => 'Receipt Notice', 'price' => 3.20 ),
-		5  => array( 'label' => 'Put Remainder Request', 'price' => 0.80 ),
+	 	1  => array( 'label' => 'National Registry', 'price' => 3.60 ),
+		2  => array( 'label' => 'Reasonable Registry', 'price' => 1.80 ),
+		3  => array( 'label' => 'Own Hand', 'price' => 4.75 ),
+		4  => array( 'label' => 'Receipt Notice', 'price' => 3.60 ),
+		5  => array( 'label' => 'Put Remainder Request', 'price' => 0.90 ),
 		6  => array( 'label' => 'Maximum National Declared Value (Orders)', 'price' => 10000.00 ),
 		7  => array( 'label' => 'Maximum National Declared Value (Messages)', 'price' => 500.00 ),
-		8  => array( 'label' => 'Declared Value Omission Fine', 'price' => 35.00 ),
-		9  => array( 'label' => 'Lost And Found', 'price' => 4.30 ),
-		10 => array( 'label' => 'Storage (Per kg Or Fraction, Per Day)', 'price' => 0.80 ),
+		8  => array( 'label' => 'Declared Value Omission Fine', 'price' => 40.00 ),
+		9  => array( 'label' => 'Lost And Found', 'price' => 4.75 ),
+		10 => array( 'label' => 'Storage (Per kg Or Fraction, Per Day)', 'price' => 0.90 ),
 		11 => array( 'label' => 'Shipping Data Modification Request (Name, Address, Forwarding, Withdrawal) (Via Postal)', 'price' => 2.50 ),
 		12 => array( 'label' => 'Indemnification', 'price' => 6.80 ),
 		15 => array( 'label' => 'CPF Related Services', 'price' => 5.70 ),
@@ -79,11 +81,9 @@ class WC_Correios_Connect {
 	 */
 	protected $prices_per_weight = array(
 		/**
-		 *
 		 * Impresso Normal (Printed Normal)
 		 * Last Update: 2014-02-01
 		 * Source: http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
-		 *
 		 */
 		99998 => array(
 			array( 'from' => 0.000, 'to' => 0.020, 'price' => 0.85 ),
@@ -113,11 +113,9 @@ class WC_Correios_Connect {
 		),
 
 		/**
-		 *
 		 * Impresso Urgente (Printed Urgent)
 		 * Last Update: 2014-02-01
 		 * Source: http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
-		 *
 		 */
 		99999 => array(
 			array( 'from' => 0.000, 'to' => 0.020, 'price' => 1.25 ),
