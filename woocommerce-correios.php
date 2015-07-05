@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Correios
  * Plugin URI: https://github.com/claudiosmweb/woocommerce-correios
  * Description: Correios para WooCommerce
- * Author: claudiosanches, rodrigoprior
+ * Author: Claudio Sanches
  * Author URI: http://claudiosmweb.com/
  * Version: 2.2.1
  * License: GPLv2 or later
@@ -178,6 +178,6 @@ class WC_Correios {
 	}
 }
 
-add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ), 0 );
+add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ) );
 
 endif;
