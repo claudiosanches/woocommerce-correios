@@ -145,14 +145,8 @@ class WC_Correios_Connect {
 	 * @param string $debug Debug mode.
 	 */
 	public function __construct() {
-		$this->id = 'correios';
-
-		// Logger.
-		if ( class_exists( 'WC_Logger' ) ) {
-			$this->log = new WC_Logger();
-		} else {
-			$this->log = $this->woocommerce_method()->logger();
-		}
+		$this->id  = 'correios';
+		$this->log = WC_Correios::logger();
 	}
 
 	/**
