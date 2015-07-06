@@ -145,7 +145,7 @@ class WC_Correios_Connect {
 	 * @param string $debug Debug mode.
 	 */
 	public function __construct() {
-		$this->id = WC_Correios::get_method_id();
+		$this->id = 'correios';
 
 		// Logger.
 		if ( class_exists( 'WC_Logger' ) ) {

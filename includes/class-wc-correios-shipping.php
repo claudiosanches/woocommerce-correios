@@ -15,7 +15,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->id                 = WC_Correios::get_method_id();
+		$this->id                 = 'correios';
 		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
 		$this->method_description = __( 'Correios is a brazilian delivery method.', 'woocommerce-correios' );
 

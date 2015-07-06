@@ -30,13 +30,6 @@ class WC_Correios {
 	const VERSION = '2.2.1';
 
 	/**
-	 * Integration id.
-	 *
-	 * @var string
-	 */
-	protected static $method_id = 'correios';
-
-	/**
 	 * Instance of this class.
 	 *
 	 * @var object
@@ -82,15 +75,6 @@ class WC_Correios {
 		}
 
 		return self::$instance;
-	}
-
-	/**
-	 * Return the method id/slug.
-	 *
-	 * @return string Gateway id/slug variable.
-	 */
-	public static function get_method_id() {
-		return self::$method_id;
 	}
 
 	/**
