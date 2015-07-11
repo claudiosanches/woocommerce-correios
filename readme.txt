@@ -3,8 +3,8 @@ Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 3.8
-Tested up to: 4.1
-Stable tag: 2.2.1
+Tested up to: 4.2
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 = Compatibilidade =
 
-Compatível com as versões 2.1.x, 2.2.x e 2.3.x do WooCommerce.
+Compatível com as versões 2.1.x, 2.2.x, 2.3.x e 2.4.x do WooCommerce.
 
 = Dúvidas? =
 
@@ -179,6 +179,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 7. Tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações do plugin.
 
 == Changelog ==
+
+= 2.2.2 - 2015/07/11 =
+
+* Corrigido código de conversão do formato de moeda dos Correios para o WooCommerce. 
 
 = 2.2.1 - 2015/02/18 =
 
@@ -339,10 +343,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.2.1 =
+= 2.2.2 =
 
-* Removido os decimais do valor declarado, o valor agora é arredondado (Os Correios passou a ter problemas com valores declarados com decimais e a calcular o valor do frete de forma incorreta).
-* Adicionado filtro `woocommerce_correios_tracking_user_data`.
+* Corrigido código de conversão do formato de moeda dos Correios para o WooCommerce.
 
 == License ==
 
