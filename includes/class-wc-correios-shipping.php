@@ -281,7 +281,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return mixed
 	 */
 	private function fix_format( $value ) {
-		$value = str_replace( ',', '.', $value );
+		$value = str_replace( array( '.', ',' ), array( '', '.' ), $value );
 
 		return $value;
 	}
