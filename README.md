@@ -2,9 +2,9 @@
 **Contributors:** claudiosanches, rodrigoprior  
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
-**Requires at least:** 3.8  
-**Tested up to:** 4.2  
-**Stable tag:** 2.2.2  
+**Requires at least:** 4.0  
+**Tested up to:** 4.3  
+**Stable tag:** 2.2.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -194,6 +194,10 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Changelog ##
 
+### 2.2.3 - 2015/07/23 ###
+
+* Melhorada a função que converte o formato de moeda que vêm dos Correios para o WooCommerce.
+
 ### 2.2.2 - 2015/07/11 ###
 
 * Corrigido código de conversão do formato de moeda dos Correios para o WooCommerce. 
@@ -357,9 +361,9 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.2.2 ###
+### 2.2.3 ###
 
-* Corrigido código de conversão do formato de moeda dos Correios para o WooCommerce.
+* Melhorada a função que converte o formato de moeda que vêm dos Correios para o WooCommerce.
 
 ## License ##
 
