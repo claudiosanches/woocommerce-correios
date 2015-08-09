@@ -120,7 +120,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			$this->replace[] = $this->object->get_order_number();
 
 			$this->find[]    = '{date}';
-			$this->replace[] = date_i18n( woocommerce_date_format(), time() );
+			$this->replace[] = date_i18n( wc_date_format(), time() );
 
 			$this->find[]    = '{tracking_code}';
 			$this->replace[] = $this->get_tracking_code_url( $tracking_code );
@@ -141,7 +141,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	public function get_content_html() {
 		ob_start();
 
-		woocommerce_get_template( $this->template_html, array(
+		wc_get_template( $this->template_html, array(
 			'order'            => $this->object,
 			'email_heading'    => $this->get_heading(),
 			'tracking_message' => $this->get_tracking_message(),
@@ -160,7 +160,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	public function get_content_plain() {
 		ob_start();
 
-		woocommerce_get_template( $this->template_plain, array(
+		wc_get_template( $this->template_plain, array(
 			'order'            => $this->object,
 			'email_heading'    => $this->get_heading(),
 			'tracking_message' => $this->get_tracking_message(),

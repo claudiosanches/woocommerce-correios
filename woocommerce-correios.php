@@ -131,21 +131,7 @@ class WC_Correios {
 	 * @return  string
 	 */
 	public function woocommerce_missing_notice() {
-		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on the last version of %s to work!', 'woocommerce-correios' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
-	}
-
-	/**
-	 * Plugin logger
-	 *
-	 * @return WC_Logger
-	 */
-	public static function logger() {
-		if ( class_exists( 'WC_Logger' ) ) {
-			return new WC_Logger();
-		} else {
-			global $woocommerce;
-			return $woocommerce->logger();
-		}
+		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on the last version of %s to work!', 'woocommerce-correios' ), '<a href="http://wordpress.org/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
 	}
 }
 

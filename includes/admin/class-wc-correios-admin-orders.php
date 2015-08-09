@@ -88,9 +88,7 @@ class WC_Correios_Admin_Orders {
 	 * @return void
 	 */
 	protected function trigger_email_notification( $order, $tracking_code ) {
-		global $woocommerce;
-
-		$mailer       = $woocommerce->mailer();
+		$mailer       = WC()->mailer();
 		$notification = $mailer->emails['WC_Email_Correios_Tracking'];
 		$notification->trigger( $order, $tracking_code );
 	}

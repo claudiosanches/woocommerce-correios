@@ -57,21 +57,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
-			$this->log = WC_Correios::logger();
-		}
-	}
-
-	/**
-	 * Backwards compatibility with version prior to 2.1.
-	 *
-	 * @return object Returns the main instance of WooCommerce class.
-	 */
-	protected function woocommerce_method() {
-		if ( function_exists( 'WC' ) ) {
-			return WC();
-		} else {
-			global $woocommerce;
-			return $woocommerce;
+			$this->log = new WC_Logger();
 		}
 	}
 
@@ -327,7 +313,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$connect->set_zip_destination( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );
 		if ( 'declare' == $this->declare_value ) {
-			$declared_value = $this->woocommerce_method()->cart->cart_contents_total;
+			$declared_value = WC()->cart->cart_contents_total;
 			$connect->set_declared_value( $declared_value );
 		}
 
@@ -358,8 +344,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = array() ) {
-		global $woocommerce;
-
 		$rates           = array();
 		$errors          = array();
 		$shipping_values = $this->correios_calculate( $package );
@@ -401,15 +385,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 					if ( '' != $error['error'] ) {
 						$type = ( '010' == $error['number'] ) ? 'notice' : 'error';
 						$message = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_attr( $error['error'] );
-						if ( function_exists( 'wc_add_notice' ) ) {
-							wc_add_notice( $message, $type );
-						} else {
-							if ( 'error' == $type ) {
-								$woocommerce->add_error( $message );
-							} else {
-								$woocommerce->add_message( $message );
-							}
-						}
+						wc_add_notice( $message, $type );
 					}
 				}
 			}

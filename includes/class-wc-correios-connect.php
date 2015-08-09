@@ -146,7 +146,7 @@ class WC_Correios_Connect {
 	 */
 	public function __construct() {
 		$this->id  = 'correios';
-		$this->log = WC_Correios::logger();
+		$this->log = new WC_Logger();
 	}
 
 	/**

@@ -63,7 +63,7 @@ class WC_Correios_Tracking_History {
 		$options = $this->get_method_options();
 
 		if ( ! empty( $options ) && 'yes' == $options['debug'] ) {
-			$logger = WC_Correios::logger();
+			$logger = new WC_Logger();
 			$logger->add( 'correios', $data );
 		}
 	}
@@ -135,7 +135,7 @@ class WC_Correios_Tracking_History {
 
 		// Display the right template for show the tracking code or tracking history.
 		if ( $events ) {
-			woocommerce_get_template(
+			wc_get_template(
 				'myaccount/tracking-history-table.php',
 				array(
 					'events' => $events,
@@ -145,7 +145,7 @@ class WC_Correios_Tracking_History {
 				WC_Correios::get_templates_path()
 			);
 		} else {
-			woocommerce_get_template(
+			wc_get_template(
 				'myaccount/tracking-code.php',
 				array(
 					'code' => $tracking_code

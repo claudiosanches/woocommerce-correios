@@ -84,7 +84,7 @@ class WC_Correios_Product_Shipping_Simulator {
 				$description = __( 'Calculate shipping estimated to your region.', 'woocommerce-correios' );
 			}
 
-			woocommerce_get_template( 'single-product/correios-simulator.php', array(
+			wc_get_template( 'single-product/correios-simulator.php', array(
 				'product'     => $product,
 				'style'       => $style,
 				'ids'         => $ids,
@@ -136,11 +136,7 @@ class WC_Correios_Product_Shipping_Simulator {
 			return __( '(Free)', 'woocommerce-correios' );
 		}
 
-		if ( function_exists( 'wc_price' ) ) {
-			return sanitize_text_field( wc_price( $value ) );
-		} else {
-			return sanitize_text_field( woocommerce_price( $value ) );
-		}
+		return sanitize_text_field( wc_price( $value ) );
 	}
 
 	/**
