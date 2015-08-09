@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[woocommerce-correios.woocommerce-correios]
-file_filter = languages/woocommerce-correios-<lang>.po
-source_file = languages/woocommerce-correios.pot
-source_lang = en
-type = PO
