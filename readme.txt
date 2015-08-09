@@ -279,7 +279,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 * Removida a classe de conexão com SOAP.
 * Melhoria do código.
-* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXmlElement`.
+* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXMLElement`.
 * Adicionado opção de taxa de manuseio.
 * Melhoria das descrições na página de configuração.
 * Melhoria no tratamento de erros.

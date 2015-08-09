@@ -73,7 +73,7 @@ class WC_Correios_Tracking_History {
 	 *
 	 * @param  string $tracking_code.
 	 *
-	 * @return SimpleXmlElement|stdClass History Tracking code.
+	 * @return SimpleXMLElement|stdClass History Tracking code.
 	 */
 	protected function get_tracking_history( $tracking_code ) {
 		$user_data   = $this->get_user_data();
@@ -96,7 +96,11 @@ class WC_Correios_Tracking_History {
 		$response = wp_remote_get( $request_url, $params );
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
-			$tracking_history = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
+			try {
+				$tracking_history = WC_Correios_Connect::safe_load_xml( $response['body'], LIBXML_NOCDATA );
+			} catch ( Exception $e ) {
+				$this->logger( 'Tracking history invalid XML: ' . $e->getMessage() );
+			}
 		} else {
 			$tracking_history = new stdClass();
 			$tracking_history->error = true;

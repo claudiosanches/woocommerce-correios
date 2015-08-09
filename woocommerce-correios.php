@@ -43,23 +43,19 @@ class WC_Correios {
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		if ( class_exists( 'SimpleXmlElement' ) ) {
-			// Checks with WooCommerce is installed.
-			if ( class_exists( 'WC_Shipping_Method' ) ) {
-				$this->includes();
+		// Checks with WooCommerce is installed.
+		if ( class_exists( 'WC_Shipping_Method' ) ) {
+			$this->includes();
 
-				if ( is_admin() ) {
-					$this->admin_includes();
-				}
-
-				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
-				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-			} else {
-				add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
+			if ( is_admin() ) {
+				$this->admin_includes();
 			}
+
+			add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
+			add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
+			add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 		} else {
-			add_action( 'admin_notices', array( $this, 'simplexmlelement_missing_notice' ) );
+			add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
 		}
 	}
 
@@ -136,15 +132,6 @@ class WC_Correios {
 	 */
 	public function woocommerce_missing_notice() {
 		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on the last version of %s to work!', 'woocommerce-correios' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
-	}
-
-	/**
-	 * SimpleXMLElement fallback notice.
-	 *
-	 * @return  string
-	 */
-	public function simplexmlelement_missing_notice() {
-		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends to %s to work!', 'woocommerce-correios' ), '<a href="http://php.net/manual/en/book.simplexml.php">' . __( 'SimpleXML', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
 	}
 
 	/**

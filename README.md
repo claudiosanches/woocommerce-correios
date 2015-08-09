@@ -65,10 +65,6 @@ Você pode esclarecer suas dúvidas usando:
 * Envie os arquivos do plugin para a pasta wp-content/plugins, ou instale usando o instalador de plugins do WordPress.
 * Ative o plugin.
 
-### Requerimentos: ###
-
-Possuir instalado a extensão SimpleXML (que já é instalado por padrão com o PHP 5).
-
 ### Configurações do plugin: ###
 
 Com o plugin instalado navegue até "WooCommerce" > "Configurações" > "Entrega" > "Correios".
@@ -101,7 +97,6 @@ Este plugin esta licenciado como GPL.
 ### O que eu preciso para utilizar este plugin? ###
 
 * Ter instalado o plugin WooCommerce.
-* Possuir instalado em sua hospedagem a extensão de SimpleXML.
 * Configurar o seu CEP de origem nas configurações do plugin.
 * Adicionar peso e dimensões nos produtos que pretende entregar.
 
@@ -293,7 +288,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 * Removida a classe de conexão com SOAP.
 * Melhoria do código.
-* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXmlElement`.
+* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXMLElement`.
 * Adicionado opção de taxa de manuseio.
 * Melhoria das descrições na página de configuração.
 * Melhoria no tratamento de erros.
