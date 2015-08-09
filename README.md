@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.3  
-**Stable tag:** 2.2.3  
+**Stable tag:** 2.3.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -65,6 +65,10 @@ Você pode esclarecer suas dúvidas usando:
 * Envie os arquivos do plugin para a pasta wp-content/plugins, ou instale usando o instalador de plugins do WordPress.
 * Ative o plugin.
 
+### Requerimentos: ###
+
+Possuir instalado a extensão SimpleXML (que já é instalado por padrão com o PHP 5).
+
 ### Configurações do plugin: ###
 
 Com o plugin instalado navegue até "WooCommerce" > "Configurações" > "Entrega" > "Correios".
@@ -97,6 +101,7 @@ Este plugin esta licenciado como GPL.
 ### O que eu preciso para utilizar este plugin? ###
 
 * Ter instalado o plugin WooCommerce.
+* Possuir instalado em sua hospedagem a extensão de SimpleXML.
 * Configurar o seu CEP de origem nas configurações do plugin.
 * Adicionar peso e dimensões nos produtos que pretende entregar.
 
@@ -188,6 +193,13 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 
 ## Changelog ##
+
+### 2.3.0 - 2015/08/08 ###
+
+* Adicionado suporte para WooCommerce 2.4.x.
+* Removido suporte para WooCommerce 2.0.x.
+* Corrigida a conversão dos valores de "Taxa de manuseio".
+* Corrigido a conversão de valores do simulador de frete na página de produto.
 
 ### 2.2.3 - 2015/07/23 ###
 
@@ -356,9 +368,12 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 ## Upgrade Notice ##
 
-### 2.2.3 ###
+### 2.3.0 ###
 
-* Melhorada a função que converte o formato de moeda que vêm dos Correios para o WooCommerce.
+* Adicionado suporte para WooCommerce 2.4.x.
+* Removido suporte para WooCommerce 2.0.x.
+* Corrigida a conversão dos valores de "Taxa de manuseio".
+* Corrigido a conversão de valores do simulador de frete na página de produto.
 
 ## License ##
 
