@@ -163,7 +163,7 @@ class WC_Correios_Product_Shipping_Simulator {
 					$add_time = isset( $options['additional_time'] ) ? $options['additional_time'] : 0;
 					$name     = WC_Correios_Connect::get_service_name( $code );
 					$label    = ( 'yes' == $date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $add_time ) : $name;
-					$cost     = str_replace( ',', '.', esc_attr( $shipping->Valor ) );
+					$cost     = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
 					$fee      = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
 
 					$_rates[] = array(

@@ -274,20 +274,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Replace comma by dot.
-	 *
-	 * @param  mixed $value Value to fix.
-	 *
-	 * @return mixed
-	 */
-	private function fix_format( $value ) {
-		$value = str_replace( '.', '', $value );
-		$value = str_replace( ',', '.', $value );
-
-		return $value;
-	}
-
-	/**
 	 * Gets the services IDs.
 	 *
 	 * @return array
@@ -382,8 +368,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				// Set the shipping rates.
 				if ( in_array( $error_number, array( '0', '010' ) ) ) {
 					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $this->additional_time ) : $name;
-					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
-					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
+					$cost  = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
+					$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 					array_push(
 						$rates,

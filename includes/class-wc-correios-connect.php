@@ -311,6 +311,20 @@ class WC_Correios_Connect {
 	}
 
 	/**
+	 * Replace comma by dot.
+	 *
+	 * @param  mixed $value Value to fix.
+	 *
+	 * @return mixed
+	 */
+	public static function fix_currency_format( $value ) {
+		$value = str_replace( '.', '', $value );
+		$value = str_replace( ',', '.', $value );
+
+		return $value;
+	}
+
+	/**
 	 * Clean Zipcode.
 	 *
 	 * @param  string $zip Zipcode.
