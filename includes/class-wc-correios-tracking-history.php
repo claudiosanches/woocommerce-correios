@@ -87,13 +87,12 @@ class WC_Correios_Tracking_History {
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
 		$params      = array(
-			'sslverify' => false,
-			'timeout'   => 30
+			'timeout' => 30
 		);
 
 		$this->logger( 'Requesting tracking history in: ' . print_r( $request_url, true ) );
 
-		$response = wp_remote_get( $request_url, $params );
+		$response = wp_safe_remote_get( $request_url, $params );
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {

@@ -461,7 +461,7 @@ class WC_Correios_Connect {
 		}
 
 		// Gets the WebServices response.
-		$response = wp_remote_get( $url, array( 'sslverify' => false, 'timeout' => 30 ) );
+		$response = wp_safe_remote_get( $url, array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
 			if ( 'yes' == $this->debug ) {
