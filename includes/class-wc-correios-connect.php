@@ -369,6 +369,7 @@ class WC_Correios_Connect {
 			'41068' => 'PAC',
 			'40096' => 'SEDEX',
 			'81019' => 'e-SEDEX',
+			'10014' => 'Carta Registrada',
 		);
 
 		if ( ! isset( $name[ $code ] ) ) {
@@ -471,7 +472,7 @@ class WC_Correios_Connect {
 		$url = add_query_arg( $args, apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice ) );
 
 		if ( 'yes' == $this->debug ) {
-			$this->log->add( $this->id, 'Requesting the Correios WebServices...' );
+			$this->log->add( $this->id, 'Requesting the Correios WebServices: ' . $url );
 		}
 
 		// Gets the WebServices response.

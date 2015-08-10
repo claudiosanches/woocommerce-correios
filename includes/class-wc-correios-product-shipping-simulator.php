@@ -108,12 +108,14 @@ class WC_Correios_Product_Shipping_Simulator {
 		$service_sedex_10   = isset( $options['service_sedex_10'] ) ? $options['service_sedex_10'] : '';
 		$service_sedex_hoje = isset( $options['service_sedex_hoje'] ) ? $options['service_sedex_hoje'] : '';
 		$service_esedex     = isset( $options['service_esedex'] ) ? $options['service_esedex'] : '';
+		$service_carta_reg  = isset( $options['service_carta_reg'] ) ? $options['service_carta_reg'] : '';
 
 		$services = array();
-		$services['PAC']        = ( 'yes' == $service_pac ) ? '41106' : '';
-		$services['SEDEX']      = ( 'yes' == $service_sedex ) ? '40010' : '';
-		$services['SEDEX 10']   = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
-		$services['SEDEX Hoje'] = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['PAC']              = ( 'yes' == $service_pac ) ? '41106' : '';
+		$services['SEDEX']            = ( 'yes' == $service_sedex ) ? '40010' : '';
+		$services['SEDEX 10']         = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
+		$services['SEDEX Hoje']       = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['Carta Registrada'] = ( 'yes' == $service_carta_reg ) ? '10014' : '';
 
 		if ( 'corporate' == $corporate_service ) {
 			$services['PAC']     = ( 'yes' == $service_pac ) ? '41068' : '';
@@ -258,15 +260,92 @@ class WC_Correios_Product_Shipping_Simulator {
 		}
 
 		$shipping = $connect->get_shipping();
+		$shipping_values = array();
+		$allow_carta_reg = self::allow_carta_reg( $package );
+
+		foreach ( $shipping as $code => $shipping_item ) {
+			$name = WC_Correios_Connect::get_service_name( $code );
+
+			if ( $name == 'Carta Registrada' ) {
+				$package_data   = $_package->get_data();
+				$shipping_price = self::calc_carta_reg_price( $package_data['weight'] );
+
+				if ( $allow_carta_reg == 0 || $shipping_price == 0 ) {
+					continue;
+				} else {
+					$shipping_item->Valor = $shipping_price;
+				}
+			}
+
+			$shipping_values[$code] = $shipping_item;
+		}
 
 		// Send shipping rates.
-		if ( ! empty( $shipping ) ) {
-			$_shipping = self::get_the_shipping( $shipping, $options, $package );
+		if ( ! empty( $shipping_values ) ) {
+			$_shipping = self::get_the_shipping( $shipping_values, $options, $package );
 			wp_send_json( array( 'error' => '', 'rates' => $_shipping ) );
 		}
 
 		// Error.
 		wp_send_json( array( 'error' => __( 'It was not possible to simulate the shipping, please try adding the product to cart and proceed to try to get the value.', 'woocommerce-correios' ), 'rates' => '' ) );
+	}
+
+
+	/**
+	* Verify if all products in the package allow Carta Registrada.
+	*
+	* @return boolean
+	*/
+	public static function allow_carta_reg( $package ) {
+		$options = get_option( 'woocommerce_correios_settings' );
+		$items = 0;
+		foreach ( $package['contents'] as $item_id => $values ) {
+			$product = $values['data'];
+			$items++;
+
+			$ship_class = $product->get_shipping_class();
+
+			if ( $product->needs_shipping() ) {
+				if ($ship_class != $options['carta_reg_shipping_class'] ) {
+					return 0;
+				}
+			}
+		}
+
+		return ($items > 0) ? 1 : 0;
+	}
+
+	/**
+	* Calculates Carta Registrada based on weight.
+	*
+	* @return float
+	*/
+	public static function calc_carta_reg_price( $weight ) {
+		$options = get_option( 'woocommerce_correios_settings' );
+		if ( $weight > 0 && $weight <= 0.020)
+		  return $options['carta_reg_price_0_20'];
+		elseif ( $weight > 0.020 && $weight <= 0.050)
+		  return $options['carta_reg_price_20_50'];
+		elseif ( $weight > 0.050 && $weight <= 0.100)
+		  return $options['carta_reg_price_50_100'];
+		elseif ( $weight > 0.100 && $weight <= 0.150)
+		  return $options['carta_reg_price_100_150'];
+		elseif ( $weight > 0.150 && $weight <= 0.200)
+		  return $options['carta_reg_price_150_200'];
+		elseif ( $weight > 0.200 && $weight <= 0.250)
+		  return $options['carta_reg_price_200_250'];
+		elseif ( $weight > 0.250 && $weight <= 0.300)
+		  return $options['carta_reg_price_250_300'];
+		elseif ( $weight > 0.300 && $weight <= 0.350)
+		  return $options['carta_reg_price_300_350'];
+		elseif ( $weight > 0.350 && $weight <= 0.400)
+		  return $options['carta_reg_price_350_400'];
+		elseif ( $weight > 0.400 && $weight <= 0.450)
+		  return $options['carta_reg_price_400_450'];
+		elseif ( $weight > 0.450 && $weight <= 0.500)
+		  return $options['carta_reg_price_450_500'];
+		else
+		  return 0;
 	}
 }
 

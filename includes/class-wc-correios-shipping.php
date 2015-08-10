@@ -26,31 +26,46 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->enabled            = $this->get_option( 'enabled' );
-		$this->title              = $this->get_option( 'title' );
-		$this->declare_value      = $this->get_option( 'declare_value' );
-		$this->display_date       = $this->get_option( 'display_date' );
-		$this->additional_time    = $this->get_option( 'additional_time' );
-		$this->fee                = $this->get_option( 'fee' );
-		$this->zip_origin         = $this->get_option( 'zip_origin' );
-		$this->simulator          = $this->get_option( 'simulator', 'no' );
-		$this->tracking_history   = $this->get_option( 'tracking_history', 'no' );
-		$this->corporate_service  = $this->get_option( 'corporate_service' );
-		$this->login              = $this->get_option( 'login' );
-		$this->password           = $this->get_option( 'password' );
-		$this->service_pac        = $this->get_option( 'service_pac' );
-		$this->service_sedex      = $this->get_option( 'service_sedex' );
-		$this->service_sedex_10   = $this->get_option( 'service_sedex_10' );
-		$this->service_sedex_hoje = $this->get_option( 'service_sedex_hoje' );
-		$this->service_esedex     = $this->get_option( 'service_esedex' );
-		$this->minimum_height     = $this->get_option( 'minimum_height' );
-		$this->minimum_width      = $this->get_option( 'minimum_width' );
-		$this->minimum_length     = $this->get_option( 'minimum_length' );
-		$this->debug              = $this->get_option( 'debug' );
+		$this->enabled                  = $this->get_option( 'enabled' );
+		$this->title                    = $this->get_option( 'title' );
+		$this->declare_value            = $this->get_option( 'declare_value' );
+		$this->display_date             = $this->get_option( 'display_date' );
+		$this->additional_time          = $this->get_option( 'additional_time' );
+		$this->fee                      = $this->get_option( 'fee' );
+		$this->zip_origin               = $this->get_option( 'zip_origin' );
+		$this->simulator                = $this->get_option( 'simulator', 'no' );
+		$this->tracking_history         = $this->get_option( 'tracking_history', 'no' );
+		$this->corporate_service        = $this->get_option( 'corporate_service' );
+		$this->login                    = $this->get_option( 'login' );
+		$this->password                 = $this->get_option( 'password' );
+		$this->service_pac              = $this->get_option( 'service_pac' );
+		$this->service_sedex            = $this->get_option( 'service_sedex' );
+		$this->service_sedex_10         = $this->get_option( 'service_sedex_10' );
+		$this->service_sedex_hoje       = $this->get_option( 'service_sedex_hoje' );
+		$this->service_esedex           = $this->get_option( 'service_esedex' );
+		$this->service_carta_reg        = $this->get_option( 'service_carta_reg' );
+		$this->carta_reg_shipping_class = $this->get_option ( 'carta_reg_shipping_class' );
+		$this->minimum_height           = $this->get_option( 'minimum_height' );
+		$this->minimum_width            = $this->get_option( 'minimum_width' );
+		$this->minimum_length           = $this->get_option( 'minimum_length' );
+		$this->debug                    = $this->get_option( 'debug' );
 
 		// Method variables.
-		$this->availability       = 'specific';
-		$this->countries          = array( 'BR' );
+		$this->availability             = 'specific';
+		$this->countries                = array( 'BR' );
+
+    //Get Carta Registrada prices
+		$this->carta_reg_price_0_20     = $this->get_option ( 'carta_reg_price_0_20' );
+		$this->carta_reg_price_20_50    = $this->get_option ( 'carta_reg_price_20_50' );
+		$this->carta_reg_price_50_100   = $this->get_option ( 'carta_reg_price_50_100' );
+		$this->carta_reg_price_100_150  = $this->get_option ( 'carta_reg_price_100_150' );
+		$this->carta_reg_price_150_200  = $this->get_option ( 'carta_reg_price_150_200' );
+		$this->carta_reg_price_200_250  = $this->get_option ( 'carta_reg_price_200_250' );
+		$this->carta_reg_price_250_300  = $this->get_option ( 'carta_reg_price_250_300' );
+		$this->carta_reg_price_300_350  = $this->get_option ( 'carta_reg_price_300_350' );
+		$this->carta_reg_price_350_400  = $this->get_option ( 'carta_reg_price_350_400' );
+		$this->carta_reg_price_400_450  = $this->get_option ( 'carta_reg_price_400_450' );
+		$this->carta_reg_price_450_500  = $this->get_option ( 'carta_reg_price_450_500' );
 
 		// Actions.
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -80,6 +95,16 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function init_form_fields() {
+		$shipping_classes = array();
+
+		if ( WC()->shipping->get_shipping_classes() ) {
+			foreach ( WC()->shipping->get_shipping_classes() as $shipping_class ) {
+				$shipping_classes[$shipping_class->slug] = $shipping_class->name;
+			}
+		} else {
+			$shipping_classes[] = __( 'Select a class&hellip;', 'woocommerce' );
+		};
+
 		$this->form_fields = array(
 			'enabled' => array(
 				'title'            => __( 'Enable/Disable', 'woocommerce-correios' ),
@@ -213,6 +238,82 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
+			'service_carta_reg' => array(
+				'title'            => __( 'Carta Registrada', 'woocommerce-correios' ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Enable', 'woocommerce-correios' ),
+				'description'      => __( 'Shipping via Carta Registrada.', 'woocommerce-correios' ),
+				'desc_tip'         => true,
+				'default'          => 'no'
+			),
+      'carta_reg_shipping_class' => array(
+				'title'            => __( 'Shipping class for Carta Registrada', 'woocommerce-correios' ),
+				'type'             => 'select',
+				'description'      => __( 'Only if all products in cart have this shipping class the Carta Registrada will be allowed', 'woocommerce-correios' ),
+				'desc_tip'         => true,
+			  'options'          => $shipping_classes,
+			),
+			'carta_reg_price' => array(
+				'title'            => __( 'Costs for Carta Registrada', 'woocommerce-correios' ),
+				'type'             => 'title',
+				'description'      => __( 'Sets the costs for shipping via Carta Registrada based on weigth.', 'woocommerce-correios' ),
+				'desc_tip'         => true,
+			),
+			'carta_reg_price_0_20' => array(
+				'title'            => __( 'Until 20g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '4.50'
+			),
+			'carta_reg_price_20_50' => array(
+				'title'            => __( 'More than 20g until 50g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '5.00'
+			),
+			'carta_reg_price_50_100' => array(
+				'title'            => __( 'More than 50g until 100g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '5.65'
+			),
+			'carta_reg_price_100_150' => array(
+				'title'            => __( 'More than 100g until 150g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '6.20'
+			),
+			'carta_reg_price_150_200' => array(
+				'title'            => __( 'More than 150g until 200g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '6.80'
+			),
+			'carta_reg_price_200_250' => array(
+				'title'            => __( 'More than 200g until 250g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '7.35'
+			),
+			'carta_reg_price_250_300' => array(
+				'title'            => __( 'More than 250g until 300g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '7.90'
+			),
+			'carta_reg_price_300_350' => array(
+				'title'            => __( 'More than 300g until 350g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '8.45'
+			),
+			'carta_reg_price_350_400' => array(
+				'title'            => __( 'More than 350g until 400g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '9.00'
+			),
+			'carta_reg_price_400_450' => array(
+				'title'            => __( 'More than 400g until 450g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '9.55'
+			),
+			'carta_reg_price_450_500' => array(
+				'title'            => __( 'More than 450g until 500g', 'woocommerce-correios' ),
+				'type'             => 'text',
+				'default'          => '10.10'
+			),
 			'package_standard' => array(
 				'title'            => __( 'Package Standard', 'woocommerce-correios' ),
 				'type'             => 'title',
@@ -280,6 +381,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40010' : '';
 		$services['SEDEX 10'] = ( 'yes' == $this->service_sedex_10 ) ? '40215' : '';
 		$services['SEDEX Hoje'] = ( 'yes' == $this->service_sedex_hoje ) ? '40290' : '';
+		$services['Carta Registrada'] = ( 'yes' == $this->service_carta_reg ) ? '10014' : '';
 
 		if ( 'corporate' == $this->corporate_service ) {
 			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '41068' : '';
@@ -319,9 +421,28 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		$shipping = $connect->get_shipping();
+    $shipping_values = array();
+		$allow_carta_reg = $this->allow_carta_reg( $package );
 
-		if ( ! empty( $shipping ) ) {
-			return $shipping;
+		foreach ( $shipping as $code => $shipping_item ) {
+			$name = WC_Correios_Connect::get_service_name( $code );
+
+			if ( $name == 'Carta Registrada' ) {
+				$package_data   = $_package->get_data();
+				$shipping_price = $this->calc_carta_reg_price( $package_data['weight'] );
+
+				if ( $allow_carta_reg == 0 || $shipping_price == 0 ) {
+				  continue;
+			  } else {
+					$shipping_item->Valor = $shipping_price;
+				}
+			}
+
+			$shipping_values[$code] = $shipping_item;
+		}
+
+		if ( ! empty( $shipping_values ) ) {
+			return $shipping_values;
 		} else {
 			// Cart only with virtual products.
 			if ( 'yes' == $this->debug ) {
@@ -394,4 +515,67 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 			}
 		}
 	}
+
+	/**
+	* Verify if all products in the package allow Carta Registrada.
+	*
+	* @return boolean
+	*/
+	public function allow_carta_reg( $package ) {
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( 'correios', 'Carta Registrada shipping class: ' . ( $this->carta_reg_shipping_class ? $this->carta_reg_shipping_class : '{none}') );
+		}
+
+		$items = 0;
+		foreach ( $package['contents'] as $item_id => $values ) {
+			$product = $values['data'];
+			$items++;
+
+			$ship_class = $product->get_shipping_class();
+
+			if ( $product->needs_shipping() ) {
+				if ( 'yes' == $this->debug ) {
+					$this->log->add( 'correios', 'Product[' . $item_id . '] shipping class: ' . ( $ship_class ? $ship_class : '{none}') );
+				}
+
+				if ($ship_class != $this->carta_reg_shipping_class ) {
+					return 0;
+				}
+			}
+		}
+
+		return ($items > 0) ? 1 : 0;
+	}
+
+	/**
+	* Calculates Carta Registrada based on weight.
+	*
+	* @return float
+	*/
+	public function calc_carta_reg_price( $weight ) {
+		if ( $weight > 0 && $weight <= 0.020)
+		  return $this->carta_reg_price_0_20;
+	  elseif ( $weight > 0.020 && $weight <= 0.050)
+			return $this->carta_reg_price_20_50;
+		elseif ( $weight > 0.050 && $weight <= 0.100)
+			return $this->carta_reg_price_50_100;
+		elseif ( $weight > 0.100 && $weight <= 0.150)
+			return $this->carta_reg_price_100_150;
+		elseif ( $weight > 0.150 && $weight <= 0.200)
+  		return $this->carta_reg_price_150_200;
+		elseif ( $weight > 0.200 && $weight <= 0.250)
+			return $this->carta_reg_price_200_250;
+		elseif ( $weight > 0.250 && $weight <= 0.300)
+			return $this->carta_reg_price_250_300;
+		elseif ( $weight > 0.300 && $weight <= 0.350)
+			return $this->carta_reg_price_300_350;
+		elseif ( $weight > 0.350 && $weight <= 0.400)
+	  	return $this->carta_reg_price_350_400;
+		elseif ( $weight > 0.400 && $weight <= 0.450)
+			return $this->carta_reg_price_400_450;
+		elseif ( $weight > 0.450 && $weight <= 0.500)
+			return $this->carta_reg_price_450_500;
+		else
+		  return 0;
+		}
 }

@@ -24,4 +24,25 @@ jQuery( document ).ready( function( $ ) {
 			eSedex.hide();
 		}
 	}).change();
+
+	$( '#woocommerce_correios_service_carta_reg' ).on( 'change', function() {
+		var
+		  ship_class    = $( '.form-table:eq(1) tr:eq(9)' ),
+		  carta_title   = $( 'h4:eq(1)' ),
+		  carta_sub     = $( 'h4:eq(1) + p' ),
+			carta_values  = $( '.form-table:eq(2) ');
+
+		if ( $( this ).is( ':checked' ) ) {
+			ship_class.show();
+			carta_title.show();
+			carta_sub.show();
+			carta_values.show();
+		} else {
+			ship_class.hide();
+			carta_title.hide();
+			carta_sub.hide();
+			carta_values.hide();
+		}
+	}).change();
+
 });
