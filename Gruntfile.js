@@ -111,54 +111,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		makepot: {
-			dist: {
-				options: {
-					type: 'wp-plugin',
-					potHeaders: {
-						'report-msgid-bugs-to': 'http://wordpress.org/support/plugin/woocommerce-correios/',
-						'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
-					}
-				}
-			}
-		},
-
-		checktextdomain: {
-			options:{
-				text_domain: '<%= pkg.name %>',
-				keywords: [
-					'__:1,2d',
-					'_e:1,2d',
-					'_x:1,2c,3d',
-					'esc_html__:1,2d',
-					'esc_html_e:1,2d',
-					'esc_html_x:1,2c,3d',
-					'esc_attr__:1,2d',
-					'esc_attr_e:1,2d',
-					'esc_attr_x:1,2c,3d',
-					'_ex:1,2c,3d',
-					'_n:1,2,4d',
-					'_nx:1,2,4c,5d',
-					'_n_noop:1,2,3d',
-					'_nx_noop:1,2,3c,4d'
-				]
-			},
-			files: {
-				src:  [
-					'**/*.php', // Include all files
-					'!node_modules/**' // Exclude node_modules/
-				],
-				expand: true
-			}
-		},
-
-		po2mo: {
-			files: {
-				src: 'languages/*.po',
-				expand: true
-			}
-		},
-
 		// Rsync commands used to take the files to svn repository
 		rsync: {
 			options: {
@@ -228,9 +180,6 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
 	grunt.loadNpmTasks( 'grunt-rsync' );
 	grunt.loadNpmTasks( 'grunt-shell' );
-	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-checktextdomain' );
-	grunt.loadNpmTasks( 'grunt-po2mo' );
 
 	// Register tasks
 	grunt.registerTask( 'default', [

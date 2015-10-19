@@ -5,17 +5,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Correios\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/woocommerce-correios/\n"
-"POT-Creation-Date: 2015-01-18 21:16:35+00:00\n"
-"PO-Revision-Date: 2015-01-18 21:18+0000\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/woocommerce-"
+"correios\n"
+"POT-Creation-Date: 2015-08-09 01:08:26+00:00\n"
+"PO-Revision-Date: 2015-08-08 22:10-0300\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/woocommerce-correios/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
+"woocommerce-correios/language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: grunt-wp-i18n 0.4.9\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: includes/admin/class-wc-correios-admin-orders.php:46
 msgid "Tracking code:"
@@ -25,7 +27,7 @@ msgstr "Código de rastreamento:"
 msgid "Added a Correios tracking code: %s"
 msgstr "Adicionado o código de rastreamento dos Correios: %s"
 
-#: includes/class-wc-correios-connect.php:391
+#: includes/class-wc-correios-connect.php:399
 msgid "Delivery in %d working day"
 msgid_plural "Delivery in %d working days"
 msgstr[0] "Entrega em %d dia útil"
@@ -37,18 +39,21 @@ msgstr "CEP inválido."
 
 #: includes/class-wc-correios-error.php:23
 msgid "System temporarily down. Please try again later."
-msgstr "Sistema temporariamente fora do ar. Por favor, tente novamente mais tarde."
+msgstr ""
+"Sistema temporariamente fora do ar. Por favor, tente novamente mais tarde."
 
 #: includes/class-wc-correios-error.php:24
 msgid "Area with delivery temporarily subjected to different periods."
 msgstr "Área com entrega temporariamente sujeita a prazo diferenciado."
 
 #: includes/class-wc-correios-product-shipping-simulator.php:43
-#: includes/class-wc-correios-product-shipping-simulator.php:274
+#: includes/class-wc-correios-product-shipping-simulator.php:269
 msgid ""
 "It was not possible to simulate the shipping, please try adding the product "
 "to cart and proceed to try to get the value."
-msgstr "Não foi possível calcular o frete, por favor, tente adicionar o produto ao carrinho e prossiga para o pagamento para tentar ver o valor do frete."
+msgstr ""
+"Não foi possível calcular o frete, por favor, tente adicionar o produto ao "
+"carrinho e prossiga para o pagamento para tentar ver o valor do frete."
 
 #: includes/class-wc-correios-product-shipping-simulator.php:80
 msgid "Shipping and delivery time"
@@ -56,7 +61,8 @@ msgstr "Frete e prazo de entrega"
 
 #: includes/class-wc-correios-product-shipping-simulator.php:81
 msgid "Calculate the shipping and delivery time estimated to your region."
-msgstr "Calcule o valor do frete e o prazo estimado de entrega para a sua região."
+msgstr ""
+"Calcule o valor do frete e o prazo estimado de entrega para a sua região."
 
 #: includes/class-wc-correios-product-shipping-simulator.php:83
 msgid "Shipping"
@@ -70,21 +76,21 @@ msgstr "Calcule o valor do frete estimado para a sua região."
 msgid "(Free)"
 msgstr "(Grátis)"
 
-#: includes/class-wc-correios-product-shipping-simulator.php:202
+#: includes/class-wc-correios-product-shipping-simulator.php:198
 msgid "Error to identify the product."
 msgstr "Erro ao identificar o produto."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:206
+#: includes/class-wc-correios-product-shipping-simulator.php:202
 msgid "Please enter with your zipcode."
 msgstr "Por favor, informe o seu CEP."
 
-#: includes/class-wc-correios-product-shipping-simulator.php:217
+#: includes/class-wc-correios-product-shipping-simulator.php:213
 msgid "Invalid product!"
 msgstr "Produto inválido!"
 
 #: includes/class-wc-correios-shipping.php:19
-#: includes/class-wc-correios-shipping.php:96
-#: includes/class-wc-correios-shipping.php:403
+#: includes/class-wc-correios-shipping.php:95
+#: includes/class-wc-correios-shipping.php:383
 #: templates/myaccount/tracking-code.php:15
 msgid "Correios"
 msgstr "Correios"
@@ -93,225 +99,237 @@ msgstr "Correios"
 msgid "Correios is a brazilian delivery method."
 msgstr "Correios é um método de entrega brasileiro."
 
-#: includes/class-wc-correios-shipping.php:86
+#: includes/class-wc-correios-shipping.php:71
+msgid "System Status &gt; Logs"
+msgstr "Status do sistema &gt; Logs"
+
+#: includes/class-wc-correios-shipping.php:85
 msgid "Enable/Disable"
 msgstr "Habilita/Desabilita"
 
-#: includes/class-wc-correios-shipping.php:88
+#: includes/class-wc-correios-shipping.php:87
 msgid "Enable this shipping method"
 msgstr "Ativar este método de envio"
 
-#: includes/class-wc-correios-shipping.php:92
+#: includes/class-wc-correios-shipping.php:91
 msgid "Title"
 msgstr "Título"
 
-#: includes/class-wc-correios-shipping.php:94
+#: includes/class-wc-correios-shipping.php:93
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isto controla o título que o usuário vê durante o checkout."
 
-#: includes/class-wc-correios-shipping.php:99
+#: includes/class-wc-correios-shipping.php:98
 msgid "Origin Zip Code"
 msgstr "CEP de origem"
 
-#: includes/class-wc-correios-shipping.php:101
+#: includes/class-wc-correios-shipping.php:100
 msgid "Zip Code from where the requests are sent."
 msgstr "CEP de onde os pedidos são enviados."
 
-#: includes/class-wc-correios-shipping.php:105
+#: includes/class-wc-correios-shipping.php:104
 msgid "Declare value"
 msgstr "Declarar valor"
 
-#: includes/class-wc-correios-shipping.php:109
+#: includes/class-wc-correios-shipping.php:108
 msgid "Declare"
 msgstr "Declarar"
 
-#: includes/class-wc-correios-shipping.php:110
+#: includes/class-wc-correios-shipping.php:109
 msgid "None"
 msgstr "Não"
 
-#: includes/class-wc-correios-shipping.php:114
+#: includes/class-wc-correios-shipping.php:113
 msgid "Estimated delivery"
 msgstr "Estimativa de entrega"
 
-#: includes/class-wc-correios-shipping.php:116
-#: includes/class-wc-correios-shipping.php:180
-#: includes/class-wc-correios-shipping.php:188
-#: includes/class-wc-correios-shipping.php:196
-#: includes/class-wc-correios-shipping.php:204
-#: includes/class-wc-correios-shipping.php:212
+#: includes/class-wc-correios-shipping.php:115
+#: includes/class-wc-correios-shipping.php:179
+#: includes/class-wc-correios-shipping.php:187
+#: includes/class-wc-correios-shipping.php:195
+#: includes/class-wc-correios-shipping.php:203
+#: includes/class-wc-correios-shipping.php:211
 msgid "Enable"
 msgstr "Habilitar"
 
-#: includes/class-wc-correios-shipping.php:117
+#: includes/class-wc-correios-shipping.php:116
 msgid "Display date of estimated delivery."
 msgstr "Exibe a data de entrega estimada."
 
-#: includes/class-wc-correios-shipping.php:122
+#: includes/class-wc-correios-shipping.php:121
 msgid "Additional days"
 msgstr "Dias adicionais"
 
-#: includes/class-wc-correios-shipping.php:124
+#: includes/class-wc-correios-shipping.php:123
 msgid "Additional days to the estimated delivery."
 msgstr "Dias adicionais para a entrega estimada."
 
-#: includes/class-wc-correios-shipping.php:130
+#: includes/class-wc-correios-shipping.php:129
 msgid "Handling Fee"
 msgstr "Taxa de manuseio"
 
-#: includes/class-wc-correios-shipping.php:132
+#: includes/class-wc-correios-shipping.php:131
 msgid ""
-"Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to "
-"disable."
-msgstr "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%. Deixe em branco para desabilitar."
+"Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable."
+msgstr ""
+"Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%. "
+"Deixe em branco para desabilitar."
 
-#: includes/class-wc-correios-shipping.php:137
+#: includes/class-wc-correios-shipping.php:136
 msgid "Simulator"
 msgstr "Simulador"
 
-#: includes/class-wc-correios-shipping.php:139
+#: includes/class-wc-correios-shipping.php:138
 msgid "Enable product shipping simulator"
 msgstr "Ativar o simulador de frete"
 
-#: includes/class-wc-correios-shipping.php:140
+#: includes/class-wc-correios-shipping.php:139
 msgid "Displays a shipping simulator in the product page."
 msgstr "Exibe um simulador de frete na página do produto."
 
-#: includes/class-wc-correios-shipping.php:144
+#: includes/class-wc-correios-shipping.php:143
 msgid "Tracking History Table"
 msgstr "Tabela do histórico de rastreamento"
 
-#: includes/class-wc-correios-shipping.php:146
+#: includes/class-wc-correios-shipping.php:145
 msgid "Enable Tracking History Table in view order page on frontend"
-msgstr "Ativar a tabela de histórico de rastreamento na página do pedido na frente do site"
+msgstr ""
+"Ativar a tabela de histórico de rastreamento na página do pedido na frente "
+"do site"
 
-#: includes/class-wc-correios-shipping.php:147
+#: includes/class-wc-correios-shipping.php:146
 msgid ""
 "Displays a table with the tracking history in My Account > View Order page."
-msgstr "Exibe uma tabela com o histório de rastreamento do pedido em na página Minha Conta  > Ver pedido."
+msgstr ""
+"Exibe uma tabela com o histório de rastreamento do pedido em na página Minha "
+"Conta  > Ver pedido."
 
-#: includes/class-wc-correios-shipping.php:151
+#: includes/class-wc-correios-shipping.php:150
 msgid "Correios Services"
 msgstr "Serviços"
 
-#: includes/class-wc-correios-shipping.php:155
+#: includes/class-wc-correios-shipping.php:154
 msgid "Corporate Service"
 msgstr "Serviço corporativo"
 
-#: includes/class-wc-correios-shipping.php:157
+#: includes/class-wc-correios-shipping.php:156
 msgid "Choose between conventional or corporate service."
 msgstr "Escolha entre o serviço convencional ou corporativo."
 
-#: includes/class-wc-correios-shipping.php:161
+#: includes/class-wc-correios-shipping.php:160
 msgid "Conventional"
 msgstr "Convencional"
 
-#: includes/class-wc-correios-shipping.php:162
+#: includes/class-wc-correios-shipping.php:161
 msgid "Corporate"
 msgstr "Corporativo"
 
-#: includes/class-wc-correios-shipping.php:166
+#: includes/class-wc-correios-shipping.php:165
 msgid "Administrative Code"
 msgstr "Código Administrativo"
 
-#: includes/class-wc-correios-shipping.php:168
+#: includes/class-wc-correios-shipping.php:167
 msgid "Your Correios login."
 msgstr "Seu login nos Correios."
 
-#: includes/class-wc-correios-shipping.php:172
+#: includes/class-wc-correios-shipping.php:171
 msgid "Administrative Password"
 msgstr "Senha Administrativa"
 
-#: includes/class-wc-correios-shipping.php:174
+#: includes/class-wc-correios-shipping.php:173
 msgid "Your Correios password."
 msgstr "Sua senha nos Correios."
 
-#: includes/class-wc-correios-shipping.php:178
+#: includes/class-wc-correios-shipping.php:177
 msgid "PAC"
 msgstr "PAC"
 
-#: includes/class-wc-correios-shipping.php:181
+#: includes/class-wc-correios-shipping.php:180
 msgid "Shipping via PAC."
 msgstr "Entrega via PAC."
 
-#: includes/class-wc-correios-shipping.php:186
+#: includes/class-wc-correios-shipping.php:185
 msgid "SEDEX"
 msgstr "SEDEX"
 
-#: includes/class-wc-correios-shipping.php:189
+#: includes/class-wc-correios-shipping.php:188
 msgid "Shipping via SEDEX."
 msgstr "Entrega via SEDEX."
 
-#: includes/class-wc-correios-shipping.php:194
+#: includes/class-wc-correios-shipping.php:193
 msgid "SEDEX 10"
 msgstr "SEDEX 10"
 
-#: includes/class-wc-correios-shipping.php:197
+#: includes/class-wc-correios-shipping.php:196
 msgid "Shipping via SEDEX 10."
 msgstr "Entrega via SEDEX 10."
 
-#: includes/class-wc-correios-shipping.php:202
+#: includes/class-wc-correios-shipping.php:201
 msgid "SEDEX Hoje"
 msgstr "SEDEX Hoje"
 
-#: includes/class-wc-correios-shipping.php:205
+#: includes/class-wc-correios-shipping.php:204
 msgid "Shipping via SEDEX Hoje."
 msgstr "Entrega via SEDEX Hoje."
 
-#: includes/class-wc-correios-shipping.php:210
+#: includes/class-wc-correios-shipping.php:209
 msgid "e-SEDEX"
 msgstr "e-SEDEX"
 
-#: includes/class-wc-correios-shipping.php:213
+#: includes/class-wc-correios-shipping.php:212
 msgid "Shipping via e-SEDEX."
 msgstr "Entrega via e-SEDEX."
 
-#: includes/class-wc-correios-shipping.php:218
+#: includes/class-wc-correios-shipping.php:217
 msgid "Package Standard"
 msgstr "Pacote Padrão"
 
-#: includes/class-wc-correios-shipping.php:220
+#: includes/class-wc-correios-shipping.php:219
 msgid "Sets a minimum measure for the package."
 msgstr "Defina uma medida mínima para o pacote."
 
-#: includes/class-wc-correios-shipping.php:224
+#: includes/class-wc-correios-shipping.php:223
 msgid "Minimum Height"
 msgstr "Altura Mínima"
 
-#: includes/class-wc-correios-shipping.php:226
+#: includes/class-wc-correios-shipping.php:225
 msgid "Minimum height of the package. Correios needs at least 2 cm."
 msgstr "A altura mínima da embalagem. Os Correios precisam de pelo menos 2 cm."
 
-#: includes/class-wc-correios-shipping.php:231
+#: includes/class-wc-correios-shipping.php:230
 msgid "Minimum Width"
 msgstr "Largura Mínima"
 
-#: includes/class-wc-correios-shipping.php:233
+#: includes/class-wc-correios-shipping.php:232
 msgid "Minimum width of the package. Correios needs at least 11 cm."
 msgstr "A largura mínima do pacote. Os Correios precisam de pelo menos 11 cm."
 
-#: includes/class-wc-correios-shipping.php:238
+#: includes/class-wc-correios-shipping.php:237
 msgid "Minimum Length"
 msgstr "Comprimento Mínimo"
 
-#: includes/class-wc-correios-shipping.php:240
+#: includes/class-wc-correios-shipping.php:239
 msgid "Minimum length of the package. Correios needs at least 16 cm."
-msgstr "Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm."
+msgstr ""
+"Comprimento mínimo do pacote. Os Correios precisam de pelo menos 16 cm."
 
-#: includes/class-wc-correios-shipping.php:245
+#: includes/class-wc-correios-shipping.php:244
 msgid "Testing"
 msgstr "Teste"
 
-#: includes/class-wc-correios-shipping.php:249
+#: includes/class-wc-correios-shipping.php:248
 msgid "Debug Log"
 msgstr "Log de depuração"
 
-#: includes/class-wc-correios-shipping.php:251
+#: includes/class-wc-correios-shipping.php:250
 msgid "Enable logging"
 msgstr "Habilitar log"
 
-#: includes/class-wc-correios-shipping.php:253
+#: includes/class-wc-correios-shipping.php:252
 msgid "Log Correios events, such as WebServices requests, inside %s."
-msgstr "Registrar log de eventos dos Correios, como solicitações de API, dentro do arquivo %s."
+msgstr ""
+"Registrar log de eventos dos Correios, como solicitações de API, dentro do "
+"arquivo %s."
 
 #: includes/emails/class-wc-email-correios-tracking.php:16
 msgid "Correios Tracking Code"
@@ -319,7 +337,9 @@ msgstr "Código de rastreio dos Correios"
 
 #: includes/emails/class-wc-email-correios-tracking.php:18
 msgid "This email is sent when configured a tracking code within an order."
-msgstr "Este e-mail é enviado quando configurado um código de rastreamento dentro de um pedido."
+msgstr ""
+"Este e-mail é enviado quando configurado um código de rastreamento dentro de "
+"um pedido."
 
 #: includes/emails/class-wc-email-correios-tracking.php:19
 msgid "Your order has been sent"
@@ -335,15 +355,18 @@ msgstr "Seu pedido recente em {blogname} foi enviado pelos Correios."
 
 #: includes/emails/class-wc-email-correios-tracking.php:23
 msgid ""
-"To track your delivery, use the following the tracking code: "
+"To track your delivery, use the following the tracking code: {tracking_code}."
+msgstr ""
+"Para acompanhar a entrega, use o seguinte código de acompanhamento: "
 "{tracking_code}."
-msgstr "Para acompanhar a entrega, use o seguinte código de acompanhamento: {tracking_code}."
 
 #: includes/emails/class-wc-email-correios-tracking.php:25
 msgid ""
 "The delivery service is the responsibility of the Correios, but if you have "
 "any questions, please contact us."
-msgstr "O serviço de entrega é de responsabilidade do Correios, mas se você tiver alguma dúvida, entre em contato conosco."
+msgstr ""
+"O serviço de entrega é de responsabilidade do Correios, mas se você tiver "
+"alguma dúvida, entre em contato conosco."
 
 #: includes/emails/class-wc-email-correios-tracking.php:44
 msgid "Subject"
@@ -353,7 +376,9 @@ msgstr "Assunto"
 msgid ""
 "This controls the email subject line. Leave blank to use the default "
 "subject: <code>%s</code>."
-msgstr "Utilize este campo para Assunto. Deixe em branco para utilizar o assunto padrão: <code>%s</code>."
+msgstr ""
+"Utilize este campo para Assunto. Deixe em branco para utilizar o assunto "
+"padrão: <code>%s</code>."
 
 #: includes/emails/class-wc-email-correios-tracking.php:51
 msgid "Email Heading"
@@ -363,7 +388,9 @@ msgstr "Título do Email"
 msgid ""
 "This controls the main heading contained within the email. Leave blank to "
 "use the default heading: <code>%s</code>."
-msgstr "Utilize este campo para Título. Deixe em branco para utilizar o título padrão: <code>%s</code>."
+msgstr ""
+"Utilize este campo para Título. Deixe em branco para utilizar o título "
+"padrão: <code>%s</code>."
 
 #: includes/emails/class-wc-email-correios-tracking.php:58
 msgid "Email Content"
@@ -373,7 +400,9 @@ msgstr "Conteúdo do Email"
 msgid ""
 "This controls the initial content of the email. Leave blank to use the "
 "default content: <code>%s</code>."
-msgstr "Utilize este campo para Conteúdo Inicial. Deixe em branco para utilizar o conteúdo padrão: <code>%s</code>."
+msgstr ""
+"Utilize este campo para Conteúdo Inicial. Deixe em branco para utilizar o "
+"conteúdo padrão: <code>%s</code>."
 
 #: includes/emails/class-wc-email-correios-tracking.php:65
 msgid "Email type"
@@ -394,6 +423,28 @@ msgstr "HTML"
 #: includes/emails/class-wc-email-correios-tracking.php:73
 msgid "Multipart"
 msgstr "Multipart"
+
+#: includes/views/html-admin-page.php:19
+msgid ""
+"Help us keep the %s plugin free making a %s or rate %s on %s. Thank you in "
+"advance!"
+msgstr ""
+"Ajude-nos a manter o %s gratuito, para isso faça uma %s ou vote %s no %s. "
+"Muito obrigado!"
+
+#. #-#-#-#-#  woocommerce-correios.pot (WooCommerce Correios 2.3.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: includes/views/html-admin-page.php:19
+msgid "WooCommerce Correios"
+msgstr "WooCommerce Correios"
+
+#: includes/views/html-admin-page.php:19
+msgid "donation"
+msgstr "doação"
+
+#: includes/views/html-admin-page.php:19
+msgid "WordPress.org"
+msgstr "WordPress.org"
 
 #: templates/emails/correios-tracking-code.php:19
 #: templates/emails/plain/correios-tracking-code.php:18
@@ -474,25 +525,17 @@ msgstr "Em transito para %s"
 msgid "Calculate"
 msgstr "Calcular"
 
-#: woocommerce-correios.php:154
+#: woocommerce-correios.php:126
+msgid "Settings"
+msgstr "Configurações"
+
+#: woocommerce-correios.php:150
 msgid "WooCommerce Correios depends on the last version of %s to work!"
 msgstr "WooCommerce Correios depende da última versão do %s para funcionar!"
 
-#: woocommerce-correios.php:154
+#: woocommerce-correios.php:150
 msgid "WooCommerce"
 msgstr "WooCommerce"
-
-#: woocommerce-correios.php:163
-msgid "WooCommerce Correios depends to %s to work!"
-msgstr "WooCommerce Correios depende de %s para funcionar!"
-
-#: woocommerce-correios.php:163
-msgid "SimpleXML"
-msgstr "SimpleXML"
-
-#. Plugin Name of the plugin/theme
-msgid "WooCommerce Correios"
-msgstr "WooCommerce Correios"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/claudiosmweb/woocommerce-correios"
@@ -503,9 +546,18 @@ msgid "Correios para WooCommerce"
 msgstr "Correios para WooCommerce"
 
 #. Author of the plugin/theme
-msgid "claudiosanches, rodrigoprior"
-msgstr "claudiosanches, rodrigoprior"
+msgid "Claudio Sanches"
+msgstr "Claudio Sanches"
 
 #. Author URI of the plugin/theme
 msgid "http://claudiosmweb.com/"
 msgstr "http://claudiosmweb.com/"
+
+#~ msgid "WooCommerce Correios depends to %s to work!"
+#~ msgstr "WooCommerce Correios depende de %s para funcionar!"
+
+#~ msgid "SimpleXML"
+#~ msgstr "SimpleXML"
+
+#~ msgid "claudiosanches, rodrigoprior"
+#~ msgstr "claudiosanches, rodrigoprior"

@@ -109,17 +109,10 @@ class WC_Correios_Package {
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
 
-				if ( version_compare( WOOCOMMERCE_VERSION, '2.1', '>=' ) ) {
-					$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				} else {
-					$_height = woocommerce_get_dimension( $this->fix_format( $product->height ), 'cm' );
-					$_width  = woocommerce_get_dimension( $this->fix_format( $product->width ), 'cm' );
-					$_length = woocommerce_get_dimension( $this->fix_format( $product->length ), 'cm' );
-					$_weight = woocommerce_get_weight( $this->fix_format( $product->weight ), 'kg' );
-				}
+				$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
+				$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
+				$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
+				$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
 
 				$height[ $count ] = $_height;
 				$width[ $count ]  = $_width;

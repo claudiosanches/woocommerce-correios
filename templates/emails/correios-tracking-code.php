@@ -65,6 +65,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<p><strong><?php _e( 'Tel:', 'woocommerce-correios' ); ?></strong> <?php echo $order->billing_phone; ?></p>
 <?php endif; ?>
 
-<?php woocommerce_get_template( 'emails/email-addresses.php', array( 'order' => $order ) ); ?>
+<?php wc_get_template( 'emails/email-addresses.php', array( 'order' => $order ) ); ?>
 
 <?php do_action( 'woocommerce_email_footer' ); ?>

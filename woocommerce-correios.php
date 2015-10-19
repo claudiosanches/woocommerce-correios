@@ -3,9 +3,9 @@
  * Plugin Name: WooCommerce Correios
  * Plugin URI: https://github.com/claudiosmweb/woocommerce-correios
  * Description: Correios para WooCommerce
- * Author: claudiosanches, rodrigoprior
+ * Author: Claudio Sanches
  * Author URI: http://claudiosmweb.com/
- * Version: 2.2.1
+ * Version: 2.3.0
  * License: GPLv2 or later
  * Text Domain: woocommerce-correios
  * Domain Path: /languages/
@@ -27,14 +27,7 @@ class WC_Correios {
 	 *
 	 * @var string
 	 */
-	const VERSION = '2.2.1';
-
-	/**
-	 * Integration id.
-	 *
-	 * @var string
-	 */
-	protected static $method_id = 'correios';
+	const VERSION = '2.3.0';
 
 	/**
 	 * Instance of this class.
@@ -50,23 +43,20 @@ class WC_Correios {
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		if ( class_exists( 'SimpleXmlElement' ) ) {
-			// Checks with WooCommerce is installed.
-			if ( class_exists( 'WC_Shipping_Method' ) ) {
-				$this->includes();
+		// Checks with WooCommerce is installed.
+		if ( class_exists( 'WC_Shipping_Method' ) ) {
+			$this->includes();
 
-				if ( is_admin() ) {
-					$this->admin_includes();
-				}
-
-				add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
-				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-			} else {
-				add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
+			if ( is_admin() ) {
+				$this->admin_includes();
 			}
+
+			add_filter( 'woocommerce_shipping_methods', array( $this, 'add_method' ) );
+			add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
+			add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 		} else {
-			add_action( 'admin_notices', array( $this, 'simplexmlelement_missing_notice' ) );
+			add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
 		}
 	}
 
@@ -82,15 +72,6 @@ class WC_Correios {
 		}
 
 		return self::$instance;
-	}
-
-	/**
-	 * Return the method id/slug.
-	 *
-	 * @return string Gateway id/slug variable.
-	 */
-	public static function get_method_id() {
-		return self::$method_id;
 	}
 
 	/**
@@ -133,6 +114,21 @@ class WC_Correios {
 	}
 
 	/**
+	 * Action links.
+	 *
+	 * @param  array $links
+	 *
+	 * @return array
+	 */
+	public function plugin_action_links( $links ) {
+		$plugin_links = array();
+
+		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=wc_correios_shipping' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
+
+		return array_merge( $plugin_links, $links );
+	}
+
+	/**
 	 * Add the shipping method to WooCommerce.
 	 *
 	 * @param   array $methods WooCommerce payment methods.
@@ -151,33 +147,10 @@ class WC_Correios {
 	 * @return  string
 	 */
 	public function woocommerce_missing_notice() {
-		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on the last version of %s to work!', 'woocommerce-correios' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
-	}
-
-	/**
-	 * SimpleXMLElement fallback notice.
-	 *
-	 * @return  string
-	 */
-	public function simplexmlelement_missing_notice() {
-		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends to %s to work!', 'woocommerce-correios' ), '<a href="http://php.net/manual/en/book.simplexml.php">' . __( 'SimpleXML', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
-	}
-
-	/**
-	 * Plugin logger
-	 *
-	 * @return WC_Logger
-	 */
-	public static function logger() {
-		if ( class_exists( 'WC_Logger' ) ) {
-			return new WC_Logger();
-		} else {
-			global $woocommerce;
-			return $woocommerce->logger();
-		}
+		echo '<div class="error"><p>' . sprintf( __( 'WooCommerce Correios depends on the last version of %s to work!', 'woocommerce-correios' ), '<a href="http://wordpress.org/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
 	}
 }
 
-add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ), 0 );
+add_action( 'plugins_loaded', array( 'WC_Correios', 'get_instance' ) );
 
 endif;

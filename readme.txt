@@ -2,9 +2,9 @@
 Contributors: claudiosanches, rodrigoprior
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
-Requires at least: 3.8
-Tested up to: 4.1
-Stable tag: 2.2.1
+Requires at least: 4.0
+Tested up to: 4.3
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 = Compatibilidade =
 
-Compatível com as versões 2.1.x, 2.2.x e 2.3.x do WooCommerce.
+Compatível com as versões 2.1.x, 2.2.x, 2.3.x e 2.4.x do WooCommerce.
 
 = Dúvidas? =
 
@@ -184,6 +184,21 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Changelog ==
 
+= 2.3.0 - 2015/08/08 =
+
+* Adicionado suporte para WooCommerce 2.4.x.
+* Removido suporte para WooCommerce 2.0.x.
+* Corrigida a conversão dos valores de "Taxa de manuseio".
+* Corrigido a conversão de valores do simulador de frete na página de produto.
+
+= 2.2.3 - 2015/07/23 =
+
+* Melhorada a função que converte o formato de moeda que vêm dos Correios para o WooCommerce.
+
+= 2.2.2 - 2015/07/11 =
+
+* Corrigido código de conversão do formato de moeda dos Correios para o WooCommerce. 
+
 = 2.2.1 - 2015/02/18 =
 
 * Removido os decimais do valor declarado, o valor agora é arredondado (Os Correios passou a ter problemas com valores declarados com decimais e a calcular o valor do frete de forma incorreta).
@@ -275,7 +290,7 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 * Removida a classe de conexão com SOAP.
 * Melhoria do código.
-* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXmlElement`.
+* Adicionado método para conexão utilizando `wp_remote_get` e leitura com `SimpleXMLElement`.
 * Adicionado opção de taxa de manuseio.
 * Melhoria das descrições na página de configuração.
 * Melhoria no tratamento de erros.
@@ -343,10 +358,12 @@ Ative a opção de **Log de depuração** do plugin e entre em contato [clicando
 
 == Upgrade Notice ==
 
-= 2.2.1 =
+= 2.3.0 =
 
-* Removido os decimais do valor declarado, o valor agora é arredondado (Os Correios passou a ter problemas com valores declarados com decimais e a calcular o valor do frete de forma incorreta).
-* Adicionado filtro `woocommerce_correios_tracking_user_data`.
+* Adicionado suporte para WooCommerce 2.4.x.
+* Removido suporte para WooCommerce 2.0.x.
+* Corrigida a conversão dos valores de "Taxa de manuseio".
+* Corrigido a conversão de valores do simulador de frete na página de produto.
 
 == License ==
 

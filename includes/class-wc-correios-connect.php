@@ -255,14 +255,8 @@ class WC_Correios_Connect {
 	 * @param string $debug Debug mode.
 	 */
 	public function __construct() {
-		$this->id = WC_Correios::get_method_id();
-
-		// Logger.
-		if ( class_exists( 'WC_Logger' ) ) {
-			$this->log = new WC_Logger();
-		} else {
-			$this->log = $this->woocommerce_method()->logger();
-		}
+		$this->id  = 'correios';
+		$this->log = new WC_Logger();
 	}
 
 	/**
@@ -423,7 +417,7 @@ class WC_Correios_Connect {
 	}
 
 	/**
-	 * Fix number format for SimpleXML.
+	 * Fix number format for XML.
 	 *
 	 * @param  float $value  Value with dot.
 	 *
@@ -431,6 +425,20 @@ class WC_Correios_Connect {
 	 */
 	protected function float_to_string( $value ) {
 		$value = str_replace( '.', ',', $value );
+
+		return $value;
+	}
+
+	/**
+	 * Replace comma by dot.
+	 *
+	 * @param  mixed $value Value to fix.
+	 *
+	 * @return mixed
+	 */
+	public static function fix_currency_format( $value ) {
+		$value = str_replace( '.', '', $value );
+		$value = str_replace( ',', '.', $value );
 
 		return $value;
 	}
@@ -596,90 +604,98 @@ class WC_Correios_Connect {
 			'StrRetorno'          => 'xml'
 		) );
 
-		$url = add_query_arg( $args, apply_filters( 'woocommerce_correios_webservice_url' , $this->_webservice ) );
+		$url = add_query_arg( $args, apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice ) );
 
 		if ( 'yes' == $this->debug ) {
 			$this->log->add( $this->id, 'Requesting the Correios WebServices...' );
 		}
 
 		// Gets the WebServices response.
-		$response = wp_remote_get( $url, array( 'sslverify' => false, 'timeout' => 30 ) );
+		$response = wp_safe_remote_get( $url, array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
 			if ( 'yes' == $this->debug ) {
 				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 			}
 		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
-			$result = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
-
-			foreach ( $result->cServico as $service ) {
-				$code = (string) $service->Codigo;
-
-				//  Obtain the price by using the prices per weight table  //
-				if ( in_array ( $code, array_keys( $this->prices_per_weight ) ) && ( !isset( $this->prices_per_weight[$code]['weight_limit'] ) || $this->weight <= $this->prices_per_weight[$code]['weight_limit'] ) ) {
-					$freight_price =
-					$biggest_price =
-					$biggest_weight = NULL;
-
-					foreach ( $this->prices_per_weight[$code] as $k2 => $v2 ) {
-						if ( ( $from = @$v2['from'] ) !== NULL && ( $to = @$v2['to'] ) !== NULL && ( $price = @$v2['price'] ) !== NULL ) {
-							$biggest_weight = $to;
-							$biggest_price = $price;
-
-							if ( $this->weight >= $from && $this->weight <= $to ) {
-								$freight_price = $price;
-								break;
-							}
-						}
-					}
-
-					if ( $freight_price === NULL ) {
-						//  Adds the additional price per kg  //
-						if ( ( $additional_per_kg = @$this->prices_per_weight[$code]['additional_per_kg'] ) !== NULL ) {
-							$freight_price = $biggest_price;
-
-							if ( $this->weight > $biggest_weight ) $freight_price += ( ceil( $this->weight ) - 1 ) * $additional_per_kg;
-						}
-						//  ================================  //
-					}
-
-					if ( $freight_price !== NULL ) {
-						//  Adds the registry price to the final freight price  //
-						$freight_price += $this->additional_services[$this->weight <= self::ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT ? $this->registry_type : self::ADDITIONAL_SERVICE_NATIONAL_REGISTRY]['price'];
-
-						//  Adds the own hand price to the final freight price  //
-						if ( !( 'N' == $this->own_hand ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
-
-						//  Adds the receipt notice price to the final freight price  //
-						if ( !( 'N' == $this->receipt_notice ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
-
-						//  Verify if this freight is more expensive than any one of the other services returned by the web service  //
-						$more_expensive = false;
-						foreach ( $values as $k3 => $v3 ) {
-							if ( $v3->Valor <= $freight_price ) {
-								$more_expensive = true;
-								break;
-							}
-						}
-						//  =======================================================================================================  //
-
-						//  Adds the service to the function result  //
-						if ( !$more_expensive ) {
-							$service->Valor = number_format( $freight_price, 2, ',', '' );
-							$service->PrazoEntrega = $this->prices_per_weight[$code]['delivery_days'];
-							$service->Erro = 0;
-							$service->MsgErro = NULL;
-						}
-						//  =======================================  //
-					}
-				}
-				//  =====================================================  //
-
+			try {
+				$result = self::safe_load_xml( $response['body'], LIBXML_NOCDATA );
+			} catch ( Exception $e ) {
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response [' . self::get_service_name( $code ) . ']: ' . print_r( $service, true ) );
+					$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
 				}
+			}
 
-				$values[ $code ] = $service;
+			if ( isset( $result->cServico ) ) {
+				foreach ( $result->cServico as $service ) {
+					$code = (string) $service->Codigo;
+
+					//  Obtain the price by using the prices per weight table  //
+					if ( in_array ( $code, array_keys( $this->prices_per_weight ) ) && ( !isset( $this->prices_per_weight[$code]['weight_limit'] ) || $this->weight <= $this->prices_per_weight[$code]['weight_limit'] ) ) {
+						$freight_price =
+						$biggest_price =
+						$biggest_weight = NULL;
+
+						foreach ( $this->prices_per_weight[$code] as $k2 => $v2 ) {
+							if ( ( $from = @$v2['from'] ) !== NULL && ( $to = @$v2['to'] ) !== NULL && ( $price = @$v2['price'] ) !== NULL ) {
+								$biggest_weight = $to;
+								$biggest_price = $price;
+
+								if ( $this->weight >= $from && $this->weight <= $to ) {
+									$freight_price = $price;
+									break;
+								}
+							}
+						}
+
+						if ( $freight_price === NULL ) {
+							//  Adds the additional price per kg  //
+							if ( ( $additional_per_kg = @$this->prices_per_weight[$code]['additional_per_kg'] ) !== NULL ) {
+								$freight_price = $biggest_price;
+	
+								if ( $this->weight > $biggest_weight ) $freight_price += ( ceil( $this->weight ) - 1 ) * $additional_per_kg;
+							}
+							//  ================================  //
+						}
+
+						if ( $freight_price !== NULL ) {
+							//  Adds the registry price to the final freight price  //
+							$freight_price += $this->additional_services[$this->weight <= self::ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT ? $this->registry_type : self::ADDITIONAL_SERVICE_NATIONAL_REGISTRY]['price'];
+
+							//  Adds the own hand price to the final freight price  //
+							if ( !( 'N' == $this->own_hand ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_OWN_HAND]['price'];
+
+							//  Adds the receipt notice price to the final freight price  //
+							if ( !( 'N' == $this->receipt_notice ) ) $freight_price += $this->additional_services[self::ADDITIONAL_SERVICE_RECEIPT_NOTICE_OTHER_SERVICES]['price'];
+
+							//  Verify if this freight is more expensive than any one of the other services returned by the web service  //
+							$more_expensive = false;
+							foreach ( $values as $k3 => $v3 ) {
+								if ( $v3->Valor <= $freight_price ) {
+									$more_expensive = true;
+									break;
+								}
+							}
+							//  =======================================================================================================  //
+
+							//  Adds the service to the function result  //
+							if ( !$more_expensive ) {
+								$service->Valor = number_format( $freight_price, 2, ',', '' );
+								$service->PrazoEntrega = $this->prices_per_weight[$code]['delivery_days'];
+								$service->Erro = 0;
+								$service->MsgErro = NULL;
+							}
+							//  =======================================  //
+						}
+					}
+					//  =====================================================  //
+
+					if ( 'yes' == $this->debug ) {
+						$this->log->add( $this->id, 'Correios WebServices response [' . self::get_service_name( $code ) . ']: ' . print_r( $service, true ) );
+					}
+
+					$values[ $code ] = $service;
+				}
 			}
 		} else {
 			if ( 'yes' == $this->debug ) {
@@ -688,5 +704,40 @@ class WC_Correios_Connect {
 		}
 
 		return $values;
+	}
+
+	/**
+	 * Safe load XML.
+	 *
+	 * @param  string $source
+	 * @param  int    $options
+	 *
+	 * @return SimpleXMLElement|bool
+	 */
+	public static function safe_load_xml( $source, $options = 0 ) {
+		$old = null;
+
+		if ( function_exists( 'libxml_disable_entity_loader' ) ) {
+			$old = libxml_disable_entity_loader( true );
+		}
+
+		$dom    = new DOMDocument();
+		$return = $dom->loadXML( $source, $options );
+
+		if ( ! is_null( $old ) ) {
+			libxml_disable_entity_loader( $old );
+		}
+
+		if ( ! $return ) {
+			return false;
+		}
+
+		if ( isset( $dom->doctype ) ) {
+			throw new Exception( 'Unsafe DOCTYPE Detected while XML parsing' );
+
+			return false;
+		}
+
+		return simplexml_import_dom( $dom );
 	}
 }

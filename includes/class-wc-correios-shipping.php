@@ -15,7 +15,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->id                 = WC_Correios::get_method_id();
+		$this->id                 = 'correios';
 		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
 		$this->method_description = __( 'Correios is a brazilian delivery method.', 'woocommerce-correios' );
 
@@ -60,22 +60,21 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
-			$this->log = WC_Correios::logger();
+			$this->log = new WC_Logger();
 		}
 	}
 
 	/**
-	 * Backwards compatibility with version prior to 2.1.
+	 * Get log.
 	 *
-	 * @return object Returns the main instance of WooCommerce class.
+	 * @return string
 	 */
-	protected function woocommerce_method() {
-		if ( function_exists( 'WC' ) ) {
-			return WC();
-		} else {
-			global $woocommerce;
-			return $woocommerce;
+	protected function get_log_view() {
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
+			return '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'System Status &gt; Logs', 'woocommerce-correios' ) . '</a>';
 		}
+
+		return '<code>woocommerce/logs/' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.txt</code>';
 	}
 
 	/**
@@ -281,7 +280,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable logging', 'woocommerce-correios' ),
 				'default'          => 'no',
-				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'woocommerce-correios' ), '<code>woocommerce/logs/correios-' . sanitize_file_name( wp_hash( 'correios' ) ) . '.txt</code>' )
+				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'woocommerce-correios' ), $this->get_log_view() )
 			)
 		);
 	}
@@ -297,11 +296,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		// Call the admin scripts.
 		wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
 
-		echo '<h3>' . $this->method_title . '</h3>';
-		echo '<p>' . $this->method_description . '</p>';
-		echo '<table class="form-table">';
-			$this->generate_settings_html();
-		echo '</table>';
+		include 'views/html-admin-page.php';
 	}
 
 	/**
@@ -360,7 +355,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$connect->set_zip_destination( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );
 		if ( 'declare' == $this->declare_value ) {
-			$declared_value = $this->woocommerce_method()->cart->cart_contents_total;
+			$declared_value = WC()->cart->cart_contents_total;
 			$connect->set_declared_value( $declared_value );
 		}
 		$connect->set_registry_type( $this->registry_type );
@@ -391,8 +386,6 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = array() ) {
-		global $woocommerce;
-
 		$rates           = array();
 		$errors          = array();
 		$shipping_values = $this->correios_calculate( $package );
@@ -414,8 +407,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				// Set the shipping rates.
 				if ( in_array( $error_number, array( '0', '010' ) ) ) {
 					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $this->additional_time ) : $name;
-					$cost  = $this->fix_format( esc_attr( $shipping->Valor ) );
-					$fee   = $this->get_fee( $this->fix_format( $this->fee ), $cost );
+					$cost  = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
+					$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 					array_push(
 						$rates,
@@ -434,15 +427,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 					if ( '' != $error['error'] ) {
 						$type = ( '010' == $error['number'] ) ? 'notice' : 'error';
 						$message = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_attr( $error['error'] );
-						if ( function_exists( 'wc_add_notice' ) ) {
-							wc_add_notice( $message, $type );
-						} else {
-							if ( 'error' == $type ) {
-								$woocommerce->add_error( $message );
-							} else {
-								$woocommerce->add_message( $message );
-							}
-						}
+						wc_add_notice( $message, $type );
 					}
 				}
 			}
