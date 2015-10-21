@@ -50,10 +50,10 @@ class WC_Correios_Connect {
 		  ADDITIONAL_SERVICE_DECLARED_VALUE_OMISSION_FINE   = 8,
 		  ADDITIONAL_SERVICE_LOST_AND_FOUND                 = 9,
 		  ADDITIONAL_SERVICE_STORAGE_PER_KG_AND_DAY         = 10,
-		  ADDITIONAL_SERVICE_SHIPPING_MODIFICATION          = 11,
-		  ADDITIONAL_SERVICE_INDEMNIFICATION                = 12,
-		  ADDITIONAL_SERVICE_CPF_RELATED_SERVICES           = 15,
-		  ADDITIONAL_SERVICE_RECEIPT_NOTICE_TELEGRAM        = 16,
+		  //ADDITIONAL_SERVICE_SHIPPING_MODIFICATION          = 11,
+		  ADDITIONAL_SERVICE_INDEMNIFICATION                = 11,
+		  ADDITIONAL_SERVICE_CPF_RELATED_SERVICES           = 13,
+		  ADDITIONAL_SERVICE_RECEIPT_NOTICE_TELEGRAM        = 14,
 
 		  ADDITIONAL_SERVICE_REASONABLE_REGISTRY_WEIGHT_LIMIT = 0.500;
 
@@ -68,10 +68,10 @@ class WC_Correios_Connect {
 		8  => array( 'label' => 'Declared Value Omission Fine', 'price' => 40.00 ),
 		9  => array( 'label' => 'Lost And Found', 'price' => 4.75 ),
 		10 => array( 'label' => 'Storage (Per kg Or Fraction, Per Day)', 'price' => 0.90 ),
-		11 => array( 'label' => 'Shipping Data Modification Request (Name, Address, Forwarding, Withdrawal) (Via Postal)', 'price' => 2.50 ),
-		12 => array( 'label' => 'Indemnification', 'price' => 6.80 ),
-		15 => array( 'label' => 'CPF Related Services', 'price' => 5.70 ),
-		16 => array( 'label' => 'Delivery Confirmation Request (Telegram)', 'price' => 3.24 ),
+		//11 => array( 'label' => 'Shipping Data Modification Request (Name, Address, Forwarding, Withdrawal) (Via Postal)', 'price' => 2.50 ),
+		11 => array( 'label' => 'Indemnification', 'price' => 6.80 ),
+		13 => array( 'label' => 'CPF Related Services', 'price' => 5.70 ),
+		14 => array( 'label' => 'Delivery Confirmation Request (Telegram)', 'price' => 3.24 ),
 	 );
 
 	/**

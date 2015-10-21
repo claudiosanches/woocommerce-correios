@@ -1,4 +1,4 @@
-# WooCommerce Correios #
+﻿# WooCommerce Correios #
 **Contributors:** claudiosanches, rodrigoprior  
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
@@ -35,6 +35,8 @@ Este plugin foi feito baseado na documentação do [Webservices Correios](http:/
 * SEDEX 10.
 * SEDEX Hoje.
 * e-SEDEX (apenas com contrato).
+* Impresso Normal.
+* Impresso Urgente.
 
 ### Instalação: ###
 
