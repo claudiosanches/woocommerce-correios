@@ -29,6 +29,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->enabled            = $this->get_option( 'enabled' );
 		$this->title              = $this->get_option( 'title' );
 		$this->declare_value      = $this->get_option( 'declare_value' );
+		$this->registry_type      = $this->get_option( 'registry_type' );
 		$this->display_date       = $this->get_option( 'display_date' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
 		$this->fee                = $this->get_option( 'fee' );
@@ -43,6 +44,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->service_sedex_10   = $this->get_option( 'service_sedex_10' );
 		$this->service_sedex_hoje = $this->get_option( 'service_sedex_hoje' );
 		$this->service_esedex     = $this->get_option( 'service_esedex' );
+		$this->service_impresso_normal  = $this->get_option( 'service_impresso_normal' );
+		$this->service_impresso_urgente = $this->get_option( 'service_impresso_urgente' );
 		$this->minimum_height     = $this->get_option( 'minimum_height' );
 		$this->minimum_width      = $this->get_option( 'minimum_width' );
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
@@ -80,6 +83,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function init_form_fields() {
+		$connect  = new WC_Correios_Connect;
+
 		$this->form_fields = array(
 			'enabled' => array(
 				'title'            => __( 'Enable/Disable', 'woocommerce-correios' ),
@@ -213,6 +218,32 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 				'desc_tip'         => true,
 				'default'          => 'no'
 			),
+			'service_impresso_normal' => array(
+				'title'            => __( 'Printed Normal', 'woocommerce-correios' ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Enable', 'woocommerce-correios' ),
+				'description'      => __( 'Shipping via Printed Normal.', 'woocommerce-correios' ),
+				'desc_tip'         => true,
+				'default'          => 'no'
+			),
+			'service_impresso_urgente' => array(
+				'title'            => __( 'Printed Urgent', 'woocommerce-correios' ),
+				'type'             => 'checkbox',
+				'label'            => __( 'Enable', 'woocommerce-correios' ),
+				'description'      => __( 'Shipping via Printed Urgent.', 'woocommerce-correios' ),
+				'desc_tip'         => true,
+				'default'          => 'no'
+			),
+			'registry_type' => array(
+				'title'            => __( 'Registry Type', 'woocommerce-correios' ),
+				'type'             => 'select',
+				'description'      => __( 'Used in the modalities without webservice (Printed Normal, Printed Urgent).', 'woocommerce-correios' ),
+				'default'          => WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY,
+				'options'          => array(
+					WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY   => __( 'National Registry', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_NATIONAL_REGISTRY ), 2, ',', '.' ) . ')',
+					WC_Correios_Connect::ADDITIONAL_SERVICE_REASONABLE_REGISTRY => __( 'Reasonable Registry', 'woocommerce-correios' ) . ' (R$ ' . number_format( $connect->get_additional_service_price( WC_Correios_Connect::ADDITIONAL_SERVICE_REASONABLE_REGISTRY ), 2, ',', '.' ) . ')'
+				),
+			),
 			'package_standard' => array(
 				'title'            => __( 'Package Standard', 'woocommerce-correios' ),
 				'type'             => 'title',
@@ -269,6 +300,19 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Replace comma by dot.
+	 *
+	 * @param  mixed $value Value to fix.
+	 *
+	 * @return mixed
+	 */
+	private function fix_format( $value ) {
+		$value = str_replace( ',', '.', str_replace( '.', '', $value ) );
+
+		return $value;
+	}
+
+	/**
 	 * Gets the services IDs.
 	 *
 	 * @return array
@@ -280,6 +324,8 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 		$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40010' : '';
 		$services['SEDEX 10'] = ( 'yes' == $this->service_sedex_10 ) ? '40215' : '';
 		$services['SEDEX Hoje'] = ( 'yes' == $this->service_sedex_hoje ) ? '40290' : '';
+		$services['Impresso Normal'] = ( 'yes' == $this->service_impresso_normal ) ? '99998' : '';
+		$services['Impresso Urgente'] = ( 'yes' == $this->service_impresso_urgente ) ? '99999' : '';
 
 		if ( 'corporate' == $this->corporate_service ) {
 			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '41068' : '';
@@ -312,7 +358,7 @@ class WC_Correios_Shipping extends WC_Shipping_Method {
 			$declared_value = WC()->cart->cart_contents_total;
 			$connect->set_declared_value( $declared_value );
 		}
-
+		$connect->set_registry_type( $this->registry_type );
 		if ( 'corporate' == $this->corporate_service ) {
 			$connect->set_login( $this->login );
 			$connect->set_password( $this->password );

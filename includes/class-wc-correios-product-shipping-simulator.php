@@ -102,18 +102,22 @@ class WC_Correios_Product_Shipping_Simulator {
 	 * @return array          Correios services.
 	 */
 	protected static function get_correios_services( $options ) {
-		$corporate_service  = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
-		$service_pac        = isset( $options['service_pac'] ) ? $options['service_pac'] : '';
-		$service_sedex      = isset( $options['service_sedex'] ) ? $options['service_sedex'] : '';
-		$service_sedex_10   = isset( $options['service_sedex_10'] ) ? $options['service_sedex_10'] : '';
-		$service_sedex_hoje = isset( $options['service_sedex_hoje'] ) ? $options['service_sedex_hoje'] : '';
-		$service_esedex     = isset( $options['service_esedex'] ) ? $options['service_esedex'] : '';
+		$corporate_service        = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
+		$service_pac              = isset( $options['service_pac'] ) ? $options['service_pac'] : '';
+		$service_sedex            = isset( $options['service_sedex'] ) ? $options['service_sedex'] : '';
+		$service_sedex_10         = isset( $options['service_sedex_10'] ) ? $options['service_sedex_10'] : '';
+		$service_sedex_hoje       = isset( $options['service_sedex_hoje'] ) ? $options['service_sedex_hoje'] : '';
+		$service_esedex           = isset( $options['service_esedex'] ) ? $options['service_esedex'] : '';
+		$service_impresso_normal  = isset( $options['service_impresso_normal'] ) ? $options['service_impresso_normal'] : '';
+		$service_impresso_urgente = isset( $options['service_impresso_urgente'] ) ? $options['service_impresso_urgente'] : '';
 
 		$services = array();
-		$services['PAC']        = ( 'yes' == $service_pac ) ? '41106' : '';
-		$services['SEDEX']      = ( 'yes' == $service_sedex ) ? '40010' : '';
-		$services['SEDEX 10']   = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
-		$services['SEDEX Hoje'] = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['PAC']              = ( 'yes' == $service_pac ) ? '41106' : '';
+		$services['SEDEX']            = ( 'yes' == $service_sedex ) ? '40010' : '';
+		$services['SEDEX 10']         = ( 'yes' == $service_sedex_10 ) ? '40215' : '';
+		$services['SEDEX Hoje']       = ( 'yes' == $service_sedex_hoje ) ? '40290' : '';
+		$services['Impresso Normal']  = ( 'yes' == $service_impresso_normal ) ? '99998' : '';
+		$services['Impresso Urgente'] = ( 'yes' == $service_impresso_urgente ) ? '99999' : '';
 
 		if ( 'corporate' == $corporate_service ) {
 			$services['PAC']     = ( 'yes' == $service_pac ) ? '41068' : '';
@@ -224,6 +228,7 @@ class WC_Correios_Product_Shipping_Simulator {
 		$display_date      = isset( $options['display_date'] ) ? $options['display_date'] : '';
 		$additional_time   = isset( $options['additional_time'] ) ? $options['additional_time'] : '';
 		$declare_value     = isset( $options['declare_value'] ) ? $options['declare_value'] : '';
+		$registry_type     = isset( $options['registry_type'] ) ? $options['registry_type'] : '';
 		$corporate_service = isset( $options['corporate_service'] ) ? $options['corporate_service'] : '';
 		$login             = isset( $options['login'] ) ? $options['login'] : '';
 		$password          = isset( $options['password'] ) ? $options['password'] : '';
@@ -252,6 +257,7 @@ class WC_Correios_Product_Shipping_Simulator {
 		if ( 'declare' == $declare_value ) {
 			$connect->set_declared_value( $product_price );
 		}
+		$connect->set_registry_type( $registry_type );
 		if ( 'corporate' == $corporate_service ) {
 			$connect->set_login( $login );
 			$connect->set_password( $password );
