@@ -1,6 +1,12 @@
 <?php
+/**
+ * Update main file for legacy from installations.
+ *
+ * @package WooCommerce_Correios
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 // Update the main file.
