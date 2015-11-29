@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/claudiosmweb/woocommerce-correios
  * Description: Correios para WooCommerce
  * Author: Claudio Sanches, Thiago Benvenuto
- * Author URI: http://claudiosmweb.com/, http://brdata.info/
+ * Author URI: http://claudiosmweb.com/
  * Version: 3.0.0
  * License: GPLv2 or later
  * Text Domain: woocommerce-correios
