@@ -37,10 +37,16 @@ class WC_Correios_Integration extends WC_Integration {
 		$this->service_type    = $this->get_option( 'service_type' );
 		$this->login           = $this->get_option( 'login' );
 		$this->password        = $this->get_option( 'password' );
+		$this->minimum_height  = $this->get_option( 'minimum_height' );
+		$this->minimum_width   = $this->get_option( 'minimum_width' );
+		$this->minimum_length  = $this->get_option( 'minimum_length' );
 
 		// Run actions.
 		add_action( 'woocommerce_update_options_integration_' .  $this->id, array( $this, 'process_admin_options' ) );
 		add_filter( 'woocommerce_correios_use_corporate_method', array( $this, 'use_corporate_method' ) );
+		add_filter( 'woocommerce_correios_package_height', array( $this, 'normalize_package_height' ) );
+		add_filter( 'woocommerce_correios_package_width', array( $this, 'normalize_package_width' ) );
+		add_filter( 'woocommerce_correios_package_length', array( $this, 'normalize_package_length' ) );
 	}
 
 	/**
@@ -115,6 +121,33 @@ class WC_Correios_Integration extends WC_Integration {
 				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 			),
+			'package_standard' => array(
+				'title'       => __( 'Package Standard', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+			),
+			'minimum_height' => array(
+				'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '2',
+			),
+			'minimum_width' => array(
+				'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '11',
+			),
+			'minimum_length' => array(
+				'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '16',
+			),
 		);
 	}
 
@@ -128,5 +161,41 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function use_corporate_method( $default ) {
 		return 'corporate' === $this->service_type;
+	}
+
+	/**
+	 * Normalize package height.
+	 *
+	 * @param  int $value Default value.
+	 * @return int
+	 */
+	public function normalize_package_height( $value ) {
+		$minimum = ( 2 <= $this->minimum_height ) ? $this->minimum_height : 2;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
+	}
+
+	/**
+	 * Normalize package width.
+	 *
+	 * @param  int $value Default value.
+	 * @return int
+	 */
+	public function normalize_package_width( $value ) {
+		$minimum = ( 11 <= $this->minimum_height ) ? $this->minimum_height : 11;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
+	}
+
+	/**
+	 * Normalize package length.
+	 *
+	 * @param  int $value Default value.
+	 * @return int
+	 */
+	public function normalize_package_length( $value ) {
+		$minimum = ( 16 <= $this->minimum_height ) ? $this->minimum_height : 16;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
 	}
 }
