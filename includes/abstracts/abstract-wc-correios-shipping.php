@@ -68,51 +68,51 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled' => array(
-				'title'            => __( 'Enable/Disable', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable this shipping method', 'woocommerce-correios' ),
-				'default'          => 'no',
+				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
+				'default' => 'no',
 			),
 			'title' => array(
-				'title'            => __( 'Title', 'woocommerce-correios' ),
-				'type'             => 'text',
-				'description'      => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'default'          => $this->method_title,
+				'title'       => __( 'Title', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => $this->method_title,
 			),
 			'show_delivery_time' => array(
-				'title'            => __( 'Delivery time', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Show estimated delivery time', 'woocommerce-correios' ),
-				'description'      => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'default'          => 'no',
+				'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
+				'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
 			),
 			'additional_time' => array(
-				'title'            => __( 'Additional days', 'woocommerce-correios' ),
-				'type'             => 'text',
-				'description'      => __( 'Additional working days to the estimated delivery.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'default'          => '0',
-				'placeholder'      => '0',
+				'title'       => __( 'Additional Days', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Additional working days to the estimated delivery.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
+				'placeholder' => '0',
 			),
 			'fee' => array(
-				'title'            => __( 'Handling Fee', 'woocommerce-correios' ),
-				'type'             => 'text',
-				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'placeholder'      => '0.00',
+				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'placeholder' => '0.00',
 			),
 			'testing' => array(
-				'title'            => __( 'Testing', 'woocommerce-correios' ),
-				'type'             => 'title',
+				'title' => __( 'Testing', 'woocommerce-correios' ),
+				'type'  => 'title',
 			),
 			'debug' => array(
-				'title'            => __( 'Debug Log', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable logging', 'woocommerce-correios' ),
-				'default'          => 'no',
-				'description'      => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_view(),
+				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
+				'default'     => 'no',
+				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_view(),
 			),
 		);
 	}
@@ -130,6 +130,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return bool
 	 */
 	protected function is_corporate() {
-		return get_option( 'woocommerce_correios_service_type', 'conventional' ) == 'corporate';
+		return apply_filters( 'woocommerce_correios_use_corporate_method', false, $this->id );
 	}
 }
