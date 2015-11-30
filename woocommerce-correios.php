@@ -53,6 +53,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 					$this->admin_includes();
 				}
 
+				add_filter( 'woocommerce_shipping_methods', array( $this, 'include_methods' ) );
 				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
@@ -87,12 +88,18 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
+		 * Get plugin path.
+		 *
+		 * @return string
+		 */
+		public static function get_plugin_path() {
+			return plugin_dir_path( __FILE__ );
+		}
+
+		/**
 		 * Load the plugin text domain for translation.
 		 */
 		public function load_plugin_textdomain() {
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-correios' );
-
-			load_textdomain( 'woocommerce-correios', trailingslashit( WP_LANG_DIR ) . 'woocommerce-correios/woocommerce-correios-' . $locale . '.mo' );
 			load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		}
 
@@ -103,16 +110,14 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once 'includes/class-wc-correios-error.php';
 			include_once 'includes/class-wc-correios-package.php';
 			include_once 'includes/class-wc-correios-connect.php';
-			include_once 'includes/class-wc-correios-shipping.php';
 			include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 			include_once 'includes/class-wc-correios-emails.php';
 			include_once 'includes/class-wc-correios-tracking-history.php';
 
-			include_once 'includes/class-wc-correios-method-base.php';
-
-			// Include all method classes.
-			foreach ( glob( plugin_dir_path( __FILE__ ) . 'methods/*.php' ) as $filename ) {
-					include_once $filename;
+			// Shipping methods.
+			include_once 'includes/abstracts/abstract-wc-correios-shipping.php';
+			foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/shipping/*.php' ) as $filename ) {
+				include_once $filename;
 			}
 		}
 
@@ -121,15 +126,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		private function admin_includes() {
 			include_once 'includes/admin/class-wc-correios-admin-orders.php';
-		}
-
-		/**
-		 * Check if the service type is set to corporate.
-		 *
-		 * @return bool
-		 */
-		public static function is_corporate() {
-			return get_option( 'woocommerce_correios_service_type', 'conventional' ) == 'corporate';
 		}
 
 		/**
@@ -148,14 +144,21 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
-		 * Add the shipping methods to WooCommerce.
+		 * Include Correios shipping methods to WooCommerce.
 		 *
-		 * @param   array $methods WooCommerce shipping methods.
+		 * @param  array $methods Default shipping methods.
 		 *
-		 * @return  array          shipping methods with Correios registered methods.
+		 * @return array
 		 */
-		public function add_methods( $methods ) {
-			return array_merge( self::$registered_methods, $methods );
+		public function include_methods( $methods ) {
+			$methods[] = 'WC_Correios_Shipping_PAC';
+			$methods[] = 'WC_Correios_Shipping_SEDEX';
+			$methods[] = 'WC_Correios_Shipping_SEDEX_10';
+			$methods[] = 'WC_Correios_Shipping_SEDEX_Hoje';
+			$methods[] = 'WC_Correios_Shipping_ESEDEX';
+			$methods[] = 'WC_Correios_Shipping_Registered_Letter';
+
+			return $methods;
 		}
 
 		/**

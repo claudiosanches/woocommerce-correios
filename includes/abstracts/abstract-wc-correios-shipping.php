@@ -1,8 +1,8 @@
 <?php
 /**
- * Correios shipping class.
+ * Abstract Correios shipping method.
  *
- * @package WooCommerce_Correios/Classes/Shipping
+ * @package WooCommerce_Correios/Abstracts
  * @since   3.0.0
  * @version 3.0.0
  */
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Default Correios Shipping method.
+ * Default Correios shipping method abstract class.
  *
  * This is a abstract method with default options for all methods.
  */
@@ -56,7 +56,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 */
 	protected function get_log_view() {
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
-			return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs', 'woocommerce-correios' ) . '</a>';
+			return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
 		}
 	}
 
@@ -121,6 +121,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * Correios options page.
 	 */
 	public function admin_options() {
-		include '../admin/views/html-admin-shipping-method-settings.php';
+		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-shipping-method-settings.php';
+	}
+
+	/**
+	 * Check if need to use corporate services.
+	 *
+	 * @return bool
+	 */
+	protected function is_corporate() {
+		return get_option( 'woocommerce_correios_service_type', 'conventional' ) == 'corporate';
 	}
 }
