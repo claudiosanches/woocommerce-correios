@@ -49,15 +49,27 @@ module.exports = function( grunt ) {
 			options: {
 				preserveComments: 'some'
 			},
-			dist: {
+			admin: {
 				files: [{
 					expand: true,
-					cwd: '<%= dirs.js %>/',
+					cwd: '<%= dirs.js %>/admin/',
 					src: [
 						'*.js',
 						'!*.min.js'
 					],
-					dest: '<%= dirs.js %>/',
+					dest: '<%= dirs.js %>/admin/',
+					ext: '.min.js'
+				}]
+			},
+			frontend: {
+				files: [{
+					expand: true,
+					cwd: '<%= dirs.js %>/frontend/',
+					src: [
+						'*.js',
+						'!*.min.js'
+					],
+					dest: '<%= dirs.js %>/frontend/',
 					ext: '.min.js'
 				}]
 			}

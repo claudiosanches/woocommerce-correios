@@ -77,6 +77,15 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
+		 * Get main file.
+		 *
+		 * @return string
+		 */
+		public static function get_main_file() {
+			return __FILE__;
+		}
+
+		/**
 		 * Get plugin path.
 		 *
 		 * @return string
