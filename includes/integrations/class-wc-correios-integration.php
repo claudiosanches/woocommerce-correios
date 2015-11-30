@@ -20,8 +20,9 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Initialize integration actions.
 	 */
 	public function __construct() {
-		$this->id           = 'correios';
-		$this->method_title = __( 'Correios', 'woocommerce-freshdesk' );
+		$this->id                 = 'correios';
+		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
+		$this->method_description = __( 'The following options are valid for all Correios shipping methods.', 'woocommerce-correios' );
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -149,6 +150,13 @@ class WC_Correios_Integration extends WC_Integration {
 				'default'     => '16',
 			),
 		);
+	}
+
+	/**
+	 * Correios options page.
+	 */
+	public function admin_options() {
+		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-integration-settings.php';
 	}
 
 	/**

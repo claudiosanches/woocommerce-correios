@@ -2,7 +2,7 @@
 /**
  * Missing dependencies notice.
  *
- * @package WooCommerce_Correios
+ * @package WooCommerce_Correios/Admin/Notices
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
