@@ -54,8 +54,13 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 
 				add_filter( 'woocommerce_integrations', array( $this, 'include_integrations' ) );
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'include_methods' ) );
+				add_filter( 'woocommerce_email_classes', array( $this, 'include_emails' ) );
+
+				// Ajax actions.
 				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
 				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
+
+				// Action links.
 				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 			} else {
 				add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
@@ -91,7 +96,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once 'includes/class-wc-correios-package.php';
 			include_once 'includes/class-wc-correios-connect.php';
 			include_once 'includes/class-wc-correios-product-shipping-simulator.php';
-			include_once 'includes/class-wc-correios-emails.php';
 			include_once 'includes/class-wc-correios-tracking-history.php';
 
 			// Integration.
@@ -127,6 +131,20 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
+		 * Include Correios integration to WooCommerce.
+		 *
+		 * @param  array $integrations Default integrations.
+		 *
+		 * @return array
+		 */
+		public function include_integrations( $integrations ) {
+			$integrations[] = 'WC_Correios_Integration';
+
+			return $integrations;
+		}
+
+
+		/**
 		 * Include Correios shipping methods to WooCommerce.
 		 *
 		 * @param  array $methods Default shipping methods.
@@ -145,16 +163,18 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
-		 * Include Correios integration to WooCommerce.
+		 * Include emails.
 		 *
-		 * @param  array $integrations Default integrations.
+		 * @param  array $emails Default emails.
 		 *
 		 * @return array
 		 */
-		public function include_integrations( $integrations ) {
-			$integrations[] = 'WC_Correios_Integration';
+		public function include_emails( $emails ) {
+			if ( ! isset( $emails['WC_Email_Correios_Tracking'] ) ) {
+				$emails['WC_Email_Correios_Tracking'] = include( 'includes/emails/class-wc-email-correios-tracking.php' );
+			}
 
-			return $integrations;
+			return $emails;
 		}
 
 		/**
