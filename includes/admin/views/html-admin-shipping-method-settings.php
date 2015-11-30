@@ -1,18 +1,24 @@
 <?php
 /**
- * Admin options screen.
+ * Shipping methods admin settings.
+ *
+ * @package WooCommerce_Correios/Settings
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), WC_Correios::VERSION, true );
 
 $reviews_url = 'https://wordpress.org/support/view/plugin-reviews/woocommerce-correios?filter=5#postform';
 
 ?>
 
-<h3><?php echo $this->method_title; ?></h3>
+<h3><?php echo esc_html( $this->method_title ); ?></h3>
 
-<?php echo $this->method_description; ?>
+<?php echo esc_html( $this->method_description ); ?>
 
 <?php if ( apply_filters( 'woocommerce_correios_help_message', true ) ) : ?>
 	<div class="updated woocommerce-message">
