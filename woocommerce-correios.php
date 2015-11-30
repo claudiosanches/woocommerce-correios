@@ -148,7 +148,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		public function plugin_action_links( $links ) {
 			$plugin_links = array();
 
-			$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=wc_correios_shipping' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
+			$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
 
 			return array_merge( $plugin_links, $links );
 		}

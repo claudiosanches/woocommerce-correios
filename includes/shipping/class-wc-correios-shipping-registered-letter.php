@@ -32,16 +32,20 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 		parent::__construct();
 
 		// Extra options.
-		$this->form_fields['price_table'] = array(
-			'title'       => __( 'Price table', 'woocommerce-correios' ),
-			'type'        => 'select',
-			'description' => __( 'Allow you to select between Commercial and Non-Commercial price table.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'commercial',
-			'options'     => array(
-				'commercial'    => __( 'Commercial', 'woocommerce-correios' ),
-				'noncommercial' => __( 'Non-Commercial', 'woocommerce-correios' ),
+		$new_options = array(
+			'price_table' => array(
+				'title'       => __( 'Price table', 'woocommerce-correios' ),
+				'type'        => 'select',
+				'description' => __( 'Allow you to select between Commercial and Non-Commercial price table.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'commercial',
+				'options'     => array(
+					'commercial'    => __( 'Commercial', 'woocommerce-correios' ),
+					'noncommercial' => __( 'Non-Commercial', 'woocommerce-correios' ),
+				),
 			),
 		);
+
+		$this->form_fields = array_merge( array_slice( $this->form_fields, 0, 3 ), $new_options, array_slice( $this->form_fields, 3 ) );
 	}
 }
