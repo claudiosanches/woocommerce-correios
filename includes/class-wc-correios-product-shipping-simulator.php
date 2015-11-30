@@ -22,8 +22,6 @@ class WC_Correios_Product_Shipping_Simulator {
 
 	/**
 	 * Shipping simulator scripts.
-	 *
-	 * @return void
 	 */
 	public function scritps() {
 		if ( is_product() ) {

@@ -62,8 +62,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 	/**
 	 * Admin options fields.
-	 *
-	 * @return void
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(

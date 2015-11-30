@@ -43,8 +43,6 @@ class WC_Correios_Tracking_Email extends WC_Email {
 
 	/**
 	 * Initialise settings form fields.
-	 *
-	 * @return void
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
@@ -116,8 +114,6 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 *
 	 * @param  WC_Order $order         Order data.
 	 * @param  string   $tracking_code Tracking code.
-	 *
-	 * @return void
 	 */
 	public function trigger( $order, $tracking_code ) {
 		if ( is_object( $order ) ) {
