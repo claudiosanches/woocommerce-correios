@@ -92,9 +92,9 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * Includes.
 		 */
 		private function includes() {
-			include_once 'includes/class-wc-correios-error.php';
+			include_once 'includes/wc-correios-functions.php';
 			include_once 'includes/class-wc-correios-package.php';
-			include_once 'includes/class-wc-correios-connect.php';
+			include_once 'includes/class-wc-correios-webservice.php';
 			include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 			include_once 'includes/class-wc-correios-tracking-history.php';
 
@@ -208,25 +208,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public static function get_templates_path() {
 			return self::get_plugin_path() . 'templates/';
-		}
-
-		/**
-		 * Insert an element in an array.
-		 *
-		 * @param  array        $current Current array.
-		 * @param  string|array $new     New element.
-		 * @param  int|string   $where   Where need to be inserted.
-		 *
-		 * @return array
-		 */
-		public static function array_insert( $current, $new, $where ) {
-			if ( is_string( $where ) ) {
-				$index = array_search( $where, array_keys( $current ) ) + 1;
-			} else {
-				$index = intval( $where );
-			}
-
-			return array_merge( array_slice( $current, 0, $index ), $new, array_slice( $current, $index ) );
 		}
 	}
 

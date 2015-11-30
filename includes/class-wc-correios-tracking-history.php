@@ -96,7 +96,7 @@ class WC_Correios_Tracking_History {
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {
-				$tracking_history = WC_Correios_Connect::safe_load_xml( $response['body'], LIBXML_NOCDATA );
+				$tracking_history = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
 			} catch ( Exception $e ) {
 				$this->logger( 'Tracking history invalid XML: ' . $e->getMessage() );
 			}

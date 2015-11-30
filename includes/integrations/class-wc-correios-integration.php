@@ -47,6 +47,10 @@ class WC_Correios_Integration extends WC_Integration {
 		add_filter( 'woocommerce_correios_use_corporate_method', array( $this, 'use_corporate_method' ), 10 );
 		add_filter( 'woocommerce_correios_origin_postcode', array( $this, 'setup_origin_postcode' ), 10 );
 		add_filter( 'woocommerce_correios_declare_value', array( $this, 'setup_declared_value' ), 10 );
+		add_filter( 'woocommerce_correios_own_hands', array( $this, 'setup_own_hands' ), 10 );
+		add_filter( 'woocommerce_correios_receipt_notice', array( $this, 'setup_receipt_notice' ), 10 );
+		add_filter( 'woocommerce_correios_login', array( $this, 'setup_login' ), 10 );
+		add_filter( 'woocommerce_correios_password', array( $this, 'setup_password' ), 10 );
 		add_filter( 'woocommerce_correios_package_height', array( $this, 'normalize_package_height' ), 10 );
 		add_filter( 'woocommerce_correios_package_width', array( $this, 'normalize_package_width' ), 10 );
 		add_filter( 'woocommerce_correios_package_length', array( $this, 'normalize_package_length' ), 10 );
@@ -176,23 +180,67 @@ class WC_Correios_Integration extends WC_Integration {
 	/**
 	 * Set up origin postcode.
 	 *
-	 * @param  string $origin_postcode Default origin postcode.
+	 * @param  string $default Default value.
 	 *
 	 * @return string
 	 */
-	public function setup_origin_postcode( $origin_postcode ) {
+	public function setup_origin_postcode( $default ) {
 		return $this->origin_postcode;
 	}
 
 	/**
 	 * Set up declared value.
 	 *
-	 * @param  bool $declare Default value.
+	 * @param  bool $default Default value.
 	 *
 	 * @return bool
 	 */
-	public function setup_declared_value( $declare ) {
+	public function setup_declared_value( $default ) {
 		return 'yes' === $this->declare_value;
+	}
+
+	/**
+	 * Set up own hands.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_own_hands( $default ) {
+		return ( 'yes' === $this->own_hands ) ? 'S' : 'N';
+	}
+
+	/**
+	 * Set up receipt notice.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_receipt_notice( $default ) {
+		return ( 'yes' === $this->receipt_notice ) ? 'S' : 'N';
+	}
+
+	/**
+	 * Set up login.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_login( $default ) {
+		return ( 'corporate' === $this->service_type ) ? $this->login : '';
+	}
+
+	/**
+	 * Set up password.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_password( $default ) {
+		return  ( 'corporate' === $this->service_type ) ? $this->password : '';
 	}
 
 	/**

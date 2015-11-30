@@ -1,4 +1,11 @@
 <?php
+/**
+ * Correios Package.
+ *
+ * @package WooCommerce_Correios/Classes
+ * @since   3.0.0
+ * @version 3.0.0
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -42,8 +49,6 @@ class WC_Correios_Package {
 
 	/**
 	 * Extracts the weight and dimensions from the package.
-	 *
-	 * @param array $package
 	 *
 	 * @return array
 	 */
@@ -98,9 +103,9 @@ class WC_Correios_Package {
 	/**
 	 * Calculates the cubage of all products.
 	 *
-	 * @param  array $height
-	 * @param  array $width
-	 * @param  array $length
+	 * @param  array $height Package height.
+	 * @param  array $width  Package width.
+	 * @param  array $length Package length.
 	 *
 	 * @return int
 	 */
@@ -123,9 +128,9 @@ class WC_Correios_Package {
 	/**
 	 * Get the max values.
 	 *
-	 * @param  array $height
-	 * @param  array $width
-	 * @param  array $length
+	 * @param  array $height Package height.
+	 * @param  array $width  Package width.
+	 * @param  array $length Package length.
 	 *
 	 * @return array
 	 */
@@ -142,9 +147,10 @@ class WC_Correios_Package {
 	/**
 	 * Calculates the square root of the scaling of all products.
 	 *
-	 * @param  array $height
-	 * @param  array $width
-	 * @param  array $length
+	 * @param  array $height     Package height.
+	 * @param  array $width      Package width.
+	 * @param  array $length     Package length.
+	 * @param  array $max_values Package bigger values.
 	 *
 	 * @return float
 	 */
@@ -166,9 +172,9 @@ class WC_Correios_Package {
 	/**
 	 * Sets the final cubage.
 	 *
-	 * @param  array $height
-	 * @param  array $width
-	 * @param  array $length
+	 * @param  array $height Package height.
+	 * @param  array $width  Package width.
+	 * @param  array $length Package length.
 	 *
 	 * @return array
 	 */

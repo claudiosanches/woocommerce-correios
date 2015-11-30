@@ -48,6 +48,22 @@ class WC_Correios_Product_Shipping_Simulator {
 	}
 
 	/**
+	 * Get fee.
+	 *
+	 * @param  string $fee  Fee.
+	 * @param  float  $total Shipping total.
+	 *
+	 * @return float
+	 */
+	protected function get_fee( $fee, $total ) {
+		if ( strstr( $fee, '%' ) ) {
+			$fee = ( $total / 100 ) * str_replace( '%', '', $fee );
+		}
+
+		return $fee;
+	}
+
+	/**
 	 * Display the simulator.
 	 *
 	 * @return string Simulator HTML.
@@ -157,10 +173,10 @@ class WC_Correios_Product_Shipping_Simulator {
 					$date     = isset( $options['display_date'] ) ? $options['display_date'] : 'no';
 					$fee      = isset( $options['fee'] ) ? $options['fee'] : 0;
 					$add_time = isset( $options['additional_time'] ) ? $options['additional_time'] : 0;
-					$name     = WC_Correios_Connect::get_service_name( $code );
-					$label    = ( 'yes' == $date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $add_time ) : $name;
-					$cost     = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
-					$fee      = WC_Correios_Connect::get_fee( str_replace( ',', '.', $fee ), $cost );
+					$name     = WC_Correios_Webservice::get_service_name( $code );
+					$label    = ( 'yes' == $date ) ? WC_Correios_Webservice::estimating_delivery( $name, $shipping->PrazoEntrega, $add_time ) : $name;
+					$cost     = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
+					$fee      = $this->get_fee( str_replace( ',', '.', $fee ), $cost );
 
 					$_rates[] = array(
 						'id'    => $name,
@@ -240,7 +256,7 @@ class WC_Correios_Product_Shipping_Simulator {
 
 		// Get the shipping.
 		$services = array_values( self::get_correios_services( $options ) );
-		$connect  = new WC_Correios_Connect;
+		$connect  = new WC_Correios_Webservice;
 		$connect->set_services( $services );
 		$_package = $connect->set_package( $package );
 		$_package->set_minimum_height( $minimum_height );

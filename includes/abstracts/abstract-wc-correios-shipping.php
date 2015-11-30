@@ -37,8 +37,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->debug              = $this->get_option( 'debug' );
 
 		// Method variables.
-		$this->availability       = 'specific';
-		$this->countries          = array( 'BR' );
+		$this->availability = 'specific';
+		$this->countries    = array( 'BR' );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -138,6 +138,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get Correios service code.
+	 *
+	 * @return string
+	 */
+	protected function get_code() {
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $this->code, $this->id );
+	}
+
+	/**
 	 * Get shipping rate.
 	 *
 	 * @param  array $package Order package.
@@ -145,10 +154,12 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return SimpleXMLElement
 	 */
 	protected function get_rate( $package ) {
-		$connect  = new WC_Correios_Connect();
-		$connect->set_services( array( $this->code ) );
+		$code = $this->get_code();
+
+		$connect  = new WC_Correios_Webservice( $this->id );
+		$connect->set_services( array( $code ) );
 		$_package = $connect->set_package( $package );
-		$connect->set_zip_destination( $package['destination']['postcode'] );
+		$connect->set_destination_postcode( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );
 
 		if ( apply_filters( 'woocommerce_correios_declare_value', false, $this->id ) ) {
@@ -163,18 +174,11 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		$shipping = $connect->get_shipping();
 
-		error_log( print_r( $shipping, true ) );
-
-		if ( ! empty( $shipping ) ) {
-			return $shipping[ $this->code ];
-		} else {
-			// Cart only with virtual products.
-			if ( 'yes' == $this->debug ) {
-				$this->log->add( 'correios', 'Cart only with virtual products.' );
-			}
-
-			return null;
+		if ( ! empty( $shipping[ $code ] ) ) {
+			return $shipping[ $code ];
 		}
+
+		return null;
 	}
 
 	/**
@@ -183,10 +187,25 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return array
 	 */
 	protected function get_accepted_error_codes() {
-		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '010' ) );
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '010' ) );
 		$codes[] = '0';
 
 		return $codes;
+	}
+
+	/**
+	 * Get shipping method label.
+	 *
+	 * @param  int $days Days to deliver.
+	 *
+	 * @return string
+	 */
+	protected function get_shipping_method_label( $days ) {
+		if ( 'yes' == $this->show_delivery_time ) {
+			return wc_correios_get_estimating_delivery( $this->title, $days, $this->additional_time );
+		}
+
+		return $this->title;
 	}
 
 	/**
@@ -210,12 +229,12 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		// Set the shipping rates.
-		$label = ( 'yes' == $this->show_delivery_time ) ? WC_Correios_Connect::estimating_delivery( $this->title, $shipping->PrazoEntrega, $this->additional_time ) : $this->title;
-		$cost  = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
+		$label = $this->get_shipping_method_label( $shipping->PrazoEntrega );
+		$cost  = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
 		$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 		// Display Correios errors notices.
-		$error_message = WC_Correios_Error::get_message( $shipping->Erro );
+		$error_message = wc_correios_get_error_message( $shipping->Erro );
 		if ( '' != $error_message ) {
 			$notice_type = ( '010' == $error_number ) ? 'notice' : 'error';
 			$notice      = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );

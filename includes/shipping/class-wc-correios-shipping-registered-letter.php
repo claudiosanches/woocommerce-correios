@@ -47,6 +47,6 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 			),
 		);
 
-		$this->form_fields = WC_Correios::array_insert( $this->form_fields, $new_options, 'behavior_options' );
+		$this->form_fields = wc_correios_array_insert( $this->form_fields, $new_options, 'behavior_options' );
 	}
 }
