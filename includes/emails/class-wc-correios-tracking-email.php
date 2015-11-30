@@ -1,12 +1,20 @@
 <?php
+/**
+ * Correios tracking code email.
+ *
+ * @package WooCommerce_Correios/Classes/Emails
+ * @since   3.0.0
+ * @version 3.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 /**
  * Correios Tracking code email.
  */
-class WC_Email_Correios_Tracking extends WC_Email {
+class WC_Correios_Tracking_Email extends WC_Email {
 
 	/**
 	 * Initialize tracking template.
@@ -45,21 +53,21 @@ class WC_Email_Correios_Tracking extends WC_Email {
 				'type'        => 'text',
 				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'woocommerce-correios' ), $this->subject ),
 				'placeholder' => '',
-				'default'     => ''
+				'default'     => '',
 			),
 			'heading' => array(
 				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
 				'placeholder' => '',
-				'default'     => ''
+				'default'     => '',
 			),
 			'tracking_message' => array(
 				'title'       => __( 'Email Content', 'woocommerce-correios' ),
 				'type'        => 'textarea',
 				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
 				'placeholder' => '',
-				'default'     => ''
+				'default'     => '',
 			),
 			'email_type' => array(
 				'title'       => __( 'Email type', 'woocommerce-correios' ),
@@ -71,8 +79,8 @@ class WC_Email_Correios_Tracking extends WC_Email {
 					'plain'     => __( 'Plain text', 'woocommerce-correios' ),
 					'html'      => __( 'HTML', 'woocommerce-correios' ),
 					'multipart' => __( 'Multipart', 'woocommerce-correios' ),
-				)
-			)
+				),
+			),
 		);
 	}
 
@@ -88,7 +96,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 	/**
 	 * Get tracking code url.
 	 *
-	 * @param  string $tracking_code
+	 * @param  string $tracking_code Tracking code.
 	 *
 	 * @return string
 	 */
@@ -146,7 +154,7 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'email_heading'    => $this->get_heading(),
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
-			'plain_text'       => false
+			'plain_text'       => false,
 		), '', $this->template_base );
 
 		return ob_get_clean();
@@ -165,11 +173,11 @@ class WC_Email_Correios_Tracking extends WC_Email {
 			'email_heading'    => $this->get_heading(),
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
-			'plain_text'       => true
+			'plain_text'       => true,
 		), '', $this->template_base );
 
 		return ob_get_clean();
 	}
 }
 
-return new WC_Email_Correios_Tracking();
+return new WC_Correios_Tracking_Email();

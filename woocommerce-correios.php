@@ -143,7 +143,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			return $integrations;
 		}
 
-
 		/**
 		 * Include Correios shipping methods to WooCommerce.
 		 *
@@ -170,8 +169,8 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * @return array
 		 */
 		public function include_emails( $emails ) {
-			if ( ! isset( $emails['WC_Email_Correios_Tracking'] ) ) {
-				$emails['WC_Email_Correios_Tracking'] = include( 'includes/emails/class-wc-email-correios-tracking.php' );
+			if ( ! isset( $emails['WC_Correios_Tracking_Email'] ) ) {
+				$emails['WC_Correios_Tracking_Email'] = include( 'includes/emails/class-wc-correios-tracking-email.php' );
 			}
 
 			return $emails;
