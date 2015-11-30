@@ -39,6 +39,7 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 				'description' => __( 'Allow you to select between Commercial and Non-Commercial price table.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => 'commercial',
+				'class'       => 'wc-enhanced-select',
 				'options'     => array(
 					'commercial'    => __( 'Commercial', 'woocommerce-correios' ),
 					'noncommercial' => __( 'Non-Commercial', 'woocommerce-correios' ),
@@ -46,6 +47,6 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 			),
 		);
 
-		$this->form_fields = array_merge( array_slice( $this->form_fields, 0, 3 ), $new_options, array_slice( $this->form_fields, 3 ) );
+		$this->form_fields = WC_Correios::array_insert( $this->form_fields, $new_options, 'behavior_options' );
 	}
 }

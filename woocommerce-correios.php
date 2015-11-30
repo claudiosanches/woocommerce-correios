@@ -77,33 +77,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		}
 
 		/**
-		 * Get main file.
-		 *
-		 * @return string
-		 */
-		public static function get_main_file() {
-			return __FILE__;
-		}
-
-		/**
-		 * Get plugin path.
-		 *
-		 * @return string
-		 */
-		public static function get_plugin_path() {
-			return plugin_dir_path( __FILE__ );
-		}
-
-		/**
-		 * Get templates path.
-		 *
-		 * @return string
-		 */
-		public static function get_templates_path() {
-			return self::get_plugin_path() . 'templates/';
-		}
-
-		/**
 		 * Load the plugin text domain for translation.
 		 */
 		public function load_plugin_textdomain() {
@@ -189,6 +162,52 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public function woocommerce_missing_notice() {
 			include 'includes/admin/views/html-admin-missing-dependencies.php';
+		}
+
+		/**
+		 * Get main file.
+		 *
+		 * @return string
+		 */
+		public static function get_main_file() {
+			return __FILE__;
+		}
+
+		/**
+		 * Get plugin path.
+		 *
+		 * @return string
+		 */
+		public static function get_plugin_path() {
+			return plugin_dir_path( __FILE__ );
+		}
+
+		/**
+		 * Get templates path.
+		 *
+		 * @return string
+		 */
+		public static function get_templates_path() {
+			return self::get_plugin_path() . 'templates/';
+		}
+
+		/**
+		 * Insert an element in an array.
+		 *
+		 * @param  array        $current Current array.
+		 * @param  string|array $new     New element.
+		 * @param  int|string   $where   Where need to be inserted.
+		 *
+		 * @return array
+		 */
+		public static function array_insert( $current, $new, $where ) {
+			if ( is_string( $where ) ) {
+				$index = array_search( $where, array_keys( $current ) ) + 1;
+			} else {
+				$index = intval( $where );
+			}
+
+			return array_merge( array_slice( $current, 0, $index ), $new, array_slice( $current, $index ) );
 		}
 	}
 

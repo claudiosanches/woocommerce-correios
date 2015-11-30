@@ -80,7 +80,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'desc_tip'    => true,
 				'default'     => $this->method_title,
 			),
-			'global_options' => array(
+			'behavior_options' => array(
 				'title' => __( 'Behavior Options', 'woocommerce-correios' ),
 				'type'  => 'title',
 			),
