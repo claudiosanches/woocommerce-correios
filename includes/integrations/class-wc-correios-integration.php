@@ -44,10 +44,12 @@ class WC_Correios_Integration extends WC_Integration {
 
 		// Run actions.
 		add_action( 'woocommerce_update_options_integration_' .  $this->id, array( $this, 'process_admin_options' ) );
-		add_filter( 'woocommerce_correios_use_corporate_method', array( $this, 'use_corporate_method' ) );
-		add_filter( 'woocommerce_correios_package_height', array( $this, 'normalize_package_height' ) );
-		add_filter( 'woocommerce_correios_package_width', array( $this, 'normalize_package_width' ) );
-		add_filter( 'woocommerce_correios_package_length', array( $this, 'normalize_package_length' ) );
+		add_filter( 'woocommerce_correios_use_corporate_method', array( $this, 'use_corporate_method' ), 10 );
+		add_filter( 'woocommerce_correios_origin_postcode', array( $this, 'setup_origin_postcode' ), 10 );
+		add_filter( 'woocommerce_correios_declare_value', array( $this, 'setup_declared_value' ), 10 );
+		add_filter( 'woocommerce_correios_package_height', array( $this, 'normalize_package_height' ), 10 );
+		add_filter( 'woocommerce_correios_package_width', array( $this, 'normalize_package_width' ), 10 );
+		add_filter( 'woocommerce_correios_package_length', array( $this, 'normalize_package_length' ), 10 );
 	}
 
 	/**
@@ -172,9 +174,32 @@ class WC_Correios_Integration extends WC_Integration {
 	}
 
 	/**
+	 * Set up origin postcode.
+	 *
+	 * @param  string $origin_postcode Default origin postcode.
+	 *
+	 * @return string
+	 */
+	public function setup_origin_postcode( $origin_postcode ) {
+		return $this->origin_postcode;
+	}
+
+	/**
+	 * Set up declared value.
+	 *
+	 * @param  bool $declare Default value.
+	 *
+	 * @return bool
+	 */
+	public function setup_declared_value( $declare ) {
+		return 'yes' === $this->declare_value;
+	}
+
+	/**
 	 * Normalize package height.
 	 *
 	 * @param  int $value Default value.
+	 *
 	 * @return int
 	 */
 	public function normalize_package_height( $value ) {
@@ -187,6 +212,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Normalize package width.
 	 *
 	 * @param  int $value Default value.
+	 *
 	 * @return int
 	 */
 	public function normalize_package_width( $value ) {
@@ -199,6 +225,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Normalize package length.
 	 *
 	 * @param  int $value Default value.
+	 *
 	 * @return int
 	 */
 	public function normalize_package_length( $value ) {

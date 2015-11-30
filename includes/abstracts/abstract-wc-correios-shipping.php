@@ -136,4 +136,103 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	protected function is_corporate() {
 		return apply_filters( 'woocommerce_correios_use_corporate_method', false, $this->id );
 	}
+
+	/**
+	 * Get shipping rate.
+	 *
+	 * @param  array $package Order package.
+	 *
+	 * @return SimpleXMLElement
+	 */
+	protected function get_rate( $package ) {
+		$connect  = new WC_Correios_Connect();
+		$connect->set_services( array( $this->code ) );
+		$_package = $connect->set_package( $package );
+		$connect->set_zip_destination( $package['destination']['postcode'] );
+		$connect->set_debug( $this->debug );
+
+		if ( apply_filters( 'woocommerce_correios_declare_value', false, $this->id ) ) {
+			$declared_value = WC()->cart->cart_contents_total;
+			$connect->set_declared_value( $declared_value );
+		}
+
+		if ( $this->is_corporate() ) {
+			$connect->set_login( $this->login );
+			$connect->set_password( $this->password );
+		}
+
+		$shipping = $connect->get_shipping();
+
+		error_log( print_r( $shipping, true ) );
+
+		if ( ! empty( $shipping ) ) {
+			return $shipping[ $this->code ];
+		} else {
+			// Cart only with virtual products.
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( 'correios', 'Cart only with virtual products.' );
+			}
+
+			return null;
+		}
+	}
+
+	/**
+	 * Get accepted error codes.
+	 *
+	 * @return array
+	 */
+	protected function get_accepted_error_codes() {
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '010' ) );
+		$codes[] = '0';
+
+		return $codes;
+	}
+
+	/**
+	 * Calculates the shipping rate.
+	 *
+	 * @param array $package Order package.
+	 */
+	public function calculate_shipping( $package = array() ) {
+		$error    = '';
+		$shipping = $this->get_rate( $package );
+
+		if ( ! isset( $shipping->Erro ) ) {
+			return;
+		}
+
+		$error_number = (string) $shipping->Erro;
+
+		// Exit if have errors.
+		if ( ! in_array( $error_number, $this->get_accepted_error_codes() ) ) {
+			return;
+		}
+
+		// Set the shipping rates.
+		$label = ( 'yes' == $this->show_delivery_time ) ? WC_Correios_Connect::estimating_delivery( $this->title, $shipping->PrazoEntrega, $this->additional_time ) : $this->title;
+		$cost  = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
+		$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
+
+		// Display Correios errors notices.
+		$error_message = WC_Correios_Error::get_message( $shipping->Erro );
+		if ( '' != $error_message ) {
+			$notice_type = ( '010' == $error_number ) ? 'notice' : 'error';
+			$notice      = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
+			wc_add_notice( $notice, $notice_type );
+		}
+
+		// Create the rate and apply filters.
+		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
+			'id'    => $this->title,
+			'label' => $label,
+			'cost'  => $cost + $fee,
+		) );
+
+		// Deprecated filter.
+		$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );
+
+		// Add rate to WooComemrce.
+		$this->add_rate( $rates[0] );
+	}
 }

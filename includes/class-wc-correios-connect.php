@@ -38,13 +38,6 @@ class WC_Correios_Connect {
 	protected $package = array();
 
 	/**
-	 * Origin zipcode.
-	 *
-	 * @var string
-	 */
-	protected $zip_origin = '';
-
-	/**
 	 * Destination zipcode.
 	 *
 	 * @var string
@@ -172,15 +165,6 @@ class WC_Correios_Connect {
 	}
 
 	/**
-	 * Set the origin zipcode.
-	 *
-	 * @param string $zip_origin
-	 */
-	public function set_zip_origin( $zip_origin = '' ) {
-		$this->zip_origin = $zip_origin;
-	}
-
-	/**
 	 * Set the destination zipcode.
 	 *
 	 * @param string $zip_destination
@@ -295,6 +279,15 @@ class WC_Correios_Connect {
 	 */
 	public function set_debug( $debug = 'no' ) {
 		$this->debug = $debug;
+	}
+
+	/**
+	 * Get origin postcode.
+	 *
+	 * @return string
+	 */
+	public function get_origin_postcode() {
+		return apply_filters( 'woocommerce_correios_origin_postcode', '' );
 	}
 
 	/**
@@ -415,7 +408,7 @@ class WC_Correios_Connect {
 			! is_array( $this->services )
 			|| empty( $this->services )
 			|| empty( $this->zip_destination )
-			|| empty( $this->zip_origin )
+			|| empty( $this->get_origin_postcode() )
 		) {
 			return $values;
 		}
@@ -455,7 +448,7 @@ class WC_Correios_Connect {
 			'nCdEmpresa'          => $this->login,
 			'sDsSenha'            => $this->password,
 			'sCepDestino'         => $this->clean_zipcode( $this->zip_destination ),
-			'sCepOrigem'          => $this->clean_zipcode( $this->zip_origin ),
+			'sCepOrigem'          => $this->clean_zipcode( $this->get_origin_postcode() ),
 			'nVlAltura'           => $this->float_to_string( $this->height ),
 			'nVlLargura'          => $this->float_to_string( $this->width ),
 			'nVlDiametro'         => $this->float_to_string( $this->diameter ),
@@ -465,7 +458,7 @@ class WC_Correios_Connect {
 			'sCdMaoPropria'       => $this->own_hand,
 			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
 			'sCdAvisoRecebimento' => $this->receipt_notice,
-			'StrRetorno'          => 'xml'
+			'StrRetorno'          => 'xml',
 		) );
 
 		$url = add_query_arg( $args, apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice ) );
