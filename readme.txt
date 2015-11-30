@@ -42,7 +42,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 = Compatibilidade =
 
-Compatível com as versões 2.1.x, 2.2.x, 2.3.x e 2.4.x do WooCommerce.
+Compatível com as versões 2.2.x, 2.3.x, 2.4.x e 2.5.x do WooCommerce.
 
 = Dúvidas? =
 
