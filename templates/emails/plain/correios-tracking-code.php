@@ -4,25 +4,25 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 2.1.1
+ * @version 3.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
-echo $email_heading . "\n\n";
+echo '= ' . $email_heading . " =\n\n";
 
-echo $tracking_message . "\n\n";
+echo wptexturize( $tracking_message ) . "\n\n";
 
-echo __( 'Your order details are shown below for your reference:', 'woocommerce-correios' ) . "\n\n";
+echo __( 'For your reference, your order details are shown below.', 'woocommerce-correios' ) . "\n\n";
 
-echo "****************************************************\n\n";
+echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
 do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text );
 
-echo sprintf( __( 'Order number: %s', 'woocommerce-correios' ), $order->get_order_number() ) . "\n";
-echo sprintf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ) . "\n";
+printf( __( 'Order number: %s', 'woocommerce-correios' ), $order->get_order_number() ) . "\n";
+printf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ) . "\n";
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
@@ -36,22 +36,25 @@ if ( $totals = $order->get_order_item_totals() ) {
 	}
 }
 
-echo "\n****************************************************\n\n";
-
 do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text );
 
-echo __( 'Your details', 'woocommerce-correios' ) . "\n\n";
+echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
-if ( $order->billing_email ) {
-	echo __( 'Email:', 'woocommerce-correios' ) . ' ' . $order->billing_email . "\n";
-}
+/**
+ * Order meta.
+ *
+ * @hooked WC_Emails::order_meta() Shows order meta data.
+ */
+do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
-if ( $order->billing_phone ) {
-	echo __( 'Tel:', 'woocommerce-correios' ) . ' ' . $order->billing_phone . "\n";
-}
+/**
+ * Customer details.
+ *
+ * @hooked WC_Emails::customer_details() Shows customer details.
+ * @hooked WC_Emails::email_address() Shows email address.
+ */
+do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text );
 
-wc_get_template( 'emails/plain/email-addresses.php', array( 'order' => $order ) );
-
-echo "\n****************************************************\n\n";
+echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );

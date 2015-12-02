@@ -1,10 +1,18 @@
 <?php
+/**
+ * Correios Tracking History.
+ *
+ * @package WooCommerce_Correios/Classes/Tracking
+ * @since   3.0.0
+ * @version 3.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 /**
- * Correios orders.
+ * Correios tracking history class.
  */
 class WC_Correios_Tracking_History {
 
@@ -19,7 +27,6 @@ class WC_Correios_Tracking_History {
 	 * Initialize the order actions.
 	 */
 	public function __construct() {
-		// Show tracking code in order details.
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view' ), 1 );
 	}
 
@@ -29,18 +36,7 @@ class WC_Correios_Tracking_History {
 	 * @return string
 	 */
 	protected function get_tracking_history_api_url() {
-		$url = $this->_api_url;
-
-		return apply_filters( 'woocommerce_correios_tracking_api_url', $url );
-	}
-
-	/**
-	 * Get method options
-	 *
-	 * @return array
-	 */
-	protected function get_method_options() {
-		return get_option( 'woocommerce_correios_settings', array() );
+		return apply_filters( 'woocommerce_correios_tracking_api_url', $this->_api_url );
 	}
 
 	/**
@@ -57,21 +53,19 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Logger.
 	 *
-	 * @param string $data
+	 * @param string $data Data to log.
 	 */
 	protected function logger( $data ) {
-		$options = $this->get_method_options();
-
-		if ( ! empty( $options ) && 'yes' == $options['debug'] ) {
+		if ( apply_filters( 'woocommerce_correios_enable_tracking_debug', false ) ) {
 			$logger = new WC_Logger();
-			$logger->add( 'correios', $data );
+			$logger->add( 'correios-tracking-history', $data );
 		}
 	}
 
 	/**
 	 * Access API Correios.
 	 *
-	 * @param  string $tracking_code.
+	 * @param  string $tracking_code Tracking code.
 	 *
 	 * @return SimpleXMLElement|stdClass History Tracking code.
 	 */
@@ -87,7 +81,7 @@ class WC_Correios_Tracking_History {
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
 		$params      = array(
-			'timeout' => 30
+			'timeout' => 30,
 		);
 
 		$this->logger( 'Requesting tracking history in: ' . print_r( $request_url, true ) );
@@ -96,7 +90,7 @@ class WC_Correios_Tracking_History {
 
 		if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {
-				$tracking_history = WC_Correios_Connect::safe_load_xml( $response['body'], LIBXML_NOCDATA );
+				$tracking_history = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
 			} catch ( Exception $e ) {
 				$this->logger( 'Tracking history invalid XML: ' . $e->getMessage() );
 			}
@@ -113,7 +107,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Display the order tracking code in order details and the tracking history.
 	 *
-	 * @param WC_Order $order_id Order data.
+	 * @param WC_Order $order Order data.
 	 */
 	public function view( $order ) {
 		$events        = false;
@@ -124,11 +118,8 @@ class WC_Correios_Tracking_History {
 			return;
 		}
 
-		// Get the shipping method options.
-		$options = $this->get_method_options();
-
 		// Try to connect to Correios Webservices and get the tracking history.
-		if ( ! empty( $options['tracking_history'] ) && 'yes' == $options['tracking_history'] ) {
+		if ( apply_filters( 'woocommerce_correios_enable_tracking_history', false ) ) {
 			$tracking = $this->get_tracking_history( $tracking_code );
 			$events   = isset( $tracking->objeto->evento ) ? $tracking->objeto->evento : false;
 		}
@@ -139,7 +130,7 @@ class WC_Correios_Tracking_History {
 				'myaccount/tracking-history-table.php',
 				array(
 					'events' => $events,
-					'code'   => $tracking_code
+					'code'   => $tracking_code,
 				),
 				'',
 				WC_Correios::get_templates_path()
@@ -148,7 +139,7 @@ class WC_Correios_Tracking_History {
 			wc_get_template(
 				'myaccount/tracking-code.php',
 				array(
-					'code' => $tracking_code
+					'code' => $tracking_code,
 				),
 				'',
 				WC_Correios::get_templates_path()

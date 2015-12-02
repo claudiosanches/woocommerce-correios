@@ -8,22 +8,22 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 ?>
 
-<h2 id="wc-correios-tracking"><?php _e( 'Correios Delivery History', 'woocommerce-correios' ); ?></h2>
+<h2 id="wc-correios-tracking"><?php esc_html_e( 'Correios Delivery History', 'woocommerce-correios' ); ?></h2>
 
-<p><?php printf( __( 'History for the tracking code: %s.', 'woocommerce-correios' ), sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $code ) ); ?></p>
+<p><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a>.</p>
 
 <table class="shop_table shop_table_responsive">
 	<tr>
-		<th><?php _e( 'Date', 'woocommerce-correios' ); ?></th>
-		<th><?php _e( 'Location', 'woocommerce-correios' ); ?></th>
-		<th><?php _e( 'Status', 'woocommerce-correios' ); ?></th>
+		<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
+		<th><?php esc_html_e( 'Location', 'woocommerce-correios' ); ?></th>
+		<th><?php esc_html_e( 'Status', 'woocommerce-correios' ); ?></th>
 	</tr>
 
-	<?php foreach ( $events as $event ): ?>
+	<?php foreach ( $events as $event ) : ?>
 		<tr>
 			<td><?php echo esc_html( $event->data . ' ' . $event->hora ); ?></td>
 			<td>
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php if ( isset( $event->destino ) ) : ?>
 					<br />
-					<?php printf( __( 'In transit to %s', 'woocommerce-correios' ), esc_html( $event->destino->local . ' - ' . $event->destino->cidade . '/' . $event->destino->uf ) ); ?>
+					<?php echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event->destino->local . ' - ' . $event->destino->cidade . '/' . $event->destino->uf ) ); ?>
 				<?php endif; ?>
 			</td>
 			<td>
