@@ -8,8 +8,10 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 ?>
 
-<div id="wc-correios-tracking" class="woocommerce-info"><strong><?php _e( 'Correios', 'woocommerce-correios' ); ?>:</strong> <?php printf( __( 'Your the tracking code: %s.', 'woocommerce-correios' ), sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $code ) ); ?></div>
+<div id="wc-correios-tracking" class="woocommerce-info">
+	<strong><?php esc_html_e( 'Correios', 'woocommerce-correios' ); ?>:</strong> <?php esc_html_e( 'Your the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a>.
+</div>

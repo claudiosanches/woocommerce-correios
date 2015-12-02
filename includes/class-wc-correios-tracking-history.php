@@ -1,10 +1,18 @@
 <?php
+/**
+ * Correios Tracking History.
+ *
+ * @package WooCommerce_Correios/Classes/Tracking
+ * @since   3.0.0
+ * @version 3.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 /**
- * Correios orders.
+ * Correios tracking history class.
  */
 class WC_Correios_Tracking_History {
 
@@ -57,7 +65,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Logger.
 	 *
-	 * @param string $data
+	 * @param string $data Data to log.
 	 */
 	protected function logger( $data ) {
 		$options = $this->get_method_options();
@@ -71,7 +79,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Access API Correios.
 	 *
-	 * @param  string $tracking_code.
+	 * @param  string $tracking_code Tracking code.
 	 *
 	 * @return SimpleXMLElement|stdClass History Tracking code.
 	 */
@@ -87,7 +95,7 @@ class WC_Correios_Tracking_History {
 		$api_url     = $this->get_tracking_history_api_url();
 		$request_url = add_query_arg( $args, $api_url );
 		$params      = array(
-			'timeout' => 30
+			'timeout' => 30,
 		);
 
 		$this->logger( 'Requesting tracking history in: ' . print_r( $request_url, true ) );
@@ -113,7 +121,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Display the order tracking code in order details and the tracking history.
 	 *
-	 * @param WC_Order $order_id Order data.
+	 * @param WC_Order $order Order data.
 	 */
 	public function view( $order ) {
 		$events        = false;
@@ -139,7 +147,7 @@ class WC_Correios_Tracking_History {
 				'myaccount/tracking-history-table.php',
 				array(
 					'events' => $events,
-					'code'   => $tracking_code
+					'code'   => $tracking_code,
 				),
 				'',
 				WC_Correios::get_templates_path()
@@ -148,7 +156,7 @@ class WC_Correios_Tracking_History {
 			wc_get_template(
 				'myaccount/tracking-code.php',
 				array(
-					'code' => $tracking_code
+					'code' => $tracking_code,
 				),
 				'',
 				WC_Correios::get_templates_path()
