@@ -39,8 +39,8 @@ module.exports = function( grunt ) {
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= dirs.js %>/*/*.js',
-				'!<%= dirs.js %>/*/*.min.js'
+				'<%= dirs.js %>/*/*/*.js',
+				'!<%= dirs.js %>/*/*/*.min.js'
 			]
 		},
 
@@ -60,44 +60,11 @@ module.exports = function( grunt ) {
 					dest: '<%= dirs.js %>/admin/',
 					ext: '.min.js'
 				}]
-			},
-			frontend: {
-				files: [{
-					expand: true,
-					cwd: '<%= dirs.js %>/frontend/',
-					src: [
-						'*.js',
-						'!*.min.js'
-					],
-					dest: '<%= dirs.js %>/frontend/',
-					ext: '.min.js'
-				}]
-			}
-		},
-
-		// Minify all .css files.
-		cssmin: {
-			minify: {
-				expand: true,
-				cwd: '<%= dirs.css %>/',
-				src: [
-					'*.css',
-					'!*.min.css'
-				],
-				dest: '<%= dirs.css %>/',
-				ext: '.min.css'
 			}
 		},
 
 		// Watch changes for assets
 		watch: {
-			css: {
-				files: [
-					'<%= dirs.css %>/*.css',
-					'!<%= dirs.css %>/*.min.css'
-				],
-				tasks: ['cssmin']
-			},
 			js: {
 				files: [
 					'<%= dirs.js %>/*js',
@@ -188,7 +155,6 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
 	grunt.loadNpmTasks( 'grunt-rsync' );
 	grunt.loadNpmTasks( 'grunt-shell' );
@@ -196,8 +162,7 @@ module.exports = function( grunt ) {
 	// Register tasks
 	grunt.registerTask( 'default', [
 		'jshint',
-		'uglify',
-		'cssmin'
+		'uglify'
 	]);
 
 	// Deploy task

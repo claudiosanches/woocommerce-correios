@@ -95,7 +95,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once 'includes/wc-correios-functions.php';
 			include_once 'includes/class-wc-correios-package.php';
 			include_once 'includes/class-wc-correios-webservice.php';
-			include_once 'includes/class-wc-correios-product-shipping-simulator.php';
 			include_once 'includes/class-wc-correios-tracking-history.php';
 
 			// Integration.
