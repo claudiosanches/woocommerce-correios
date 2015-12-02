@@ -15,7 +15,7 @@ echo '= ' . $email_heading . " =\n\n";
 
 echo wptexturize( $tracking_message ) . "\n\n";
 
-echo _e( 'For your reference, your order details are shown below.', 'woocommerce-correios' ) . "\n\n";
+echo __( 'For your reference, your order details are shown below.', 'woocommerce-correios' ) . "\n\n";
 
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 

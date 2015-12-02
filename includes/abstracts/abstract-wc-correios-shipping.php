@@ -54,7 +54,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 *
 	 * @return string
 	 */
-	protected function get_log_view() {
+	protected function get_log_link() {
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
 			return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
 		}
@@ -114,7 +114,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
 				'default'     => 'no',
-				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_view(),
+				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
 			),
 		);
 	}

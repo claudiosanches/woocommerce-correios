@@ -38,6 +38,8 @@ class WC_Correios_Integration extends WC_Integration {
 		$this->service_type    = $this->get_option( 'service_type' );
 		$this->login           = $this->get_option( 'login' );
 		$this->password        = $this->get_option( 'password' );
+		$this->enable_tracking = $this->get_option( 'enable_tracking' );
+		$this->tracking_debug  = $this->get_option( 'tracking_debug' );
 		$this->minimum_height  = $this->get_option( 'minimum_height' );
 		$this->minimum_width   = $this->get_option( 'minimum_width' );
 		$this->minimum_length  = $this->get_option( 'minimum_length' );
@@ -51,9 +53,22 @@ class WC_Correios_Integration extends WC_Integration {
 		add_filter( 'woocommerce_correios_receipt_notice', array( $this, 'setup_receipt_notice' ), 10 );
 		add_filter( 'woocommerce_correios_login', array( $this, 'setup_login' ), 10 );
 		add_filter( 'woocommerce_correios_password', array( $this, 'setup_password' ), 10 );
+		add_filter( 'woocommerce_correios_enable_tracking_history', array( $this, 'setup_tracking_history' ), 10 );
+		add_filter( 'woocommerce_correios_enable_tracking_debug', array( $this, 'setup_tracking_debug' ), 10 );
 		add_filter( 'woocommerce_correios_package_height', array( $this, 'normalize_package_height' ), 10 );
 		add_filter( 'woocommerce_correios_package_width', array( $this, 'normalize_package_width' ), 10 );
 		add_filter( 'woocommerce_correios_package_length', array( $this, 'normalize_package_length' ), 10 );
+	}
+
+	/**
+	 * Get tracking log url.
+	 *
+	 * @return string
+	 */
+	protected function get_tracking_log_link() {
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
+			return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=correios-tracking-history-' . sanitize_file_name( wp_hash( 'correios-tracking-history' ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+		}
 	}
 
 	/**
@@ -128,11 +143,28 @@ class WC_Correios_Integration extends WC_Integration {
 				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 			),
+			'tracking' => array(
+				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page.', 'woocommerce-correios' ),
+			),
+			'enable_tracking' => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable Tracking History Table', 'woocommerce-correios' ),
+				'default' => 'no',
+			),
+			'tracking_debug' => array(
+				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable logging for Tracking History', 'woocommerce-correios' ),
+				'default'     => 'no',
+				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), __( 'Tracking History Table', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
+			),
 			'package_standard' => array(
 				'title'       => __( 'Package Standard', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
 			),
 			'minimum_height' => array(
 				'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
@@ -240,7 +272,29 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	public function setup_password( $default ) {
-		return  ( 'corporate' === $this->service_type ) ? $this->password : '';
+		return ( 'corporate' === $this->service_type ) ? $this->password : '';
+	}
+
+	/**
+	 * Set up tracking history.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_tracking_history( $default ) {
+		return 'yes' === $this->enable_tracking;
+	}
+
+	/**
+	 * Set up tracking debug.
+	 *
+	 * @param  string $default Default value.
+	 *
+	 * @return string
+	 */
+	public function setup_tracking_debug( $default ) {
+		return 'yes' === $this->tracking_debug;
 	}
 
 	/**

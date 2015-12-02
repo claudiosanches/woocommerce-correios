@@ -27,7 +27,6 @@ class WC_Correios_Tracking_History {
 	 * Initialize the order actions.
 	 */
 	public function __construct() {
-		// Show tracking code in order details.
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view' ), 1 );
 	}
 
@@ -37,18 +36,7 @@ class WC_Correios_Tracking_History {
 	 * @return string
 	 */
 	protected function get_tracking_history_api_url() {
-		$url = $this->_api_url;
-
-		return apply_filters( 'woocommerce_correios_tracking_api_url', $url );
-	}
-
-	/**
-	 * Get method options
-	 *
-	 * @return array
-	 */
-	protected function get_method_options() {
-		return get_option( 'woocommerce_correios_settings', array() );
+		return apply_filters( 'woocommerce_correios_tracking_api_url', $this->_api_url );
 	}
 
 	/**
@@ -68,11 +56,9 @@ class WC_Correios_Tracking_History {
 	 * @param string $data Data to log.
 	 */
 	protected function logger( $data ) {
-		$options = $this->get_method_options();
-
-		if ( ! empty( $options ) && 'yes' == $options['debug'] ) {
+		if ( apply_filters( 'woocommerce_correios_enable_tracking_debug', false ) ) {
 			$logger = new WC_Logger();
-			$logger->add( 'correios', $data );
+			$logger->add( 'correios-tracking-history', $data );
 		}
 	}
 
@@ -132,11 +118,8 @@ class WC_Correios_Tracking_History {
 			return;
 		}
 
-		// Get the shipping method options.
-		$options = $this->get_method_options();
-
 		// Try to connect to Correios Webservices and get the tracking history.
-		if ( ! empty( $options['tracking_history'] ) && 'yes' == $options['tracking_history'] ) {
+		if ( apply_filters( 'woocommerce_correios_enable_tracking_history', false ) ) {
 			$tracking = $this->get_tracking_history( $tracking_code );
 			$events   = isset( $tracking->objeto->evento ) ? $tracking->objeto->evento : false;
 		}
