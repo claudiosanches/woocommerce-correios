@@ -98,7 +98,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
 				'description' => __( 'This controls if the price of the package must be declared for insurance purposes.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
-				'default'     => 'no',
+				'default'     => 'yes',
 			),
 			'service_options' => array(
 				'title' => __( 'Service Options', 'woocommerce-correios' ),
