@@ -235,7 +235,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$error_message = wc_correios_get_error_message( $shipping->Erro );
 		if ( '' != $error_message ) {
 			$notice_type = ( '010' == $error_number ) ? 'notice' : 'error';
-			$notice      = '<strong>' . __( 'Correios', 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
+			$notice      = '<strong>' . __( $this->title, 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
 			wc_add_notice( $notice, $notice_type );
 		}
 
