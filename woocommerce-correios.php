@@ -95,6 +95,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once 'includes/wc-correios-functions.php';
 			include_once 'includes/class-wc-correios-package.php';
 			include_once 'includes/class-wc-correios-webservice.php';
+			include_once 'includes/class-wc-correios-webservice-international.php';
 			include_once 'includes/class-wc-correios-tracking-history.php';
 
 			// Integration.
@@ -156,6 +157,9 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			$methods[] = 'WC_Correios_Shipping_SEDEX_Hoje';
 			$methods[] = 'WC_Correios_Shipping_ESEDEX';
 			$methods[] = 'WC_Correios_Shipping_Registered_Letter';
+			$methods[] = 'WC_Correios_Shipping_Mercadoria_Expressa';
+			$methods[] = 'WC_Correios_Shipping_Mercadoria_Economica';
+			$methods[] = 'WC_Correios_Shipping_Leve_Internacional';
 
 			return $methods;
 		}
