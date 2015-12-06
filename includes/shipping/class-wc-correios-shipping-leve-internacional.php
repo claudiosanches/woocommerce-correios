@@ -14,13 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Leve Internacional shipping method class.
  */
-class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_Shipping {
+class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_International_Shipping {
 
 	/**
 	 * Initialize Leve Internacional.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_esedex';
+		$this->id           = 'correios_leve_internacional';
 		$this->method_title = __( 'Leve Internacional', 'woocommerce-correios' );
 		$this->more_link    = '';
 

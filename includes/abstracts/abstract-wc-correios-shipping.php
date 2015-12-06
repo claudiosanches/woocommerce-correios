@@ -120,6 +120,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get shipping method title.
+	 *
+	 * @return string
+	 */
+	public function get_method_title() {
+		return sprintf( __( '%s is a shipping method from Correios, the brazilian most used delivery company.', 'woocommerce-correios' ), $this->method_title );
+	}
+
+	/**
 	 * Correios options page.
 	 */
 	public function admin_options() {

@@ -14,13 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Mercadoria Econômica shipping method class.
  */
-class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Shipping {
+class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_International_Shipping {
 
 	/**
 	 * Initialize Mercadoria Econômica.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_esedex';
+		$this->id           = 'correios_mercadoria_economica';
 		$this->method_title = __( 'Mercadoria Econ&ocirc;mica', 'woocommerce-correios' );
 		$this->more_link    = '';
 

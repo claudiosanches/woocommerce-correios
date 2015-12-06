@@ -17,7 +17,7 @@ wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin/shipping-methods
 <h3><?php echo esc_html( $this->method_title ); ?></h3>
 
 <p>
-	<?php echo esc_html( sprintf( __( '%s is a shipping method from Correios, the brazilian most used delivery company.', 'woocommerce-correios' ), $this->method_title ) ); ?>
+	<?php echo esc_html( $this->get_method_title() ); ?>
 
 	<?php if ( ! empty( $this->more_link ) ) : ?>
 		<a href="<?php echo esc_url( $this->more_link ); ?>"><?php echo esc_html( sprintf( __( 'More about %s.', 'woocommerce-correios' ), $this->method_title ) ); ?></a>

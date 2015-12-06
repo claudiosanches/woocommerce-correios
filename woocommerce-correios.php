@@ -103,6 +103,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 
 			// Shipping methods.
 			include_once 'includes/abstracts/abstract-wc-correios-shipping.php';
+			include_once 'includes/abstracts/abstract-wc-correios-international-shipping.php';
 			foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/shipping/*.php' ) as $filename ) {
 				include_once $filename;
 			}
