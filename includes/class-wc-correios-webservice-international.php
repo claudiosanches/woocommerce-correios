@@ -30,9 +30,9 @@ class WC_Correios_Webservice_International {
 	 * 128 - Mercadoria Econômica.
 	 * 209 - Leve Internacional.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	protected $services = array();
+	protected $service = '';
 
 	/**
 	 * Products package.
@@ -115,12 +115,12 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
-	 * Set the services.
+	 * Set the service.
 	 *
-	 * @param array $services Correios services.
+	 * @param string $service Correios international service.
 	 */
-	public function set_services( $services = array() ) {
-		$this->services = $services;
+	public function set_service( $services = '' ) {
+		$this->service = $services;
 	}
 
 	/**
@@ -231,12 +231,21 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
+	 * Check if is setted.
+	 *
+	 * @return bool
+	 */
+	protected function is_setted() {
+		return ! empty( $this->service ) || ! empty( $this->destination_country );
+	}
+
+	/**
 	 * Get shipping prices.
 	 *
-	 * @return array
+	 * @return SimpleXMLElement
 	 */
 	public function get_shipping() {
-		$values = array();
+		$shipping = null;
 
 		// Checks if services and postcode is empty.
 		if ( ! $this->is_setted() ) {
@@ -264,22 +273,17 @@ class WC_Correios_Webservice_International {
 			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $package, true ) );
 		}
 
-		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
-			'nCdServico'          => implode( ',', $this->services ),
-			'nCdEmpresa'          => apply_filters( 'woocommerce_correios_login', '', $this->id ),
-			'sDsSenha'            => apply_filters( 'woocommerce_correios_password', '', $this->id ),
-			'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
-			'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
-			'nVlAltura'           => $this->float_to_string( $this->height ),
-			'nVlLargura'          => $this->float_to_string( $this->width ),
-			'nVlDiametro'         => $this->float_to_string( $this->diameter ),
-			'nVlComprimento'      => $this->float_to_string( $this->length ),
-			'nVlPeso'             => $this->float_to_string( $this->weight ),
-			'nCdFormato'          => $this->format,
-			'sCdMaoPropria'       => apply_filters( 'woocommerce_correios_own_hands', 'N', $this->id ),
-			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
-			'sCdAvisoRecebimento' => apply_filters( 'woocommerce_correios_receipt_notice', 'N', $this->id ),
-			'StrRetorno'          => 'xml',
+		$args = apply_filters( 'woocommerce_correios_international_shipping_args', array(
+			'tipoConsulta' => 'Geral',
+			'especif'      => $this->service,
+			'uforigem'     => '',
+			'localidade'   => '',
+			'pais'         => '',
+			'altura'       => $this->float_to_string( $this->height ),
+			'largura'      => $this->float_to_string( $this->width ),
+			'profundidade' => $this->float_to_string( $this->length ),
+			'peso'         => $this->float_to_string( $this->weight ),
+			'reset'        => 'true',
 		), $this->id );
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
@@ -304,15 +308,13 @@ class WC_Correios_Webservice_International {
 				}
 			}
 
-			if ( isset( $result->cServico ) ) {
-				foreach ( $result->cServico as $service ) {
-					$code = (string) $service->Codigo;
-
+			if ( isset( $result->exporta_facil->tipo_servico ) ) {
+				foreach ( $result->exporta_facil->tipo_servico as $service ) {
 					if ( 'yes' == $this->debug ) {
 						$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $service, true ) );
 					}
 
-					$values[ $code ] = $service;
+					$shipping = $service;
 				}
 			}
 		} else {
@@ -321,6 +323,6 @@ class WC_Correios_Webservice_International {
 			}
 		}
 
-		return $values;
+		return $shipping;
 	}
 }
