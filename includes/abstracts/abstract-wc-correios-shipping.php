@@ -155,7 +155,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$code = $this->get_code();
 
 		$connect  = new WC_Correios_Webservice( $this->id );
-		$connect->set_services( array( $code ) );
+		$connect->set_service( $code );
 		$_package = $connect->set_package( $package );
 		$connect->set_destination_postcode( $package['destination']['postcode'] );
 		$connect->set_debug( $this->debug );
@@ -172,11 +172,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		$shipping = $connect->get_shipping();
 
-		if ( ! empty( $shipping[ $code ] ) ) {
-			return $shipping[ $code ];
-		}
-
-		return null;
+		return $shipping;
 	}
 
 	/**

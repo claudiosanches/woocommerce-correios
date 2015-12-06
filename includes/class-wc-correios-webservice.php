@@ -24,7 +24,7 @@ class WC_Correios_Webservice {
 	private $_webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
 	/**
-	 * IDs from Correios services.
+	 * IDs from Correios service.
 	 *
 	 * 41106 - PAC without contract.
 	 * 40010 - SEDEX without contract.
@@ -34,9 +34,9 @@ class WC_Correios_Webservice {
 	 * 40096 - SEDEX with contract.
 	 * 81019 - e-SEDEX with contract.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	protected $services = array();
+	protected $service = '';
 
 	/**
 	 * Products package.
@@ -123,12 +123,12 @@ class WC_Correios_Webservice {
 	}
 
 	/**
-	 * Set the services.
+	 * Set the service
 	 *
-	 * @param array $services Correios services.
+	 * @param stsring $service Correios service.
 	 */
-	public function set_services( $services = array() ) {
-		$this->services = $services;
+	public function set_service( $service = '' ) {
+		$this->service = $service;
 	}
 
 	/**
@@ -262,18 +262,18 @@ class WC_Correios_Webservice {
 	 * @return bool
 	 */
 	protected function is_setted() {
-		return is_array( $this->services ) || ! empty( $this->services ) || ! empty( $this->destination_postcode ) || ! empty( $this->get_origin_postcode() );
+		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $this->get_origin_postcode() );
 	}
 
 	/**
 	 * Get shipping prices.
 	 *
-	 * @return array
+	 * @return SimpleXMLElement
 	 */
 	public function get_shipping() {
-		$values = array();
+		$shipping = null;
 
-		// Checks if services and postcode is empty.
+		// Checks if service and postcode are empty.
 		if ( ! $this->is_setted() ) {
 			return $values;
 		}
@@ -300,7 +300,7 @@ class WC_Correios_Webservice {
 		}
 
 		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
-			'nCdServico'          => implode( ',', $this->services ),
+			'nCdServico'          => $this->service,
 			'nCdEmpresa'          => apply_filters( 'woocommerce_correios_login', '', $this->id ),
 			'sDsSenha'            => apply_filters( 'woocommerce_correios_password', '', $this->id ),
 			'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
@@ -340,15 +340,13 @@ class WC_Correios_Webservice {
 			}
 
 			if ( isset( $result->cServico ) ) {
-				foreach ( $result->cServico as $service ) {
-					$code = (string) $service->Codigo;
+				$service = $result->cServico;
 
-					if ( 'yes' == $this->debug ) {
-						$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $service, true ) );
-					}
-
-					$values[ $code ] = $service;
+				if ( 'yes' == $this->debug ) {
+					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $service, true ) );
 				}
+
+				$shipping = $service;
 			}
 		} else {
 			if ( 'yes' == $this->debug ) {
@@ -356,6 +354,6 @@ class WC_Correios_Webservice {
 			}
 		}
 
-		return $values;
+		return $shipping;
 	}
 }
