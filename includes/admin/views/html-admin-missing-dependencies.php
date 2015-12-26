@@ -26,7 +26,7 @@ if ( function_exists( 'get_plugins' ) ) {
 	<?php else : ?>
 	<?php
 	if ( current_user_can( 'install_plugins' ) ) {
-			$url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=woocommerce' ), 'install-plugin_woocommerce' );
+		$url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=woocommerce' ), 'install-plugin_woocommerce' );
 	} else {
 		$url = 'http://wordpress.org/plugins/woocommerce/';
 	}
