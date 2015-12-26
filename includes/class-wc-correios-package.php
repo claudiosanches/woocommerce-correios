@@ -185,21 +185,21 @@ class WC_Correios_Package {
 		$greatest   = array_search( max( $max_values ), $max_values );
 
 		switch ( $greatest ) {
-			case 'height':
+			case 'height' :
 				$cubage = array(
 					'height' => max( $height ),
 					'width'  => $root,
 					'length' => $root,
 				);
 				break;
-			case 'width':
+			case 'width' :
 				$cubage = array(
 					'height' => $root,
 					'width'  => max( $width ),
 					'length' => $root,
 				);
 				break;
-			case 'length':
+			case 'length' :
 				$cubage = array(
 					'height' => $root,
 					'width'  => $root,
@@ -207,7 +207,7 @@ class WC_Correios_Package {
 				);
 				break;
 
-			default:
+			default :
 				$cubage = array(
 					'height' => 0,
 					'width'  => 0,
