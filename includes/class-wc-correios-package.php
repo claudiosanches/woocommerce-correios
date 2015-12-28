@@ -234,7 +234,7 @@ class WC_Correios_Package {
 			'height' => apply_filters( 'woocommerce_correios_package_height', $cubage['height'] ),
 			'width'  => apply_filters( 'woocommerce_correios_package_width', $cubage['width'] ),
 			'length' => apply_filters( 'woocommerce_correios_package_length', $cubage['length'] ),
-			'weight' => $data['weight'],
+			'weight' => apply_filters( 'woocommerce_correios_package_weight', $data['weight'] ),
 		);
 	}
 }
