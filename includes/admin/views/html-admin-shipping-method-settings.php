@@ -24,7 +24,7 @@ wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin/shipping-methods
 	<?php endif; ?>
 </p>
 
-<p><?php echo esc_html__( 'Configure general options, like origin postcode in', 'woocommerce-correios' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios' ) ) . '">' . esc_html__( 'Correios integration page.', 'woocommerce' ) . '</a>'; ?></p>
+<p><?php echo esc_html__( 'Configure general options, like origin postcode in', 'woocommerce-correios' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios' ) ) . '">' . esc_html__( 'Correios integration page.', 'woocommerce-correios' ) . '</a>'; ?></p>
 
 <?php include 'html-admin-help-message.php'; ?>
 
