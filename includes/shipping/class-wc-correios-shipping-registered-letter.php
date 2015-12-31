@@ -30,9 +30,16 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 		$this->code = '10014';
 
 		parent::__construct();
+	}
 
-		// Extra options.
-		$new_options = array(
+	/**
+	 * Get behavior options.
+	 * Include extra options.
+	 *
+	 * @return array
+	 */
+	protected function get_behavior_options() {
+		return array(
 			'price_table' => array(
 				'title'       => __( 'Price table', 'woocommerce-correios' ),
 				'type'        => 'select',
@@ -46,7 +53,5 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 				),
 			),
 		);
-
-		$this->form_fields = wc_correios_array_insert( $this->form_fields, $new_options, 'behavior_options' );
 	}
 }

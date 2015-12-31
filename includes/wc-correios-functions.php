@@ -49,25 +49,6 @@ function wc_correios_safe_load_xml( $source, $options = 0 ) {
 }
 
 /**
- * Insert an element in an array.
- *
- * @param  array        $current Current array.
- * @param  string|array $new     New element.
- * @param  int|string   $where   Where need to be inserted.
- *
- * @return array
- */
-function wc_correios_array_insert( $current, $new, $where ) {
-	if ( is_string( $where ) ) {
-		$index = array_search( $where, array_keys( $current ) ) + 1;
-	} else {
-		$index = intval( $where );
-	}
-
-	return array_merge( array_slice( $current, 0, $index ), $new, array_slice( $current, $index ) );
-}
-
-/**
  * Sanitize postcode.
  *
  * @param  string $postcode Postcode.
