@@ -26,7 +26,15 @@ printf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_forma
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
-echo "\n" . $order->email_order_items_table( true, false, true, '', '', true );
+if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.5', '>=' ) ) {
+	$order_items = $order->email_order_items_table( array(
+		'plain_text' => true,
+	) );
+} else {
+	$order_items = $order->email_order_items_table( true, false, true, '', '', true );
+}
+
+echo "\n" . $order_items;
 
 echo "----------\n\n";
 

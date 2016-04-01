@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 2.1.1
+ * @version 3.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,7 +31,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tr>
 	</thead>
 	<tbody>
-		<?php echo $order->email_order_items_table( true, false, true ); ?>
+		<?php
+			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.5', '>=' ) ) {
+				echo $order->email_order_items_table( array(
+					'plain_text' => false,
+				) );
+			} else {
+				echo $order->email_order_items_table( true, false, true );
+			}
+		?>
 	</tbody>
 	<tfoot>
 		<?php if ( $totals = $order->get_order_item_totals() ) :
