@@ -89,7 +89,10 @@ class WC_Correios_Admin_Orders {
 	protected function trigger_email_notification( $order, $tracking_code ) {
 		$mailer       = WC()->mailer();
 		$notification = $mailer->emails['WC_Correios_Tracking_Email'];
-		$notification->trigger( $order, $tracking_code );
+
+		if ( 'yes' === $notification->enabled ) {
+			$notification->trigger( $order, $tracking_code );
+		}
 	}
 }
 

@@ -22,7 +22,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	public function __construct() {
 		$this->id               = 'correios_tracking';
 		$this->title            = __( 'Correios Tracking Code', 'woocommerce-correios' );
-		$this->enabled          = 'yes';
+		$this->customer_email   = true;
 		$this->description      = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
 		$this->heading          = __( 'Your order has been sent', 'woocommerce-correios' );
 		$this->subject          = __( '[{blogname}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
@@ -46,6 +46,12 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
+			'enabled' => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this email notification', 'woocommerce-correios' ),
+				'default' => 'yes',
+			),
 			'subject' => array(
 				'title'       => __( 'Subject', 'woocommerce-correios' ),
 				'type'        => 'text',
@@ -72,7 +78,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				'type'        => 'select',
 				'description' => __( 'Choose which format of email to send.', 'woocommerce-correios' ),
 				'default'     => 'html',
-				'class'       => 'email_type',
+				'class'       => 'email_type wc-enhanced-select',
 				'options'     => array(
 					'plain'     => __( 'Plain text', 'woocommerce-correios' ),
 					'html'      => __( 'HTML', 'woocommerce-correios' ),
