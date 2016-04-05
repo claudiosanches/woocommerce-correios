@@ -28,10 +28,10 @@ msgid "Added a Correios tracking code: %s"
 msgstr "Adicionado o código de rastreamento dos Correios: %s"
 
 #: includes/class-wc-correios-connect.php:399
-msgid "Delivery in %d working day"
+msgid "Delivery within %d working day"
 msgid_plural "Delivery in %d working days"
-msgstr[0] "Entrega em %d dia útil"
-msgstr[1] "Entrega em %d dias úteis"
+msgstr[0] "Entrega em até %d dia útil"
+msgstr[1] "Entrega em até %d dias úteis"
 
 #: includes/class-wc-correios-error.php:22
 msgid "Invalid zip code."
