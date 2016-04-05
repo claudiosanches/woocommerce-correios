@@ -76,7 +76,7 @@ function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0
 	}
 
 	if ( $days > 0 ) {
-		$name .= ' (' . sprintf( _n( 'Delivery in %d working day', 'Delivery in %d working days', $days, 'woocommerce-correios' ),  $days ) . ')';
+		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'woocommerce-correios' ),  $days ) . ')';
 	}
 
 	return $name;
