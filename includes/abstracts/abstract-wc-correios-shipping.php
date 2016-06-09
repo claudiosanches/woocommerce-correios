@@ -318,15 +318,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get Correios service code.
-	 *
-	 * @return string
-	 */
-	protected function get_code() {
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $this->code, $this->id, $this->instance_id );
-	}
-
-	/**
 	 * Get shipping rate.
 	 *
 	 * @param  array $package Order package.

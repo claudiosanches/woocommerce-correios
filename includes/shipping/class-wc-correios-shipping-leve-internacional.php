@@ -22,15 +22,23 @@ class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_International_
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		parent::__construct( $instance_id );
-
 		$this->id           = 'correios-leve-internacional';
 		$this->method_title = __( 'Leve Internacional', 'woocommerce-correios' );
 		$this->more_link    = '';
 
-		/**
-		 * 209 - Leve Internacional.
-		 */
-		$this->code = '209';
+		parent::__construct( $instance_id );
+	}
+
+	/**
+	 * Get Correios service code.
+	 *
+	 * 209 - Leve Internacional.
+	 *
+	 * @return string
+	 */
+	public function get_code() {
+		$code = '209';
+
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

@@ -22,15 +22,23 @@ class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Internationa
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		parent::__construct( $instance_id );
-
 		$this->id           = 'correios-mercadoria-economica';
 		$this->method_title = __( 'Mercadoria Econ&ocirc;mica', 'woocommerce-correios' );
 		$this->more_link    = '';
 
-		/**
-		 * 128 - Mercadoria Econômica.
-		 */
-		$this->code = '128';
+		parent::__construct( $instance_id );
+	}
+
+	/**
+	 * Get Correios service code.
+	 *
+	 * 128 - Mercadoria Econômica.
+	 *
+	 * @return string
+	 */
+	public function get_code() {
+		$code = '128';
+
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

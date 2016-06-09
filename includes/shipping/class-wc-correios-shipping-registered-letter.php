@@ -22,16 +22,24 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		parent::__construct( $instance_id );
-
 		$this->id           = 'correios-registered-letter';
 		$this->method_title = __( 'Registered Letter', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/carta-comercial';
 
-		/**
-		 * 10014 - Registered Letter.
-		 */
-		$this->code = '10014';
+		parent::__construct( $instance_id );
+	}
+
+	/**
+	 * Get Correios service code.
+	 *
+	 * 10014 - Registered Letter.
+	 *
+	 * @return string
+	 */
+	public function get_code() {
+		$code = '10014';
+
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 
 	/**
