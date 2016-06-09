@@ -20,7 +20,7 @@ class WC_Correios_Shipping_Registered_Letter extends WC_Correios_Shipping {
 	 * Initialize Registered Letter.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_registered_letter';
+		$this->id           = 'correios-registered-letter';
 		$this->method_title = __( 'Registered Letter', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/carta-comercial';
 

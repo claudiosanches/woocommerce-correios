@@ -20,7 +20,7 @@ class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Internationa
 	 * Initialize Mercadoria Econômica.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_mercadoria_economica';
+		$this->id           = 'correios-mercadoria-economica';
 		$this->method_title = __( 'Mercadoria Econ&ocirc;mica', 'woocommerce-correios' );
 		$this->more_link    = '';
 

@@ -228,7 +228,15 @@ class WC_Correios_Package {
 		// Get the package data.
 		$data = apply_filters( 'woocommerce_correios_default_package', $this->get_package_data() );
 
-		$cubage = $this->get_cubage( $data['height'], $data['width'], $data['length'] );
+		if ( ! empty( $data['height'] ) && ! empty( $data['width'] ) && ! empty( $data['length'] ) ) {
+			$cubage = $this->get_cubage( $data['height'], $data['width'], $data['length'] );
+		} else {
+			$cubage = array(
+				'height' => 0,
+				'width'  => 0,
+				'length' => 0,
+			);
+		}
 
 		return array(
 			'height' => apply_filters( 'woocommerce_correios_package_height', $cubage['height'] ),

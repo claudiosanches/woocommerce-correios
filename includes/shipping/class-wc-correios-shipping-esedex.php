@@ -20,7 +20,7 @@ class WC_Correios_Shipping_ESEDEX extends WC_Correios_Shipping {
 	 * Initialize e-SEDEX.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_esedex';
+		$this->id           = 'correios-esedex';
 		$this->method_title = __( 'e-SEDEX', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/e-sedex';
 

@@ -20,7 +20,7 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International
 	 * Initialize Mercadoria Expressa.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_mercadoria_expressa';
+		$this->id           = 'correios-mercadoria-expressa';
 		$this->method_title = __( 'Mercadoria Expressa', 'woocommerce-correios' );
 		$this->more_link    = '';
 

@@ -20,7 +20,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Initialize integration actions.
 	 */
 	public function __construct() {
-		$this->id                 = 'correios';
+		$this->id                 = 'correios-integration';
 		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
 		$this->method_description = __( 'The following options are valid for all Correios shipping methods.', 'woocommerce-correios' );
 

@@ -20,7 +20,7 @@ class WC_Correios_Shipping_SEDEX_10 extends WC_Correios_Shipping {
 	 * Initialize SEDEX 10.
 	 */
 	public function __construct() {
-		$this->id           = 'correios_sedex10';
+		$this->id           = 'correios-sedex10';
 		$this->method_title = __( 'SEDEX 10', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-10';
 
