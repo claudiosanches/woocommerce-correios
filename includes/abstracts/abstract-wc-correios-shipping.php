@@ -21,24 +21,36 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	/**
 	 * Initialize the Correios shipping method.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		$this->instance_id        = absint( $instance_id );
+		$this->method_description = sprintf( __( '%s is a shipping method from Correios.', 'woocommerce-correios' ), $this->method_title );
+		$this->supports           = array(
+			'shipping-zones',
+			'instance-settings',
+		);
+
 		// Load the form fields.
 		$this->init_form_fields();
-
-		// Load the settings.
-		$this->init_settings();
 
 		// Define user set variables.
 		$this->enabled            = $this->get_option( 'enabled' );
 		$this->title              = $this->get_option( 'title' );
+		$this->origin_postcode    = $this->get_option( 'origin_postcode' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
 		$this->fee                = $this->get_option( 'fee' );
+		$this->receipt_notice     = $this->get_option( 'receipt_notice' );
+		$this->own_hands          = $this->get_option( 'own_hands' );
+		$this->declare_value      = $this->get_option( 'declare_value' );
+		$this->service_type       = $this->get_option( 'service_type' );
+		$this->login              = $this->get_option( 'login' );
+		$this->password           = $this->get_option( 'password' );
+		$this->enable_tracking    = $this->get_option( 'enable_tracking' );
+		$this->tracking_debug     = $this->get_option( 'tracking_debug' );
+		$this->minimum_height     = $this->get_option( 'minimum_height' );
+		$this->minimum_width      = $this->get_option( 'minimum_width' );
+		$this->minimum_length     = $this->get_option( 'minimum_length' );
 		$this->debug              = $this->get_option( 'debug' );
-
-		// Method variables.
-		$this->availability = 'specific';
-		$this->countries    = array( 'BR' );
 
 		// Active logs.
 		if ( 'yes' == $this->debug ) {
@@ -79,7 +91,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
-			'default' => 'no',
+			'default' => 'yes',
 		);
 		$fields['title'] = array(
 			'title'       => __( 'Title', 'woocommerce-correios' ),
@@ -89,8 +101,17 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'default'     => $this->method_title,
 		);
 		$fields['behavior_options'] = array(
-			'title' => __( 'Behavior Options', 'woocommerce-correios' ),
-			'type'  => 'title',
+			'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
+			'type'    => 'title',
+			'default' => '',
+		);
+		$fields['origin_postcode'] = array(
+			'title'       => __( 'Origin Postcode', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'placeholder' => '00000-000',
+			'default'     => '',
 		);
 
 		// Add custom behavior options.
@@ -118,10 +139,99 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'placeholder' => '0.00',
+			'default'     => '',
+		);
+		$fields['optional_services'] = array(
+			'title'   => __( 'Optional Services', 'woocommerce-correios' ),
+			'type'    => 'title',
+			'default' => '',
+		);
+		$fields['receipt_notice'] = array(
+			'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
+			'type'        => 'checkbox',
+			'label'       => __( 'Enable receipt notice', 'woocommerce-correios' ),
+			'description' => __( 'This controls if the sender must receive a receipt notice when a package is delivered.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => 'no',
+		);
+		$fields['own_hands'] = array(
+			'title'       => __( 'Own Hands', 'woocommerce-correios' ),
+			'type'        => 'checkbox',
+			'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
+			'description' => __( 'This controls if the package must be delivered exclusively to the recipient printed in its label.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => 'no',
+		);
+		$fields['declare_value'] = array(
+			'title'       => __( 'Declare Value for Insurance', 'woocommerce-correios' ),
+			'type'        => 'checkbox',
+			'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
+			'description' => __( 'This controls if the price of the package must be declared for insurance purposes.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => 'yes',
+		);
+		$fields['service_options'] = array(
+			'title'   => __( 'Service Options', 'woocommerce-correios' ),
+			'type'    => 'title',
+			'default' => '',
+		);
+		$fields['service_type'] = array(
+			'title'       => __( 'Service Type', 'woocommerce-correios' ),
+			'type'        => 'select',
+			'description' => __( 'Choose between conventional or corporate service.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => 'conventional',
+			'class'       => 'wc-enhanced-select',
+			'options'     => array(
+				'conventional' => __( 'Conventional', 'woocommerce-correios' ),
+				'corporate'    => __( 'Corporate', 'woocommerce-correios' ),
+			),
+		);
+		$fields['login'] = array(
+			'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Your Correios login, It\'s usually your CNPJ.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => '',
+		);
+		$fields['password'] = array(
+			'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => '',
+		);
+		$fields['package_standard'] = array(
+			'title'       => __( 'Package Standard', 'woocommerce-correios' ),
+			'type'        => 'title',
+			'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
+			'default'     => '',
+		);
+		$fields['minimum_height'] = array(
+			'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => '2',
+		);
+		$fields['minimum_width'] = array(
+			'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => '11',
+		);
+		$fields['minimum_length'] = array(
+			'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'default'     => '16',
 		);
 		$fields['testing'] = array(
-			'title' => __( 'Testing', 'woocommerce-correios' ),
-			'type'  => 'title',
+			'title'   => __( 'Testing', 'woocommerce-correios' ),
+			'type'    => 'title',
+			'default' => '',
 		);
 		$fields['debug'] = array(
 			'title'       => __( 'Debug Log', 'woocommerce-correios' ),
@@ -131,16 +241,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
 		);
 
-		$this->form_fields = $fields;
-	}
-
-	/**
-	 * Get shipping method title.
-	 *
-	 * @return string
-	 */
-	public function get_method_title() {
-		return sprintf( __( '%s is a shipping method from Correios, the brazilian most used delivery company.', 'woocommerce-correios' ), $this->method_title );
+		$this->instance_form_fields = $fields;
 	}
 
 	/**
@@ -156,7 +257,64 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return bool
 	 */
 	protected function is_corporate() {
-		return apply_filters( 'woocommerce_correios_use_corporate_method', false, $this->id );
+		return 'corporate' === $this->service_type;
+	}
+
+	/**
+	 * Get login.
+	 *
+	 * @return string
+	 */
+	public function get_login() {
+		return $this->is_corporate() ? $this->login : '';
+	}
+
+	/**
+	 * Get password.
+	 *
+	 * @return string
+	 */
+	public function get_password() {
+		return $this->is_corporate() ? $this->password : '';
+	}
+
+	/**
+	 * Get minimum height.
+	 *
+	 * @param  int $value Default value.
+	 *
+	 * @return int
+	 */
+	public function get_minimum_height( $value ) {
+		$minimum = ( 2 <= $this->minimum_height ) ? $this->minimum_height : 2;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
+	}
+
+	/**
+	 * Get minimum width.
+	 *
+	 * @param  int $value Default value.
+	 *
+	 * @return int
+	 */
+	public function get_minimum_width( $value ) {
+		$minimum = ( 11 <= $this->minimum_height ) ? $this->minimum_height : 11;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
+	}
+
+	/**
+	 * Get minimum length.
+	 *
+	 * @param  int $value Default value.
+	 *
+	 * @return int
+	 */
+	public function get_minimum_length( $value ) {
+		$minimum = ( 16 <= $this->minimum_height ) ? $this->minimum_height : 16;
+
+		return ( $minimum <= $value ) ? $value : $minimum;
 	}
 
 	/**
@@ -165,7 +323,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return string
 	 */
 	protected function get_code() {
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $this->code, $this->id );
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $this->code, $this->id, $this->instance_id );
 	}
 
 	/**
@@ -266,7 +424,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Create the rate and apply filters.
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
-			'id'    => $this->title,
+			'id'    => $this->id . $this->instance_id,
 			'label' => $label,
 			'cost'  => $cost + $fee,
 		) );

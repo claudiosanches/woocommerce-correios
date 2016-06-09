@@ -18,8 +18,12 @@ class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 
 	/**
 	 * Initialize SEDEX Hoje.
+	 *
+	 * @param int $instance_id Shipping zone instance.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		parent::__construct( $instance_id );
+
 		$this->id           = 'correios-sedex-hoje';
 		$this->method_title = __( 'SEDEX Hoje', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-hoje';
@@ -28,7 +32,5 @@ class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 		 * 40290 - SEDEX Hoje without contract.
 		 */
 		$this->code = '40290';
-
-		parent::__construct();
 	}
 }

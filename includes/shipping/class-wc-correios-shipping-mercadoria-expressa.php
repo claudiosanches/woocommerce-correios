@@ -18,8 +18,12 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International
 
 	/**
 	 * Initialize Mercadoria Expressa.
+	 *
+	 * @param int $instance_id Shipping zone instance.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		parent::__construct();
+
 		$this->id           = 'correios-mercadoria-expressa';
 		$this->method_title = __( 'Mercadoria Expressa', 'woocommerce-correios' );
 		$this->more_link    = '';
@@ -28,7 +32,5 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International
 		 * 110 - Mercadoria Expressa.
 		 */
 		$this->code = '110';
-
-		parent::__construct();
 	}
 }

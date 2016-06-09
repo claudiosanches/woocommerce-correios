@@ -18,8 +18,11 @@ class WC_Correios_Shipping_ESEDEX extends WC_Correios_Shipping {
 
 	/**
 	 * Initialize e-SEDEX.
+	 *
+	 * @param int $instance_id Shipping zone instance.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		parent::__construct( $instance_id );
 		$this->id           = 'correios-esedex';
 		$this->method_title = __( 'e-SEDEX', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/e-sedex';
@@ -28,8 +31,6 @@ class WC_Correios_Shipping_ESEDEX extends WC_Correios_Shipping {
 		 * 81019 - e-SEDEX with contract.
 		 */
 		$this->code = $this->is_corporate() ? '81019' : '-1';
-
-		parent::__construct();
 	}
 
 	/**

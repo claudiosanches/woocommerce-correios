@@ -156,15 +156,15 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			$methods[] = 'WC_Correios_Shipping_Legacy';
 
 			// New methods.
-			$methods[] = 'WC_Correios_Shipping_PAC';
-			$methods[] = 'WC_Correios_Shipping_SEDEX';
-			$methods[] = 'WC_Correios_Shipping_SEDEX_10';
-			$methods[] = 'WC_Correios_Shipping_SEDEX_Hoje';
-			$methods[] = 'WC_Correios_Shipping_ESEDEX';
-			$methods[] = 'WC_Correios_Shipping_Registered_Letter';
-			$methods[] = 'WC_Correios_Shipping_Mercadoria_Expressa';
-			$methods[] = 'WC_Correios_Shipping_Mercadoria_Economica';
-			$methods[] = 'WC_Correios_Shipping_Leve_Internacional';
+			$methods['correios-pac']                  = 'WC_Correios_Shipping_PAC';
+			$methods['correios-sedex']                = 'WC_Correios_Shipping_SEDEX';
+			$methods['correios-sedex10']              = 'WC_Correios_Shipping_SEDEX_10';
+			$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
+			$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
+			// $methods['correios-registered-letter']    = 'WC_Correios_Shipping_Registered_Letter';
+			// $methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
+			// $methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
+			// $methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';
 
 			return $methods;
 		}

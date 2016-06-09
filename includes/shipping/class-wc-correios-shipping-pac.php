@@ -18,8 +18,12 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 
 	/**
 	 * Initialize PAC.
+	 *
+	 * @param int $instance_id Shipping zone instance.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		parent::__construct( $instance_id );
+
 		$this->id           = 'correios-pac';
 		$this->method_title = __( 'PAC', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/pac-encomenda-economica';
@@ -29,7 +33,5 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 		 * 41068 - PAC with contract.
 		 */
 		$this->code = $this->is_corporate() ? '41068' : '41106';
-
-		parent::__construct();
 	}
 }

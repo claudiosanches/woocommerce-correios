@@ -18,8 +18,12 @@ class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 
 	/**
 	 * Initialize SEDEX.
+	 *
+	 * @param int $instance_id Shipping zone instance.
 	 */
-	public function __construct() {
+	public function __construct( $instance_id = 0 ) {
+		parent::__construct( $instance_id );
+
 		$this->id           = 'correios-sedex';
 		$this->method_title = __( 'SEDEX', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex';
@@ -29,7 +33,5 @@ class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 		 * 40096 - SEDEX with contract.
 		 */
 		$this->code = $this->is_corporate() ? '40096' : '40010';
-
-		parent::__construct();
 	}
 }
