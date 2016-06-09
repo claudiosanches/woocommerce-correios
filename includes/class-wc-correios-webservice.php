@@ -24,6 +24,20 @@ class WC_Correios_Webservice {
 	private $_webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
 	/**
+	 * Shipping method ID.
+	 *
+	 * @var string
+	 */
+	protected $id = '';
+
+	/**
+	 * Shipping zone instance ID.
+	 *
+	 * @var int
+	 */
+	protected $instance_id = 0;
+
+	/**
 	 * IDs from Correios service.
 	 *
 	 * 41106 - PAC without contract.
@@ -39,11 +53,11 @@ class WC_Correios_Webservice {
 	protected $service = '';
 
 	/**
-	 * Products package.
+	 * Origin postcode.
 	 *
-	 * @var WC_Correios_Package
+	 * @var string
 	 */
-	protected $package = null;
+	protected $origin_postcode = '';
 
 	/**
 	 * Destination postcode.
@@ -51,6 +65,20 @@ class WC_Correios_Webservice {
 	 * @var string
 	 */
 	protected $destination_postcode = '';
+
+	/**
+	 * Login.
+	 *
+	 * @var string
+	 */
+	protected $login = '';
+
+	/**
+	 * Password.
+	 *
+	 * @var string
+	 */
+	protected $password = '';
 
 	/**
 	 * Package height.
@@ -88,11 +116,46 @@ class WC_Correios_Webservice {
 	protected $weight = 0;
 
 	/**
+	 * Minimum height.
+	 *
+	 * @var float
+	 */
+	protected $minimum_height = 2;
+
+	/**
+	 * Minimum width.
+	 *
+	 * @var float
+	 */
+	protected $minimum_width = 11;
+
+	/**
+	 * Minimum length.
+	 *
+	 * @var float
+	 */
+	protected $minimum_length = 16;
+
+	/**
 	 * Declared value.
 	 *
 	 * @var string
 	 */
 	protected $declared_value = '0';
+
+	/**
+	 * Own hands.
+	 *
+	 * @var string
+	 */
+	protected $own_hands = 'N';
+
+	/**
+	 * Receipt notice.
+	 *
+	 * @var string
+	 */
+	protected $receipt_notice = 'N';
 
 	/**
 	 * Package format.
@@ -113,19 +176,28 @@ class WC_Correios_Webservice {
 	protected $debug = 'no';
 
 	/**
+	 * Logger.
+	 *
+	 * @var WC_Logger
+	 */
+	protected $log = null;
+
+	/**
 	 * Initialize webservice.
 	 *
-	 * @param string $id Shipping method ID.
+	 * @param string $id
+	 * @param string $instance_id
 	 */
-	public function __construct( $id = 'correios' ) {
-		$this->id  = $id;
-		$this->log = new WC_Logger();
+	public function __construct( $id = 'correios', $instance_id = 0 ) {
+		$this->id           = $id;
+		$this->instance_id  = $instance_id;
+		$this->log          = new WC_Logger();
 	}
 
 	/**
 	 * Set the service
 	 *
-	 * @param stsring $service Correios service.
+	 * @param stsring $service
 	 */
 	public function set_service( $service = '' ) {
 		$this->service = $service;
@@ -134,29 +206,76 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package.
 	 *
-	 * @param array $package Shipping package.
+	 * @param array $package
 	 *
 	 * @return WC_Correios_Package
 	 */
 	public function set_package( $package = array() ) {
-		$this->package = new WC_Correios_Package( $package );
+		$package = new WC_Correios_Package( $package );
 
-		return $this->package;
+		if ( ! is_null( $package ) ) {
+			$data = $package->get_data();
+
+			$this->set_height( $data['height'] );
+			$this->set_width( $data['width'] );
+			$this->set_length( $data['length'] );
+			$this->set_weight( $data['weight'] );
+		}
+
+		if ( 'yes' == $this->debug ) {
+			if ( ! empty( $data ) ) {
+				$data = array(
+					'weight' => $this->get_weight(),
+					'height' => $this->get_height(),
+					'width'  => $this->get_width(),
+					'length' => $this->get_length(),
+				);
+			}
+
+			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $data, true ) );
+		}
+	}
+
+	/**
+	 * Set origin postcode.
+	 *
+	 * @param string $postcode
+	 */
+	public function set_origin_postcode( $postcode = '' ) {
+		$this->origin_postcode = $postcode;
 	}
 
 	/**
 	 * Set destination postcode.
 	 *
-	 * @param string $postcode Destination postcode.
+	 * @param string $postcode
 	 */
 	public function set_destination_postcode( $postcode = '' ) {
 		$this->destination_postcode = $postcode;
 	}
 
 	/**
+	 * Set login.
+	 *
+	 * @param string $login
+	 */
+	public function set_login( $login = '' ) {
+		$this->login = $login;
+	}
+
+	/**
+	 * Set password.
+	 *
+	 * @param string $password
+	 */
+	public function set_password( $password = '' ) {
+		$this->password = $password;
+	}
+
+	/**
 	 * Set shipping package height.
 	 *
-	 * @param float $height Shipping package height.
+	 * @param float $height
 	 */
 	public function set_height( $height = 0 ) {
 		$this->height = $height;
@@ -165,7 +284,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package width.
 	 *
-	 * @param float $width Shipping package width.
+	 * @param float $width
 	 */
 	public function set_width( $width = 0 ) {
 		$this->width = $width;
@@ -174,7 +293,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package diameter.
 	 *
-	 * @param float $diameter Shipping package diameter.
+	 * @param float $diameter
 	 */
 	public function set_diameter( $diameter = 0 ) {
 		$this->diameter = $diameter;
@@ -183,7 +302,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package length.
 	 *
-	 * @param float $length Shipping package length.
+	 * @param float $length
 	 */
 	public function set_length( $length = 0 ) {
 		$this->length = $length;
@@ -192,19 +311,64 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package weight.
 	 *
-	 * @param float $weight Shipping package weight.
+	 * @param float $weight
 	 */
 	public function set_weight( $weight = 0 ) {
 		$this->weight = $weight;
 	}
 
 	/**
+	 * Set minimum height.
+	 *
+	 * @param float $minimum_height
+	 */
+	public function set_minimum_height( $minimum_height = 2 ) {
+		$this->minimum_height = 2 <= $minimum_height ? $minimum_height : 2;
+	}
+
+	/**
+	 * Set minimum width.
+	 *
+	 * @param float $minimum_width
+	 */
+	public function set_minimum_width( $minimum_width = 11 ) {
+		$this->minimum_width = 11 <= $minimum_width ? $minimum_width : 11;
+	}
+
+	/**
+	 * Set minimum length.
+	 *
+	 * @param float $minimum_length
+	 */
+	public function set_minimum_length( $minimum_length = 16 ) {
+		$this->minimum_length = 16 <= $minimum_length ? $minimum_length : 16;
+	}
+
+	/**
 	 * Set declared value.
 	 *
-	 * @param string $declared_value Value to declare.
+	 * @param string $declared_value
 	 */
 	public function set_declared_value( $declared_value = '0' ) {
 		$this->declared_value = $declared_value;
+	}
+
+	/**
+	 * Set own hands.
+	 *
+	 * @param string $own_hands
+	 */
+	public function set_own_hands( $own_hands = 'N' ) {
+		$this->own_hands = $own_hands;
+	}
+
+	/**
+	 * Set receipt notice.
+	 *
+	 * @param string $receipt_notice
+	 */
+	public function set_receipt_notice( $receipt_notice = 'N' ) {
+		$this->receipt_notice = $receipt_notice;
 	}
 
 	/**
@@ -231,7 +395,7 @@ class WC_Correios_Webservice {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice, $this->id );
+		return apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice, $this->id, $this->instance_id );
 	}
 
 	/**
@@ -240,7 +404,69 @@ class WC_Correios_Webservice {
 	 * @return string
 	 */
 	public function get_origin_postcode() {
-		return apply_filters( 'woocommerce_correios_origin_postcode', '', $this->id );
+		return apply_filters( 'woocommerce_correios_origin_postcode', $this->origin_postcode, $this->id, $this->instance_id );
+	}
+
+	/**
+	 * Get login.
+	 *
+	 * @return string
+	 */
+	public function get_login() {
+		return apply_filters( 'woocommerce_correios_login', $this->login, $this->id, $this->instance_id );
+	}
+	/**
+	 * Get password.
+	 *
+	 * @return string
+	 */
+	public function get_password() {
+		return apply_filters( 'woocommerce_correios_password', $this->password, $this->id, $this->instance_id );
+	}
+
+	/**
+	 * Get height.
+	 *
+	 * @return float
+	 */
+	public function get_height() {
+		return $this->float_to_string( $this->minimum_height <= $this->height ? $this->height : $this->minimum_height );
+	}
+
+	/**
+	 * Get width.
+	 *
+	 * @return float
+	 */
+	public function get_width() {
+		return $this->float_to_string( $this->minimum_width <= $this->width ? $this->width : $this->minimum_width );
+	}
+
+	/**
+	 * Get diameter.
+	 *
+	 * @return float
+	 */
+	public function get_diameter() {
+		return $this->float_to_string( $this->diameter );
+	}
+
+	/**
+	 * Get length.
+	 *
+	 * @return float
+	 */
+	public function get_length() {
+		return $this->float_to_string( $this->minimum_length <= $this->length ? $this->length : $this->minimum_length );
+	}
+
+	/**
+	 * Get weight.
+	 *
+	 * @return float
+	 */
+	public function get_weight() {
+		return $this->float_to_string( $this->weight );
 	}
 
 	/**
@@ -257,11 +483,11 @@ class WC_Correios_Webservice {
 	}
 
 	/**
-	 * Check if is setted.
+	 * Check if is available.
 	 *
 	 * @return bool
 	 */
-	protected function is_setted() {
+	protected function is_available() {
 		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $this->get_origin_postcode() );
 	}
 
@@ -274,48 +500,27 @@ class WC_Correios_Webservice {
 		$shipping = null;
 
 		// Checks if service and postcode are empty.
-		if ( ! $this->is_setted() ) {
+		if ( ! $this->is_available() ) {
 			return $values;
-		}
-
-		if ( ! is_null( $this->package ) ) {
-			$package = $this->package->get_data();
-			$this->height = $package['height'];
-			$this->width  = $package['width'];
-			$this->length = $package['length'];
-			$this->weight = $package['weight'];
-		}
-
-		if ( 'yes' == $this->debug ) {
-			if ( ! empty( $package ) ) {
-				$package = array(
-					'weight' => $this->weight,
-					'height' => $this->height,
-					'width'  => $this->width,
-					'length' => $this->length,
-				);
-			}
-
-			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $package, true ) );
 		}
 
 		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
 			'nCdServico'          => $this->service,
-			'nCdEmpresa'          => apply_filters( 'woocommerce_correios_login', '', $this->id ),
-			'sDsSenha'            => apply_filters( 'woocommerce_correios_password', '', $this->id ),
+			'nCdEmpresa'          => $this->get_login(),
+			'sDsSenha'            => $this->get_password(),
 			'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
 			'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
-			'nVlAltura'           => $this->float_to_string( $this->height ),
-			'nVlLargura'          => $this->float_to_string( $this->width ),
-			'nVlDiametro'         => $this->float_to_string( $this->diameter ),
-			'nVlComprimento'      => $this->float_to_string( $this->length ),
-			'nVlPeso'             => $this->float_to_string( $this->weight ),
+			'nVlAltura'           => $this->get_height(),
+			'nVlLargura'          => $this->get_width(),
+			'nVlDiametro'         => $this->get_diameter(),
+			'nVlComprimento'      => $this->get_length(),
+			'nVlPeso'             => $this->get_weight(),
 			'nCdFormato'          => $this->format,
-			'sCdMaoPropria'       => apply_filters( 'woocommerce_correios_own_hands', 'N', $this->id ),
+			'sCdMaoPropria'       => $this->own_hands,
 			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
-			'sCdAvisoRecebimento' => apply_filters( 'woocommerce_correios_receipt_notice', 'N', $this->id ),
+			'sCdAvisoRecebimento' => $this->receipt_notice,
 			'StrRetorno'          => 'xml',
-		), $this->id );
+		), $this->id, $this->instance_id );
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
 

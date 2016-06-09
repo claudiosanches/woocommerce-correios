@@ -20,6 +20,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 	/**
 	 * Initialize the Correios shipping method.
+	 *
+	 * @param int $instance_id Shipping zone instance ID.
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->instance_id        = absint( $instance_id );
@@ -279,42 +281,16 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get minimum height.
+	 * Get cart total.
 	 *
-	 * @param  int $value Default value.
-	 *
-	 * @return int
+	 * @return float
 	 */
-	public function get_minimum_height( $value ) {
-		$minimum = ( 2 <= $this->minimum_height ) ? $this->minimum_height : 2;
+	protected function get_cart_total() {
+		if ( ! WC()->cart->prices_include_tax ) {
+			return WC()->cart->cart_contents_total;
+		}
 
-		return ( $minimum <= $value ) ? $value : $minimum;
-	}
-
-	/**
-	 * Get minimum width.
-	 *
-	 * @param  int $value Default value.
-	 *
-	 * @return int
-	 */
-	public function get_minimum_width( $value ) {
-		$minimum = ( 11 <= $this->minimum_height ) ? $this->minimum_height : 11;
-
-		return ( $minimum <= $value ) ? $value : $minimum;
-	}
-
-	/**
-	 * Get minimum length.
-	 *
-	 * @param  int $value Default value.
-	 *
-	 * @return int
-	 */
-	public function get_minimum_length( $value ) {
-		$minimum = ( 16 <= $this->minimum_height ) ? $this->minimum_height : 16;
-
-		return ( $minimum <= $value ) ? $value : $minimum;
+		return WC()->cart->cart_contents_total + WC()->cart->tax_total;
 	}
 
 	/**
@@ -325,25 +301,30 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return SimpleXMLElement
 	 */
 	protected function get_rate( $package ) {
-		$code = $this->get_code();
+		$api = new WC_Correios_Webservice( $this->id );
+		$api->set_service( $this->get_code() );
+		$api->set_package( $package );
+		$api->set_origin_postcode( $this->origin_postcode );
+		$api->set_destination_postcode( $package['destination']['postcode'] );
+		$api->set_debug( $this->debug );
 
-		$connect  = new WC_Correios_Webservice( $this->id );
-		$connect->set_service( $code );
-		$_package = $connect->set_package( $package );
-		$connect->set_destination_postcode( $package['destination']['postcode'] );
-		$connect->set_debug( $this->debug );
-
-		if ( apply_filters( 'woocommerce_correios_declare_value', false, $this->id ) ) {
-			$declared_value = WC()->cart->cart_contents_total;
-			$connect->set_declared_value( $declared_value );
+		if ( 'yes' === $this->declare_value ) {
+			$api->set_declared_value( $this->get_cart_total() );
 		}
+
+		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );
+		$api->set_receipt_notice( 'yes' === $this->receipt_notice ? 'S' : 'N' );
 
 		if ( $this->is_corporate() ) {
-			$connect->set_login( $this->login );
-			$connect->set_password( $this->password );
+			$api->set_login( $this->login );
+			$api->set_password( $this->password );
 		}
 
-		$shipping = $connect->get_shipping();
+		$api->set_minimum_height( $this->minimum_height );
+		$api->set_minimum_width( $this->minimum_width );
+		$api->set_minimum_length( $this->minimum_length );
+
+		$shipping = $api->get_shipping();
 
 		return $shipping;
 	}

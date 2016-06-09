@@ -153,7 +153,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public function include_methods( $methods ) {
 			// Legacy method.
-			$methods[] = 'WC_Correios_Shipping_Legacy';
+			// $methods[] = 'WC_Correios_Shipping_Legacy';
 
 			// New methods.
 			$methods['correios-pac']                  = 'WC_Correios_Shipping_PAC';
