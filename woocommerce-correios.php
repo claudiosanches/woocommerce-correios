@@ -56,10 +56,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'include_methods' ) );
 				add_filter( 'woocommerce_email_classes', array( $this, 'include_emails' ) );
 
-				// Ajax actions.
-				add_action( 'wp_ajax_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-				add_action( 'wp_ajax_nopriv_wc_correios_simulator', array( 'WC_Correios_Product_Shipping_Simulator', 'ajax_simulator' ) );
-
 				// Action links.
 				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 			} else {
@@ -158,10 +154,12 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			// New methods.
 			$methods['correios-pac']                  = 'WC_Correios_Shipping_PAC';
 			$methods['correios-sedex']                = 'WC_Correios_Shipping_SEDEX';
-			$methods['correios-sedex10']              = 'WC_Correios_Shipping_SEDEX_10';
+			$methods['correios-sedex10-envelope']     = 'WC_Correios_Shipping_SEDEX_10_Envelope';
+			$methods['correios-sedex10-pacote']       = 'WC_Correios_Shipping_SEDEX_10_Pacote';
+			$methods['correios-sedex12']              = 'WC_Correios_Shipping_SEDEX_12';
 			$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
 			$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
-			// $methods['correios-registered-letter']    = 'WC_Correios_Shipping_Registered_Letter';
+			$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
 			// $methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
 			// $methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
 			// $methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';
@@ -188,7 +186,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * WooCommerce fallback notice.
 		 */
 		public function woocommerce_missing_notice() {
-			include 'includes/admin/views/html-admin-missing-dependencies.php';
+			include_once 'includes/admin/views/html-admin-missing-dependencies.php';
 		}
 
 		/**

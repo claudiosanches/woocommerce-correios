@@ -1,6 +1,6 @@
 <?php
 /**
- * Correios SEDEX 10 shipping method.
+ * Correios Carta Registrada shipping method.
  *
  * @package WooCommerce_Correios/Classes/Shipping
  * @since   3.0.0
@@ -12,19 +12,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * SEDEX 10 shipping method class.
+ * Carta Registrada shipping method class.
  */
-class WC_Correios_Shipping_SEDEX_10 extends WC_Correios_Shipping {
+class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 
 	/**
-	 * Initialize SEDEX 10.
+	 * Initialize Carta Registrada.
 	 *
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		$this->id           = 'correios-sedex10';
-		$this->method_title = __( 'SEDEX 10', 'woocommerce-correios' );
-		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-10';
+		$this->id           = 'correios-carta-registrada';
+		$this->method_title = __( 'Carta Registrada', 'woocommerce-correios' );
+		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/carta-comercial';
 
 		parent::__construct( $instance_id );
 	}
@@ -32,12 +32,12 @@ class WC_Correios_Shipping_SEDEX_10 extends WC_Correios_Shipping {
 	/**
 	 * Get Correios service code.
 	 *
-	 * 40215 - SEDEX 10 without contract.
+	 * 10014 - Carta Registrada.
 	 *
 	 * @return string
 	 */
 	public function get_code() {
-		$code = '40215';
+		$code = '10014';
 
 		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
