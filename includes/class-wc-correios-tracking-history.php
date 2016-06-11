@@ -97,6 +97,7 @@ class WC_Correios_Tracking_History {
 		} else {
 			$tracking_history = new stdClass();
 			$tracking_history->error = true;
+			$tracking_history->body  = $response['body'];
 		}
 
 		$this->logger( 'Tracking history response: ' . print_r( $tracking_history, true ) );
