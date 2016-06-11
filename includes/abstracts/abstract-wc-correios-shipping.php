@@ -384,7 +384,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		// Set the shipping rates.
 		$label = $this->get_shipping_method_label( $shipping->PrazoEntrega );
 		$cost  = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
-		$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 		// Display Correios errors notices.
 		$error_message = wc_correios_get_error_message( $shipping->Erro );
@@ -393,6 +392,14 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			$notice      = '<strong>' . __( $this->title, 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
 			wc_add_notice( $notice, $notice_type );
 		}
+
+		// Exit if don't have price.
+		if ( 0 === intval( $cost ) ) {
+			return;
+		}
+
+		// Apply fee:
+		$fee = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 		// Create the rate and apply filters.
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
