@@ -55,10 +55,6 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'general_options' => array(
-				'title' => __( 'General Options', 'woocommerce-correios' ),
-				'type'  => 'title',
-			),
 			'tracking' => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
 				'type'        => 'title',
@@ -84,7 +80,13 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Correios options page.
 	 */
 	public function admin_options() {
-		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-integration-settings.php';
+		echo '<h2>' . esc_html( $this->get_method_title() ) . '</h2>';
+		echo wp_kses_post( wpautop( $this->get_method_description() ) );
+
+		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-help-message.php';
+
+		echo '<div><input type="hidden" name="section" value="' . esc_attr( $this->id ) . '" /></div>';
+		echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>';
 	}
 
 	/**
