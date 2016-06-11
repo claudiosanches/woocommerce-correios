@@ -38,17 +38,9 @@ class WC_Correios_Webservice {
 	protected $instance_id = 0;
 
 	/**
-	 * IDs from Correios service.
+	 * ID from Correios service.
 	 *
-	 * 41106 - PAC without contract.
-	 * 40010 - SEDEX without contract.
-	 * 40215 - SEDEX 10 without contract.
-	 * 40290 - SEDEX Hoje without contract.
-	 * 41068 - PAC with contract.
-	 * 40096 - SEDEX with contract.
-	 * 81019 - e-SEDEX with contract.
-	 *
-	 * @var string
+	 * @var string|array
 	 */
 	protected $service = '';
 
@@ -197,10 +189,14 @@ class WC_Correios_Webservice {
 	/**
 	 * Set the service
 	 *
-	 * @param stsring $service
+	 * @param string|array $service
 	 */
 	public function set_service( $service = '' ) {
-		$this->service = $service;
+		if ( is_array( $service ) ) {
+			$this->service = implode( ',', $service );
+		} else {
+			$this->service = $service;
+		}
 	}
 
 	/**
