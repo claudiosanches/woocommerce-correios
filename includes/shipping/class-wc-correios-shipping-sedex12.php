@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_SEDEX_12 extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 40169 - SEDEX 12.
+	 *
+	 * @var string
+	 */
+	protected $code = '40169';
+
+	/**
 	 * Initialize SEDEX 12.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_SEDEX_12 extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-12';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 40169 - SEDEX 12.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '40169';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

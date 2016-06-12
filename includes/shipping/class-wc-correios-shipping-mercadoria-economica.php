@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_International_Shipping {
 
 	/**
+	 * Service code.
+	 * 128 - Mercadoria Econômica.
+	 *
+	 * @var string
+	 */
+	protected $code = '128';
+
+	/**
 	 * Initialize Mercadoria Econômica.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Internationa
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 128 - Mercadoria Econômica.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '128';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

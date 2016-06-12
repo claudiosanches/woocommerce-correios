@@ -19,6 +19,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 	/**
+	 * Service code.
+	 *
+	 * @var string
+	 */
+	protected $code = '';
+
+	/**
+	 * Corporate code.
+	 *
+	 * @var string
+	 */
+	protected $corporate_code = '';
+
+	/**
 	 * Initialize the Correios shipping method.
 	 *
 	 * @param int $instance_id Shipping zone instance ID.
@@ -44,6 +58,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->receipt_notice     = $this->get_option( 'receipt_notice' );
 		$this->own_hands          = $this->get_option( 'own_hands' );
 		$this->declare_value      = $this->get_option( 'declare_value' );
+		$this->custom_code        = $this->get_option( 'custom_code' );
 		$this->service_type       = $this->get_option( 'service_type' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
@@ -177,6 +192,14 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'type'    => 'title',
 			'default' => '',
 		);
+		$fields['custom_code'] = array(
+			'title'       => __( 'Service Code', 'woocommerce-correios' ),
+			'type'        => 'text',
+			'description' => __( 'Service code, use this for custom codes.', 'woocommerce-correios' ),
+			'desc_tip'    => true,
+			'placeholder' => $this->code,
+			'default'     => '',
+		);
 		$fields['service_type'] = array(
 			'title'       => __( 'Service Type', 'woocommerce-correios' ),
 			'type'        => 'select',
@@ -254,6 +277,23 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get Correios service code.
+	 *
+	 * @return string
+	 */
+	public function get_code() {
+		if ( ! empty( $this->custom_code ) ) {
+			$code = $this->custom_code;
+		} elseif ( $this->is_corporate() && ! empty( $this->corporate_code ) ) {
+			$code = $this->corporate_code;
+		} else {
+			$code = $this->code;
+		}
+
+		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
+	}
+
+	/**
 	 * Check if need to use corporate services.
 	 *
 	 * @return bool
@@ -302,11 +342,11 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 */
 	protected function get_rate( $package ) {
 		$api = new WC_Correios_Webservice( $this->id );
+		$api->set_debug( $this->debug );
 		$api->set_service( $this->get_code() );
 		$api->set_package( $package );
 		$api->set_origin_postcode( $this->origin_postcode );
 		$api->set_destination_postcode( $package['destination']['postcode'] );
-		$api->set_debug( $this->debug );
 
 		if ( 'yes' === $this->declare_value ) {
 			$api->set_declared_value( $this->get_cart_total() );
@@ -315,10 +355,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );
 		$api->set_receipt_notice( 'yes' === $this->receipt_notice ? 'S' : 'N' );
 
-		if ( $this->is_corporate() ) {
-			$api->set_login( $this->login );
-			$api->set_password( $this->password );
-		}
+		$api->set_login( $this->login );
+		$api->set_password( $this->password );
 
 		$api->set_minimum_height( $this->minimum_height );
 		$api->set_minimum_width( $this->minimum_width );

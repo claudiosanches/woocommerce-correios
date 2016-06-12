@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_SEDEX_10_Envelope extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 40215 - SEDEX 10 Envelope.
+	 *
+	 * @var string
+	 */
+	protected $code = '40215';
+
+	/**
 	 * Initialize SEDEX 10 Envelope.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_SEDEX_10_Envelope extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-10';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 40215 - SEDEX 10 Envelope.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '40215';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

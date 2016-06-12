@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_International_Shipping {
 
 	/**
+	 * Service code.
+	 * 209 - Leve Internacional.
+	 *
+	 * @var string
+	 */
+	protected $code = '209';
+
+	/**
 	 * Initialize Leve Internacional.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_International_
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 209 - Leve Internacional.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '209';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

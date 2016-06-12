@@ -17,6 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 41106 - PAC without contract.
+	 *
+	 * @var string
+	 */
+	protected $code = '41106';
+
+	/**
+	 * Corporate code.
+	 * 41068 - PAC with contract.
+	 *
+	 * @var string
+	 */
+	protected $corporate_code = '41068';
+
+	/**
 	 * Initialize PAC.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,19 +43,5 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/pac-encomenda-economica';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 41106 - PAC without contract.
-	 * 41068 - PAC with contract.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = $this->is_corporate() ? '41068' : '41106';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

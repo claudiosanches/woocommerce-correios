@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 10014 - Carta Registrada.
+	 *
+	 * @var string
+	 */
+	protected $code = '10014';
+
+	/**
 	 * Initialize Carta Registrada.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/carta-comercial';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 10014 - Carta Registrada.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '10014';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

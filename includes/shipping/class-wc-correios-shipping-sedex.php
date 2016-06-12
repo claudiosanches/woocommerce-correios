@@ -17,6 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 40010 - SEDEX without contract.
+	 *
+	 * @var string
+	 */
+	protected $code = '40010';
+
+	/**
+	 * Corporate code.
+	 * 40096 - SEDEX with contract.
+	 *
+	 * @var string
+	 */
+	protected $corporate_code = '40096';
+
+	/**
 	 * Initialize SEDEX.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,19 +43,5 @@ class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 40010 - SEDEX without contract.
-	 * 40096 - SEDEX with contract.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = $this->is_corporate() ? '40096' : '40010';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

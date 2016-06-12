@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International_Shipping {
 
 	/**
+	 * Service code.
+	 * 110 - Mercadoria Expressa.
+	 *
+	 * @var string
+	 */
+	protected $code = '110';
+
+	/**
 	 * Initialize Mercadoria Expressa.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -26,19 +34,6 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International
 		$this->method_title = __( 'Mercadoria Expressa', 'woocommerce-correios' );
 		$this->more_link    = '';
 
-		parent::__construct();
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 110 - Mercadoria Expressa.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '110';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
+		parent::__construct( $instance_id );
 	}
 }

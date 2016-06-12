@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 40290 - SEDEX Hoje without contract.
+	 *
+	 * @var string
+	 */
+	protected $code = '40290';
+
+	/**
 	 * Initialize SEDEX Hoje.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,18 +35,5 @@ class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-hoje';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 40290 - SEDEX Hoje without contract.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = '40290';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 }

@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Shipping_ESEDEX extends WC_Correios_Shipping {
 
 	/**
+	 * Service code.
+	 * 81019 - e-SEDEX.
+	 *
+	 * @var string
+	 */
+	protected $code = '81019';
+
+	/**
 	 * Initialize e-SEDEX.
 	 *
 	 * @param int $instance_id Shipping zone instance.
@@ -27,19 +35,6 @@ class WC_Correios_Shipping_ESEDEX extends WC_Correios_Shipping {
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/e-sedex';
 
 		parent::__construct( $instance_id );
-	}
-
-	/**
-	 * Get Correios service code.
-	 *
-	 * 81019 - e-SEDEX with contract.
-	 *
-	 * @return string
-	 */
-	public function get_code() {
-		$code = $this->is_corporate() ? '81019' : '-1';
-
-		return apply_filters( 'woocommerce_correios_shipping_method_code', $code, $this->id, $this->instance_id );
 	}
 
 	// /**
