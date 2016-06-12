@@ -56,22 +56,25 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				'title'       => __( 'Subject', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'woocommerce-correios' ), $this->subject ),
-				'placeholder' => '',
+				'placeholder' => $this->subject,
 				'default'     => '',
+				'desc_tip'    => true,
 			),
 			'heading' => array(
 				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
-				'placeholder' => '',
+				'placeholder' => $this->heading,
 				'default'     => '',
+				'desc_tip'    => true,
 			),
 			'tracking_message' => array(
 				'title'       => __( 'Email Content', 'woocommerce-correios' ),
 				'type'        => 'textarea',
 				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
-				'placeholder' => '',
+				'placeholder' => $this->message,
 				'default'     => '',
+				'desc_tip'    => true,
 			),
 			'email_type' => array(
 				'title'       => __( 'Email type', 'woocommerce-correios' ),
@@ -84,6 +87,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 					'html'      => __( 'HTML', 'woocommerce-correios' ),
 					'multipart' => __( 'Multipart', 'woocommerce-correios' ),
 				),
+				'desc_tip'    => true,
 			),
 		);
 	}
