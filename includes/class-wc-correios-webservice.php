@@ -490,14 +490,14 @@ class WC_Correios_Webservice {
 	/**
 	 * Get shipping prices.
 	 *
-	 * @return SimpleXMLElement
+	 * @return SimpleXMLElement|array
 	 */
 	public function get_shipping() {
 		$shipping = null;
 
 		// Checks if service and postcode are empty.
 		if ( ! $this->is_available() ) {
-			return $values;
+			return $shipping;
 		}
 
 		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
@@ -525,7 +525,7 @@ class WC_Correios_Webservice {
 		}
 
 		// Gets the WebServices response.
-		$response = wp_safe_remote_get( $url, array( 'timeout' => 30 ) );
+		$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
 			if ( 'yes' == $this->debug ) {
@@ -541,13 +541,11 @@ class WC_Correios_Webservice {
 			}
 
 			if ( isset( $result->cServico ) ) {
-				$service = $result->cServico;
-
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $service, true ) );
+					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
 
-				$shipping = $service;
+				$shipping = $result->cServico;
 			}
 		} else {
 			if ( 'yes' == $this->debug ) {

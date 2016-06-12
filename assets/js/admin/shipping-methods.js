@@ -1,5 +1,5 @@
 jQuery( document ).ready( function( $ ) {
-	$( 'input[id$="_show_delivery_time"]' ).on( 'change', function() {
+	$( 'input[id$="_show_delivery_time"], #woocommerce_correios_display_date' ).on( 'change', function() {
 		var field = $( 'input[id$="_additional_time"]' ).closest( 'tr' );
 
 		if ( $( this ).is( ':checked' ) ) {
@@ -9,7 +9,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 	}).change();
 
-	$( 'select[id$="_service_type"]' ).on( 'change', function() {
+	$( 'select[id$="_service_type"], #woocommerce_correios_corporate_service' ).on( 'change', function() {
 		var login    = $( 'input[id$="_login"]' ).closest( 'tr' ),
 			password = $( 'input[id$="_password"]' ).closest( 'tr' );
 

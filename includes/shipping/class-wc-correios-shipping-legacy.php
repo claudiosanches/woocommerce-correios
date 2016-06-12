@@ -31,8 +31,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$this->additional_time    = $this->get_option( 'additional_time' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->zip_origin         = $this->get_option( 'zip_origin' );
-		$this->simulator          = $this->get_option( 'simulator', 'no' );
-		$this->tracking_history   = $this->get_option( 'tracking_history', 'no' );
 		$this->corporate_service  = $this->get_option( 'corporate_service' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
@@ -127,20 +125,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
 				'placeholder'      => '0.00'
-			),
-			'simulator' => array(
-				'title'            => __( 'Simulator', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable product shipping simulator', 'woocommerce-correios' ),
-				'description'      => __( 'Displays a shipping simulator in the product page.', 'woocommerce-correios' ),
-				'default'          => 'no'
-			),
-			'tracking_history' => array(
-				'title'            => __( 'Tracking History Table', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable Tracking History Table in view order page on frontend', 'woocommerce-correios' ),
-				'description'      => __( 'Displays a table with the tracking history in My Account > View Order page.', 'woocommerce-correios' ),
-				'default'          => 'no'
 			),
 			'services' => array(
 				'title'            => __( 'Correios Services', 'woocommerce-correios' ),
@@ -257,26 +241,23 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		// Call the admin scripts.
-		wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin' . $suffix . '.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '', true );
+		wp_enqueue_script( 'wc-correios', plugins_url( 'assets/js/admin/shipping-methods' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), '', true );
 
-		$reviews_url = 'https://wordpress.org/support/view/plugin-reviews/woocommerce-correios?filter=5#postform';
+		echo '<h3>' . esc_html( $this->method_title ) . '</h3>';
 
-		?>
+		echo '<p>' . esc_html( $this->method_description ) . '</p>';
 
-		<h3><?php echo $this->method_title; ?></h3>
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
+			echo '<div class="error inline">';
+			echo '<p><strong>' . sprintf( __( 'This shipping method this depreciated since %s, and you should you the new Shipping Zones screen.', 'woocommerce-correios' ), 'WooCommerce 2.6' ) . ' <a href="#">' . __( 'See how to configure.', 'woocommerce-correios' ) . '</a></strong></p>';
+			echo '</div>';
+		} else {
+			include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-help-message.php';
+		}
 
-		<?php echo $this->method_description; ?>
-
-		<?php if ( apply_filters( 'woocommerce_correios_help_message', true ) ) : ?>
-			<div class="updated woocommerce-message inline">
-				<p><?php printf( __( 'Help us keep the %s plugin free making a %s or rate %s on %s. Thank you in advance!', 'woocommerce-correios' ), '<strong>' . __( 'WooCommerce Correios', 'woocommerce-correios' ) . '</strong>', '<a href="http://claudiosmweb.com/doacoes/">' . __( 'donation', 'woocommerce-correios' ) . '</a>', '<a href="' . esc_url( $reviews_url ) . '" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>', '<a href="' . esc_url( $reviews_url ) . '" target="_blank">' . __( 'WordPress.org', 'woocommerce-correios' ) . '</a>' ); ?></p>
-			</div>
-		<?php endif; ?>
-
-		<table class="form-table">
-			<?php $this->generate_settings_html(); ?>
-		</table>
-		<?php
+		echo '<table class="form-table">';
+		$this->generate_settings_html();
+		echo '</table>';
 	}
 
 	/**
@@ -302,6 +283,19 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get cart total.
+	 *
+	 * @return float
+	 */
+	protected function get_cart_total() {
+		if ( ! WC()->cart->prices_include_tax ) {
+			return WC()->cart->cart_contents_total;
+		}
+
+		return WC()->cart->cart_contents_total + WC()->cart->tax_total;
+	}
+
+	/**
 	 * Gets the price of shipping.
 	 *
 	 * @param  array $package Order package.
@@ -310,24 +304,25 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 	 */
 	protected function correios_calculate( $package ) {
 		$services = array_values( $this->correios_services() );
-		$connect  = new WC_Correios_Connect;
-		$connect->set_services( $services );
-		$_package = $connect->set_package( $package );
-		$_package->set_minimum_height( $this->minimum_height );
-		$_package->set_minimum_width( $this->minimum_width );
-		$_package->set_minimum_length( $this->minimum_length );
-		$connect->set_zip_origin( $this->zip_origin );
-		$connect->set_zip_destination( $package['destination']['postcode'] );
+		$connect = new WC_Correios_Webservice( $this->id );
 		$connect->set_debug( $this->debug );
+		$connect->set_service( $services );
+		$connect->set_package( $package );
+		$connect->set_origin_postcode( $this->zip_origin );
+		$connect->set_destination_postcode( $package['destination']['postcode'] );
+
 		if ( 'declare' == $this->declare_value ) {
-			$declared_value = WC()->cart->cart_contents_total;
-			$connect->set_declared_value( $declared_value );
+			$connect->set_declared_value( $this->get_cart_total() );
 		}
 
 		if ( 'corporate' == $this->corporate_service ) {
 			$connect->set_login( $this->login );
 			$connect->set_password( $this->password );
 		}
+
+		$connect->set_minimum_height( $this->minimum_height );
+		$connect->set_minimum_width( $this->minimum_width );
+		$connect->set_minimum_length( $this->minimum_length );
 
 		$shipping = $connect->get_shipping();
 
@@ -344,6 +339,50 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Gets the service name.
+	 *
+	 * @param  int   $code Correios service ID.
+	 *
+	 * @return array       Correios service name.
+	 */
+	protected function get_service_name( $code ) {
+		$name = array(
+			'41106' => 'PAC',
+			'40010' => 'SEDEX',
+			'40215' => 'SEDEX 10',
+			'40290' => 'SEDEX Hoje',
+			'41068' => 'PAC',
+			'40096' => 'SEDEX',
+			'81019' => 'e-SEDEX',
+		);
+
+		return isset( $name[ $code ] ) ? $name[ $code ] : '';
+	}
+
+	/**
+	 * Get additional time.
+	 *
+	 * @param  array $package Package data.
+	 *
+	 * @return array
+	 */
+	protected function get_additional_time( $package = array() ) {
+		return apply_filters( 'woocommerce_correios_shipping_additional_time', $this->additional_time, $package );
+	}
+
+	/**
+	 * Get accepted error codes.
+	 *
+	 * @return array
+	 */
+	protected function get_accepted_error_codes() {
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '010' ) );
+		$codes[] = '0';
+
+		return $codes;
+	}
+
+	/**
 	 * Calculates the shipping rate.
 	 *
 	 * @param array $package Order package.
@@ -354,34 +393,36 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$shipping_values = $this->correios_calculate( $package );
 
 		if ( ! empty( $shipping_values ) ) {
-			foreach ( $shipping_values as $code => $shipping ) {
+			foreach ( $shipping_values as $shipping ) {
 				if ( ! isset( $shipping->Erro ) ) {
 					continue;
 				}
 
-				$name          = WC_Correios_Connect::get_service_name( $code );
+				$name          = $this->get_service_name( (string) $shipping->Codigo );
 				$error_number  = (string) $shipping->Erro;
-				$error_message = WC_Correios_Error::get_message( $shipping->Erro );
+				$error_message = wc_correios_get_error_message( $error_number );
 				$errors[ $error_number ] = array(
 					'error'   => $error_message,
 					'number'  => $error_number
 				);
 
-				// Set the shipping rates.
-				if ( in_array( $error_number, array( '0', '010' ) ) ) {
-					$label = ( 'yes' == $this->display_date ) ? WC_Correios_Connect::estimating_delivery( $name, $shipping->PrazoEntrega, $this->additional_time ) : $name;
-					$cost  = WC_Correios_Connect::fix_currency_format( esc_attr( $shipping->Valor ) );
-					$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
-
-					array_push(
-						$rates,
-						array(
-							'id'    => $name,
-							'label' => $label,
-							'cost'  => $cost + $fee,
-						)
-					);
+				if ( ! in_array( $error_number, $this->get_accepted_error_codes() ) ) {
+					continue;
 				}
+
+				// Set the shipping rates.
+				$label = ( 'yes' == $this->display_date ) ? wc_correios_get_estimating_delivery( $name, (int) $shipping->PrazoEntrega, $this->get_additional_time( $package ) ) : $name;
+				$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) );
+				$fee   = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
+
+				array_push(
+					$rates,
+					array(
+						'id'    => $name,
+						'label' => $label,
+						'cost'  => $cost + $fee,
+					)
+				);
 			}
 
 			// Display correios errors.
