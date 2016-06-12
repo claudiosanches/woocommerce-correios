@@ -355,8 +355,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );
 		$api->set_receipt_notice( 'yes' === $this->receipt_notice ? 'S' : 'N' );
 
-		$api->set_login( $this->login );
-		$api->set_password( $this->password );
+		$api->set_login( $this->get_login() );
+		$api->set_password( $this->get_password() );
 
 		$api->set_minimum_height( $this->minimum_height );
 		$api->set_minimum_width( $this->minimum_width );
@@ -438,8 +438,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		// Set the shipping rates.
-		$label = $this->get_shipping_method_label( $shipping->PrazoEntrega, $package );
-		$cost  = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
+		$label = $this->get_shipping_method_label( (int) $shipping->PrazoEntrega, $package );
+		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) );
 
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {
