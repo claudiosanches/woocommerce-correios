@@ -98,10 +98,14 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once 'includes/integrations/class-wc-correios-integration.php';
 
 			// Shipping methods.
-			include_once 'includes/abstracts/abstract-wc-correios-shipping.php';
-			include_once 'includes/abstracts/abstract-wc-correios-international-shipping.php';
-			foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/shipping/*.php' ) as $filename ) {
-				include_once $filename;
+			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
+				include_once 'includes/abstracts/abstract-wc-correios-shipping.php';
+				include_once 'includes/abstracts/abstract-wc-correios-international-shipping.php';
+				foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/shipping/*.php' ) as $filename ) {
+					include_once $filename;
+				}
+			} else {
+				include_once 'includes/shipping/class-wc-correios-shipping-legacy.php';
 			}
 		}
 
@@ -149,20 +153,22 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public function include_methods( $methods ) {
 			// Legacy method.
-			// $methods[] = 'WC_Correios_Shipping_Legacy';
+			$methods[] = 'WC_Correios_Shipping_Legacy';
 
 			// New methods.
-			$methods['correios-pac']                  = 'WC_Correios_Shipping_PAC';
-			$methods['correios-sedex']                = 'WC_Correios_Shipping_SEDEX';
-			$methods['correios-sedex10-envelope']     = 'WC_Correios_Shipping_SEDEX_10_Envelope';
-			$methods['correios-sedex10-pacote']       = 'WC_Correios_Shipping_SEDEX_10_Pacote';
-			$methods['correios-sedex12']              = 'WC_Correios_Shipping_SEDEX_12';
-			$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
-			$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
-			$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
-			// $methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
-			// $methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
-			// $methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';
+			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
+				$methods['correios-pac']                  = 'WC_Correios_Shipping_PAC';
+				$methods['correios-sedex']                = 'WC_Correios_Shipping_SEDEX';
+				$methods['correios-sedex10-envelope']     = 'WC_Correios_Shipping_SEDEX_10_Envelope';
+				$methods['correios-sedex10-pacote']       = 'WC_Correios_Shipping_SEDEX_10_Pacote';
+				$methods['correios-sedex12']              = 'WC_Correios_Shipping_SEDEX_12';
+				$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
+				$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
+				$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
+				// $methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
+				// $methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
+				// $methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';
+			}
 
 			return $methods;
 		}
