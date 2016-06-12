@@ -368,6 +368,17 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get additional time.
+	 *
+	 * @param  array $package Package data.
+	 *
+	 * @return array
+	 */
+	protected function get_additional_time( $package = array() ) {
+		return apply_filters( 'woocommerce_correios_shipping_additional_time', $this->additional_time, $package );
+	}
+
+	/**
 	 * Get accepted error codes.
 	 *
 	 * @return array
@@ -386,9 +397,9 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 *
 	 * @return string
 	 */
-	protected function get_shipping_method_label( $days ) {
+	protected function get_shipping_method_label( $days, $package ) {
 		if ( 'yes' == $this->show_delivery_time ) {
-			return wc_correios_get_estimating_delivery( $this->title, $days, $this->additional_time );
+			return wc_correios_get_estimating_delivery( $this->title, $days, $this->get_additional_time( $package ) );
 		}
 
 		return $this->title;
@@ -405,7 +416,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			return;
 		}
 
-		$error    = '';
 		$shipping = $this->get_rate( $package );
 
 		if ( ! isset( $shipping->Erro ) ) {
@@ -419,24 +429,24 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			return;
 		}
 
-		// Set the shipping rates.
-		$label = $this->get_shipping_method_label( $shipping->PrazoEntrega );
-		$cost  = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
-
-		// Display Correios errors notices.
-		$error_message = wc_correios_get_error_message( $shipping->Erro );
+		// Display Correios errors.
+		$error_message = wc_correios_get_error_message( $error_number );
 		if ( '' != $error_message ) {
 			$notice_type = ( '010' == $error_number ) ? 'notice' : 'error';
 			$notice      = '<strong>' . __( $this->title, 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
 			wc_add_notice( $notice, $notice_type );
 		}
 
+		// Set the shipping rates.
+		$label = $this->get_shipping_method_label( $shipping->PrazoEntrega, $package );
+		$cost  = wc_correios_normalize_price( esc_attr( $shipping->Valor ) );
+
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {
 			return;
 		}
 
-		// Apply fee:
+		// Apply fees.
 		$fee = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
 
 		// Create the rate and apply filters.
@@ -449,7 +459,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		// Deprecated filter.
 		$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );
 
-		// Add rate to WooComemrce.
+		// Add rate to WooCommerce.
 		$this->add_rate( $rates[0] );
 	}
 }

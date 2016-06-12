@@ -69,14 +69,10 @@ function wc_correios_sanitize_postcode( $postcode ) {
  * @return string
  */
 function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0 ) {
-	$additional_days = intval( $additional_days );
+	$total = intval( $days ) + intval( $additional_days );
 
-	if ( $additional_days > 0 ) {
-		$days += intval( $additional_days );
-	}
-
-	if ( $days > 0 ) {
-		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'woocommerce-correios' ),  $days ) . ')';
+	if ( $total > 0 ) {
+		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ),  $total ) . ')';
 	}
 
 	return $name;
