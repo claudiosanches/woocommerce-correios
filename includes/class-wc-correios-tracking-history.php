@@ -103,7 +103,7 @@ class WC_Correios_Tracking_History {
 
 		$this->logger( 'Tracking history response: ' . print_r( $tracking_history, true ) );
 
-		return $tracking_history;
+		return apply_filters( 'woocommerce_correios_tracking_response', $tracking_history, $tracking_code );
 	}
 
 	/**
