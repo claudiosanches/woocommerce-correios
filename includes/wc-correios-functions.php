@@ -108,9 +108,5 @@ function wc_correios_get_error_message( $code ) {
 		'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
 	) );
 
-	if ( isset( $messages[ $code ] ) ) {
-		return $messages[ $code ];
-	}
-
-	return '';
+	return isset( $messages[ $code ] ) ? $messages[ $code ] : '';
 }
