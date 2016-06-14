@@ -178,7 +178,7 @@ class WC_Correios_Webservice {
 	 * Initialize webservice.
 	 *
 	 * @param string $id
-	 * @param string $instance_id
+	 * @param int    $instance_id
 	 */
 	public function __construct( $id = 'correios', $instance_id = 0 ) {
 		$this->id           = $id;
@@ -484,7 +484,7 @@ class WC_Correios_Webservice {
 	 * @return bool
 	 */
 	protected function is_available() {
-		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $this->get_origin_postcode() );
+		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $this->get_origin_postcode() ) || 0 === $this->get_height();
 	}
 
 	/**
