@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_International
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-mercadoria-expressa';
-		$this->method_title = __( 'Mercadoria Expressa', 'woocommerce-correios' );
+		$this->method_title = __( 'Mercadoria Expressa', 'woocommerce-correios' ) . ' ' . __( '(beta)', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );

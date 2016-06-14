@@ -62,8 +62,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->service_type       = $this->get_option( 'service_type' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
-		$this->enable_tracking    = $this->get_option( 'enable_tracking' );
-		$this->tracking_debug     = $this->get_option( 'tracking_debug' );
 		$this->minimum_height     = $this->get_option( 'minimum_height' );
 		$this->minimum_width      = $this->get_option( 'minimum_width' );
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
@@ -341,7 +339,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return SimpleXMLElement
 	 */
 	protected function get_rate( $package ) {
-		$api = new WC_Correios_Webservice( $this->id );
+		$api = new WC_Correios_Webservice( $this->id, $this->instance_id );
 		$api->set_debug( $this->debug );
 		$api->set_service( $this->get_code() );
 		$api->set_package( $package );
@@ -454,7 +452,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'id'    => $this->id . $this->instance_id,
 			'label' => $label,
 			'cost'  => $cost + $fee,
-		) );
+		), $this->instance_id );
 
 		// Deprecated filter.
 		$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );

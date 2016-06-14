@@ -274,7 +274,7 @@ class WC_Correios_Webservice {
 	 * @param float $height
 	 */
 	public function set_height( $height = 0 ) {
-		$this->height = $height;
+		$this->height = (float) $height;
 	}
 
 	/**
@@ -283,7 +283,7 @@ class WC_Correios_Webservice {
 	 * @param float $width
 	 */
 	public function set_width( $width = 0 ) {
-		$this->width = $width;
+		$this->width = (float) $width;
 	}
 
 	/**
@@ -292,7 +292,7 @@ class WC_Correios_Webservice {
 	 * @param float $diameter
 	 */
 	public function set_diameter( $diameter = 0 ) {
-		$this->diameter = $diameter;
+		$this->diameter = (float) $diameter;
 	}
 
 	/**
@@ -301,7 +301,7 @@ class WC_Correios_Webservice {
 	 * @param float $length
 	 */
 	public function set_length( $length = 0 ) {
-		$this->length = $length;
+		$this->length = (float) $length;
 	}
 
 	/**
@@ -310,7 +310,7 @@ class WC_Correios_Webservice {
 	 * @param float $weight
 	 */
 	public function set_weight( $weight = 0 ) {
-		$this->weight = $weight;
+		$this->weight = (float) $weight;
 	}
 
 	/**

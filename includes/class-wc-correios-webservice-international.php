@@ -24,6 +24,20 @@ class WC_Correios_Webservice_International {
 	private $_webservice = 'http://www2.correios.com.br/sistemas/efi/bb/Consulta.cfm?';
 
 	/**
+	 * Shipping method ID.
+	 *
+	 * @var string
+	 */
+	protected $id = '';
+
+	/**
+	 * Shipping zone instance ID.
+	 *
+	 * @var int
+	 */
+	protected $instance_id = 0;
+
+	/**
 	 * IDs from Correios services.
 	 *
 	 * 110 - Mercadoria Expressa (EMS).
@@ -33,13 +47,6 @@ class WC_Correios_Webservice_International {
 	 * @var string
 	 */
 	protected $service = '';
-
-	/**
-	 * Products package.
-	 *
-	 * @var WC_Correios_Package
-	 */
-	protected $package = null;
 
 	/**
 	 * Destination country.
@@ -107,10 +114,12 @@ class WC_Correios_Webservice_International {
 	/**
 	 * Initialize webservice.
 	 *
-	 * @param string $id Shipping method ID.
+	 * @param string $id
+	 * @param int    $instance_id
 	 */
-	public function __construct( $id = 'correios' ) {
-		$this->id  = $id;
+	public function __construct( $id = 'correios', $instance_id = 0 ) {
+		$this->id           = $id;
+		$this->instance_id  = $instance_id;
 		$this->log = new WC_Logger();
 	}
 
@@ -119,8 +128,8 @@ class WC_Correios_Webservice_International {
 	 *
 	 * @param string $service Correios international service.
 	 */
-	public function set_service( $services = '' ) {
-		$this->service = $services;
+	public function set_service( $service = '' ) {
+		$this->service = $service;
 	}
 
 	/**
@@ -131,9 +140,29 @@ class WC_Correios_Webservice_International {
 	 * @return WC_Correios_Package
 	 */
 	public function set_package( $package = array() ) {
-		$this->package = new WC_Correios_Package( $package );
+		$package = new WC_Correios_Package( $package );
 
-		return $this->package;
+		if ( ! is_null( $package ) ) {
+			$data = $package->get_data();
+
+			$this->set_height( $data['height'] );
+			$this->set_width( $data['width'] );
+			$this->set_length( $data['length'] );
+			$this->set_weight( $data['weight'] );
+		}
+
+		if ( 'yes' == $this->debug ) {
+			if ( ! empty( $data ) ) {
+				$data = array(
+					'weight' => $this->get_weight(),
+					'height' => $this->get_height(),
+					'width'  => $this->get_width(),
+					'length' => $this->get_length(),
+				);
+			}
+
+			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $data, true ) );
+		}
 	}
 
 	/**
@@ -169,7 +198,7 @@ class WC_Correios_Webservice_International {
 	 * @param float $height Shipping package height.
 	 */
 	public function set_height( $height = 0 ) {
-		$this->height = $height;
+		$this->height = (float) $height;
 	}
 
 	/**
@@ -178,7 +207,7 @@ class WC_Correios_Webservice_International {
 	 * @param float $width Shipping package width.
 	 */
 	public function set_width( $width = 0 ) {
-		$this->width = $width;
+		$this->width = (float) $width;
 	}
 
 	/**
@@ -187,7 +216,7 @@ class WC_Correios_Webservice_International {
 	 * @param float $length Shipping package length.
 	 */
 	public function set_length( $length = 0 ) {
-		$this->length = $length;
+		$this->length = (float) $length;
 	}
 
 	/**
@@ -196,7 +225,7 @@ class WC_Correios_Webservice_International {
 	 * @param float $weight Shipping package weight.
 	 */
 	public function set_weight( $weight = 0 ) {
-		$this->weight = $weight;
+		$this->weight = (float) $weight;
 	}
 
 	/**
@@ -214,7 +243,7 @@ class WC_Correios_Webservice_International {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_international_url', $this->_webservice, $this->id );
+		return apply_filters( 'woocommerce_correios_webservice_international_url', $this->_webservice, $this->id, $this->instance_id );
 	}
 
 	/**
@@ -253,6 +282,71 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
+	 * Get destination country.
+	 *
+	 * @return string
+	 */
+	public function get_destination_country() {
+		return $this->destination_country;
+	}
+
+	/**
+	 * Get origin location.
+	 *
+	 * @return string
+	 */
+	public function get_origin_location() {
+		$location = 'C' === $this->origin_location ? 'C' : 'I';
+
+		return apply_filters( 'woocommerce_correios_international_origin_location', $this->origin_location, $this->id, $this->instance_id );
+	}
+
+	/**
+	 * Get origin state.
+	 *
+	 * @return string
+	 */
+	public function get_origin_state() {
+		return apply_filters( 'woocommerce_correios_international_origin_state', $this->origin_state, $this->id, $this->instance_id );
+	}
+
+	/**
+	 * Get height.
+	 *
+	 * @return float
+	 */
+	public function get_height() {
+		return $this->float_to_string( $this->height );
+	}
+
+	/**
+	 * Get width.
+	 *
+	 * @return float
+	 */
+	public function get_width() {
+		return $this->float_to_string( $this->width );
+	}
+
+	/**
+	 * Get length.
+	 *
+	 * @return float
+	 */
+	public function get_length() {
+		return $this->float_to_string( $this->length );
+	}
+
+	/**
+	 * Get weight.
+	 *
+	 * @return float
+	 */
+	public function get_weight() {
+		return $this->float_to_string( $this->weight );
+	}
+
+	/**
 	 * Fix number format for XML.
 	 *
 	 * @param  float $value  Value with dot.
@@ -271,7 +365,7 @@ class WC_Correios_Webservice_International {
 	 * @return bool
 	 */
 	protected function is_setted() {
-		return ! empty( $this->service ) || ! empty( $this->destination_country );
+		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $this->get_origin_state() ) || 0 === $this->get_height();
 	}
 
 	/**
@@ -287,37 +381,16 @@ class WC_Correios_Webservice_International {
 			return $values;
 		}
 
-		if ( ! is_null( $this->package ) ) {
-			$package = $this->package->get_data();
-			$this->height = $package['height'];
-			$this->width  = $package['width'];
-			$this->length = $package['length'];
-			$this->weight = $package['weight'];
-		}
-
-		if ( 'yes' == $this->debug ) {
-			if ( ! empty( $package ) ) {
-				$package = array(
-					'weight' => $this->weight,
-					'height' => $this->height,
-					'width'  => $this->width,
-					'length' => $this->length,
-				);
-			}
-
-			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $package, true ) );
-		}
-
 		$args = apply_filters( 'woocommerce_correios_international_shipping_args', array(
 			'tipoConsulta' => 'Geral',
 			'especif'      => $this->service,
-			'uforigem'     => '',
-			'localidade'   => '',
-			'pais'         => '',
-			'altura'       => $this->float_to_string( $this->height ),
-			'largura'      => $this->float_to_string( $this->width ),
-			'profundidade' => $this->float_to_string( $this->length ),
-			'peso'         => $this->float_to_string( $this->weight ),
+			'uforigem'     => $this->get_origin_state(),
+			'localidade'   => $this->get_origin_location(),
+			'pais'         => $this->get_destination_country(),
+			'altura'       => $this->get_height(),
+			'largura'      => $this->get_width(),
+			'profundidade' => $this->get_length(),
+			'peso'         => $this->get_weight(),
 			'reset'        => 'true',
 		), $this->id );
 
@@ -343,14 +416,12 @@ class WC_Correios_Webservice_International {
 				}
 			}
 
-			if ( isset( $result->exporta_facil->tipo_servico ) ) {
-				$service = $result->exporta_facil->tipo_servico;
-
+			if ( isset( $result->tipo_servico ) ) {
 				if ( 'yes' == $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $service, true ) );
+					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
 
-				$shipping = $service;
+				$shipping = $result->tipo_servico;
 			}
 		} else {
 			if ( 'yes' == $this->debug ) {
