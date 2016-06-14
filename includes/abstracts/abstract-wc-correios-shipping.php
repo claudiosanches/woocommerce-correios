@@ -159,7 +159,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$fields['optional_services'] = array(
 			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
 			'type'        => 'title',
-			'description' => __( 'Use these options to add the value of each service provided by the Correios', 'woocommerce-correios' ),
+			'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
 			'default'     => '',
 		);
 		$fields['receipt_notice'] = array(
