@@ -171,7 +171,8 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				$methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
 				$methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';
 
-				if ( empty( get_option( 'woocommerce_correios_settings' ) ) ) {
+				$old_options = get_option( 'woocommerce_correios_settings' );
+				if ( empty( $old_options ) ) {
 					unset( $methods['correios-legacy'] );
 				}
 			}

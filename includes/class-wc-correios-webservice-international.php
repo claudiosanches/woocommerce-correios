@@ -365,7 +365,9 @@ class WC_Correios_Webservice_International {
 	 * @return bool
 	 */
 	protected function is_setted() {
-		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $this->get_origin_state() ) || 0 === $this->get_height();
+		$state = $this->get_origin_state();
+
+		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $state ) || 0 === $this->get_height();
 	}
 
 	/**
