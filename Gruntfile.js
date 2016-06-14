@@ -49,7 +49,7 @@ module.exports = function( grunt ) {
 		// Minify .js files.
 		uglify: {
 			options: {
-				preserveComments: 'some'
+				preserveComments: /^!/
 			},
 			admin: {
 				files: [{
@@ -60,6 +60,18 @@ module.exports = function( grunt ) {
 						'!*.min.js'
 					],
 					dest: '<%= dirs.js %>/admin/',
+					ext: '.min.js'
+				}]
+			},
+			frontend: {
+				files: [{
+					expand: true,
+					cwd: '<%= dirs.js %>/frontend/',
+					src: [
+						'*.js',
+						'!*.min.js'
+					],
+					dest: '<%= dirs.js %>/frontend/',
 					ext: '.min.js'
 				}]
 			}

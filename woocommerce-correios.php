@@ -45,7 +45,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
 			// Checks with WooCommerce is installed.
-			if ( class_exists( 'WC_Shipping_Method' ) ) {
+			if ( class_exists( 'WC_Integration' ) ) {
 				$this->includes();
 
 				if ( is_admin() ) {
@@ -92,6 +92,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-package.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice-international.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-autofill-addresses.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-tracking-history.php';
 
 			// Integration.

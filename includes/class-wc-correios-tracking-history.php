@@ -24,14 +24,14 @@ class WC_Correios_Tracking_History {
 	private $_api_url = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos';
 
 	/**
-	 * Initialize the order actions.
+	 * Initialize actions.
 	 */
 	public function __construct() {
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view' ), 1 );
 	}
 
 	/**
-	 * Get the tracing history API URL.
+	 * Get the tracking history API URL.
 	 *
 	 * @return string
 	 */
