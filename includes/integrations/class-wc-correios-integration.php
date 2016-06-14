@@ -105,9 +105,9 @@ class WC_Correios_Integration extends WC_Integration {
 				'autofill_expire' => array(
 					'title'       => __( 'Postcode Expire', 'woocommerce-correios' ),
 					'type'        => 'select',
-					'default'     => 'never',
+					'default'     => 'forever',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'Define how long postcodes were saved in the database before a new query.', 'woocommerce-correios' ),
+					'description' => __( 'Defines how long a postcode will stay saved in the database before a new query.', 'woocommerce-correios' ),
 					'options'     => array(
 						'1'     => __( '1 month', 'woocommerce-correios' ),
 						'2'     => sprintf( __( '%d month', 'woocommerce-correios' ), 2 ),
@@ -121,7 +121,7 @@ class WC_Correios_Integration extends WC_Integration {
 						'10'    => sprintf( __( '%d month', 'woocommerce-correios' ), 10 ),
 						'11'    => sprintf( __( '%d month', 'woocommerce-correios' ), 11 ),
 						'12'    => sprintf( __( '%d month', 'woocommerce-correios' ), 12 ),
-						'never' => __( 'Never', 'woocommerce-correios' ),
+						'forever' => __( 'Forever', 'woocommerce-correios' ),
 					),
 				),
 				'autofill_force' => array(

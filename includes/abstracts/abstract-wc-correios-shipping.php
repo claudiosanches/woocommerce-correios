@@ -157,9 +157,10 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'default'     => '',
 		);
 		$fields['optional_services'] = array(
-			'title'   => __( 'Optional Services', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
+			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
+			'type'        => 'title',
+			'description' => __( 'Use these options to add the value of each service provided by the Correios', 'woocommerce-correios' ),
+			'default'     => '',
 		);
 		$fields['receipt_notice'] = array(
 			'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
@@ -213,7 +214,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$fields['login'] = array(
 			'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
 			'type'        => 'text',
-			'description' => __( 'Your Correios login, It\'s usually your CNPJ.', 'woocommerce-correios' ),
+			'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '',
 		);

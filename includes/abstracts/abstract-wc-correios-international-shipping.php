@@ -115,9 +115,10 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 			'default'     => '',
 		);
 		$this->instance_form_fields['optional_services'] = array(
-			'title'   => __( 'Optional Services', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
+			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
+			'type'        => 'title',
+			'description' => __( 'Use these options to add the value of each service provided by the Correios', 'woocommerce-correios' ),
+			'default'     => '',
 		);
 		$this->instance_form_fields['automatic_insurance'] = array(
 			'title'       => __( 'Automatic Insurance', 'woocommerce-correios' ),
