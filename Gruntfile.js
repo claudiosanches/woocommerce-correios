@@ -1,4 +1,6 @@
 /* jshint node:true */
+var expandHomeDir = require( 'expand-home-dir' );
+
 module.exports = function( grunt ) {
 'use strict';
 
@@ -15,7 +17,7 @@ module.exports = function( grunt ) {
 		// gets the package vars
 		pkg: grunt.file.readJSON( 'package.json' ),
 		svn_settings: {
-			path: '../../../../wp_plugins/<%= pkg.name %>',
+			path: expandHomeDir( '~/Projects/wordpress-plugins-svn/' ) + '<%= pkg.name %>',
 			tag: '<%= svn_settings.path %>/tags/<%= pkg.version %>',
 			trunk: '<%= svn_settings.path %>/trunk',
 			exclude: [
@@ -71,22 +73,6 @@ module.exports = function( grunt ) {
 					'!<%= dirs.js %>/*.min.js'
 				],
 				tasks: ['jshint', 'uglify']
-			}
-		},
-
-		// Image optimization
-		imagemin: {
-			dist: {
-				options: {
-					optimizationLevel: 7,
-					progressive: true
-				},
-				files: [{
-					expand: true,
-					cwd: './',
-					src: 'screenshot-*.png',
-					dest: './'
-				}]
 			}
 		},
 
@@ -196,7 +182,6 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
 	grunt.loadNpmTasks( 'grunt-checktextdomain' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-rsync' );
