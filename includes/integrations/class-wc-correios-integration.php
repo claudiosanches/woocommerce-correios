@@ -134,7 +134,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'autofill_empty_database' => array(
 					'title'       => __( 'Empty Database', 'woocommerce-correios' ),
 					'type'        => 'button',
-					'label'       => __( 'Empty database', 'woocommerce-correios' ),
+					'label'       => __( 'Empty Database', 'woocommerce-correios' ),
 					'description' => __( 'Delete all the saved postcodes in the database, use this option if you have issues with outdated postcodes.', 'woocommerce-correios' ),
 				),
 				'autofill_debug' => array(
