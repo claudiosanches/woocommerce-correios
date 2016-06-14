@@ -21,6 +21,6 @@ if ( ! empty( $this->more_link ) ) {
 
 echo wp_kses_post( wpautop( $description ) );
 
-include dirname( __FILE__ ) . 'html-admin-help-message.php';
+include dirname( __FILE__ ) . '/html-admin-help-message.php';
 
 echo $this->get_admin_options_html();

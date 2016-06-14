@@ -88,26 +88,26 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * Includes.
 		 */
 		private function includes() {
-			include_once dirname( __FILE__ ) . 'includes/wc-correios-functions.php';
-			include_once dirname( __FILE__ ) . 'includes/class-wc-correios-package.php';
-			include_once dirname( __FILE__ ) . 'includes/class-wc-correios-webservice.php';
-			include_once dirname( __FILE__ ) . 'includes/class-wc-correios-webservice-international.php';
-			include_once dirname( __FILE__ ) . 'includes/class-wc-correios-tracking-history.php';
+			include_once dirname( __FILE__ ) . '/includes/wc-correios-functions.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-package.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice-international.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-tracking-history.php';
 
 			// Integration.
-			include_once dirname( __FILE__ ) . 'includes/integrations/class-wc-correios-integration.php';
+			include_once dirname( __FILE__ ) . '/includes/integrations/class-wc-correios-integration.php';
 
 			// Shipping methods.
 			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
-				include_once dirname( __FILE__ ) . 'includes/abstracts/abstract-wc-correios-shipping.php';
-				include_once dirname( __FILE__ ) . 'includes/abstracts/abstract-wc-correios-international-shipping.php';
-				foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/shipping/*.php' ) as $filename ) {
-					include_once dirname( __FILE__ ) . $filename;
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping.php';
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-international-shipping.php';
+				foreach ( glob( plugin_dir_path( __FILE__ ) . '/includes/shipping/*.php' ) as $filename ) {
+					include_once $filename;
 				}
 
 				$this->upgrade();
 			} else {
-				include_once dirname( __FILE__ ) . 'includes/shipping/class-wc-correios-shipping-legacy.php';
+				include_once dirname( __FILE__ ) . '/includes/shipping/class-wc-correios-shipping-legacy.php';
 			}
 		}
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * Admin includes.
 		 */
 		private function admin_includes() {
-			include_once dirname( __FILE__ ) . 'includes/admin/class-wc-correios-admin-orders.php';
+			include_once dirname( __FILE__ ) . '/includes/admin/class-wc-correios-admin-orders.php';
 		}
 
 		/**
@@ -188,7 +188,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public function include_emails( $emails ) {
 			if ( ! isset( $emails['WC_Correios_Tracking_Email'] ) ) {
-				$emails['WC_Correios_Tracking_Email'] = include( dirname( __FILE__ ) . 'includes/emails/class-wc-correios-tracking-email.php' );
+				$emails['WC_Correios_Tracking_Email'] = include( dirname( __FILE__ ) . '/includes/emails/class-wc-correios-tracking-email.php' );
 			}
 
 			return $emails;
@@ -198,7 +198,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * WooCommerce fallback notice.
 		 */
 		public function woocommerce_missing_notice() {
-			include_once dirname( __FILE__ ) . 'includes/admin/views/html-admin-missing-dependencies.php';
+			include_once dirname( __FILE__ ) . '/includes/admin/views/html-admin-missing-dependencies.php';
 		}
 
 		/**
