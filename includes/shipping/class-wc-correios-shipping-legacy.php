@@ -249,7 +249,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
 			echo '<div class="error inline">';
-			echo '<p><strong>' . sprintf( __( 'This shipping method this depreciated since %s, and you should you the new Shipping Zones screen.', 'woocommerce-correios' ), 'WooCommerce 2.6' ) . ' <a href="#">' . __( 'See how to configure.', 'woocommerce-correios' ) . '</a></strong></p>';
+			echo '<p><strong>' . sprintf( __( 'This shipping method this depreciated since %s, and you should configure shipping methods in the new Shipping Zones screen.', 'woocommerce-correios' ), 'WooCommerce 2.6' ) . ' <a href="#">' . __( 'See how to configure.', 'woocommerce-correios' ) . '</a></strong></p>';
 			echo '</div>';
 		} else {
 			include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-help-message.php';
