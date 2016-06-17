@@ -109,12 +109,12 @@ class WC_Correios_Autofill_Addresses {
 			if ( ! is_null( $address ) ) {
 				$this->save_address( (array) $address );
 			}
-		} else if ( $this->check_if_expired( $address->last_query ) ) {
+		} elseif ( $this->check_if_expired( $address->last_query ) ) {
 			$_address = $this->fetch_address( $postcode );
 
 			if ( ! is_null( $_address ) ) {
 				$address = $_address;
-				$this->update_address( $id, (array) $address );
+				$this->update_address( (array) $address );
 			}
 		}
 
@@ -185,7 +185,7 @@ class WC_Correios_Autofill_Addresses {
 	 *
 	 * @return bool
 	 */
-	protected function update_address( $id, $address ) {
+	protected function update_address( $address ) {
 		$this->delete_address( $address['postcode'] );
 
 		return $this->save_address( $address );
