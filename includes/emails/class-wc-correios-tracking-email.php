@@ -115,7 +115,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			$url = sprintf( '<a href="%s#wc-correios-tracking">%s</a>', $this->object->get_view_order_url(), $tracking_code );
 		}
 
-		return apply_filters( 'woocommerce_correios_email_tracking_core_url', $url, $tracking_code, $this->object, $options );
+		return apply_filters( 'woocommerce_correios_email_tracking_core_url', $url, $tracking_code, $this->object );
 	}
 
 	/**
