@@ -203,9 +203,7 @@ class WC_Correios_Autofill_Addresses {
 		$address  = null;
 		$soap_opt = array(
 			'encoding'   => 'UTF-8',
-			'trace'      => true,
 			'exceptions' => true,
-			'cache_wsdl' => false,
 		);
 
 		try {
