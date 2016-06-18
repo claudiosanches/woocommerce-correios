@@ -100,27 +100,27 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * Admin options fields.
 	 */
 	public function init_form_fields() {
-		$fields = array();
+		$this->instance_form_fields = array();
 
-		$fields['enabled'] = array(
+		$this->instance_form_fields['enabled'] = array(
 			'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
 			'default' => 'yes',
 		);
-		$fields['title'] = array(
+		$this->instance_form_fields['title'] = array(
 			'title'       => __( 'Title', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => $this->method_title,
 		);
-		$fields['behavior_options'] = array(
+		$this->instance_form_fields['behavior_options'] = array(
 			'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
 			'type'    => 'title',
 			'default' => '',
 		);
-		$fields['origin_postcode'] = array(
+		$this->instance_form_fields['origin_postcode'] = array(
 			'title'       => __( 'Origin Postcode', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
@@ -128,11 +128,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'placeholder' => '00000-000',
 			'default'     => '',
 		);
-
-		// Add custom behavior options.
-		$fields = array_merge( $fields, $this->get_behavior_options() );
-
-		$fields['show_delivery_time'] = array(
+		$this->instance_form_fields['show_delivery_time'] = array(
 			'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
 			'type'        => 'checkbox',
 			'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
@@ -140,7 +136,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'desc_tip'    => true,
 			'default'     => 'no',
 		);
-		$fields['additional_time'] = array(
+		$this->instance_form_fields['additional_time'] = array(
 			'title'       => __( 'Additional Days', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Additional working days to the estimated delivery.', 'woocommerce-correios' ),
@@ -148,7 +144,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'default'     => '0',
 			'placeholder' => '0',
 		);
-		$fields['fee'] = array(
+		$this->instance_form_fields['fee'] = array(
 			'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
@@ -156,29 +152,29 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'placeholder' => '0.00',
 			'default'     => '',
 		);
-		$fields['optional_services'] = array(
+		$this->instance_form_fields['optional_services'] = array(
 			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
 			'type'        => 'title',
 			'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
 			'default'     => '',
 		);
-		$fields['receipt_notice'] = array(
+		$this->instance_form_fields['receipt_notice'] = array(
 			'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
 			'type'        => 'checkbox',
 			'label'       => __( 'Enable receipt notice', 'woocommerce-correios' ),
-			'description' => __( 'This controls if the sender must receive a receipt notice when a package is delivered.', 'woocommerce-correios' ),
+			'description' => __( 'This controls whether to add costs of the receipt notice service.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => 'no',
 		);
-		$fields['own_hands'] = array(
+		$this->instance_form_fields['own_hands'] = array(
 			'title'       => __( 'Own Hands', 'woocommerce-correios' ),
 			'type'        => 'checkbox',
 			'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
-			'description' => __( 'This controls if the package must be delivered exclusively to the recipient printed in its label.', 'woocommerce-correios' ),
+			'description' => __( 'This controls whether to add costs of the own hands service', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => 'no',
 		);
-		$fields['declare_value'] = array(
+		$this->instance_form_fields['declare_value'] = array(
 			'title'       => __( 'Declare Value for Insurance', 'woocommerce-correios' ),
 			'type'        => 'checkbox',
 			'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
@@ -186,12 +182,12 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'desc_tip'    => true,
 			'default'     => 'yes',
 		);
-		$fields['service_options'] = array(
+		$this->instance_form_fields['service_options'] = array(
 			'title'   => __( 'Service Options', 'woocommerce-correios' ),
 			'type'    => 'title',
 			'default' => '',
 		);
-		$fields['custom_code'] = array(
+		$this->instance_form_fields['custom_code'] = array(
 			'title'       => __( 'Service Code', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Service code, use this for custom codes.', 'woocommerce-correios' ),
@@ -199,7 +195,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'placeholder' => $this->code,
 			'default'     => '',
 		);
-		$fields['service_type'] = array(
+		$this->instance_form_fields['service_type'] = array(
 			'title'       => __( 'Service Type', 'woocommerce-correios' ),
 			'type'        => 'select',
 			'description' => __( 'Choose between conventional or corporate service.', 'woocommerce-correios' ),
@@ -211,61 +207,59 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'corporate'    => __( 'Corporate', 'woocommerce-correios' ),
 			),
 		);
-		$fields['login'] = array(
+		$this->instance_form_fields['login'] = array(
 			'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '',
 		);
-		$fields['password'] = array(
+		$this->instance_form_fields['password'] = array(
 			'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '',
 		);
-		$fields['package_standard'] = array(
+		$this->instance_form_fields['package_standard'] = array(
 			'title'       => __( 'Package Standard', 'woocommerce-correios' ),
 			'type'        => 'title',
 			'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
 			'default'     => '',
 		);
-		$fields['minimum_height'] = array(
+		$this->instance_form_fields['minimum_height'] = array(
 			'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '2',
 		);
-		$fields['minimum_width'] = array(
+		$this->instance_form_fields['minimum_width'] = array(
 			'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '11',
 		);
-		$fields['minimum_length'] = array(
+		$this->instance_form_fields['minimum_length'] = array(
 			'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
 			'type'        => 'text',
 			'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'default'     => '16',
 		);
-		$fields['testing'] = array(
+		$this->instance_form_fields['testing'] = array(
 			'title'   => __( 'Testing', 'woocommerce-correios' ),
 			'type'    => 'title',
 			'default' => '',
 		);
-		$fields['debug'] = array(
+		$this->instance_form_fields['debug'] = array(
 			'title'       => __( 'Debug Log', 'woocommerce-correios' ),
 			'type'        => 'checkbox',
 			'label'       => __( 'Enable logging', 'woocommerce-correios' ),
 			'default'     => 'no',
 			'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
 		);
-
-		$this->instance_form_fields = $fields;
 	}
 
 	/**

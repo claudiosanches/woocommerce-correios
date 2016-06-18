@@ -103,7 +103,7 @@ class WC_Correios_Integration extends WC_Integration {
 					'default' => 'no',
 				),
 				'autofill_validity' => array(
-					'title'       => __( 'Postcode Validity', 'woocommerce-correios' ),
+					'title'       => __( 'Postcodes Validity', 'woocommerce-correios' ),
 					'type'        => 'select',
 					'default'     => 'forever',
 					'class'       => 'wc-enhanced-select',
