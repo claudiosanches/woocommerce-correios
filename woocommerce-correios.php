@@ -92,6 +92,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice-international.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-autofill-addresses.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-tracking-history.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-rest-api.php';
 
 			// Integration.
 			include_once dirname( __FILE__ ) . '/includes/integrations/class-wc-correios-integration.php';
