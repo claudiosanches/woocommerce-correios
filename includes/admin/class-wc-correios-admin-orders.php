@@ -45,7 +45,7 @@ class WC_Correios_Admin_Orders {
 	 */
 	public function metabox_content( $post ) {
 		echo '<label for="correios_tracking">' . esc_html__( 'Tracking code:', 'woocommerce-correios' ) . '</label><br />';
-		echo '<input type="text" id="correios_tracking" name="correios_tracking" value="' . esc_attr( get_post_meta( $post->ID, 'correios_tracking', true ) ) . '" style="width: 100%;" />';
+		echo '<input type="text" id="correios_tracking" name="correios_tracking" value="' . esc_attr( get_post_meta( $post->ID, '_correios_tracking_code', true ) ) . '" style="width: 100%;" />';
 	}
 
 	/**
@@ -59,12 +59,12 @@ class WC_Correios_Admin_Orders {
 		}
 
 		if ( isset( $_POST['correios_tracking'] ) ) {
-			$old = get_post_meta( $post_id, 'correios_tracking', true );
+			$old = get_post_meta( $post_id, '_correios_tracking_code', true );
 
 			$new = sanitize_text_field( wp_unslash( $_POST['correios_tracking'] ) );
 
 			if ( $new && $new != $old ) {
-				update_post_meta( $post_id, 'correios_tracking', $new );
+				update_post_meta( $post_id, '_correios_tracking_code', $new );
 
 				// Gets order data.
 				$order = wc_get_order( $post_id );
@@ -75,7 +75,7 @@ class WC_Correios_Admin_Orders {
 				// Send email notification.
 				$this->trigger_email_notification( $order, $new );
 			} elseif ( '' == $new && $old ) {
-				delete_post_meta( $post_id, 'correios_tracking', $old );
+				delete_post_meta( $post_id, '_correios_tracking_code', $old );
 			}
 		}
 	}
