@@ -73,7 +73,7 @@ class WC_Correios_REST_API {
 				'get_callback'    => array( $this, 'get_tracking_code_callback' ),
 				'update_callback' => array( $this, 'update_tracking_code_callback' ),
 				'schema'          => array(
-					'description' => __( 'Correios tracking code.', 'woocommerce' ),
+					'description' => __( 'Correios tracking code.', 'woocommerce-correios' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
