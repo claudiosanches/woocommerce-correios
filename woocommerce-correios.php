@@ -29,7 +29,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 *
 		 * @var string
 		 */
-		const VERSION = '3.0.0-beta2';
+		const VERSION = '3.0.0';
 
 		/**
 		 * Instance of this class.
@@ -86,6 +86,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		private function includes() {
 			include_once dirname( __FILE__ ) . '/includes/wc-correios-functions.php';
+			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-install.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-package.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice.php';
 			include_once dirname( __FILE__ ) . '/includes/class-wc-correios-webservice-international.php';
@@ -103,10 +104,14 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 					include_once $filename;
 				}
 
-				$this->upgrade();
+				// Update settings to 3.0.0 when using WooCommerce 2.6.0.
+				WC_Correios_Install::upgrade_300_to_wc_260();
 			} else {
 				include_once dirname( __FILE__ ) . '/includes/shipping/class-wc-correios-shipping-legacy.php';
 			}
+
+			// Update to 3.0.0.
+			WC_Correios_Install::upgrade_300();
 		}
 
 		/**
@@ -210,34 +215,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public static function get_templates_path() {
 			return self::get_plugin_path() . 'templates/';
-		}
-
-		/**
-		 * Upgrade to 3.0.0.
-		 */
-		private function upgrade() {
-			if ( $old_options = get_option( 'woocommerce_correios_settings' ) ) {
-				if ( isset( $old_options['tracking_history'] ) ) {
-					$integration_options = get_option( 'woocommerce_correios-integration_settings', array(
-						'general_options' => '',
-						'tracking'        => '',
-						'enable_tracking' => 'no',
-						'tracking_debug'  => 'no'
-					) );
-
-					// Update integration options.
-					$integration_options['enable_tracking'] = $old_options['tracking_history'];
-					update_option( 'woocommerce_correios-integration_settings', $integration_options );
-
-					// Update the old options.
-					unset( $old_options['tracking_history'] );
-					update_option( 'woocommerce_correios_settings', $old_options );
-				}
-
-				if ( 'no' === $old_options['enabled'] ) {
-					delete_option( 'woocommerce_correios_settings' );
-				}
-			}
 		}
 	}
 
