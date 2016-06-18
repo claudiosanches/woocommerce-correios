@@ -55,9 +55,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				add_filter( 'woocommerce_integrations', array( $this, 'include_integrations' ) );
 				add_filter( 'woocommerce_shipping_methods', array( $this, 'include_methods' ) );
 				add_filter( 'woocommerce_email_classes', array( $this, 'include_emails' ) );
-
-				// Action links.
-				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 			} else {
 				add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
 			}
@@ -117,21 +114,6 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		private function admin_includes() {
 			include_once dirname( __FILE__ ) . '/includes/admin/class-wc-correios-admin-orders.php';
-		}
-
-		/**
-		 * Action links.
-		 *
-		 * @param  array $links Plugin action links.
-		 *
-		 * @return array
-		 */
-		public function plugin_action_links( $links ) {
-			$plugin_links = array();
-
-			$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
-
-			return array_merge( $plugin_links, $links );
 		}
 
 		/**
