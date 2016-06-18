@@ -1,5 +1,5 @@
 === WooCommerce Correios ===
-Contributors: claudiosanches, rodrigoprior
+Contributors: claudiosanches, rodrigoprior, matheuscl
 Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
