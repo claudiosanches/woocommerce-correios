@@ -78,12 +78,12 @@ class WC_Correios_Autofill_Addresses {
 	}
 
 	/**
-	 * Get expire time.
+	 * Get validity.
 	 *
 	 * @return string
 	 */
-	protected function get_expire_time() {
-		return apply_filters( 'woocommerce_correios_autofill_addresses_expire_time', 'forever' );
+	protected function get_validity() {
+		return apply_filters( 'woocommerce_correios_autofill_addresses_validity', 'forever' );
 	}
 
 	/**
@@ -128,9 +128,9 @@ class WC_Correios_Autofill_Addresses {
 	 * @return bool
 	 */
 	protected function check_if_expired( $last_query ) {
-		$expire = $this->get_expire_time();
+		$validity = $this->get_validity();
 
-		if ( 'forever' !== $expire && strtotime( '+' . $expire . ' months', strtotime( $last_query ) ) < current_time( 'timestamp' ) ) {
+		if ( 'forever' !== $validity && strtotime( '+' . $validity . ' months', strtotime( $last_query ) ) < current_time( 'timestamp' ) ) {
 			return true;
 		}
 

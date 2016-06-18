@@ -33,7 +33,7 @@ class WC_Correios_Integration extends WC_Integration {
 		$this->tracking_enable         = $this->get_option( 'tracking_enable' );
 		$this->tracking_debug          = $this->get_option( 'tracking_debug' );
 		$this->autofill_enable         = $this->get_option( 'autofill_enable' );
-		$this->autofill_expire         = $this->get_option( 'autofill_expire' );
+		$this->autofill_validity       = $this->get_option( 'autofill_validity' );
 		$this->autofill_force          = $this->get_option( 'autofill_force' );
 		$this->autofill_empty_database = $this->get_option( 'autofill_empty_database' );
 		$this->autofill_debug          = $this->get_option( 'autofill_debug' );
@@ -48,7 +48,7 @@ class WC_Correios_Integration extends WC_Integration {
 		// Autofill address actions.
 		add_filter( 'woocommerce_correios_enable_autofill_addresses', array( $this, 'setup_autofill_addresses' ), 10 );
 		add_filter( 'woocommerce_correios_enable_autofill_addresses_debug', array( $this, 'setup_autofill_addresses_debug' ), 10 );
-		add_filter( 'woocommerce_correios_autofill_addresses_expire_time', array( $this, 'setup_autofill_addresses_expire_time' ), 10 );
+		add_filter( 'woocommerce_correios_autofill_addresses_validity_time', array( $this, 'setup_autofill_addresses_validity_time' ), 10 );
 		add_filter( 'woocommerce_correios_autofill_addresses_force_autofill', array( $this, 'setup_autofill_addresses_force_autofill' ), 10 );
 		add_action( 'wp_ajax_correios_autofill_addresses_empty_database', array( $this, 'ajax_empty_database' ) );
 	}
@@ -102,8 +102,8 @@ class WC_Correios_Integration extends WC_Integration {
 					'label'   => __( 'Enable Autofill Addresses', 'woocommerce-correios' ),
 					'default' => 'no',
 				),
-				'autofill_expire' => array(
-					'title'       => __( 'Postcode Expire', 'woocommerce-correios' ),
+				'autofill_validity' => array(
+					'title'       => __( 'Postcode Validity', 'woocommerce-correios' ),
 					'type'        => 'select',
 					'default'     => 'forever',
 					'class'       => 'wc-enhanced-select',
@@ -256,12 +256,12 @@ class WC_Correios_Integration extends WC_Integration {
 	}
 
 	/**
-	 * Set up autofill addresses expire time.
+	 * Set up autofill addresses validity time.
 	 *
 	 * @return string
 	 */
-	public function setup_autofill_addresses_expire_time() {
-		return $this->autofill_expire;
+	public function setup_autofill_addresses_validity_time() {
+		return $this->autofill_validity;
 	}
 
 	/**
