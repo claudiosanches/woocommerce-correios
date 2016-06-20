@@ -260,7 +260,7 @@ class WC_Correios_Autofill_Addresses {
 
 		$postcode = wc_correios_sanitize_postcode( $_GET['postcode'] );
 
-		if ( empty( $postcode ) ) {
+		if ( empty( $postcode ) || 8 !== strlen( $postcode ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );
 			exit;
 		}
