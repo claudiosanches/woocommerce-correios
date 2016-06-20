@@ -23,10 +23,10 @@ jQuery( function( $ ) {
 			// Initial load.
 			this.autofill( 'billing', true );
 
-			$( '#billing_postcode' ).on( 'blur', function() {
+			$( document.body ).on( 'blur', '#billing_postcode', function() {
 				WCCorreiosAutofillAddress.autofill( 'billing' );
 			});
-			$( '#shipping_postcode' ).on( 'blur', function() {
+			$( document.body ).on( 'blur', '#shipping_postcode', function() {
 				WCCorreiosAutofillAddress.autofill( 'shipping' );
 			});
 		},
