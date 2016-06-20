@@ -259,9 +259,14 @@ class WC_Correios_Autofill_Addresses {
 		}
 
 		$postcode = wc_correios_sanitize_postcode( $_GET['postcode'] );
-		$address  = $this->get_address( $postcode );
 
-		// Test if found any postcode.
+		if ( empty( $postcode ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );
+			exit;
+		}
+
+		$address = $this->get_address( $postcode );
+
 		if ( is_null( $address ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );
 			exit;
