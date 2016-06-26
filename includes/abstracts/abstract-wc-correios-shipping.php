@@ -146,7 +146,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		);
 		$this->instance_form_fields['fee'] = array(
 			'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
-			'type'        => 'text',
+			'type'        => 'price',
 			'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
 			'desc_tip'    => true,
 			'placeholder' => '0.00',
@@ -440,7 +440,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		// Apply fees.
-		$fee = $this->get_fee( str_replace( ',', '.', $this->fee ), $cost );
+		$fee = $this->get_fee( wc_correios_normalize_price( $this->fee ), $cost );
 
 		// Create the rate and apply filters.
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
