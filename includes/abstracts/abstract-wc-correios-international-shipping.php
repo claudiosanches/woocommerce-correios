@@ -187,7 +187,7 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 
 		$shipping = $this->get_rate( $package );
 
-		if ( isset( $shipping->erro ) ) {
+		if ( empty( $shipping->dados_postais->preco_postal ) ) {
 			return;
 		}
 
