@@ -25,8 +25,8 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		$this->customer_email   = true;
 		$this->description      = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
 		$this->heading          = __( 'Your order has been sent', 'woocommerce-correios' );
-		$this->subject          = __( '[{blogname}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
-		$this->message          = __( 'Hi there. Your recent order on {blogname} has been sent by Correios.', 'woocommerce-correios' )
+		$this->subject          = __( '[{site_title}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
+		$this->message          = __( 'Hi there. Your recent order on {site_title} has been sent by Correios.', 'woocommerce-correios' )
 									. PHP_EOL . ' ' . PHP_EOL
 									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
 									. PHP_EOL . ' ' . PHP_EOL
