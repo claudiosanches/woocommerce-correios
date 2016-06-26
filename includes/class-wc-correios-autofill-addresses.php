@@ -19,7 +19,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Table name.
 	 *
-	 * var string
+	 * @var string
 	 */
 	public static $table = 'correios_postcodes';
 
@@ -97,11 +97,7 @@ class WC_Correios_Autofill_Addresses {
 		global $wpdb;
 
 		$table    = $wpdb->prefix . self::$table;
-		$address  = $wpdb->get_row( $wpdb->prepare( "
-			SELECT *
-			FROM $table
-			WHERE postcode = %s
-		", $postcode ) );
+		$address  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE postcode = %s;", $postcode ) );
 
 		if ( is_wp_error( $address ) || is_null( $address ) ) {
 			$address = $this->fetch_address( $postcode );
@@ -169,8 +165,6 @@ class WC_Correios_Autofill_Addresses {
 
 	/**
 	 * Delete an address from database.
-	 *
-	 * @return string $postcode
 	 */
 	protected function delete_address( $postcode ) {
 		global $wpdb;

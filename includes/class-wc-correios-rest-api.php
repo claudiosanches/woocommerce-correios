@@ -48,10 +48,8 @@ class WC_Correios_REST_API {
 	/**
 	 * Update tracking code using the legacy WooCOmmerce REST API.
 	 *
-	 * @param  int   $order_id Order ID.
-	 * @param  array $data     Posted data.
-	 *
-	 * @return array
+	 * @param int   $order_id Order ID.
+	 * @param array $data     Posted data.
 	 */
 	public function legacy_orders_update( $order_id, $data ) {
 		if ( isset( $data['correios_tracking_code'] ) ) {
@@ -86,7 +84,7 @@ class WC_Correios_REST_API {
 	 *
 	 * @param array           $data    Details of current response.
 	 * @param string          $field   Name of field.
-	 * @param WP_REST_Request $request Current request
+	 * @param WP_REST_Request $request Current request.
 	 *
 	 * @return string
 	 */

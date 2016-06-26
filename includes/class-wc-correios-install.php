@@ -55,7 +55,7 @@ class WC_Correios_Install {
 					'general_options' => '',
 					'tracking'        => '',
 					'enable_tracking' => 'no',
-					'tracking_debug'  => 'no'
+					'tracking_debug'  => 'no',
 				) );
 
 				// Update integration options.

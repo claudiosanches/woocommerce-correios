@@ -79,20 +79,20 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'title'            => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable this shipping method', 'woocommerce-correios' ),
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'title' => array(
 				'title'            => __( 'Title', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => __( 'Correios', 'woocommerce-correios' )
+				'default'          => __( 'Correios', 'woocommerce-correios' ),
 			),
 			'zip_origin' => array(
 				'title'            => __( 'Origin Zip Code', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'Zip Code from where the requests are sent.', 'woocommerce-correios' ),
-				'desc_tip'         => true
+				'desc_tip'         => true,
 			),
 			'declare_value' => array(
 				'title'            => __( 'Declare value', 'woocommerce-correios' ),
@@ -100,7 +100,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'default'          => 'none',
 				'options'          => array(
 					'declare'      => __( 'Declare', 'woocommerce-correios' ),
-					'none'         => __( 'None', 'woocommerce-correios' )
+					'none'         => __( 'None', 'woocommerce-correios' ),
 				),
 			),
 			'display_date' => array(
@@ -109,7 +109,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Display date of estimated delivery.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'additional_time' => array(
 				'title'            => __( 'Additional days', 'woocommerce-correios' ),
@@ -117,18 +117,18 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'description'      => __( 'Additional days to the estimated delivery.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
 				'default'          => '0',
-				'placeholder'      => '0'
+				'placeholder'      => '0',
 			),
 			'fee' => array(
 				'title'            => __( 'Handling Fee', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'placeholder'      => '0.00'
+				'placeholder'      => '0.00',
 			),
 			'services' => array(
 				'title'            => __( 'Correios Services', 'woocommerce-correios' ),
-				'type'             => 'title'
+				'type'             => 'title',
 			),
 			'corporate_service' => array(
 				'title'            => __( 'Corporate Service', 'woocommerce-correios' ),
@@ -138,20 +138,20 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'default'          => 'conventional',
 				'options'          => array(
 					'conventional' => __( 'Conventional', 'woocommerce-correios' ),
-					'corporate'    => __( 'Corporate', 'woocommerce-correios' )
+					'corporate'    => __( 'Corporate', 'woocommerce-correios' ),
 				),
 			),
 			'login' => array(
 				'title'            => __( 'Administrative Code', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'Your Correios login.', 'woocommerce-correios' ),
-				'desc_tip'         => true
+				'desc_tip'         => true,
 			),
 			'password' => array(
 				'title'            => __( 'Administrative Password', 'woocommerce-correios' ),
 				'type'             => 'password',
 				'description'      => __( 'Your Correios password.', 'woocommerce-correios' ),
-				'desc_tip'         => true
+				'desc_tip'         => true,
 			),
 			'service_pac' => array(
 				'title'            => __( 'PAC', 'woocommerce-correios' ),
@@ -159,7 +159,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via PAC.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'service_sedex' => array(
 				'title'            => __( 'SEDEX', 'woocommerce-correios' ),
@@ -167,7 +167,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via SEDEX.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'service_sedex_10' => array(
 				'title'            => __( 'SEDEX 10', 'woocommerce-correios' ),
@@ -175,7 +175,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via SEDEX 10.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'service_sedex_hoje' => array(
 				'title'            => __( 'SEDEX Hoje', 'woocommerce-correios' ),
@@ -183,7 +183,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via SEDEX Hoje.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'service_esedex' => array(
 				'title'            => __( 'e-SEDEX', 'woocommerce-correios' ),
@@ -191,7 +191,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'label'            => __( 'Enable', 'woocommerce-correios' ),
 				'description'      => __( 'Shipping via e-SEDEX.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => 'no'
+				'default'          => 'no',
 			),
 			'package_standard' => array(
 				'title'            => __( 'Package Standard', 'woocommerce-correios' ),
@@ -204,33 +204,33 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'type'             => 'text',
 				'description'      => __( 'Minimum height of the package. Correios needs at least 2 cm.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => '2'
+				'default'          => '2',
 			),
 			'minimum_width' => array(
 				'title'            => __( 'Minimum Width', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'Minimum width of the package. Correios needs at least 11 cm.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => '11'
+				'default'          => '11',
 			),
 			'minimum_length' => array(
 				'title'            => __( 'Minimum Length', 'woocommerce-correios' ),
 				'type'             => 'text',
 				'description'      => __( 'Minimum length of the package. Correios needs at least 16 cm.', 'woocommerce-correios' ),
 				'desc_tip'         => true,
-				'default'          => '16'
+				'default'          => '16',
 			),
 			'testing' => array(
 				'title'            => __( 'Testing', 'woocommerce-correios' ),
-				'type'             => 'title'
+				'type'             => 'title',
 			),
 			'debug' => array(
 				'title'            => __( 'Debug Log', 'woocommerce-correios' ),
 				'type'             => 'checkbox',
 				'label'            => __( 'Enable logging', 'woocommerce-correios' ),
 				'default'          => 'no',
-				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'woocommerce-correios' ), $this->get_log_view() )
-			)
+				'description'      => sprintf( __( 'Log Correios events, such as WebServices requests, inside %s.', 'woocommerce-correios' ), $this->get_log_view() ),
+			),
 		);
 	}
 
@@ -341,7 +341,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 	/**
 	 * Gets the service name.
 	 *
-	 * @param  int   $code Correios service ID.
+	 * @param  int $code Correios service ID.
 	 *
 	 * @return array       Correios service name.
 	 */
@@ -403,7 +403,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				$error_message = wc_correios_get_error_message( $error_number );
 				$errors[ $error_number ] = array(
 					'error'   => $error_message,
-					'number'  => $error_number
+					'number'  => $error_number,
 				);
 
 				if ( ! in_array( $error_number, $this->get_accepted_error_codes() ) ) {

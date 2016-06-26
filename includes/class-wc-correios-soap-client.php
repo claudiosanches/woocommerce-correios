@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * WC_Correios_Soap_Client class.
+ */
 class WC_Correios_Soap_Client extends SoapClient {
 
 	/**
@@ -34,6 +37,6 @@ class WC_Correios_Soap_Client extends SoapClient {
 	 * @return resource Of type stream-context.
 	 */
 	private function get_custom_stream_context() {
-		return stream_context_create( array( 'http'=> array( 'protocol_version' => '1.0', 'header' => 'Connection: Close' ) ) );
+		return stream_context_create( array( 'http' => array( 'protocol_version' => '1.0', 'header' => 'Connection: Close' ) ) );
 	}
 }

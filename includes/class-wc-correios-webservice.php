@@ -203,8 +203,6 @@ class WC_Correios_Webservice {
 	 * Set shipping package.
 	 *
 	 * @param array $package
-	 *
-	 * @return WC_Correios_Package
 	 */
 	public function set_package( $package = array() ) {
 		$package = new WC_Correios_Package( $package );

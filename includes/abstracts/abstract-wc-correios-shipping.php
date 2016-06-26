@@ -386,7 +386,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	/**
 	 * Get shipping method label.
 	 *
-	 * @param  int $days Days to deliver.
+	 * @param  int   $days Days to deliver.
+	 * @param  array $package Package data.
 	 *
 	 * @return string
 	 */

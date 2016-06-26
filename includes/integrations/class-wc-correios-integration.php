@@ -176,7 +176,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * Generate Button Input HTML.
 	 *
 	 * @param string $key
-	 * @param array $data
+	 * @param array  $data
 	 * @return string
 	 */
 	public function generate_button_html( $key, $data ) {
