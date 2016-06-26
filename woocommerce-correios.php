@@ -42,7 +42,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 * Initialize the plugin public actions.
 		 */
 		private function __construct() {
-			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+			add_action( 'init', array( $this, 'load_plugin_textdomain' ), -1 );
 
 			// Checks with WooCommerce is installed.
 			if ( class_exists( 'WC_Integration' ) ) {
