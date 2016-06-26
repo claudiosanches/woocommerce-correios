@@ -27,9 +27,9 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		$this->heading          = __( 'Your order has been sent', 'woocommerce-correios' );
 		$this->subject          = __( '[{blogname}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
 		$this->message          = __( 'Hi there. Your recent order on {blogname} has been sent by Correios.', 'woocommerce-correios' )
-									. PHP_EOL . PHP_EOL
+									. PHP_EOL . ' ' . PHP_EOL
 									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
-									. PHP_EOL . PHP_EOL
+									. PHP_EOL . ' ' . PHP_EOL
 									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
 		$this->tracking_message = $this->get_option( 'tracking_message', $this->message );
 		$this->template_html    = 'emails/correios-tracking-code.php';
@@ -82,14 +82,30 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				'description' => __( 'Choose which format of email to send.', 'woocommerce-correios' ),
 				'default'     => 'html',
 				'class'       => 'email_type wc-enhanced-select',
-				'options'     => array(
-					'plain'     => __( 'Plain text', 'woocommerce-correios' ),
-					'html'      => __( 'HTML', 'woocommerce-correios' ),
-					'multipart' => __( 'Multipart', 'woocommerce-correios' ),
-				),
+				'options'     => $this->get_custom_email_type_options(),
 				'desc_tip'    => true,
 			),
 		);
+	}
+
+	/**
+	 * Email type options.
+	 *
+	 * @return array
+	 */
+	protected function get_custom_email_type_options() {
+		if ( method_exists( $this, 'get_email_type_options' ) ) {
+			return $this->get_email_type_options();
+		}
+
+		$types = array( 'plain' => __( 'Plain text', 'woocommerce-correios' ) );
+
+		if ( class_exists( 'DOMDocument' ) ) {
+			$types['html']      = __( 'HTML', 'woocommerce-correios' );
+			$types['multipart'] = __( 'Multipart', 'woocommerce-correios' );
+		}
+
+		return $types;
 	}
 
 	/**
