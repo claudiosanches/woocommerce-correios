@@ -36,7 +36,7 @@ Estão integrados os seguintes serviços:
  - Mercadoria Econômica
  - Leve Internacional
 - Consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente)
-- Consulta e autopreenchimento de endereços baseados em CEPs.
+- Consulta e autopreenchimento de endereços baseados em CEPs
 
 ### Instalação: ###
 
@@ -44,7 +44,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 ### Compatibilidade ###
 
-Compatível com versão 2.6.x do WooCommerce.
+Compatível com a versão 2.6.x do WooCommerce.
 
 ### Dúvidas? ###
 
