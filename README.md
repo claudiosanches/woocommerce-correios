@@ -12,7 +12,7 @@ Integration between the Correios and WooCommerce
 
 ## Description ##
 
-Integre os métodos de entrega e serviços dos Correios com a sua loja WooCommerce.
+Utilize os métodos de entrega e serviços dos Correios com a sua loja WooCommerce.
 
 [Correios](http://www.correios.com.br/) é um método de entrega brasileiro.
 
