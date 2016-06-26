@@ -198,16 +198,14 @@ class WC_Correios_Autofill_Addresses {
 	 * @return stdClass
 	 */
 	protected function fetch_address( $postcode ) {
+		include_once dirname( __FILE__ ) . '/class-wc-correios-soap-client.php';
+
 		$this->logger( sprintf( 'Fetching address for "%s" on Correios Webservices...', $postcode ) );
 
-		$address  = null;
-		$soap_opt = array(
-			'encoding'   => 'UTF-8',
-			'exceptions' => true,
-		);
+		$address = null;
 
 		try {
-			$soap       = new SoapClient( $this->get_tracking_addresses_webservice_url(), $soap_opt );
+			$soap       = new WC_Correios_Soap_Client( $this->get_tracking_addresses_webservice_url() );
 			$response   = $soap->consultaCEP( array( 'cep' => $postcode ) );
 			$data       = $response->return;
 			$address    = new stdClass;
