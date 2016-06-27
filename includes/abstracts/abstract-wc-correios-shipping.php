@@ -441,7 +441,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		// Apply fees.
-		$fee = $this->get_fee( wc_correios_normalize_price( $this->fee ), $cost );
+		$fee = $this->get_fee( $this->fee, $cost );
 
 		// Create the rate and apply filters.
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
