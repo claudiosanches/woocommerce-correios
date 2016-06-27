@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.5  
-**Stable tag:** 3.0.0  
+**Stable tag:** 3.0.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -215,6 +215,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.0.1 - 2016/06/26 ###
+
+- Corrigido o calculo da taxa de manuseio.
+
 ### 3.0.0 - 2016/06/26 ###
 
 - Reformulação geral de todos o código do plugin.
@@ -223,13 +227,13 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Adicionado novo menu de "integrações".
 - Adicionada integração com o serviço de consulta de CEP e assim adicionando uma opção para autopreencher endereços com base no CEP.
 - Atualizada a integração com o sistema que gera o histórico de rastreamento do pedido.
-- Removida a opção de simulador de frete do carrinho.
+- Removida a opção de simulador de frete na página do produto.
 - Integrado o campo de "correios_tracking_code" dos pedidos com a API REST do WooCommerce.
 - E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
 
 ## Upgrade Notice ##
 
-### 3.0.0 ###
+### 3.0.1 ###
 
 - Reformulação geral de todos o código do plugin.
 - Adicionado suporte as áreas de entrega do WooCommerce 2.6.
@@ -237,6 +241,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Adicionado novo menu de "integrações".
 - Adicionada integração com o serviço de consulta de CEP e assim adicionando uma opção para autopreencher endereços com base no CEP.
 - Atualizada a integração com o sistema que gera o histórico de rastreamento do pedido.
-- Removida a opção de simulador de frete do carrinho.
+- Removida a opção de simulador de frete na página do produto.
 - Integrado o campo de "correios_tracking_code" dos pedidos com a API REST do WooCommerce.
+- Corrigido o calculo da taxa de manuseio.
 - E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
