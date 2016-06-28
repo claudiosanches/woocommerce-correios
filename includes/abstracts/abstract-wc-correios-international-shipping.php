@@ -44,11 +44,6 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 		$this->automatic_insurance = $this->get_option( 'automatic_insurance' );
 		$this->debug               = $this->get_option( 'debug' );
 
-		// Active logs.
-		if ( 'yes' == $this->debug ) {
-			$this->log = new WC_Logger();
-		}
-
 		// Save admin options.
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 	}
@@ -57,88 +52,88 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 	 * Admin options fields.
 	 */
 	public function init_form_fields() {
-		$this->instance_form_fields = array();
-
-		$this->instance_form_fields['enabled'] = array(
-			'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
-			'default' => 'yes',
-		);
-		$this->instance_form_fields['title'] = array(
-			'title'       => __( 'Title', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => $this->method_title,
-		);
-		$this->instance_form_fields['behavior_options'] = array(
-			'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
-		);
-		$this->instance_form_fields['origin_state'] = array(
-			'title'       => __( 'Origin State', 'woocommerce-correios' ),
-			'type'        => 'select',
-			'description' => __( 'The UF of the location your packages are delivered from.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '',
-			'class'       => 'wc-enhanced-select',
-			'options'     => WC()->countries->get_states( 'BR' ),
-		);
-		$this->instance_form_fields['origin_location'] = array(
-			'title'       => __( 'Origin Locale', 'woocommerce-correios' ),
-			'type'        => 'select',
-			'description' => __( 'The location of your packages are delivered from.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'C',
-			'class'       => 'wc-enhanced-select',
-			'options'     => array(
-				'C' => __( 'Capital', 'woocommerce-correios' ),
-				'I' => __( 'Interior', 'woocommerce-correios' ),
+		$this->instance_form_fields = array(
+			'enabled' => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
+				'default' => 'yes',
 			),
-		);
-		$this->instance_form_fields['show_delivery_time'] = array(
-			'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
-			'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'no',
-		);
-		$this->instance_form_fields['fee'] = array(
-			'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
-			'type'        => 'price',
-			'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'placeholder' => '0.00',
-			'default'     => '',
-		);
-		$this->instance_form_fields['optional_services'] = array(
-			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
-			'type'        => 'title',
-			'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
-			'default'     => '',
-		);
-		$this->instance_form_fields['automatic_insurance'] = array(
-			'title'       => __( 'Automatic Insurance', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable automatic insurance', 'woocommerce-correios' ),
-			'description' => __( 'This controls if need to apply insurance to the order.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'yes',
-		);
-		$this->instance_form_fields['testing'] = array(
-			'title'   => __( 'Testing', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
-		);
-		$this->instance_form_fields['debug'] = array(
-			'title'       => __( 'Debug Log', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable logging', 'woocommerce-correios' ),
-			'default'     => 'no',
-			'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
+			'title' => array(
+				'title'       => __( 'Title', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => $this->method_title,
+			),
+			'behavior_options' => array(
+				'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
+				'type'    => 'title',
+				'default' => '',
+			),
+			'origin_state' => array(
+				'title'       => __( 'Origin State', 'woocommerce-correios' ),
+				'type'        => 'select',
+				'description' => __( 'The UF of the location your packages are delivered from.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+				'class'       => 'wc-enhanced-select',
+				'options'     => WC()->countries->get_states( 'BR' ),
+			),
+			'origin_location' => array(
+				'title'       => __( 'Origin Locale', 'woocommerce-correios' ),
+				'type'        => 'select',
+				'description' => __( 'The location of your packages are delivered from.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'C',
+				'class'       => 'wc-enhanced-select',
+				'options'     => array(
+					'C' => __( 'Capital', 'woocommerce-correios' ),
+					'I' => __( 'Interior', 'woocommerce-correios' ),
+				),
+			),
+			'show_delivery_time' => array(
+				'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
+				'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
+			),
+			'fee' => array(
+				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
+				'type'        => 'price',
+				'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'placeholder' => '0.00',
+				'default'     => '',
+			),
+			'optional_services' => array(
+				'title'       => __( 'Optional Services', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
+				'default'     => '',
+			),
+			'automatic_insurance' => array(
+				'title'       => __( 'Automatic Insurance', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable automatic insurance', 'woocommerce-correios' ),
+				'description' => __( 'This controls if need to apply insurance to the order.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'yes',
+			),
+			'testing' => array(
+				'title'   => __( 'Testing', 'woocommerce-correios' ),
+				'type'    => 'title',
+				'default' => '',
+			),
+			'debug' => array(
+				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
+				'default'     => 'no',
+				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
+			),
 		);
 	}
 

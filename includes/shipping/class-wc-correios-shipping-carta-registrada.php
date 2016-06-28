@@ -61,7 +61,7 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 	protected function get_shipping_classes_options() {
 		$shipping_classes = WC()->shipping->get_shipping_classes();
 		$options          = array(
-			'' => __( '-- Select a shipping class --', 'woocommerce-correios' )
+			'' => __( '-- Select a shipping class --', 'woocommerce-correios' ),
 		);
 
 		if ( ! empty( $shipping_classes ) ) {

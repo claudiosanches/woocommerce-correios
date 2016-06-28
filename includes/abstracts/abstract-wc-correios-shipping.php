@@ -67,11 +67,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
 		$this->debug              = $this->get_option( 'debug' );
 
-		// Active logs.
-		if ( 'yes' == $this->debug ) {
-			$this->log = new WC_Logger();
-		}
-
 		// Save admin options.
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 	}
@@ -88,177 +83,168 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get behavior options.
-	 *
-	 * @return array
-	 */
-	protected function get_behavior_options() {
-		return array();
-	}
-
-	/**
 	 * Admin options fields.
 	 */
 	public function init_form_fields() {
-		$this->instance_form_fields = array();
-
-		$this->instance_form_fields['enabled'] = array(
-			'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
-			'default' => 'yes',
-		);
-		$this->instance_form_fields['title'] = array(
-			'title'       => __( 'Title', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => $this->method_title,
-		);
-		$this->instance_form_fields['behavior_options'] = array(
-			'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
-		);
-		$this->instance_form_fields['origin_postcode'] = array(
-			'title'       => __( 'Origin Postcode', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'placeholder' => '00000-000',
-			'default'     => '',
-		);
-		$this->instance_form_fields['show_delivery_time'] = array(
-			'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
-			'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'no',
-		);
-		$this->instance_form_fields['additional_time'] = array(
-			'title'       => __( 'Additional Days', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Additional working days to the estimated delivery.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '0',
-			'placeholder' => '0',
-		);
-		$this->instance_form_fields['fee'] = array(
-			'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
-			'type'        => 'price',
-			'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'placeholder' => '0.00',
-			'default'     => '',
-		);
-		$this->instance_form_fields['optional_services'] = array(
-			'title'       => __( 'Optional Services', 'woocommerce-correios' ),
-			'type'        => 'title',
-			'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
-			'default'     => '',
-		);
-		$this->instance_form_fields['receipt_notice'] = array(
-			'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable receipt notice', 'woocommerce-correios' ),
-			'description' => __( 'This controls whether to add costs of the receipt notice service.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'no',
-		);
-		$this->instance_form_fields['own_hands'] = array(
-			'title'       => __( 'Own Hands', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
-			'description' => __( 'This controls whether to add costs of the own hands service', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'no',
-		);
-		$this->instance_form_fields['declare_value'] = array(
-			'title'       => __( 'Declare Value for Insurance', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
-			'description' => __( 'This controls if the price of the package must be declared for insurance purposes.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'yes',
-		);
-		$this->instance_form_fields['service_options'] = array(
-			'title'   => __( 'Service Options', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
-		);
-		$this->instance_form_fields['custom_code'] = array(
-			'title'       => __( 'Service Code', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Service code, use this for custom codes.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'placeholder' => $this->code,
-			'default'     => '',
-		);
-		$this->instance_form_fields['service_type'] = array(
-			'title'       => __( 'Service Type', 'woocommerce-correios' ),
-			'type'        => 'select',
-			'description' => __( 'Choose between conventional or corporate service.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => 'conventional',
-			'class'       => 'wc-enhanced-select',
-			'options'     => array(
-				'conventional' => __( 'Conventional', 'woocommerce-correios' ),
-				'corporate'    => __( 'Corporate', 'woocommerce-correios' ),
+		$this->instance_form_fields = array(
+			'enabled' => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
+				'default' => 'yes',
 			),
-		);
-		$this->instance_form_fields['login'] = array(
-			'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '',
-		);
-		$this->instance_form_fields['password'] = array(
-			'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '',
-		);
-		$this->instance_form_fields['package_standard'] = array(
-			'title'       => __( 'Package Standard', 'woocommerce-correios' ),
-			'type'        => 'title',
-			'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
-			'default'     => '',
-		);
-		$this->instance_form_fields['minimum_height'] = array(
-			'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '2',
-		);
-		$this->instance_form_fields['minimum_width'] = array(
-			'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '11',
-		);
-		$this->instance_form_fields['minimum_length'] = array(
-			'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
-			'type'        => 'text',
-			'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
-			'desc_tip'    => true,
-			'default'     => '16',
-		);
-		$this->instance_form_fields['testing'] = array(
-			'title'   => __( 'Testing', 'woocommerce-correios' ),
-			'type'    => 'title',
-			'default' => '',
-		);
-		$this->instance_form_fields['debug'] = array(
-			'title'       => __( 'Debug Log', 'woocommerce-correios' ),
-			'type'        => 'checkbox',
-			'label'       => __( 'Enable logging', 'woocommerce-correios' ),
-			'default'     => 'no',
-			'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
+			'title' => array(
+				'title'       => __( 'Title', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => $this->method_title,
+			),
+			'behavior_options' => array(
+				'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
+				'type'    => 'title',
+				'default' => '',
+			),
+			'origin_postcode' => array(
+				'title'       => __( 'Origin Postcode', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'placeholder' => '00000-000',
+				'default'     => '',
+			),
+			'show_delivery_time' => array(
+				'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
+				'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
+			),
+			'additional_time' => array(
+				'title'       => __( 'Additional Days', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Additional working days to the estimated delivery.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
+				'placeholder' => '0',
+			),
+			'fee' => array(
+				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
+				'type'        => 'price',
+				'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'placeholder' => '0.00',
+				'default'     => '',
+			),
+			'optional_services' => array(
+				'title'       => __( 'Optional Services', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
+				'default'     => '',
+			),
+			'receipt_notice' => array(
+				'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable receipt notice', 'woocommerce-correios' ),
+				'description' => __( 'This controls whether to add costs of the receipt notice service.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
+			),
+			'own_hands' => array(
+				'title'       => __( 'Own Hands', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
+				'description' => __( 'This controls whether to add costs of the own hands service', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
+			),
+			'declare_value' => array(
+				'title'       => __( 'Declare Value for Insurance', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
+				'description' => __( 'This controls if the price of the package must be declared for insurance purposes.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'yes',
+			),
+			'service_options' => array(
+				'title'   => __( 'Service Options', 'woocommerce-correios' ),
+				'type'    => 'title',
+				'default' => '',
+			),
+			'custom_code' => array(
+				'title'       => __( 'Service Code', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Service code, use this for custom codes.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'placeholder' => $this->code,
+				'default'     => '',
+			),
+			'service_type' => array(
+				'title'       => __( 'Service Type', 'woocommerce-correios' ),
+				'type'        => 'select',
+				'description' => __( 'Choose between conventional or corporate service.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'conventional',
+				'class'       => 'wc-enhanced-select',
+				'options'     => array(
+					'conventional' => __( 'Conventional', 'woocommerce-correios' ),
+					'corporate'    => __( 'Corporate', 'woocommerce-correios' ),
+				),
+			),
+			'login' => array(
+				'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
+			'password' => array(
+				'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
+			'package_standard' => array(
+				'title'       => __( 'Package Standard', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
+				'default'     => '',
+			),
+			'minimum_height' => array(
+				'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '2',
+			),
+			'minimum_width' => array(
+				'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '11',
+			),
+			'minimum_length' => array(
+				'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '16',
+			),
+			'testing' => array(
+				'title'   => __( 'Testing', 'woocommerce-correios' ),
+				'type'    => 'title',
+				'default' => '',
+			),
+			'debug' => array(
+				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
+				'default'     => 'no',
+				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
+			),
 		);
 	}
 
