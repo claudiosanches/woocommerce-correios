@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.5
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -199,6 +199,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.0.2 - 2016/06/28 =
+
+- Adicionado novo método de Carta Registrada seguindo a tabela dos Correios e com suporte a classes de entrega.
+
 = 3.0.1 - 2016/06/26 =
 
 - Corrigido o calculo da taxa de manuseio.
@@ -217,7 +221,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.0.1 =
+= 3.0.2 =
 
 - Reformulação geral de todos o código do plugin.
 - Adicionado suporte as áreas de entrega do WooCommerce 2.6.
@@ -228,4 +232,5 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Removida a opção de simulador de frete na página do produto.
 - Integrado o campo de "correios_tracking_code" dos pedidos com a API REST do WooCommerce.
 - Corrigido o calculo da taxa de manuseio.
+- Adicionado método de Carta Registrada seguindo a tabela dos Correios e com suporte a classes de entrega.
 - E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
