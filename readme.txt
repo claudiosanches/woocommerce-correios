@@ -68,7 +68,7 @@ Você pode esclarecer suas dúvidas usando:
 
 = Configurações do plugin: =
 
-[youtube https://www.youtube.com/watch?v=3z9j0NPU_O0]
+[youtube https://www.youtube.com/watch?v=IWjLAy9i--I]
 
 = Configurações dos produtos =
 
