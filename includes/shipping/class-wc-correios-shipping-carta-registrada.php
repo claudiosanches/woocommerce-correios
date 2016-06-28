@@ -254,10 +254,9 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 		$type         = $this->get_type_of_cost();
 		$cost         = 0;
 		$total_weight = 0;
-		$support      = true;
 
 		if ( 'yes' == $this->debug ) {
-			$this->log->add( $this->id, 'Calculing cost for Carta Registrada' );
+			$this->log->add( $this->id, 'Calculating cost for Carta Registrada' );
 		}
 
 		if ( '' === $this->shipping_class ) {
@@ -273,10 +272,13 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 			$qty     = $value['quantity'];
 			$weight  = 0;
 
-			// Check if the item supports this shipping method.
+			// Check if all or some items in the cart don't supports this shipping method.
 			if ( $this->shipping_class !== $product->get_shipping_class() ) {
-				$support = false;
-				break;
+				if ( 'yes' == $this->debug ) {
+					$this->log->add( $this->id, 'One or all items in the cart do not supports the configured shipping class' );
+				}
+
+				return 0;
 			}
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
@@ -288,19 +290,6 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 			}
 
 			$total_weight += $weight;
-		}
-
-		// All or some items in the cart don't supports this shipping method, so abort!
-		if ( ! $support ) {
-			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'One or all items in the cart do not supports the shipping class' );
-			}
-
-			return 0;
-		}
-
-		if ( 'yes' == $this->debug ) {
-			$this->log->add( $this->id, sprintf( 'Total weight: %sg', $total_weight ) );
 		}
 
 		foreach ( $this->get_costs() as $cost_weight => $costs ) {
