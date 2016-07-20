@@ -143,10 +143,10 @@ class WC_Correios_Webservice_International {
 		if ( ! is_null( $package ) ) {
 			$data = $package->get_data();
 
-			$this->set_height( wc_get_dimension( $data['height'], 'mm' ) );
-			$this->set_width( wc_get_dimension( $data['width'], 'mm' ) );
-			$this->set_length( wc_get_dimension( $data['length'], 'mm' ) );
-			$this->set_weight( wc_get_weight( $data['weight'], 'g' ) );
+			$this->set_height( wc_get_dimension( $data['height'], 'mm', 'cm' ) );
+			$this->set_width( wc_get_dimension( $data['width'], 'mm', 'cm' ) );
+			$this->set_length( wc_get_dimension( $data['length'], 'mm', 'cm' ) );
+			$this->set_weight( wc_get_weight( $data['weight'], 'g', 'kg' ) );
 		}
 
 		if ( 'yes' == $this->debug ) {
