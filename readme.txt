@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -199,6 +199,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.0.5 - 2016/07/20 =
+
+- Corrigido o formato das dimensões e peso para os métodos de entrega internacionais.
+
 = 3.0.4 - 2016/07/20 =
 
 - Corrigido o tratamento do XML das métodos internacionais, nos quais os Correios as vezes envia um XML no formato incorreto.
@@ -229,7 +233,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.0.4 =
+= 3.0.5 =
 
 - Reformulação geral de todos o código do plugin.
 - Adicionado suporte as áreas de entrega do WooCommerce 2.6.
