@@ -29,7 +29,7 @@ function wc_correios_safe_load_xml( $source, $options = 0 ) {
 	}
 
 	$dom    = new DOMDocument();
-	$return = $dom->loadXML( $source, $options );
+	$return = $dom->loadXML( trim( $source ), $options );
 
 	if ( ! is_null( $old ) ) {
 		libxml_disable_entity_loader( $old );
