@@ -5,7 +5,7 @@
  * Description: Correios para WooCommerce
  * Author: Claudio Sanches
  * Author URI: http://claudiosmweb.com/
- * Version: 3.0.5
+ * Version: 3.0.6
  * License: GPLv2 or later
  * Text Domain: woocommerce-correios
  * Domain Path: languages/
@@ -29,7 +29,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 *
 		 * @var string
 		 */
-		const VERSION = '3.0.5';
+		const VERSION = '3.0.6';
 
 		/**
 		 * Instance of this class.

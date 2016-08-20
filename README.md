@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.6  
-**Stable tag:** 3.0.5  
+**Stable tag:** 3.0.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -215,6 +215,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.0.6 - 2016/08/20 ###
+
+- Introduzida a função `wc_correios_get_address_by_postcode()`.
+- Removida opção de seguro para métodos internacionais, pois o valor adicionado era o valor do premio do seguro automático.
+- Corrigido e-Sedex para aceitar apenas a opção corporativa.
+
 ### 3.0.5 - 2016/07/20 ###
 
 - Corrigido o formato das dimensões e peso para os métodos de entrega internacionais.
@@ -249,7 +255,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.0.5 ###
+### 3.0.6 ###
 
 - Reformulação geral de todos o código do plugin.
 - Adicionado suporte as áreas de entrega do WooCommerce 2.6.
