@@ -35,14 +35,13 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 		$this->init_form_fields();
 
 		// Define user set variables.
-		$this->enabled             = $this->get_option( 'enabled' );
-		$this->title               = $this->get_option( 'title' );
-		$this->origin_state        = $this->get_option( 'origin_state' );
-		$this->origin_location     = $this->get_option( 'origin_location' );
-		$this->show_delivery_time  = $this->get_option( 'show_delivery_time' );
-		$this->fee                 = $this->get_option( 'fee' );
-		$this->automatic_insurance = $this->get_option( 'automatic_insurance' );
-		$this->debug               = $this->get_option( 'debug' );
+		$this->enabled            = $this->get_option( 'enabled' );
+		$this->title              = $this->get_option( 'title' );
+		$this->origin_state       = $this->get_option( 'origin_state' );
+		$this->origin_location    = $this->get_option( 'origin_location' );
+		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
+		$this->fee                = $this->get_option( 'fee' );
+		$this->debug              = $this->get_option( 'debug' );
 
 		// Save admin options.
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -113,14 +112,6 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 				'type'        => 'title',
 				'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
 				'default'     => '',
-			),
-			'automatic_insurance' => array(
-				'title'       => __( 'Automatic Insurance', 'woocommerce-correios' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable automatic insurance', 'woocommerce-correios' ),
-				'description' => __( 'This controls if need to apply insurance to the order.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
-				'default'     => 'yes',
 			),
 			'testing' => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
@@ -196,10 +187,6 @@ abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {
 			return;
-		}
-
-		if ( 'yes' === $this->automatic_insurance ) {
-			$cost += sanitize_text_field( (float) $shipping->dados_postais->seguro_automatico );
 		}
 
 		// Apply fees.
