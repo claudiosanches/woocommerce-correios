@@ -158,3 +158,14 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 
 	return false;
 }
+
+/**
+ * Get address by postcode.
+ *
+ * @param string $postcode
+ *
+ * @return stdClass
+ */
+function wc_correios_get_address_by_postcode( $postcode ) {
+	return WC_Correios_Autofill_Addresses::get_address( $postcode );
+}
