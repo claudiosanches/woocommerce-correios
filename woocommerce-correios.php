@@ -156,6 +156,8 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
 				$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
 				$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
+				$methods['correios-impresso-normal']      = 'WC_Correios_Shipping_Impresso_Normal';
+				$methods['correios-impresso-urgente']     = 'WC_Correios_Shipping_Impresso_Urgente';
 				$methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
 				$methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
 				$methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';

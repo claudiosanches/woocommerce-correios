@@ -31,6 +31,8 @@ Estão integrados os seguintes serviços:
  - SEDEX Hoje
  - e-SEDEX (necessário conta administrativa nos Correios)
  - Carta Registrada
+ - Impresso Normal
+ - Impresso Urgente
 - Entrega internacional:
  - Mercadoria Expressa
  - Mercadoria Econômica
@@ -102,6 +104,8 @@ São aceitos os seguintes métodos de entrega nacionais:
 - SEDEX Hoje
 - e-SEDEX (necessário conta administrativa nos Correios)
 - Carta Registrada
+- Impresso Normal
+- Impresso Urgente
 
 E os seguintes métodos de entrega internacionais:
 

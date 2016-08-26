@@ -584,6 +584,16 @@ msgstr ""
 msgid "Shipping Class"
 msgstr ""
 
+#: includes/shipping/class-wc-correios-shipping-impresso-normal.php:137
+#: includes/shipping/class-wc-correios-shipping-impresso-urgente.php:121
+msgid "-- Select a registry type --"
+msgstr ""
+
+#: includes/shipping/class-wc-correios-shipping-impresso-normal.php:178
+#: includes/shipping/class-wc-correios-shipping-impresso-urgente.php:162
+msgid "Registry Type"
+msgstr ""
+
 #: includes/shipping/class-wc-correios-shipping-carta-registrada.php:100
 msgid "Select for which shipping class this method will be applied."
 msgstr ""
