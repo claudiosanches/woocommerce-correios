@@ -16,6 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 	/**
+	 * Service code.
+	 * 20010 - Impresso Normal.
+	 *
+	 * @var string
+	 */
+	protected $code = '20010';
+
+	/**
 	 * Additional cost per kg or fraction.
 	 * Cost based in 25/08/2016 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal

@@ -16,6 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping {
 	/**
+	 * Service code.
+	 * 20214 - Impresso Urgente.
+	 *
+	 * @var string
+	 */
+	protected $code = '20214';
+
+	/**
 	 * Weight limit for this shipping method.
 	 * Value based in 25/08/2016 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
