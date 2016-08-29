@@ -198,61 +198,17 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping {
 	 */
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_impresso_urgente_costs', array(
-			'0-20' => array (
-				'MIN'  => 0.000,
-				'MAX'  => 20.000,
-				'COST' => 1.40,
-			),
-			'21-50' => array (
-				'MIN'  => 20.001,
-				'MAX'  => 50.000,
-				'COST' => 1.95,
-			),
-			'51-100' => array (
-				'MIN'  => 50.001,
-				'MAX'  => 100.000,
-				'COST' => 2.60,
-				),
-			'101-150' => array (
-				'MIN'  => 100.001,
-				'MAX'  => 150.000,
-				'COST' => 3.20,
-			),
-			'151-200' => array (
-				'MIN'  => 150.001,
-				'MAX'  => 200.000,
-				'COST' => 3.75,
-			),
-			'201-250' => array (
-				'MIN'  => 200.001,
-				'MAX'  => 250.000,
-				'COST' => 4.40,
-			),
-			'251-300' => array (
-				'MIN'  => 250.001,
-				'MAX'  => 300.000,
-				'COST' => 4.95,
-			),
-			'301-350' => array (
-				'MIN'  => 300.001,
-				'MAX'  => 350.000,
-				'COST' => 5.55,
-			),
-			'351-400' => array (
-				'MIN'  => 350.001,
-				'MAX'  => 400.000,
-				'COST' => 6.05,
-			),
-			'401-450' => array (
-				'MIN'  => 400.001,
-				'MAX'  => 450.000,
-				'COST' => 6.70,
-			),
-			'451-500' => array (
-				'MIN'  => 450.001,
-				'MAX'  => 500.000,
-				'COST' => 7.25,
-			),
+			'20' => 1.40,
+			'50' => 1.95,
+			'100' => 2.60,
+			'150' => 3.20,
+			'200' => 3.75,
+			'250' => 4.40,
+			'300' => 4.95,
+			'350' => 5.55,
+			'400' => 6.05,
+			'450' => 6.70,
+			'500' => 7.25,
 		), $this->id, $this->instance_id );
 	}
 
@@ -306,8 +262,8 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping {
 
 		if ( $total_weight <= self::SHIPPING_METHOD_WEIGHT_LIMIT ) {
 			foreach ( $this->get_costs() as $cost_weights => $costs ) {
-				if ( $total_weight >= $costs[ 'MIN' ] && $total_weight <= $costs[ 'MAX' ] ) {
-					$cost = $costs[ 'COST' ];
+				if ( $total_weight <= $cost_weights ) {
+					$cost = $costs;
 
 					if ( 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
 						$cost += WC_Correios_Shipping::NATIONAL_REGISTRY_COST;

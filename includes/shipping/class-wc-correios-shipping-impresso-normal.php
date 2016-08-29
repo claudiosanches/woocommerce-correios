@@ -206,111 +206,27 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 	 */
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_impresso_normal_costs', array(
-			'0-20' => array (
-				'MIN'  => 0.000,
-				'MAX'  => 20.000,
-				'COST' => 0.95,
-  			),
-  			'21-50' => array (
-				'MIN'  => 20.001,
-				'MAX'  => 50.000,
-				'COST' => 1.45,
-  			),
-  			'51-100' => array (
-				'MIN'  => 50.001,
-				'MAX'  => 100.000,
-				'COST' => 1.95,
-  			),
-  			'101-150' => array (
-				'MIN'  => 100.001,
-				'MAX'  => 150.000,
-				'COST' => 2.35,
-  			),
-  			'151-200' => array (
-				'MIN'  => 150.001,
-				'MAX'  => 200.000,
-				'COST' => 2.75,
-  			),
-  			'201-250' => array (
-				'MIN'  => 200.001,
-				'MAX'  => 250.000,
-				'COST' => 3.20,
-  			),
-  			'251-300' => array (
-				'MIN'  => 250.001,
-				'MAX'  => 300.000,
-				'COST' => 3.65,
-  			),
-  			'301-350' => array (
-				'MIN'  => 300.001,
-				'MAX'  => 350.000,
-				'COST' => 4.05,
-  			),
-  			'351-400' => array (
-				'MIN'  => 350.001,
-				'MAX'  => 400.000,
-				'COST' => 4.50,
-  			),
-  			'401-450' => array (
-				'MIN'  => 400.001,
-				'MAX'  => 450.000,
-				'COST' => 4.95,
-  			),
-  			'451-500' => array (
-				'MIN'  => 450.001,
-				'MAX'  => 500.000,
-				'COST' => 5.40,
-  			),
-  			'501-550' => array (
-				'MIN'  => 500.001,
-				'MAX'  => 550.000,
-				'COST' => 5.75,
-  			),
-  			'551-600' => array (
-				'MIN'  => 550.001,
-				'MAX'  => 600.000,
-				'COST' => 6.15,
-  			),
-  			'601-650' => array (
-				'MIN'  => 600.001,
-				'MAX'  => 650.000,
-				'COST' => 6.55,
-  			),
-  			'651-700' => array (
-				'MIN'  => 650.001,
-				'MAX'  => 700.000,
-				'COST' => 6.90,
-  			),
-  			'701-750' => array (
-				'MIN'  => 700.001,
-				'MAX'  => 750.000,
-				'COST' => 7.25,
-  			),
-  			'751-800' => array (
-				'MIN'  => 750.001,
-				'MAX'  => 800.000,
-				'COST' => 7.65,
-  			),
-  			'801-850' => array (
-				'MIN'  => 800.001,
-				'MAX'  => 850.000,
-				'COST' => 8.05,
-  			),
-  			'851-900' => array (
-				'MIN'  => 850.001,
-				'MAX'  => 900.000,
-				'COST' => 8.50,
-  			),
-  			'901-950' => array (
-				'MIN'  => 900.001,
-				'MAX'  => 950.000,
-				'COST' => 8.85,
-  			),
-  			'951-1000' => array (
-				'MIN'  => 950.001,
-				'MAX'  => 1000.000,
-				'COST' => 9.25,
-			),
+			'20' => 0.95,
+			'50' => 1.45,
+			'100' => 1.95,
+			'150' => 2.35,
+			'200' => 2.75,
+			'250' => 3.20,
+			'300' => 3.65,
+			'350' => 4.05,
+			'400' => 4.50,
+			'450' => 4.95,
+			'500' => 5.40,
+			'550' => 5.75,
+			'600' => 6.15,
+			'650' => 6.55,
+			'700' => 6.90,
+			'750' => 7.25,
+			'800' => 7.65,
+			'850' => 8.05,
+			'900' => 8.50,
+			'950' => 8.85,
+			'1000' => 9.25,
 		), $this->id, $this->instance_id );
 	}
 
@@ -377,8 +293,8 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 			}
 
 			foreach ( $this->get_costs() as $cost_weights => $costs ) {
-				if ( $additional_weight_gs >= $costs[ 'MIN' ] && $additional_weight_gs <= $costs[ 'MAX' ] ) {
-					$cost = $costs[ 'COST' ];
+				if ( $additional_weight_gs <= $cost_weights ) {
+					$cost = $costs;
 
 					if ( $additional_weight_kgs > 0 ) {
 						$cost += $additional_weight_kgs * self::ADDITIONAL_COST_PER_KG;
