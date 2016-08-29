@@ -16,52 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 	/**
-	 * National Registry cost.
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
-	 *
-	 */
-	const NATIONAL_REGISTRY_COST = 4.30;
-
-	/**
-	 * Reasonable Registry cost.
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
-	 *
-	 */
-	const REASONABLE_REGISTRY_COST = 2.15;
-
-	/**
-	 * Receipt Notice cost.
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
-	 *
-	 */
-	const RECEIPT_NOTICE_COST = 4.30;
-
-	/**
-	 * Own Hands cost.
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
-	 *
-	 */
-	const OWN_HANDS_COST = 5.50;
-
-	/**
 	 * Additional cost per kg or fraction.
 	 * Cost based in 25/08/2016 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
 	 *
 	 */
 	const ADDITIONAL_COST_PER_KG = 3.70;
-
-	/**
-	 * Weight limit for reasonable registry.
-	 * Value based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
-	 *
-	 */
-	const REASONABLE_REGISTRY_WEIGHT_LIMIT = 500.000;
 
 	/**
 	 * Weight limit for this shipping method.
@@ -416,18 +376,18 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 						$cost += $additional_weight_kgs * self::ADDITIONAL_COST_PER_KG;
 					}
 
-					if ( $total_weight > self::REASONABLE_REGISTRY_WEIGHT_LIMIT || 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
-						$cost += self::NATIONAL_REGISTRY_COST;
+					if ( $total_weight > WC_Correios_Shipping::REASONABLE_REGISTRY_WEIGHT_LIMIT || 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
+						$cost += WC_Correios_Shipping::NATIONAL_REGISTRY_COST;
 					} else {
-						$cost += self::REASONABLE_REGISTRY_COST;
+						$cost += WC_Correios_Shipping::REASONABLE_REGISTRY_COST;
 					}
 
 					if ( 'yes' === $this->receipt_notice ) {
-						$cost += self::RECEIPT_NOTICE_COST;
+						$cost += WC_Correios_Shipping::RECEIPT_NOTICE_COST;
 					}
 
 					if ( 'yes' === $this->own_hands ) {
-						$cost += self::OWN_HANDS_COST;
+						$cost += WC_Correios_Shipping::OWN_HANDS_COST;
 					}
 
 					break;
