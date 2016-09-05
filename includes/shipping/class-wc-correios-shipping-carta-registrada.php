@@ -15,6 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Carta Registrada shipping method class.
  */
 class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
+	/**
+	 * Service code.
+	 * 10014 - Carta Registrada.
+	 *
+	 * @var string
+	 */
+	protected $code = '10014';
 
 	/**
 	 * Initialize Carta Registrada.
