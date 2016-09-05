@@ -39,8 +39,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$this->service_sedex_10         = $this->get_option( 'service_sedex_10' );
 		$this->service_sedex_hoje       = $this->get_option( 'service_sedex_hoje' );
 		$this->service_esedex           = $this->get_option( 'service_esedex' );
-		$this->service_impresso_normal  = $this->get_option( 'service_impresso_normal' );
-		$this->service_impresso_urgente = $this->get_option( 'service_impresso_urgente' );
 		$this->minimum_height           = $this->get_option( 'minimum_height' );
 		$this->minimum_width            = $this->get_option( 'minimum_width' );
 		$this->minimum_length           = $this->get_option( 'minimum_length' );
@@ -195,22 +193,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'desc_tip'         => true,
 				'default'          => 'no',
 			),
-			'service_impresso_normal' => array(
-				'title'            => __( 'Impresso Normal', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'woocommerce-correios' ),
-				'description'      => __( 'Shipping via Impresso Normal.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'default'          => 'no',
-			),
-			'service_impresso_urgente' => array(
-				'title'            => __( 'Impresso Urgente', 'woocommerce-correios' ),
-				'type'             => 'checkbox',
-				'label'            => __( 'Enable', 'woocommerce-correios' ),
-				'description'      => __( 'Shipping via Impresso Urgente.', 'woocommerce-correios' ),
-				'desc_tip'         => true,
-				'default'          => 'no',
-			),
 			'package_standard' => array(
 				'title'            => __( 'Package Standard', 'woocommerce-correios' ),
 				'type'             => 'title',
@@ -290,8 +272,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40010' : '';
 		$services['SEDEX 10'] = ( 'yes' == $this->service_sedex_10 ) ? '40215' : '';
 		$services['SEDEX Hoje'] = ( 'yes' == $this->service_sedex_hoje ) ? '40290' : '';
-		$services['Impresso Normal'] = ( 'yes' == $this->service_impresso_normal ) ? '20010' : '';
-		$services['Impresso Urgente'] = ( 'yes' == $this->service_impresso_urgente ) ? '20214' : '';
 
 		if ( 'corporate' == $this->corporate_service ) {
 			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '41068' : '';
@@ -374,8 +354,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 			'41068' => 'PAC',
 			'40096' => 'SEDEX',
 			'81019' => 'e-SEDEX',
-			'20010' => 'Impresso Normal',
-			'20214' => 'Impresso Urgente',
 		);
 
 		return isset( $name[ $code ] ) ? $name[ $code ] : '';

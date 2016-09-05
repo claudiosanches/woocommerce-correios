@@ -14,15 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Impresso Urgente shipping method class.
  */
-class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping {
-	/**
-	 * Service code.
-	 * 20214 - Impresso Urgente.
-	 *
-	 * @var string
-	 */
-	protected $code = '20214';
-
+class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_National_Shipping {
 	/**
 	 * Weight limit for this shipping method.
 	 * Value based in 25/08/2016 from:
@@ -266,17 +258,17 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping {
 					$cost = $costs;
 
 					if ( 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
-						$cost += WC_Correios_Shipping::NATIONAL_REGISTRY_COST;
+						$cost += WC_Correios_National_Shipping::NATIONAL_REGISTRY_COST;
 					} else {
-						$cost += WC_Correios_Shipping::REASONABLE_REGISTRY_COST;
+						$cost += WC_Correios_National_Shipping::REASONABLE_REGISTRY_COST;
 					}
 
 					if ( 'yes' === $this->receipt_notice ) {
-						$cost += WC_Correios_Shipping::RECEIPT_NOTICE_COST;
+						$cost += WC_Correios_National_Shipping::RECEIPT_NOTICE_COST;
 					}
 
 					if ( 'yes' === $this->own_hands ) {
-						$cost += WC_Correios_Shipping::OWN_HANDS_COST;
+						$cost += WC_Correios_National_Shipping::OWN_HANDS_COST;
 					}
 
 					break;

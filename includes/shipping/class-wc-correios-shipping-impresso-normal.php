@@ -14,15 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Impresso Normal shipping method class.
  */
-class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
-	/**
-	 * Service code.
-	 * 20010 - Impresso Normal.
-	 *
-	 * @var string
-	 */
-	protected $code = '20010';
-
+class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_National_Shipping {
 	/**
 	 * Additional cost per kg or fraction.
 	 * Cost based in 25/08/2016 from:
@@ -300,18 +292,18 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping {
 						$cost += $additional_weight_kgs * self::ADDITIONAL_COST_PER_KG;
 					}
 
-					if ( $total_weight > WC_Correios_Shipping::REASONABLE_REGISTRY_WEIGHT_LIMIT || 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
-						$cost += WC_Correios_Shipping::NATIONAL_REGISTRY_COST;
+					if ( $total_weight > WC_Correios_National_Shipping::REASONABLE_REGISTRY_WEIGHT_LIMIT || 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
+						$cost += WC_Correios_National_Shipping::NATIONAL_REGISTRY_COST;
 					} else {
-						$cost += WC_Correios_Shipping::REASONABLE_REGISTRY_COST;
+						$cost += WC_Correios_National_Shipping::REASONABLE_REGISTRY_COST;
 					}
 
 					if ( 'yes' === $this->receipt_notice ) {
-						$cost += WC_Correios_Shipping::RECEIPT_NOTICE_COST;
+						$cost += WC_Correios_National_Shipping::RECEIPT_NOTICE_COST;
 					}
 
 					if ( 'yes' === $this->own_hands ) {
-						$cost += WC_Correios_Shipping::OWN_HANDS_COST;
+						$cost += WC_Correios_National_Shipping::OWN_HANDS_COST;
 					}
 
 					break;

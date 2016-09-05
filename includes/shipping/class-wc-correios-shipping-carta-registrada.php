@@ -15,13 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Carta Registrada shipping method class.
  */
 class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
-	/**
-	 * Service code.
-	 * 10014 - Carta Registrada.
-	 *
-	 * @var string
-	 */
-	protected $code = '10014';
 
 	/**
 	 * Initialize Carta Registrada.
@@ -157,7 +150,7 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 
 	/**
 	 * Get costs.
-	 * Costs based in 29/08/2016 from:
+	 * Costs based in 14/12/2015 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/carta
 	 *
 	 * @return array
@@ -165,70 +158,70 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping {
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_carta_registrada_costs', array(
 			'20'  => array(
-				'R'     => '6.00',
-				'AR'    => '10.30',
-				'MP'    => '11.50',
-				'AR+MP' => '15.80',
+				'R'     => '5.40',
+				'AR'    => '9.30',
+				'MP'    => '10.40',
+				'AR+MP' => '14.30',
 			),
 			'50'  => array(
-				'R'     => '6.65',
-				'AR'    => '10.95',
-				'MP'    => '12.15',
-				'AR+MP' => '16.45',
+				'R'     => '6.00',
+				'AR'    => '9.90',
+				'MP'    => '11.00',
+				'AR+MP' => '14.90',
 			),
-			'100'  => array(
-				'R'     => '7.55',
-				'AR'    => '11.85',
-				'MP'    => '13.05',
-				'AR+MP' => '17.35',
+			'100' => array(
+				'R'     => '6.85',
+				'AR'    => '10.75',
+				'MP'    => '11.85',
+				'AR+MP' => '15.75',
 			),
-			'150'  => array(
-				'R'     => '8.30',
-				'AR'    => '12.60',
+			'150' => array(
+				'R'     => '7.50',
+				'AR'    => '11.40',
+				'MP'    => '12.50',
+				'AR+MP' => '16.40',
+			),
+			'200' => array(
+				'R'     => '8.15',
+				'AR'    => '12.05',
+				'MP'    => '13.15',
+				'AR+MP' => '17.05',
+			),
+			'250' => array(
+				'R'     => '8.80',
+				'AR'    => '12.70',
 				'MP'    => '13.80',
-				'AR+MP' => '18.10',
+				'AR+MP' => '17.70',
 			),
-			'200'  => array(
-				'R'     => '9.00',
-				'AR'    => '13.30',
+			'300' => array(
+				'R'     => '9.50',
+				'AR'    => '13.40',
 				'MP'    => '14.50',
-				'AR+MP' => '18.80',
+				'AR+MP' => '18.40',
 			),
-			'250'  => array(
-				'R'     => '9.70',
-				'AR'    => '14.00',
-				'MP'    => '15.20',
-				'AR+MP' => '19.50',
+			'350' => array(
+				'R'     => '10.15',
+				'AR'    => '14.05',
+				'MP'    => '15.15',
+				'AR+MP' => '19.05',
 			),
-			'300'  => array(
-				'R'     => '10.50',
-				'AR'    => '14.80',
-				'MP'    => '16.00',
-				'AR+MP' => '20.30',
+			'400' => array(
+				'R'     => '10.80',
+				'AR'    => '14.70',
+				'MP'    => '15.80',
+				'AR+MP' => '19.70',
 			),
-			'350'  => array(
-				'R'     => '11.25',
-				'AR'    => '15.55',
-				'MP'    => '16.75',
-				'AR+MP' => '21.05',
+			'450' => array(
+				'R'     => '11.45',
+				'AR'    => '15.35',
+				'MP'    => '16.45',
+				'AR+MP' => '20.35',
 			),
-			'400'  => array(
-				'R'     => '11.95',
-				'AR'    => '16.25',
-				'MP'    => '17.45',
-				'AR+MP' => '21.75',
-			),
-			'450'  => array(
-				'R'     => '12.65',
-				'AR'    => '16.95',
-				'MP'    => '18.15',
-				'AR+MP' => '22.45',
-			),
-			'500'  => array(
-				'R'     => '13.40',
-				'AR'    => '17.70',
-				'MP'    => '18.90',
-				'AR+MP' => '23.20',
+			'500' => array(
+				'R'     => '12.10',
+				'AR'    => '16.00',
+				'MP'    => '17.10',
+				'AR+MP' => '21.00',
 			),
 		), $this->id, $this->instance_id );
 	}
