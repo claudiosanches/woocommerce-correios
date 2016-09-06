@@ -24,25 +24,25 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->enabled                  = $this->get_option( 'enabled' );
-		$this->title                    = $this->get_option( 'title' );
-		$this->declare_value            = $this->get_option( 'declare_value' );
-		$this->display_date             = $this->get_option( 'display_date' );
-		$this->additional_time          = $this->get_option( 'additional_time' );
-		$this->fee                      = $this->get_option( 'fee' );
-		$this->zip_origin               = $this->get_option( 'zip_origin' );
-		$this->corporate_service        = $this->get_option( 'corporate_service' );
-		$this->login                    = $this->get_option( 'login' );
-		$this->password                 = $this->get_option( 'password' );
-		$this->service_pac              = $this->get_option( 'service_pac' );
-		$this->service_sedex            = $this->get_option( 'service_sedex' );
-		$this->service_sedex_10         = $this->get_option( 'service_sedex_10' );
-		$this->service_sedex_hoje       = $this->get_option( 'service_sedex_hoje' );
-		$this->service_esedex           = $this->get_option( 'service_esedex' );
-		$this->minimum_height           = $this->get_option( 'minimum_height' );
-		$this->minimum_width            = $this->get_option( 'minimum_width' );
-		$this->minimum_length           = $this->get_option( 'minimum_length' );
-		$this->debug                    = $this->get_option( 'debug' );
+		$this->enabled            = $this->get_option( 'enabled' );
+		$this->title              = $this->get_option( 'title' );
+		$this->declare_value      = $this->get_option( 'declare_value' );
+		$this->display_date       = $this->get_option( 'display_date' );
+		$this->additional_time    = $this->get_option( 'additional_time' );
+		$this->fee                = $this->get_option( 'fee' );
+		$this->zip_origin         = $this->get_option( 'zip_origin' );
+		$this->corporate_service  = $this->get_option( 'corporate_service' );
+		$this->login              = $this->get_option( 'login' );
+		$this->password           = $this->get_option( 'password' );
+		$this->service_pac        = $this->get_option( 'service_pac' );
+		$this->service_sedex      = $this->get_option( 'service_sedex' );
+		$this->service_sedex_10   = $this->get_option( 'service_sedex_10' );
+		$this->service_sedex_hoje = $this->get_option( 'service_sedex_hoje' );
+		$this->service_esedex     = $this->get_option( 'service_esedex' );
+		$this->minimum_height     = $this->get_option( 'minimum_height' );
+		$this->minimum_width      = $this->get_option( 'minimum_width' );
+		$this->minimum_length     = $this->get_option( 'minimum_length' );
+		$this->debug              = $this->get_option( 'debug' );
 
 		// Method variables.
 		$this->availability       = 'specific';
