@@ -120,7 +120,7 @@ class WC_Correios_Webservice_International {
 	public function __construct( $id = 'correios', $instance_id = 0 ) {
 		$this->id           = $id;
 		$this->instance_id  = $instance_id;
-		$this->log = new WC_Logger();
+		$this->log          = new WC_Logger();
 	}
 
 	/**

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * This is a abstract method with default options for all methods.
  */
-abstract class WC_Correios_International_Shipping extends WC_Correios_Shipping {
+abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 
 	/**
 	 * Initialize the Correios shipping method.
