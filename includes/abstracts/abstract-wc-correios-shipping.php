@@ -404,7 +404,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$error_number = (string) $shipping->Erro;
 
 		// Exit if have errors.
-		if ( ! in_array( $error_number, $this->get_accepted_error_codes() ) ) {
+		if ( ! in_array( $error_number, $this->get_accepted_error_codes(), true ) ) {
 			return;
 		}
 
