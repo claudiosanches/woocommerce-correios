@@ -100,6 +100,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			// Shipping methods.
 			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
 				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping.php';
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-national-shipping.php';
 				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-international-shipping.php';
 				foreach ( glob( plugin_dir_path( __FILE__ ) . '/includes/shipping/*.php' ) as $filename ) {
 					include_once $filename;
@@ -156,6 +157,8 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
 				$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
 				$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
+				$methods['correios-impresso-normal']      = 'WC_Correios_Shipping_Impresso_Normal';
+				$methods['correios-impresso-urgente']     = 'WC_Correios_Shipping_Impresso_Urgente';
 				$methods['correios-mercadoria-expressa']  = 'WC_Correios_Shipping_Mercadoria_Expressa';
 				$methods['correios-mercadoria-economica'] = 'WC_Correios_Shipping_Mercadoria_Economica';
 				$methods['correios-leve-internacional']   = 'WC_Correios_Shipping_Leve_Internacional';

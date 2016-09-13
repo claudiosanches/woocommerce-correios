@@ -17,7 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This is a abstract method with default options for all methods.
  */
 abstract class WC_Correios_Shipping extends WC_Shipping_Method {
-
 	/**
 	 * Service code.
 	 *
