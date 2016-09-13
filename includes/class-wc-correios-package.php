@@ -111,10 +111,11 @@ class WC_Correios_Package {
 	 */
 	protected function cubage_total( $height, $width, $length ) {
 		// Sets the cubage of all products.
-		$all   = array();
-		$total = 0;
+		$all         = array();
+		$total       = 0;
+		$total_items = count( $height );
 
-		for ( $i = 0; $i < count( $height ); $i++ ) {
+		for ( $i = 0; $i < $total_items; $i++ ) {
 			$all[ $i ] = $height[ $i ] * $width[ $i ] * $length[ $i ];
 		}
 
@@ -158,7 +159,7 @@ class WC_Correios_Package {
 		$cubage_total = $this->cubage_total( $height, $width, $length );
 		$root        = 0;
 
-		if ( 0 != $cubage_total ) {
+		if ( 0 !== $cubage_total ) {
 			// Dividing the value of scaling of all products.
 			// With the measured value of greater.
 			$division = $cubage_total / max( $max_values );
@@ -182,7 +183,7 @@ class WC_Correios_Package {
 		$cubage     = array();
 		$max_values = $this->get_max_values( $height, $width, $length );
 		$root       = $this->calculate_root( $height, $width, $length, $max_values );
-		$greatest   = array_search( max( $max_values ), $max_values );
+		$greatest   = array_search( max( $max_values ), $max_values, true );
 
 		switch ( $greatest ) {
 			case 'height' :

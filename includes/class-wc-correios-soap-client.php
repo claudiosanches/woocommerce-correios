@@ -19,7 +19,7 @@ class WC_Correios_Soap_Client extends SoapClient {
 	/**
 	 * SoapClient construct.
 	 *
-	 * @param mixed $wsdl
+	 * @param mixed $wsdl WSDL URL.
 	 */
 	public function __construct( $wsdl ) {
 		parent::__construct( $wsdl, array(

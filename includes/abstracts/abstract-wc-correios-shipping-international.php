@@ -167,7 +167,7 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		$api = new WC_Correios_Webservice_International( $this->id, $this->instance_id );
 
 		// Check if valid to be calculeted.
-		if ( ! in_array( $package['destination']['country'], $api->get_allowed_countries() ) ) {
+		if ( ! in_array( $package['destination']['country'], $api->get_allowed_countries(), true ) ) {
 			return;
 		}
 
@@ -179,7 +179,7 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 
 		// Set the shipping rates.
 		$label = $this->title;
-		if ( 'yes' == $this->show_delivery_time ) {
+		if ( 'yes' === $this->show_delivery_time ) {
 			$label .= ' (' . sanitize_text_field( (string) $shipping->dados_postais->prazo_entrega ) . ')';
 		}
 		$cost = sanitize_text_field( (float) $shipping->dados_postais->preco_postal );

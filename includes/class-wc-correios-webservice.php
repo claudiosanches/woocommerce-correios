@@ -177,8 +177,8 @@ class WC_Correios_Webservice {
 	/**
 	 * Initialize webservice.
 	 *
-	 * @param string $id
-	 * @param int    $instance_id
+	 * @param string $id Method ID.
+	 * @param int    $instance_id Instance ID.
 	 */
 	public function __construct( $id = 'correios', $instance_id = 0 ) {
 		$this->id           = $id;
@@ -189,7 +189,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set the service
 	 *
-	 * @param string|array $service
+	 * @param string|array $service Service.
 	 */
 	public function set_service( $service = '' ) {
 		if ( is_array( $service ) ) {
@@ -202,7 +202,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package.
 	 *
-	 * @param array $package
+	 * @param array $package Shipping package.
 	 */
 	public function set_package( $package = array() ) {
 		$package = new WC_Correios_Package( $package );
@@ -216,7 +216,7 @@ class WC_Correios_Webservice {
 			$this->set_weight( $data['weight'] );
 		}
 
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			if ( ! empty( $data ) ) {
 				$data = array(
 					'weight' => $this->get_weight(),
@@ -233,7 +233,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set origin postcode.
 	 *
-	 * @param string $postcode
+	 * @param string $postcode Origin postcode.
 	 */
 	public function set_origin_postcode( $postcode = '' ) {
 		$this->origin_postcode = $postcode;
@@ -242,7 +242,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set destination postcode.
 	 *
-	 * @param string $postcode
+	 * @param string $postcode Destination postcode.
 	 */
 	public function set_destination_postcode( $postcode = '' ) {
 		$this->destination_postcode = $postcode;
@@ -251,7 +251,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set login.
 	 *
-	 * @param string $login
+	 * @param string $login User login.
 	 */
 	public function set_login( $login = '' ) {
 		$this->login = $login;
@@ -260,7 +260,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set password.
 	 *
-	 * @param string $password
+	 * @param string $password User login.
 	 */
 	public function set_password( $password = '' ) {
 		$this->password = $password;
@@ -269,7 +269,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package height.
 	 *
-	 * @param float $height
+	 * @param float $height Package height.
 	 */
 	public function set_height( $height = 0 ) {
 		$this->height = (float) $height;
@@ -278,7 +278,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package width.
 	 *
-	 * @param float $width
+	 * @param float $width Package width.
 	 */
 	public function set_width( $width = 0 ) {
 		$this->width = (float) $width;
@@ -287,7 +287,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package diameter.
 	 *
-	 * @param float $diameter
+	 * @param float $diameter Package diameter.
 	 */
 	public function set_diameter( $diameter = 0 ) {
 		$this->diameter = (float) $diameter;
@@ -296,7 +296,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package length.
 	 *
-	 * @param float $length
+	 * @param float $length Package length.
 	 */
 	public function set_length( $length = 0 ) {
 		$this->length = (float) $length;
@@ -305,7 +305,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set shipping package weight.
 	 *
-	 * @param float $weight
+	 * @param float $weight Package weight.
 	 */
 	public function set_weight( $weight = 0 ) {
 		$this->weight = (float) $weight;
@@ -314,7 +314,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set minimum height.
 	 *
-	 * @param float $minimum_height
+	 * @param float $minimum_height Package minimum height.
 	 */
 	public function set_minimum_height( $minimum_height = 2 ) {
 		$this->minimum_height = 2 <= $minimum_height ? $minimum_height : 2;
@@ -323,7 +323,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set minimum width.
 	 *
-	 * @param float $minimum_width
+	 * @param float $minimum_width Package minimum width.
 	 */
 	public function set_minimum_width( $minimum_width = 11 ) {
 		$this->minimum_width = 11 <= $minimum_width ? $minimum_width : 11;
@@ -332,7 +332,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set minimum length.
 	 *
-	 * @param float $minimum_length
+	 * @param float $minimum_length Package minimum length.
 	 */
 	public function set_minimum_length( $minimum_length = 16 ) {
 		$this->minimum_length = 16 <= $minimum_length ? $minimum_length : 16;
@@ -341,7 +341,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set declared value.
 	 *
-	 * @param string $declared_value
+	 * @param string $declared_value Declared value.
 	 */
 	public function set_declared_value( $declared_value = '0' ) {
 		$this->declared_value = $declared_value;
@@ -350,7 +350,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set own hands.
 	 *
-	 * @param string $own_hands
+	 * @param string $own_hands Use 'N' for no and 'S' for yes.
 	 */
 	public function set_own_hands( $own_hands = 'N' ) {
 		$this->own_hands = $own_hands;
@@ -359,7 +359,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Set receipt notice.
 	 *
-	 * @param string $receipt_notice
+	 * @param string $receipt_notice Use 'N' for no and 'S' for yes.
 	 */
 	public function set_receipt_notice( $receipt_notice = 'N' ) {
 		$this->receipt_notice = $receipt_notice;
@@ -520,7 +520,7 @@ class WC_Correios_Webservice {
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
 
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Requesting Correios WebServices: ' . $url );
 		}
 
@@ -528,27 +528,27 @@ class WC_Correios_Webservice {
 		$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 			}
 		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {
 				$result = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
 			} catch ( Exception $e ) {
-				if ( 'yes' == $this->debug ) {
+				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
 				}
 			}
 
 			if ( isset( $result->cServico ) ) {
-				if ( 'yes' == $this->debug ) {
+				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
 
 				$shipping = $result->cServico;
 			}
 		} else {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 			}
 		}

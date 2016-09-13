@@ -163,7 +163,7 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 /**
  * Get address by postcode.
  *
- * @param string $postcode
+ * @param string $postcode Postcode.
  *
  * @return stdClass
  */

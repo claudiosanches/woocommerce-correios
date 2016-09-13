@@ -168,7 +168,6 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			return;
 		}
 
-
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 

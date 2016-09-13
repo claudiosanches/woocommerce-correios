@@ -39,7 +39,7 @@ class WC_Correios_Integration extends WC_Integration {
 		$this->autofill_debug          = $this->get_option( 'autofill_debug' );
 
 		// Actions.
-		add_action( 'woocommerce_update_options_integration_' .  $this->id, array( $this, 'process_admin_options' ) );
+		add_action( 'woocommerce_update_options_integration_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		// Tracking history actions.
 		add_filter( 'woocommerce_correios_enable_tracking_history', array( $this, 'setup_tracking_history' ), 10 );
