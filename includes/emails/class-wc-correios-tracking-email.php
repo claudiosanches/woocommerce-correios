@@ -140,7 +140,12 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * @param  WC_Order $order         Order data.
 	 * @param  string   $tracking_code Tracking code.
 	 */
-	public function trigger( $order, $tracking_code ) {
+	public function trigger( $order, $tracking_code = '' ) {
+		// Get the order object while resending emails.
+		if ( is_numeric( $order ) ) {
+			$order = wc_get_order( $order );
+		}
+
 		if ( is_object( $order ) ) {
 			$this->object    = $order;
 			$this->recipient = $this->object->billing_email;
@@ -151,6 +156,10 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			$this->find[]    = '{date}';
 			$this->replace[] = date_i18n( wc_date_format(), time() );
 
+			if ( empty( $tracking_code ) ) {
+				$tracking_code = get_post_meta( $this->object->id, '_correios_tracking_code', true );
+			}
+
 			$this->find[]    = '{tracking_code}';
 			$this->replace[] = $this->get_tracking_code_url( $tracking_code );
 		}
@@ -158,6 +167,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		if ( ! $this->get_recipient() ) {
 			return;
 		}
+
 
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}

@@ -22,6 +22,7 @@ class WC_Correios_Admin_Orders {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
 		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_tracking_code' ) );
+		add_filter( 'woocommerce_resend_order_emails_available', array( $this, 'resend_tracking_code_email' ) );
 	}
 
 	/**
@@ -61,6 +62,19 @@ class WC_Correios_Admin_Orders {
 		if ( isset( $_POST['correios_tracking'] ) ) {
 			wc_correios_update_tracking_code( $post_id, wp_unslash( $_POST['correios_tracking'] ) );
 		}
+	}
+
+	/**
+	 * Include option to resend the tracking code email.
+	 *
+	 * @param array $emails List of emails.
+	 *
+	 * @return array
+	 */
+	public function resend_tracking_code_email( $emails ) {
+		$emails[] = 'correios_tracking';
+
+		return $emails;
 	}
 }
 
