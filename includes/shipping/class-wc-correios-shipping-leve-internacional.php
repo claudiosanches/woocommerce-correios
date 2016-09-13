@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_Shipping_Inter
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-leve-internacional';
-		$this->method_title = __( 'Leve Internacional', 'woocommerce-correios' ) . ' ' . __( '(beta)', 'woocommerce-correios' );
+		$this->method_title = __( 'Leve Internacional', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );
