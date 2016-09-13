@@ -105,6 +105,7 @@ function wc_correios_get_error_message( $code ) {
 	$messages = apply_filters( 'woocommerce_correios_available_error_messages', array(
 		'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
 		'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
+		'008' => __( 'Service unavailable to the informed route.', 'woocommerce-correios' ),
 		'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
 	) );
 
