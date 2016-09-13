@@ -67,7 +67,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 */
 		public static function get_instance() {
 			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
+			if ( null === self::$instance ) {
 				self::$instance = new self;
 			}
 
@@ -100,8 +100,9 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 			// Shipping methods.
 			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
 				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping.php';
-				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-national-shipping.php';
-				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-international-shipping.php';
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping-carta.php';
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping-impresso.php';
+				include_once dirname( __FILE__ ) . '/includes/abstracts/abstract-wc-correios-shipping-international.php';
 				foreach ( glob( plugin_dir_path( __FILE__ ) . '/includes/shipping/*.php' ) as $filename ) {
 					include_once $filename;
 				}
