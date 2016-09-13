@@ -114,13 +114,13 @@ class WC_Correios_Webservice_International {
 	/**
 	 * Initialize webservice.
 	 *
-	 * @param string $id
-	 * @param int    $instance_id
+	 * @param string $id Method ID.
+	 * @param int    $instance_id Instance ID.
 	 */
 	public function __construct( $id = 'correios', $instance_id = 0 ) {
 		$this->id           = $id;
 		$this->instance_id  = $instance_id;
-		$this->log = new WC_Logger();
+		$this->log          = new WC_Logger();
 	}
 
 	/**
@@ -149,7 +149,7 @@ class WC_Correios_Webservice_International {
 			$this->set_weight( wc_get_weight( $data['weight'], 'g', 'kg' ) );
 		}
 
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			if ( ! empty( $data ) ) {
 				$data = array(
 					'weight' => $this->get_weight(),
@@ -614,7 +614,7 @@ class WC_Correios_Webservice_International {
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
 
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Requesting Correios WebServices: ' . $url );
 		}
 
@@ -622,27 +622,27 @@ class WC_Correios_Webservice_International {
 		$response = wp_safe_remote_get( $url, array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 			}
 		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {
 				$result = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
 			} catch ( Exception $e ) {
-				if ( 'yes' == $this->debug ) {
+				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
 				}
 			}
 
 			if ( isset( $result->tipo_servico ) ) {
-				if ( 'yes' == $this->debug ) {
+				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
 
 				$shipping = $result->tipo_servico;
 			}
 		} else {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 			}
 		}

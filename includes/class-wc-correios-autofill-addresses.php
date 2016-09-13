@@ -89,7 +89,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Get address by postcode.
 	 *
-	 * @param string $postcode
+	 * @param string $postcode Address postcode.
 	 *
 	 * @return stdClass
 	 */
@@ -126,7 +126,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Check if postcode is expired.
 	 *
-	 * @param string $last_query
+	 * @param string $last_query Date of the last query.
 	 * @return bool
 	 */
 	protected static function check_if_expired( $last_query ) {
@@ -142,7 +142,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Insert an address.
 	 *
-	 * @param array $address
+	 * @param array $address Address data to save.
 	 *
 	 * @return bool
 	 */
@@ -171,6 +171,8 @@ class WC_Correios_Autofill_Addresses {
 
 	/**
 	 * Delete an address from database.
+	 *
+	 * @param string $postcode Address postcode.
 	 */
 	protected static function delete_address( $postcode ) {
 		global $wpdb;
@@ -181,7 +183,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Update an address.
 	 *
-	 * @param array $address
+	 * @param array $address Address data.
 	 *
 	 * @return bool
 	 */
@@ -194,7 +196,7 @@ class WC_Correios_Autofill_Addresses {
 	/**
 	 * Fetch an address from Correios Webservices.
 	 *
-	 * @param string $postcode
+	 * @param string $postcode Address postcode.
 	 * @return stdClass
 	 */
 	protected static function fetch_address( $postcode ) {
@@ -256,7 +258,7 @@ class WC_Correios_Autofill_Addresses {
 			exit;
 		}
 
-		$postcode = wc_correios_sanitize_postcode( $_GET['postcode'] );
+		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) );
 
 		if ( empty( $postcode ) || 8 !== strlen( $postcode ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );

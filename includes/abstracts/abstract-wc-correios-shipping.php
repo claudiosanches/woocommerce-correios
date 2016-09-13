@@ -362,7 +362,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return array
 	 */
 	protected function get_accepted_error_codes() {
-		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '010' ) );
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '008', '010' ) );
 		$codes[] = '0';
 
 		return $codes;
@@ -377,7 +377,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return string
 	 */
 	protected function get_shipping_method_label( $days, $package ) {
-		if ( 'yes' == $this->show_delivery_time ) {
+		if ( 'yes' === $this->show_delivery_time ) {
 			return wc_correios_get_estimating_delivery( $this->title, $days, $this->get_additional_time( $package ) );
 		}
 
@@ -404,15 +404,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$error_number = (string) $shipping->Erro;
 
 		// Exit if have errors.
-		if ( ! in_array( $error_number, $this->get_accepted_error_codes() ) ) {
+		if ( ! in_array( $error_number, $this->get_accepted_error_codes(), true ) ) {
 			return;
 		}
 
 		// Display Correios errors.
 		$error_message = wc_correios_get_error_message( $error_number );
-		if ( '' != $error_message ) {
-			$notice_type = ( '010' == $error_number ) ? 'notice' : 'error';
-			$notice      = '<strong>' . __( $this->title, 'woocommerce-correios' ) . ':</strong> ' . esc_html( $error_message );
+		if ( '' !== $error_message ) {
+			$notice_type = ( '010' === $error_number ) ? 'notice' : 'error';
+			$notice      = '<strong>' . $this->title . ':</strong> ' . esc_html( $error_message );
 			wc_add_notice( $notice, $notice_type );
 		}
 

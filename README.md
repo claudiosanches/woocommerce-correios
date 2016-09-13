@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.6  
-**Stable tag:** 3.0.6  
+**Stable tag:** 3.1.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -219,6 +219,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.1.0 - 2016/09/13 ###
+
+- Adicionado os métodos Impresso Normal e Impresso Urgente (obrigado a [@jckronbauer](https://github.com/jckronbauer)).
+- Adicionada opção para enviar novamente e-mail do código de rastreio.
+- Adicionada mensagem de erro quando serviço é indisponível no trecho informado.
+
 ### 3.0.6 - 2016/08/20 ###
 
 - Introduzida a função `wc_correios_get_address_by_postcode()`.
@@ -259,13 +265,9 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.0.6 ###
+### 3.1.0 ###
 
-- Reformulação geral de todos o código do plugin.
-- Adicionado suporte as áreas de entrega do WooCommerce 2.6.
-- Adicionado os métodos de SEDEX 10 Envelope, SEDEX 12, Carta Registrada, Mercadoria Expressa, Mercadoria Econômica e Leve Internacional.
-- Adicionado novo menu de "integrações".
-- Adicionada integração com o serviço de consulta de CEP e assim adicionando uma opção para autopreencher endereços com base no CEP.
-- Atualizada a integração com o sistema que gera o histórico de rastreamento do pedido.
-- Removida a opção de simulador de frete na página do produto.
+- Adicionado os métodos Impresso Normal e Impresso Urgente (obrigado a [@jckronbauer](https://github.com/jckronbauer)).
+- Adicionada opção para enviar novamente e-mail do código de rastreio.
+- Adicionada mensagem de erro quando serviço é indisponível no trecho informado.
 - E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
