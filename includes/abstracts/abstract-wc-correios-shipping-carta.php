@@ -169,15 +169,15 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 	 *
 	 * @param  array $package Shipping package.
 	 *
-	 * @return float
+	 * @return float|bool
 	 */
 	protected function get_package_weight( $package ) {
 		$weight = 0;
 
 		foreach ( $package['contents'] as $value ) {
-			$product = $value['data'];
-			$qty     = $value['quantity'];
-			$product_weight  = 0;
+			$product        = $value['data'];
+			$qty            = $value['quantity'];
+			$product_weight = 0;
 
 			// Check if all or some items in the cart don't supports this shipping method.
 			if ( $this->shipping_class !== $product->get_shipping_class() ) {
@@ -185,7 +185,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 					$this->log->add( $this->id, 'One or all items in the cart do not supports the configured shipping class' );
 				}
 
-				return 0;
+				return false;
 			}
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
