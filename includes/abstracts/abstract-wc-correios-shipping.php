@@ -362,7 +362,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return array
 	 */
 	protected function get_accepted_error_codes() {
-		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '008', '010' ) );
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '010' ) );
 		$codes[] = '0';
 
 		return $codes;
