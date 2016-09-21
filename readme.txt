@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.1.2 - 2016/09/20 =
+
+- Removida mensagem de erro quando serviço é indisponível no trecho informado, esta mensagem estava causando muita confusão para usuários quando Sedex 10 ou Sedex Hoje estão indisponíveis.
+
 = 3.1.1 - 2016/09/15 =
 
 - Corrigida a utilização das classes de entrega para os métodos de Carta Registrada, Impresso Normal e Impresso Urgente.
@@ -253,10 +257,6 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.1.1 =
+= 3.1.2 =
 
-- Adicionado os métodos Impresso Normal e Impresso Urgente (obrigado a [@jckronbauer](https://github.com/jckronbauer)).
-- Adicionada opção para enviar novamente e-mail do código de rastreio.
-- Adicionada mensagem de erro quando serviço é indisponível no trecho informado.
-- Corrigida a utilização das classes de entrega para os métodos de Carta Registrada, Impresso Normal e Impresso Urgente.
-- E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
+- Removida mensagem de erro quando serviço é indisponível no trecho informado, esta mensagem estava causando muita confusão para usuários quando Sedex 10 ou Sedex Hoje estão indisponíveis.
