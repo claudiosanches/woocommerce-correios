@@ -31,7 +31,8 @@ class WC_Correios_Package {
 	 * @return array
 	 */
 	public function __construct( $package = array() ) {
-		$this->package = $package;
+		$this->package = $package;			
+		do_action('wc_correios_package_constructed',$package);	
 	}
 
 	/**
