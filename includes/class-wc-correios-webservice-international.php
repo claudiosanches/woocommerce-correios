@@ -49,6 +49,13 @@ class WC_Correios_Webservice_International {
 	protected $service = '';
 
 	/**
+	 * WooCommerce package containing the products.
+	 *
+	 * @var array
+	 */
+	protected $package = null;
+
+	/**
 	 * Destination country.
 	 *
 	 * @var string
@@ -138,10 +145,11 @@ class WC_Correios_Webservice_International {
 	 * @param array $package Shipping package.
 	 */
 	public function set_package( $package = array() ) {
-		$package = new WC_Correios_Package( $package );
+		$this->package = $package;
+		$correios_package = new WC_Correios_Package( $package );
 
-		if ( ! is_null( $package ) ) {
-			$data = $package->get_data();
+		if ( ! is_null( $correios_package ) ) {
+			$data = $correios_package->get_data();
 
 			$this->set_height( wc_get_dimension( $data['height'], 'mm', 'cm' ) );
 			$this->set_width( wc_get_dimension( $data['width'], 'mm', 'cm' ) );
@@ -241,7 +249,7 @@ class WC_Correios_Webservice_International {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_international_url', $this->_webservice, $this->id, $this->instance_id );
+		return apply_filters( 'woocommerce_correios_webservice_international_url', $this->_webservice, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -514,7 +522,7 @@ class WC_Correios_Webservice_International {
 	public function get_origin_location() {
 		$location = 'C' === $this->origin_location ? 'C' : 'I';
 
-		return apply_filters( 'woocommerce_correios_international_origin_location', $this->origin_location, $this->id, $this->instance_id );
+		return apply_filters( 'woocommerce_correios_international_origin_location', $this->origin_location, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -523,7 +531,7 @@ class WC_Correios_Webservice_International {
 	 * @return string
 	 */
 	public function get_origin_state() {
-		return apply_filters( 'woocommerce_correios_international_origin_state', $this->origin_state, $this->id, $this->instance_id );
+		return apply_filters( 'woocommerce_correios_international_origin_state', $this->origin_state, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -610,7 +618,7 @@ class WC_Correios_Webservice_International {
 			'profundidade' => $this->get_length(),
 			'peso'         => $this->get_weight(),
 			'reset'        => 'true',
-		), $this->id );
+		), $this->id, $this->package );
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
 
