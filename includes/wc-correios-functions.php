@@ -75,7 +75,7 @@ function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0
 		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ),  $total ) . ')';
 	}
 
-	return $name;
+	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $name, $days, $additional_days );
 }
 
 /**
