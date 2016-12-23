@@ -95,6 +95,7 @@ class WC_Correios_Tracking_History {
 				if ( isset( $events['tipo'] ) ) {
 					$events = array( (object) $events );
 				}
+
 			}
 		} catch ( Exception $e ) {
 			$this->logger( sprintf( 'An error occurred while trying to fetch the tracking history for "%s": %s', $tracking_code, $e->getMessage() ) );

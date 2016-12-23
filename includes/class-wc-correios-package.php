@@ -157,12 +157,13 @@ class WC_Correios_Package {
 	 */
 	protected function calculate_root( $height, $width, $length, $max_values ) {
 		$cubage_total = $this->cubage_total( $height, $width, $length );
-		$root        = 0;
+		$root         = 0;
+		$biggest      = max( $max_values );
 
-		if ( 0 !== $cubage_total ) {
+		if ( 0 !== $cubage_total && 0 !== $biggest ) {
 			// Dividing the value of scaling of all products.
 			// With the measured value of greater.
-			$division = $cubage_total / max( $max_values );
+			$division = $cubage_total / $biggest;
 			// Total square root.
 			$root = round( sqrt( $division ), 1 );
 		}
