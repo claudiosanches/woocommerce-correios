@@ -143,8 +143,11 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 		// Gets order data.
 		$order = wc_get_order( $order_id );
 
+		//Gets tracking link
+		$tracking_link = "<a href='http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=$tracking_code' target='_blank'>$tracking_code</a>";
+		
 		// Add order note.
-		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
+		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_link ) );
 
 		// Send email notification.
 		wc_correios_trigger_tracking_code_email( $order, $tracking_code );
