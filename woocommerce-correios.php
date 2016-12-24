@@ -1,17 +1,32 @@
 <?php
 /**
  * Plugin Name: WooCommerce Correios
- * Plugin URI: https://github.com/claudiosmweb/woocommerce-correios
- * Description: Correios para WooCommerce
- * Author: Claudio Sanches
- * Author URI: http://claudiosmweb.com/
- * Version: 3.1.3
- * License: GPLv2 or later
+ * Plugin URI:  https://github.com/claudiosanches/woocommerce-correios
+ * Description: Adds Correios shipping methods to your WooCommerce store.
+ * Author:      Claudio Sanches
+ * Author URI:  https://claudiosmweb.com
+ * Version:     3.1.4
+ * License:     GPLv2 or later
  * Text Domain: woocommerce-correios
- * Domain Path: languages/
+ * Domain Path: /languages
+ *
+ * WooCommerce Correios is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * WooCommerce Correios is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with WooCommerce Correios. If not, see
+ * <https://www.gnu.org/licenses/gpl-2.0.txt>.
  *
  * @package WooCommerce_Correios
  */
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -29,7 +44,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 *
 		 * @var string
 		 */
-		const VERSION = '3.1.3';
+		const VERSION = '3.1.4';
 
 		/**
 		 * Instance of this class.

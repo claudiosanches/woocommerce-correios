@@ -1,7 +1,7 @@
 {
   "name": "woocommerce-correios",
   "description": "Correios para WooCommerce",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/claudiosmweb/woocommerce-correios"
