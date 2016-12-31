@@ -228,7 +228,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 			'id'    => $this->id . $this->instance_id,
 			'label' => $this->title,
 			'cost'  => $cost + $fee,
-		), $this->instance_id );
+		), $this->instance_id, $package );
 
 		// Add rate to WooCommerce.
 		$this->add_rate( $rate );
