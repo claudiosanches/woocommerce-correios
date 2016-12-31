@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.1.4
+Stable tag: 3.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.1.5 - 2016/12/31 =
+
+- Adicionado link para a página de rastreio do pedido nas notas do pedido.
+- Corrigido valor declarado utilizando o valor do pacote atual e não do carrinho.
+- Adicionado objeto do pacote no filtro `woocommerce_correios_{$method_id}_rate`.
+
 = 3.1.4 - 2016/12/23 =
 
 - Adicionada prevenção de erros no PHP quando todos os valores de peso e dimensões estão em branco.
@@ -268,9 +274,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.1.4 =
+= 3.1.5 =
 
-- Adicionada prevenção de erros no PHP quando todos os valores de peso e dimensões estão em branco.
-- Introduzido o filtro `woocommerce_correios_get_estimating_delivery` para edição da estimativa de entrega.
-- Adicionada informações do pacote nos filtros para tornar possível calcular frete para múltiplos pacotes.
-- Adicionada prevenção de erro quando Correios retorna apenas um objeto no rastreio de entrega.
+- Adicionado link para a página de rastreio do pedido nas notas do pedido.
+- Corrigido valor declarado utilizando o valor do pacote atual e não do carrinho.
+- Adicionado objeto do pacote no filtro `woocommerce_correios_{$method_id}_rate`.
