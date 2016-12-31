@@ -299,19 +299,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get cart total.
-	 *
-	 * @return float
-	 */
-	protected function get_cart_total() {
-		if ( ! WC()->cart->prices_include_tax ) {
-			return WC()->cart->cart_contents_total;
-		}
-
-		return WC()->cart->cart_contents_total + WC()->cart->tax_total;
-	}
-
-	/**
 	 * Get shipping rate.
 	 *
 	 * @param  array $package Order package.
@@ -327,7 +314,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_destination_postcode( $package['destination']['postcode'] );
 
 		if ( 'yes' === $this->declare_value ) {
-			$api->set_declared_value( $this->get_cart_total() );
+			$api->set_declared_value( $package['contents_cost'] );
 		}
 
 		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );
