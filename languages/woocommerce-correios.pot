@@ -262,6 +262,16 @@ msgstr ""
 msgid "Additional working days to the estimated delivery."
 msgstr ""
 
+#: includes/abstracts/abstract-wc-correios-shipping-carta.php:114
+#: includes/abstracts/abstract-wc-correios-shipping-impresso.php:163
+msgid "Delivery Days"
+msgstr ""
+
+#: includes/abstracts/abstract-wc-correios-shipping-carta.php:116
+#: includes/abstracts/abstract-wc-correios-shipping-impresso.php:165
+msgid "Working days to the estimated delivery."
+msgstr ""
+
 #: includes/abstracts/abstract-wc-correios-shipping.php:162
 msgid "Declare Value for Insurance"
 msgstr ""
