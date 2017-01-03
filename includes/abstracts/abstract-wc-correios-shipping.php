@@ -299,19 +299,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get cart total.
-	 *
-	 * @return float
-	 */
-	protected function get_cart_total() {
-		if ( ! WC()->cart->prices_include_tax ) {
-			return WC()->cart->cart_contents_total;
-		}
-
-		return WC()->cart->cart_contents_total + WC()->cart->tax_total;
-	}
-
-	/**
 	 * Get shipping rate.
 	 *
 	 * @param  array $package Order package.
@@ -327,7 +314,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_destination_postcode( $package['destination']['postcode'] );
 
 		if ( 'yes' === $this->declare_value ) {
-			$api->set_declared_value( $this->get_cart_total() );
+			$api->set_declared_value( $package['contents_cost'] );
 		}
 
 		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );
@@ -362,7 +349,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return array
 	 */
 	protected function get_accepted_error_codes() {
-		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '008', '010' ) );
+		$codes   = apply_filters( 'woocommerce_correios_accepted_error_codes', array( '-33', '-3', '010' ) );
 		$codes[] = '0';
 
 		return $codes;
@@ -433,7 +420,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'id'    => $this->id . $this->instance_id,
 			'label' => $label,
 			'cost'  => $cost + $fee,
-		), $this->instance_id );
+		), $this->instance_id, $package );
 
 		// Deprecated filter.
 		$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );

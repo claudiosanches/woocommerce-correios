@@ -75,7 +75,7 @@ function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0
 		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ),  $total ) . ')';
 	}
 
-	return $name;
+	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $name, $days, $additional_days );
 }
 
 /**
@@ -105,7 +105,6 @@ function wc_correios_get_error_message( $code ) {
 	$messages = apply_filters( 'woocommerce_correios_available_error_messages', array(
 		'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
 		'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
-		'008' => __( 'Service unavailable to the informed route.', 'woocommerce-correios' ),
 		'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
 	) );
 
@@ -144,8 +143,11 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 		// Gets order data.
 		$order = wc_get_order( $order_id );
 
+		// Build tracking link.
+		$tracking_link = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=$tracking_code" target="_blank">%s</a>', $tracking_code );
+
 		// Add order note.
-		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
+		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_link ) );
 
 		// Send email notification.
 		wc_correios_trigger_tracking_code_email( $order, $tracking_code );

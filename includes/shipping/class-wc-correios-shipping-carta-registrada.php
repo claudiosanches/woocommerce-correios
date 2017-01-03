@@ -147,7 +147,11 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping_Carta {
 			return 0;
 		}
 
+		// Get the package weight and validate.
 		$weight = $this->get_package_weight( $package );
+		if ( false === $weight ) {
+			return 0;
+		}
 
 		foreach ( $this->get_costs() as $cost_weight => $costs ) {
 			if ( $weight <= $cost_weight ) {

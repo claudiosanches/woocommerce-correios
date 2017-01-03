@@ -84,7 +84,11 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 			return 0;
 		}
 
+		// Get the package weight and validate.
 		$weight = $this->get_package_weight( $package );
+		if ( false === $weight ) {
+			return 0;
+		}
 
 		if ( $weight <= $this->shipping_method_weight_limit ) {
 			foreach ( $this->get_costs() as $cost_weights => $costs ) {

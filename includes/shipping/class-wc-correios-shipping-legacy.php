@@ -283,19 +283,6 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get cart total.
-	 *
-	 * @return float
-	 */
-	protected function get_cart_total() {
-		if ( ! WC()->cart->prices_include_tax ) {
-			return WC()->cart->cart_contents_total;
-		}
-
-		return WC()->cart->cart_contents_total + WC()->cart->tax_total;
-	}
-
-	/**
 	 * Gets the price of shipping.
 	 *
 	 * @param  array $package Order package.
@@ -312,7 +299,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$connect->set_destination_postcode( $package['destination']['postcode'] );
 
 		if ( 'declare' == $this->declare_value ) {
-			$connect->set_declared_value( $this->get_cart_total() );
+			$connect->set_declared_value( $package['contents_cost'] );
 		}
 
 		if ( 'corporate' == $this->corporate_service ) {

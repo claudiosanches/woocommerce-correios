@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios 3.1.0\n"
+"Project-Id-Version: WooCommerce Correios 3.1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/plugins/woocommerce-domination/\n"
-"POT-Creation-Date: 2016-09-13 05:28:26+00:00\n"
+"POT-Creation-Date: 2016-12-31 02:40:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -505,7 +505,7 @@ msgstr ""
 #: includes/integrations/class-wc-correios-integration.php:24
 #: includes/shipping/class-wc-correios-shipping-legacy.php:17
 #: includes/shipping/class-wc-correios-shipping-legacy.php:89
-#: includes/shipping/class-wc-correios-shipping-legacy.php:439
+#: includes/shipping/class-wc-correios-shipping-legacy.php:426
 #: templates/myaccount/tracking-code.php:16
 msgid "Correios"
 msgstr ""
@@ -816,14 +816,10 @@ msgid "Invalid zip code."
 msgstr ""
 
 #: includes/wc-correios-functions.php:108
-msgid "Service unavailable to the informed route."
-msgstr ""
-
-#: includes/wc-correios-functions.php:109
 msgid "Area with delivery temporarily subjected to different periods."
 msgstr ""
 
-#: includes/wc-correios-functions.php:148
+#: includes/wc-correios-functions.php:150
 msgid "Added a Correios tracking code: %s"
 msgstr ""
 
@@ -885,11 +881,11 @@ msgid "In transit to %s"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/claudiosmweb/woocommerce-correios"
+msgid "https://github.com/claudiosanches/woocommerce-correios"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Correios para WooCommerce"
+msgid "Adds Correios shipping methods to your WooCommerce store."
 msgstr ""
 
 #. Author of the plugin/theme
@@ -897,5 +893,5 @@ msgid "Claudio Sanches"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://claudiosmweb.com/"
+msgid "https://claudiosmweb.com"
 msgstr ""
