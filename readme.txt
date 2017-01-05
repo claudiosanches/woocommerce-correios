@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.1.6 - 2017/01/05 =
+
+- Declara valor para os métodos de sedex apenas se o total do pacote for mais do que 17 reais.
+- Adicionada opção manual para estimativa de entrega para os métodos de Impresso e Carta Registrada.
+- Corrigida mensagens de alerta do plugin para serem exibidas apenas na página do carrinho.
+
 = 3.1.5 - 2016/12/31 =
 
 - Adicionado link para a página de rastreio do pedido nas notas do pedido.
@@ -274,8 +280,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.1.5 =
+= 3.1.6 =
 
-- Adicionado link para a página de rastreio do pedido nas notas do pedido.
-- Corrigido valor declarado utilizando o valor do pacote atual e não do carrinho.
-- Adicionado objeto do pacote no filtro `woocommerce_correios_{$method_id}_rate`.
+- Declara valor para os métodos de sedex apenas se o total do pacote for mais do que 17 reais.
+- Adicionada opção manual para estimativa de entrega para os métodos de Impresso e Carta Registrada.
+- Corrigida mensagens de alerta do plugin para serem exibidas apenas na página do carrinho.
