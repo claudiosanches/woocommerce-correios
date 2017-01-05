@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This is a abstract method with default options for all methods.
  */
 abstract class WC_Correios_Shipping extends WC_Shipping_Method {
+
 	/**
 	 * Service code.
 	 *
@@ -299,9 +300,20 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get the declared value from the package.
+	 *
+	 * @param  array $package Cart package.
+	 *
+	 * @return float
+	 */
+	protected function get_declared_value( $package ) {
+		return $package['contents_cost'];
+	}
+
+	/**
 	 * Get shipping rate.
 	 *
-	 * @param  array $package Order package.
+	 * @param  array $package Cart package.
 	 *
 	 * @return SimpleXMLElement
 	 */
@@ -314,7 +326,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_destination_postcode( $package['destination']['postcode'] );
 
 		if ( 'yes' === $this->declare_value ) {
-			$api->set_declared_value( $package['contents_cost'] );
+			$api->set_declared_value( $this->get_declared_value( $package ) );
 		}
 
 		$api->set_own_hands( 'yes' === $this->own_hands ? 'S' : 'N' );

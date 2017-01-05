@@ -44,4 +44,18 @@ class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 
 		parent::__construct( $instance_id );
 	}
+
+	/**
+	 * Get the declared value from the package.
+	 *
+	 * @param  array $package Cart package.
+	 * @return float
+	 */
+	protected function get_declared_value( $package ) {
+		if ( 16 >= $package['contents_cost'] ) {
+			return 0;
+		}
+
+		return $package['contents_cost'];
+	}
 }
