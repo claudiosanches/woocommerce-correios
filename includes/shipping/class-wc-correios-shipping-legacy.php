@@ -419,7 +419,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 			}
 
 			// Display correios errors.
-			if ( ! empty( $errors ) ) {
+			if ( ! empty( $errors ) && is_cart() ) {
 				foreach ( $errors as $error ) {
 					if ( '' != $error['error'] ) {
 						$type = ( '010' == $error['number'] ) ? 'notice' : 'error';
