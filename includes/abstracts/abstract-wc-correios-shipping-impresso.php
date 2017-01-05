@@ -85,14 +85,16 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 		$this->init_form_fields();
 
 		// Define user set variables.
-		$this->enabled        = $this->get_option( 'enabled' );
-		$this->title          = $this->get_option( 'title' );
-		$this->shipping_class = $this->get_option( 'shipping_class' );
-		$this->registry_type  = $this->get_option( 'registry_type' );
-		$this->fee            = $this->get_option( 'fee' );
-		$this->receipt_notice = $this->get_option( 'receipt_notice' );
-		$this->own_hands      = $this->get_option( 'own_hands' );
-		$this->debug          = $this->get_option( 'debug' );
+		$this->enabled            = $this->get_option( 'enabled' );
+		$this->title              = $this->get_option( 'title' );
+		$this->shipping_class     = $this->get_option( 'shipping_class' );
+		$this->registry_type      = $this->get_option( 'registry_type' );
+		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
+		$this->additional_time    = $this->get_option( 'additional_time' );
+		$this->fee                = $this->get_option( 'fee' );
+		$this->receipt_notice     = $this->get_option( 'receipt_notice' );
+		$this->own_hands          = $this->get_option( 'own_hands' );
+		$this->debug              = $this->get_option( 'debug' );
 
 		// Active logs.
 		if ( 'yes' === $this->debug ) {
@@ -148,6 +150,22 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 					'RM' => __( 'Registro Módico', 'woocommerce-correios' ),
 				),
 				'default'     => 'RM',
+			),
+			'show_delivery_time' => array(
+				'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Show estimated delivery time', 'woocommerce-correios' ),
+				'description' => __( 'Display the estimated delivery time in working days.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
+			),
+			'additional_time' => array(
+				'title'       => __( 'Delivery Days', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Working days to the estimated delivery.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
+				'placeholder' => '0',
 			),
 			'fee' => array(
 				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
