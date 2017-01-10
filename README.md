@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.1.6  
+**Stable tag:** 3.1.7  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -219,6 +219,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.1.7 - 2017/01/10 ###
+
+- Corrigido o link de rastreio nas notas do pedido.
+
 ### 3.1.6 - 2017/01/05 ###
 
 - Declara valor para os métodos de sedex apenas se o total do pacote for mais do que 17 reais.
@@ -296,8 +300,6 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.1.6 ###
+### 3.1.7 ###
 
-- Declara valor para os métodos de sedex apenas se o total do pacote for mais do que 17 reais.
-- Adicionada opção manual para estimativa de entrega para os métodos de Impresso e Carta Registrada.
-- Corrigida mensagens de alerta do plugin para serem exibidas apenas na página do carrinho.
+- Corrigido o link de rastreio nas notas do pedido.
