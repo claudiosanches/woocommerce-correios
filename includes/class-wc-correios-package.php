@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes
  * @since   3.0.0
- * @version 3.0.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -35,19 +35,6 @@ class WC_Correios_Package {
 	}
 
 	/**
-	 * Replace comma by dot.
-	 *
-	 * @param  mixed $value Value to fix.
-	 *
-	 * @return mixed
-	 */
-	private function fix_format( $value ) {
-		$value = str_replace( ',', '.', $value );
-
-		return $value;
-	}
-
-	/**
 	 * Extracts the weight and dimensions from the package.
 	 *
 	 * @return array
@@ -66,10 +53,10 @@ class WC_Correios_Package {
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
 
-				$_height = wc_get_dimension( (float) $this->fix_format( $product->height ), 'cm' );
-				$_width  = wc_get_dimension( (float) $this->fix_format( $product->width ), 'cm' );
-				$_length = wc_get_dimension( (float) $this->fix_format( $product->length ), 'cm' );
-				$_weight = wc_get_weight( (float) $this->fix_format( $product->weight ), 'kg' );
+				$_height = wc_get_dimension( (float) $product->get_length(), 'cm' );
+				$_width  = wc_get_dimension( (float) $product->get_width(), 'cm' );
+				$_length = wc_get_dimension( (float) $product->get_height(), 'cm' );
+				$_weight = wc_get_weight( (float) $product->get_weight(), 'kg' );
 
 				$height[ $count ] = $_height;
 				$width[ $count ]  = $_width;

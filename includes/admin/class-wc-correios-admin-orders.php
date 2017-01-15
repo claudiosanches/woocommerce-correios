@@ -45,8 +45,16 @@ class WC_Correios_Admin_Orders {
 	 * @param WC_Post $post Post data.
 	 */
 	public function metabox_content( $post ) {
+		$order = wc_get_order( $post->ID );
+
+		if ( method_exists( $order, 'get_meta' ) ) {
+			$tracking_code = $order->get_meta( '_correios_tracking_code' );
+		} else {
+			$tracking_code = $order->correios_tracking_code;
+		}
+
 		echo '<label for="correios_tracking">' . esc_html__( 'Tracking code:', 'woocommerce-correios' ) . '</label><br />';
-		echo '<input type="text" id="correios_tracking" name="correios_tracking" value="' . esc_attr( get_post_meta( $post->ID, '_correios_tracking_code', true ) ) . '" style="width: 100%;" />';
+		echo '<input type="text" id="correios_tracking" name="correios_tracking" value="' . esc_attr( $tracking_code ) . '" style="width: 100%;" />';
 	}
 
 	/**

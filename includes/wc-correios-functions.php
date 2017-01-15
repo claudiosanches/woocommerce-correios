@@ -135,13 +135,21 @@ function wc_correios_trigger_tracking_code_email( $order, $tracking_code ) {
  */
 function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 	$tracking_code = sanitize_text_field( $tracking_code );
-	$current       = get_post_meta( $order_id, '_correios_tracking_code', true );
+	$order         = wc_get_order( $order_id );
+
+	if ( method_exists( $order, 'get_meta' ) ) {
+		$current = $order->get_meta( '_correios_tracking_code' );
+	} else {
+		$current = $order->correios_tracking_code;
+	}
 
 	if ( '' !== $tracking_code && $tracking_code !== $current ) {
-		update_post_meta( $order_id, '_correios_tracking_code', $tracking_code );
-
-		// Gets order data.
-		$order = wc_get_order( $order_id );
+		if ( method_exists( $order, 'update_meta_data' ) ) {
+			$order->update_meta_data( '_correios_tracking_code', $tracking_code );
+			$order->save();
+		} else {
+			update_post_meta( $order_id, '_correios_tracking_code', $tracking_code );
+		}
 
 		// Build tracking link.
 		$tracking_link = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
@@ -154,7 +162,11 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code ) {
 
 		return true;
 	} elseif ( '' === $tracking_code ) {
-		delete_post_meta( $order_id, '_correios_tracking_code' );
+		if ( method_exists( $order, 'delete_meta_data' ) ) {
+			$order->delete_meta_data( '_correios_tracking_code' );
+		} else {
+			delete_post_meta( $order_id, '_correios_tracking_code' );
+		}
 
 		return true;
 	}

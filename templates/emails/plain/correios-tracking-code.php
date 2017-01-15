@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.0.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,12 +26,14 @@ printf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_forma
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
-if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.5', '>=' ) ) {
-	$order_items = $order->email_order_items_table( array(
+if ( function_exists( 'wc_get_email_order_items' ) ) {
+	wc_get_email_order_items( $order, array(
 		'plain_text' => true,
 	) );
 } else {
-	$order_items = $order->email_order_items_table( true, false, true, '', '', true );
+	$order_items = $order->email_order_items_table( array(
+		'plain_text' => true,
+	) );
 }
 
 echo "\n" . $order_items;

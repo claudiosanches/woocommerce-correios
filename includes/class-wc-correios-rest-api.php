@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes
  * @since   3.0.0
- * @version 3.0.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,7 +36,11 @@ class WC_Correios_REST_API {
 	 * @return array
 	 */
 	public function legacy_orders_response( $data, $order, $fields ) {
-		$data['correios_tracking_code'] = $order->correios_tracking_code;
+		if ( method_exists( $order, 'get_meta' ) ) {
+			$data['correios_tracking_code'] = $order->get_meta( '_correios_tracking_code' );
+		} else {
+			$data['correios_tracking_code'] = $order->correios_tracking_code;
+		}
 
 		if ( $fields ) {
 			$data = WC()->api->WC_API_Customers->filter_response_fields( $data, $order, $fields );
@@ -89,7 +93,13 @@ class WC_Correios_REST_API {
 	 * @return string
 	 */
 	function get_tracking_code_callback( $data, $field, $request ) {
-		return get_post_meta( $data['id'], '_' . $field, true );
+		$order = wc_get_order( $data['id'] );
+
+		if ( method_exists( $order, 'get_meta' ) ) {
+			return $order->get_meta( '_correios_tracking_code' );
+		} else {
+			return $order->correios_tracking_code;
+		}
 	}
 
 	/**

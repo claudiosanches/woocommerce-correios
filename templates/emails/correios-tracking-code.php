@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.0.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,12 +32,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</thead>
 	<tbody>
 		<?php
-			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.5', '>=' ) ) {
-				echo $order->email_order_items_table( array(
+			if ( function_exists( 'wc_get_email_order_items' ) ) {
+				wc_get_email_order_items( $order, array(
 					'plain_text' => false,
 				) );
 			} else {
-				echo $order->email_order_items_table( true, false, true );
+				echo $order->email_order_items_table( array(
+					'plain_text' => false,
+				) );
 			}
 		?>
 	</tbody>

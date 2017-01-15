@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Abstracts
  * @since   3.1.0
- * @version 3.1.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -217,7 +217,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 			}
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
-				$product_weight = wc_get_weight( (float) str_replace( ',', '.', $product->weight ), 'g' );
+				$product_weight = wc_get_weight( (float) $product->get_weight(), 'g' );
 
 				if ( $qty > 1 ) {
 					$product_weight *= $qty;

@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 2.2.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <p><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a>.</p>
 
-<table class="shop_table shop_table_responsive">
+<table class="woocommerce-table shop_table shop_table_responsive">
 	<tr>
 		<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
 		<th><?php esc_html_e( 'Location', 'woocommerce-correios' ); ?></th>

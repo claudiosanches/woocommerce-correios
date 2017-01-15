@@ -114,8 +114,13 @@ class WC_Correios_Tracking_History {
 	 * @param WC_Order $order Order data.
 	 */
 	public function view( $order ) {
-		$events        = false;
-		$tracking_code = get_post_meta( $order->id, '_correios_tracking_code', true );
+		$events = false;
+
+		if ( method_exists( $order, 'get_meta' ) ) {
+			$tracking_code = $order->get_meta( '_correios_tracking_code' );
+		} else {
+			$tracking_code = $order->correios_tracking_code;
+		}
 
 		// Check if exist a tracking code for the order.
 		if ( ! $tracking_code ) {
