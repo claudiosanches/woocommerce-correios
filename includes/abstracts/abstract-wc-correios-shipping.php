@@ -52,6 +52,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->enabled            = $this->get_option( 'enabled' );
 		$this->title              = $this->get_option( 'title' );
 		$this->origin_postcode    = $this->get_option( 'origin_postcode' );
+		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '0' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
 		$this->fee                = $this->get_option( 'fee' );
@@ -77,9 +78,25 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return string
 	 */
 	protected function get_log_link() {
-		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
-			return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+		return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+	}
+
+	/**
+	 * Get shipping classes options.
+	 *
+	 * @return array
+	 */
+	protected function get_shipping_classes_options() {
+		$shipping_classes = WC()->shipping->get_shipping_classes();
+		$options          = array(
+			'0' => _x( 'None', 'shipping class', 'woocommerce-correios' ),
+		);
+
+		if ( ! empty( $shipping_classes ) ) {
+			$options += wp_list_pluck( $shipping_classes, 'name', 'term_id' );
 		}
+
+		return $options;
 	}
 
 	/**
@@ -112,6 +129,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'desc_tip'    => true,
 				'placeholder' => '00000-000',
 				'default'     => '',
+			),
+			'shipping_class_id' => array(
+				'title'       => __( 'Shipping Class', 'woocommerce-correios' ),
+				'type'        => 'select',
+				'description' => __( 'If necessary, select a shipping class to apply this method.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+				'class'       => 'wc-enhanced-select',
+				'options'     => $this->get_shipping_classes_options(),
 			),
 			'show_delivery_time' => array(
 				'title'       => __( 'Delivery Time', 'woocommerce-correios' ),
@@ -315,7 +341,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 *
 	 * @param  array $package Cart package.
 	 *
-	 * @return SimpleXMLElement
+	 * @return SimpleXMLElement|null
 	 */
 	protected function get_rate( $package ) {
 		$api = new WC_Correios_Webservice( $this->id, $this->instance_id );
@@ -384,6 +410,29 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Check if package uses only the selected shipping class.
+	 *
+	 * @param  array $package Cart package.
+	 * @return bool
+	 */
+	protected function has_only_selected_shipping_class( $package ) {
+		$only_selected = true;
+		foreach ( $package['contents'] as $item_id => $values ) {
+			$product = $values['data'];
+			$qty     = $values['quantity'];
+
+			if ( $qty > 0 && $product->needs_shipping() ) {
+				if ( $this->shipping_class_id !== $product->get_shipping_class_id() ) {
+					$only_selected = false;
+					break;
+				}
+			}
+		}
+
+		return $only_selected;
+	}
+
+	/**
 	 * Calculates the shipping rate.
 	 *
 	 * @param array $package Order package.
@@ -391,6 +440,11 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	public function calculate_shipping( $package = array() ) {
 		// Check if valid to be calculeted.
 		if ( '' === $package['destination']['postcode'] || 'BR' !== $package['destination']['country'] ) {
+			return;
+		}
+
+		// Check for shipping classes.
+		if ( ! $this->has_only_selected_shipping_class( $package ) ) {
 			return;
 		}
 

@@ -100,7 +100,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				'default'          => 'none',
 				'options'          => array(
 					'declare'      => __( 'Declare', 'woocommerce-correios' ),
-					'none'         => __( 'None', 'woocommerce-correios' ),
+					'none'         => __( 'No', 'woocommerce-correios' ),
 				),
 			),
 			'display_date' => array(

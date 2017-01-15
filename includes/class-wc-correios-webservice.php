@@ -43,7 +43,7 @@ class WC_Correios_Webservice {
 	 * @var string|array
 	 */
 	protected $service = '';
-	
+
 	/**
 	 * WooCommerce package containing the products.
 	 *
