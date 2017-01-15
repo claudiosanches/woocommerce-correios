@@ -217,7 +217,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 			}
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
-				$product_weight = wc_get_weight( str_replace( ',', '.', $product->weight ), 'g' );
+				$product_weight = wc_get_weight( (float) str_replace( ',', '.', $product->weight ), 'g' );
 
 				if ( $qty > 1 ) {
 					$product_weight *= $qty;
@@ -255,7 +255,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
 			'id'    => $this->id . $this->instance_id,
 			'label' => $this->get_shipping_method_label( (int) $this->get_shipping_time( $package ), $package ),
-			'cost'  => $cost + $fee,
+			'cost'  => (float) $cost + (float) $fee,
 		), $this->instance_id, $package );
 
 		// Add rate to WooCommerce.

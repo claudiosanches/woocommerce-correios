@@ -431,7 +431,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
 			'id'    => $this->id . $this->instance_id,
 			'label' => $label,
-			'cost'  => $cost + $fee,
+			'cost'  => (float) $cost + (float) $fee,
 		), $this->instance_id, $package );
 
 		// Deprecated filter.

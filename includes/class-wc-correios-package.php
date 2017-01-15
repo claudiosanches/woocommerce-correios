@@ -66,10 +66,10 @@ class WC_Correios_Package {
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
 
-				$_height = wc_get_dimension( $this->fix_format( $product->height ), 'cm' );
-				$_width  = wc_get_dimension( $this->fix_format( $product->width ), 'cm' );
-				$_length = wc_get_dimension( $this->fix_format( $product->length ), 'cm' );
-				$_weight = wc_get_weight( $this->fix_format( $product->weight ), 'kg' );
+				$_height = wc_get_dimension( (float) $this->fix_format( $product->height ), 'cm' );
+				$_width  = wc_get_dimension( (float) $this->fix_format( $product->width ), 'cm' );
+				$_length = wc_get_dimension( (float) $this->fix_format( $product->length ), 'cm' );
+				$_weight = wc_get_weight( (float) $this->fix_format( $product->weight ), 'kg' );
 
 				$height[ $count ] = $_height;
 				$width[ $count ]  = $_width;
@@ -160,7 +160,7 @@ class WC_Correios_Package {
 		$root         = 0;
 		$biggest      = max( $max_values );
 
-		if ( 0 !== $cubage_total && 0 !== $biggest ) {
+		if ( 0 !== $cubage_total && 0 < $biggest ) {
 			// Dividing the value of scaling of all products.
 			// With the measured value of greater.
 			$division = $cubage_total / $biggest;
