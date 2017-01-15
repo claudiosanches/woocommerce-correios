@@ -122,7 +122,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 				}
 
 				// Update settings to 3.0.0 when using WooCommerce 2.6.0.
-				WC_Correios_Install::upgrade_300_to_wc_260();
+				WC_Correios_Install::upgrade_300_from_wc_260();
 			} else {
 				include_once dirname( __FILE__ ) . '/includes/shipping/class-wc-correios-shipping-legacy.php';
 			}
