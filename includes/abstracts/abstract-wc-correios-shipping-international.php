@@ -39,7 +39,7 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		$this->title              = $this->get_option( 'title' );
 		$this->origin_state       = $this->get_option( 'origin_state' );
 		$this->origin_location    = $this->get_option( 'origin_location' );
-		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '0' );
+		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '-1' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->debug              = $this->get_option( 'debug' );

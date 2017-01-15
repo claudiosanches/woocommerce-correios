@@ -52,7 +52,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->enabled            = $this->get_option( 'enabled' );
 		$this->title              = $this->get_option( 'title' );
 		$this->origin_postcode    = $this->get_option( 'origin_postcode' );
-		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '0' );
+		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '-1' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
 		$this->fee                = $this->get_option( 'fee' );
@@ -89,7 +89,8 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	protected function get_shipping_classes_options() {
 		$shipping_classes = WC()->shipping->get_shipping_classes();
 		$options          = array(
-			'0' => _x( 'None', 'shipping class', 'woocommerce-correios' ),
+			'-1' => __( 'Any Shipping Class', 'woocommerce-correios' ),
+			'0'  => __( 'No Shipping Class', 'woocommerce-correios' ),
 		);
 
 		if ( ! empty( $shipping_classes ) ) {
@@ -417,6 +418,11 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 */
 	protected function has_only_selected_shipping_class( $package ) {
 		$only_selected = true;
+
+		if ( -1 === $this->shipping_class_id ) {
+			return $only_selected;
+		}
+
 		foreach ( $package['contents'] as $item_id => $values ) {
 			$product = $values['data'];
 			$qty     = $values['quantity'];
