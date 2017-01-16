@@ -1,10 +1,11 @@
 /* jshint node:true */
-var expandHomeDir = require( 'expand-home-dir' );
-
 module.exports = function( grunt ) {
 'use strict';
 
 	grunt.initConfig({
+
+		// Gets the package vars.
+		pkg: grunt.file.readJSON( 'package.json' ),
 
 		// Setting folder templates
 		dirs: {
@@ -14,27 +15,7 @@ module.exports = function( grunt ) {
 			js:     'assets/js'
 		},
 
-		// gets the package vars
-		pkg: grunt.file.readJSON( 'package.json' ),
-		svn_settings: {
-			path: expandHomeDir( '~/Projects/wordpress-plugins-svn/' ) + '<%= pkg.name %>',
-			tag: '<%= svn_settings.path %>/tags/<%= pkg.version %>',
-			trunk: '<%= svn_settings.path %>/trunk',
-			exclude: [
-				'.git/',
-				'.tx/',
-				'.editorconfig',
-				'.gitignore',
-				'.jshintrc',
-				'node_modules/',
-				'Gruntfile.js',
-				'README.md',
-				'package.json',
-				'*.zip'
-			]
-		},
-
-		// Javascript linting with jshint
+		// Javascript linting with jshint.
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -77,29 +58,50 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// Watch changes for assets
+		// Minify CSS.
+		cssmin: {
+			admin: {
+				files: [{
+					expand: true,
+					cwd: '<%= dirs.css %>/admin/',
+					src: [
+						'*.css',
+						'!*.min.css'
+					],
+					dest: '<%= dirs.css %>/admin/',
+					ext: '.min.css'
+				}]
+			}
+		},
+
+		// Watch changes for assets.
 		watch: {
 			js: {
 				files: [
 					'<%= dirs.js %>/*js',
 					'!<%= dirs.js %>/*.min.js'
 				],
-				tasks: ['jshint', 'uglify']
+				tasks: [ 'jshint', 'uglify' ]
+			},
+			css: {
+				files: [
+					'<%= dirs.css %>/*css',
+					'!<%= dirs.css %>/*.min.css'
+				],
+				tasks: [ 'cssmin' ]
 			}
 		},
 
+		// Make .pot files.
 		makepot: {
 			dist: {
 				options: {
-					type: 'wp-plugin',
-					potHeaders: {
-						'report-msgid-bugs-to': 'https://wordpress.org/plugins/woocommerce-domination/',
-						'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
-					}
+					type: 'wp-plugin'
 				}
 			}
 		},
 
+		// Check text domain.
 		checktextdomain: {
 			options:{
 				text_domain: '<%= pkg.name %>',
@@ -122,96 +124,40 @@ module.exports = function( grunt ) {
 			},
 			files: {
 				src:  [
-					'**/*.php', // Include all files
-					'!node_modules/**' // Exclude node_modules/
+					'**/*.php', // Include all files.
+					'!node_modules/**' // Exclude node_modules/.
 				],
 				expand: true
 			}
 		},
 
-		// Rsync commands used to take the files to svn repository
-		rsync: {
+		// Create README.md for GitHub.
+		wp_readme_to_markdown: {
 			options: {
-				args: ['--verbose'],
-				exclude: '<%= svn_settings.exclude %>',
-				syncDest: true,
-				recursive: true
+				screenshot_url: 'http://ps.w.org/<%= pkg.name %>/assets/{screenshot}.png'
 			},
-			tag: {
-				options: {
-					src: './',
-					dest: '<%= svn_settings.tag %>'
-				}
-			},
-			trunk: {
-				options: {
-				src: './',
-				dest: '<%= svn_settings.trunk %>'
-				}
-			}
-		},
-
-		// Shell command to commit the new version of the plugin
-		shell: {
-			// Remove delete files.
-			svn_remove: {
-				command: 'svn st | grep \'^!\' | awk \'{print $2}\' | xargs svn --force delete',
-				options: {
-					stdout: true,
-					stderr: true,
-					execOptions: {
-						cwd: '<%= svn_settings.path %>'
-					}
-				}
-			},
-			// Add new files.
-			svn_add: {
-				command: 'svn add --force * --auto-props --parents --depth infinity -q',
-				options: {
-					stdout: true,
-					stderr: true,
-					execOptions: {
-						cwd: '<%= svn_settings.path %>'
-					}
-				}
-			},
-			// Commit the changes.
-			svn_commit: {
-				command: 'svn commit -m "updated the plugin version to <%= pkg.version %>"',
-				options: {
-					stdout: true,
-					stderr: true,
-					execOptions: {
-						cwd: '<%= svn_settings.path %>'
-					}
+			dest: {
+				files: {
+					'README.md': 'readme.txt'
 				}
 			}
 		}
-
 	});
 
-	// Load tasks
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	// Load tasks.
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-checktextdomain' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-rsync' );
-	grunt.loadNpmTasks( 'grunt-shell' );
+	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
-	// Register tasks
+	// Register tasks.
 	grunt.registerTask( 'default', [
 		'jshint',
-		'uglify'
+		'uglify',
+		'cssmin'
 	]);
-
-	// Deploy task
-	grunt.registerTask( 'deploy', [
-		'default',
-		'rsync:tag',
-		'rsync:trunk',
-		'shell:svn_remove',
-		'shell:svn_add',
-		'shell:svn_commit'
-	] );
+	grunt.registerTask( 'readme', 'wp_readme_to_markdown' );
 };

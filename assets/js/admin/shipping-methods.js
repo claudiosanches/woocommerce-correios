@@ -1,4 +1,4 @@
-jQuery( document ).ready( function( $ ) {
+jQuery( function( $ ) {
 	$( 'input[id$="_show_delivery_time"], #woocommerce_correios_display_date' ).on( 'change', function() {
 		var field = $( 'input[id$="_additional_time"]' ).closest( 'tr' );
 
