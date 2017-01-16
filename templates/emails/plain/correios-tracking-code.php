@@ -22,21 +22,22 @@ echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n"
 do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text );
 
 printf( __( 'Order number: %s', 'woocommerce-correios' ), $order->get_order_number() ) . "\n";
-printf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ) . "\n";
+$order_date = method_exists( $order, 'get_date_created' ) ? $order->get_date_created() : $order->order_date;
+printf( __( 'Order date: %s', 'woocommerce-correios' ), date_i18n( wc_date_format(), strtotime( $order_date ) ) ) . "\n";
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
+
+echo "\n";
 
 if ( function_exists( 'wc_get_email_order_items' ) ) {
 	wc_get_email_order_items( $order, array(
 		'plain_text' => true,
 	) );
 } else {
-	$order_items = $order->email_order_items_table( array(
+	$order->email_order_items_table( array(
 		'plain_text' => true,
 	) );
 }
-
-echo "\n" . $order_items;
 
 echo "----------\n\n";
 
