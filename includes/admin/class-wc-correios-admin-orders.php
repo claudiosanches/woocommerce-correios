@@ -21,7 +21,6 @@ class WC_Correios_Admin_Orders {
 	 */
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'register_metabox' ) );
-		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_tracking_code' ) );
 		add_filter( 'woocommerce_resend_order_emails_available', array( $this, 'resend_tracking_code_email' ) );
 		add_action( 'wp_ajax_woocommerce_correios_add_tracking_code', array( $this, 'ajax_add_tracking_code' ) );
 		add_action( 'wp_ajax_woocommerce_correios_remove_tracking_code', array( $this, 'ajax_remove_tracking_code' ) );
@@ -47,17 +46,7 @@ class WC_Correios_Admin_Orders {
 	 * @param WC_Post $post Post data.
 	 */
 	public function metabox_content( $post ) {
-		$order = wc_get_order( $post->ID );
-
-		if ( method_exists( $order, 'get_meta' ) ) {
-			$order_id       = $order->get_id();
-			$tracking_codes = $order->get_meta( '_correios_tracking_code' );
-		} else {
-			$order_id       = $order->id;
-			$tracking_codes = $order->correios_tracking_code;
-		}
-
-		$tracking_codes = array_filter( explode( ',', $tracking_codes ) );
+		$tracking_codes = wc_correios_get_tracking_codes( $post->ID );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders' . $suffix . '.css', WC_Correios::get_main_file() ), array(), WC_Correios::VERSION );
@@ -66,7 +55,7 @@ class WC_Correios_Admin_Orders {
 			'woocommerce-correios-orders-admin',
 			'WCCorreiosAdminOrdersParams',
 			array(
-				'order_id' => $order_id,
+				'order_id' => $post->ID,
 				'i18n'     => array(
 					'removeQuestion' => esc_js( __( 'Are you sure you want to remove this tracking code?', 'woocommerce-correios' ) ),
 				),
@@ -78,21 +67,6 @@ class WC_Correios_Admin_Orders {
 		);
 
 		include_once dirname( __FILE__ ) . '/views/html-meta-box-tracking-code.php';
-	}
-
-	/**
-	 * Save tracking code.
-	 *
-	 * @param int $post_id Current post type ID.
-	 */
-	public function save_tracking_code( $post_id ) {
-		if ( empty( $_POST['woocommerce_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
-			return;
-		}
-
-		if ( isset( $_POST['correios_tracking'] ) ) {
-			wc_correios_update_tracking_code( $post_id, wp_unslash( $_POST['correios_tracking'] ) );
-		}
 	}
 
 	/**

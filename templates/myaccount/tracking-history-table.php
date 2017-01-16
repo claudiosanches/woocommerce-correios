@@ -12,11 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<h2 id="wc-correios-tracking"><?php esc_html_e( 'Correios Delivery History', 'woocommerce-correios' ); ?></h2>
+<p class="wc-correios-tracking__description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a></p>
 
-<p><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a>.</p>
-
-<table class="woocommerce-table shop_table shop_table_responsive">
+<table class="wc-correios-tracking__table woocommerce-table shop_table shop_table_responsive">
 	<tr>
 		<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
 		<th><?php esc_html_e( 'Location', 'woocommerce-correios' ); ?></th>

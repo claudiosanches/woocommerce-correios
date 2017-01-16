@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Emails
  * @since   3.0.0
- * @version 3.0.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +28,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		$this->subject          = __( '[{site_title}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
 		$this->message          = __( 'Hi there. Your recent order on {site_title} has been sent by Correios.', 'woocommerce-correios' )
 									. PHP_EOL . ' ' . PHP_EOL
-									. __( 'To track your delivery, use the following the tracking code: {tracking_code}.', 'woocommerce-correios' )
+									. __( 'To track your delivery, use the following the tracking code(s): {tracking_code}', 'woocommerce-correios' )
 									. PHP_EOL . ' ' . PHP_EOL
 									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
 		$this->tracking_message = $this->get_option( 'tracking_message', $this->message );
@@ -135,6 +135,25 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	}
 
 	/**
+	 * Get tracking codes HTML.
+	 *
+	 * @param  array $tracking_codes Tracking codes.
+	 *
+	 * @return string
+	 */
+	public function get_tracking_codes( $tracking_codes ) {
+		$html = '<ul>';
+
+		foreach ( $tracking_codes as $tracking_code ) {
+			$html .= '<li>' . $this->get_tracking_code_url( $tracking_code ) . '</li>';
+		}
+
+		$html .= '</ul>';
+
+		return $html;
+	}
+
+	/**
 	 * Trigger email.
 	 *
 	 * @param  WC_Order $order         Order data.
@@ -162,15 +181,13 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			$this->replace[] = date_i18n( wc_date_format(), time() );
 
 			if ( empty( $tracking_code ) ) {
-				if ( method_exists( $order, 'get_billing_email' ) ) {
-					$tracking_code = $order->get_meta( '_correios_tracking_code' );
-				} else {
-					$tracking_code = $order->correios_tracking_code;
-				}
+				$tracking_codes = wc_correios_get_tracking_codes( $order );
+			} else {
+				$tracking_codes = array( $tracking_code );
 			}
 
 			$this->find[]    = '{tracking_code}';
-			$this->replace[] = $this->get_tracking_code_url( $tracking_code );
+			$this->replace[] = $this->get_tracking_codes( $tracking_codes );
 		}
 
 		if ( ! $this->get_recipient() ) {
@@ -207,10 +224,16 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	public function get_content_plain() {
 		ob_start();
 
+		// Format list.
+		$message = $this->get_tracking_message();
+		$message = str_replace( '<ul>', "\n", $message );
+		$message = str_replace( '<li>', "\n - ", $message );
+		$message = str_replace( array( '</ul>', '</li>' ), '', $message );
+
 		wc_get_template( $this->template_plain, array(
 			'order'            => $this->object,
 			'email_heading'    => $this->get_heading(),
-			'tracking_message' => $this->get_tracking_message(),
+			'tracking_message' => $message,
 			'sent_to_admin'    => false,
 			'plain_text'       => true,
 		), '', $this->template_base );

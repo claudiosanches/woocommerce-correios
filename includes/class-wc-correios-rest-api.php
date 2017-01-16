@@ -36,11 +36,7 @@ class WC_Correios_REST_API {
 	 * @return array
 	 */
 	public function legacy_orders_response( $data, $order, $fields ) {
-		if ( method_exists( $order, 'get_meta' ) ) {
-			$data['correios_tracking_code'] = $order->get_meta( '_correios_tracking_code' );
-		} else {
-			$data['correios_tracking_code'] = $order->correios_tracking_code;
-		}
+		$data['correios_tracking_code'] = implode( ',', wc_correios_get_tracking_codes( $order ) );
 
 		if ( $fields ) {
 			$data = WC()->api->WC_API_Customers->filter_response_fields( $data, $order, $fields );
@@ -93,13 +89,7 @@ class WC_Correios_REST_API {
 	 * @return string
 	 */
 	function get_tracking_code_callback( $data, $field, $request ) {
-		$order = wc_get_order( $data['id'] );
-
-		if ( method_exists( $order, 'get_meta' ) ) {
-			return $order->get_meta( '_correios_tracking_code' );
-		} else {
-			return $order->correios_tracking_code;
-		}
+		return implode( ',', wc_correios_get_tracking_codes( $data['id'] ) );
 	}
 
 	/**
