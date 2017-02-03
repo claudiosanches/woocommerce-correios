@@ -21,7 +21,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * National Registry cost.
 	 *
-	 * Cost based in 25/08/2016 from:
+	 * Cost based in 01/10/2016 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
@@ -31,7 +31,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Reasonable Registry cost.
 	 *
-	 * Cost based in 25/08/2016 from:
+	 * Cost based in 01/10/2016 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
@@ -41,8 +41,8 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Receipt Notice cost.
 	 *
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 01/10/2016 from:
+	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
@@ -51,8 +51,8 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Own Hands cost.
 	 *
-	 * Cost based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 01/10/2016 from:
+	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
@@ -61,8 +61,8 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Weight limit for reasonable registry.
 	 *
-	 * Value based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Value based in 01/02/2017 from:
+	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
 	 *
 	 * @var float
 	 */
