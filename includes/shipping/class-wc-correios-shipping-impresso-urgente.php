@@ -19,8 +19,8 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	/**
 	 * Weight limit for this shipping method.
 	 *
-	 * Value based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Value based in 01/02/2017 from:
+	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
 	 *
 	 * @var float
 	 */
@@ -41,24 +41,24 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 
 	/**
 	 * Get costs.
-	 * Costs based in 25/08/2016 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Costs based in 01/02/2017 from:
+	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
 	 *
 	 * @return array
 	 */
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_impresso_urgente_costs', array(
-			'20'  => 1.40,
-			'50'  => 1.95,
-			'100' => 2.60,
-			'150' => 3.20,
-			'200' => 3.75,
-			'250' => 4.40,
-			'300' => 4.95,
-			'350' => 5.55,
-			'400' => 6.05,
-			'450' => 6.70,
-			'500' => 7.25,
+			'20'  => 1.50,
+			'50'  => 2.10,
+			'100' => 2.85,
+			'150' => 3.50,
+			'200' => 4.10,
+			'250' => 4.80,
+			'300' => 5.40,
+			'350' => 6.05,
+			'400' => 6.60,
+			'450' => 7.30,
+			'500' => 7.90,
 		), $this->id, $this->instance_id );
 	}
 
