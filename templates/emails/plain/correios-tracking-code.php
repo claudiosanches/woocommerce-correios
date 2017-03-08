@@ -30,7 +30,7 @@ do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text )
 echo "\n";
 
 if ( function_exists( 'wc_get_email_order_items' ) ) {
-	wc_get_email_order_items( $order, array(
+	echo wc_get_email_order_items( $order, array(
 		'plain_text' => true,
 	) );
 } else {
