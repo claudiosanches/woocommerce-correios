@@ -88,10 +88,10 @@ class WC_Correios_Admin_Orders {
 	public function ajax_add_tracking_code() {
 		check_ajax_referer( 'woocommerce-correios-add-tracking-code', 'security' );
 
-		$args = filter_input_array( INPUT_POST, [
+		$args = filter_input_array( INPUT_POST, array(
 			'order_id'      => FILTER_SANITIZE_NUMBER_INT,
 			'tracking_code' => FILTER_SANITIZE_STRING,
-		] );
+		) );
 
 		$order = wc_get_order( $args['order_id'] );
 
@@ -108,10 +108,10 @@ class WC_Correios_Admin_Orders {
 	public function ajax_remove_tracking_code() {
 		check_ajax_referer( 'woocommerce-correios-remove-tracking-code', 'security' );
 
-		$args = filter_input_array( INPUT_POST, [
+		$args = filter_input_array( INPUT_POST, array(
 			'order_id'      => FILTER_SANITIZE_NUMBER_INT,
 			'tracking_code' => FILTER_SANITIZE_STRING,
-		] );
+		) );
 
 		wc_correios_update_tracking_code( $args['order_id'], $args['tracking_code'], true );
 
