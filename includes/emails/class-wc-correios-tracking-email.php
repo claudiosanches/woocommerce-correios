@@ -211,6 +211,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'tracking_message' => $this->get_tracking_message(),
 			'sent_to_admin'    => false,
 			'plain_text'       => false,
+			'email'            => $this,
 		), '', $this->template_base );
 
 		return ob_get_clean();
@@ -236,6 +237,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'tracking_message' => $message,
 			'sent_to_admin'    => false,
 			'plain_text'       => true,
+			'email'            => $this,
 		), '', $this->template_base );
 
 		return ob_get_clean();
