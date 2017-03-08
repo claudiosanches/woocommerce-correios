@@ -34,7 +34,7 @@ if ( function_exists( 'wc_get_email_order_items' ) ) {
 		'plain_text' => true,
 	) );
 } else {
-	$order->email_order_items_table( array(
+	echo $order->email_order_items_table( array(
 		'plain_text' => true,
 	) );
 }
