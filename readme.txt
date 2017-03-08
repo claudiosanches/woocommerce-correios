@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.1.7
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,7 +46,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 = Compatibilidade =
 
-Compatível com a versão 2.6.x do WooCommerce.
+Compatível com a versão 2.6.x e 2.7.x do WooCommerce.
 
 = Dúvidas? =
 
@@ -203,6 +203,14 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.2.0 - 2017/03/07 =
+
+- Adicionado suporte para o WooCommerce 2.7.
+- Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
+- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte a classes de entrega para todos os métodos de entrega.
+- Corrigida compatibilidade com PHP 7.1.
+
 = 3.1.7 - 2017/01/10 =
 
 - Corrigido o link de rastreio nas notas do pedido.
@@ -284,6 +292,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.1.7 =
+= 3.2.0 =
 
-- Corrigido o link de rastreio nas notas do pedido.
+- Adicionado suporte para o WooCommerce 2.7.
+- Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
+- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte a classes de entrega para todos os métodos de entrega.
+- Corrigida compatibilidade com PHP 7.1.

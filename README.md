@@ -1,10 +1,10 @@
 # WooCommerce Correios #
-**Contributors:** claudiosanches, rodrigoprior, matheuscl  
+**Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior), [matheuscl](https://profiles.wordpress.org/matheuscl)  
 **Donate link:** http://claudiosmweb.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.1.7  
+**Stable tag:** 3.2.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -46,7 +46,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 ### Compatibilidade ###
 
-Compatível com a versão 2.6.x do WooCommerce.
+Compatível com a versão 2.6.x e 2.7.x do WooCommerce.
 
 ### Dúvidas? ###
 
@@ -193,31 +193,39 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 ## Screenshots ##
 
 ### 1. Exemplo de áreas de entrega com os Correios. ###
-![1. Exemplo de áreas de entrega com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-1.png)
+![Exemplo de áreas de entrega com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-1.png)
 
 ### 2. Exemplo da tela de configurações dos métodos de entrega. ###
-![2. Exemplo da tela de configurações dos métodos de entrega.](http://ps.w.org/woocommerce-correios/assets/screenshot-2.png)
+![Exemplo da tela de configurações dos métodos de entrega.](http://ps.w.org/woocommerce-correios/assets/screenshot-2.png)
 
 ### 3. Configurações de integração com os Correios. ###
-![3. Configurações de integração com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-3.png)
+![Configurações de integração com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-3.png)
 
 ### 4. Campo para adicionar o código de rastreamento (tela de administração de pedidos). ###
-![4. Campo para adicionar o código de rastreamento (tela de administração de pedidos).](http://ps.w.org/woocommerce-correios/assets/screenshot-4.png)
+![Campo para adicionar o código de rastreamento (tela de administração de pedidos).](http://ps.w.org/woocommerce-correios/assets/screenshot-4.png)
 
 ### 5. Configurações do e-mails do código de rastreamento. ###
-![5. Configurações do e-mails do código de rastreamento.](http://ps.w.org/woocommerce-correios/assets/screenshot-5.png)
+![Configurações do e-mails do código de rastreamento.](http://ps.w.org/woocommerce-correios/assets/screenshot-5.png)
 
 ### 6. Exemplo dos métodos de entrega sendo exibidos na página de finalização. ###
-![6. Exemplo dos métodos de entrega sendo exibidos na página de finalização.](http://ps.w.org/woocommerce-correios/assets/screenshot-6.png)
+![Exemplo dos métodos de entrega sendo exibidos na página de finalização.](http://ps.w.org/woocommerce-correios/assets/screenshot-6.png)
 
 ### 7. Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta". ###
-![7. Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta".](http://ps.w.org/woocommerce-correios/assets/screenshot-7.png)
+![Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta".](http://ps.w.org/woocommerce-correios/assets/screenshot-7.png)
 
 ### 8. Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração. ###
-![8. Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração.](http://ps.w.org/woocommerce-correios/assets/screenshot-8.png)
+![Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração.](http://ps.w.org/woocommerce-correios/assets/screenshot-8.png)
 
 
 ## Changelog ##
+
+### 3.2.0 - 2017/03/07 ###
+
+- Adicionado suporte para o WooCommerce 2.7.
+- Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
+- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte a classes de entrega para todos os métodos de entrega.
+- Corrigida compatibilidade com PHP 7.1.
 
 ### 3.1.7 - 2017/01/10 ###
 
@@ -300,6 +308,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.1.7 ###
+### 3.2.0 ###
 
-- Corrigido o link de rastreio nas notas do pedido.
+- Adicionado suporte para o WooCommerce 2.7.
+- Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
+- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte a classes de entrega para todos os métodos de entrega.
+- Corrigida compatibilidade com PHP 7.1.

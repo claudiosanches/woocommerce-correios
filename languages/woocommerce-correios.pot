@@ -2,15 +2,16 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Correios 3.1.7\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/plugins/woocommerce-domination/\n"
-"POT-Creation-Date: 2017-01-10 03:49:05+00:00\n"
+"Project-Id-Version: WooCommerce Correios 3.2.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/woocommerce-correios\n"
+"POT-Creation-Date: 2017-03-08 02:20:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:26
@@ -25,48 +26,50 @@ msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:79
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:114
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:56
-#: includes/abstracts/abstract-wc-correios-shipping.php:91
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:57
+#: includes/abstracts/abstract-wc-correios-shipping.php:109
 #: includes/emails/class-wc-correios-tracking-email.php:50
-#: includes/integrations/class-wc-correios-integration.php:78
-#: includes/integrations/class-wc-correios-integration.php:96
+#: includes/integrations/class-wc-correios-integration.php:76
+#: includes/integrations/class-wc-correios-integration.php:94
 #: includes/shipping/class-wc-correios-shipping-legacy.php:79
 msgid "Enable/Disable"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:81
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:116
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:58
-#: includes/abstracts/abstract-wc-correios-shipping.php:93
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:59
+#: includes/abstracts/abstract-wc-correios-shipping.php:111
 #: includes/shipping/class-wc-correios-shipping-legacy.php:81
 msgid "Enable this shipping method"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:85
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:120
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:62
-#: includes/abstracts/abstract-wc-correios-shipping.php:97
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:63
+#: includes/abstracts/abstract-wc-correios-shipping.php:115
 #: includes/shipping/class-wc-correios-shipping-legacy.php:85
 msgid "Title"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:87
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:122
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:64
-#: includes/abstracts/abstract-wc-correios-shipping.php:99
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:65
+#: includes/abstracts/abstract-wc-correios-shipping.php:117
 #: includes/shipping/class-wc-correios-shipping-legacy.php:87
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:92
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:127
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:69
-#: includes/abstracts/abstract-wc-correios-shipping.php:104
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:70
+#: includes/abstracts/abstract-wc-correios-shipping.php:122
 msgid "Behavior Options"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:97
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:132
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:96
+#: includes/abstracts/abstract-wc-correios-shipping.php:135
 msgid "Shipping Class"
 msgstr ""
 
@@ -77,22 +80,22 @@ msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:106
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:155
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:95
-#: includes/abstracts/abstract-wc-correios-shipping.php:117
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:105
+#: includes/abstracts/abstract-wc-correios-shipping.php:144
 msgid "Delivery Time"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:108
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:157
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:97
-#: includes/abstracts/abstract-wc-correios-shipping.php:119
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:107
+#: includes/abstracts/abstract-wc-correios-shipping.php:146
 msgid "Show estimated delivery time"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:109
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:158
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:98
-#: includes/abstracts/abstract-wc-correios-shipping.php:120
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:108
+#: includes/abstracts/abstract-wc-correios-shipping.php:147
 msgid "Display the estimated delivery time in working days."
 msgstr ""
 
@@ -108,16 +111,16 @@ msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:122
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:171
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:103
-#: includes/abstracts/abstract-wc-correios-shipping.php:133
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:113
+#: includes/abstracts/abstract-wc-correios-shipping.php:160
 #: includes/shipping/class-wc-correios-shipping-legacy.php:123
 msgid "Handling Fee"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:124
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:173
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:105
-#: includes/abstracts/abstract-wc-correios-shipping.php:135
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:115
+#: includes/abstracts/abstract-wc-correios-shipping.php:162
 #: includes/shipping/class-wc-correios-shipping-legacy.php:125
 msgid ""
 "Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to "
@@ -126,86 +129,86 @@ msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:130
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:179
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:111
-#: includes/abstracts/abstract-wc-correios-shipping.php:141
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:121
+#: includes/abstracts/abstract-wc-correios-shipping.php:168
 msgid "Optional Services"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:132
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:181
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:113
-#: includes/abstracts/abstract-wc-correios-shipping.php:143
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:123
+#: includes/abstracts/abstract-wc-correios-shipping.php:170
 msgid "Use these options to add the value of each service provided by the Correios."
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:136
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:185
-#: includes/abstracts/abstract-wc-correios-shipping.php:147
+#: includes/abstracts/abstract-wc-correios-shipping.php:174
 msgid "Receipt Notice"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:138
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:187
-#: includes/abstracts/abstract-wc-correios-shipping.php:149
+#: includes/abstracts/abstract-wc-correios-shipping.php:176
 msgid "Enable receipt notice"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:139
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:188
-#: includes/abstracts/abstract-wc-correios-shipping.php:150
+#: includes/abstracts/abstract-wc-correios-shipping.php:177
 msgid "This controls whether to add costs of the receipt notice service."
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:144
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:193
-#: includes/abstracts/abstract-wc-correios-shipping.php:155
+#: includes/abstracts/abstract-wc-correios-shipping.php:182
 msgid "Own Hands"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:146
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:195
-#: includes/abstracts/abstract-wc-correios-shipping.php:157
+#: includes/abstracts/abstract-wc-correios-shipping.php:184
 msgid "Enable own hands"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:147
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:196
-#: includes/abstracts/abstract-wc-correios-shipping.php:158
+#: includes/abstracts/abstract-wc-correios-shipping.php:185
 msgid "This controls whether to add costs of the own hands service"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:152
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:201
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:117
-#: includes/abstracts/abstract-wc-correios-shipping.php:237
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:127
+#: includes/abstracts/abstract-wc-correios-shipping.php:264
 #: includes/shipping/class-wc-correios-shipping-legacy.php:224
 msgid "Testing"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:157
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:206
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:122
-#: includes/abstracts/abstract-wc-correios-shipping.php:242
-#: includes/integrations/class-wc-correios-integration.php:84
-#: includes/integrations/class-wc-correios-integration.php:137
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:132
+#: includes/abstracts/abstract-wc-correios-shipping.php:269
+#: includes/integrations/class-wc-correios-integration.php:82
+#: includes/integrations/class-wc-correios-integration.php:135
 #: includes/shipping/class-wc-correios-shipping-legacy.php:228
 msgid "Debug Log"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:159
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:208
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:124
-#: includes/abstracts/abstract-wc-correios-shipping.php:244
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:134
+#: includes/abstracts/abstract-wc-correios-shipping.php:271
 #: includes/shipping/class-wc-correios-shipping-legacy.php:230
 msgid "Enable logging"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping-carta.php:161
 #: includes/abstracts/abstract-wc-correios-shipping-impresso.php:210
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:126
-#: includes/abstracts/abstract-wc-correios-shipping.php:246
-#: includes/integrations/class-wc-correios-integration.php:88
-#: includes/integrations/class-wc-correios-integration.php:141
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:136
+#: includes/abstracts/abstract-wc-correios-shipping.php:273
+#: includes/integrations/class-wc-correios-integration.php:86
+#: includes/integrations/class-wc-correios-integration.php:139
 msgid "Log %s events, such as WebServices requests."
 msgstr ""
 
@@ -233,156 +236,169 @@ msgstr ""
 msgid "%s is a international shipping method from Correios."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:74
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:75
 msgid "Origin State"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:76
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:77
 msgid "The UF of the location your packages are delivered from."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:83
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:84
 msgid "Origin Locale"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:85
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:86
 msgid "The location of your packages are delivered from."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:90
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:91
 msgid "Capital"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping-international.php:91
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:92
 msgid "Interior"
 msgstr ""
 
+#: includes/abstracts/abstract-wc-correios-shipping-international.php:98
+#: includes/abstracts/abstract-wc-correios-shipping.php:137
+msgid "If necessary, select a shipping class to apply this method."
+msgstr ""
+
 #: includes/abstracts/abstract-wc-correios-shipping.php:81
-#: includes/integrations/class-wc-correios-integration.php:63
+#: includes/integrations/class-wc-correios-integration.php:62
 msgid "View logs."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:109
-msgid "Origin Postcode"
+#: includes/abstracts/abstract-wc-correios-shipping.php:92
+msgid "Any Shipping Class"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:111
-msgid "The postcode of the location your packages are delivered from."
-msgstr ""
-
-#: includes/abstracts/abstract-wc-correios-shipping.php:125
-msgid "Additional Days"
+#: includes/abstracts/abstract-wc-correios-shipping.php:93
+msgid "No Shipping Class"
 msgstr ""
 
 #: includes/abstracts/abstract-wc-correios-shipping.php:127
+msgid "Origin Postcode"
+msgstr ""
+
+#: includes/abstracts/abstract-wc-correios-shipping.php:129
+msgid "The postcode of the location your packages are delivered from."
+msgstr ""
+
+#: includes/abstracts/abstract-wc-correios-shipping.php:152
+msgid "Additional Days"
+msgstr ""
+
+#: includes/abstracts/abstract-wc-correios-shipping.php:154
 msgid "Additional working days to the estimated delivery."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:163
+#: includes/abstracts/abstract-wc-correios-shipping.php:190
 msgid "Declare Value for Insurance"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:165
+#: includes/abstracts/abstract-wc-correios-shipping.php:192
 msgid "Enable declared value"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:166
+#: includes/abstracts/abstract-wc-correios-shipping.php:193
 msgid ""
 "This controls if the price of the package must be declared for insurance "
 "purposes."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:171
+#: includes/abstracts/abstract-wc-correios-shipping.php:198
 msgid "Service Options"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:176
+#: includes/abstracts/abstract-wc-correios-shipping.php:203
 msgid "Service Code"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:178
+#: includes/abstracts/abstract-wc-correios-shipping.php:205
 msgid "Service code, use this for custom codes."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:184
+#: includes/abstracts/abstract-wc-correios-shipping.php:211
 #: includes/shipping/class-wc-correios-shipping-esedex.php:40
 msgid "Service Type"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:186
+#: includes/abstracts/abstract-wc-correios-shipping.php:213
 #: includes/shipping/class-wc-correios-shipping-esedex.php:42
 #: includes/shipping/class-wc-correios-shipping-legacy.php:136
 msgid "Choose between conventional or corporate service."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:191
+#: includes/abstracts/abstract-wc-correios-shipping.php:218
 #: includes/shipping/class-wc-correios-shipping-legacy.php:140
 msgid "Conventional"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:192
+#: includes/abstracts/abstract-wc-correios-shipping.php:219
 #: includes/shipping/class-wc-correios-shipping-esedex.php:47
 #: includes/shipping/class-wc-correios-shipping-legacy.php:141
 msgid "Corporate"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:196
+#: includes/abstracts/abstract-wc-correios-shipping.php:223
 #: includes/shipping/class-wc-correios-shipping-legacy.php:145
 msgid "Administrative Code"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:198
+#: includes/abstracts/abstract-wc-correios-shipping.php:225
 msgid "Your Correios login. It's usually your CNPJ."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:203
+#: includes/abstracts/abstract-wc-correios-shipping.php:230
 #: includes/shipping/class-wc-correios-shipping-legacy.php:151
 msgid "Administrative Password"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:205
+#: includes/abstracts/abstract-wc-correios-shipping.php:232
 #: includes/shipping/class-wc-correios-shipping-legacy.php:153
 msgid "Your Correios password."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:210
+#: includes/abstracts/abstract-wc-correios-shipping.php:237
 #: includes/shipping/class-wc-correios-shipping-legacy.php:197
 msgid "Package Standard"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:212
+#: includes/abstracts/abstract-wc-correios-shipping.php:239
 msgid "Minimum measure for your shipping packages."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:216
+#: includes/abstracts/abstract-wc-correios-shipping.php:243
 #: includes/shipping/class-wc-correios-shipping-legacy.php:203
 msgid "Minimum Height"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:218
+#: includes/abstracts/abstract-wc-correios-shipping.php:245
 msgid "Minimum height of your shipping packages. Correios needs at least 2cm."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:223
+#: includes/abstracts/abstract-wc-correios-shipping.php:250
 #: includes/shipping/class-wc-correios-shipping-legacy.php:210
 msgid "Minimum Width"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:225
+#: includes/abstracts/abstract-wc-correios-shipping.php:252
 msgid "Minimum width of your shipping packages. Correios needs at least 11cm."
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:230
+#: includes/abstracts/abstract-wc-correios-shipping.php:257
 #: includes/shipping/class-wc-correios-shipping-legacy.php:217
 msgid "Minimum Length"
 msgstr ""
 
-#: includes/abstracts/abstract-wc-correios-shipping.php:232
+#: includes/abstracts/abstract-wc-correios-shipping.php:259
 msgid "Minimum length of your shipping packages. Correios needs at least 16cm."
 msgstr ""
 
-#: includes/admin/class-wc-correios-admin-orders.php:48
-msgid "Tracking code:"
+#: includes/admin/class-wc-correios-admin-orders.php:60
+msgid "Are you sure you want to remove this tracking code?"
 msgstr ""
 
 #: includes/admin/views/html-admin-help-message.php:14
@@ -417,6 +433,41 @@ msgstr ""
 
 #: includes/admin/views/html-admin-shipping-method-settings.php:19
 msgid "More about %s."
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:16
+#: includes/admin/views/html-meta-box-tracking-code.php:19
+#: includes/admin/views/html-meta-box-tracking-code.php:41
+msgid "Tracking code"
+msgid_plural "Tracking codes:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:19
+#: includes/admin/views/html-meta-box-tracking-code.php:41
+msgid "View tracking code"
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:19
+#: includes/admin/views/html-meta-box-tracking-code.php:41
+msgid "Remove tracking code"
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:26
+msgid "Add tracking code"
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:28
+msgid "Add new tracking code"
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:35
+msgid "Tracking codes:"
+msgstr ""
+
+#: includes/admin/views/html-meta-box-tracking-code.php:37
+#: templates/myaccount/tracking-codes.php:15
+msgid "Tracking code:"
 msgstr ""
 
 #: includes/class-wc-correios-autofill-addresses.php:257
@@ -454,8 +505,8 @@ msgstr ""
 
 #: includes/emails/class-wc-correios-tracking-email.php:31
 msgid ""
-"To track your delivery, use the following the tracking code: "
-"{tracking_code}."
+"To track your delivery, use the following the tracking code(s): "
+"{tracking_code}"
 msgstr ""
 
 #: includes/emails/class-wc-correios-tracking-email.php:33
@@ -522,53 +573,54 @@ msgstr ""
 #: includes/shipping/class-wc-correios-shipping-legacy.php:17
 #: includes/shipping/class-wc-correios-shipping-legacy.php:89
 #: includes/shipping/class-wc-correios-shipping-legacy.php:426
-#: templates/myaccount/tracking-code.php:16
 msgid "Correios"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:73
-#: includes/integrations/class-wc-correios-integration.php:88
+#: includes/integrations/class-wc-correios-integration.php:71
+#: includes/integrations/class-wc-correios-integration.php:86
 msgid "Tracking History Table"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:75
-#: includes/integrations/class-wc-correios-integration.php:93
+#: includes/integrations/class-wc-correios-integration.php:73
+#: includes/integrations/class-wc-correios-integration.php:91
 msgid ""
 "Displays a table with informations about the shipping in My Account > View "
 "Order page."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:80
+#: includes/integrations/class-wc-correios-integration.php:78
 msgid "Enable Tracking History Table"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:86
+#: includes/integrations/class-wc-correios-integration.php:84
 msgid "Enable logging for Tracking History"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:91
-#: includes/integrations/class-wc-correios-integration.php:141
+#: includes/integrations/class-wc-correios-integration.php:89
+#: includes/integrations/class-wc-correios-integration.php:139
 msgid "Autofill Addresses"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:98
+#: includes/integrations/class-wc-correios-integration.php:96
 msgid "Enable Autofill Addresses"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:102
+#: includes/integrations/class-wc-correios-integration.php:100
 msgid "Postcodes Validity"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:106
+#: includes/integrations/class-wc-correios-integration.php:104
 msgid ""
 "Defines how long a postcode will stay saved in the database before a new "
 "query."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:108
+#: includes/integrations/class-wc-correios-integration.php:106
 msgid "1 month"
 msgstr ""
 
+#: includes/integrations/class-wc-correios-integration.php:107
+#: includes/integrations/class-wc-correios-integration.php:108
 #: includes/integrations/class-wc-correios-integration.php:109
 #: includes/integrations/class-wc-correios-integration.php:110
 #: includes/integrations/class-wc-correios-integration.php:111
@@ -578,67 +630,65 @@ msgstr ""
 #: includes/integrations/class-wc-correios-integration.php:115
 #: includes/integrations/class-wc-correios-integration.php:116
 #: includes/integrations/class-wc-correios-integration.php:117
-#: includes/integrations/class-wc-correios-integration.php:118
-#: includes/integrations/class-wc-correios-integration.php:119
 msgid "%d month"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:120
+#: includes/integrations/class-wc-correios-integration.php:118
 msgid "Forever"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:124
+#: includes/integrations/class-wc-correios-integration.php:122
 msgid "Force Autofill"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:126
+#: includes/integrations/class-wc-correios-integration.php:124
 msgid "Enable Force Autofill"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:127
+#: includes/integrations/class-wc-correios-integration.php:125
 msgid ""
 "When enabled will autofill all addresses after the user finish to fill the "
 "postcode, even if the addresses are already filled."
 msgstr ""
 
+#: includes/integrations/class-wc-correios-integration.php:129
 #: includes/integrations/class-wc-correios-integration.php:131
-#: includes/integrations/class-wc-correios-integration.php:133
 msgid "Empty Database"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:134
+#: includes/integrations/class-wc-correios-integration.php:132
 msgid ""
 "Delete all the saved postcodes in the database, use this option if you have "
 "issues with outdated postcodes."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:139
+#: includes/integrations/class-wc-correios-integration.php:137
 msgid "Enable logging for Autofill Addresses"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:160
+#: includes/integrations/class-wc-correios-integration.php:158
 msgid ""
 "It's required have installed the %s on your server in order to integrate "
 "with the services of the Correios!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:160
+#: includes/integrations/class-wc-correios-integration.php:158
 msgid "SOAP module"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:169
+#: includes/integrations/class-wc-correios-integration.php:167
 msgid "Are you sure you want to delete all postcodes from the database?"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:274
+#: includes/integrations/class-wc-correios-integration.php:272
 msgid "Missing parameters!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:279
+#: includes/integrations/class-wc-correios-integration.php:277
 msgid "Invalid nonce!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:288
+#: includes/integrations/class-wc-correios-integration.php:286
 msgid "Postcode database emptied successfully!"
 msgstr ""
 
@@ -684,7 +734,7 @@ msgid "Declare"
 msgstr ""
 
 #: includes/shipping/class-wc-correios-shipping-legacy.php:103
-msgid "None"
+msgid "No"
 msgstr ""
 
 #: includes/shipping/class-wc-correios-shipping-legacy.php:107
@@ -835,8 +885,12 @@ msgstr ""
 msgid "Area with delivery temporarily subjected to different periods."
 msgstr ""
 
-#: includes/wc-correios-functions.php:150
+#: includes/wc-correios-functions.php:189
 msgid "Added a Correios tracking code: %s"
+msgstr ""
+
+#: includes/wc-correios-functions.php:208
+msgid "Removed a Correios tracking code: %s"
 msgstr ""
 
 #: templates/emails/correios-tracking-code.php:19
@@ -844,56 +898,28 @@ msgstr ""
 msgid "For your reference, your order details are shown below."
 msgstr ""
 
-#: templates/emails/correios-tracking-code.php:23
-msgid "Order:"
-msgstr ""
-
-#: templates/emails/correios-tracking-code.php:28
-msgid "Product"
-msgstr ""
-
-#: templates/emails/correios-tracking-code.php:29
-msgid "Quantity"
-msgstr ""
-
-#: templates/emails/correios-tracking-code.php:30
-msgid "Price"
-msgstr ""
-
-#: templates/emails/plain/correios-tracking-code.php:24
-msgid "Order number: %s"
-msgstr ""
-
-#: templates/emails/plain/correios-tracking-code.php:25
-msgid "Order date: %s"
-msgstr ""
-
-#: templates/myaccount/tracking-code.php:16
-msgid "Your the tracking code:"
-msgstr ""
-
 #: templates/myaccount/tracking-history-table.php:15
-msgid "Correios Delivery History"
-msgstr ""
-
-#: templates/myaccount/tracking-history-table.php:17
 msgid "History for the tracking code:"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:21
+#: templates/myaccount/tracking-history-table.php:19
 msgid "Date"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:22
+#: templates/myaccount/tracking-history-table.php:20
 msgid "Location"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:23
+#: templates/myaccount/tracking-history-table.php:21
 msgid "Status"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:34
+#: templates/myaccount/tracking-history-table.php:32
 msgid "In transit to %s"
+msgstr ""
+
+#: templates/myaccount/tracking-title.php:15
+msgid "Correios Delivery History"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
