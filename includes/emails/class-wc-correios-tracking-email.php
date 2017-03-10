@@ -156,13 +156,14 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	/**
 	 * Trigger email.
 	 *
+	 * @param  int      $order_id      Order ID.
 	 * @param  WC_Order $order         Order data.
 	 * @param  string   $tracking_code Tracking code.
 	 */
-	public function trigger( $order, $tracking_code = '' ) {
+	public function trigger( $order_id, $order = false, $tracking_code = '' ) {
 		// Get the order object while resending emails.
-		if ( is_numeric( $order ) ) {
-			$order = wc_get_order( $order );
+		if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
+			$order = wc_get_order( $order_id );
 		}
 
 		if ( is_object( $order ) ) {

@@ -122,7 +122,11 @@ function wc_correios_trigger_tracking_code_email( $order, $tracking_code ) {
 	$notification = $mailer->emails['WC_Correios_Tracking_Email'];
 
 	if ( 'yes' === $notification->enabled ) {
-		$notification->trigger( $order, $tracking_code );
+		if ( method_exists( $order, 'get_id' ) ) {
+			$notification->trigger( $order->get_id(), $order, $tracking_code );
+		} else {
+			$notification->trigger( $order->id, $order, $tracking_code );
+		}
 	}
 }
 
