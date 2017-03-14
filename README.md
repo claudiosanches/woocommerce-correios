@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.2.1  
+**Stable tag:** 3.2.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -46,7 +46,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 ### Compatibilidade ###
 
-Compatível com a versão 2.6.x e 2.7.x do WooCommerce.
+Compatível com a versão 2.6.x e 3.0.x do WooCommerce.
 
 ### Dúvidas? ###
 
@@ -219,15 +219,20 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.2.2 - 2017/03/14 ###
+
+- Corrigido o salvamento dos códigos de rastreamento em versões anteriores ao WooCommerce 3.0.
+- Corrigida compatibilidade com o envio de e-mails dos códigos de rastreamento no WooCommerce 3.0.
+
 ### 3.2.1 - 2017/03/08 ###
 
 - Corrigida compatiblidade com PHP 5.2 e 5.3 na nova ferramenta de cadastro de código de rastreamento.
 
 ### 3.2.0 - 2017/03/07 ###
 
-- Adicionado suporte para o WooCommerce 2.7.
+- Adicionado suporte para o WooCommerce 3.0.
 - Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
-- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte para vários códigos de rastreamento para cada pedido.
 - Adicionado suporte a classes de entrega para todos os métodos de entrega.
 - Corrigida compatibilidade com PHP 7.1.
 
@@ -312,11 +317,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.2.1 ###
+### 3.2.2 ###
 
-- Adicionado suporte para o WooCommerce 2.7.
+- Adicionado suporte para o WooCommerce 3.0.
 - Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
-- Adicionado suporte para vários códigos de rastreamento para cara pedido.
+- Adicionado suporte para vários códigos de rastreamento para cada pedido.
 - Adicionado suporte a classes de entrega para todos os métodos de entrega.
-- Corrigida compatibilidade com PHP 7.1.
-- Corrigida compatiblidade com PHP 5.2 e 5.3 na nova ferramenta de cadastro de código de rastreamento.
+- Correções em geral.
