@@ -133,12 +133,14 @@ function wc_correios_trigger_tracking_code_email( $order, $tracking_code ) {
 /**
  * Get tracking codes.
  *
- * @param  WC_Order|int $order_id Order ID or order data.
+ * @param  WC_Order|int $order Order ID or order data.
  *
  * @return array
  */
-function wc_correios_get_tracking_codes( $order_id ) {
-	$order = wc_get_order( $order_id );
+function wc_correios_get_tracking_codes( $order ) {
+	if ( is_numeric( $order ) ) {
+		$order = wc_get_order( $order );
+	}
 
 	if ( method_exists( $order, 'get_meta' ) ) {
 		$codes = $order->get_meta( '_correios_tracking_code' );
@@ -152,15 +154,19 @@ function wc_correios_get_tracking_codes( $order_id ) {
 /**
  * Update tracking code.
  *
- * @param  int    $order_id      Order ID.
- * @param  string $tracking_code Tracking code.
- * @param  bool   $remove        If should remove the tracking code.
+ * @param  WC_Order|int $order         Order ID or order data.
+ * @param  string       $tracking_code Tracking code.
+ * @param  bool         remove         If should remove the tracking code.
  *
  * @return bool
  */
-function wc_correios_update_tracking_code( $order_id, $tracking_code, $remove = false ) {
+function wc_correios_update_tracking_code( $order, $tracking_code, $remove = false ) {
 	$tracking_code = sanitize_text_field( $tracking_code );
-	$order         = wc_get_order( $order_id );
+
+	// Get order instance.
+	if ( is_numeric( $order ) ) {
+		$order = wc_get_order( $order );
+	}
 
 	if ( method_exists( $order, 'get_meta' ) ) {
 		$tracking_codes = $order->get_meta( '_correios_tracking_code' );
@@ -175,7 +181,7 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code, $remove = 
 			$order->delete_meta_data( '_correios_tracking_code' );
 			$order->save();
 		} else {
-			delete_post_meta( $order_id, '_correios_tracking_code' );
+			delete_post_meta( $order->id, '_correios_tracking_code' );
 		}
 
 		return true;
@@ -186,7 +192,7 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code, $remove = 
 			$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
 			$order->save();
 		} else {
-			update_post_meta( $order_id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
+			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
 		}
 
 		// Add order note.
@@ -205,7 +211,7 @@ function wc_correios_update_tracking_code( $order_id, $tracking_code, $remove = 
 			$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
 			$order->save();
 		} else {
-			update_post_meta( $order_id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
+			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
 		}
 
 		// Add order note.
