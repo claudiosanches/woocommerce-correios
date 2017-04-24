@@ -98,16 +98,11 @@ class WC_Correios_Package {
 	 */
 	protected function cubage_total( $height, $width, $length ) {
 		// Sets the cubage of all products.
-		$all         = array();
 		$total       = 0;
 		$total_items = count( $height );
 
 		for ( $i = 0; $i < $total_items; $i++ ) {
-			$all[ $i ] = $height[ $i ] * $width[ $i ] * $length[ $i ];
-		}
-
-		foreach ( $all as $value ) {
-			$total += $value;
+			$total += $height[ $i ] * $width[ $i ] * $length[ $i ];
 		}
 
 		return $total;
