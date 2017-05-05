@@ -18,11 +18,11 @@ class WC_Correios_Shipping_SEDEX extends WC_Correios_Shipping {
 
 	/**
 	 * Service code.
-	 * 40010 - SEDEX without contract.
+	 * 04014 - SEDEX without contract.
 	 *
 	 * @var string
 	 */
-	protected $code = '40010';
+	protected $code = '04014';
 
 	/**
 	 * Corporate code.
