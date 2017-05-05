@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.2.2  
+**Stable tag:** 3.3.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -219,6 +219,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.3.0 - 2017/05/05 ###
+
+- Atualizados os códigos do PAC e Sedex.
+- Atualizada a forma que são exibidos os códigos de rastreamento, uma vez que os Correios desativou o link que era utilizado.
+
 ### 3.2.2 - 2017/03/14 ###
 
 - Corrigido o salvamento dos códigos de rastreamento em versões anteriores ao WooCommerce 3.0.
@@ -317,10 +322,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.2.2 ###
+### 3.3.0 ###
 
-- Adicionado suporte para o WooCommerce 3.0.
-- Atualizados os valores do Impresso Normal e Impresso Urgente (Obrigado Alex Koti).
-- Adicionado suporte para vários códigos de rastreamento para cada pedido.
-- Adicionado suporte a classes de entrega para todos os métodos de entrega.
-- Correções em geral.
+- Atualizados os códigos do PAC e Sedex.
+- Atualizada a forma que são exibidos os códigos de rastreamento, uma vez que os Correios desativou o link que era utilizado.
