@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.2.0
+ * @version 3.3.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,15 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<p class="wc-correios-tracking__description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=<?php echo esc_attr( $code ); ?>" target="_blank"><?php echo esc_html( $code ) ?></a></p>
+<p class="wc-correios-tracking__description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <strong><?php echo esc_html( $code ); ?></strong></p>
 
 <table class="wc-correios-tracking__table woocommerce-table shop_table shop_table_responsive">
-	<tr>
-		<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
-		<th><?php esc_html_e( 'Location', 'woocommerce-correios' ); ?></th>
-		<th><?php esc_html_e( 'Status', 'woocommerce-correios' ); ?></th>
-	</tr>
-
+	<thead>
+		<tr>
+			<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
+			<th><?php esc_html_e( 'Location', 'woocommerce-correios' ); ?></th>
+			<th><?php esc_html_e( 'Status', 'woocommerce-correios' ); ?></th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php foreach ( $events as $event ) : ?>
 		<tr>
 			<td><?php echo esc_html( $event->data . ' ' . $event->hora ); ?></td>
@@ -37,4 +39,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</td>
 		</tr>
 	<?php endforeach; ?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">
+				<form method="POST" target="_blank" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" class="wc-correios-tracking__form">
+					<input type="hidden" name="Objetos" value="<?php echo esc_attr( $code ); ?>">
+					<input class="wc-correios-tracking__button button" type="submit" value="<?php esc_attr_e( 'Query on Correios', 'woocommerce-correios' ); ?>">
+				</form>
+			</td>
+		</tr>
+	</tfoot>
 </table>

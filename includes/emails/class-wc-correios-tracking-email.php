@@ -125,11 +125,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * @return string
 	 */
 	public function get_tracking_code_url( $tracking_code ) {
-		$url = sprintf( '<a href="http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%1$s" target="_blank">%1$s</a>', $tracking_code );
-
-		if ( apply_filters( 'woocommerce_correios_enable_tracking_history', false ) ) {
-			$url = sprintf( '<a href="%s#wc-correios-tracking">%s</a>', $this->object->get_view_order_url(), $tracking_code );
-		}
+		$url = sprintf( '<a href="%s#wc-correios-tracking">%s</a>', $this->object->get_view_order_url(), $tracking_code );
 
 		return apply_filters( 'woocommerce_correios_email_tracking_core_url', $url, $tracking_code, $this->object );
 	}

@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.2.0
+ * @version 3.3.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,4 +12,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<h2 id="#wc-correios-tracking" class="wc-correios-tracking__title"><?php esc_html_e( 'Correios Delivery History', 'woocommerce-correios' ); ?></h2>
+<h2 id="#wc-correios-tracking" class="wc-correios-tracking__title"><?php esc_html_e( 'Correios delivery tracking', 'woocommerce-correios' ); ?></h2>
