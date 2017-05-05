@@ -18,11 +18,11 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 
 	/**
 	 * Service code.
-	 * 41106 - PAC without contract.
+	 * 04510 - PAC without contract.
 	 *
 	 * @var string
 	 */
-	protected $code = '41106';
+	protected $code = '04510';
 
 	/**
 	 * Corporate code.
