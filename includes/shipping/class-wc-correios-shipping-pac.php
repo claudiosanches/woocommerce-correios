@@ -26,11 +26,11 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 
 	/**
 	 * Corporate code.
-	 * 41068 - PAC with contract.
+	 * 04669 - PAC with contract.
 	 *
 	 * @var string
 	 */
-	protected $corporate_code = '41068';
+	protected $corporate_code = '04669';
 
 	/**
 	 * Initialize PAC.
