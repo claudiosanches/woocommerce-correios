@@ -274,8 +274,8 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 		$services['SEDEX Hoje'] = ( 'yes' == $this->service_sedex_hoje ) ? '40290' : '';
 
 		if ( 'corporate' == $this->corporate_service ) {
-			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '41068' : '';
-			$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '40096' : '';
+			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '04669' : '';
+			$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '04162' : '';
 			$services['e-SEDEX'] = ( 'yes' == $this->service_esedex ) ? '81019' : '';
 		}
 
@@ -338,8 +338,8 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 			'04014' => 'SEDEX',
 			'40215' => 'SEDEX 10',
 			'40290' => 'SEDEX Hoje',
-			'41068' => 'PAC',
-			'40096' => 'SEDEX',
+			'04669' => 'PAC',
+			'04162' => 'SEDEX',
 			'81019' => 'e-SEDEX',
 		);
 
