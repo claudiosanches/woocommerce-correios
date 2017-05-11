@@ -96,14 +96,15 @@ class WC_Correios_Tracking_History {
 					$objects = (array) $response->return->objeto;
 
 					// Fix when return only last event for each object.
-					if ( is_object( $objects[0]->evento ) ) {
-						$new_objects = array();
-						foreach ( $objects as $key => $object ) {
-							$new_objects[ $key ] = $object;
-							$new_objects[ $key ]->evento = array( $new_objects[ $key ]->evento );
+					$_objects = array();
+					foreach ( $objects as $key => $object ) {
+						$_objects[ $key ] = $object;
+
+						if ( is_object( $object->evento ) ) {
+							$_objects[ $key ]->evento = array( $_objects[ $key ]->evento );
 						}
-						$objects = $new_objects;
 					}
+					$objects = $_objects;
 
 				// Handle single object.
 				} elseif ( is_object( $response->return->objeto ) ) {
@@ -115,6 +116,7 @@ class WC_Correios_Tracking_History {
 					}
 				}
 			}
+
 		} catch ( Exception $e ) {
 			$this->logger( sprintf( 'An error occurred while trying to fetch the tracking history for "%s": %s', implode( ', ', $tracking_codes ), $e->getMessage() ) );
 		}
