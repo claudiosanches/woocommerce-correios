@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.3.0  
+**Stable tag:** 3.4.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -219,6 +219,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.4.0 - 2017/05/13 ###
+
+- Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
+- Adicionado novos links com código de rastreamneto na lista de pedidos no admin.
+- Corrigido códigos de rastreamento que ainda não foram atualizados na página de detalhes do pedido em "Minha conta".
+
 ### 3.3.0 - 2017/05/05 ###
 
 - Atualizados os códigos do PAC e Sedex.
@@ -322,7 +328,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.3.0 ###
+### 3.4.0 ###
 
-- Atualizados os códigos do PAC e Sedex.
-- Atualizada a forma que são exibidos os códigos de rastreamento, uma vez que os Correios desativou o link que era utilizado.
+- Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
+- Adicionado novos links com código de rastreamneto na lista de pedidos no admin.
+- Corrigido códigos de rastreamento que ainda não foram atualizados na página de detalhes do pedido em "Minha conta".
