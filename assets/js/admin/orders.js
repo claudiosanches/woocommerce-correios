@@ -14,8 +14,7 @@ jQuery( function( $ ) {
 		init: function() {
 			$( document.body )
 				.on( 'click', '.correios-tracking-code .dashicons-dismiss', this.removeTrackingCode )
-				.on( 'click', '.correios-tracking-code .button-secondary', this.addTrackingCode )
-				.on( 'click', '.correios-tracking-code a', this.openTrackingLink );
+				.on( 'click', '.correios-tracking-code .button-secondary', this.addTrackingCode );
 		},
 
 		/**
@@ -140,28 +139,6 @@ jQuery( function( $ ) {
 					self.unblock();
 				}
 			});
-		},
-
-		/**
-		 * Open tracking link into Correios.
-		 *
-		 * @param {Object} evt Current event.
-		 */
-		openTrackingLink: function( evt ) {
-			evt.preventDefault();
-
-			// Remove old form.
-			$( '#wc_correios_tracking_form' ).remove();
-
-			var code  = $( this ).text();
-			var form = '<form id="wc_correios_tracking_form" method="post" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" target="_blank" style="display: none;">';
-			form += '<input type="hidden" name="objetos" value="' + code + '" />';
-			form += '</form>';
-
-			$( 'body' ).prepend( form );
-
-			// Submit form.
-			$( '#wc_correios_tracking_form' ).submit();
 		}
 	};
 
