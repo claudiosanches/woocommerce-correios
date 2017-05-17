@@ -283,6 +283,27 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Validate price field.
+	 *
+	 * Make sure the data is escaped correctly, etc.
+	 * Includes "%" back.
+	 *
+	 * @param  string $key   Field key.
+	 * @param  string $value Posted value/
+	 * @return string
+	 */
+	public function validate_price_field( $key, $value ) {
+		$value     = is_null( $value ) ? '' : $value;
+		$new_value = '' === $value ? '' : wc_format_decimal( trim( stripslashes( $value ) ) );
+
+		if ( '%' === substr( $value, -1 ) ) {
+			$new_value .= '%';
+		}
+
+		return $new_value;
+	}
+
+	/**
 	 * Get Correios service code.
 	 *
 	 * @return string
