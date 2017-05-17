@@ -4,7 +4,7 @@ Donate link: http://claudiosmweb.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.4.1 - 2017/05/17 =
+
+- Restaurado o suporte de valores em porcentagem para "Taxa de manuseio".
+
 = 3.4.0 - 2017/05/13 =
 
 - Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
@@ -312,8 +316,9 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.4.0 =
+= 3.4.1 =
 
 - Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
 - Adicionado novos links com código de rastreamneto na lista de pedidos no admin.
 - Corrigido códigos de rastreamento que ainda não foram atualizados na página de detalhes do pedido em "Minha conta".
+- Restaurado o suporte de valores em porcentagem para "Taxa de manuseio".
