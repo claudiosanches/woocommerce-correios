@@ -536,6 +536,7 @@ class WC_Correios_Webservice {
 		$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
 
 		if ( is_wp_error( $response ) ) {
+			do_action('woocommerce_correios_shipping_error_response', $response);
 			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 			}
@@ -552,10 +553,12 @@ class WC_Correios_Webservice {
 				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
+				do_action('woocommerce_correios_shipping_ws_response', $response);
 
 				$shipping = $result->cServico;
 			}
 		} else {
+			do_action('woocommerce_correios_shipping_error_ws_response', $response);
 			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 			}
