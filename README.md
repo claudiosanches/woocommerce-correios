@@ -3,7 +3,7 @@
 **Donate link:** https://claudiosanches.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
-**Tested up to:** 4.7  
+**Tested up to:** 4.8  
 **Stable tag:** 3.5.0  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
