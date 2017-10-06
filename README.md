@@ -1,10 +1,11 @@
 # WooCommerce Correios #
 **Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior), [matheuscl](https://profiles.wordpress.org/matheuscl)  
-**Donate link:** http://claudiosmweb.com/doacoes/  
+**Donate link:** https://claudiosanches.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 4.7  
-**Stable tag:** 3.4.1  
+**Stable tag:** 3.5.0  
+**Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -46,14 +47,14 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 ### Compatibilidade ###
 
-Compatível com a versão 2.6.x e 3.0.x do WooCommerce.
+Requer WooCommerce 3.0 ou posterior para funcionar.
 
 ### Dúvidas? ###
 
 Você pode esclarecer suas dúvidas usando:
 
 - A nossa sessão de [FAQ](http://wordpress.org/extend/plugins/woocommerce-correios/faq/).
-- Utilizando o nosso [fórum no Github](https://github.com/claudiosmweb/woocommerce-correios).
+- Utilizando o nosso [fórum no Github](https://github.com/claudiosanches/woocommerce-correios).
 - Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/woocommerce-correios).
 
 ## Installation ##
@@ -87,7 +88,7 @@ Este plugin esta licenciado como GPL.
 
 ### O que eu preciso para utilizar este plugin? ###
 
-* WooCommerce 2.6 ou superior.
+* WooCommerce 3.0 ou posterior.
 * [SimpleXML](http://php.net/manual/pt_BR/book.simplexml.php) ativado no PHP (note que já é ativado por padrão no PHP 5).
 * Modulo [SOAP](http://php.net/manual/pt_BR/book.soap.php) (utilizado para a tabela de histórico de rastreamento e autopreenchimento de endereços).
 * Adicionar peso e dimensões nos produtos que pretende entregar.
@@ -184,11 +185,11 @@ Este plugin utiliza o Webservices dos Correios para calcular o frete e quando es
 
 Se estiver tendo problemas, antes de tudo ative a opção de **Log de depuração** do método que você esta tendo problema e tente novamente cotar o frete, fazendo isso, um arquivo de log é criado e são registradas as respostas do Webservice dos Correios, leia o arquivo de log, nele é descrito exatamente o que esta acontecendo, tanto o que foi concluindo com sucesso ou não.
 
-Se ainda não foi capaz de solucionar o problema, copie o conteúdo do arquivo de log, cole no [pastebin.com](http://pastebin.com), salve e pegue o link gerado, depois disso abra um tópico informando o seu problema no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios#postform).
+Se ainda não foi capaz de solucionar o problema, copie o conteúdo do arquivo de log, cole no [pastebin.com](http://pastebin.com), salve e pegue o link gerado, depois disso abra um tópico informando o seu problema no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios/#new-post).
 
 ### Dúvidas sobre o funcionamento do plugin? ###
 
-Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios#postform), vou responder conforme eu tenho tempo livre e caso sua dúvida for relacionada com o funcionamento deste plguin.
+Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios/#new-post), vou responder conforme eu tenho tempo livre e caso sua dúvida for relacionada com o funcionamento deste plguin.
 
 ## Screenshots ##
 
@@ -218,6 +219,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 
 ## Changelog ##
+
+### 3.5.0 - 2017/10/06 ###
+
+- Adicionada opção para adicionar peso extra por pacote.
+- Adicionado suporte para entrega em áreas de risco.
+- Corrigido problema de valor declaro do PAC.
 
 ### 3.4.1 - 2017/05/17 ###
 
@@ -328,7 +335,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Atualizada a integração com o sistema que gera o histórico de rastreamento do pedido.
 - Removida a opção de simulador de frete na página do produto.
 - Integrado o campo de "correios_tracking_code" dos pedidos com a API REST do WooCommerce.
-- E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosmweb/woocommerce-correios/compare/2.3.0...3.0.0).
+- E mais outras várias alterações que podem ser verificadas pelo [GitHub](https://github.com/claudiosanches/woocommerce-correios/compare/2.3.0...3.0.0).
 
 ## Upgrade Notice ##
 
