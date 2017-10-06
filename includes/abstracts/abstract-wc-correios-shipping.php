@@ -66,6 +66,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->minimum_height     = $this->get_option( 'minimum_height' );
 		$this->minimum_width      = $this->get_option( 'minimum_width' );
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
+		$this->extra_weight       = $this->get_option( 'extra_weight', '0' );
 		$this->debug              = $this->get_option( 'debug' );
 
 		// Save admin options.
@@ -240,25 +241,32 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'default'     => '',
 			),
 			'minimum_height' => array(
-				'title'       => __( 'Minimum Height', 'woocommerce-correios' ),
+				'title'       => __( 'Minimum Height (cm)', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => '2',
 			),
 			'minimum_width' => array(
-				'title'       => __( 'Minimum Width', 'woocommerce-correios' ),
+				'title'       => __( 'Minimum Width (cm)', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => '11',
 			),
 			'minimum_length' => array(
-				'title'       => __( 'Minimum Length', 'woocommerce-correios' ),
+				'title'       => __( 'Minimum Length (cm)', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => '16',
+			),
+			'extra_weight' => array(
+				'title'       => __( 'Extra Weight (kg)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Extra weight in kilograms to add to the package total when quoting shipping costs.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
 			),
 			'testing' => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
@@ -386,6 +394,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_minimum_height( $this->minimum_height );
 		$api->set_minimum_width( $this->minimum_width );
 		$api->set_minimum_length( $this->minimum_length );
+		$api->set_extra_weight( $this->extra_weight );
 
 		$shipping = $api->get_shipping();
 

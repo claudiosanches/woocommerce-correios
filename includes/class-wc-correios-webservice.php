@@ -136,6 +136,13 @@ class WC_Correios_Webservice {
 	protected $minimum_length = 16;
 
 	/**
+	 * Extra weight.
+	 *
+	 * @var float
+	 */
+	protected $extra_weight = 0;
+
+	/**
 	 * Declared value.
 	 *
 	 * @var string
@@ -347,6 +354,15 @@ class WC_Correios_Webservice {
 	}
 
 	/**
+	 * Set extra weight.
+	 *
+	 * @param float $extra_weight Package extra weight.
+	 */
+	public function set_extra_weight( $extra_weight = 0 ) {
+		$this->extra_weight = (float) wc_format_decimal( $extra_weight );
+	}
+
+	/**
 	 * Set declared value.
 	 *
 	 * @param string $declared_value Declared value.
@@ -468,7 +484,7 @@ class WC_Correios_Webservice {
 	 * @return float
 	 */
 	public function get_weight() {
-		return $this->float_to_string( $this->weight );
+		return $this->float_to_string( $this->weight + $this->extra_weight );
 	}
 
 	/**
