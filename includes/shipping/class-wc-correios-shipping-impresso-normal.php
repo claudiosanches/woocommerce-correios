@@ -113,7 +113,9 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 		}
 
 		if ( $weight <= $this->shipping_method_weight_limit ) {
-			if ( $weight > 1000 ) {
+			if ( $weight > 2000 ) {
+				return 0;
+			} elseif ( $weight > 1000 ) {
 				// Get the additional kgs over 1 kg.
 				$additional_weight_kgs = intval( $weight / 1000 );
 
