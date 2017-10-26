@@ -5,7 +5,7 @@
  * Description:          Adds Correios shipping methods to your WooCommerce store.
  * Author:               Claudio Sanches
  * Author URI:           https://claudiosanches.com
- * Version:              3.5.0
+ * Version:              3.5.1
  * License:              GPLv2 or later
  * Text Domain:          woocommerce-correios
  * Domain Path:          /languages
@@ -45,7 +45,7 @@ if ( ! class_exists( 'WC_Correios' ) ) :
 		 *
 		 * @var string
 		 */
-		const VERSION = '3.5.0';
+		const VERSION = '3.5.1';
 
 		/**
 		 * Instance of this class.

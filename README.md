@@ -3,8 +3,8 @@
 **Donate link:** https://claudiosanches.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
-**Tested up to:** 4.8  
-**Stable tag:** 3.5.0  
+**Tested up to:** 4.9  
+**Stable tag:** 3.5.1  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -220,6 +220,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.5.1 - 2017/10/26 ###
+
+- Usa por padrão o CEP de base do WooCommerce 3.2 ao adicionar um novo método de entrega.
+- Correção do valor declarado para PAC, que ainda não aceitava o pedido quando o valor era igual a 17 reais.
+- Correção do peso máximo para Impresso Normal.
+
 ### 3.5.0 - 2017/10/06 ###
 
 - Adicionada opção para adicionar peso extra por pacote.
@@ -339,9 +345,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.4.1 ###
+### 3.5.1 ###
 
-- Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
-- Adicionado novos links com código de rastreamneto na lista de pedidos no admin.
-- Corrigido códigos de rastreamento que ainda não foram atualizados na página de detalhes do pedido em "Minha conta".
-- Restaurado o suporte de valores em porcentagem para "Taxa de manuseio".
+- Usa por padrão o CEP de base do WooCommerce 3.2 ao adicionar um novo método de entrega.
+- Correção do valor declarado para PAC, que ainda não aceitava o pedido quando o valor era igual a 17 reais.
+- Correção do peso máximo para Impresso Normal.
