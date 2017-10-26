@@ -83,6 +83,21 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get base postcode.
+	 *
+	 * @since  3.5.1
+	 * @return string
+	 */
+	protected function get_base_postcode() {
+		// WooCommerce 3.1.1+.
+		if ( method_exists( WC()->countries, 'get_base_postcode' ) ) {
+			return WC()->countries->get_base_postcode();
+		}
+
+		return '';
+	}
+
+	/**
 	 * Get shipping classes options.
 	 *
 	 * @return array
@@ -130,7 +145,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'placeholder' => '00000-000',
-				'default'     => '',
+				'default'     => $this->get_base_postcode(),
 			),
 			'shipping_class_id' => array(
 				'title'       => __( 'Shipping Class', 'woocommerce-correios' ),
