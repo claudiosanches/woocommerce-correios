@@ -65,7 +65,7 @@ class WC_Correios_Admin_Orders {
 		if ( 'edit-shop_order' === $screen->id ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_Correios::VERSION, true );
+			wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_CORREIOS_VERSION, true );
 		}
 	}
 
@@ -92,9 +92,9 @@ class WC_Correios_Admin_Orders {
 		$tracking_codes = wc_correios_get_tracking_codes( $post->ID );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders' . $suffix . '.css', WC_Correios::get_main_file() ), array(), WC_Correios::VERSION );
-		wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_Correios::VERSION, true );
-		wp_enqueue_script( 'woocommerce-correios-orders-admin', plugins_url( 'assets/js/admin/orders' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui', 'wp-util' ), WC_Correios::VERSION, true );
+		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders' . $suffix . '.css', WC_Correios::get_main_file() ), array(), WC_CORREIOS_VERSION );
+		wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_CORREIOS_VERSION, true );
+		wp_enqueue_script( 'woocommerce-correios-orders-admin', plugins_url( 'assets/js/admin/orders' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui', 'wp-util' ), WC_CORREIOS_VERSION, true );
 		wp_localize_script(
 			'woocommerce-correios-orders-admin',
 			'WCCorreiosAdminOrdersParams',

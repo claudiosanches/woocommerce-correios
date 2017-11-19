@@ -31,7 +31,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php if ( isset( $event->destino ) ) : ?>
 					<br />
-					<?php echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event->destino->local . ' - ' . $event->destino->cidade . '/' . $event->destino->uf ) ); ?>
+					<?php
+						/* translators: %s: address */
+						echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event->destino->local . ' - ' . $event->destino->cidade . '/' . $event->destino->uf ) );
+					?>
 				<?php endif; ?>
 			</td>
 			<td>
@@ -43,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tfoot>
 		<tr>
 			<td colspan="3">
-				<form method="POST" target="_blank" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" class="wc-correios-tracking__form">
+				<form method="POST" target="_blank" rel="nofollow noopener noreferrer" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" class="wc-correios-tracking__form">
 					<input type="hidden" name="Objetos" value="<?php echo esc_attr( $code ); ?>">
 					<input class="wc-correios-tracking__button button" type="submit" value="<?php esc_attr_e( 'Query on Correios', 'woocommerce-correios' ); ?>">
 				</form>

@@ -102,8 +102,8 @@ class WC_Correios_Autofill_Addresses {
 			return null;
 		}
 
-		$table    = $wpdb->prefix . self::$table;
-		$address  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE postcode = %s;", $postcode ) );
+		$table   = $wpdb->prefix . self::$table;
+		$address = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s WHERE postcode = %s;', $table, $postcode ) ); // WPCS: db call ok, cache ok.
 
 		if ( is_wp_error( $address ) || is_null( $address ) ) {
 			$address = self::fetch_address( $postcode );
@@ -164,7 +164,7 @@ class WC_Correios_Autofill_Addresses {
 			$wpdb->prefix . self::$table,
 			$address,
 			array( '%s', '%s', '%s', '%s', '%s', '%s' )
-		);
+		); // WPCS: db call ok, cache ok.
 
 		return false !== $result;
 	}
@@ -177,7 +177,7 @@ class WC_Correios_Autofill_Addresses {
 	protected static function delete_address( $postcode ) {
 		global $wpdb;
 
-		$wpdb->delete( $wpdb->prefix . self::$table, array( 'postcode' => $postcode ), array( '%s' ) );
+		$wpdb->delete( $wpdb->prefix . self::$table, array( 'postcode' => $postcode ), array( '%s' ) ); // WPCS: db call ok, cache ok.
 	}
 
 	/**
@@ -207,10 +207,10 @@ class WC_Correios_Autofill_Addresses {
 		$address = null;
 
 		try {
-			$soap       = new WC_Correios_Soap_Client( self::get_tracking_addresses_webservice_url() );
-			$response   = $soap->consultaCEP( array( 'cep' => $postcode ) );
-			$data       = $response->return;
-			$address    = new stdClass;
+			$soap     = new WC_Correios_Soap_Client( self::get_tracking_addresses_webservice_url() );
+			$response = $soap->consultaCEP( array( 'cep' => $postcode ) );
+			$data     = $response->return;
+			$address  = new stdClass();
 
 			$address->postcode     = $data->cep;
 			$address->address      = $data->end;
@@ -223,7 +223,7 @@ class WC_Correios_Autofill_Addresses {
 		}
 
 		if ( ! is_null( $address ) ) {
-			self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, print_r( $address, true ) ) );
+			self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, print_r( $address, true ) ) ); // @codingStandardsIgnoreLine
 		}
 
 		return $address;
@@ -236,7 +236,7 @@ class WC_Correios_Autofill_Addresses {
 		if ( is_checkout() || is_account_page() ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			wp_enqueue_script( 'woocommerce-correios-autofill-addresses', plugins_url( 'assets/js/frontend/autofill-address' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui' ), WC_Correios::VERSION, true );
+			wp_enqueue_script( 'woocommerce-correios-autofill-addresses', plugins_url( 'assets/js/frontend/autofill-address' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui' ), WC_CORREIOS_VERSION, true );
 
 			wp_localize_script(
 				'woocommerce-correios-autofill-addresses',
@@ -253,12 +253,12 @@ class WC_Correios_Autofill_Addresses {
 	 * Ajax autofill endpoint.
 	 */
 	public function ajax_autofill() {
-		if ( empty( $_GET['postcode'] ) ) {
+		if ( empty( $_GET['postcode'] ) ) { // WPCS: input var okay, CSRF ok.
 			wp_send_json_error( array( 'message' => __( 'Missing postcode paramater.', 'woocommerce-correios' ) ) );
 			exit;
 		}
 
-		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) );
+		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) ); // WPCS: input var okay, CSRF ok.
 
 		if ( empty( $postcode ) || 8 !== strlen( $postcode ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );
@@ -299,7 +299,7 @@ class WC_Correios_Autofill_Addresses {
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$table_name = $wpdb->prefix . self::$table;
+		$table_name      = $wpdb->prefix . self::$table;
 
 		$sql = "CREATE TABLE $table_name (
 			ID bigint(20) NOT NULL auto_increment,

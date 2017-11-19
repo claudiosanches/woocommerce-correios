@@ -29,7 +29,7 @@ class WC_Correios_Install {
 	 * Update version.
 	 */
 	private static function update_version() {
-		update_option( 'woocommerce_correios_version', WC_Correios::VERSION );
+		update_option( 'woocommerce_correios_version', WC_CORREIOS_VERSION );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class WC_Correios_Install {
 		$version = self::get_version();
 
 		if ( empty( $version ) ) {
-			$wpdb->query( "UPDATE $wpdb->postmeta SET meta_key = '_correios_tracking_code' WHERE meta_key = 'correios_tracking';" );
+			$wpdb->query( "UPDATE $wpdb->postmeta SET meta_key = '_correios_tracking_code' WHERE meta_key = 'correios_tracking';" ); // WPCS: db call ok, cache ok.
 		}
 	}
 
@@ -49,7 +49,8 @@ class WC_Correios_Install {
 	 * Upgrade to 3.0.0 while using WooCommerce 2.6.0.
 	 */
 	public static function upgrade_300_from_wc_260() {
-		if ( $old_options = get_option( 'woocommerce_correios_settings' ) ) {
+		$old_options = get_option( 'woocommerce_correios_settings' );
+		if ( $old_options ) {
 			if ( isset( $old_options['tracking_history'] ) ) {
 				$integration_options = get_option( 'woocommerce_correios-integration_settings', array(
 					'general_options' => '',

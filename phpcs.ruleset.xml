@@ -7,7 +7,7 @@
 
 	<rule ref="WordPress.VIP.ValidatedSanitizedInput">
 		<properties>
-			<property name="customSanitizingFunctions" type="array" value="wc_clean" />
+			<property name="customSanitizingFunctions" type="array" value="wc_clean,wc_correios_sanitize_postcode" />
 		</properties>
 	</rule>
 </ruleset>

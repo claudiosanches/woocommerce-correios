@@ -67,58 +67,70 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'tracking' => array(
+			'tracking'                => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page.', 'woocommerce-correios' ),
 			),
-			'tracking_enable' => array(
+			'tracking_enable'         => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Tracking History Table', 'woocommerce-correios' ),
 				'default' => 'no',
 			),
-			'tracking_debug' => array(
+			'tracking_debug'          => array(
 				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging for Tracking History', 'woocommerce-correios' ),
 				'default'     => 'no',
+				/* translators: %s: log link */
 				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), __( 'Tracking History Table', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
 			),
-			'autofill_addresses' => array(
+			'autofill_addresses'      => array(
 				'title'       => __( 'Autofill Addresses', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page.', 'woocommerce-correios' ),
 			),
-			'autofill_enable' => array(
+			'autofill_enable'         => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Autofill Addresses', 'woocommerce-correios' ),
 				'default' => 'no',
 			),
-			'autofill_validity' => array(
+			'autofill_validity'       => array(
 				'title'       => __( 'Postcodes Validity', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'default'     => 'forever',
 				'class'       => 'wc-enhanced-select',
 				'description' => __( 'Defines how long a postcode will stay saved in the database before a new query.', 'woocommerce-correios' ),
 				'options'     => array(
-					'1'     => __( '1 month', 'woocommerce-correios' ),
-					'2'     => sprintf( __( '%d month', 'woocommerce-correios' ), 2 ),
-					'3'     => sprintf( __( '%d month', 'woocommerce-correios' ), 3 ),
-					'4'     => sprintf( __( '%d month', 'woocommerce-correios' ), 4 ),
-					'5'     => sprintf( __( '%d month', 'woocommerce-correios' ), 5 ),
-					'6'     => sprintf( __( '%d month', 'woocommerce-correios' ), 6 ),
-					'7'     => sprintf( __( '%d month', 'woocommerce-correios' ), 7 ),
-					'8'     => sprintf( __( '%d month', 'woocommerce-correios' ), 8 ),
-					'9'     => sprintf( __( '%d month', 'woocommerce-correios' ), 9 ),
-					'10'    => sprintf( __( '%d month', 'woocommerce-correios' ), 10 ),
-					'11'    => sprintf( __( '%d month', 'woocommerce-correios' ), 11 ),
-					'12'    => sprintf( __( '%d month', 'woocommerce-correios' ), 12 ),
+					'1'       => __( '1 month', 'woocommerce-correios' ),
+					/* translators: %s number of months */
+					'2'       => sprintf( __( '%d months', 'woocommerce-correios' ), 2 ),
+					/* translators: %s number of months */
+					'3'       => sprintf( __( '%d months', 'woocommerce-correios' ), 3 ),
+					/* translators: %s number of months */
+					'4'       => sprintf( __( '%d months', 'woocommerce-correios' ), 4 ),
+					/* translators: %s number of months */
+					'5'       => sprintf( __( '%d months', 'woocommerce-correios' ), 5 ),
+					/* translators: %s number of months */
+					'6'       => sprintf( __( '%d months', 'woocommerce-correios' ), 6 ),
+					/* translators: %s number of months */
+					'7'       => sprintf( __( '%d months', 'woocommerce-correios' ), 7 ),
+					/* translators: %s number of months */
+					'8'       => sprintf( __( '%d months', 'woocommerce-correios' ), 8 ),
+					/* translators: %s number of months */
+					'9'       => sprintf( __( '%d months', 'woocommerce-correios' ), 9 ),
+					/* translators: %s number of months */
+					'10'      => sprintf( __( '%d months', 'woocommerce-correios' ), 10 ),
+					/* translators: %s number of months */
+					'11'      => sprintf( __( '%d months', 'woocommerce-correios' ), 11 ),
+					/* translators: %s number of months */
+					'12'      => sprintf( __( '%d months', 'woocommerce-correios' ), 12 ),
 					'forever' => __( 'Forever', 'woocommerce-correios' ),
 				),
 			),
-			'autofill_force' => array(
+			'autofill_force'          => array(
 				'title'       => __( 'Force Autofill', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable Force Autofill', 'woocommerce-correios' ),
@@ -131,11 +143,12 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Empty Database', 'woocommerce-correios' ),
 				'description' => __( 'Delete all the saved postcodes in the database, use this option if you have issues with outdated postcodes.', 'woocommerce-correios' ),
 			),
-			'autofill_debug' => array(
+			'autofill_debug'          => array(
 				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging for Autofill Addresses', 'woocommerce-correios' ),
 				'default'     => 'no',
+				/* translators: %s: log link */
 				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), __( 'Autofill Addresses', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
 			),
 		);
@@ -152,14 +165,15 @@ class WC_Correios_Integration extends WC_Integration {
 
 		if ( class_exists( 'SoapClient' ) ) {
 			echo '<div><input type="hidden" name="section" value="' . esc_attr( $this->id ) . '" /></div>';
-			echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>';
+			echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>'; // WPCS: XSS ok.
 		} else {
 			$GLOBALS['hide_save_button'] = true; // Hide save button.
-			echo '<div class="notice notice-error inline"><p>' . sprintf( __( 'It\'s required have installed the %s on your server in order to integrate with the services of the Correios!', 'woocommerce-correios' ), '<a href="https://secure.php.net/manual/book.soap.php" target="_blank">' . __( 'SOAP module', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
+			/* translators: %s: SOAP documentation link */
+			echo '<div class="notice notice-error inline"><p>' . sprintf( esc_html__( 'It\'s required have installed the %s on your server in order to integrate with the services of the Correios!', 'woocommerce-correios' ), '<a href="https://secure.php.net/manual/book.soap.php" target="_blank" rel="nofollow noopener noreferrer">' . esc_html__( 'SOAP module', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
 		}
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_enqueue_script( $this->id . '-admin', plugins_url( 'assets/js/admin/integration' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui' ), WC_Correios::VERSION, true );
+		wp_enqueue_script( $this->id . '-admin', plugins_url( 'assets/js/admin/integration' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui' ), WC_CORREIOS_VERSION, true );
 		wp_localize_script(
 			$this->id . '-admin',
 			'WCCorreiosIntegrationAdminParams',
@@ -173,8 +187,8 @@ class WC_Correios_Integration extends WC_Integration {
 	/**
 	 * Generate Button Input HTML.
 	 *
-	 * @param string $key
-	 * @param array  $data
+	 * @param string $key  Input key.
+	 * @param array  $data Input data.
 	 * @return string
 	 */
 	public function generate_button_html( $key, $data ) {
@@ -193,13 +207,13 @@ class WC_Correios_Integration extends WC_Integration {
 		<tr valign="top">
 			<th scope="row" class="titledesc">
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); ?>
+				<?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok. ?>
 			</th>
 			<td class="forminp">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
 					<button class="button-secondary" type="button" id="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['label'] ); ?></button>
-					<?php echo $this->get_description_html( $data ); ?>
+					<?php echo $this->get_description_html( $data ); // WPCS: XSS ok. ?>
 				</fieldset>
 			</td>
 		</tr>
@@ -268,18 +282,18 @@ class WC_Correios_Integration extends WC_Integration {
 	public function ajax_empty_database() {
 		global $wpdb;
 
-		if ( ! isset( $_POST['nonce'] ) ) {
+		if ( ! isset( $_POST['nonce'] ) ) { // WPCS: input var okay, CSRF ok.
 			wp_send_json_error( array( 'message' => __( 'Missing parameters!', 'woocommerce-correios' ) ) );
 			exit;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'woocommerce_correios_autofill_addresses_nonce' ) ) {
+		if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'woocommerce_correios_autofill_addresses_nonce' ) ) { // WPCS: input var okay, CSRF ok.
 			wp_send_json_error( array( 'message' => __( 'Invalid nonce!', 'woocommerce-correios' ) ) );
 			exit;
 		}
 
 		$table_name = $wpdb->prefix . WC_Correios_Autofill_Addresses::$table;
-		$wpdb->query( "DROP TABLE IF EXISTS $table_name;" );
+		$wpdb->query( "DROP TABLE IF EXISTS $table_name;" ); // @codingStandardsIgnoreLine
 
 		WC_Correios_Autofill_Addresses::create_database();
 

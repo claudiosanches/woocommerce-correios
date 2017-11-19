@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<th><?php echo esc_html( $code ); ?></th>
 				<td>
-					<form method="POST" target="_blank" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" class="wc-correios-tracking__form">
+					<form method="POST" target="_blank" rel="nofollow noopener noreferrer" action="http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm" class="wc-correios-tracking__form">
 						<input type="hidden" name="Objetos" value="<?php echo esc_attr( $code ); ?>">
 						<input class="wc-correios-tracking__button button" type="submit" value="<?php esc_attr_e( 'Query on Correios', 'woocommerce-correios' ); ?>">
 					</form>
