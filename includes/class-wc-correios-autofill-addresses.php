@@ -103,7 +103,7 @@ class WC_Correios_Autofill_Addresses {
 		}
 
 		$table   = $wpdb->prefix . self::$table;
-		$address = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s WHERE postcode = %s;', $table, $postcode ) ); // WPCS: db call ok, cache ok.
+		$address = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE postcode = %s;", $postcode ) ); // @codingStandardsIgnoreLine
 
 		if ( is_wp_error( $address ) || is_null( $address ) ) {
 			$address = self::fetch_address( $postcode );
