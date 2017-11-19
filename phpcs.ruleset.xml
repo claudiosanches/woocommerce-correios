@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards">
+    <description>PHP_CodeSniffer ruleset for WordPress plugins and themes development.</description>
+
+    <rule ref="PHPCompatibility"></rule>
+    <rule ref="WordPress"></rule>
+
+	<rule ref="WordPress.VIP.ValidatedSanitizedInput">
+		<properties>
+			<property name="customSanitizingFunctions" type="array" value="wc_clean" />
+		</properties>
+	</rule>
+</ruleset>
