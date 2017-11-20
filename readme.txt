@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 3.5.1
+Stable tag: 3.6.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -204,6 +204,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.6.0 - 2017/11/19 =
+
+- Atualizado o valor mínimo declarado para 18 reais.
+- Melhorias gerais no código base do plugin.
+
 = 3.5.1 - 2017/10/26 =
 
 - Usa por padrão o CEP de base do WooCommerce 3.2 ao adicionar um novo método de entrega.
@@ -329,8 +334,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.5.1 =
+= 3.6.0 =
 
-- Usa por padrão o CEP de base do WooCommerce 3.2 ao adicionar um novo método de entrega.
-- Correção do valor declarado para PAC, que ainda não aceitava o pedido quando o valor era igual a 17 reais.
-- Correção do peso máximo para Impresso Normal.
+- Atualizado o valor mínimo declarado para 18 reais.
+- Melhorias gerais no código base do plugin.
