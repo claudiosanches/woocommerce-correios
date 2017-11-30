@@ -153,6 +153,8 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping_Carta {
 			return 0;
 		}
 
+		$weight += wc_format_decimal($this->extra_weight);
+
 		foreach ( $this->get_costs() as $cost_weight => $costs ) {
 			if ( $weight <= $cost_weight ) {
 				$cost = $costs[ $type ];
