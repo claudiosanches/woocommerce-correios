@@ -91,6 +91,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 		$this->registry_type      = $this->get_option( 'registry_type' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->additional_time    = $this->get_option( 'additional_time' );
+		$this->extra_weight       = $this->get_option( 'extra_weight', '0' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->receipt_notice     = $this->get_option( 'receipt_notice' );
 		$this->own_hands          = $this->get_option( 'own_hands' );
@@ -166,6 +167,13 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'desc_tip'    => true,
 				'default'     => '0',
 				'placeholder' => '0',
+			),
+			'extra_weight' => array(
+				'title'       => __( 'Extra Weight (g)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Extra weight in grams to add to the package total when quoting shipping costs.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
 			),
 			'fee' => array(
 				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
