@@ -518,9 +518,9 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		//Display delivery
 		if('yes' == $this->show_delivery_time ){
-			$delivery  = wc_correios_get_estimating_delivery( $shipping->PrazoEntrega, $this->get_additional_time( $package ) );
+			$meta_delivery = array('delivery forecast' => wc_correios_get_estimating_delivery( $shipping->PrazoEntrega, $this->get_additional_time( $package ) ) );
 		}else{
-			$Delivery = 0;
+			$meta_delivery = array();
 		}
 
 
@@ -529,7 +529,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			'id'    => $this->id . $this->instance_id,
 			'label' => $label,
 			'cost'  => (float) $cost + (float) $fee,
-			'meta_data' => array('delivery forecast' => $delivery ),
+			'meta_data' => $meta_delivery,
 		), $this->instance_id, $package );
 
 		// Deprecated filter.
