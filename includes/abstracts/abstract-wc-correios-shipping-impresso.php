@@ -21,42 +21,42 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * National Registry cost.
 	 *
-	 * Cost based in 01/10/2016 from:
+	 * Cost based in 31/07/2017 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
-	protected $national_registry_cost = 4.30;
+	protected $national_registry_cost = 5.00;
 
 	/**
 	 * Reasonable Registry cost.
 	 *
-	 * Cost based in 01/10/2016 from:
+	 * Cost based in 31/07/2017 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
-	protected $reasonable_registry_cost = 2.15;
+	protected $reasonable_registry_cost = 2.50;
 
 	/**
 	 * Receipt Notice cost.
 	 *
-	 * Cost based in 01/10/2016 from:
+	 * Cost based in 31/07/2017 from:
 	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
-	protected $receipt_notice_cost = 4.30;
+	protected $receipt_notice_cost = 5.00;
 
 	/**
 	 * Own Hands cost.
 	 *
-	 * Cost based in 01/10/2016 from:
+	 * Cost based in 31/07/2017 from:
 	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
-	protected $own_hands_cost = 5.50;
+	protected $own_hands_cost = 5.90;
 
 	/**
 	 * Weight limit for reasonable registry.
