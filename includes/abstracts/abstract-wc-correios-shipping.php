@@ -440,22 +440,6 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	}
 
 	/**
-	 * Get shipping method label.
-	 *
-	 * @param  int   $days Days to deliver.
-	 * @param  array $package Package data.
-	 *
-	 * @return string
-	 */
-	protected function get_shipping_method_label( $days, $package ) {
-		if ( 'yes' === $this->show_delivery_time ) {
-			return wc_correios_get_estimating_delivery( $this->title, $days, $this->get_additional_time( $package ) );
-		}
-
-		return $this->title;
-	}
-
-	/**
 	 * Check if package uses only the selected shipping class.
 	 *
 	 * @param  array $package Cart package.
@@ -521,7 +505,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		}
 
 		// Set the shipping rates.
-		$label = $this->get_shipping_method_label( (int) $shipping->PrazoEntrega, $package );
+		$label = $this->title;
 		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) );
 
 		// Exit if don't have price.

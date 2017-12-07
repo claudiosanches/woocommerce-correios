@@ -262,7 +262,7 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 		// Create the rate and apply filters.
 		$rate = apply_filters( 'woocommerce_correios_' . $this->id . '_rate', array(
 			'id'    => $this->id . $this->instance_id,
-			'label' => $this->get_shipping_method_label( (int) $this->get_shipping_time( $package ), $package ),
+			'label' => $this->title,
 			'cost'  => (float) $cost + (float) $fee,
 		), $this->instance_id, $package );
 
