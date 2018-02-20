@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping_Carta {
 
 	/**
 	 * Get costs.
-	 * Costs based in 28/06/2016 from:
+	 * Costs based in 31/10/2017 from:
 	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/carta
 	 *
 	 * @return array
@@ -39,70 +39,70 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping_Carta {
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_carta_registrada_costs', array(
 			'20'  => array(
-				'R'     => 6.00,
-				'AR'    => 10.30,
-				'MP'    => 11.50,
-				'AR+MP' => 15.80,
+				'R'     => 6.85,
+				'AR'    => 11.85,
+				'MP'    => 12.75,
+				'AR+MP' => 17.75,
 			),
 			'50'  => array(
-				'R'     => 6.65,
-				'AR'    => 10.95,
-				'MP'    => 12.15,
-				'AR+MP' => 16.45,
+				'R'     => 7.55,
+				'AR'    => 12.55,
+				'MP'    => 13.45,
+				'AR+MP' => 18.45,
 			),
 			'100' => array(
-				'R'     => 7.55,
-				'AR'    => 11.85,
-				'MP'    => 13.05,
-				'AR+MP' => 17.35,
+				'R'     => 8.55,
+				'AR'    => 13.55,
+				'MP'    => 14.45,
+				'AR+MP' => 19.45,
 			),
 			'150' => array(
-				'R'     => 8.30,
-				'AR'    => 12.60,
-				'MP'    => 13.80,
-				'AR+MP' => 18.10,
+				'R'     => 9.35,
+				'AR'    => 14.35,
+				'MP'    => 15.25,
+				'AR+MP' => 20.25,
 			),
 			'200' => array(
-				'R'     => 9.00,
-				'AR'    => 13.30,
-				'MP'    => 14.50,
-				'AR+MP' => 18.80,
+				'R'     => 10.10,
+				'AR'    => 15.10,
+				'MP'    => 16.00,
+				'AR+MP' => 21.00,
 			),
 			'250' => array(
-				'R'     => 9.70,
-				'AR'    => 14.00,
-				'MP'    => 15.20,
-				'AR+MP' => 19.50,
+				'R'     => 10.90,
+				'AR'    => 15.90,
+				'MP'    => 16.80,
+				'AR+MP' => 21.80,
 			),
 			'300' => array(
-				'R'     => 10.50,
-				'AR'    => 14.80,
-				'MP'    => 16.00,
-				'AR+MP' => 20.30,
+				'R'     => 11.75,
+				'AR'    => 16.75,
+				'MP'    => 17.65,
+				'AR+MP' => 22.65,
 			),
 			'350' => array(
-				'R'     => 11.25,
-				'AR'    => 15.55,
-				'MP'    => 16.75,
-				'AR+MP' => 21.05,
+				'R'     => 12.55,
+				'AR'    => 17.55,
+				'MP'    => 18.45,
+				'AR+MP' => 23.45,
 			),
 			'400' => array(
-				'R'     => 11.95,
-				'AR'    => 16.25,
-				'MP'    => 17.45,
-				'AR+MP' => 21.75,
+				'R'     => 13.30,
+				'AR'    => 18.30,
+				'MP'    => 19.20,
+				'AR+MP' => 24.20,
 			),
 			'450' => array(
-				'R'     => 12.65,
-				'AR'    => 16.95,
-				'MP'    => 18.15,
-				'AR+MP' => 22.45,
+				'R'     => 14.10,
+				'AR'    => 19.10,
+				'MP'    => 20.00,
+				'AR+MP' => 25.00,
 			),
 			'500' => array(
-				'R'     => 13.40,
-				'AR'    => 17.70,
-				'MP'    => 18.90,
-				'AR+MP' => 23.20,
+				'R'     => 14.90,
+				'AR'    => 19.90,
+				'MP'    => 20.80,
+				'AR+MP' => 25.80,
 			),
 		), $this->id, $this->instance_id );
 	}
