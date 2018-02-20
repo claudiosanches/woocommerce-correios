@@ -119,11 +119,13 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 			return 0;
 		}
 
-		// Get the package weight and validate.
+		// Get the package weight, validate and add extra weight.
 		$weight = $this->get_package_weight( $package );
 		if ( false === $weight ) {
 			return 0;
 		}
+
+		$weight += wc_format_decimal( $this->extra_weight );
 
 		if ( $weight <= $this->shipping_method_weight_limit ) {
 			if ( $weight > 2000 ) {
