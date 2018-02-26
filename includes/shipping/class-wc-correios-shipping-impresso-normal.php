@@ -141,12 +141,14 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 				$additional_weight_gs = $weight;
 			}
 
+			$additional_costs_per_kg = $this->get_additional_costs_per_kg();
+
 			foreach ( $this->get_costs() as $cost_weights => $costs ) {
 				if ( $additional_weight_gs <= $cost_weights ) {
 					$cost = $costs;
 
 					if ( $additional_weight_kgs > 0 ) {
-						$cost += $additional_weight_kgs * $this->get_additional_costs_per_kg();
+						$cost += $additional_weight_kgs * $additional_costs_per_kg;
 					}
 
 					if ( $weight > $this->reasonable_registry_weight_limit || 'yes' === $this->own_hands || 'RN' === $this->registry_type ) {
