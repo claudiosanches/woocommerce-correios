@@ -12,4 +12,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<h2 id="#wc-correios-tracking" class="wc-correios-tracking__title"><?php esc_html_e( 'Correios delivery tracking', 'woocommerce-correios' ); ?></h2>
+<h2 id="wc-correios-tracking" class="wc-correios-tracking__title"><?php esc_html_e( 'Correios delivery tracking', 'woocommerce-correios' ); ?></h2>
