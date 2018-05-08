@@ -210,6 +210,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Adicionada opção para peso extra nos métodos de Impresso e Carta, mais detalhes em [#95](https://github.com/claudiosanches/woocommerce-correios/pull/95).
 - CEP da loja é usado por padrão ao adicionar um novo método de entrega.
 - Adicionada opções para usar rastreamento com dados administrativos.
+- Melhorado a exibição e salvamento da estimativa de entrega, mais detalhes em [#98](https://github.com/claudiosanches/woocommerce-correios/pull/98)
 
 [See changelog for all versions](https://raw.githubusercontent.com/claudiosanches/woocommerce-correios/master/CHANGELOG.txt).
 
