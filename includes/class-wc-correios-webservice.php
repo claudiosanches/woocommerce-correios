@@ -550,6 +550,8 @@ class WC_Correios_Webservice {
 
 		// Gets the WebServices response.
 		$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
+		
+		do_action( 'woocommerce_correios_webservice_request_finished', $response, $args );
 
 		if ( is_wp_error( $response ) ) {
 			if ( 'yes' === $this->debug ) {
