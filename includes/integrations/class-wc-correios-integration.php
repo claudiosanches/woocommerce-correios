@@ -31,6 +31,8 @@ class WC_Correios_Integration extends WC_Integration {
 
 		// Define user set variables.
 		$this->tracking_enable         = $this->get_option( 'tracking_enable' );
+		$this->tracking_login          = $this->get_option( 'tracking_login' );
+		$this->tracking_password       = $this->get_option( 'tracking_password' );
 		$this->tracking_debug          = $this->get_option( 'tracking_debug' );
 		$this->autofill_enable         = $this->get_option( 'autofill_enable' );
 		$this->autofill_validity       = $this->get_option( 'autofill_validity' );
@@ -43,6 +45,7 @@ class WC_Correios_Integration extends WC_Integration {
 
 		// Tracking history actions.
 		add_filter( 'woocommerce_correios_enable_tracking_history', array( $this, 'setup_tracking_history' ), 10 );
+		add_filter( 'woocommerce_correios_tracking_user_data', array( $this, 'setup_tracking_user_data' ), 10 );
 		add_filter( 'woocommerce_correios_enable_tracking_debug', array( $this, 'setup_tracking_debug' ), 10 );
 
 		// Autofill address actions.
@@ -77,6 +80,20 @@ class WC_Correios_Integration extends WC_Integration {
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Tracking History Table', 'woocommerce-correios' ),
 				'default' => 'no',
+			),
+			'tracking_login'          => array(
+				'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
+			'tracking_password'       => array(
+				'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
 			),
 			'tracking_debug'          => array(
 				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
@@ -229,6 +246,23 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function setup_tracking_history() {
 		return 'yes' === $this->tracking_enable && class_exists( 'SoapClient' );
+	}
+
+	/**
+	 * Setup tracking user data.
+	 *
+	 * @param array $user_data User data.
+	 * @return array
+	 */
+	public function setup_tracking_user_data( $user_data ) {
+		if ( ! $this->tracking_login && ! $this->tracking_password ) {
+			$user_data = array(
+				'login'    => $this->tracking_login,
+				'password' => $this->tracking_password,
+			);
+		}
+
+		return $user_data;
 	}
 
 	/**
