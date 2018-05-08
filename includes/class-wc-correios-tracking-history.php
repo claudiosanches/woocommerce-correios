@@ -45,7 +45,10 @@ class WC_Correios_Tracking_History {
 	 * @return array
 	 */
 	protected function get_user_data() {
-		$user_data = apply_filters( 'woocommerce_correios_tracking_user_data', array( 'login' => 'ECT', 'password' => 'SRO' ) );
+		$user_data = apply_filters( 'woocommerce_correios_tracking_user_data', array(
+			'login'    => 'ECT',
+			'password' => 'SRO',
+		) );
 
 		return $user_data;
 	}
@@ -65,8 +68,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Access API Correios.
 	 *
-	 * @param  array $tracking_code Tracking code.
-	 *
+	 * @param  array $tracking_codes Tracking codes.
 	 * @return array
 	 */
 	protected function get_tracking_history( $tracking_codes ) {
@@ -106,8 +108,8 @@ class WC_Correios_Tracking_History {
 					}
 					$objects = $_objects;
 
-				// Handle single object.
 				} elseif ( is_object( $response->return->objeto ) ) {
+					// Handle single object.
 					$objects = array( $response->return->objeto );
 
 					// Fix when return only last event.
@@ -116,7 +118,6 @@ class WC_Correios_Tracking_History {
 					}
 				}
 			}
-
 		} catch ( Exception $e ) {
 			$this->logger( sprintf( 'An error occurred while trying to fetch the tracking history for "%s": %s', implode( ', ', $tracking_codes ), $e->getMessage() ) );
 		}
