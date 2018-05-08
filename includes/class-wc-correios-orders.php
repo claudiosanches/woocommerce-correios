@@ -54,7 +54,7 @@ class WC_Correios_Orders {
 	 * @return string
 	 */
 	public function item_display_delivery_forecast( $display_key, $meta ) {
-		return '_delivery_forecast' === $meta->key ? __( 'Delivery forecast', 'woocommerce_correios' ) : $display_key;
+		return '_delivery_forecast' === $meta->key ? __( 'Delivery forecast', 'woocommerce-correios' ) : $display_key;
 	}
 }
 
