@@ -57,16 +57,18 @@ class WC_Correios {
 		include_once dirname( __FILE__ ) . '/class-wc-correios-autofill-addresses.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-tracking-history.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-rest-api.php';
+		include_once dirname( __FILE__ ) . '/class-wc-correios-orders.php';
+		include_once dirname( __FILE__ ) . '/class-wc-correios-cart.php';
 
 		// Integration.
 		include_once dirname( __FILE__ ) . '/integrations/class-wc-correios-integration.php';
 
 		// Shipping methods.
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
-			include_once dirname( __FILE__ ) . '/abstracts/abstract-wc-correios-shipping.php';
-			include_once dirname( __FILE__ ) . '/abstracts/abstract-wc-correios-shipping-carta.php';
-			include_once dirname( __FILE__ ) . '/abstracts/abstract-wc-correios-shipping-impresso.php';
-			include_once dirname( __FILE__ ) . '/abstracts/abstract-wc-correios-shipping-international.php';
+			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping.php';
+			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-carta.php';
+			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-impresso.php';
+			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-international.php';
 			foreach ( glob( plugin_dir_path( __FILE__ ) . '/shipping/*.php' ) as $filename ) {
 				include_once $filename;
 			}

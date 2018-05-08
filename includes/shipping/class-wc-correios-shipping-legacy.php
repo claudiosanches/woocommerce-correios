@@ -398,6 +398,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 				}
 
 				// Set the shipping rates.
+				$label = ( 'yes' == $this->display_date ) ? wc_correios_get_estimating_delivery( $name, (int) $shipping->PrazoEntrega, $this->get_additional_time( $package ) ) : $name;
 				$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) );
 
 				// Exit if don't have price.
@@ -411,7 +412,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 					$rates,
 					array(
 						'id'    => $name,
-						'label' => $name,
+						'label' => $label,
 						'cost'  => $cost + $fee,
 					)
 				);

@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Functions
  * @since   3.0.0
- * @version 3.2.2
+ * @version 3.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,8 +41,6 @@ function wc_correios_safe_load_xml( $source, $options = 0 ) {
 
 	if ( isset( $dom->doctype ) ) {
 		throw new Exception( 'Unsafe DOCTYPE Detected while XML parsing' );
-
-		return false;
 	}
 
 	return simplexml_import_dom( $dom );
@@ -60,21 +58,23 @@ function wc_correios_sanitize_postcode( $postcode ) {
 }
 
 /**
- * Get estimating days for delivery.
+ * Get estimating delivery description.
  *
+ * @param string $name            Shipping name.
  * @param string $days            Estimated days to accomplish delivery.
  * @param int    $additional_days Additional days.
  *
- * @return int
+ * @return string
  */
-function wc_correios_get_estimating_delivery( $days, $additional_days = 0 ) {
+function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0 ) {
 	$total = intval( $days ) + intval( $additional_days );
 
 	if ( $total > 0 ) {
-		$estimate = $total;
+		/* translators: %d: days to delivery */
+		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ), $total ) . ')';
 	}
 
-	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $estimate );
+	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $name, $days, $additional_days );
 }
 
 /**
@@ -156,7 +156,7 @@ function wc_correios_get_tracking_codes( $order ) {
  *
  * @param  WC_Order|int $order         Order ID or order data.
  * @param  string       $tracking_code Tracking code.
- * @param  bool         remove         If should remove the tracking code.
+ * @param  bool         $remove        If should remove the tracking code.
  *
  * @return bool
  */
@@ -196,6 +196,7 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		}
 
 		// Add order note.
+		/* translators: %s: tracking code */
 		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
 
 		// Send email notification.
@@ -203,7 +204,9 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 
 		return true;
 	} elseif ( $remove && in_array( $tracking_code, $tracking_codes, true ) ) {
-		if ( false !== ( $key = array_search( $tracking_code, $tracking_codes ) ) ) {
+		$key = array_search( $tracking_code, $tracking_codes, true );
+
+		if ( false !== $key ) {
 			unset( $tracking_codes[ $key ] );
 		}
 
@@ -215,6 +218,7 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		}
 
 		// Add order note.
+		/* translators: %s: tracking code */
 		$order->add_order_note( sprintf( __( 'Removed a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
 
 		return true;
@@ -232,60 +236,4 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
  */
 function wc_correios_get_address_by_postcode( $postcode ) {
 	return WC_Correios_Autofill_Addresses::get_address( $postcode );
-}
-
-/**
- * Show delivery on cart page.
- *
- * @param object $method Method.
- *
- */
-function wc_correios_show_shipping_estimate($method){
-	//Exit if Delivery forecast doesn't exist
-	if(!array_key_exists('delivery forecast', $method->meta_data)){
-		return;
-	}
-
-	//Exit if delivery forecast is false or 0
-	if(!$method->meta_data['delivery forecast']){
-		return;
-	}
-
-	printf('<p>Delivery within %s working days</p>',$method->meta_data['delivery forecast']);
-
-}
-add_action( 'woocommerce_after_shipping_rate', 'wc_correios_show_shipping_estimate');
-
-
-
-
-/**
- * Get days for delivery.
- *
- * @param  WC_Order|int $order         Order ID or order data.
- *
- * @return string|bool
- */
-function wc_correios_get_days_for_delivery($order){
-
-	if ( is_numeric( $order ) ) {
-		$order = wc_get_order( $order );
-	}
-
-	$shipping = $order->get_items('shipping');
-
-	//Get meta data of shipping
-	$value = array_values($shipping)[0];
-	$meta = ($value->get_meta_data() == array()) ? false : $value->get_meta_data()[0];
-
-	if (!$meta){
-		return false;
-	}
-
-	//return days to delivery
-	if( 'delivery forecast' == $meta->get_data()['key'] ){
-		return $meta->get_data()['value'];
-	}
-
-	return false;
 }

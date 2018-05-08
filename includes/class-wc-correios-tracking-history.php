@@ -123,7 +123,7 @@ class WC_Correios_Tracking_History {
 		}
 
 		if ( ! is_null( $objects ) ) {
-			$this->logger( sprintf( 'Tracking history found successfully: %s', print_r( $objects, true ) ) );
+			$this->logger( sprintf( 'Tracking history found successfully: %s', wc_print_r( $objects, true ) ) );
 		}
 
 		return apply_filters( 'woocommerce_correios_tracking_objects', $objects, $tracking_codes );
@@ -137,23 +137,10 @@ class WC_Correios_Tracking_History {
 	public function view( $order ) {
 		$objects = array();
 
-		$days_for_delivery = wc_correios_get_days_for_delivery($order);
 		$tracking_codes = wc_correios_get_tracking_codes( $order );
 
-		// Check if exist delivery estimate or tracking code for the order.
-		if ( !$days_for_delivery and empty( $tracking_codes )) {
-			return;
-		}
-
-		wc_get_template(
-			'myaccount/tracking-title.php',
-			array('days_to_delivery' => $days_for_delivery),
-			'',
-			WC_Correios::get_templates_path()
-		);
-
-		// Check if exist tracking code
-		if (empty( $tracking_codes )){
+		// Check if exist a tracking code for the order.
+		if ( empty( $tracking_codes ) ) {
 			return;
 		}
 
@@ -162,6 +149,12 @@ class WC_Correios_Tracking_History {
 			$objects = $this->get_tracking_history( $tracking_codes );
 		}
 
+		wc_get_template(
+			'myaccount/tracking-title.php',
+			array(),
+			'',
+			WC_Correios::get_templates_path()
+		);
 
 		// Display the right template for show the tracking code or tracking history.
 		if ( ! empty( $objects ) ) {

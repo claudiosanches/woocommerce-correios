@@ -88,7 +88,7 @@ class WC_Correios_REST_API {
 	 *
 	 * @return string
 	 */
-	function get_tracking_code_callback( $data, $field, $request ) {
+	public function get_tracking_code_callback( $data, $field, $request ) {
 		return implode( ',', wc_correios_get_tracking_codes( $data['id'] ) );
 	}
 
@@ -100,7 +100,7 @@ class WC_Correios_REST_API {
 	 *
 	 * @return bool
 	 */
-	function update_tracking_code_callback( $value, $object ) {
+	public function update_tracking_code_callback( $value, $object ) {
 		if ( ! $value || ! is_string( $value ) ) {
 			return;
 		}
