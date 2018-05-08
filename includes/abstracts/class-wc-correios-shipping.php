@@ -145,7 +145,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'type'        => 'text',
 				'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
-				'placeholder' => get_option( 'woocommerce_store_postcode', '00000-000' ),
+				'placeholder' => '00000-000',
 				'default'     => $this->get_base_postcode(),
 			),
 			'shipping_class_id'  => array(

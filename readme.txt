@@ -204,11 +204,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
-= 3.7.0 - 2018/05/xx =
+= 3.7.0 - 2018/05/08 =
 
 - Atualizados os valores do Impresso e Carta, mais detalhes em [#97](https://github.com/claudiosanches/woocommerce-correios/pull/97) e [#100](https://github.com/claudiosanches/woocommerce-correios/pull/100).
 - Adicionada opção para peso extra nos métodos de Impresso e Carta, mais detalhes em [#95](https://github.com/claudiosanches/woocommerce-correios/pull/95).
-- CEP da loja é usado por padrão ao adicionar um novo método de entrega.
 - Adicionada opções para usar rastreamento com dados administrativos.
 - Melhorado a exibição e salvamento da estimativa de entrega, mais detalhes em [#98](https://github.com/claudiosanches/woocommerce-correios/pull/98)
 
@@ -216,7 +215,9 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.6.0 =
+= 3.7.0 =
 
 - Atualizados os valores do Impresso e Carta.
-- Adicionada opção para peso extra nos métodos de Impresso e Carta
+- Adicionada opção para peso extra nos métodos de Impresso e Carta.
+- Adicionada opções para usar rastreamento com dados administrativos.
+- Melhorado a exibição e salvamento da estimativa de entrega.
