@@ -73,7 +73,7 @@ class WC_Correios_Integration extends WC_Integration {
 			'tracking'                => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
 				'type'        => 'title',
-				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page.', 'woocommerce-correios' ),
+				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page. Required username and password that can be obtained with the Correios\' commercial area.', 'woocommerce-correios' ),
 			),
 			'tracking_enable'         => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
@@ -255,7 +255,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return array
 	 */
 	public function setup_tracking_user_data( $user_data ) {
-		if ( ! $this->tracking_login && ! $this->tracking_password ) {
+		if ( $this->tracking_login && $this->tracking_password ) {
 			$user_data = array(
 				'login'    => $this->tracking_login,
 				'password' => $this->tracking_password,

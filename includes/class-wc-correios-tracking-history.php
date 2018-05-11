@@ -68,6 +68,7 @@ class WC_Correios_Tracking_History {
 	/**
 	 * Access API Correios.
 	 *
+	 * @throws Exception When username or password fails.
 	 * @param  array $tracking_codes Tracking codes.
 	 * @return array
 	 */
@@ -111,6 +112,12 @@ class WC_Correios_Tracking_History {
 				} elseif ( is_object( $response->return->objeto ) ) {
 					// Handle single object.
 					$objects = array( $response->return->objeto );
+
+					// Check for invalid username and passowrd.
+					if ( isset( $objects[0]->numero ) && 'Erro' === $objects[0]->numero ) {
+						$objects = null; // Reset values to disable tracking table.
+						throw new Exception( 'Invalid username or password!' );
+					}
 
 					// Fix when return only last event.
 					if ( is_object( $objects[0]->evento ) ) {
