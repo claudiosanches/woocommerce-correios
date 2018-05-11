@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -204,6 +204,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.7.1 - 2018/05/11 =
+
+- Melhorado o comportamento quando login e senha para tabela de rastreamento estão incorretos.
+- Melhorada a descrição para opção de integração com tabela de rastreamento.
+
 = 3.7.0 - 2018/05/08 =
 
 - Atualizados os valores do Impresso e Carta, mais detalhes em [#97](https://github.com/claudiosanches/woocommerce-correios/pull/97) e [#100](https://github.com/claudiosanches/woocommerce-correios/pull/100).
@@ -215,9 +220,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.7.0 =
+= 3.7.1 =
 
 - Atualizados os valores do Impresso e Carta.
 - Adicionada opção para peso extra nos métodos de Impresso e Carta.
 - Adicionada opções para usar rastreamento com dados administrativos.
 - Melhorado a exibição e salvamento da estimativa de entrega.
+- Melhorado o comportamento quando login e senha para tabela de rastreamento estão incorretos.
+- Melhorada a descrição para opção de integração com tabela de rastreamento.
