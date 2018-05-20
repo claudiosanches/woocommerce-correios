@@ -28,6 +28,7 @@ class WC_Correios_Tracking_History {
 	 */
 	public function __construct() {
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'view' ), 1 );
+		add_action( 'woocommerce_correios_tracking_history', array( $this, 'view' ), 1 );
 	}
 
 	/**
