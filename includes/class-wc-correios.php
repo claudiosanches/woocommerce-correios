@@ -42,7 +42,7 @@ class WC_Correios {
 	 * Load the plugin text domain for translation.
 	 */
 	public static function load_plugin_textdomain() {
-		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( WC_CORREIOS_PLUGIN_FILE ) ) . '/languages/' );
 	}
 
 	/**
