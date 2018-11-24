@@ -76,7 +76,7 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 			'100' => 2.15,
 			'150' => 2.60,
 			'200' => 3.10,
-			'250' => 3.50,
+			'250' => 3.60,
 			'300' => 4.05,
 			'350' => 4.50,
 			'400' => 5.05,
