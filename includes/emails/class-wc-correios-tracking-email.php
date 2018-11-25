@@ -171,11 +171,11 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				$this->recipient = $order->billing_email;
 			}
 
-			$this->find[]    = '{order_number}';
-			$this->replace[] = $order->get_order_number();
+			$this->find['order_number']    = '{order_number}';
+			$this->replace['order_number'] = $order->get_order_number();
 
-			$this->find[]    = '{date}';
-			$this->replace[] = date_i18n( wc_date_format(), time() );
+			$this->find['date']    = '{date}';
+			$this->replace['date'] = date_i18n( wc_date_format(), time() );
 
 			if ( empty( $tracking_code ) ) {
 				$tracking_codes = wc_correios_get_tracking_codes( $order );
@@ -183,8 +183,8 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				$tracking_codes = array( $tracking_code );
 			}
 
-			$this->find[]    = '{tracking_code}';
-			$this->replace[] = $this->get_tracking_codes( $tracking_codes );
+			$this->find['tracking_code']    = '{tracking_code}';
+			$this->replace['tracking_code'] = $this->get_tracking_codes( $tracking_codes );
 		}
 
 		if ( ! $this->get_recipient() ) {
