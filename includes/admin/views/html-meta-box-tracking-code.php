@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<strong><?php echo esc_html( _n( 'Tracking code:', 'Tracking codes:', count( $tracking_codes ), 'woocommerce-correios' ) ); ?></strong>
 			<ul>
 				<?php foreach ( $tracking_codes as $tracking_code ) : ?>
-					<li><a href="#" aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ); ?>"><?php echo esc_html( $tracking_code ); ?></a> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ) ?>" data-code="<?php echo esc_attr( $tracking_code ); ?>"></a></li>
+					<li><a href="#" class="tracking-code-link" aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ); ?>"><?php echo esc_html( $tracking_code ); ?></a> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ) ?>" data-code="<?php echo esc_attr( $tracking_code ); ?>"></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
