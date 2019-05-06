@@ -12,7 +12,7 @@ jQuery( function( $ ) {
 		 */
 		init: function() {
 			$( document.body )
-				.on( 'click', '.correios-tracking-code a', this.openTrackingLink );
+				.on( 'click', '.correios-tracking-code a.tracking-code-link', this.openTrackingLink );
 		},
 
 		/**
