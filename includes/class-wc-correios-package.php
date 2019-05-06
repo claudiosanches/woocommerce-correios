@@ -53,9 +53,9 @@ class WC_Correios_Package {
 
 			if ( $qty > 0 && $product->needs_shipping() ) {
 
-				$_height = wc_get_dimension( (float) $product->get_length(), 'cm' );
+				$_height = wc_get_dimension( (float) $product->get_height(), 'cm' );
 				$_width  = wc_get_dimension( (float) $product->get_width(), 'cm' );
-				$_length = wc_get_dimension( (float) $product->get_height(), 'cm' );
+				$_length = wc_get_dimension( (float) $product->get_length(), 'cm' );
 				$_weight = wc_get_weight( (float) $product->get_weight(), 'kg' );
 
 				$height[ $count ] = $_height;
