@@ -507,6 +507,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 			wc_add_notice( $notice, $notice_type );
 		}
 
+		// Display Correios observations.
+		if (isset($shipping->obsFim)){
+			$obs_message = apply_filters( 'woocommerce_correios_observation_message', $shipping->obsFim);
+			if( '' !== $obs_message && is_cart() ){
+				$notice = '<strong>' . $this->title . ':</strong> ' . esc_html( $obs_message );
+				wc_add_notice( $notice, 'notice' );
+			}
+		}
+
 		// Set the shipping rates.
 		$label = $this->title;
 		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
