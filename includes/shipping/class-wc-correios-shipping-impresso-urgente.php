@@ -19,8 +19,8 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	/**
 	 * Weight limit for this shipping method.
 	 *
-	 * Value based in 01/02/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Value based in 30/06/2019 from:
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @var float
 	 */
@@ -41,8 +41,8 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 
 	/**
 	 * Get costs.
-	 * Costs based in 01/02/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Costs based in 30/06/2019 from:
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @return array
 	 */
