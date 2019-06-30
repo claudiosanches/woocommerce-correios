@@ -21,7 +21,6 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	 *
 	 * Cost based in 01/02/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
-	 * Reviewed in 30/06/2019.
 	 *
 	 * @var float
 	 */
@@ -32,7 +31,6 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	 *
 	 * Value based in 01/02/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
-	 * Reviewed in 30/06/2019.
 	 *
 	 * @var float
 	 */
