@@ -21,8 +21,8 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * National Registry cost.
 	 *
-	 * Cost based in 30/06/2019 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 01/08/2018 from:
+	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais	 
 	 *
 	 * @var float
 	 */
@@ -31,7 +31,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Reasonable Registry cost.
 	 *
-	 * Cost based in 30/06/2019 from:
+	 * Cost based in 01/08/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
@@ -41,7 +41,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Receipt Notice cost.
 	 *
-	 * Cost based in 30/06/2019 from:
+	 * Cost based in 01/08/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
@@ -51,7 +51,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Own Hands cost.
 	 *
-	 * Cost based in 30/06/2019 from:
+	 * Cost based in 01/08/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
@@ -61,7 +61,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Weight limit for reasonable registry.
 	 *
-	 * Value based in 30/06/2019 from:
+	 * Value based in 01/02/2018 from:
 	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @var float
