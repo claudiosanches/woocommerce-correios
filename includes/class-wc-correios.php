@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WooCommerce Correios main class.
+ * Plugins main class.
  */
 class WC_Correios {
 

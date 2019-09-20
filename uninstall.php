@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce Correios Uninstall
+ * Uninstall
  *
  * @package WooCommerce_Correios/Uninstaller
  * @since   3.0.0

@@ -1,4 +1,4 @@
-# WooCommerce Correios #
+# Claudio Sanches - Correios for WooCommerce #
 **Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior), [matheuscl](https://profiles.wordpress.org/matheuscl)  
 **Donate link:** https://claudiosanches.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
@@ -17,7 +17,7 @@ Utilize os métodos de entrega e serviços dos Correios com a sua loja WooCommer
 
 [Correios](http://www.correios.com.br/) é um método de entrega brasileiro.
 
-O plugin WooCommerce Correios foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
+Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](http://www.correios.com.br/webservices/) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
 
 ### Serviços integrados ###
 

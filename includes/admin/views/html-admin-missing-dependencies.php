@@ -19,7 +19,7 @@ if ( function_exists( 'get_plugins' ) ) {
 ?>
 
 <div class="error">
-	<p><strong><?php esc_html_e( 'WooCommerce Correios', 'woocommerce-correios' ); ?></strong> <?php esc_html_e( 'depends on the last version of WooCommerce to work!', 'woocommerce-correios' ); ?></p>
+	<p><strong><?php esc_html_e( 'Claudio Sanches - Correios for WooCommerce', 'woocommerce-correios' ); ?></strong> <?php esc_html_e( 'depends on the last version of WooCommerce to work!', 'woocommerce-correios' ); ?></p>
 
 	<?php if ( $is_installed && current_user_can( 'install_plugins' ) ) : ?>
 		<p><a href="<?php echo esc_url( wp_nonce_url( self_admin_url( 'plugins.php?action=activate&plugin=woocommerce/woocommerce.php&plugin_status=active' ), 'activate-plugin_woocommerce/woocommerce.php' ) ); ?>" class="button button-primary"><?php esc_html_e( 'Active WooCommerce', 'woocommerce-correios' ); ?></a></p>

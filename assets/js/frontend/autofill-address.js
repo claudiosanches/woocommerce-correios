@@ -1,6 +1,6 @@
 /* global WCCorreiosAutofillAddressParams */
 /*!
- * WooCommerce Correios Autofill Brazilian 2016.
+ * Claudio Sanches - Correios for WooCommerce: Autofill Brazilian 2016.
  *
  * Autofill address with postcodes.
  *
