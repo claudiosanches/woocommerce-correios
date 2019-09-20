@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 3.7.2
+Stable tag: 3.8.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -204,6 +204,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 3.8.0 - 2019/09/20 =
+
+- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
+- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
+- Corrigida rotina de atualização das opções do plugin.
+
 = 3.7.2 - 2019/05/06 =
 
 - Correção dos links que levam para a página de rastreio de encomenda.
@@ -227,9 +233,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.7.2 =
+= 3.8.0 =
 
-- Correção dos links que levam para a página de rastreio de encomenda.
-- Corrigido problema com código incorreto vindo do Webservice dos Correios impossibilitando mostrar o frete corretamente.
-- Atualizado valores do Impresso normal, Registro Módico e Registro Nacional para tabela de 01/08/2018.
-- Corrigido os valores de altura e comprimento que estavamos trocados.
+- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
+- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
+- Corrigida rotina de atualização das opções do plugin.
