@@ -42,6 +42,7 @@ class WC_Correios_Install {
 
 		if ( empty( $version ) ) {
 			$wpdb->query( "UPDATE $wpdb->postmeta SET meta_key = '_correios_tracking_code' WHERE meta_key = 'correios_tracking';" ); // WPCS: db call ok, cache ok.
+			self::update_version();
 		}
 	}
 
