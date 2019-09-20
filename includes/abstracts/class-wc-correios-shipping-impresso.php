@@ -22,7 +22,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 * National Registry cost.
 	 *
 	 * Cost based in 01/08/2018 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais	 
 	 *
 	 * @var float
 	 */
@@ -32,7 +32,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 * Reasonable Registry cost.
 	 *
 	 * Cost based in 01/08/2018 from:
-	 * http://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
@@ -42,7 +42,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 * Receipt Notice cost.
 	 *
 	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
@@ -52,7 +52,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 * Own Hands cost.
 	 *
 	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-adicionais-nacionais
+	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
 	 *
 	 * @var float
 	 */
@@ -61,12 +61,12 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * Weight limit for reasonable registry.
 	 *
-	 * Value based in 01/02/2017 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * Value based in 01/02/2018 from:
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @var float
 	 */
-	protected $reasonable_registry_weight_limit = 500.000;
+	protected $reasonable_registry_weight_limit = 2000.000;
 
 	/**
 	 * Initialize Impresso shipping method.

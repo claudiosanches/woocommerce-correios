@@ -20,7 +20,7 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	 * Weight limit for this shipping method.
 	 *
 	 * Value based in 01/02/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal	 
 	 *
 	 * @var float
 	 */
@@ -34,7 +34,7 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-impresso-urgente';
 		$this->method_title = __( 'Impresso Urgente', 'woocommerce-correios' );
-		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/impresso-normal';
+		$this->more_link    = 'https://www.correios.com.br/a-a-z/impresso-normal';
 
 		parent::__construct( $instance_id );
 	}
@@ -42,7 +42,7 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	/**
 	 * Get costs.
 	 * Costs based in 01/02/2018 from:
-	 * https://www.correios.com.br/para-voce/consultas-e-solicitacoes/precos-e-prazos/servicos-nacionais_pasta/impresso-normal
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @return array
 	 */
