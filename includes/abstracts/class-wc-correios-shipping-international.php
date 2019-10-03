@@ -37,10 +37,12 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		// Define user set variables.
 		$this->enabled            = $this->get_option( 'enabled' );
 		$this->title              = $this->get_option( 'title' );
-		$this->origin_state       = $this->get_option( 'origin_state' );
-		$this->origin_location    = $this->get_option( 'origin_location' );
+		$this->origin_postcode    = $this->get_option( 'origin_postcode' );
 		$this->shipping_class_id  = (int) $this->get_option( 'shipping_class_id', '-1' );
+		$this->declare_value      = $this->get_option( 'declare_value' );
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
+		$this->login              = $this->get_option( 'login' );
+		$this->password           = $this->get_option( 'password' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->debug              = $this->get_option( 'debug' );
 
@@ -71,26 +73,13 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 				'type'    => 'title',
 				'default' => '',
 			),
-			'origin_state' => array(
-				'title'       => __( 'Origin State', 'woocommerce-correios' ),
-				'type'        => 'select',
-				'description' => __( 'The UF of the location your packages are delivered from.', 'woocommerce-correios' ),
+			'origin_postcode' => array(
+				'title'       => __( 'Origin Postcode', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'The postcode of the location your packages are delivered from.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
-				'default'     => '',
-				'class'       => 'wc-enhanced-select',
-				'options'     => WC()->countries->get_states( 'BR' ),
-			),
-			'origin_location' => array(
-				'title'       => __( 'Origin Locale', 'woocommerce-correios' ),
-				'type'        => 'select',
-				'description' => __( 'The location of your packages are delivered from.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
-				'default'     => 'C',
-				'class'       => 'wc-enhanced-select',
-				'options'     => array(
-					'C' => __( 'Capital', 'woocommerce-correios' ),
-					'I' => __( 'Interior', 'woocommerce-correios' ),
-				),
+				'placeholder' => '00000-000',
+				'default'     => $this->get_base_postcode(),
 			),
 			'shipping_class_id' => array(
 				'title'       => __( 'Shipping Class', 'woocommerce-correios' ),
@@ -123,6 +112,28 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 				'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
 				'default'     => '',
 			),
+			'declare_value'      => array(
+				'title'       => __( 'Declare Value for Insurance', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable declared value', 'woocommerce-correios' ),
+				'description' => __( 'This controls if the price of the package must be declared for insurance purposes.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => 'yes',
+			),
+			'login'              => array(
+				'title'       => __( 'User', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios login. It\'s usually your idCorreios.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
+			'password'           => array(
+				'title'       => __( 'Password', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
 			'testing' => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
 				'type'    => 'title',
@@ -148,6 +159,35 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 	}
 
 	/**
+	 * Get login.
+	 *
+	 * @return string
+	 */
+	public function get_login() {
+		return $this->login;
+	}
+
+	/**
+	 * Get password.
+	 *
+	 * @return string
+	 */
+	public function get_password() {
+		return $this->password;
+	}
+
+	/**
+	 * Get the declared value from the package.
+	 *
+	 * @param  array $package Cart package.
+	 *
+	 * @return float
+	 */
+	protected function get_declared_value( $package ) {
+		return $package['contents_cost'];
+	}
+
+	/**
 	 * Get shipping rate.
 	 *
 	 * @param  array $package Order package.
@@ -159,9 +199,15 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		$api->set_debug( $this->debug );
 		$api->set_service( $this->get_code() );
 		$api->set_package( $package );
+		$api->set_origin_postcode( $this->origin_postcode );
 		$api->set_destination_country( $package['destination']['country'] );
-		$api->set_origin_state( $this->origin_state );
-		$api->set_origin_location( $this->origin_location );
+
+		if ( 'yes' === $this->declare_value ) {
+			$api->set_declared_value( $this->get_declared_value( $package ) );
+		}
+
+		$api->set_login( $this->get_login() );
+		$api->set_password( $this->get_password() );
 
 		$shipping = $api->get_shipping();
 
@@ -188,16 +234,17 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 
 		$shipping = $this->get_rate( $package );
 
-		if ( empty( $shipping->dados_postais->preco_postal ) ) {
+		if ( empty( $shipping->pcFinal ) ) {
 			return;
 		}
 
 		// Set the shipping rates.
 		$label = $this->title;
+		/* TODO
 		if ( 'yes' === $this->show_delivery_time ) {
 			$label .= ' (' . sanitize_text_field( (string) $shipping->dados_postais->prazo_entrega ) . ')';
-		}
-		$cost = sanitize_text_field( (float) $shipping->dados_postais->preco_postal );
+		}*/
+		$cost = sanitize_text_field( (float) $shipping->pcFinal );
 
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {

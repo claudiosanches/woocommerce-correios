@@ -18,11 +18,11 @@ class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Shipping_Int
 
 	/**
 	 * Service code.
-	 * 128 - Mercadoria Econômica.
+	 * 45128 - Mercadoria Econômica.
 	 *
 	 * @var string
 	 */
-	protected $code = '128';
+	protected $code = '45128';
 
 	/**
 	 * Initialize Mercadoria Econômica.

@@ -18,11 +18,11 @@ class WC_Correios_Shipping_Mercadoria_Expressa extends WC_Correios_Shipping_Inte
 
 	/**
 	 * Service code.
-	 * 110 - Mercadoria Expressa.
+	 * 45110 - Mercadoria Expressa.
 	 *
 	 * @var string
 	 */
-	protected $code = '110';
+	protected $code = '45110';
 
 	/**
 	 * Initialize Mercadoria Expressa.

@@ -21,7 +21,7 @@ class WC_Correios_Webservice_International {
 	 *
 	 * @var string
 	 */
-	private $_webservice = 'http://www2.correios.com.br/sistemas/efi/bb/Consulta.cfm?';
+	private $_webservice_base = 'https://cws2.correios.com.br/precoprazoservice/rs/v1/internacional/preco/';
 
 	/**
 	 * Shipping method ID.
@@ -40,9 +40,9 @@ class WC_Correios_Webservice_International {
 	/**
 	 * IDs from Correios services.
 	 *
-	 * 110 - Mercadoria Expressa (EMS).
-	 * 128 - Mercadoria Econômica.
-	 * 209 - Leve Internacional.
+	 * 45110 - Mercadoria Expressa (EMS).
+	 * 45128 - Mercadoria Econômica.
+	 * 45209 - Leve Internacional.
 	 *
 	 * @var string
 	 */
@@ -56,6 +56,13 @@ class WC_Correios_Webservice_International {
 	protected $package = null;
 
 	/**
+	 * Origin postcode.
+	 *
+	 * @var string
+	 */
+	protected $origin_postcode = '';
+
+	/**
 	 * Destination country.
 	 *
 	 * @var string
@@ -63,18 +70,18 @@ class WC_Correios_Webservice_International {
 	protected $destination_country = '';
 
 	/**
-	 * Origin location.
+	 * Login.
 	 *
 	 * @var string
 	 */
-	protected $origin_location = '';
+	protected $login = '';
 
 	/**
-	 * Origin state.
+	 * Password.
 	 *
 	 * @var string
 	 */
-	protected $origin_state = '';
+	protected $password = '';
 
 	/**
 	 * Package height.
@@ -89,6 +96,13 @@ class WC_Correios_Webservice_International {
 	 * @var float
 	 */
 	protected $width = 0;
+
+	/**
+	 * Package diameter.
+	 *
+	 * @var float
+	 */
+	protected $diameter = 0;
 
 	/**
 	 * Package length.
@@ -110,6 +124,17 @@ class WC_Correios_Webservice_International {
 	 * @var string
 	 */
 	protected $declared_value = '0';
+
+	/**
+	 * Package format.
+	 *
+	 * 1 – envelope
+	 * 2 – box/package
+	 * 3 – roll/prism
+	 *
+	 * @var string
+	 */
+	protected $format = '2';
 
 	/**
 	 * Debug mode.
@@ -172,6 +197,15 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
+	 * Set origin postcode.
+	 *
+	 * @param string $postcode Origin postcode.
+	 */
+	public function set_origin_postcode( $postcode = '' ) {
+		$this->origin_postcode = $postcode;
+	}
+
+	/**
 	 * Set destination country.
 	 *
 	 * @param string $country Destination country.
@@ -181,21 +215,21 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
-	 * Set origin location.
+	 * Set login.
 	 *
-	 * @param string $location Origin location.
+	 * @param string $login User login.
 	 */
-	public function set_origin_location( $location = '' ) {
-		$this->origin_location = $location;
+	public function set_login( $login = '' ) {
+		$this->login = $login;
 	}
 
 	/**
-	 * Set origin state.
+	 * Set password.
 	 *
-	 * @param string $state Origin state.
+	 * @param string $password User login.
 	 */
-	public function set_origin_state( $state = '' ) {
-		$this->origin_state = $state;
+	public function set_password( $password = '' ) {
+		$this->password = $password;
 	}
 
 	/**
@@ -217,6 +251,15 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
+	 * Set shipping package diameter.
+	 *
+	 * @param float $diameter Package diameter.
+	 */
+	public function set_diameter( $diameter = 0 ) {
+		$this->diameter = (float) $diameter;
+	}
+
+	/**
 	 * Set shipping package length.
 	 *
 	 * @param float $length Shipping package length.
@@ -235,6 +278,24 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
+	 * Set declared value.
+	 *
+	 * @param string $declared_value Declared value.
+	 */
+	public function set_declared_value( $declared_value = '0' ) {
+		$this->declared_value = $declared_value;
+	}
+
+	/**
+	 * Set shipping package format.
+	 *
+	 * @param string $format Package format.
+	 */
+	public function set_format( $format = '2' ) {
+		$this->format = $format;
+	}
+
+	/**
 	 * Set the debug mode.
 	 *
 	 * @param string $debug Yes or no.
@@ -249,7 +310,8 @@ class WC_Correios_Webservice_International {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_international_url', $this->_webservice, $this->id, $this->instance_id, $this->package );
+		return apply_filters( 'woocommerce_correios_webservice_international_url',
+			$this->_webservice_base . $this->service . '?', $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -258,6 +320,7 @@ class WC_Correios_Webservice_International {
 	 * @return string
 	 */
 	public function get_allowed_countries() {
+		// This list of countries was obtained from https://apps2.correios.com.br/efi/app/simulaPrecoPrazoInternacional/index.php on 2019-10-02
 		return apply_filters( 'woocommerce_correios_international_allowed_countries', array(
 			'AD',
 			'AE',
@@ -271,8 +334,10 @@ class WC_Correios_Webservice_International {
 			'AR',
 			'AS',
 			'AT',
+			'ATF',
 			'AU',
 			'AW',
+			'AX',
 			'AZ',
 			'BA',
 			'BB',
@@ -283,11 +348,14 @@ class WC_Correios_Webservice_International {
 			'BH',
 			'BI',
 			'BJ',
+			'BL',
 			'BM',
 			'BN',
 			'BO',
+			'BQ',
 			'BS',
 			'BT',
+			'BVT',
 			'BW',
 			'BY',
 			'BZ',
@@ -306,6 +374,7 @@ class WC_Correios_Webservice_International {
 			'CR',
 			'CU',
 			'CV',
+			'CW',
 			'CX',
 			'CY',
 			'CZ',
@@ -348,6 +417,7 @@ class WC_Correios_Webservice_International {
 			'GW',
 			'GY',
 			'HK',
+			'HM',
 			'HN',
 			'HR',
 			'HT',
@@ -373,6 +443,7 @@ class WC_Correios_Webservice_International {
 			'KN',
 			'KP',
 			'KR',
+			'KV',
 			'KW',
 			'KY',
 			'KZ',
@@ -391,6 +462,7 @@ class WC_Correios_Webservice_International {
 			'MC',
 			'MD',
 			'ME',
+			'MF',
 			'MG',
 			'MH',
 			'MK',
@@ -450,14 +522,17 @@ class WC_Correios_Webservice_International {
 			'SG',
 			'SH',
 			'SI',
+			'SJ',
 			'SK',
 			'SL',
 			'SM',
 			'SN',
 			'SO',
 			'SR',
+			'SS',
 			'ST',
 			'SV',
+			'SX',
 			'SY',
 			'SZ',
 			'TC',
@@ -467,10 +542,10 @@ class WC_Correios_Webservice_International {
 			'TH',
 			'TJ',
 			'TK',
+			'TL',
 			'TM',
 			'TN',
 			'TO',
-			'TP',
 			'TR',
 			'TT',
 			'TV',
@@ -478,6 +553,7 @@ class WC_Correios_Webservice_International {
 			'TZ',
 			'UA',
 			'UG',
+			'UM',
 			'US',
 			'UY',
 			'UZ',
@@ -515,23 +591,30 @@ class WC_Correios_Webservice_International {
 	}
 
 	/**
-	 * Get origin location.
+	 * Get origin postcode.
 	 *
 	 * @return string
 	 */
-	public function get_origin_location() {
-		$location = 'C' === $this->origin_location ? 'C' : 'I';
-
-		return apply_filters( 'woocommerce_correios_international_origin_location', $this->origin_location, $this->id, $this->instance_id, $this->package );
+	public function get_origin_postcode() {
+		return apply_filters( 'woocommerce_correios_origin_postcode', $this->origin_postcode, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
-	 * Get origin state.
+	 * Get login.
 	 *
 	 * @return string
 	 */
-	public function get_origin_state() {
-		return apply_filters( 'woocommerce_correios_international_origin_state', $this->origin_state, $this->id, $this->instance_id, $this->package );
+	public function get_login() {
+		return apply_filters( 'woocommerce_correios_login', $this->login, $this->id, $this->instance_id, $this->package );
+	}
+
+	/**
+	 * Get password.
+	 *
+	 * @return string
+	 */
+	public function get_password() {
+		return apply_filters( 'woocommerce_correios_password', $this->password, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -550,6 +633,15 @@ class WC_Correios_Webservice_International {
 	 */
 	public function get_width() {
 		return $this->float_to_string( $this->width );
+	}
+
+	/**
+	 * Get diameter.
+	 *
+	 * @return float
+	 */
+	public function get_diameter() {
+		return $this->float_to_string( $this->diameter );
 	}
 
 	/**
@@ -589,9 +681,9 @@ class WC_Correios_Webservice_International {
 	 * @return bool
 	 */
 	protected function is_setted() {
-		$state = $this->get_origin_state();
+		$origin_postcode = $this->get_origin_postcode();
 
-		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $state ) || 0 === $this->get_height();
+		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $origin_postcode ) || 0 === $this->get_height();
 	}
 
 	/**
@@ -608,16 +700,16 @@ class WC_Correios_Webservice_International {
 		}
 
 		$args = apply_filters( 'woocommerce_correios_international_shipping_args', array(
-			'tipoConsulta' => 'Geral',
-			'especif'      => $this->service,
-			'uforigem'     => $this->get_origin_state(),
-			'localidade'   => $this->get_origin_location(),
-			'pais'         => $this->get_destination_country(),
-			'altura'       => $this->get_height(),
-			'largura'      => $this->get_width(),
-			'profundidade' => $this->get_length(),
-			'peso'         => $this->get_weight(),
-			'reset'        => 'true',
+			'cepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
+			'sgPaisDestino'      => $this->get_destination_country(),
+			'altura'             => $this->get_height(),
+			'largura'            => $this->get_width(),
+			'diametro'           => $this->get_diameter(),
+			'comprimento'        => $this->get_length(),
+			'psObjeto'           => $this->get_weight(),
+			'tpObjeto'           => $this->format,
+			'servicosAdicionais' => '',
+			'vlDeclarado'        => round( number_format( $this->declared_value, 2, '.', '' ) ),
 		), $this->id, $this->package );
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
@@ -627,7 +719,14 @@ class WC_Correios_Webservice_International {
 		}
 
 		// Gets the WebServices response.
-		$response = wp_safe_remote_get( $url, array( 'timeout' => 30 ) );
+		$response = wp_safe_remote_get( $url, array(
+			'timeout' => 30,
+			'headers' =>  array(
+				'Authorization' => 'Basic ' . base64_encode( sprintf( '%s:%s', $this->get_login(), $this->get_password() ) )
+				)
+			)
+		);
+
 
 		if ( is_wp_error( $response ) ) {
 			if ( 'yes' === $this->debug ) {
@@ -635,19 +734,20 @@ class WC_Correios_Webservice_International {
 			}
 		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 			try {
-				$result = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
+				$result = json_decode( $response['body'] );
+				$this->log->add( $this->id, 'Success: ' . print_r( $result, true ) );
 			} catch ( Exception $e ) {
 				if ( 'yes' === $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
+					$this->log->add( $this->id, 'Correios WebServices invalid return: ' . $e->getMessage() );
 				}
 			}
 
-			if ( isset( $result->tipo_servico ) ) {
+			if ( isset( $result->precoProduto ) ) {
 				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
 				}
 
-				$shipping = $result->tipo_servico;
+				$shipping = $result->precoProduto;
 			}
 		} else {
 			if ( 'yes' === $this->debug ) {

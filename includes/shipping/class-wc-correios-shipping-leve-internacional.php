@@ -18,11 +18,11 @@ class WC_Correios_Shipping_Leve_Internacional extends WC_Correios_Shipping_Inter
 
 	/**
 	 * Service code.
-	 * 209 - Leve Internacional.
+	 * 45209 - Leve Internacional.
 	 *
 	 * @var string
 	 */
-	protected $code = '209';
+	protected $code = '45209';
 
 	/**
 	 * Initialize Leve Internacional.
