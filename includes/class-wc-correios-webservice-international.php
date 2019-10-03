@@ -708,7 +708,7 @@ class WC_Correios_Webservice_International {
 			'comprimento'        => $this->get_length(),
 			'psObjeto'           => $this->get_weight(),
 			'tpObjeto'           => $this->format,
-			'servicosAdicionais' => '',
+			'servicosAdicionais' => number_format( $this->declared_value ) > 0 ? '030' : '',
 			'vlDeclarado'        => round( number_format( $this->declared_value, 2, '.', '' ) ),
 		), $this->id, $this->package );
 
