@@ -517,63 +517,66 @@ class WC_Correios_Webservice {
 	 * @return SimpleXMLElement|array
 	 */
 	public function get_shipping() {
-		$shipping = null;
+		$shipping = [];
 
 		// Checks if service and postcode are empty.
 		if ( ! $this->is_available() ) {
 			return $shipping;
 		}
 
-		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
-			'nCdServico'          => $this->service,
-			'nCdEmpresa'          => $this->get_login(),
-			'sDsSenha'            => $this->get_password(),
-			'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
-			'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
-			'nVlAltura'           => $this->get_height(),
-			'nVlLargura'          => $this->get_width(),
-			'nVlDiametro'         => $this->get_diameter(),
-			'nVlComprimento'      => $this->get_length(),
-			'nVlPeso'             => $this->get_weight(),
-			'nCdFormato'          => $this->format,
-			'sCdMaoPropria'       => $this->own_hands,
-			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
-			'sCdAvisoRecebimento' => $this->receipt_notice,
-			'StrRetorno'          => 'xml',
-		), $this->id, $this->instance_id, $this->package );
-
-		$url = add_query_arg( $args, $this->get_webservice_url() );
-
-		if ( 'yes' === $this->debug ) {
-			$this->log->add( $this->id, 'Requesting Correios WebServices: ' . $url );
-		}
-
-		// Gets the WebServices response.
-		$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
-
-		if ( is_wp_error( $response ) ) {
+		foreach (explode(',', $this->service) as $idx => $servico) {
+			# code...
+			$args = apply_filters( 'woocommerce_correios_shipping_args', array(
+				'nCdServico'          => $servico,
+				'nCdEmpresa'          => $this->get_login(),
+				'sDsSenha'            => $this->get_password(),
+				'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
+				'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
+				'nVlAltura'           => $this->get_height(),
+				'nVlLargura'          => $this->get_width(),
+				'nVlDiametro'         => $this->get_diameter(),
+				'nVlComprimento'      => $this->get_length(),
+				'nVlPeso'             => $this->get_weight(),
+				'nCdFormato'          => $this->format,
+				'sCdMaoPropria'       => $this->own_hands,
+				'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
+				'sCdAvisoRecebimento' => $this->receipt_notice,
+				'StrRetorno'          => 'xml',
+			), $this->id, $this->instance_id, $this->package );
+	
+			$url = add_query_arg( $args, $this->get_webservice_url() );
+	
 			if ( 'yes' === $this->debug ) {
-				$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
+				$this->log->add( $this->id, 'Requesting Correios WebServices: ' . $url );
 			}
-		} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
-			try {
-				$result = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
-			} catch ( Exception $e ) {
+	
+			// Gets the WebServices response.
+			$response = wp_safe_remote_get( esc_url_raw( $url ), array( 'timeout' => 30 ) );
+	
+			if ( is_wp_error( $response ) ) {
 				if ( 'yes' === $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
+					$this->log->add( $this->id, 'WP_Error: ' . $response->get_error_message() );
 				}
-			}
-
-			if ( isset( $result->cServico ) ) {
+			} elseif ( $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+				try {
+					$result = wc_correios_safe_load_xml( $response['body'], LIBXML_NOCDATA );
+				} catch ( Exception $e ) {
+					if ( 'yes' === $this->debug ) {
+						$this->log->add( $this->id, 'Correios WebServices invalid XML: ' . $e->getMessage() );
+					}
+				}
+	
+				if ( isset( $result->cServico ) ) {
+					if ( 'yes' === $this->debug ) {
+						$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
+					}
+	
+					$shipping[] = $result->cServico;
+				}
+			} else {
 				if ( 'yes' === $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
+					$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 				}
-
-				$shipping = $result->cServico;
-			}
-		} else {
-			if ( 'yes' === $this->debug ) {
-				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
 			}
 		}
 
