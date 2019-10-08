@@ -488,59 +488,62 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		$shipping = $this->get_rate( $package );
 
-		if ( ! isset( $shipping->Erro ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
-			return;
-		}
-
-		$error_number = (string) $shipping->Erro; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
-
-		// Exit if have errors.
-		if ( ! in_array( $error_number, $this->get_accepted_error_codes(), true ) ) {
-			return;
-		}
-
-		// Display Correios errors.
-		$error_message = wc_correios_get_error_message( $error_number );
-		if ( '' !== $error_message && is_cart() ) {
-			$notice_type = ( '010' === $error_number ) ? 'notice' : 'error';
-			$notice      = '<strong>' . $this->title . ':</strong> ' . esc_html( $error_message );
-			wc_add_notice( $notice, $notice_type );
-		}
-
-		// Set the shipping rates.
-		$label = $this->title;
-		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
-
-		// Exit if don't have price.
-		if ( 0 === intval( $cost ) ) {
-			return;
-		}
-
-		// Apply fees.
-		$fee = $this->get_fee( $this->fee, $cost );
-
-		// Display delivery.
-		$meta_delivery = array();
-		if ( 'yes' === $this->show_delivery_time ) {
-			$meta_delivery = array(
-				'_delivery_forecast' => intval( $shipping->PrazoEntrega ) + intval( $this->get_additional_time( $package ) ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+		foreach ($shipping as $idx => $servico) {
+			# code...
+			if ( ! isset( $shipping->Erro ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+				return;
+			}
+	
+			$error_number = (string) $servico->Erro; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+	
+			// Exit if have errors.
+			if ( ! in_array( $error_number, $this->get_accepted_error_codes(), true ) ) {
+				return;
+			}
+	
+			// Display Correios errors.
+			$error_message = wc_correios_get_error_message( $error_number );
+			if ( '' !== $error_message && is_cart() ) {
+				$notice_type = ( '010' === $error_number ) ? 'notice' : 'error';
+				$notice      = '<strong>' . $this->title . ':</strong> ' . esc_html( $error_message );
+				wc_add_notice( $notice, $notice_type );
+			}
+	
+			// Set the shipping rates.
+			$label = $this->title;
+			$cost  = wc_correios_normalize_price( esc_attr( (string) $servico->Valor ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+	
+			// Exit if don't have price.
+			if ( 0 === intval( $cost ) ) {
+				return;
+			}
+	
+			// Apply fees.
+			$fee = $this->get_fee( $this->fee, $cost );
+	
+			// Display delivery.
+			$meta_delivery = array();
+			if ( 'yes' === $this->show_delivery_time ) {
+				$meta_delivery = array(
+					'_delivery_forecast' => intval( $servico->PrazoEntrega ) + intval( $this->get_additional_time( $package ) ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+				);
+			}
+	
+			// Create the rate and apply filters.
+			$rate = apply_filters(
+				'woocommerce_correios_' . $this->id . '_rate', array(
+					'id'        => $this->id . $this->instance_id,
+					'label'     => $label,
+					'cost'      => (float) $cost + (float) $fee,
+					'meta_data' => $meta_delivery,
+				), $this->instance_id, $package
 			);
+	
+			// Deprecated filter.
+			$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );
+	
+			// Add rate to WooCommerce.
+			$this->add_rate( $rates[0] );
 		}
-
-		// Create the rate and apply filters.
-		$rate = apply_filters(
-			'woocommerce_correios_' . $this->id . '_rate', array(
-				'id'        => $this->id . $this->instance_id,
-				'label'     => $label,
-				'cost'      => (float) $cost + (float) $fee,
-				'meta_data' => $meta_delivery,
-			), $this->instance_id, $package
-		);
-
-		// Deprecated filter.
-		$rates = apply_filters( 'woocommerce_correios_shipping_methods', array( $rate ), $package );
-
-		// Add rate to WooCommerce.
-		$this->add_rate( $rates[0] );
 	}
 }
