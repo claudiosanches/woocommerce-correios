@@ -21,42 +21,42 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * National Registry cost.
 	 *
-	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais	 
+	 * Cost based in 05/02/2020 from:
+	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-registro
 	 *
 	 * @var float
 	 */
-	protected $national_registry_cost = 5.75;
+	protected $national_registry_cost = 6.35;
 
 	/**
 	 * Reasonable Registry cost.
 	 *
-	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 05/02/2020 from:
+	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-registro
 	 *
 	 * @var float
 	 */
-	protected $reasonable_registry_cost = 2.90;
+	protected $reasonable_registry_cost = 3.20;
 
 	/**
 	 * Receipt Notice cost.
 	 *
-	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 05/02/2020 from:
+	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-aviso-de-recebimento
 	 *
 	 * @var float
 	 */
-	protected $receipt_notice_cost = 5.75;
+	protected $receipt_notice_cost = 6.35;
 
 	/**
 	 * Own Hands cost.
 	 *
-	 * Cost based in 01/08/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-adicionais-nacionais
+	 * Cost based in 05/02/2020 from:
+	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/precos-de-mao-propria
 	 *
 	 * @var float
 	 */
-	protected $own_hands_cost = 6.80;
+	protected $own_hands_cost = 7.50;
 
 	/**
 	 * Weight limit for reasonable registry.
