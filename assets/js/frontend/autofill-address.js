@@ -123,9 +123,7 @@ jQuery( function( $ ) {
 			$( '#' + field + '_city' ).val( data.city ).change();
 
 			// State.
-			$( '#' + field + '_state option:selected' ).attr( 'selected', false ).change();
-			$( '#' + field + '_state option[value="' + data.state + '"]' ).attr( 'selected', 'selected' ).change();
-			$( '#' + field + '_state' ).trigger( 'liszt:updated' ).trigger( 'chosen:updated' ); // Chosen support.
+			$( '#' + field + '_state' ).val( data.state ).change();
 		}
 	};
 
