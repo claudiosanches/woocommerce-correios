@@ -36,76 +36,76 @@ class WC_Correios_Shipping_Carta_Registrada extends WC_Correios_Shipping_Carta {
 	 *
 	 * @return array
 	 */
-	protected function get_costs() {
-		return apply_filters( 'woocommerce_correios_carta_registrada_costs', array(
-			'20'  => array(
-				'R'     => 6.85,
-				'AR'    => 11.85,
-				'MP'    => 12.75,
-				'AR+MP' => 17.75,
-			),
-			'50'  => array(
-				'R'     => 7.55,
-				'AR'    => 12.55,
-				'MP'    => 13.45,
-				'AR+MP' => 18.45,
-			),
-			'100' => array(
-				'R'     => 8.55,
-				'AR'    => 13.55,
-				'MP'    => 14.45,
-				'AR+MP' => 19.45,
-			),
-			'150' => array(
-				'R'     => 9.35,
-				'AR'    => 14.35,
-				'MP'    => 15.25,
-				'AR+MP' => 20.25,
-			),
-			'200' => array(
-				'R'     => 10.10,
-				'AR'    => 15.10,
-				'MP'    => 16.00,
-				'AR+MP' => 21.00,
-			),
-			'250' => array(
-				'R'     => 10.90,
-				'AR'    => 15.90,
-				'MP'    => 16.80,
-				'AR+MP' => 21.80,
-			),
-			'300' => array(
-				'R'     => 11.75,
-				'AR'    => 16.75,
-				'MP'    => 17.65,
-				'AR+MP' => 22.65,
-			),
-			'350' => array(
-				'R'     => 12.55,
-				'AR'    => 17.55,
-				'MP'    => 18.45,
-				'AR+MP' => 23.45,
-			),
-			'400' => array(
-				'R'     => 13.30,
-				'AR'    => 18.30,
-				'MP'    => 19.20,
-				'AR+MP' => 24.20,
-			),
-			'450' => array(
-				'R'     => 14.10,
-				'AR'    => 19.10,
-				'MP'    => 20.00,
-				'AR+MP' => 25.00,
-			),
-			'500' => array(
-				'R'     => 14.90,
-				'AR'    => 19.90,
-				'MP'    => 20.80,
-				'AR+MP' => 25.80,
-			),
-		), $this->id, $this->instance_id );
-	}
+     protected function get_costs() {
+         return apply_filters( 'woocommerce_correios_carta_registrada_costs', array(
+             '20'  => array(
+                 'R'     => 8.40,
+                 'AR'    => 14.75,
+                 'MP'    => 15.90,
+                 'AR+MP' => 22.25,
+             ),
+             '50'  => array(
+                 'R'     => 9.20,
+                 'AR'    => 15.55,
+                 'MP'    => 16.70,
+                 'AR+MP' => 23.05,
+             ),
+             '100' => array(
+                 'R'     => 10.30,
+                 'AR'    => 16.65,
+                 'MP'    => 17.80,
+                 'AR+MP' => 24.15,
+             ),
+             '150' => array(
+                 'R'     => 11.15,
+                 'AR'    => 17.50,
+                 'MP'    => 18.65,
+                 'AR+MP' => 25.00,
+             ),
+             '200' => array(
+                 'R'     => 12.00,
+                 'AR'    => 18.35,
+                 'MP'    => 19.50,
+                 'AR+MP' => 25.85,
+             ),
+             '250' => array(
+                 'R'     => 12.90,
+                 'AR'    => 19.25,
+                 'MP'    => 20.40,
+                 'AR+MP' => 26.75,
+             ),
+             '300' => array(
+                 'R'     => 13.85,
+                 'AR'    => 20.20,
+                 'MP'    => 21.35,
+                 'AR+MP' => 27.70,
+             ),
+             '350' => array(
+                 'R'     => 14.70,
+                 'AR'    => 21.05,
+                 'MP'    => 22.20,
+                 'AR+MP' => 28.55,
+             ),
+             '400' => array(
+                 'R'     => 15.60,
+                 'AR'    => 21.95,
+                 'MP'    => 23.10,
+                 'AR+MP' => 29.45,
+             ),
+             '450' => array(
+                 'R'     => 16.45,
+                 'AR'    => 22.80,
+                 'MP'    => 23.95,
+                 'AR+MP' => 30.30,
+             ),
+             '500' => array(
+                 'R'     => 17.35,
+                 'AR'    => 23.70,
+                 'MP'    => 24.85,
+                 'AR+MP' => 31.20,
+             ),
+         ), $this->id, $this->instance_id );
+     }
 
 	/**
 	 * Get type of cost.
