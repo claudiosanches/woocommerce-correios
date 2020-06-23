@@ -19,18 +19,18 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	/**
 	 * Additional cost per kg or fraction.
 	 *
-	 * Cost based in 01/02/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
+	 * Cost based in 05/02/2020 from:
+	 * https://www.correios.com.br/enviar-e-receber/marketing-direto/impressos/impresso-normal
 	 *
 	 * @var float
 	 */
-	protected $additional_cost_per_kg = 4.15;
+	protected $additional_cost_per_kg = 4.85;
 
 	/**
 	 * Weight limit for this shipping method.
 	 *
-	 * Value based in 01/02/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
+	 * Value based in 05/02/2020 from:
+	 * https://www.correios.com.br/enviar-e-receber/marketing-direto/impressos/impresso-normal
 	 *
 	 * @var float
 	 */
@@ -71,27 +71,27 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	 */
 	protected function get_costs() {
 		return apply_filters( 'woocommerce_correios_impresso_normal_costs', array(
-			'20'  => 1.10,
-			'50'  => 1.65,
-			'100' => 2.15,
-			'150' => 2.60,
-			'200' => 3.10,
-			'250' => 3.60,
-			'300' => 4.05,
-			'350' => 4.50,
-			'400' => 5.05,
-			'450' => 5.55,
-			'500' => 6.05,
-			'550' => 6.40,
-			'600' => 6.90,
-			'650' => 7.35,
-			'700' => 7.70,
-			'750' => 8.10,
-			'800' => 8.50,
-			'850' => 9.00,
-			'900' => 9.50,
-			'950' => 9.90,
-			'1000' => 10.30,
+			'20'  => 1.30,
+			'50'  => 1.95,
+			'100' => 2.50,
+			'150' => 3.05,
+			'200' => 3.65,
+			'250' => 4.20,
+			'300' => 4.75,
+			'350' => 5.25,
+			'400' => 5.90,
+			'450' => 6.50,
+			'500' => 7.10,
+			'550' => 7.50,
+			'600' => 8.10,
+			'650' => 8.60,
+			'700' => 9.00,
+			'750' => 9.50,
+			'800' => 9.95,
+			'850' => 10.55,
+			'900' => 11.15,
+			'950' => 11.60,
+			'1000' => 12.05,
 		), $this->id, $this->instance_id );
 	}
 
