@@ -183,6 +183,11 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		} else {
 			delete_post_meta( $order->id, '_correios_tracking_code' );
 		}
+		
+		foreach ( $tracking_codes as $tracking_code ) {
+			do_action( 'woocommerce_correios_tracking_code_removed', $tracking_code, $order );
+		}
+		
 
 		return true;
 	} elseif ( ! $remove && ! in_array( $tracking_code, $tracking_codes, true ) ) {
@@ -194,6 +199,8 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		} else {
 			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
 		}
+		
+		do_action( 'woocommerce_correios_tracking_code_added', $tracking_code, $order );
 
 		// Add order note.
 		/* translators: %s: tracking code */
@@ -216,6 +223,8 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		} else {
 			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
 		}
+		
+		do_action( 'woocommerce_correios_tracking_code_removed', $tracking_code, $order );
 
 		// Add order note.
 		/* translators: %s: tracking code */
