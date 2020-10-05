@@ -33,6 +33,13 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	protected $corporate_code = '';
 
 	/**
+	 * Minimum value to ignore the flag of declared value.
+	 * 
+	 * @var float
+	 */
+	protected $min_declared_value = 20.5;
+
+	/**
 	 * Initialize the Correios shipping method.
 	 *
 	 * @param int $instance_id Shipping zone instance ID.
