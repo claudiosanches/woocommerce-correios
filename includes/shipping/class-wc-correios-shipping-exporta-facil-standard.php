@@ -1,6 +1,6 @@
 <?php
 /**
- * Correios Mercadoria Econômica shipping method.
+ * Correios Exporta Fácil Standard shipping method.
  *
  * @package WooCommerce_Correios/Classes/Shipping
  * @since   3.0.0
@@ -12,26 +12,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Mercadoria Econômica shipping method class.
+ * Exporta Fácil Standard shipping method class.
  */
-class WC_Correios_Shipping_Mercadoria_Economica extends WC_Correios_Shipping_International {
+class WC_Correios_Shipping_Exporta_Facil_Standard extends WC_Correios_Shipping_International {
 
 	/**
 	 * Service code.
-	 * 45128 - Mercadoria Econômica.
+	 * 45128 - Exporta Fácil Standard.
 	 *
 	 * @var string
 	 */
 	protected $code = '45128';
 
 	/**
-	 * Initialize Mercadoria Econômica.
+	 * Initialize Exporta Fácil Standard.
 	 *
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		$this->id           = 'correios-mercadoria-economica';
-		$this->method_title = __( 'Mercadoria Econ&ocirc;mica', 'woocommerce-correios' );
+		$this->id           = 'correios-exporta-facil-standard';
+		$this->method_title = __( 'Exporta Fácil Standard', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );

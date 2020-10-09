@@ -40,10 +40,11 @@ class WC_Correios_Webservice_International {
 	/**
 	 * IDs from Correios services.
 	 *
-	 * 45110 - Mercadoria Expressa (EMS).
-	 * 45128 - Mercadoria Econômica.
-	 * 45209 - Leve Internacional.
-	 *
+	 * 45209 - Exporta Fácil Econômico.
+	 * 45110 - Exporta Fácil Expresso.
+	 * 45195 - Exporta Fácil Premium.
+	 * 45128 - Exporta Fácil Standard.
+	 economico*
 	 * @var string
 	 */
 	protected $service = '';

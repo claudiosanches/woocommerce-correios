@@ -35,9 +35,10 @@ Estão integrados os seguintes serviços:
  - Impresso Normal
  - Impresso Urgente
 - Entrega internacional:
- - Mercadoria Expressa
- - Mercadoria Econômica
- - Leve Internacional
+ - Exporta Fácil Econômico
+ - Exporta Fácil Expresso
+ - Exporta Fácil Standard
+ - Exporta Fácil Premium
 - Consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente)
 - Consulta e autopreenchimento de endereços baseados em CEPs
 
@@ -110,9 +111,10 @@ São aceitos os seguintes métodos de entrega nacionais:
 
 E os seguintes métodos de entrega internacionais:
 
-- Mercadoria Expressa
-- Mercadoria Econômica
-- Leve Internacional
+- Exporta Fácil Econômico
+- Exporta Fácil Expresso
+- Exporta Fácil Premium
+- Exporta Fácil Standard
 
 ### Onde configuro os métodos de entrega? ###
 
