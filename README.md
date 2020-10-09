@@ -115,6 +115,10 @@ E os seguintes métodos de entrega internacionais:
 - Exporta Fácil Expresso
 - Exporta Fácil Premium
 - Exporta Fácil Standard
+- Documento Econômico
+- Documento Internacional Expresso
+- Documento Internacional Premium
+- Documento Internacional Standard
 
 ### Onde configuro os métodos de entrega? ###
 

@@ -44,7 +44,10 @@ class WC_Correios_Webservice_International {
 	 * 45110 - Exporta Fácil Expresso.
 	 * 45195 - Exporta Fácil Premium.
 	 * 45128 - Exporta Fácil Standard.
-	 economico*
+	 * 45020 - Documento Econômico.
+	 * 45012 - Documento Internacional Expresso.
+	 * 45179 - Documento Internacional Premium.
+	 * 45039 - Documento Internacional Standard.
 	 * @var string
 	 */
 	protected $service = '';
