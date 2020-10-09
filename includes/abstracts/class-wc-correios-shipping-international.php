@@ -43,6 +43,10 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		$this->show_delivery_time = $this->get_option( 'show_delivery_time' );
 		$this->login              = $this->get_option( 'login' );
 		$this->password           = $this->get_option( 'password' );
+		$this->minimum_height     = $this->get_option( 'minimum_height' );
+		$this->minimum_width      = $this->get_option( 'minimum_width' );
+		$this->minimum_length     = $this->get_option( 'minimum_length' );
+		$this->extra_weight       = $this->get_option( 'extra_weight', '0' );
 		$this->fee                = $this->get_option( 'fee' );
 		$this->debug              = $this->get_option( 'debug' );
 
@@ -134,6 +138,40 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 				'desc_tip'    => true,
 				'default'     => '',
 			),
+			'package_standard'   => array(
+				'title'       => __( 'Package Standard', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Minimum measure for your shipping packages.', 'woocommerce-correios' ),
+				'default'     => '',
+			),
+			'minimum_height'     => array(
+				'title'       => __( 'Minimum Height (cm)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum height of your shipping packages. Correios needs at least 2cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '2',
+			),
+			'minimum_width'      => array(
+				'title'       => __( 'Minimum Width (cm)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum width of your shipping packages. Correios needs at least 11cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '11',
+			),
+			'minimum_length'     => array(
+				'title'       => __( 'Minimum Length (cm)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Minimum length of your shipping packages. Correios needs at least 16cm.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '16',
+			),
+			'extra_weight'       => array(
+				'title'       => __( 'Extra Weight (g)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Extra weight in grams to add to the package total when quoting shipping costs.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '0',
+			),
 			'testing' => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
 				'type'    => 'title',
@@ -209,6 +247,11 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		$api->set_login( $this->get_login() );
 		$api->set_password( $this->get_password() );
 
+		$api->set_minimum_height( $this->minimum_height );
+		$api->set_minimum_width( $this->minimum_width );
+		$api->set_minimum_length( $this->minimum_length );
+		$api->set_extra_weight( $this->extra_weight );
+
 		$shipping = $api->get_shipping();
 
 		return $shipping;
@@ -240,10 +283,12 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 
 		// Set the shipping rates.
 		$label = $this->title;
-		/* TODO
 		if ( 'yes' === $this->show_delivery_time ) {
-			$label .= ' (' . sanitize_text_field( (string) $shipping->dados_postais->prazo_entrega ) . ')';
-		}*/
+			$label .= sprintf(' (%s a %s dias úteis)',
+				sanitize_text_field( (string) $shipping->prazoMinimo ),
+				sanitize_text_field( (string) $shipping->prazoMaximo )
+			);
+		}
 		$cost = sanitize_text_field( (float) $shipping->pcFinal );
 
 		// Exit if don't have price.

@@ -476,6 +476,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @param array $package Order package.
 	 */
 	public function calculate_shipping( $package = array() ) {
+
 		// Check if valid to be calculeted.
 		if ( '' === $package['destination']['postcode'] || 'BR' !== $package['destination']['country'] ) {
 			return;
