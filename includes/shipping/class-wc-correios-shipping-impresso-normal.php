@@ -29,12 +29,12 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	/**
 	 * Weight limit for this shipping method.
 	 *
-	 * Value based in 05/02/2020 from:
+	 * Value based in 19/11/2020 from:
 	 * https://www.correios.com.br/enviar-e-receber/marketing-direto/impressos/impresso-normal
 	 *
 	 * @var float
 	 */
-	protected $shipping_method_weight_limit = 2000.000;
+	protected $shipping_method_weight_limit = 10000.000;
 
 	/**
 	 * Initialize Impresso Normal.
@@ -128,7 +128,7 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 		$weight += wc_format_decimal( $this->extra_weight );
 
 		if ( $weight <= $this->shipping_method_weight_limit ) {
-			if ( $weight > 2000 ) {
+			if ( $weight > 10000 ) {
 				return 0;
 			} elseif ( $weight > 1000 ) {
 				// Get the additional kgs over 1 kg.
