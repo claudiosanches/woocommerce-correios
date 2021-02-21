@@ -44,8 +44,12 @@ class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 	 * @return float
 	 */
 	protected function get_declared_value( $package ) {
-		if ( 18 >= $package['contents_cost'] ) {
+		if ( 20.50 >= $package['contents_cost'] ) {
 			return 0;
+		}
+
+		if ( 3000 < $package['contents_cost'] ) {
+			return 3000;
 		}
 
 		return $package['contents_cost'];
