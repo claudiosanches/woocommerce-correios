@@ -122,6 +122,7 @@ class WC_Correios {
 			$methods['correios-sedex10-pacote']       = 'WC_Correios_Shipping_SEDEX_10_Pacote';
 			$methods['correios-sedex12']              = 'WC_Correios_Shipping_SEDEX_12';
 			$methods['correios-sedex-hoje']           = 'WC_Correios_Shipping_SEDEX_Hoje';
+			$methods['correios-mini-envios']          = 'WC_Correios_Shipping_Mini_Envios';
 			$methods['correios-esedex']               = 'WC_Correios_Shipping_ESEDEX';
 			$methods['correios-carta-registrada']     = 'WC_Correios_Shipping_Carta_Registrada';
 			$methods['correios-impresso-normal']      = 'WC_Correios_Shipping_Impresso_Normal';
