@@ -68,6 +68,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$this->minimum_width      = $this->get_option( 'minimum_width' );
 		$this->minimum_length     = $this->get_option( 'minimum_length' );
 		$this->extra_weight       = $this->get_option( 'extra_weight', '0' );
+		$this->maximum_weight     = $this->get_option( 'maximum_weight');
 		$this->debug              = $this->get_option( 'debug' );
 
 		// Save admin options.
@@ -284,6 +285,13 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'desc_tip'    => true,
 				'default'     => '0',
 			),
+			'maximum_weight'     => array(
+				'title'       => __( 'Maximum Weight (kg)', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Maximum weight allowed in kilograms of package total when quoting shipping costs.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '50',
+			),
 			'testing'            => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
 				'type'    => 'title',
@@ -412,6 +420,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$api->set_minimum_width( $this->minimum_width );
 		$api->set_minimum_length( $this->minimum_length );
 		$api->set_extra_weight( $this->extra_weight );
+		$api->set_maximum_weight( $this->maximum_weight );
 
 		$shipping = $api->get_shipping();
 

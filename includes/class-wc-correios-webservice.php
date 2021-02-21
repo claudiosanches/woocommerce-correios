@@ -143,6 +143,13 @@ class WC_Correios_Webservice {
 	protected $extra_weight = 0;
 
 	/**
+	 * Maximum weight.
+	 *
+	 * @var float
+	 */
+	protected $maximum_weight = 50;
+
+	/**
 	 * Declared value.
 	 *
 	 * @var string
@@ -361,6 +368,15 @@ class WC_Correios_Webservice {
 	public function set_extra_weight( $extra_weight = 0 ) {
 		$this->extra_weight = (float) wc_format_decimal( $extra_weight );
 	}
+	
+	/**
+	 * Set maximum weight.
+	 *
+	 * @param float $maximum_weight Package extra weight.
+	 */
+	public function set_maximum_weight( $maximum_weight = 50 ) {
+		$this->maximum_weight = (float) wc_format_decimal( $maximum_weight );
+	}
 
 	/**
 	 * Set declared value.
@@ -524,6 +540,11 @@ class WC_Correios_Webservice {
 			return $shipping;
 		}
 
+		// Checks if exceeds maximum weight
+		if ( (float) wc_format_decimal( $this->get_weight() ) > $this->maximum_weight ) {
+			return $shipping;
+		}
+		
 		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
 			'nCdServico'          => $this->service,
 			'nCdEmpresa'          => $this->get_login(),
