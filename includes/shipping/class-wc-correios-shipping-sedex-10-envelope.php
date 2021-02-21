@@ -32,7 +32,7 @@ class WC_Correios_Shipping_SEDEX_10_Envelope extends WC_Correios_Shipping {
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-sedex10-envelope';
 		$this->method_title = __( 'SEDEX 10 Envelope', 'woocommerce-correios' );
-		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-10';
+		$this->more_link    = 'https://www.correios.com.br/enviar-e-receber/encomendas';
 
 		parent::__construct( $instance_id );
 	}
