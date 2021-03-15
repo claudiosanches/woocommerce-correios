@@ -35,9 +35,14 @@ Estão integrados os seguintes serviços:
  - Impresso Normal
  - Impresso Urgente
 - Entrega internacional:
- - Mercadoria Expressa
- - Mercadoria Econômica
- - Leve Internacional
+ - Exporta Fácil Econômico
+ - Exporta Fácil Expresso
+ - Exporta Fácil Premium
+ - Exporta Fácil Standard
+ - Documento Econômico
+ - Documento Internacional Expresso
+ - Documento Internacional Premium
+ - Documento Internacional Standard
 - Consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente)
 - Consulta e autopreenchimento de endereços baseados em CEPs
 
