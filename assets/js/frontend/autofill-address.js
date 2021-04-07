@@ -110,13 +110,17 @@ jQuery( function( $ ) {
 		 */
 		fillFields: function( field, data ) {
 			// Address.
-			$( '#' + field + '_address_1' ).val( data.address ).change();
+			if ( data.address ) {
+				$( '#' + field + '_address_1' ).val( data.address ).change();
+			}
 
 			// Neighborhood.
-			if ( $( '#' + field + '_neighborhood' ).length ) {
-				$( '#' + field + '_neighborhood' ).val( data.neighborhood ).change();
-			} else {
-				$( '#' + field + '_address_2' ).val( data.neighborhood ).change();
+			if ( data.neighborhood ) {
+				if ( $( '#' + field + '_neighborhood' ).length ) {
+					$( '#' + field + '_neighborhood' ).val( data.neighborhood ).change();
+				} else {
+					$( '#' + field + '_address_2' ).val( data.neighborhood ).change();
+				}
 			}
 
 			// City.
