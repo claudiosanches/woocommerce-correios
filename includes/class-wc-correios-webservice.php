@@ -368,7 +368,7 @@ class WC_Correios_Webservice {
 	 * @param string $declared_value Declared value.
 	 */
 	public function set_declared_value( $declared_value = '0' ) {
-		$this->declared_value = $declared_value;
+		$this->declared_value = ($declared_value>18 && $declared_value<21) ? 21 : $declared_value;
 	}
 
 	/**
