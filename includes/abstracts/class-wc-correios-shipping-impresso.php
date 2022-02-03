@@ -21,42 +21,42 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	/**
 	 * National Registry cost.
 	 *
-	 * Cost based in 05/02/2020 from:
-	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-registro
+	 * Cost based in 31/01/2022 from:
+	 * https://www.correios.com.br/enviar/servicos-adicionais
 	 *
 	 * @var float
 	 */
-	protected $national_registry_cost = 6.35;
+	protected $national_registry_cost = 7.00;
 
 	/**
 	 * Reasonable Registry cost.
 	 *
-	 * Cost based in 05/02/2020 from:
-	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-registro
+	 * Cost based in 31/01/2022 from:
+	 * https://www.correios.com.br/enviar/servicos-adicionais
 	 *
 	 * @var float
 	 */
-	protected $reasonable_registry_cost = 3.20;
+	protected $reasonable_registry_cost = 3.50;
 
 	/**
 	 * Receipt Notice cost.
 	 *
-	 * Cost based in 05/02/2020 from:
-	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/preco-de-aviso-de-recebimento
+	 * Cost based in 31/01/2022 from:
+	 * https://www.correios.com.br/enviar/servicos-adicionais
 	 *
 	 * @var float
 	 */
-	protected $receipt_notice_cost = 6.35;
+	protected $receipt_notice_cost = 7.00;
 
 	/**
 	 * Own Hands cost.
 	 *
-	 * Cost based in 05/02/2020 from:
-	 * https://correios.com.br/enviar-e-receber/servicos-adicionais/precos-de-mao-propria
+	 * Cost based in 31/01/2022 from:
+	 * https://www.correios.com.br/enviar/servicos-adicionais
 	 *
 	 * @var float
 	 */
-	protected $own_hands_cost = 7.50;
+	protected $own_hands_cost = 8.25;
 
 	/**
 	 * Weight limit for reasonable registry.
