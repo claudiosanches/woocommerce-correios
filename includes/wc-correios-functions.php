@@ -71,7 +71,8 @@ function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0
 
 	if ( $total > 0 ) {
 		/* translators: %d: days to delivery */
-		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ), $total ) . ')';
+		$estimating = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ), $total );
+		$name = $name ? $name . " ($estimating)" : $estimating;
 	}
 
 	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $name, $days, $additional_days );
