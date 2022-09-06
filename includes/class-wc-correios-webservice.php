@@ -119,21 +119,21 @@ class WC_Correios_Webservice {
 	 *
 	 * @var float
 	 */
-	protected $minimum_height = 2;
+	protected $minimum_height = 1;
 
 	/**
 	 * Minimum width.
 	 *
 	 * @var float
 	 */
-	protected $minimum_width = 11;
+	protected $minimum_width = 9;
 
 	/**
 	 * Minimum length.
 	 *
 	 * @var float
 	 */
-	protected $minimum_length = 16;
+	protected $minimum_length = 10;
 
 	/**
 	 * Extra weight.
