@@ -331,8 +331,8 @@ class WC_Correios_Webservice {
 	 *
 	 * @param float $minimum_height Package minimum height.
 	 */
-	public function set_minimum_height( $minimum_height = 2 ) {
-		$this->minimum_height = 2 <= $minimum_height ? $minimum_height : 2;
+	public function set_minimum_height( $minimum_height = 1 ) {
+		$this->minimum_height = 1 <= $minimum_height ? $minimum_height : 1;
 	}
 
 	/**
@@ -340,8 +340,8 @@ class WC_Correios_Webservice {
 	 *
 	 * @param float $minimum_width Package minimum width.
 	 */
-	public function set_minimum_width( $minimum_width = 11 ) {
-		$this->minimum_width = 11 <= $minimum_width ? $minimum_width : 11;
+	public function set_minimum_width( $minimum_width = 9 ) {
+		$this->minimum_width = 9 <= $minimum_width ? $minimum_width : 9;
 	}
 
 	/**
@@ -349,8 +349,8 @@ class WC_Correios_Webservice {
 	 *
 	 * @param float $minimum_length Package minimum length.
 	 */
-	public function set_minimum_length( $minimum_length = 16 ) {
-		$this->minimum_length = 16 <= $minimum_length ? $minimum_length : 16;
+	public function set_minimum_length( $minimum_length = 10 ) {
+		$this->minimum_length = 10 <= $minimum_length ? $minimum_length : 10;
 	}
 
 	/**
