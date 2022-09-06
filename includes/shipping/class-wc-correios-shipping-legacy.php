@@ -275,6 +275,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 
 		if ( 'corporate' == $this->corporate_service ) {
 			$services['PAC'] = ( 'yes' == $this->service_pac ) ? '04669' : '';
+			$services['PAC MINI'] = ( 'yes' == $this->service_pac_mini ) ? '04227' : '';
 			$services['SEDEX'] = ( 'yes' == $this->service_sedex ) ? '04162' : '';
 			$services['e-SEDEX'] = ( 'yes' == $this->service_esedex ) ? '81019' : '';
 		}
@@ -339,6 +340,7 @@ class WC_Correios_Shipping_Legacy extends WC_Shipping_Method {
 			'40215' => 'SEDEX 10',
 			'40290' => 'SEDEX Hoje',
 			'04669' => 'PAC',
+			'04669' => 'PAC MINI',
 			'04162' => 'SEDEX',
 			'81019' => 'e-SEDEX',
 		);
