@@ -23,8 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function wc_correios_safe_load_xml( $source, $options = 0 ) {
 	$old = null;
+	$not_php8 = PHP_VERSION_ID < 80000;
 
-	if ( function_exists( 'libxml_disable_entity_loader' ) ) {
+	if ( $not_php8 && function_exists( 'libxml_disable_entity_loader' ) ) {
 		$old = libxml_disable_entity_loader( true );
 	}
 
