@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
+
 /**
  * Correios orders.
  */
@@ -26,7 +28,7 @@ class WC_Correios_Admin_Orders {
 		add_action( 'wp_ajax_woocommerce_correios_remove_tracking_code', array( $this, 'ajax_remove_tracking_code' ) );
 
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '3.0.0', '>=' ) ) {
-			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'tracking_code_orders_list' ), 100 );
+			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'tracking_code_orders_list' ), 100, 2 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'orders_list_scripts' ) );
 		}
 	}
@@ -36,13 +38,9 @@ class WC_Correios_Admin_Orders {
 	 *
 	 * @param string $column Current column.
 	 */
-	public function tracking_code_orders_list( $column ) {
-		global $post, $the_order;
-
+	public function tracking_code_orders_list( $column, $post_id ) {
 		if ( 'shipping_address' === $column ) {
-			if ( empty( $the_order ) || $the_order->get_id() !== $post->ID ) {
-				$the_order = wc_get_order( $post->ID );
-			}
+			$the_order = wc_get_order( $post_id );
 
 			$codes = wc_correios_get_tracking_codes( $the_order );
 			if ( ! empty( $codes ) ) {
@@ -73,11 +71,15 @@ class WC_Correios_Admin_Orders {
 	 * Register tracking code metabox.
 	 */
 	public function register_metabox() {
+		$screen = defined('WC_VERSION') && version_compare(WC_VERSION, '7.1', '>=') && wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+			? wc_get_page_screen_id( 'shop-order' )
+			: 'shop_order';
+
 		add_meta_box(
 			'wc_correios',
 			'Correios',
 			array( $this, 'metabox_content' ),
-			'shop_order',
+			$screen,
 			'side',
 			'default'
 		);
@@ -89,6 +91,7 @@ class WC_Correios_Admin_Orders {
 	 * @param WC_Post $post Post data.
 	 */
 	public function metabox_content( $post ) {
+		$order 			= ( $post instanceof WP_Post ) ? wc_get_order( $post->ID ) : $post;
 		$tracking_codes = wc_correios_get_tracking_codes( $post->ID );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -99,7 +102,7 @@ class WC_Correios_Admin_Orders {
 			'woocommerce-correios-orders-admin',
 			'WCCorreiosAdminOrdersParams',
 			array(
-				'order_id' => $post->ID,
+				'order_id' => $order->get_id(),
 				'i18n'     => array(
 					'removeQuestion' => esc_js( __( 'Are you sure you want to remove this tracking code?', 'woocommerce-correios' ) ),
 				),

@@ -33,6 +33,9 @@ class WC_Correios {
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
+
+			// Add HPOS compatibility
+            add_action('before_woocommerce_init', array(__CLASS__, 'hposCompatibility'));
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}
@@ -193,4 +196,18 @@ class WC_Correios {
 	public static function get_templates_path() {
 		return self::get_plugin_path() . 'templates/';
 	}
+
+	/**
+	 * Mark the plugin as compatible with the HPOS feature
+	 *
+	 * @return void
+	 */
+	public static function hposCompatibility(): void {
+		if(defined('WC_VERSION') && version_compare(WC_VERSION, '7.1', '<'))
+			return;
+
+		if(class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class))
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', 'woocommerce-correios/woocommerce-correios.php', true);
+	}
+
 }

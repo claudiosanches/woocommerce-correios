@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 3.8.0\n"
+"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 3.9.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/woocommerce-correios\n"
 "POT-Creation-Date: 2019-09-20 22:02:46+00:00\n"

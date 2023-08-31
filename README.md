@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 5.2  
-**Stable tag:** 3.8.0  
+**Stable tag:** 3.9.0  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -226,6 +226,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 3.9.0 - 2023/08/31 ###
+
+- Adicionada compatibilidade com recurso HPOS do WooCommerce.
+
 ### 3.8.0 - 2019/09/20 ###
 
 - Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
@@ -255,8 +259,6 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 3.8.0 ###
+### 3.9.0 ###
 
-- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
-- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
-- Corrigida rotina de atualização das opções do plugin.
+- Adicionada compatibilidade com recurso HPOS do WooCommerce.
