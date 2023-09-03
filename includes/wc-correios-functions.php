@@ -25,14 +25,14 @@ function wc_correios_safe_load_xml( $source, $options = 0 ) {
 	$old = null;
 
 	if ( function_exists( 'libxml_disable_entity_loader' ) ) {
-		$old = libxml_disable_entity_loader( true );
+		$old = @libxml_disable_entity_loader( true );
 	}
 
 	$dom    = new DOMDocument();
 	$return = $dom->loadXML( trim( $source ), $options );
 
 	if ( ! is_null( $old ) ) {
-		libxml_disable_entity_loader( $old );
+		@libxml_disable_entity_loader( $old );
 	}
 
 	if ( ! $return ) {
