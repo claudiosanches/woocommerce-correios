@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	public function __construct( $instance_id = 0 ) {
 		$this->id                 = 'correios-cws';
 		$this->instance_id        = absint( $instance_id );
-		$this->method_title       = __( 'Correios', 'woocommerce-correios' );
+		$this->method_title       = __( 'Correios (New API)', 'woocommerce-correios' );
 		$this->method_description = __( 'Correios shipping method.', 'woocommerce-correios' );
 		$this->supports           = array(
 			'shipping-zones',

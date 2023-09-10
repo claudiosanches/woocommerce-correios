@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Documento_Internacional_Standard extends WC_Correios_
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-documento-internacional-standard';
-		$this->method_title = __( 'Documento Internacional Standard', 'woocommerce-correios' );
+		$this->method_title = __( 'Documento Internacional Standard (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );
