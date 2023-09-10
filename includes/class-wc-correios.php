@@ -54,6 +54,8 @@ class WC_Correios {
 		include_once dirname( __FILE__ ) . '/class-wc-correios-package.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice-international.php';
+		include_once dirname( __FILE__ ) . '/class-wc-correios-cws-connect.php';
+		include_once dirname( __FILE__ ) . '/class-wc-correios-cws-calculate.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-autofill-addresses.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-tracking-history.php';
 		include_once dirname( __FILE__ ) . '/class-wc-correios-rest-api.php';
@@ -116,6 +118,7 @@ class WC_Correios {
 
 		// New methods.
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
+			$methods['correios-cws']                               = 'WC_Correios_Shipping_Cws';
 			$methods['correios-pac']                               = 'WC_Correios_Shipping_PAC';
 			$methods['correios-sedex']                             = 'WC_Correios_Shipping_SEDEX';
 			$methods['correios-sedex10-envelope']                  = 'WC_Correios_Shipping_SEDEX_10_Envelope';

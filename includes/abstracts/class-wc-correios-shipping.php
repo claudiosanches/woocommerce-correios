@@ -90,12 +90,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return string
 	 */
 	protected function get_base_postcode() {
-		// WooCommerce 3.1.1+.
-		if ( method_exists( WC()->countries, 'get_base_postcode' ) ) {
-			return WC()->countries->get_base_postcode();
-		}
-
-		return '';
+		return WC()->countries->get_base_postcode();
 	}
 
 	/**

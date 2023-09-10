@@ -237,3 +237,13 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 function wc_correios_get_address_by_postcode( $postcode ) {
 	return WC_Correios_Autofill_Addresses::get_address( $postcode );
 }
+
+/**
+ * Obscure sensitive data.
+ *
+ * @param string $text Sensitive data.
+ * @return string
+ */
+function wc_correios_esc_sensitive_data( $text ) {
+	return preg_replace( '/(?!^).(?!$)/', '*', $text );
+}

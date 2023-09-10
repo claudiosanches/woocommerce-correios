@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="correios-tracking-code">
 	<?php if ( ! empty( $tracking_codes ) ) : ?>
-		<div class="correios-tracking-code__list">
+		<div class="correios-tracking-code-list">
 			<strong><?php echo esc_html( _n( 'Tracking code:', 'Tracking codes:', count( $tracking_codes ), 'woocommerce-correios' ) ); ?></strong>
 			<ul>
 				<?php foreach ( $tracking_codes as $tracking_code ) : ?>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <script type="text/html" id="tmpl-tracking-code-list">
-	<div class="correios-tracking-code__list">
+	<div class="correios-tracking-code-list">
 		<# if ( 1 < data.trackingCodes.length ) { #>
 			<strong><?php esc_html_e( 'Tracking codes:', 'woocommerce-correios' ); ?></strong>
 		<# } else { #>

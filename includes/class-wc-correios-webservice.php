@@ -508,7 +508,7 @@ class WC_Correios_Webservice {
 	protected function is_available() {
 		$origin_postcode = $this->get_origin_postcode();
 
-		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $origin_postcode ) || 0 === $this->get_height();
+		return ! empty( $this->service ) && ! empty( $this->destination_postcode ) && ! empty( $origin_postcode );
 	}
 
 	/**

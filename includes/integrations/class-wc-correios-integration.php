@@ -17,6 +17,83 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Integration extends WC_Integration {
 
 	/**
+	 * Integration ID.
+	 *
+	 * @var string
+	 */
+	public $id = '';
+
+	/**
+	 * Integration title.
+	 *
+	 * @var string
+	 */
+	public $method_title = '';
+
+	/**
+	 * Tracking status.
+	 *
+	 * @var string
+	 */
+	public $tracking_enable = '';
+
+	/**
+	 * Tracking login.
+	 *
+	 * @var string
+	 */
+	public $tracking_login = '';
+
+	/**
+	 * Tracking password.
+	 *
+	 * @var string
+	 */
+	public $tracking_password = '';
+
+	/**
+	 * Tracking debug.
+	 *
+	 * @var string
+	 */
+	public $tracking_debug = '';
+
+	/**
+	 * Autofill status.
+	 *
+	 * @var string
+	 */
+	public $autofill_enable = '';
+
+	/**
+	 * Autofill Validity.
+	 *
+	 * @var string
+	 */
+	public $autofill_validity = '';
+
+	/**
+	 * Force autofill.
+	 *
+	 * @var string
+	 */
+	public $autofill_force = '';
+
+	/**
+	 * Autofill debug.
+	 *
+	 * @var string
+	 */
+	public $autofill_debug = '';
+
+	/**
+	 * Form fields.
+	 *
+	 * @var array
+	 */
+	public $form_fields = array();
+
+	/**
 	 * Initialize integration actions.
 	 */
 	public function __construct() {
@@ -30,18 +107,23 @@ class WC_Correios_Integration extends WC_Integration {
 		$this->init_settings();
 
 		// Define user set variables.
-		$this->tracking_enable         = $this->get_option( 'tracking_enable' );
-		$this->tracking_login          = $this->get_option( 'tracking_login' );
-		$this->tracking_password       = $this->get_option( 'tracking_password' );
-		$this->tracking_debug          = $this->get_option( 'tracking_debug' );
-		$this->autofill_enable         = $this->get_option( 'autofill_enable' );
-		$this->autofill_validity       = $this->get_option( 'autofill_validity' );
-		$this->autofill_force          = $this->get_option( 'autofill_force' );
-		$this->autofill_empty_database = $this->get_option( 'autofill_empty_database' );
-		$this->autofill_debug          = $this->get_option( 'autofill_debug' );
+		$this->tracking_enable   = $this->get_option( 'tracking_enable' );
+		$this->tracking_login    = $this->get_option( 'tracking_login' );
+		$this->tracking_password = $this->get_option( 'tracking_password' );
+		$this->tracking_debug    = $this->get_option( 'tracking_debug' );
+		$this->autofill_enable   = $this->get_option( 'autofill_enable' );
+		$this->autofill_validity = $this->get_option( 'autofill_validity' );
+		$this->autofill_force    = $this->get_option( 'autofill_force' );
+		$this->autofill_debug    = $this->get_option( 'autofill_debug' );
 
 		// Actions.
 		add_action( 'woocommerce_update_options_integration_' . $this->id, array( $this, 'process_admin_options' ) );
+
+		// Correios Web Service API actions.
+		add_filter( 'woocommerce_correios_cws_environment', array( $this, 'setup_cws_environment' ), 10 );
+		add_filter( 'woocommerce_correios_cws_user_data', array( $this, 'setup_cws_user_data' ), 10 );
+		add_filter( 'woocommerce_correios_cws_debug', array( $this, 'setup_cws_debug' ), 10 );
+		add_action( 'wp_ajax_correios_cws_update_services_list', array( $this, 'ajax_update_services_list' ) );
 
 		// Tracking history actions.
 		add_filter( 'woocommerce_correios_enable_tracking_history', array( $this, 'setup_tracking_history' ), 10 );
@@ -70,6 +152,55 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
+			'cws' => array(
+				'title'       => __( 'Correios Web Services', 'woocommerce-correios' ),
+				'type'        => 'title',
+				'description' => __( 'Integrates with the new Correios API. Note that "Username", "Access Code" and "Posting Card" are required to make this integration to work properly.', 'woocommerce-correios' ),
+			),
+			'cws_environment' => array(
+				'title'   => __( 'Environment', 'woocommerce-correios' ),
+				'type'    => 'select',
+				'label'   => __( 'Enable Correios API. It will replace all quote routes to the new Correios API.', 'woocommerce-correios' ),
+				'default' => 'production',
+				'options' => array(
+					'production' => __( 'Production', 'woocommerce-correios' ),
+					'staging'    => __( 'Staging', 'woocommerce-correios' ),
+				),
+			),
+			'cws_username' => array(
+				'title'       => __( 'Username', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios username.', 'woocommerce-correios' ),
+				'desc_tip'    => true,
+				'default'     => '',
+			),
+			'cws_access_code' => array(
+				'title'       => __( 'Access Code', 'woocommerce-correios' ),
+				'type'        => 'password',
+				/* translators: %s: Correios URL */
+				'description' => sprintf( __( 'Your Correios API Access Code. You can generate an access code in %1$s for production or %2$s for staging.', 'woocommerce-correios' ), '<a href="https://cws.correios.com.br/acesso-componentes" target="_blank">https://cws.correios.com.br/acesso-componentes</a>', '<a href="https://cwshom.correios.com.br/acesso-componentes" target="_blank">https://cwshom.correios.com.br/acesso-componentes</a>' ),
+				'default'     => '',
+			),
+			'cws_posting_card' => array(
+				'title'       => __( 'Posting Card', 'woocommerce-correios' ),
+				'type'        => 'text',
+				'description' => __( 'Your Correios Posting Card number.', 'woocommerce-correios' ),
+				'default'     => '',
+			),
+			'cws_update_services_list' => array(
+				'title'       => __( 'Generate/Update Services List', 'woocommerce-correios' ),
+				'type'        => 'button',
+				'label'       => __( 'Update Services List', 'woocommerce-correios' ),
+				'description' => __( 'Generates a list with all services available for your Correios\'s contract.', 'woocommerce-correios' ),
+			),
+			'cws_debug' => array(
+				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable logging for Correios API', 'woocommerce-correios' ),
+				'default'     => 'no',
+				/* translators: %s: log link */
+				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Correios API', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
+			),
 			'tracking'                => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
 				'type'        => 'title',
@@ -101,12 +232,12 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Enable logging for Tracking History', 'woocommerce-correios' ),
 				'default'     => 'no',
 				/* translators: %s: log link */
-				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), __( 'Tracking History Table', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
+				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Tracking History Table', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
 			),
 			'autofill_addresses'      => array(
 				'title'       => __( 'Autofill Addresses', 'woocommerce-correios' ),
 				'type'        => 'title',
-				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page.', 'woocommerce-correios' ),
+				'description' => __( 'Enable address autofill based on zipcode during checkout.', 'woocommerce-correios' ),
 			),
 			'autofill_enable'         => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
@@ -166,7 +297,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Enable logging for Autofill Addresses', 'woocommerce-correios' ),
 				'default'     => 'no',
 				/* translators: %s: log link */
-				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), __( 'Autofill Addresses', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
+				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Autofill Addresses', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
 			),
 		);
 	}
@@ -182,7 +313,7 @@ class WC_Correios_Integration extends WC_Integration {
 
 		if ( class_exists( 'SoapClient' ) ) {
 			echo '<div><input type="hidden" name="section" value="' . esc_attr( $this->id ) . '" /></div>';
-			echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>'; // WPCS: XSS ok.
+			echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 			$GLOBALS['hide_save_button'] = true; // Hide save button.
 			/* translators: %s: SOAP documentation link */
@@ -195,8 +326,9 @@ class WC_Correios_Integration extends WC_Integration {
 			$this->id . '-admin',
 			'WCCorreiosIntegrationAdminParams',
 			array(
-				'i18n_confirm_message' => __( 'Are you sure you want to delete all postcodes from the database?', 'woocommerce-correios' ),
-				'empty_database_nonce' => wp_create_nonce( 'woocommerce_correios_autofill_addresses_nonce' ),
+				'i18n_confirm_message'      => __( 'Are you sure you want to delete all postcodes from the database?', 'woocommerce-correios' ),
+				'update_cws_services_nonce' => wp_create_nonce( 'woocommerce_correios_update_services_nonce' ),
+				'empty_database_nonce'      => wp_create_nonce( 'woocommerce_correios_autofill_addresses_nonce' ),
 			)
 		);
 	}
@@ -224,19 +356,51 @@ class WC_Correios_Integration extends WC_Integration {
 		<tr valign="top">
 			<th scope="row" class="titledesc">
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok. ?>
+				<?php echo $this->get_tooltip_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</th>
 			<td class="forminp">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
 					<button class="button-secondary" type="button" id="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['label'] ); ?></button>
-					<?php echo $this->get_description_html( $data ); // WPCS: XSS ok. ?>
+					<?php echo $this->get_description_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</fieldset>
 			</td>
 		</tr>
 		<?php
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Setup Correios Web Service Environment.
+	 *
+	 * @return string
+	 */
+	public function setup_cws_environment() {
+		$env = $this->get_option( 'cws_environment' );
+		return $env ? $env : 'staging';
+	}
+
+	/**
+	 * Setup Correios Web Service Username.
+	 *
+	 * @return string
+	 */
+	public function setup_cws_user_data() {
+		return array(
+			'username'        => $this->get_option( 'cws_username' ),
+			'access_code'     => $this->get_option( 'cws_access_code' ),
+			'posting_card'    => $this->get_option( 'cws_posting_card' ),
+		);
+	}
+
+	/**
+	 * Setup Correios Web Service Debug log.
+	 *
+	 * @return string
+	 */
+	public function setup_cws_debug() {
+		return $this->get_option( 'cws_debug' );
 	}
 
 	/**
@@ -308,6 +472,28 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function setup_autofill_addresses_force_autofill() {
 		return $this->autofill_force;
+	}
+
+	/**
+	 * Ajax update services list.
+	 */
+	public function ajax_update_services_list() {
+		if ( ! isset( $_POST['nonce'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'Missing parameters!', 'woocommerce-correios' ) ) );
+		}
+
+		if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'woocommerce_correios_update_services_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid nonce!', 'woocommerce-correios' ) ) );
+		}
+
+		$connect = new WC_Correios_Cws_Connect();
+		$list    = $connect->get_available_services( true );
+
+		if ( empty( $list ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unable to retrieve services list!', 'woocommerce-correios' ) ) );
+		}
+
+		wp_send_json_success( array( 'message' => __( 'Services list generated successfully!', 'woocommerce-correios' ) ) );
 	}
 
 	/**

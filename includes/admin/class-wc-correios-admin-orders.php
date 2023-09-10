@@ -74,7 +74,7 @@ class WC_Correios_Admin_Orders {
 	 */
 	public function register_metabox() {
 		add_meta_box(
-			'wc_correios',
+			'wc-correios',
 			'Correios',
 			array( $this, 'metabox_content' ),
 			'shop_order',
@@ -92,7 +92,7 @@ class WC_Correios_Admin_Orders {
 		$tracking_codes = wc_correios_get_tracking_codes( $post->ID );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders' . $suffix . '.css', WC_Correios::get_main_file() ), array(), WC_CORREIOS_VERSION );
+		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders.css', WC_Correios::get_main_file() ), array(), WC_CORREIOS_VERSION );
 		wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_CORREIOS_VERSION, true );
 		wp_enqueue_script( 'woocommerce-correios-orders-admin', plugins_url( 'assets/js/admin/orders' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui', 'wp-util' ), WC_CORREIOS_VERSION, true );
 		wp_localize_script(
