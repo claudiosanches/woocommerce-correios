@@ -232,7 +232,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 			$shipping_zone = isset( $_REQUEST['instance_id'] ) && 0 < intval( $_REQUEST['instance_id'] );
 
 			if ( $shipping_tab && $shipping_zone ) {
-				$connect = new WC_Correios_Cws_Connect();
+				$connect = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );
 				$list    = $connect->get_available_services();
 
 				return $default + $list;
