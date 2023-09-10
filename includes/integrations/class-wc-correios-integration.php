@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Integration
  * @since   3.0.0
- * @version 3.0.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,55 +38,6 @@ class WC_Correios_Integration extends WC_Integration {
 	public $tracking_enable = '';
 
 	/**
-	 * Tracking login.
-	 *
-	 * @var string
-	 */
-	public $tracking_login = '';
-
-	/**
-	 * Tracking password.
-	 *
-	 * @var string
-	 */
-	public $tracking_password = '';
-
-	/**
-	 * Tracking debug.
-	 *
-	 * @var string
-	 */
-	public $tracking_debug = '';
-
-	/**
-	 * Autofill status.
-	 *
-	 * @var string
-	 */
-	public $autofill_enable = '';
-
-	/**
-	 * Autofill Validity.
-	 *
-	 * @var string
-	 */
-	public $autofill_validity = '';
-
-	/**
-	 * Force autofill.
-	 *
-	 * @var string
-	 */
-	public $autofill_force = '';
-
-	/**
-	 * Autofill debug.
-	 *
-	 * @var string
-	 */
-	public $autofill_debug = '';
-
-	/**
 	 * Form fields.
 	 *
 	 * @var array
@@ -106,16 +57,6 @@ class WC_Correios_Integration extends WC_Integration {
 		// Load the settings.
 		$this->init_settings();
 
-		// Define user set variables.
-		$this->tracking_enable   = $this->get_option( 'tracking_enable' );
-		$this->tracking_login    = $this->get_option( 'tracking_login' );
-		$this->tracking_password = $this->get_option( 'tracking_password' );
-		$this->tracking_debug    = $this->get_option( 'tracking_debug' );
-		$this->autofill_enable   = $this->get_option( 'autofill_enable' );
-		$this->autofill_validity = $this->get_option( 'autofill_validity' );
-		$this->autofill_force    = $this->get_option( 'autofill_force' );
-		$this->autofill_debug    = $this->get_option( 'autofill_debug' );
-
 		// Actions.
 		add_action( 'woocommerce_update_options_integration_' . $this->id, array( $this, 'process_admin_options' ) );
 
@@ -127,8 +68,7 @@ class WC_Correios_Integration extends WC_Integration {
 
 		// Tracking history actions.
 		add_filter( 'woocommerce_correios_enable_tracking_history', array( $this, 'setup_tracking_history' ), 10 );
-		add_filter( 'woocommerce_correios_tracking_user_data', array( $this, 'setup_tracking_user_data' ), 10 );
-		add_filter( 'woocommerce_correios_enable_tracking_debug', array( $this, 'setup_tracking_debug' ), 10 );
+		add_filter( 'woocommerce_correios_get_tracking_link_correios', array( $this, 'setup_tracking_link_correios' ), 10 );
 
 		// Autofill address actions.
 		add_filter( 'woocommerce_correios_enable_autofill_addresses', array( $this, 'setup_autofill_addresses' ), 10 );
@@ -201,40 +141,25 @@ class WC_Correios_Integration extends WC_Integration {
 				/* translators: %s: log link */
 				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Correios API', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
 			),
-			'tracking'                => array(
+			'tracking'                 => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Displays a table with informations about the shipping in My Account > View Order page. Required username and password that can be obtained with the Correios\' commercial area.', 'woocommerce-correios' ),
 			),
-			'tracking_enable'         => array(
+			'tracking_enable'          => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Tracking History Table', 'woocommerce-correios' ),
 				'default' => 'no',
 			),
-			'tracking_login'          => array(
-				'title'       => __( 'Administrative Code', 'woocommerce-correios' ),
+			'tracking_link_correios'   => array(
+				'title'       => __( 'Link Correios', 'woocommerce-correios' ),
 				'type'        => 'text',
-				'description' => __( 'Your Correios login. It\'s usually your CNPJ.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
-				'default'     => '',
+				/* translators: %s: Correios URL */
+				'description' => sprintf( __( 'Custom link to display tracking history of objects from Correios. By default uses %s', 'woocommerce-correios' ), '<a href="https://www.linkcorreios.com.br/" target="_blank">https://www.linkcorreios.com.br/<a>' ),
+				'default'     => 'https://www.linkcorreios.com.br/',
 			),
-			'tracking_password'       => array(
-				'title'       => __( 'Administrative Password', 'woocommerce-correios' ),
-				'type'        => 'text',
-				'description' => __( 'Your Correios password.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
-				'default'     => '',
-			),
-			'tracking_debug'          => array(
-				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging for Tracking History', 'woocommerce-correios' ),
-				'default'     => 'no',
-				/* translators: %s: log link */
-				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Tracking History Table', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
-			),
-			'autofill_addresses'      => array(
+			'autofill_addresses'       => array(
 				'title'       => __( 'Autofill Addresses', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Enable address autofill based on zipcode during checkout.', 'woocommerce-correios' ),
@@ -409,33 +334,17 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return bool
 	 */
 	public function setup_tracking_history() {
-		return 'yes' === $this->tracking_enable && class_exists( 'SoapClient' );
+		return 'yes' === $this->get_option( 'tracking_enable' );
 	}
 
 	/**
-	 * Setup tracking user data.
+	 * Link Correios integration.
 	 *
-	 * @param array $user_data User data.
-	 * @return array
+	 * @param string $code Tracking code.
+	 * @return string
 	 */
-	public function setup_tracking_user_data( $user_data ) {
-		if ( $this->tracking_login && $this->tracking_password ) {
-			$user_data = array(
-				'login'    => $this->tracking_login,
-				'password' => $this->tracking_password,
-			);
-		}
-
-		return $user_data;
-	}
-
-	/**
-	 * Set up tracking debug.
-	 *
-	 * @return bool
-	 */
-	public function setup_tracking_debug() {
-		return 'yes' === $this->tracking_debug;
+	public function setup_tracking_link_correios( $code ) {
+		return trailingslashit( $this->get_option( 'tracking_link_correios' ) ) . $code;
 	}
 
 	/**
@@ -444,7 +353,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return bool
 	 */
 	public function setup_autofill_addresses() {
-		return 'yes' === $this->autofill_enable && class_exists( 'SoapClient' );
+		return 'yes' === $this->get_option( 'autofill_enable' ) && class_exists( 'SoapClient' );
 	}
 
 	/**
@@ -453,7 +362,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return bool
 	 */
 	public function setup_autofill_addresses_debug() {
-		return 'yes' === $this->autofill_debug;
+		return 'yes' === $this->get_option( 'autofill_debug' );
 	}
 
 	/**
@@ -462,7 +371,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	public function setup_autofill_addresses_validity_time() {
-		return $this->autofill_validity;
+		return $this->get_option( 'autofill_validity' );
 	}
 
 	/**
@@ -471,7 +380,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	public function setup_autofill_addresses_force_autofill() {
-		return $this->autofill_force;
+		return $this->get_option( 'autofill_force' );
 	}
 
 	/**

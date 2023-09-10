@@ -247,3 +247,13 @@ function wc_correios_get_address_by_postcode( $postcode ) {
 function wc_correios_esc_sensitive_data( $text ) {
 	return preg_replace( '/(?!^).(?!$)/', '*', $text );
 }
+
+/**
+ * Get tracking URL.
+ *
+ * @param string $code Tracking code.
+ * @return string
+ */
+function wc_correios_get_tracking_url( $code ) {
+	return apply_filters( 'woocommerce_correios_get_tracking_link_correios', $code );
+}

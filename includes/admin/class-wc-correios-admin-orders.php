@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Admin/Orders
  * @since   3.0.0
- * @version 3.4.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +27,6 @@ class WC_Correios_Admin_Orders {
 
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '3.0.0', '>=' ) ) {
 			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'tracking_code_orders_list' ), 100 );
-			add_action( 'admin_enqueue_scripts', array( $this, 'orders_list_scripts' ) );
 		}
 	}
 
@@ -48,24 +47,11 @@ class WC_Correios_Admin_Orders {
 			if ( ! empty( $codes ) ) {
 				$tracking_codes = array();
 				foreach ( $codes as $code ) {
-					$tracking_codes[] = '<a href="#" aria-label="' . esc_attr__( 'Tracking code', 'woocommerce-correios' ) . '">' . esc_html( $code ) . '</a>';
+					$tracking_codes[] = '<a href="' . esc_url( wc_correios_get_tracking_url( $code ) ) . '" aria-label="' . esc_attr__( 'Tracking code', 'woocommerce-correios' ) . '" target="_blank">' . esc_html( $code ) . '</a>';
 				}
 
 				include dirname( __FILE__ ) . '/views/html-list-table-tracking-code.php';
 			}
-		}
-	}
-
-	/**
-	 * Load order list scripts.
-	 */
-	public function orders_list_scripts() {
-		$screen = get_current_screen();
-
-		if ( 'edit-shop_order' === $screen->id ) {
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-			wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_CORREIOS_VERSION, true );
 		}
 	}
 
@@ -132,10 +118,10 @@ class WC_Correios_Admin_Orders {
 	public function ajax_add_tracking_code() {
 		check_ajax_referer( 'woocommerce-correios-add-tracking-code', 'security' );
 
-		$args = filter_input_array( INPUT_POST, array(
-			'order_id'      => FILTER_SANITIZE_NUMBER_INT,
-			'tracking_code' => FILTER_SANITIZE_STRING,
-		) );
+		$args = array(
+			'order_id'      => isset( $_REQUEST['order_id'] ) ? intval( $_REQUEST['order_id'] ) : 0,
+			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( $_REQUEST['tracking_code'] ) : '',
+		);
 
 		$order = wc_get_order( $args['order_id'] );
 
@@ -152,10 +138,10 @@ class WC_Correios_Admin_Orders {
 	public function ajax_remove_tracking_code() {
 		check_ajax_referer( 'woocommerce-correios-remove-tracking-code', 'security' );
 
-		$args = filter_input_array( INPUT_POST, array(
-			'order_id'      => FILTER_SANITIZE_NUMBER_INT,
-			'tracking_code' => FILTER_SANITIZE_STRING,
-		) );
+		$args = array(
+			'order_id'      => isset( $_REQUEST['order_id'] ) ? intval( $_REQUEST['order_id'] ) : 0,
+			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( $_REQUEST['tracking_code'] ) : '',
+		);
 
 		wc_correios_update_tracking_code( $args['order_id'], $args['tracking_code'], true );
 

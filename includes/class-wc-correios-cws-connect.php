@@ -367,7 +367,7 @@ class WC_Correios_Cws_Connect {
 	 * @return array
 	 */
 	public function get_shipping_cost( $args, $product_code, $package ) {
-		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_cost', array(), $this->method_id, $this->instance_id, $package, $args );
+		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_cost', array(), $args, $this->method_id, $this->instance_id, $package );
 		if ( ! empty( $data ) ) {
 			return $data;
 		}
@@ -388,6 +388,8 @@ class WC_Correios_Cws_Connect {
 
 		$args['nuContrato'] = $token['cartaoPostagem']['contrato'];
 		$args['nuDR']       = $token['cartaoPostagem']['dr'];
+
+		$args = apply_filters( 'woocommerce_correios_cws_get_shipping_cost_args', $args, $this->method_id, $this->instance_id, $package );
 
 		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
 		$response = wp_safe_remote_get(
@@ -426,7 +428,7 @@ class WC_Correios_Cws_Connect {
 	 * @return array
 	 */
 	public function get_shipping_time( $args, $product_code, $package ) {
-		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_time', array(), $this->method_id, $this->instance_id, $package );
+		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_time', array(), $args, $this->method_id, $this->instance_id, $package );
 		if ( ! empty( $data ) ) {
 			return $data;
 		}
@@ -444,6 +446,8 @@ class WC_Correios_Cws_Connect {
 			'nacional',
 			$product_code,
 		);
+
+		$args = apply_filters( 'woocommerce_correios_cws_get_shipping_time_args', $args, $this->method_id, $this->instance_id, $package );
 
 		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
 		$response = wp_safe_remote_get(
@@ -469,6 +473,65 @@ class WC_Correios_Cws_Connect {
 		$data = json_decode( $response['body'], true );
 
 		$this->add_log( sprintf( 'Shipping time calculated for product code %s:', $product_code ), $data );
+
+		return $data;
+	}
+
+	/**
+	 * Get tracking history.
+	 *
+	 * @param array $tracking_codes Tracking codes.
+	 * @return array
+	 */
+	public function get_tracking_history( $tracking_codes ) {
+		$data = apply_filters( 'woocommerce_correios_cws_pre_get_tracking_history', array(), $tracking_codes );
+		if ( ! empty( $data ) ) {
+			return $data;
+		}
+
+		$this->add_log( sprintf( 'Getting tracking history for: %s', implode( ', ', $tracking_codes ) ) );
+
+		$token = $this->get_token();
+		if ( empty( $token ) ) {
+			$this->add_log( 'Missing Token! Aborting...' );
+		}
+
+		$endpoint = array(
+			'srorastro',
+			'v1',
+			'objetos',
+		);
+
+		$args = array(
+			'codigosObjetos' => implode( ',', $tracking_codes ),
+			'resultado'      => 'T',
+		);
+
+		$args     = apply_filters( 'woocommerce_correios_cws_get_tracking_history_args', $args, $tracking_codes );
+		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
+		$response = wp_safe_remote_get(
+			$url,
+			array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $token['token'],
+					'Accept'        => 'application/json',
+				),
+				'timeout' => 30,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$this->add_log( 'Failed to get tracking history:', $response->get_error_message() );
+			return array();
+		}
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			$this->add_log( 'Failed to get tracking history:', $response );
+			return array();
+		}
+
+		$data = json_decode( $response['body'], true );
+
+		$this->add_log( sprintf( 'Retrived tracking history for %s:', implode( ', ', $tracking_codes ) ), $data );
 
 		return $data;
 	}
