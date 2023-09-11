@@ -17,34 +17,12 @@ Utilize os métodos de entrega e serviços dos Correios com a sua loja WooCommer
 
 [Correios](http://www.correios.com.br/) é um método de entrega brasileiro.
 
-Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](https://www.correios.com.br/precos-e-prazos/calculador-remoto-de-precos-e-prazos) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
+Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](https://www.correios.com.br/atendimento/developers) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
 
-= Serviços integrados =
+= Integração =
 
-Estão integrados os seguintes serviços:
-
-- Entrega nacional:
- - PAC
- - SEDEX
- - SEDEX 10 Envelope
- - SEDEX 10 Pacote
- - SEDEX 12
- - SEDEX Hoje
- - e-SEDEX (necessário conta administrativa nos Correios)
- - Carta Registrada
- - Impresso Normal
- - Impresso Urgente
-- Entrega internacional:
- - Exporta Fácil Econômico
- - Exporta Fácil Expresso
- - Exporta Fácil Premium
- - Exporta Fácil Standard
- - Documento Econômico
- - Documento Internacional Expresso
- - Documento Internacional Premium
- - Documento Internacional Standard
-- Consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente)
-- Consulta e autopreenchimento de endereços baseados em CEPs
+Este plugin suporta a nova API dos Correios, fazendo integração completa com o seu contrato, sendo possível integrar com qualquer metétodo de entrega disponível para o seu contrato, como PAC, SEDEX e mais.
+Também tem integração para consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente), além de incluir integração para preenchimento automatico de endereços a partir de um CEP.
 
 = Instalação: =
 
@@ -71,12 +49,21 @@ Você pode esclarecer suas dúvidas usando:
 
 = Requerimentos: =
 
-- [SimpleXML](http://php.net/manual/pt_BR/book.simplexml.php) ativado no PHP (note que já é ativado por padrão no PHP 5).
-- Modulo [SOAP](http://php.net/manual/pt_BR/book.soap.php) (utilizado para a tabela de histórico de rastreamento e autopreenchimento de endereços).
+- Ter contrato com os Correios.
 
-= Configurações do plugin: =
+= Configuração do plugin =
 
-[youtube https://www.youtube.com/watch?v=IWjLAy9i--I]
+1. Depois de instalado e ativado, vá até "WooCommerce" > "Configurações" > "Integrações" > "Correios".
+2. Preencha os campos "Nome de usuário", "Código de acesso" e "Cartão de postagem" na sessão "Correios Web Services".
+3. Salve as configurações.
+4. Ainda nesta página você pode clicar em "Atualizar lista de serviços" para baixar a lista de serviços dos Correios disponíveis no seu contrato.
+5. Finalmente vá até "WooCommerce" > "Configurações" > "Entrega" e crie/edite uma area de entrega para entregas no Brasil.
+6. Adicione o método de entrega "Correios (Nova API)".
+7. Clique para editar o métedo e selecione o "Serviço" que será usado. Por exemplo "PAC CONTRATO AG" ou "SEDEX CONTRATO AG" (os serviços são baixados na etapa 4 deste guia).
+8. Finalmente termine de configurar as outras opções conforme a sua necessidade e salve o método de entrega.
+9. Pronto, tudo configurado.
+
+Para garantir que tudo esta funcionando tenha certeza de configurar o peso e médidas dos produtos em cada um deles, veja mais detalhes na sessão seguinte.
 
 = Configurações dos produtos =
 
@@ -94,30 +81,12 @@ Este plugin esta licenciado como GPL.
 = O que eu preciso para utilizar este plugin? =
 
 * WooCommerce 3.0 ou posterior.
-* [SimpleXML](http://php.net/manual/pt_BR/book.simplexml.php) ativado no PHP (note que já é ativado por padrão no PHP 5).
-* Modulo [SOAP](http://php.net/manual/pt_BR/book.soap.php) (utilizado para a tabela de histórico de rastreamento e autopreenchimento de endereços).
+* Contrato com os Correios.
 * Adicionar peso e dimensões nos produtos que pretende entregar.
 
 = Quais são os métodos de entrega que o plugin aceita? =
 
-São aceitos os seguintes métodos de entrega nacionais:
-
-- PAC
-- SEDEX
-- SEDEX 10 Envelope
-- SEDEX 10 Pacote
-- SEDEX 12
-- SEDEX Hoje
-- e-SEDEX (necessário conta administrativa nos Correios)
-- Carta Registrada
-- Impresso Normal
-- Impresso Urgente
-
-E os seguintes métodos de entrega internacionais:
-
-- Mercadoria Expressa
-- Mercadoria Econômica
-- Leve Internacional
+Todos os métodos disponíveis no seu contrato com os Correios.
 
 = Onde configuro os métodos de entrega? =
 
@@ -139,7 +108,7 @@ A cotação do frete é feita utilizando o [Calculador Remoto de Preços e Prazo
 
 Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente, junto com as dimensões dos produtos e peso. Desta forma o valor cotado sera o mais próximo possível do real.
 
-Note que já fazem quase 4 anos que este plugin existe utilizando o mesmo método para obter a cubagem do pedido e tem funcionando muito bem, caso você tenha algum problema, provavelmente é por causa de configurar valores errados nos produtos.
+Note que já fazem mais de 10 anos que este plugin existe utilizando o mesmo método para obter a cubagem do pedido e tem funcionando muito bem, caso você tenha algum problema, provavelmente é por causa de configurar valores errados nos produtos.
 
 = Tem calculadora de frete na página do produto? =
 
@@ -209,6 +178,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 4.0.0 - 2023/09/10 =
+
+- Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
+- Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
+
 = 3.8.0 - 2019/09/20 =
 
 - Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
@@ -240,6 +214,5 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 = 3.8.0 =
 
-- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
-- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
-- Corrigida rotina de atualização das opções do plugin.
+- Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
+- Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
