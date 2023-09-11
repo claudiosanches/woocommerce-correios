@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 6.3
-Stable tag: 4.0.0
+Stable tag: 4.1.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -178,6 +178,15 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 4.1.0 - 2023/09/11 =
+
+- Atualizado valor mínimo declarado para 24 reais.
+- Melhorada exibição das datas da tabela de rastreamento de objeto.
+- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, previnindo de remover o nome da rua e o bairro.
+- Atualizado peso máximo e valores do Impresso Normal.
+- Atualizado os preços de Carta Registrada.
+- Correções gerais de estabilidade e prevenindo erros no WP.
+
 = 4.0.0 - 2023/09/10 =
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
@@ -212,7 +221,13 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 3.8.0 =
+= 4.1.0 =
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
+- Atualizado valor mínimo declarado para 24 reais.
+- Melhorada exibição das datas da tabela de rastreamento de objeto.
+- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, previnindo de remover o nome da rua e o bairro.
+- Atualizado peso máximo e valores do Impresso Normal.
+- Atualizado os preços de Carta Registrada.
+- Correções gerais de estabilidade e prevenindo erros no WP.

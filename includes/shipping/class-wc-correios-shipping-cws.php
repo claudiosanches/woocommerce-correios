@@ -230,7 +230,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 			return $default;
 		}
 
-		$screen  = get_current_screen();
+		$screen = get_current_screen();
 
 		if ( isset( $screen->id ) && 'woocommerce_page_wc-settings' === $screen->id ) {
 			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended

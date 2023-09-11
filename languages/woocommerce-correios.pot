@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 4.0.0\n"
+"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 4.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-correios\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-10T23:27:14-03:00\n"
+"POT-Creation-Date: 2023-09-11T11:47:44-03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: woocommerce-correios\n"
@@ -858,7 +858,7 @@ msgid "Select a service. It list all services available for your contract with C
 msgstr ""
 
 #: includes/shipping/class-wc-correios-shipping-cws.php:77
-#: includes/shipping/class-wc-correios-shipping-cws.php:227
+#: includes/shipping/class-wc-correios-shipping-cws.php:226
 msgid "Select a service..."
 msgstr ""
 
@@ -992,24 +992,29 @@ msgstr ""
 msgid "For your reference, your order details are shown below."
 msgstr ""
 
+#. translators: 1: date 2: time
 #: templates/myaccount/tracking-history-table.php:15
+msgid "%1$s \\a\\t %2$s"
+msgstr ""
+
+#: templates/myaccount/tracking-history-table.php:18
 msgid "History for the tracking code:"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:20
+#: templates/myaccount/tracking-history-table.php:23
 msgid "Date"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:21
+#: templates/myaccount/tracking-history-table.php:24
 msgid "Location"
 msgstr ""
 
-#: templates/myaccount/tracking-history-table.php:22
+#: templates/myaccount/tracking-history-table.php:25
 msgid "Status"
 msgstr ""
 
 #. translators: %s: address
-#: templates/myaccount/tracking-history-table.php:39
+#: templates/myaccount/tracking-history-table.php:42
 msgid "In transit to %s"
 msgstr ""
 
