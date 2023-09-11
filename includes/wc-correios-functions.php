@@ -101,12 +101,15 @@ function wc_correios_normalize_price( $value ) {
 function wc_correios_get_error_message( $code ) {
 	$code = (string) $code;
 
-	$messages = apply_filters( 'woocommerce_correios_available_error_messages', array(
-		'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
-		'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
-		'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
-		'011' => __( 'The destination CEP is subject to special delivery conditions by ECT and will be carried out with the addition of up to 7 (seven) business days to the regular term.', 'woocommerce-correios' ),
-	) );
+	$messages = apply_filters(
+		'woocommerce_correios_available_error_messages',
+		array(
+			'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
+			'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
+			'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
+			'011' => __( 'The destination CEP is subject to special delivery conditions by ECT and will be carried out with the addition of up to 7 (seven) business days to the regular term.', 'woocommerce-correios' ),
+		)
+	);
 
 	return isset( $messages[ $code ] ) ? $messages[ $code ] : '';
 }

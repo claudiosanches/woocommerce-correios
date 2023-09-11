@@ -33,10 +33,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php echo esc_html( $event['descricao'] ); ?>
 				<?php if ( isset( $event['unidadeDestino'] ) ) : ?>
 					<br />
-					<em><?php
+					<em>
+					<?php
 						/* translators: %s: address */
 						echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event['unidadeDestino']['tipo'] . ' - ' . $event['unidadeDestino']['endereco']['cidade'] . '/' . $event['unidadeDestino']['endereco']['uf'] ) );
-					?></em>
+					?>
+					</em>
 				<?php endif; ?>
 			</td>
 		</tr>

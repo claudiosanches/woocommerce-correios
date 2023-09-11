@@ -65,7 +65,8 @@ class WC_Correios_REST_API {
 			return;
 		}
 
-		register_rest_field( 'shop_order',
+		register_rest_field(
+			'shop_order',
 			'correios_tracking_code',
 			array(
 				'get_callback'    => array( $this, 'get_tracking_code_callback' ),

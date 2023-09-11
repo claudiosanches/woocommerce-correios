@@ -49,27 +49,27 @@ class WC_Correios {
 	 * Includes.
 	 */
 	private static function includes() {
-		include_once dirname( __FILE__ ) . '/wc-correios-functions.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-install.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-package.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice-international.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-cws-connect.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-cws-calculate.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-autofill-addresses.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-tracking-history.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-rest-api.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-orders.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-cart.php';
+		include_once __DIR__ . '/wc-correios-functions.php';
+		include_once __DIR__ . '/class-wc-correios-install.php';
+		include_once __DIR__ . '/class-wc-correios-package.php';
+		include_once __DIR__ . '/class-wc-correios-webservice.php';
+		include_once __DIR__ . '/class-wc-correios-webservice-international.php';
+		include_once __DIR__ . '/class-wc-correios-cws-connect.php';
+		include_once __DIR__ . '/class-wc-correios-cws-calculate.php';
+		include_once __DIR__ . '/class-wc-correios-autofill-addresses.php';
+		include_once __DIR__ . '/class-wc-correios-tracking-history.php';
+		include_once __DIR__ . '/class-wc-correios-rest-api.php';
+		include_once __DIR__ . '/class-wc-correios-orders.php';
+		include_once __DIR__ . '/class-wc-correios-cart.php';
 
 		// Integration.
-		include_once dirname( __FILE__ ) . '/integrations/class-wc-correios-integration.php';
+		include_once __DIR__ . '/integrations/class-wc-correios-integration.php';
 
 		// Shipping methods.
-		include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping.php';
-		include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-carta.php';
-		include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-impresso.php';
-		include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-international.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-carta.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-impresso.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-international.php';
 		foreach ( glob( plugin_dir_path( __FILE__ ) . '/shipping/*.php' ) as $filename ) {
 			include_once $filename;
 		}
@@ -79,7 +79,7 @@ class WC_Correios {
 	 * Admin includes.
 	 */
 	private static function admin_includes() {
-		include_once dirname( __FILE__ ) . '/admin/class-wc-correios-admin-orders.php';
+		include_once __DIR__ . '/admin/class-wc-correios-admin-orders.php';
 	}
 
 	/**
@@ -103,25 +103,25 @@ class WC_Correios {
 	 * @return array
 	 */
 	public static function include_methods( $methods ) {
-		$methods['correios-cws']                               = 'WC_Correios_Shipping_Cws';
-		$methods['correios-carta-registrada']                  = 'WC_Correios_Shipping_Carta_Registrada';
-		$methods['correios-impresso-normal']                   = 'WC_Correios_Shipping_Impresso_Normal';
-		$methods['correios-impresso-urgente']                  = 'WC_Correios_Shipping_Impresso_Urgente';
-		$methods['correios-pac']                               = 'WC_Correios_Shipping_PAC';
-		$methods['correios-sedex']                             = 'WC_Correios_Shipping_SEDEX';
-		$methods['correios-sedex10-envelope']                  = 'WC_Correios_Shipping_SEDEX_10_Envelope';
-		$methods['correios-sedex10-pacote']                    = 'WC_Correios_Shipping_SEDEX_10_Pacote';
-		$methods['correios-sedex12']                           = 'WC_Correios_Shipping_SEDEX_12';
-		$methods['correios-sedex-hoje']                        = 'WC_Correios_Shipping_SEDEX_Hoje';
-		$methods['correios-esedex']                            = 'WC_Correios_Shipping_ESEDEX';
-		$methods['correios-exporta-facil-economico']           = 'WC_Correios_Shipping_Exporta_Facil_Economico';
-		$methods['correios-exporta-facil-expresso']            = 'WC_Correios_Shipping_Exporta_Facil_Expresso';
-		$methods['correios-exporta-facil-premium']             = 'WC_Correios_Shipping_Exporta_Facil_Premium';
-		$methods['correios-exporta-facil-standard']            = 'WC_Correios_Shipping_Exporta_Facil_Standard';
-		$methods['correios-documento-economico']               = 'WC_Correios_Shipping_Documento_Economico';
-		$methods['correios-documento-internacional-expresso']  = 'WC_Correios_Shipping_Documento_Internacional_Expresso';
-		$methods['correios-documento-internacional-premium']   = 'WC_Correios_Shipping_Documento_Internacional_Premium';
-		$methods['correios-documento-internacional-standard']  = 'WC_Correios_Shipping_Documento_Internacional_Standard';
+		$methods['correios-cws']                              = 'WC_Correios_Shipping_Cws';
+		$methods['correios-carta-registrada']                 = 'WC_Correios_Shipping_Carta_Registrada';
+		$methods['correios-impresso-normal']                  = 'WC_Correios_Shipping_Impresso_Normal';
+		$methods['correios-impresso-urgente']                 = 'WC_Correios_Shipping_Impresso_Urgente';
+		$methods['correios-pac']                              = 'WC_Correios_Shipping_PAC';
+		$methods['correios-sedex']                            = 'WC_Correios_Shipping_SEDEX';
+		$methods['correios-sedex10-envelope']                 = 'WC_Correios_Shipping_SEDEX_10_Envelope';
+		$methods['correios-sedex10-pacote']                   = 'WC_Correios_Shipping_SEDEX_10_Pacote';
+		$methods['correios-sedex12']                          = 'WC_Correios_Shipping_SEDEX_12';
+		$methods['correios-sedex-hoje']                       = 'WC_Correios_Shipping_SEDEX_Hoje';
+		$methods['correios-esedex']                           = 'WC_Correios_Shipping_ESEDEX';
+		$methods['correios-exporta-facil-economico']          = 'WC_Correios_Shipping_Exporta_Facil_Economico';
+		$methods['correios-exporta-facil-expresso']           = 'WC_Correios_Shipping_Exporta_Facil_Expresso';
+		$methods['correios-exporta-facil-premium']            = 'WC_Correios_Shipping_Exporta_Facil_Premium';
+		$methods['correios-exporta-facil-standard']           = 'WC_Correios_Shipping_Exporta_Facil_Standard';
+		$methods['correios-documento-economico']              = 'WC_Correios_Shipping_Documento_Economico';
+		$methods['correios-documento-internacional-expresso'] = 'WC_Correios_Shipping_Documento_Internacional_Expresso';
+		$methods['correios-documento-internacional-premium']  = 'WC_Correios_Shipping_Documento_Internacional_Premium';
+		$methods['correios-documento-internacional-standard'] = 'WC_Correios_Shipping_Documento_Internacional_Standard';
 
 		return $methods;
 	}
@@ -135,7 +135,7 @@ class WC_Correios {
 	 */
 	public static function include_emails( $emails ) {
 		if ( ! isset( $emails['WC_Correios_Tracking_Email'] ) ) {
-			$emails['WC_Correios_Tracking_Email'] = include dirname( __FILE__ ) . '/emails/class-wc-correios-tracking-email.php';
+			$emails['WC_Correios_Tracking_Email'] = include __DIR__ . '/emails/class-wc-correios-tracking-email.php';
 		}
 
 		return $emails;
@@ -145,7 +145,7 @@ class WC_Correios {
 	 * WooCommerce fallback notice.
 	 */
 	public static function woocommerce_missing_notice() {
-		include_once dirname( __FILE__ ) . '/admin/views/html-admin-missing-dependencies.php';
+		include_once __DIR__ . '/admin/views/html-admin-missing-dependencies.php';
 	}
 
 	/**

@@ -111,25 +111,25 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 */
 	public function init_form_fields() {
 		$this->instance_form_fields = array(
-			'enabled' => array(
+			'enabled'            => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable this shipping method', 'woocommerce-correios' ),
 				'default' => 'yes',
 			),
-			'title' => array(
+			'title'              => array(
 				'title'       => __( 'Title', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => $this->method_title,
 			),
-			'behavior_options' => array(
+			'behavior_options'   => array(
 				'title'   => __( 'Behavior Options', 'woocommerce-correios' ),
 				'type'    => 'title',
 				'default' => '',
 			),
-			'shipping_class' => array(
+			'shipping_class'     => array(
 				'title'       => __( 'Shipping Class', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'description' => __( 'Select for which shipping class this method will be applied.', 'woocommerce-correios' ),
@@ -138,7 +138,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'class'       => 'wc-enhanced-select',
 				'options'     => $this->get_shipping_classes_options(),
 			),
-			'registry_type' => array(
+			'registry_type'      => array(
 				'title'       => __( 'Registry Type', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'description' => __( 'Select for which registry type this method will be applied.', 'woocommerce-correios' ),
@@ -160,7 +160,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'desc_tip'    => true,
 				'default'     => 'no',
 			),
-			'additional_time' => array(
+			'additional_time'    => array(
 				'title'       => __( 'Delivery Days', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Working days to the estimated delivery.', 'woocommerce-correios' ),
@@ -168,14 +168,14 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'default'     => '0',
 				'placeholder' => '0',
 			),
-			'extra_weight' => array(
+			'extra_weight'       => array(
 				'title'       => __( 'Extra Weight (g)', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Extra weight in grams to add to the package total when quoting shipping costs.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => '0',
 			),
-			'fee' => array(
+			'fee'                => array(
 				'title'       => __( 'Handling Fee', 'woocommerce-correios' ),
 				'type'        => 'price',
 				'description' => __( 'Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable.', 'woocommerce-correios' ),
@@ -183,13 +183,13 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'placeholder' => '0.00',
 				'default'     => '',
 			),
-			'optional_services' => array(
+			'optional_services'  => array(
 				'title'       => __( 'Optional Services', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Use these options to add the value of each service provided by the Correios.', 'woocommerce-correios' ),
 				'default'     => '',
 			),
-			'receipt_notice' => array(
+			'receipt_notice'     => array(
 				'title'       => __( 'Receipt Notice', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable receipt notice', 'woocommerce-correios' ),
@@ -197,7 +197,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'desc_tip'    => true,
 				'default'     => 'no',
 			),
-			'own_hands' => array(
+			'own_hands'          => array(
 				'title'       => __( 'Own Hands', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
@@ -205,12 +205,12 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'desc_tip'    => true,
 				'default'     => 'no',
 			),
-			'testing' => array(
+			'testing'            => array(
 				'title'   => __( 'Testing', 'woocommerce-correios' ),
 				'type'    => 'title',
 				'default' => '',
 			),
-			'debug' => array(
+			'debug'              => array(
 				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'woocommerce-correios' ),

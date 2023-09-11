@@ -525,12 +525,15 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Create the rate and apply filters.
 		$rate = apply_filters(
-			'woocommerce_correios_' . $this->id . '_rate', array(
+			'woocommerce_correios_' . $this->id . '_rate',
+			array(
 				'id'        => $this->id . $this->instance_id,
 				'label'     => $label,
 				'cost'      => (float) $cost + (float) $fee,
 				'meta_data' => $meta_delivery,
-			), $this->instance_id, $package
+			),
+			$this->instance_id,
+			$package
 		);
 
 		// Deprecated filter.

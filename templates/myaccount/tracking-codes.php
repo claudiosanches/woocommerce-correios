@@ -16,6 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="wc-correios-tracking-list">
 	<?php foreach ( $codes as $code ) : ?>
-		<li><a href="<?php echo esc_url( wc_correios_get_tracking_url( $code ) ) ?>" target="_blank"><?php echo esc_html( $code ); ?></a></li>
+		<li><a href="<?php echo esc_url( wc_correios_get_tracking_url( $code ) ); ?>" target="_blank"><?php echo esc_html( $code ); ?></a></li>
 	<?php endforeach; ?>
 </ul>

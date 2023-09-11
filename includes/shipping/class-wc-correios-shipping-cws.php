@@ -66,7 +66,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 				'desc_tip'    => true,
 				'default'     => $this->method_title,
 			),
-			'product_code'        => array(
+			'product_code'       => array(
 				'title'       => __( 'Service', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'description' => __( 'Select a service. It list all services available for your contract with Correios.', 'woocommerce-correios' ),

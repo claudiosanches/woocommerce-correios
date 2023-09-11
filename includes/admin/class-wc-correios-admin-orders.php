@@ -50,7 +50,7 @@ class WC_Correios_Admin_Orders {
 					$tracking_codes[] = '<a href="' . esc_url( wc_correios_get_tracking_url( $code ) ) . '" aria-label="' . esc_attr__( 'Tracking code', 'woocommerce-correios' ) . '" target="_blank">' . esc_html( $code ) . '</a>';
 				}
 
-				include dirname( __FILE__ ) . '/views/html-list-table-tracking-code.php';
+				include __DIR__ . '/views/html-list-table-tracking-code.php';
 			}
 		}
 	}
@@ -96,7 +96,7 @@ class WC_Correios_Admin_Orders {
 			)
 		);
 
-		include_once dirname( __FILE__ ) . '/views/html-meta-box-tracking-code.php';
+		include_once __DIR__ . '/views/html-meta-box-tracking-code.php';
 	}
 
 	/**

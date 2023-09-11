@@ -92,12 +92,12 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'cws' => array(
+			'cws'                      => array(
 				'title'       => __( 'Correios Web Services', 'woocommerce-correios' ),
 				'type'        => 'title',
 				'description' => __( 'Integrates with the new Correios API. Note that "Username", "Access Code" and "Posting Card" are required to make this integration to work properly.', 'woocommerce-correios' ),
 			),
-			'cws_environment' => array(
+			'cws_environment'          => array(
 				'title'   => __( 'Environment', 'woocommerce-correios' ),
 				'type'    => 'select',
 				'label'   => __( 'Enable Correios API. It will replace all quote routes to the new Correios API.', 'woocommerce-correios' ),
@@ -107,21 +107,21 @@ class WC_Correios_Integration extends WC_Integration {
 					'staging'    => __( 'Staging', 'woocommerce-correios' ),
 				),
 			),
-			'cws_username' => array(
+			'cws_username'             => array(
 				'title'       => __( 'Username', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Your Correios username.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => '',
 			),
-			'cws_access_code' => array(
+			'cws_access_code'          => array(
 				'title'       => __( 'Access Code', 'woocommerce-correios' ),
 				'type'        => 'password',
 				/* translators: %s: Correios URL */
 				'description' => sprintf( __( 'Your Correios API Access Code. You can generate an access code in %1$s for production or %2$s for staging.', 'woocommerce-correios' ), '<a href="https://cws.correios.com.br/acesso-componentes" target="_blank">https://cws.correios.com.br/acesso-componentes</a>', '<a href="https://cwshom.correios.com.br/acesso-componentes" target="_blank">https://cwshom.correios.com.br/acesso-componentes</a>' ),
 				'default'     => '',
 			),
-			'cws_posting_card' => array(
+			'cws_posting_card'         => array(
 				'title'       => __( 'Posting Card', 'woocommerce-correios' ),
 				'type'        => 'text',
 				'description' => __( 'Your Correios Posting Card number.', 'woocommerce-correios' ),
@@ -133,7 +133,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Update Services List', 'woocommerce-correios' ),
 				'description' => __( 'Generates a list with all services available for your Correios\'s contract.', 'woocommerce-correios' ),
 			),
-			'cws_debug' => array(
+			'cws_debug'                => array(
 				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging for Correios API', 'woocommerce-correios' ),
@@ -164,13 +164,13 @@ class WC_Correios_Integration extends WC_Integration {
 				'type'        => 'title',
 				'description' => __( 'Enable address autofill based on zipcode during checkout.', 'woocommerce-correios' ),
 			),
-			'autofill_enable'         => array(
+			'autofill_enable'          => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Autofill Addresses', 'woocommerce-correios' ),
 				'default' => 'no',
 			),
-			'autofill_validity'       => array(
+			'autofill_validity'        => array(
 				'title'       => __( 'Postcodes Validity', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'default'     => 'forever',
@@ -203,14 +203,14 @@ class WC_Correios_Integration extends WC_Integration {
 					'forever' => __( 'Forever', 'woocommerce-correios' ),
 				),
 			),
-			'autofill_force'          => array(
+			'autofill_force'           => array(
 				'title'       => __( 'Force Autofill', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable Force Autofill', 'woocommerce-correios' ),
 				'description' => __( 'When enabled will autofill all addresses after the user finish to fill the postcode, even if the addresses are already filled.', 'woocommerce-correios' ),
 				'default'     => 'no',
 			),
-			'autofill_empty_database' => array(
+			'autofill_empty_database'  => array(
 				'title'       => __( 'Empty Database', 'woocommerce-correios' ),
 				'type'        => 'button',
 				'label'       => __( 'Empty Database', 'woocommerce-correios' ),
@@ -316,9 +316,9 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function setup_cws_user_data() {
 		return array(
-			'username'        => $this->get_option( 'cws_username' ),
-			'access_code'     => $this->get_option( 'cws_access_code' ),
-			'posting_card'    => $this->get_option( 'cws_posting_card' ),
+			'username'     => $this->get_option( 'cws_username' ),
+			'access_code'  => $this->get_option( 'cws_access_code' ),
+			'posting_card' => $this->get_option( 'cws_posting_card' ),
 		);
 	}
 

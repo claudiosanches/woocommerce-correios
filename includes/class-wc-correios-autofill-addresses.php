@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Autofill
  * @since   3.0.0
- * @version 3.0.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -204,7 +204,7 @@ class WC_Correios_Autofill_Addresses {
 		$address     = null;
 
 		if ( ! $cws_enabled ) {
-			include_once dirname( __FILE__ ) . '/class-wc-correios-soap-client.php';
+			include_once __DIR__ . '/class-wc-correios-soap-client.php';
 			self::logger( sprintf( 'Fetching address for "%s" on Correios Webservices...', $postcode ) );
 
 			try {
