@@ -222,10 +222,15 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	 * @return array
 	 */
 	protected function load_services_list() {
-		$screen  = get_current_screen();
 		$default = array(
 			'' => __( 'Select a service...', 'woocommerce-correios' ),
 		);
+
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return $default;
+		}
+
+		$screen  = get_current_screen();
 
 		if ( isset( $screen->id ) && 'woocommerce_page_wc-settings' === $screen->id ) {
 			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
