@@ -226,18 +226,18 @@ class WC_Correios_Integration extends WC_Integration {
 		echo '<h2>' . esc_html( $this->get_method_title() ) . '</h2>';
 		echo wp_kses_post( wpautop( $this->get_method_description() ) );
 
-		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-help-message.php';
-
-		if ( class_exists( 'SoapClient' ) ) {
-			echo '<div><input type="hidden" name="section" value="' . esc_attr( $this->id ) . '" /></div>';
-			echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		} else {
-			$GLOBALS['hide_save_button'] = true; // Hide save button.
-			/* translators: %s: SOAP documentation link */
-			echo '<div class="notice notice-error inline"><p>' . sprintf( esc_html__( 'It\'s required have installed the %s on your server in order to integrate with the services of the Correios!', 'woocommerce-correios' ), '<a href="https://secure.php.net/manual/book.soap.php" target="_blank" rel="nofollow noopener noreferrer">' . esc_html__( 'SOAP module', 'woocommerce-correios' ) . '</a>' ) . '</p></div>';
-		}
+		echo '<div id="plugin-correios-settings">';
+		echo '<div class="box">';
+		echo '<div><input type="hidden" name="section" value="' . esc_attr( $this->id ) . '" /></div>';
+		echo '<table class="form-table">' . $this->generate_settings_html( $this->get_form_fields(), false ) . '</table>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '</div>';
+		echo '<div class="box">';
+		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-support.php';
+		echo '</div>';
+		echo '</div>';
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( $this->id . '-admin-styles', plugins_url( 'assets/css/admin/settings.css', WC_Correios::get_main_file() ), array(), WC_CORREIOS_VERSION );
 		wp_enqueue_script( $this->id . '-admin', plugins_url( 'assets/js/admin/integration' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui' ), WC_CORREIOS_VERSION, true );
 		wp_localize_script(
 			$this->id . '-admin',
@@ -347,7 +347,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	public function setup_tracking_link_correios( $code ) {
-		return trailingslashit( $this->get_option( 'tracking_link_correios' ) ) . $code;
+		return trailingslashit( $this->get_option( 'tracking_link_correios', 'https://www.linkcorreios.com.br/' ) ) . $code;
 	}
 
 	/**

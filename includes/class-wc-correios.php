@@ -33,6 +33,7 @@ class WC_Correios {
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( WC_CORREIOS_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}
@@ -84,10 +85,6 @@ class WC_Correios {
 
 	/**
 	 * Include Correios integration to WooCommerce.
-	 *
-	 * @param  array $integrations Default integrations.
-	 *
-	 * @return array
 	 */
 	public static function include_integrations( $integrations ) {
 		$integrations[] = 'WC_Correios_Integration';
@@ -139,6 +136,22 @@ class WC_Correios {
 		}
 
 		return $emails;
+	}
+
+	/**
+	 * Action links.
+	 *
+	 * @param  array $links Default plugin links.
+	 *
+	 * @return array
+	 */
+	public static function plugin_action_links( $links ) {
+		$plugin_links   = array();
+		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios-integration' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Premium Support', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Contribute', 'woocommerce-correios' ) . '</a>';
+
+		return array_merge( $plugin_links, $links );
 	}
 
 	/**
