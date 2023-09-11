@@ -129,23 +129,23 @@ jQuery(function ($) {
 		 */
 		fillFields(field, data) {
 			// Address.
-			if ( data.address ) {
+			if (data.address) {
 				$('#' + field + '_address_1')
 					.val(data.address)
 					.change();
-      }
+			}
 
 			// Neighborhood.
-      if ( data.neighborhood ) {
-        if ($('#' + field + '_neighborhood').length) {
-          $('#' + field + '_neighborhood')
-            .val(data.neighborhood)
-            .change();
-        } else {
-          $('#' + field + '_address_2')
-            .val(data.neighborhood)
-            .change();
-        }
+			if (data.neighborhood) {
+				if ($('#' + field + '_neighborhood').length) {
+					$('#' + field + '_neighborhood')
+						.val(data.neighborhood)
+						.change();
+				} else {
+					$('#' + field + '_address_2')
+						.val(data.neighborhood)
+						.change();
+				}
 			}
 
 			// City.

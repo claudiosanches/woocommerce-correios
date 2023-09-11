@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-10T23:00:42-03:00\n"
+"POT-Creation-Date: 2023-09-10T23:27:14-03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: woocommerce-correios\n"
@@ -532,22 +532,14 @@ msgstr ""
 msgid "Tracking codes:"
 msgstr ""
 
-#: includes/class-wc-correios-autofill-addresses.php:270
+#: includes/class-wc-correios-autofill-addresses.php:273
 msgid "Missing postcode paramater."
 msgstr ""
 
-#: includes/class-wc-correios-autofill-addresses.php:277
-#: includes/class-wc-correios-autofill-addresses.php:284
+#: includes/class-wc-correios-autofill-addresses.php:280
+#: includes/class-wc-correios-autofill-addresses.php:287
 msgid "Invalid postcode."
 msgstr ""
-
-#. translators: %d: days to delivery
-#: includes/class-wc-correios-cart.php:35
-#: includes/wc-correios-functions.php:74
-msgid "Delivery within %d working day"
-msgid_plural "Delivery within %d working days"
-msgstr[0] ""
-msgstr[1] ""
 
 #. translators: 1: shipping method name 2: days to delivery
 #: includes/class-wc-correios-orders.php:40
@@ -962,29 +954,36 @@ msgstr ""
 msgid "SEDEX (Legacy)"
 msgstr ""
 
-#: includes/wc-correios-functions.php:107
+#. translators: %d: days to delivery
+#: includes/wc-correios-functions.php:74
+msgid "Delivery within %d working day"
+msgid_plural "Delivery within %d working days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/wc-correios-functions.php:108
 msgid "System temporarily down. Please try again later."
 msgstr ""
 
-#: includes/wc-correios-functions.php:108
+#: includes/wc-correios-functions.php:109
 msgid "Invalid zip code."
 msgstr ""
 
-#: includes/wc-correios-functions.php:109
+#: includes/wc-correios-functions.php:110
 msgid "Area with delivery temporarily subjected to different periods."
 msgstr ""
 
-#: includes/wc-correios-functions.php:110
+#: includes/wc-correios-functions.php:111
 msgid "The destination CEP is subject to special delivery conditions by ECT and will be carried out with the addition of up to 7 (seven) business days to the regular term."
 msgstr ""
 
 #. translators: %s: tracking code
-#: includes/wc-correios-functions.php:203
+#: includes/wc-correios-functions.php:204
 msgid "Added a Correios tracking code: %s"
 msgstr ""
 
 #. translators: %s: tracking code
-#: includes/wc-correios-functions.php:225
+#: includes/wc-correios-functions.php:226
 msgid "Removed a Correios tracking code: %s"
 msgstr ""
 
