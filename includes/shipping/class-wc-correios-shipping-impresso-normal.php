@@ -19,18 +19,18 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	/**
 	 * Additional cost per kg or fraction.
 	 *
-	 * Cost based in 05/02/2020 from:
-	 * https://www.correios.com.br/enviar-e-receber/marketing-direto/impressos/impresso-normal
+	 * Cost based in 31/01/2023 from:
+	 * https://www.correios.com.br/enviar/marketing-direto/saiba-mais-nacional
 	 *
 	 * @var float
 	 */
-	protected $additional_cost_per_kg = 4.85;
+	protected $additional_cost_per_kg = 5.65;
 
 	/**
 	 * Weight limit for this shipping method.
 	 *
-	 * Value based in 05/02/2020 from:
-	 * https://www.correios.com.br/enviar-e-receber/marketing-direto/impressos/impresso-normal
+	 * Value based in 31/01/2023 from:
+	 * https://www.correios.com.br/enviar/marketing-direto/saiba-mais-nacional
 	 *
 	 * @var float
 	 */
@@ -68,8 +68,8 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 
 	/**
 	 * Get costs.
-	 * Costs based in 01/02/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
+	 * Costs based in 31/01/2023 from:
+	 * https://www.correios.com.br/enviar/marketing-direto/saiba-mais-nacional
 	 *
 	 * @return array
 	 */
@@ -77,27 +77,27 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 		return apply_filters(
 			'woocommerce_correios_impresso_normal_costs',
 			array(
-				'20'   => 1.30,
-				'50'   => 1.95,
-				'100'  => 2.50,
-				'150'  => 3.05,
-				'200'  => 3.65,
-				'250'  => 4.20,
-				'300'  => 4.75,
-				'350'  => 5.25,
-				'400'  => 5.90,
-				'450'  => 6.50,
-				'500'  => 7.10,
-				'550'  => 7.50,
-				'600'  => 8.10,
-				'650'  => 8.60,
-				'700'  => 9.00,
-				'750'  => 9.50,
-				'800'  => 9.95,
-				'850'  => 10.55,
-				'900'  => 11.15,
-				'950'  => 11.60,
-				'1000' => 12.05,
+				'20'  => 1.55,
+				'50'  => 2.25,
+				'100' => 2.90,
+				'150' => 3.55,
+				'200' => 4.25,
+				'250' => 4.85,
+				'300' => 5.55,
+				'350' => 6.15,
+				'400' => 6.90,
+				'450' => 7.55,
+				'500' => 8.25,
+				'550' => 8.75,
+				'600' => 9.40,
+				'650' => 10.00,
+				'700' => 10.45,
+				'750' => 11.05,
+				'800' => 11.60,
+				'850' => 12.25,
+				'900' => 12.95,
+				'950' => 13.50,
+				'1000' => 14.00,
 			),
 			$this->id,
 			$this->instance_id
