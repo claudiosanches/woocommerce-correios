@@ -61,6 +61,7 @@ class WC_Correios_Integration extends WC_Integration {
 		add_action( 'woocommerce_update_options_integration_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		// Correios Web Service API actions.
+		add_filter( 'woocommerce_correios_cws_is_enabled', array( $this, 'setup_cws_status' ), 10 );
 		add_filter( 'woocommerce_correios_cws_environment', array( $this, 'setup_cws_environment' ), 10 );
 		add_filter( 'woocommerce_correios_cws_user_data', array( $this, 'setup_cws_user_data' ), 10 );
 		add_filter( 'woocommerce_correios_cws_debug', array( $this, 'setup_cws_debug' ), 10 );
@@ -72,7 +73,6 @@ class WC_Correios_Integration extends WC_Integration {
 
 		// Autofill address actions.
 		add_filter( 'woocommerce_correios_enable_autofill_addresses', array( $this, 'setup_autofill_addresses' ), 10 );
-		add_filter( 'woocommerce_correios_enable_autofill_addresses_debug', array( $this, 'setup_autofill_addresses_debug' ), 10 );
 		add_filter( 'woocommerce_correios_autofill_addresses_validity_time', array( $this, 'setup_autofill_addresses_validity_time' ), 10 );
 		add_filter( 'woocommerce_correios_autofill_addresses_force_autofill', array( $this, 'setup_autofill_addresses_force_autofill' ), 10 );
 		add_action( 'wp_ajax_correios_autofill_addresses_empty_database', array( $this, 'ajax_empty_database' ) );
@@ -216,14 +216,6 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Empty Database', 'woocommerce-correios' ),
 				'description' => __( 'Delete all the saved postcodes in the database, use this option if you have issues with outdated postcodes.', 'woocommerce-correios' ),
 			),
-			'autofill_debug'          => array(
-				'title'       => __( 'Debug Log', 'woocommerce-correios' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging for Autofill Addresses', 'woocommerce-correios' ),
-				'default'     => 'no',
-				/* translators: %s: log link */
-				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Autofill Addresses', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
-			),
 		);
 	}
 
@@ -297,6 +289,17 @@ class WC_Correios_Integration extends WC_Integration {
 	}
 
 	/**
+	 * Setup CWS status.
+	 *
+	 * @return bool
+	 */
+	public function setup_cws_status() {
+		$data = $this->setup_cws_user_data();
+		$data = array_filter( $data );
+		return ! empty( $data );
+	}
+
+	/**
 	 * Setup Correios Web Service Environment.
 	 *
 	 * @return string
@@ -309,7 +312,7 @@ class WC_Correios_Integration extends WC_Integration {
 	/**
 	 * Setup Correios Web Service Username.
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function setup_cws_user_data() {
 		return array(
@@ -354,15 +357,6 @@ class WC_Correios_Integration extends WC_Integration {
 	 */
 	public function setup_autofill_addresses() {
 		return 'yes' === $this->get_option( 'autofill_enable' ) && class_exists( 'SoapClient' );
-	}
-
-	/**
-	 * Set up autofill addresses debug.
-	 *
-	 * @return bool
-	 */
-	public function setup_autofill_addresses_debug() {
-		return 'yes' === $this->get_option( 'autofill_debug' );
 	}
 
 	/**

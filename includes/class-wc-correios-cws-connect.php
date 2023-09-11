@@ -535,4 +535,58 @@ class WC_Correios_Cws_Connect {
 
 		return $data;
 	}
+
+	/**
+	 * Get address from a postcode.
+	 *
+	 * @param string $postcode Postcode.
+	 * @return array
+	 */
+	public function get_address_from_postcode( $postcode ) {
+		$data = apply_filters( 'woocommerce_correios_cws_pre_get_address_from_postcode', array(), $postcode );
+		if ( ! empty( $data ) ) {
+			return $data;
+		}
+
+		$this->add_log( sprintf( 'Fetching address for: %s', $postcode ) );
+
+		$token = $this->get_token();
+		if ( empty( $token ) ) {
+			$this->add_log( 'Missing Token! Aborting...' );
+		}
+
+		$endpoint = array(
+			'cep',
+			'v2',
+			'enderecos',
+			$postcode,
+		);
+
+		$url      = $this->get_cws_url( join( '/', $endpoint ) );
+		$response = wp_safe_remote_get(
+			$url,
+			array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $token['token'],
+					'Accept'        => 'application/json',
+				),
+				'timeout' => 30,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$this->add_log( 'Failed to fetch address:', $response->get_error_message() );
+			return array();
+		}
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			$this->add_log( 'Failed to fetch address:', $response );
+			return array();
+		}
+
+		$data = json_decode( $response['body'], true );
+
+		$this->add_log( sprintf( 'Retrived address for %s:', $postcode ), $data );
+
+		return $data;
+	}
 }

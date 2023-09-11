@@ -71,7 +71,7 @@ class WC_Correios_Autofill_Addresses {
 	 * @param string $data Data to log.
 	 */
 	protected static function logger( $data ) {
-		if ( apply_filters( 'woocommerce_correios_enable_autofill_addresses_debug', false ) ) {
+		if ( apply_filters( 'woocommerce_correios_cws_debug', false ) ) {
 			$logger = new WC_Logger();
 			$logger->add( 'correios-autofill-addresses', $data );
 		}
@@ -200,30 +200,43 @@ class WC_Correios_Autofill_Addresses {
 	 * @return stdClass
 	 */
 	protected static function fetch_address( $postcode ) {
-		include_once dirname( __FILE__ ) . '/class-wc-correios-soap-client.php';
+		$cws_enabled = apply_filters( 'woocommerce_correios_cws_is_enabled', false );
+		$address     = null;
 
-		self::logger( sprintf( 'Fetching address for "%s" on Correios Webservices...', $postcode ) );
+		if ( ! $cws_enabled ) {
+			include_once dirname( __FILE__ ) . '/class-wc-correios-soap-client.php';
+			self::logger( sprintf( 'Fetching address for "%s" on Correios Webservices...', $postcode ) );
 
-		$address = null;
+			try {
+				$soap     = new WC_Correios_Soap_Client( self::get_tracking_addresses_webservice_url() );
+				$response = $soap->consultaCEP( array( 'cep' => $postcode ) );
+				$data     = $response->return;
+				$address  = new stdClass();
 
-		try {
-			$soap     = new WC_Correios_Soap_Client( self::get_tracking_addresses_webservice_url() );
-			$response = $soap->consultaCEP( array( 'cep' => $postcode ) );
-			$data     = $response->return;
-			$address  = new stdClass();
+				$address->postcode     = $data->cep;
+				$address->address      = $data->end;
+				$address->city         = $data->cidade;
+				$address->neighborhood = $data->bairro;
+				$address->state        = $data->uf;
+				$address->last_query   = current_time( 'mysql' );
+			} catch ( Exception $e ) {
+				self::logger( sprintf( 'An error occurred while trying to fetch address for "%s": %s', $postcode, $e->getMessage() ) );
+			}
 
-			$address->postcode     = $data->cep;
-			$address->address      = $data->end;
-			$address->city         = $data->cidade;
-			$address->neighborhood = $data->bairro;
-			$address->state        = $data->uf;
+			if ( ! is_null( $address ) ) {
+				self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, print_r( $address, true ) ) );
+			}
+		} else {
+			$connect = new WC_Correios_Cws_Connect();
+			$data    = $connect->get_address_from_postcode( $postcode );
+			$address = new stdClass();
+
+			$address->postcode     = $data['cep'];
+			$address->address      = $data['logradouro'];
+			$address->city         = $data['localidade'];
+			$address->neighborhood = $data['bairro'];
+			$address->state        = $data['uf'];
 			$address->last_query   = current_time( 'mysql' );
-		} catch ( Exception $e ) {
-			self::logger( sprintf( 'An error occurred while trying to fetch address for "%s": %s', $postcode, $e->getMessage() ) );
-		}
-
-		if ( ! is_null( $address ) ) {
-			self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, print_r( $address, true ) ) ); // @codingStandardsIgnoreLine
 		}
 
 		return $address;
@@ -253,12 +266,12 @@ class WC_Correios_Autofill_Addresses {
 	 * Ajax autofill endpoint.
 	 */
 	public function ajax_autofill() {
-		if ( empty( $_GET['postcode'] ) ) { // WPCS: input var okay, CSRF ok.
+		if ( empty( $_GET['postcode'] ) ) {
 			wp_send_json_error( array( 'message' => __( 'Missing postcode paramater.', 'woocommerce-correios' ) ) );
 			exit;
 		}
 
-		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) ); // WPCS: input var okay, CSRF ok.
+		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) );
 
 		if ( empty( $postcode ) || 8 !== strlen( $postcode ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );
