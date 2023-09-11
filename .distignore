@@ -10,3 +10,4 @@ composer.*
 package-lock.json
 package.json
 README.md
+CHANGELOG.txt
