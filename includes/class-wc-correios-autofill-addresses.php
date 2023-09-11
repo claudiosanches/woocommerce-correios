@@ -210,15 +210,18 @@ class WC_Correios_Autofill_Addresses {
 			try {
 				$soap     = new WC_Correios_Soap_Client( self::get_tracking_addresses_webservice_url() );
 				$response = $soap->consultaCEP( array( 'cep' => $postcode ) );
-				$data     = $response->return;
-				$address  = new stdClass();
+				$data     = isset( $response->return ) ? $response->return : false;
 
-				$address->postcode     = $data->cep;
-				$address->address      = $data->end;
-				$address->city         = $data->cidade;
-				$address->neighborhood = $data->bairro;
-				$address->state        = $data->uf;
-				$address->last_query   = current_time( 'mysql' );
+				if ( $data ) {
+					$address = new stdClass();
+
+					$address->postcode     = $data->cep;
+					$address->address      = $data->end;
+					$address->city         = $data->cidade;
+					$address->neighborhood = $data->bairro;
+					$address->state        = $data->uf;
+					$address->last_query   = current_time( 'mysql' );
+				}
 			} catch ( Exception $e ) {
 				self::logger( sprintf( 'An error occurred while trying to fetch address for "%s": %s', $postcode, $e->getMessage() ) );
 			}
