@@ -249,7 +249,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	 * @return float
 	 */
 	protected function get_declared_value( $package ) {
-		if ( 18 >= $package['contents_cost'] ) {
+		if ( 24 >= $package['contents_cost'] ) {
 			return 0;
 		}
 
