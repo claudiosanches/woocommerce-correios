@@ -1,0 +1,4 @@
+{
+    "presets": ["@wordpress/babel-preset-default", "minify"],
+	"comments": false
+}

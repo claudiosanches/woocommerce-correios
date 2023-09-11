@@ -31,7 +31,7 @@ class WC_Correios_Shipping_SEDEX_Hoje extends WC_Correios_Shipping {
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-sedex-hoje';
-		$this->method_title = __( 'SEDEX Hoje', 'woocommerce-correios' );
+		$this->method_title = __( 'SEDEX Hoje (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-hoje';
 
 		parent::__construct( $instance_id );

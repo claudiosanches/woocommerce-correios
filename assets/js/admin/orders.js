@@ -1,53 +1,59 @@
-/* global wp, ajaxurl, WCCorreiosAdminOrdersParams */
-jQuery( function( $ ) {
-
+/* global ajaxurl, WCCorreiosAdminOrdersParams */
+jQuery(function ($) {
 	/**
 	 * Admin class.
 	 *
 	 * @type {Object}
 	 */
-	var WCCorreiosAdminOrders = {
-
+	const WCCorreiosAdminOrders = {
 		/**
 		 * Initialize actions.
 		 */
-		init: function() {
-			$( document.body )
-				.on( 'click', '.correios-tracking-code .dashicons-dismiss', this.removeTrackingCode )
-				.on( 'click', '.correios-tracking-code .button-secondary', this.addTrackingCode );
+		init() {
+			$(document.body)
+				.on(
+					'click',
+					'.correios-tracking-code .dashicons-dismiss',
+					this.removeTrackingCode
+				)
+				.on(
+					'click',
+					'.correios-tracking-code .button-secondary',
+					this.addTrackingCode
+				);
 		},
 
 		/**
 		 * Block meta boxes.
 		 */
-		block: function() {
-			$( '#wc_correios' ).block({
+		block() {
+			$('#wc-correios').block({
 				message: null,
 				overlayCSS: {
 					background: '#fff',
-					opacity: 0.6
-				}
+					opacity: 0.6,
+				},
 			});
 		},
 
 		/**
 		 * Unblock meta boxes.
 		 */
-		unblock: function() {
-			$( '#wc_correios' ).unblock();
+		unblock() {
+			$('#wc-correios').unblock();
 		},
 
 		/**
 		 * Add tracking fields.
 		 *
-		 * @param {Object} $el Current element.
+		 * @param {Object} trackingCodes
 		 */
-		addTrackingFields: function( trackingCodes ) {
-			var $wrap = $( 'body #wc_correios .correios-tracking-code' );
-			var template = wp.template( 'tracking-code-list' );
+		addTrackingFields(trackingCodes) {
+			const $wrap = $('body #wc-correios .correios-tracking-code');
+			const template = wp.template('tracking-code-list');
 
-			$( '.correios-tracking-code__list', $wrap ).remove();
-			$wrap.prepend( template( { 'trackingCodes': trackingCodes } ) );
+			$('.correios-tracking-code-list', $wrap).remove();
+			$wrap.prepend(template({ trackingCodes }));
 		},
 
 		/**
@@ -55,38 +61,38 @@ jQuery( function( $ ) {
 		 *
 		 * @param {Object} evt Current event.
 		 */
-		addTrackingCode: function( evt ) {
+		addTrackingCode(evt) {
 			evt.preventDefault();
 
-			var $el          = $( '#add-tracking-code' );
-			var trackingCode = $el.val();
+			const $el = $('#add-tracking-code');
+			const trackingCode = $el.val();
 
-			if ( '' === trackingCode ) {
+			if ('' === trackingCode) {
 				return;
 			}
 
-			var self = WCCorreiosAdminOrders;
-			var data = {
+			const self = WCCorreiosAdminOrders;
+			const data = {
 				action: 'woocommerce_correios_add_tracking_code',
 				security: WCCorreiosAdminOrdersParams.nonces.add,
 				order_id: WCCorreiosAdminOrdersParams.order_id,
-				tracking_code: trackingCode
+				tracking_code: trackingCode,
 			};
 
 			self.block();
 
 			// Clean input.
-			$el.val( '' );
+			$el.val('');
 
 			// Add tracking code.
 			$.ajax({
 				type: 'POST',
 				url: ajaxurl,
-				data: data,
-				success: function( response ) {
-					self.addTrackingFields( response.data );
+				data,
+				success(response) {
+					self.addTrackingFields(response.data);
 					self.unblock();
-				}
+				},
 			});
 		},
 
@@ -95,13 +101,13 @@ jQuery( function( $ ) {
 		 *
 		 * @param {Object} $el Current element.
 		 */
-		removeTrackingFields: function( $el ) {
-			var $wrap = $( 'body #wc_correios .correios-tracking-code__list' );
+		removeTrackingFields($el) {
+			const $wrap = $('body #wc-correios .correios-tracking-code-list');
 
-			if ( 1 === $( 'li', $wrap ).length ) {
+			if (1 === $('li', $wrap).length) {
 				$wrap.remove();
 			} else {
-				$el.closest( 'li' ).remove();
+				$el.closest('li').remove();
 			}
 		},
 
@@ -110,21 +116,23 @@ jQuery( function( $ ) {
 		 *
 		 * @param {Object} evt Current event.
 		 */
-		removeTrackingCode: function( evt ) {
+		removeTrackingCode(evt) {
 			evt.preventDefault();
 
 			// Ask if really want remove the tracking code.
-			if ( ! window.confirm( WCCorreiosAdminOrdersParams.i18n.removeQuestion ) ) {
+			if (
+				!window.confirm(WCCorreiosAdminOrdersParams.i18n.removeQuestion) // eslint-disable-line no-alert
+			) {
 				return;
 			}
 
-			var self = WCCorreiosAdminOrders;
-			var $el  = $( this );
-			var data = {
+			const self = WCCorreiosAdminOrders;
+			const $el = $(this);
+			const data = {
 				action: 'woocommerce_correios_remove_tracking_code',
 				security: WCCorreiosAdminOrdersParams.nonces.remove,
 				order_id: WCCorreiosAdminOrdersParams.order_id,
-				tracking_code: $el.data( 'code' )
+				tracking_code: $el.data('code'),
 			};
 
 			self.block();
@@ -133,13 +141,13 @@ jQuery( function( $ ) {
 			$.ajax({
 				type: 'POST',
 				url: ajaxurl,
-				data: data,
-				success: function() {
-					self.removeTrackingFields( $el );
+				data,
+				success() {
+					self.removeTrackingFields($el);
 					self.unblock();
-				}
+				},
 			});
-		}
+		},
 	};
 
 	WCCorreiosAdminOrders.init();

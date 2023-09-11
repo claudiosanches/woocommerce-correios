@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Documento_Internacional_Premium extends WC_Correios_S
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-documento-internacional-premium';
-		$this->method_title = __( 'Documento Internacional Premium', 'woocommerce-correios' );
+		$this->method_title = __( 'Documento Internacional Premium (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );

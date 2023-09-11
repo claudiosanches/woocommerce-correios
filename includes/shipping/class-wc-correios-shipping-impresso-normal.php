@@ -58,8 +58,12 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	 * @return float
 	 */
 	protected function get_additional_costs_per_kg() {
-		return apply_filters( 'woocommerce_correios_impresso_additional_cost_per_kg',
-			$this->additional_cost_per_kg, $this->id, $this->instance_id );
+		return apply_filters(
+			'woocommerce_correios_impresso_additional_cost_per_kg',
+			$this->additional_cost_per_kg,
+			$this->id,
+			$this->instance_id
+		);
 	}
 
 	/**
@@ -70,29 +74,34 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 	 * @return array
 	 */
 	protected function get_costs() {
-		return apply_filters( 'woocommerce_correios_impresso_normal_costs', array(
-			'20'  => 1.55,
-			'50'  => 2.25,
-			'100' => 2.90,
-			'150' => 3.55,
-			'200' => 4.25,
-			'250' => 4.85,
-			'300' => 5.55,
-			'350' => 6.15,
-			'400' => 6.90,
-			'450' => 7.55,
-			'500' => 8.25,
-			'550' => 8.75,
-			'600' => 9.40,
-			'650' => 10.00,
-			'700' => 10.45,
-			'750' => 11.05,
-			'800' => 11.60,
-			'850' => 12.25,
-			'900' => 12.95,
-			'950' => 13.50,
-			'1000' => 14.00,
-		), $this->id, $this->instance_id );
+		return apply_filters(
+			'woocommerce_correios_impresso_normal_costs',
+			array(
+				'20'  => 1.55,
+				'50'  => 2.25,
+				'100' => 2.90,
+				'150' => 3.55,
+				'200' => 4.25,
+				'250' => 4.85,
+				'300' => 5.55,
+				'350' => 6.15,
+				'400' => 6.90,
+				'450' => 7.55,
+				'500' => 8.25,
+				'550' => 8.75,
+				'600' => 9.40,
+				'650' => 10.00,
+				'700' => 10.45,
+				'750' => 11.05,
+				'800' => 11.60,
+				'850' => 12.25,
+				'900' => 12.95,
+				'950' => 13.50,
+				'1000' => 14.00,
+			),
+			$this->id,
+			$this->instance_id
+		);
 	}
 
 	/**
@@ -172,10 +181,8 @@ class WC_Correios_Shipping_Impresso_Normal extends WC_Correios_Shipping_Impresso
 			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, sprintf( 'Total cost for %sg and %s: %s', $weight, $this->registry_type, $cost ) );
 			}
-		} else {
-			if ( 'yes' === $this->debug ) {
+		} elseif ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, sprintf( 'The cart weight of %.3f exceeds the shipping method supported weight limit of %.3f', $weight, $this->shipping_method_weight_limit ) );
-			}
 		}
 
 		return $cost;
