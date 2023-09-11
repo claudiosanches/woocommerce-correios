@@ -31,7 +31,7 @@ class WC_Correios_Shipping_SEDEX_10_Pacote extends WC_Correios_Shipping {
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-sedex10-pacote';
-		$this->method_title = __( 'SEDEX 10 Pacote', 'woocommerce-correios' );
+		$this->method_title = __( 'SEDEX 10 Pacote (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/sedex-10';
 
 		parent::__construct( $instance_id );

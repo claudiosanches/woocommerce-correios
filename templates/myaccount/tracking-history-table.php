@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.3.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<p class="wc-correios-tracking__description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <strong><?php echo esc_html( $code ); ?></strong></p>
+<p class="wc-correios-tracking-description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <strong><?php echo esc_html( $code ); ?></strong></p>
 
-<table class="wc-correios-tracking__table woocommerce-table shop_table shop_table_responsive">
+<table class="wc-correios-tracking-table woocommerce-table shop_table shop_table_responsive">
 	<thead>
 		<tr>
 			<th><?php esc_html_e( 'Date', 'woocommerce-correios' ); ?></th>
@@ -25,32 +25,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tbody>
 	<?php foreach ( $events as $event ) : ?>
 		<tr>
-			<td><?php echo esc_html( $event->data . ' ' . $event->hora ); ?></td>
+			<td><?php echo esc_html( $event['dtHrCriado'] ); ?></td>
 			<td>
-				<?php echo esc_html( $event->local . ' - ' . $event->cidade . '/' . $event->uf ); ?>
-
-				<?php if ( isset( $event->destino ) ) : ?>
-					<br />
-					<?php
-						/* translators: %s: address */
-						echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event->destino->local . ' - ' . $event->destino->cidade . '/' . $event->destino->uf ) );
-					?>
-				<?php endif; ?>
+				<?php echo esc_html( $event['unidade']['tipo'] . ' - ' . $event['unidade']['endereco']['cidade'] . '/' . $event['unidade']['endereco']['uf'] ); ?>
 			</td>
 			<td>
-				<?php echo esc_html( $event->descricao ); ?>
+				<?php echo esc_html( $event['descricao'] ); ?>
+				<?php if ( isset( $event['unidadeDestino'] ) ) : ?>
+					<br />
+					<em>
+					<?php
+						/* translators: %s: address */
+						echo esc_html( sprintf( __( 'In transit to %s', 'woocommerce-correios' ), $event['unidadeDestino']['tipo'] . ' - ' . $event['unidadeDestino']['endereco']['cidade'] . '/' . $event['unidadeDestino']['endereco']['uf'] ) );
+					?>
+					</em>
+				<?php endif; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="3">
-				<form method="POST" target="_blank" rel="nofollow noopener noreferrer" action="https://www2.correios.com.br/sistemas/rastreamento/resultado.cfm" class="wc-correios-tracking__form">
-					<input type="hidden" name="Objetos" value="<?php echo esc_attr( $code ); ?>">
-					<input class="wc-correios-tracking__button button" type="submit" value="<?php esc_attr_e( 'Query on Correios', 'woocommerce-correios' ); ?>">
-				</form>
-			</td>
-		</tr>
-	</tfoot>
 </table>

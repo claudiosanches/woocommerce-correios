@@ -13,6 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="correios-tracking-code">
 	<small class="meta">
 		<?php echo esc_html( _n( 'Tracking code:', 'Tracking codes:', count( $tracking_codes ), 'woocommerce-correios' ) ); ?>
-		<?php echo implode( ' | ', $tracking_codes ); ?>
+		<?php echo implode( ' | ', $tracking_codes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</small>
 </div>

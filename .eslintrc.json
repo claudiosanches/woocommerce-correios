@@ -1,0 +1,7 @@
+{
+    "extends": ["plugin:@wordpress/eslint-plugin/recommended"],
+	"ignorePatterns": ["**/**/*.min.js"],
+	"env": {
+		"jquery": true
+	}
+}

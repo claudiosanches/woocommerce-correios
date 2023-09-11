@@ -1,10 +1,10 @@
 # Claudio Sanches - Correios for WooCommerce #
-**Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior), [matheuscl](https://profiles.wordpress.org/matheuscl)  
+**Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches/), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior/), [matheuscl](https://profiles.wordpress.org/matheuscl/)  
 **Donate link:** https://claudiosanches.com/doacoes/  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
-**Tested up to:** 5.2  
-**Stable tag:** 3.8.0  
+**Tested up to:** 6.3  
+**Stable tag:** 4.0.0  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -17,29 +17,12 @@ Utilize os métodos de entrega e serviços dos Correios com a sua loja WooCommer
 
 [Correios](http://www.correios.com.br/) é um método de entrega brasileiro.
 
-Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](https://www.correios.com.br/precos-e-prazos/calculador-remoto-de-precos-e-prazos) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
+Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desenvolvedores deste plugin possuem vínculos com esta empresa. E note que este plugin foi feito baseado na documentação do [Webservices Correios](https://www.correios.com.br/atendimento/developers) e com apoio da [Infranology](http://infranology.com.br/) na construção das classes de cubagem.
 
-### Serviços integrados ###
+### Integração ###
 
-Estão integrados os seguintes serviços:
-
-- Entrega nacional:
- - PAC
- - SEDEX
- - SEDEX 10 Envelope
- - SEDEX 10 Pacote
- - SEDEX 12
- - SEDEX Hoje
- - e-SEDEX (necessário conta administrativa nos Correios)
- - Carta Registrada
- - Impresso Normal
- - Impresso Urgente
-- Entrega internacional:
- - Mercadoria Expressa
- - Mercadoria Econômica
- - Leve Internacional
-- Consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente)
-- Consulta e autopreenchimento de endereços baseados em CEPs
+Este plugin suporta a nova API dos Correios, fazendo integração completa com o seu contrato, sendo possível integrar com qualquer método de entrega disponível para o seu contrato, como PAC, SEDEX e mais.
+Também tem integração para consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente), além de incluir integração para preenchimento automático de endereços a partir de um CEP.
 
 ### Instalação: ###
 
@@ -66,12 +49,21 @@ Você pode esclarecer suas dúvidas usando:
 
 ### Requerimentos: ###
 
-- [SimpleXML](http://php.net/manual/pt_BR/book.simplexml.php) ativado no PHP (note que já é ativado por padrão no PHP 5).
-- Modulo [SOAP](http://php.net/manual/pt_BR/book.soap.php) (utilizado para a tabela de histórico de rastreamento e autopreenchimento de endereços).
+- Ter contrato com os Correios.
 
-### Configurações do plugin: ###
+### Configuração do plugin ###
 
-[youtube https://www.youtube.com/watch?v=IWjLAy9i--I]
+1. Depois de instalado e ativado, vá até "WooCommerce" > "Configurações" > "Integrações" > "Correios".
+2. Preencha os campos "Nome de usuário", "Código de acesso" e "Cartão de postagem" na sessão "Correios Web Services".
+3. Salve as configurações.
+4. Ainda nesta página você pode clicar em "Atualizar lista de serviços" para baixar a lista de serviços dos Correios disponíveis no seu contrato.
+5. Finalmente vá até "WooCommerce" > "Configurações" > "Entrega" e crie/edite uma area de entrega para entregas no Brasil.
+6. Adicione o método de entrega "Correios (Nova API)".
+7. Clique para editar o métedo e selecione o "Serviço" que será usado. Por exemplo "PAC CONTRATO AG" ou "SEDEX CONTRATO AG" (os serviços são baixados na etapa 4 deste guia).
+8. Finalmente termine de configurar as outras opções conforme a sua necessidade e salve o método de entrega.
+9. Pronto, tudo configurado.
+
+Para garantir que tudo esta funcionando tenha certeza de configurar o peso e médidas dos produtos em cada um deles, veja mais detalhes na sessão seguinte.
 
 ### Configurações dos produtos ###
 
@@ -89,30 +81,12 @@ Este plugin esta licenciado como GPL.
 ### O que eu preciso para utilizar este plugin? ###
 
 * WooCommerce 3.0 ou posterior.
-* [SimpleXML](http://php.net/manual/pt_BR/book.simplexml.php) ativado no PHP (note que já é ativado por padrão no PHP 5).
-* Modulo [SOAP](http://php.net/manual/pt_BR/book.soap.php) (utilizado para a tabela de histórico de rastreamento e autopreenchimento de endereços).
+* Contrato com os Correios.
 * Adicionar peso e dimensões nos produtos que pretende entregar.
 
 ### Quais são os métodos de entrega que o plugin aceita? ###
 
-São aceitos os seguintes métodos de entrega nacionais:
-
-- PAC
-- SEDEX
-- SEDEX 10 Envelope
-- SEDEX 10 Pacote
-- SEDEX 12
-- SEDEX Hoje
-- e-SEDEX (necessário conta administrativa nos Correios)
-- Carta Registrada
-- Impresso Normal
-- Impresso Urgente
-
-E os seguintes métodos de entrega internacionais:
-
-- Mercadoria Expressa
-- Mercadoria Econômica
-- Leve Internacional
+Todos os métodos disponíveis no seu contrato com os Correios.
 
 ### Onde configuro os métodos de entrega? ###
 
@@ -134,7 +108,7 @@ A cotação do frete é feita utilizando o [Calculador Remoto de Preços e Prazo
 
 Na cotação do frete é usado o seu CEP de origem, CEP de destino do cliente, junto com as dimensões dos produtos e peso. Desta forma o valor cotado sera o mais próximo possível do real.
 
-Note que já fazem quase 4 anos que este plugin existe utilizando o mesmo método para obter a cubagem do pedido e tem funcionando muito bem, caso você tenha algum problema, provavelmente é por causa de configurar valores errados nos produtos.
+Note que já fazem mais de 10 anos que este plugin existe utilizando o mesmo método para obter a cubagem do pedido e tem funcionando muito bem, caso você tenha algum problema, provavelmente é por causa de configurar valores errados nos produtos.
 
 ### Tem calculadora de frete na página do produto? ###
 
@@ -165,7 +139,7 @@ Aqui uma lista de erros mais comuns:
 
 E não se esqueça de verificar o erro ativando a opção de **Log de depuração** nas configurações de cada método de entrega. Imediatamente após ativar o log, basta tentar cotar o frete novamente, fazendo assim o log ser gerado. Você pode acessar todos os logs indo em "WooCommerce" > "Status do sistema" > "Logs".
 
-Dica: Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer do site dos Correios ter caído ou o seu servidor estar com pouca memoria.
+Dica: Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer do site dos Correios ter caído ou o seu servidor estar com pouca memória.
 
 ### Os métodos de entrega dos Correios não aparecem no carrinho ou durante a finalização? ###
 
@@ -194,31 +168,36 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 ## Screenshots ##
 
 ### 1. Exemplo de áreas de entrega com os Correios. ###
-![Exemplo de áreas de entrega com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-1.png)
+![Exemplo de áreas de entrega com os Correios.](https://ps.w.org/woocommerce-correios/assets/screenshot-1.png)
 
 ### 2. Exemplo da tela de configurações dos métodos de entrega. ###
-![Exemplo da tela de configurações dos métodos de entrega.](http://ps.w.org/woocommerce-correios/assets/screenshot-2.png)
+![Exemplo da tela de configurações dos métodos de entrega.](https://ps.w.org/woocommerce-correios/assets/screenshot-2.png)
 
 ### 3. Configurações de integração com os Correios. ###
-![Configurações de integração com os Correios.](http://ps.w.org/woocommerce-correios/assets/screenshot-3.png)
+![Configurações de integração com os Correios.](https://ps.w.org/woocommerce-correios/assets/screenshot-3.png)
 
 ### 4. Campo para adicionar o código de rastreamento (tela de administração de pedidos). ###
-![Campo para adicionar o código de rastreamento (tela de administração de pedidos).](http://ps.w.org/woocommerce-correios/assets/screenshot-4.png)
+![Campo para adicionar o código de rastreamento (tela de administração de pedidos).](https://ps.w.org/woocommerce-correios/assets/screenshot-4.png)
 
 ### 5. Configurações do e-mails do código de rastreamento. ###
-![Configurações do e-mails do código de rastreamento.](http://ps.w.org/woocommerce-correios/assets/screenshot-5.png)
+![Configurações do e-mails do código de rastreamento.](https://ps.w.org/woocommerce-correios/assets/screenshot-5.png)
 
 ### 6. Exemplo dos métodos de entrega sendo exibidos na página de finalização. ###
-![Exemplo dos métodos de entrega sendo exibidos na página de finalização.](http://ps.w.org/woocommerce-correios/assets/screenshot-6.png)
+![Exemplo dos métodos de entrega sendo exibidos na página de finalização.](https://ps.w.org/woocommerce-correios/assets/screenshot-6.png)
 
 ### 7. Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta". ###
-![Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta".](http://ps.w.org/woocommerce-correios/assets/screenshot-7.png)
+![Exemplo do código de rastreamento sendo exibido dentro da página de detalhes de pedido na página "Minha conta".](https://ps.w.org/woocommerce-correios/assets/screenshot-7.png)
 
 ### 8. Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração. ###
-![Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração.](http://ps.w.org/woocommerce-correios/assets/screenshot-8.png)
+![Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração.](https://ps.w.org/woocommerce-correios/assets/screenshot-8.png)
 
 
 ## Changelog ##
+
+### 4.0.0 - 2023/09/10 ###
+
+- Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
+- Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
 
 ### 3.8.0 - 2019/09/20 ###
 
@@ -251,6 +230,5 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ### 3.8.0 ###
 
-- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
-- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
-- Corrigida rotina de atualização das opções do plugin.
+- Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
+- Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.

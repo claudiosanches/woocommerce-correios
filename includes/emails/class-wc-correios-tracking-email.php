@@ -46,23 +46,25 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'enabled' => array(
+			'enabled'          => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable this email notification', 'woocommerce-correios' ),
 				'default' => 'yes',
 			),
-			'subject' => array(
+			'subject'          => array(
 				'title'       => __( 'Subject', 'woocommerce-correios' ),
 				'type'        => 'text',
+				/* translators: %s: email subject */
 				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'woocommerce-correios' ), $this->subject ),
 				'placeholder' => $this->subject,
 				'default'     => '',
 				'desc_tip'    => true,
 			),
-			'heading' => array(
+			'heading'          => array(
 				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
 				'type'        => 'text',
+				/* translators: %s: email heading */
 				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
 				'placeholder' => $this->heading,
 				'default'     => '',
@@ -71,12 +73,13 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'tracking_message' => array(
 				'title'       => __( 'Email Content', 'woocommerce-correios' ),
 				'type'        => 'textarea',
+				/* translators: %s: email message */
 				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
 				'placeholder' => $this->message,
 				'default'     => '',
 				'desc_tip'    => true,
 			),
-			'email_type' => array(
+			'email_type'       => array(
 				'title'       => __( 'Email type', 'woocommerce-correios' ),
 				'type'        => 'select',
 				'description' => __( 'Choose which format of email to send.', 'woocommerce-correios' ),
@@ -197,14 +200,19 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	public function get_content_html() {
 		ob_start();
 
-		wc_get_template( $this->template_html, array(
-			'order'            => $this->object,
-			'email_heading'    => $this->get_heading(),
-			'tracking_message' => $this->get_tracking_message(),
-			'sent_to_admin'    => false,
-			'plain_text'       => false,
-			'email'            => $this,
-		), '', $this->template_base );
+		wc_get_template(
+			$this->template_html,
+			array(
+				'order'            => $this->object,
+				'email_heading'    => $this->get_heading(),
+				'tracking_message' => $this->get_tracking_message(),
+				'sent_to_admin'    => false,
+				'plain_text'       => false,
+				'email'            => $this,
+			),
+			'',
+			$this->template_base
+		);
 
 		return ob_get_clean();
 	}
@@ -223,14 +231,19 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		$message = str_replace( '<li>', "\n - ", $message );
 		$message = str_replace( array( '</ul>', '</li>' ), '', $message );
 
-		wc_get_template( $this->template_plain, array(
-			'order'            => $this->object,
-			'email_heading'    => $this->get_heading(),
-			'tracking_message' => $message,
-			'sent_to_admin'    => false,
-			'plain_text'       => true,
-			'email'            => $this,
-		), '', $this->template_base );
+		wc_get_template(
+			$this->template_plain,
+			array(
+				'order'            => $this->object,
+				'email_heading'    => $this->get_heading(),
+				'tracking_message' => $message,
+				'sent_to_admin'    => false,
+				'plain_text'       => true,
+				'email'            => $this,
+			),
+			'',
+			$this->template_base
+		);
 
 		return ob_get_clean();
 	}
