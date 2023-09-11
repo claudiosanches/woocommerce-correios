@@ -85,6 +85,9 @@ class WC_Correios {
 
 	/**
 	 * Include Correios integration to WooCommerce.
+	 *
+	 * @param array $integrations Integrations list.
+	 * @return array
 	 */
 	public static function include_integrations( $integrations ) {
 		$integrations[] = 'WC_Correios_Integration';
