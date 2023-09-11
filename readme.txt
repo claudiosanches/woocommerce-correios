@@ -182,7 +182,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 - Atualizado valor mínimo declarado para 24 reais.
 - Melhorada exibição das datas da tabela de rastreamento de objeto.
-- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, previnindo de remover o nome da rua e o bairro.
+- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, prevenindo de remover o nome da rua e o bairro.
 - Atualizado peso máximo e valores do Impresso Normal.
 - Atualizado os preços de Carta Registrada.
 - Correções gerais de estabilidade e prevenindo erros no WP.
@@ -202,7 +202,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
 - Atualizado valor mínimo declarado para 24 reais.
 - Melhorada exibição das datas da tabela de rastreamento de objeto.
-- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, previnindo de remover o nome da rua e o bairro.
+- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, prevenindo de remover o nome da rua e o bairro.
 - Atualizado peso máximo e valores do Impresso Normal.
 - Atualizado os preços de Carta Registrada.
 - Correções gerais de estabilidade e prevenindo erros no WP.
