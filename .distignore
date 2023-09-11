@@ -1,0 +1,12 @@
+.*
+.*/
+*.md
+*.xml
+*.zip
+/assets/scss/
+/node_modules/
+/vendor/
+composer.*
+package-lock.json
+package.json
+README.md

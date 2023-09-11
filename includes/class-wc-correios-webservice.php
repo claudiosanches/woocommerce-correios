@@ -21,7 +21,7 @@ class WC_Correios_Webservice {
 	 *
 	 * @var string
 	 */
-	private $_webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
+	private $webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
 	/**
 	 * Shipping method ID.
@@ -195,9 +195,9 @@ class WC_Correios_Webservice {
 	 * @param int    $instance_id Instance ID.
 	 */
 	public function __construct( $id = 'correios', $instance_id = 0 ) {
-		$this->id           = $id;
-		$this->instance_id  = $instance_id;
-		$this->log          = new WC_Logger();
+		$this->id          = $id;
+		$this->instance_id = $instance_id;
+		$this->log         = new WC_Logger();
 	}
 
 	/**
@@ -219,7 +219,7 @@ class WC_Correios_Webservice {
 	 * @param array $package Shipping package.
 	 */
 	public function set_package( $package = array() ) {
-		$this->package = $package;
+		$this->package    = $package;
 		$correios_package = new WC_Correios_Package( $package );
 
 		if ( ! is_null( $correios_package ) ) {
@@ -241,7 +241,7 @@ class WC_Correios_Webservice {
 				);
 			}
 
-			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $data, true ) );
+			$this->log->add( $this->id, 'Weight and cubage of the order: ' . wc_print_r( $data, true ) );
 		}
 	}
 
@@ -413,7 +413,7 @@ class WC_Correios_Webservice {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice, $this->id, $this->instance_id, $this->package );
+		return apply_filters( 'woocommerce_correios_webservice_url', $this->webservice, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -508,13 +508,13 @@ class WC_Correios_Webservice {
 	protected function is_available() {
 		$origin_postcode = $this->get_origin_postcode();
 
-		return ! empty( $this->service ) || ! empty( $this->destination_postcode ) || ! empty( $origin_postcode ) || 0 === $this->get_height();
+		return ! empty( $this->service ) && ! empty( $this->destination_postcode ) && ! empty( $origin_postcode );
 	}
 
 	/**
 	 * Get shipping prices.
 	 *
-	 * @return SimpleXMLElement|array
+	 * @return SimpleXMLElement|array24
 	 */
 	public function get_shipping() {
 		$shipping = null;
@@ -524,23 +524,29 @@ class WC_Correios_Webservice {
 			return $shipping;
 		}
 
-		$args = apply_filters( 'woocommerce_correios_shipping_args', array(
-			'nCdServico'          => $this->service,
-			'nCdEmpresa'          => $this->get_login(),
-			'sDsSenha'            => $this->get_password(),
-			'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
-			'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
-			'nVlAltura'           => $this->get_height(),
-			'nVlLargura'          => $this->get_width(),
-			'nVlDiametro'         => $this->get_diameter(),
-			'nVlComprimento'      => $this->get_length(),
-			'nVlPeso'             => $this->get_weight(),
-			'nCdFormato'          => $this->format,
-			'sCdMaoPropria'       => $this->own_hands,
-			'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
-			'sCdAvisoRecebimento' => $this->receipt_notice,
-			'StrRetorno'          => 'xml',
-		), $this->id, $this->instance_id, $this->package );
+		$args = apply_filters(
+			'woocommerce_correios_shipping_args',
+			array(
+				'nCdServico'          => $this->service,
+				'nCdEmpresa'          => $this->get_login(),
+				'sDsSenha'            => $this->get_password(),
+				'sCepDestino'         => wc_correios_sanitize_postcode( $this->destination_postcode ),
+				'sCepOrigem'          => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
+				'nVlAltura'           => $this->get_height(),
+				'nVlLargura'          => $this->get_width(),
+				'nVlDiametro'         => $this->get_diameter(),
+				'nVlComprimento'      => $this->get_length(),
+				'nVlPeso'             => $this->get_weight(),
+				'nCdFormato'          => $this->format,
+				'sCdMaoPropria'       => $this->own_hands,
+				'nVlValorDeclarado'   => round( number_format( $this->declared_value, 2, '.', '' ) ),
+				'sCdAvisoRecebimento' => $this->receipt_notice,
+				'StrRetorno'          => 'xml',
+			),
+			$this->id,
+			$this->instance_id,
+			$this->package
+		);
 
 		$url = add_query_arg( $args, $this->get_webservice_url() );
 
@@ -564,17 +570,15 @@ class WC_Correios_Webservice {
 				}
 			}
 
-			if ( isset( $result->cServico ) ) {
+			if ( isset( $result->cServico ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				if ( 'yes' === $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
+					$this->log->add( $this->id, 'Correios WebServices response: ' . wc_print_r( $result, true ) );
 				}
 
-				$shipping = $result->cServico;
+				$shipping = $result->cServico; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			}
-		} else {
-			if ( 'yes' === $this->debug ) {
-				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
-			}
+		} elseif ( 'yes' === $this->debug ) {
+				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . wc_print_r( $response, true ) );
 		}
 
 		return $shipping;

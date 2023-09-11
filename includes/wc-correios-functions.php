@@ -25,14 +25,14 @@ function wc_correios_safe_load_xml( $source, $options = 0 ) {
 	$old = null;
 
 	if ( function_exists( 'libxml_disable_entity_loader' ) ) {
-		$old = libxml_disable_entity_loader( true );
+		$old = @libxml_disable_entity_loader( true ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, Generic.PHP.DeprecatedFunctions.Deprecated
 	}
 
 	$dom    = new DOMDocument();
 	$return = $dom->loadXML( trim( $source ), $options );
 
 	if ( ! is_null( $old ) ) {
-		libxml_disable_entity_loader( $old );
+		@libxml_disable_entity_loader( $old ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, Generic.PHP.DeprecatedFunctions.Deprecated
 	}
 
 	if ( ! $return ) {
@@ -71,7 +71,8 @@ function wc_correios_get_estimating_delivery( $name, $days, $additional_days = 0
 
 	if ( $total > 0 ) {
 		/* translators: %d: days to delivery */
-		$name .= ' (' . sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ), $total ) . ')';
+		$estimating = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $total, 'woocommerce-correios' ), $total );
+		$name = $name ? $name . " ($estimating)" : $estimating;
 	}
 
 	return apply_filters( 'woocommerce_correios_get_estimating_delivery', $name, $days, $additional_days );
@@ -101,12 +102,15 @@ function wc_correios_normalize_price( $value ) {
 function wc_correios_get_error_message( $code ) {
 	$code = (string) $code;
 
-	$messages = apply_filters( 'woocommerce_correios_available_error_messages', array(
-		'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
-		'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
-		'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
-		'011' => __( 'The destination CEP is subject to special delivery conditions by ECT and will be carried out with the addition of up to 7 (seven) business days to the regular term.', 'woocommerce-correios' ),
-	) );
+	$messages = apply_filters(
+		'woocommerce_correios_available_error_messages',
+		array(
+			'-33' => __( 'System temporarily down. Please try again later.', 'woocommerce-correios' ),
+			'-3'  => __( 'Invalid zip code.', 'woocommerce-correios' ),
+			'010' => __( 'Area with delivery temporarily subjected to different periods.', 'woocommerce-correios' ),
+			'011' => __( 'The destination CEP is subject to special delivery conditions by ECT and will be carried out with the addition of up to 7 (seven) business days to the regular term.', 'woocommerce-correios' ),
+		)
+	);
 
 	return isset( $messages[ $code ] ) ? $messages[ $code ] : '';
 }
@@ -236,4 +240,24 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
  */
 function wc_correios_get_address_by_postcode( $postcode ) {
 	return WC_Correios_Autofill_Addresses::get_address( $postcode );
+}
+
+/**
+ * Obscure sensitive data.
+ *
+ * @param string $text Sensitive data.
+ * @return string
+ */
+function wc_correios_esc_sensitive_data( $text ) {
+	return preg_replace( '/(?!^).(?!$)/', '*', $text );
+}
+
+/**
+ * Get tracking URL.
+ *
+ * @param string $code Tracking code.
+ * @return string
+ */
+function wc_correios_get_tracking_url( $code ) {
+	return apply_filters( 'woocommerce_correios_get_tracking_link_correios', $code );
 }

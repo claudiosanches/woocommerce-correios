@@ -2,6 +2,7 @@
 	"name": "claudiosanches/woocommerce-correios",
 	"description": "Adds Correios shipping methods to your WooCommerce store.",
 	"homepage": "https://github.com/claudiosanches/woocommerce-correios",
+	"version": "4.0.0",
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0+",
 	"authors": [
@@ -16,21 +17,24 @@
 		"issues": "https://github.com/claudiosanches/woocommerce-correios/issues/",
 		"source": "https://github.com/claudiosanches/woocommerce-correios"
 	},
-	"require": {
-		"claudiosanches/wp-git-hooks": "^1.3.1"
-	},
-	"scripts": {
-		"pre-update-cmd": [
-			"ClaudioSanches\\WpGitHooks\\Hooks::preHooks"
-		],
-		"pre-install-cmd": [
-			"@pre-update-cmd"
-		],
-		"post-install-cmd": [
-			"ClaudioSanches\\WpGitHooks\\Hooks::postHooks"
-		],
-		"post-update-cmd": [
-			"@post-install-cmd"
-		]
-	}
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "require": {
+        "php": ">=7.3"
+    },
+    "scripts": {
+        "phpcs": [
+            "phpcs --standard=phpcs.ruleset.xml"
+        ],
+        "makepot": [
+            "wp i18n make-pot . languages/woocommerce-correios.pot --exclude=vendor/node_modules"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }
