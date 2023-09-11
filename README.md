@@ -55,6 +55,8 @@ Você pode esclarecer suas dúvidas usando:
 
 ### Configuração do plugin ###
 
+[youtube https://www.youtube.com/watch?v=YOoiqv-VJWw]
+
 1. Depois de instalado e ativado, vá até "WooCommerce" > "Configurações" > "Integrações" > "Correios".
 2. Preencha os campos "Nome de usuário", "Código de acesso" e "Cartão de postagem" na sessão "Correios Web Services".
 3. Salve as configurações.
