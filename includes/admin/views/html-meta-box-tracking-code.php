@@ -12,11 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="correios-tracking-code">
 	<?php if ( ! empty( $tracking_codes ) ) : ?>
-		<div class="correios-tracking-code__list">
+		<div class="correios-tracking-code-list">
 			<strong><?php echo esc_html( _n( 'Tracking code:', 'Tracking codes:', count( $tracking_codes ), 'woocommerce-correios' ) ); ?></strong>
 			<ul>
 				<?php foreach ( $tracking_codes as $tracking_code ) : ?>
-					<li><a href="#" class="tracking-code-link" aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ); ?>"><?php echo esc_html( $tracking_code ); ?></a> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ) ?>" data-code="<?php echo esc_attr( $tracking_code ); ?>"></a></li>
+					<li><a href="<?php echo esc_url( wc_correios_get_tracking_url( $tracking_code ) ); ?>" class="tracking-code-link" aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ); ?>" target="_blank"><?php echo esc_html( $tracking_code ); ?></a> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" data-code="<?php echo esc_attr( $tracking_code ); ?>"></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <script type="text/html" id="tmpl-tracking-code-list">
-	<div class="correios-tracking-code__list">
+	<div class="correios-tracking-code-list">
 		<# if ( 1 < data.trackingCodes.length ) { #>
 			<strong><?php esc_html_e( 'Tracking codes:', 'woocommerce-correios' ); ?></strong>
 		<# } else { #>
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<# } #>
 		<ul>
 			<# _.each( data.trackingCodes, function( trackingCode ) { #>
-				<li><span aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ) ?>">{{trackingCode}}</span> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ) ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ) ?>" data-code="{{trackingCode}}"></a></li>
+				<li><span aria-label="<?php esc_attr_e( 'Tracking code', 'woocommerce-correios' ); ?>">{{trackingCode}}</span> <a href="#" class="dashicons-dismiss" title="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" aria-label="<?php esc_attr_e( 'Remove tracking code', 'woocommerce-correios' ); ?>" data-code="{{trackingCode}}"></a></li>
 			<# }); #>
 		</ul>
 	</div>

@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Exporta_Facil_Premium extends WC_Correios_Shipping_In
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-exporta-facil-premium';
-		$this->method_title = __( 'Exporta Fácil Premium', 'woocommerce-correios' );
+		$this->method_title = __( 'Exporta Fácil Premium (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );

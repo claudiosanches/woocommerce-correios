@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes
  * @since   3.6.0
- * @version 3.6.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -33,6 +33,7 @@ class WC_Correios {
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( WC_CORREIOS_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}
@@ -49,52 +50,43 @@ class WC_Correios {
 	 * Includes.
 	 */
 	private static function includes() {
-		include_once dirname( __FILE__ ) . '/wc-correios-functions.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-install.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-package.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-webservice-international.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-autofill-addresses.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-tracking-history.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-rest-api.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-orders.php';
-		include_once dirname( __FILE__ ) . '/class-wc-correios-cart.php';
+		include_once __DIR__ . '/wc-correios-functions.php';
+		include_once __DIR__ . '/class-wc-correios-install.php';
+		include_once __DIR__ . '/class-wc-correios-package.php';
+		include_once __DIR__ . '/class-wc-correios-webservice.php';
+		include_once __DIR__ . '/class-wc-correios-webservice-international.php';
+		include_once __DIR__ . '/class-wc-correios-cws-connect.php';
+		include_once __DIR__ . '/class-wc-correios-cws-calculate.php';
+		include_once __DIR__ . '/class-wc-correios-autofill-addresses.php';
+		include_once __DIR__ . '/class-wc-correios-tracking-history.php';
+		include_once __DIR__ . '/class-wc-correios-rest-api.php';
+		include_once __DIR__ . '/class-wc-correios-orders.php';
+		include_once __DIR__ . '/class-wc-correios-cart.php';
 
 		// Integration.
-		include_once dirname( __FILE__ ) . '/integrations/class-wc-correios-integration.php';
+		include_once __DIR__ . '/integrations/class-wc-correios-integration.php';
 
 		// Shipping methods.
-		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
-			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping.php';
-			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-carta.php';
-			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-impresso.php';
-			include_once dirname( __FILE__ ) . '/abstracts/class-wc-correios-shipping-international.php';
-			foreach ( glob( plugin_dir_path( __FILE__ ) . '/shipping/*.php' ) as $filename ) {
-				include_once $filename;
-			}
-
-			// Update settings to 3.0.0 when using WooCommerce 2.6.0.
-			WC_Correios_Install::upgrade_300_from_wc_260();
-		} else {
-			include_once dirname( __FILE__ ) . '/shipping/class-wc-correios-shipping-legacy.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-carta.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-impresso.php';
+		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-international.php';
+		foreach ( glob( plugin_dir_path( __FILE__ ) . '/shipping/*.php' ) as $filename ) {
+			include_once $filename;
 		}
-
-		// Update to 3.0.0.
-		WC_Correios_Install::upgrade_300();
 	}
 
 	/**
 	 * Admin includes.
 	 */
 	private static function admin_includes() {
-		include_once dirname( __FILE__ ) . '/admin/class-wc-correios-admin-orders.php';
+		include_once __DIR__ . '/admin/class-wc-correios-admin-orders.php';
 	}
 
 	/**
 	 * Include Correios integration to WooCommerce.
 	 *
-	 * @param  array $integrations Default integrations.
-	 *
+	 * @param array $integrations Integrations list.
 	 * @return array
 	 */
 	public static function include_integrations( $integrations ) {
@@ -111,36 +103,25 @@ class WC_Correios {
 	 * @return array
 	 */
 	public static function include_methods( $methods ) {
-		// Legacy method.
-		$methods['correios-legacy'] = 'WC_Correios_Shipping_Legacy';
-
-		// New methods.
-		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.6.0', '>=' ) ) {
-			$methods['correios-pac']                               = 'WC_Correios_Shipping_PAC';
-			$methods['correios-sedex']                             = 'WC_Correios_Shipping_SEDEX';
-			$methods['correios-sedex10-envelope']                  = 'WC_Correios_Shipping_SEDEX_10_Envelope';
-			$methods['correios-sedex10-pacote']                    = 'WC_Correios_Shipping_SEDEX_10_Pacote';
-			$methods['correios-sedex12']                           = 'WC_Correios_Shipping_SEDEX_12';
-			$methods['correios-sedex-hoje']                        = 'WC_Correios_Shipping_SEDEX_Hoje';
-			$methods['correios-esedex']                            = 'WC_Correios_Shipping_ESEDEX';
-			$methods['correios-carta-registrada']                  = 'WC_Correios_Shipping_Carta_Registrada';
-			$methods['correios-impresso-normal']                   = 'WC_Correios_Shipping_Impresso_Normal';
-			$methods['correios-impresso-urgente']                  = 'WC_Correios_Shipping_Impresso_Urgente';
-			$methods['correios-exporta-facil-economico']           = 'WC_Correios_Shipping_Exporta_Facil_Economico';
-			$methods['correios-exporta-facil-expresso']            = 'WC_Correios_Shipping_Exporta_Facil_Expresso';
-			$methods['correios-exporta-facil-premium']             = 'WC_Correios_Shipping_Exporta_Facil_Premium';
-			$methods['correios-exporta-facil-standard']            = 'WC_Correios_Shipping_Exporta_Facil_Standard';
-			$methods['correios-documento-economico']               = 'WC_Correios_Shipping_Documento_Economico';
-			$methods['correios-documento-internacional-expresso']  = 'WC_Correios_Shipping_Documento_Internacional_Expresso';
-			$methods['correios-documento-internacional-premium']   = 'WC_Correios_Shipping_Documento_Internacional_Premium';
-			$methods['correios-documento-internacional-standard']  = 'WC_Correios_Shipping_Documento_Internacional_Standard';
-
-
-			$old_options = get_option( 'woocommerce_correios_settings' );
-			if ( empty( $old_options ) ) {
-				unset( $methods['correios-legacy'] );
-			}
-		}
+		$methods['correios-cws']                              = 'WC_Correios_Shipping_Cws';
+		$methods['correios-carta-registrada']                 = 'WC_Correios_Shipping_Carta_Registrada';
+		$methods['correios-impresso-normal']                  = 'WC_Correios_Shipping_Impresso_Normal';
+		$methods['correios-impresso-urgente']                 = 'WC_Correios_Shipping_Impresso_Urgente';
+		$methods['correios-pac']                              = 'WC_Correios_Shipping_PAC';
+		$methods['correios-sedex']                            = 'WC_Correios_Shipping_SEDEX';
+		$methods['correios-sedex10-envelope']                 = 'WC_Correios_Shipping_SEDEX_10_Envelope';
+		$methods['correios-sedex10-pacote']                   = 'WC_Correios_Shipping_SEDEX_10_Pacote';
+		$methods['correios-sedex12']                          = 'WC_Correios_Shipping_SEDEX_12';
+		$methods['correios-sedex-hoje']                       = 'WC_Correios_Shipping_SEDEX_Hoje';
+		$methods['correios-esedex']                           = 'WC_Correios_Shipping_ESEDEX';
+		$methods['correios-exporta-facil-economico']          = 'WC_Correios_Shipping_Exporta_Facil_Economico';
+		$methods['correios-exporta-facil-expresso']           = 'WC_Correios_Shipping_Exporta_Facil_Expresso';
+		$methods['correios-exporta-facil-premium']            = 'WC_Correios_Shipping_Exporta_Facil_Premium';
+		$methods['correios-exporta-facil-standard']           = 'WC_Correios_Shipping_Exporta_Facil_Standard';
+		$methods['correios-documento-economico']              = 'WC_Correios_Shipping_Documento_Economico';
+		$methods['correios-documento-internacional-expresso'] = 'WC_Correios_Shipping_Documento_Internacional_Expresso';
+		$methods['correios-documento-internacional-premium']  = 'WC_Correios_Shipping_Documento_Internacional_Premium';
+		$methods['correios-documento-internacional-standard'] = 'WC_Correios_Shipping_Documento_Internacional_Standard';
 
 		return $methods;
 	}
@@ -154,17 +135,33 @@ class WC_Correios {
 	 */
 	public static function include_emails( $emails ) {
 		if ( ! isset( $emails['WC_Correios_Tracking_Email'] ) ) {
-			$emails['WC_Correios_Tracking_Email'] = include dirname( __FILE__ ) . '/emails/class-wc-correios-tracking-email.php';
+			$emails['WC_Correios_Tracking_Email'] = include __DIR__ . '/emails/class-wc-correios-tracking-email.php';
 		}
 
 		return $emails;
 	}
 
 	/**
+	 * Action links.
+	 *
+	 * @param  array $links Default plugin links.
+	 *
+	 * @return array
+	 */
+	public static function plugin_action_links( $links ) {
+		$plugin_links   = array();
+		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios-integration' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Premium Support', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Contribute', 'woocommerce-correios' ) . '</a>';
+
+		return array_merge( $plugin_links, $links );
+	}
+
+	/**
 	 * WooCommerce fallback notice.
 	 */
 	public static function woocommerce_missing_notice() {
-		include_once dirname( __FILE__ ) . '/admin/views/html-admin-missing-dependencies.php';
+		include_once __DIR__ . '/admin/views/html-admin-missing-dependencies.php';
 	}
 
 	/**

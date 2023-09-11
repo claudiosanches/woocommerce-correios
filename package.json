@@ -1,20 +1,41 @@
 {
   "name": "woocommerce-correios",
   "description": "Correios para WooCommerce",
-  "version": "3.8.0",
+  "version": "4.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/claudiosanches/woocommerce-correios"
   },
-  "main": "Gruntfile.js",
+  "scripts": {
+    "autoprefixer": "postcss -u --no-map autoprefixer -r assets/css/**/*.css",
+    "babel:admin": "babel assets/js/admin --out-dir assets/js/admin --out-file-extension .min.js --ignore '**/*.min.js'",
+    "babel:frontend": "babel assets/js/frontend --out-dir assets/js/frontend --out-file-extension .min.js --ignore '**/*.min.js'",
+    "build:css": "npm-run-all -s scss autoprefixer",
+    "build:js": "npm-run-all -s babel:*",
+    "build:md": "wp-readme-to-md --screenshot-url=https://ps.w.org/woocommerce-correios/assets/{screenshot}.png",
+    "build:pot": "composer run-script makepot",
+    "build": "npm-run-all -s lint:* build:*",
+    "lint:js": "eslint assets/js",
+    "lint:php": "composer run-script phpcs",
+    "lint:scss": "stylelint assets/scss/**/*.scss",
+    "scss": "sass --no-source-map --style=compressed assets/scss:assets/css",
+    "watch:jsadmin": "npm run babel:admin -- --watch",
+    "watch:jsfrontend": "npm run babel:frontend -- --watch",
+    "watch:scss": "npm run scss -- --watch --update",
+    "watch": "npm-run-all -p watch:*"
+  },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-checktextdomain": "^1.0.1",
-    "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-wp-i18n": "^1.0.3",
-    "grunt-wp-readme-to-markdown": "^2.0.1"
+    "@babel/cli": "^7.21.5",
+    "@wordpress/babel-preset-default": "^7.16.0",
+    "@wordpress/eslint-plugin": "^14.5.0",
+    "@wordpress/stylelint-config": "^21.15.0",
+    "autoprefixer": "^10.4.14",
+    "babel-preset-minify": "^0.5.2",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1",
+    "uglify": "^0.1.5",
+    "wp-readme-to-markdown": "^1.0.1"
   }
 }

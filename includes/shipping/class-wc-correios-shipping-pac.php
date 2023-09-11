@@ -39,7 +39,7 @@ class WC_Correios_Shipping_PAC extends WC_Correios_Shipping {
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-pac';
-		$this->method_title = __( 'PAC', 'woocommerce-correios' );
+		$this->method_title = __( 'PAC (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = 'http://www.correios.com.br/para-voce/correios-de-a-a-z/pac-encomenda-economica';
 
 		parent::__construct( $instance_id );

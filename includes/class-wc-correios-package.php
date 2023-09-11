@@ -26,9 +26,7 @@ class WC_Correios_Package {
 	/**
 	 * Sets the package.
 	 *
-	 * @param  array $package Package to calcule.
-	 *
-	 * @return array
+	 * @param array $package Package to calcule.
 	 */
 	public function __construct( $package = array() ) {
 		$this->package = $package;
@@ -70,12 +68,12 @@ class WC_Correios_Package {
 						$width[ $n ]  = $_width;
 						$length[ $n ] = $_length;
 						$weight[ $n ] = $_weight;
-						$n++;
+						++$n;
 					}
 					$count = $n;
 				}
 
-				$count++;
+				++$count;
 			}
 		}
 
@@ -169,21 +167,21 @@ class WC_Correios_Package {
 		$greatest   = array_search( max( $max_values ), $max_values, true );
 
 		switch ( $greatest ) {
-			case 'height' :
+			case 'height':
 				$cubage = array(
 					'height' => max( $height ),
 					'width'  => $root,
 					'length' => $root,
 				);
 				break;
-			case 'width' :
+			case 'width':
 				$cubage = array(
 					'height' => $root,
 					'width'  => max( $width ),
 					'length' => $root,
 				);
 				break;
-			case 'length' :
+			case 'length':
 				$cubage = array(
 					'height' => $root,
 					'width'  => $root,
@@ -191,7 +189,7 @@ class WC_Correios_Package {
 				);
 				break;
 
-			default :
+			default:
 				$cubage = array(
 					'height' => 0,
 					'width'  => 0,
