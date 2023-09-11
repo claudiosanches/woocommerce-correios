@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Webservice/Connect
  * @since   4.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -209,11 +209,15 @@ class WC_Correios_Cws_Connect {
 	 *
 	 * @param array $data Token response data.
 	 *
-	 * @return string
+	 * @return int
 	 */
 	protected function get_token_expiration_date( $data ) {
+		$now      = new \DateTime( 'now' );
+		$timezone = new \DateTimeZone( 'America/Sao_Paulo' );
+		$now->setTimezone( $timezone );
+
 		// Set the transient expiration time to 30 minutes before the token expiration time.
-		return strtotime( $data['expiraEm'] ) - strtotime( $data['emissao'] ) - ( HOUR_IN_SECONDS / 2 );
+		return strtotime( $data['expiraEm'] ) - $now->format( 'U' ) - ( HOUR_IN_SECONDS / 2 );
 	}
 
 	/**
@@ -222,7 +226,7 @@ class WC_Correios_Cws_Connect {
 	 * @return array
 	 */
 	public function get_token() {
-		$transient = $this->id . $this->environment . '-token';
+		$transient = $this->id . '-' . $this->environment . '-token';
 
 		$data = apply_filters( 'woocommerce_correios_cws_default_token', array() );
 		if ( ! empty( $data ) ) {
@@ -265,7 +269,9 @@ class WC_Correios_Cws_Connect {
 		$json       = wp_json_encode( $data );
 
 		// Save token as a transient.
-		set_transient( $transient, $json, $expiration );
+		if ( 0 < $expiration ) {
+			set_transient( $transient, $json, $expiration );
+		}
 
 		$this->add_log( 'Token generated:', $data );
 

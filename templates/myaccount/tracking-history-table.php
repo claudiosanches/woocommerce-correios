@@ -28,11 +28,11 @@ $date_format = sprintf( __( '%1$s \a\t %2$s', 'woocommerce-correios' ), get_opti
 	<tbody>
 	<?php foreach ( $events as $event ) : ?>
 		<tr>
-			<td><?php echo esc_html( date_i18n( $date_format, strtotime( $event['dtHrCriado'] ) ) ); ?></td>
-			<td>
+			<td data-title="<?php esc_attr_e( 'Date', 'woocommerce-correios' ); ?>"><?php echo esc_html( date_i18n( $date_format, strtotime( $event['dtHrCriado'] ) ) ); ?></td>
+			<td data-title="<?php esc_attr_e( 'Location', 'woocommerce-correios' ); ?>">
 				<?php echo esc_html( $event['unidade']['tipo'] . ' - ' . $event['unidade']['endereco']['cidade'] . '/' . $event['unidade']['endereco']['uf'] ); ?>
 			</td>
-			<td>
+			<td data-title="<?php esc_attr_e( 'Status', 'woocommerce-correios' ); ?>">
 				<?php echo esc_html( $event['descricao'] ); ?>
 				<?php if ( isset( $event['unidadeDestino'] ) ) : ?>
 					<br />

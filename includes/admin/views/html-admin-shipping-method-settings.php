@@ -22,11 +22,31 @@ if ( ! empty( $this->more_link ) ) {
 
 echo wp_kses_post( wpautop( $description ) );
 
-echo '<div id="plugin-correios-settings">';
-echo '<div class="box">';
-echo $this->get_admin_options_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-echo '</div>';
-echo '<div class="box">';
-require __DIR__ . '/html-admin-support.php';
-echo '</div>';
-echo '</div>';
+if ( isset( $cws_needs_setup ) && $cws_needs_setup ) {
+	?>
+	<div class="notice notice-error inline">
+		<p>
+			<?php
+				echo wp_kses_post(
+					sprintf(
+						/* translators: %s: settings link labed "here" */
+						__( 'This shipping method requires integration with the new Correios API, complete this integration %s. If you are seeing this message even after completing the integration, click on the "Update Services List" button to generate the list of services and be able to use this delivery method.', 'woocommerce-correios' ),
+						'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios-integration' ) ) . '">' . __( 'here', 'woocommerce-correios' ) . '</a>'
+					)
+				);
+			?>
+		</p>
+	</div>
+	<?php
+}
+
+?>
+
+<div id="plugin-correios-settings">
+	<div class="box">
+		<?php echo $this->get_admin_options_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	</div>
+	<div class="box">
+		<?php require __DIR__ . '/html-admin-support.php'; ?>
+	</div>
+</div>

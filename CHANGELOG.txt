@@ -1,5 +1,13 @@
 == Changelog ==
 
+= 4.1.1 - 2023/09/11 =
+
+- Adicionado suporte para WooCommerce High-Performance Order Storage.
+- Corrigida a validade do token dos Correios.
+- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
+- Removido suporte para versões anteriores ao WooCommerce 3.0.
+- Corrigida a tabela de rastreamento de objeto para ser responsiva.
+
 = 4.1.0 - 2023/09/11 =
 
 - Atualizado valor mínimo declarado para 24 reais.

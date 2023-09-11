@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Integration
  * @since   3.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -79,12 +79,12 @@ class WC_Correios_Integration extends WC_Integration {
 	}
 
 	/**
-	 * Get tracking log url.
+	 * Get log url.
 	 *
 	 * @return string
 	 */
-	protected function get_tracking_log_link() {
-		return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=correios-tracking-history-' . sanitize_file_name( wp_hash( 'correios-tracking-history' ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+	protected function get_log_link() {
+		return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
 	}
 
 	/**
@@ -139,7 +139,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'label'       => __( 'Enable logging for Correios API', 'woocommerce-correios' ),
 				'default'     => 'no',
 				/* translators: %s: log link */
-				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Correios API', 'woocommerce-correios' ) ) . $this->get_tracking_log_link(),
+				'description' => sprintf( __( 'Log %s events, such as Web Services requests.', 'woocommerce-correios' ), __( 'Correios API', 'woocommerce-correios' ) ) . $this->get_log_link(),
 			),
 			'tracking'                 => array(
 				'title'       => __( 'Tracking History Table', 'woocommerce-correios' ),

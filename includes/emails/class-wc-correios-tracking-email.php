@@ -166,13 +166,8 @@ class WC_Correios_Tracking_Email extends WC_Email {
 		}
 
 		if ( is_object( $order ) ) {
-			$this->object = $order;
-
-			if ( method_exists( $order, 'get_billing_email' ) ) {
-				$this->recipient = $order->get_billing_email();
-			} else {
-				$this->recipient = $order->billing_email;
-			}
+			$this->object    = $order;
+			$this->recipient = $order->get_billing_email();
 
 			if ( empty( $tracking_code ) ) {
 				$tracking_codes = wc_correios_get_tracking_codes( $order );

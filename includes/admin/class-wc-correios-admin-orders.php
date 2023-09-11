@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Admin/Orders
  * @since   3.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,24 +26,25 @@ class WC_Correios_Admin_Orders {
 		add_action( 'wp_ajax_woocommerce_correios_remove_tracking_code', array( $this, 'ajax_remove_tracking_code' ) );
 
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '3.0.0', '>=' ) ) {
-			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'tracking_code_orders_list' ), 100 );
+			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'tracking_code_orders_list' ), 100, 2 );
 		}
 	}
 
 	/**
 	 * Display tracking code into orders list.
 	 *
-	 * @param string $column Current column.
+	 * @param string $column  Current column.
+	 * @param int    $post_id Post ID.
 	 */
-	public function tracking_code_orders_list( $column ) {
-		global $post, $the_order;
-
+	public function tracking_code_orders_list( $column, $post_id ) {
 		if ( 'shipping_address' === $column ) {
-			if ( empty( $the_order ) || $the_order->get_id() !== $post->ID ) {
-				$the_order = wc_get_order( $post->ID );
+			$order = wc_get_order( $post_id );
+
+			if ( ! $order ) {
+				return;
 			}
 
-			$codes = wc_correios_get_tracking_codes( $the_order );
+			$codes = wc_correios_get_tracking_codes( $order );
 			if ( ! empty( $codes ) ) {
 				$tracking_codes = array();
 				foreach ( $codes as $code ) {
@@ -59,11 +60,18 @@ class WC_Correios_Admin_Orders {
 	 * Register tracking code metabox.
 	 */
 	public function register_metabox() {
+		$screen = 'shop_order';
+
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '7.1', '>=' ) ) {
+			$hpos_enabled = wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled();
+			$screen       = $hpos_enabled ? wc_get_page_screen_id( 'shop-order' ) : 'shop_order';
+		}
+
 		add_meta_box(
 			'wc-correios',
 			'Correios',
 			array( $this, 'metabox_content' ),
-			'shop_order',
+			$screen,
 			'side',
 			'default'
 		);
@@ -75,17 +83,18 @@ class WC_Correios_Admin_Orders {
 	 * @param WC_Post $post Post data.
 	 */
 	public function metabox_content( $post ) {
-		$tracking_codes = wc_correios_get_tracking_codes( $post->ID );
+		$order          = ( $post instanceof WP_Post ) ? wc_get_order( $post->ID ) : $post;
+		$order_id       = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : $order->ID;
+		$tracking_codes = wc_correios_get_tracking_codes( $order_id );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_enqueue_style( 'woocommerce-correios-orders-admin', plugins_url( 'assets/css/admin/orders.css', WC_Correios::get_main_file() ), array(), WC_CORREIOS_VERSION );
-		wp_enqueue_script( 'woocommerce-correios-open-tracking-code', plugins_url( 'assets/js/admin/open-tracking-code' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery' ), WC_CORREIOS_VERSION, true );
 		wp_enqueue_script( 'woocommerce-correios-orders-admin', plugins_url( 'assets/js/admin/orders' . $suffix . '.js', WC_Correios::get_main_file() ), array( 'jquery', 'jquery-blockui', 'wp-util' ), WC_CORREIOS_VERSION, true );
 		wp_localize_script(
 			'woocommerce-correios-orders-admin',
 			'WCCorreiosAdminOrdersParams',
 			array(
-				'order_id' => $post->ID,
+				'order_id' => $order_id,
 				'i18n'     => array(
 					'removeQuestion' => esc_js( __( 'Are you sure you want to remove this tracking code?', 'woocommerce-correios' ) ),
 				),

@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! apply_filters( 'woocommerce_correios_support_us', true ) ) {
+	return;
+}
+
 ?>
 	<div class="support-us postbox">
 		<div class="inside">

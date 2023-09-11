@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.1.0  
+**Stable tag:** 4.1.1  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -30,7 +30,9 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 ### Compatibilidade ###
 
-Requer WooCommerce 3.0 ou posterior para funcionar.
+- WooCommerce 3.0 ou posterior para funcionar.
+- Integrado com a [API nova dos Correios](https://www.correios.com.br/atendimento/developers).
+- Compativel com o [Link Correios](https://www.linkcorreios.com.br/).
 
 ### Dúvidas? ###
 
@@ -194,6 +196,14 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 4.1.1 - 2023/09/11 ###
+
+- Adicionado suporte para WooCommerce High-Performance Order Storage.
+- Corrigida a validade do token dos Correios.
+- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
+- Removido suporte para versões anteriores ao WooCommerce 3.0.
+- Corrigida a tabela de rastreamento de objeto para ser responsiva.
+
 ### 4.1.0 - 2023/09/11 ###
 
 - Atualizado valor mínimo declarado para 24 reais.
@@ -208,36 +218,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
 
-### 3.8.0 - 2019/09/20 ###
-
-- Nome do plugin atualizado de "WooCommerce Correios" para "Claudio Sanches - Correios for WooCommerce".
-- Atualizado limites de peso para Impresso normal, Registro Módico e Registro Nacional.
-- Corrigida rotina de atualização das opções do plugin.
-
-### 3.7.2 - 2019/05/06 ###
-
-- Correção dos links que levam para a página de rastreio de encomenda.
-- Corrigido problema com código incorreto vindo do Webservice dos Correios impossibilitando mostrar o frete corretamente.
-- Atualizado valores do Impresso normal, Registro Módico e Registro Nacional para tabela de 01/08/2018.
-- Corrigido os valores de altura e comprimento que estavamos trocados.
-
-### 3.7.1 - 2018/05/11 ###
-
-- Melhorado o comportamento quando login e senha para tabela de rastreamento estão incorretos.
-- Melhorada a descrição para opção de integração com tabela de rastreamento.
-
-### 3.7.0 - 2018/05/08 ###
-
-- Atualizados os valores do Impresso e Carta, mais detalhes em [#97](https://github.com/claudiosanches/woocommerce-correios/pull/97) e [#100](https://github.com/claudiosanches/woocommerce-correios/pull/100).
-- Adicionada opção para peso extra nos métodos de Impresso e Carta, mais detalhes em [#95](https://github.com/claudiosanches/woocommerce-correios/pull/95).
-- Adicionada opções para usar rastreamento com dados administrativos.
-- Melhorado a exibição e salvamento da estimativa de entrega, mais detalhes em [#98](https://github.com/claudiosanches/woocommerce-correios/pull/98)
-
 [See changelog for all versions](https://raw.githubusercontent.com/claudiosanches/woocommerce-correios/master/CHANGELOG.txt).
 
 ## Upgrade Notice ##
 
-### 4.1.0 ###
+### 4.1.1 ###
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -247,3 +232,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Atualizado peso máximo e valores do Impresso Normal.
 - Atualizado os preços de Carta Registrada.
 - Correções gerais de estabilidade e prevenindo erros no WP.
+- Adicionado suporte para WooCommerce High-Performance Order Storage.
+- Corrigida a validade do token dos Correios.
+- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
+- Removido suporte para versões anteriores ao WooCommerce 3.0.
+- Corrigida a tabela de rastreamento de objeto para ser responsiva.

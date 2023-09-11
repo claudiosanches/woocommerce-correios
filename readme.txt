@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 6.3
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -30,7 +30,9 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 = Compatibilidade =
 
-Requer WooCommerce 3.0 ou posterior para funcionar.
+- WooCommerce 3.0 ou posterior para funcionar.
+- Integrado com a [API nova dos Correios](https://www.correios.com.br/atendimento/developers).
+- Compativel com o [Link Correios](https://www.linkcorreios.com.br/).
 
 = Dúvidas? =
 
@@ -178,6 +180,14 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 4.1.1 - 2023/09/11 =
+
+- Adicionado suporte para WooCommerce High-Performance Order Storage.
+- Corrigida a validade do token dos Correios.
+- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
+- Removido suporte para versões anteriores ao WooCommerce 3.0.
+- Corrigida a tabela de rastreamento de objeto para ser responsiva.
+
 = 4.1.0 - 2023/09/11 =
 
 - Atualizado valor mínimo declarado para 24 reais.
@@ -196,7 +206,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 4.1.0 =
+= 4.1.1 =
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -206,3 +216,8 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Atualizado peso máximo e valores do Impresso Normal.
 - Atualizado os preços de Carta Registrada.
 - Correções gerais de estabilidade e prevenindo erros no WP.
+- Adicionado suporte para WooCommerce High-Performance Order Storage.
+- Corrigida a validade do token dos Correios.
+- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
+- Removido suporte para versões anteriores ao WooCommerce 3.0.
+- Corrigida a tabela de rastreamento de objeto para ser responsiva.

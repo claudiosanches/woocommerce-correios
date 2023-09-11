@@ -126,11 +126,7 @@ function wc_correios_trigger_tracking_code_email( $order, $tracking_code ) {
 	$notification = $mailer->emails['WC_Correios_Tracking_Email'];
 
 	if ( 'yes' === $notification->enabled ) {
-		if ( method_exists( $order, 'get_id' ) ) {
-			$notification->trigger( $order->get_id(), $order, $tracking_code );
-		} else {
-			$notification->trigger( $order->id, $order, $tracking_code );
-		}
+		$notification->trigger( $order->get_id(), $order, $tracking_code );
 	}
 }
 
@@ -146,11 +142,7 @@ function wc_correios_get_tracking_codes( $order ) {
 		$order = wc_get_order( $order );
 	}
 
-	if ( method_exists( $order, 'get_meta' ) ) {
-		$codes = $order->get_meta( '_correios_tracking_code' );
-	} else {
-		$codes = $order->correios_tracking_code;
-	}
+	$codes = $order->get_meta( '_correios_tracking_code' );
 
 	return array_filter( explode( ',', $codes ) );
 }
@@ -172,32 +164,19 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		$order = wc_get_order( $order );
 	}
 
-	if ( method_exists( $order, 'get_meta' ) ) {
-		$tracking_codes = $order->get_meta( '_correios_tracking_code' );
-	} else {
-		$tracking_codes = $order->correios_tracking_code;
-	}
-
+	$tracking_codes = $order->get_meta( '_correios_tracking_code' );
 	$tracking_codes = array_filter( explode( ',', $tracking_codes ) );
 
 	if ( '' === $tracking_code ) {
-		if ( method_exists( $order, 'delete_meta_data' ) ) {
-			$order->delete_meta_data( '_correios_tracking_code' );
-			$order->save();
-		} else {
-			delete_post_meta( $order->id, '_correios_tracking_code' );
-		}
+		$order->delete_meta_data( '_correios_tracking_code' );
+		$order->save();
 
 		return true;
 	} elseif ( ! $remove && ! in_array( $tracking_code, $tracking_codes, true ) ) {
 		$tracking_codes[] = $tracking_code;
 
-		if ( method_exists( $order, 'update_meta_data' ) ) {
-			$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
-			$order->save();
-		} else {
-			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
-		}
+		$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
+		$order->save();
 
 		// Add order note.
 		/* translators: %s: tracking code */
@@ -214,12 +193,8 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 			unset( $tracking_codes[ $key ] );
 		}
 
-		if ( method_exists( $order, 'update_meta_data' ) ) {
-			$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
-			$order->save();
-		} else {
-			update_post_meta( $order->id, '_correios_tracking_code', implode( ',', $tracking_codes ) );
-		}
+		$order->update_meta_data( '_correios_tracking_code', implode( ',', $tracking_codes ) );
+		$order->save();
 
 		// Add order note.
 		/* translators: %s: tracking code */

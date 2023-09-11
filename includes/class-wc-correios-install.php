@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes
  * @since   3.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,5 +30,18 @@ class WC_Correios_Install {
 	 */
 	private static function update_version() {
 		update_option( 'woocommerce_correios_version', WC_CORREIOS_VERSION );
+	}
+
+	/**
+	 * Remove old transients.
+	 */
+	public static function remove_old_transients() {
+		$version = self::get_version();
+
+		if ( version_compare( $version, '4.0', '<=' ) ) {
+			delete_transient( 'correios-cwsstaging-token' );
+			delete_transient( 'correios-cwsproduction-token' );
+			self::update_version();
+		}
 	}
 }

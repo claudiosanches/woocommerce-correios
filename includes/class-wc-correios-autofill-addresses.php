@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Autofill
  * @since   3.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -132,7 +132,7 @@ class WC_Correios_Autofill_Addresses {
 	protected static function check_if_expired( $last_query ) {
 		$validity = self::get_validity();
 
-		if ( 'forever' !== $validity && strtotime( '+' . $validity . ' months', strtotime( $last_query ) ) < current_time( 'timestamp' ) ) { // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
+		if ( 'forever' !== $validity && strtotime( '+' . $validity . ' months', strtotime( $last_query ) ) < time() ) {
 			return true;
 		}
 

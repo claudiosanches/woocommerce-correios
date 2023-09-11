@@ -30,6 +30,7 @@ class WC_Correios {
 				self::admin_includes();
 			}
 
+			add_action( 'before_woocommerce_init', array( __CLASS__, 'setup_hpos_compatibility' ) );
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
@@ -81,6 +82,19 @@ class WC_Correios {
 	 */
 	private static function admin_includes() {
 		include_once __DIR__ . '/admin/class-wc-correios-admin-orders.php';
+	}
+
+	/**
+	 * Setup WooCommerce HPOS compatibility.
+	 */
+	public static function setup_hpos_compatibility() {
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '7.1', '<' ) ) {
+			return;
+		}
+
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'woocommerce-correios/woocommerce-correios.php', true );
+		}
 	}
 
 	/**

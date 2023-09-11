@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Shipping
  * @since   4.0.0
- * @version 4.0.0
+ * @version 4.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -245,6 +245,15 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		}
 
 		return $default;
+	}
+
+	/**
+	 * Correios options page.
+	 */
+	public function admin_options() {
+		$cws_needs_setup = 1 >= count( $this->instance_form_fields['product_code']['options'] );
+
+		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-shipping-method-settings.php';
 	}
 
 	/**
