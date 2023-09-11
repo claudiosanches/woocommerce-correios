@@ -10,6 +10,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+/* translators: 1: date 2: time */
+$date_format = sprintf( __( '%1$s \a\t %2$s', 'woocommerce-correios' ), get_option( 'date_format' ), get_option( 'time_format' ) );
 ?>
 
 <p class="wc-correios-tracking-description"><?php esc_html_e( 'History for the tracking code:', 'woocommerce-correios' ); ?> <strong><?php echo esc_html( $code ); ?></strong></p>
@@ -25,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tbody>
 	<?php foreach ( $events as $event ) : ?>
 		<tr>
-			<td><?php echo esc_html( $event['dtHrCriado'] ); ?></td>
+			<td><?php echo esc_html( date_i18n( $date_format, strtotime( $event['dtHrCriado'] ) ) ); ?></td>
 			<td>
 				<?php echo esc_html( $event['unidade']['tipo'] . ' - ' . $event['unidade']['endereco']['cidade'] . '/' . $event['unidade']['endereco']['uf'] ); ?>
 			</td>
