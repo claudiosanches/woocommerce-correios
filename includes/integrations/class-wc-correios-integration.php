@@ -100,7 +100,7 @@ class WC_Correios_Integration extends WC_Integration {
 			'cws_environment'          => array(
 				'title'   => __( 'Environment', 'woocommerce-correios' ),
 				'type'    => 'select',
-				'label'   => __( 'Enable Correios API. It will replace all quote routes to the new Correios API.', 'woocommerce-correios' ),
+				'label'   => __( 'Select an environment for your integration with Correios API.', 'woocommerce-correios' ),
 				'default' => 'production',
 				'options' => array(
 					'production' => __( 'Production', 'woocommerce-correios' ),

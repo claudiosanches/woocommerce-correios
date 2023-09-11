@@ -21,8 +21,8 @@ Este plugin foi desenvolvido sem nenhum incentivo dos Correios. Nenhum dos desen
 
 = Integração =
 
-Este plugin suporta a nova API dos Correios, fazendo integração completa com o seu contrato, sendo possível integrar com qualquer metétodo de entrega disponível para o seu contrato, como PAC, SEDEX e mais.
-Também tem integração para consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente), além de incluir integração para preenchimento automatico de endereços a partir de um CEP.
+Este plugin suporta a nova API dos Correios, fazendo integração completa com o seu contrato, sendo possível integrar com qualquer método de entrega disponível para o seu contrato, como PAC, SEDEX e mais.
+Também tem integração para consulta do histórico de rastreamento da encomenda (sendo exibida na página do pedido em "Minha conta" para o cliente), além de incluir integração para preenchimento automático de endereços a partir de um CEP.
 
 = Instalação: =
 
@@ -139,7 +139,7 @@ Aqui uma lista de erros mais comuns:
 
 E não se esqueça de verificar o erro ativando a opção de **Log de depuração** nas configurações de cada método de entrega. Imediatamente após ativar o log, basta tentar cotar o frete novamente, fazendo assim o log ser gerado. Você pode acessar todos os logs indo em "WooCommerce" > "Status do sistema" > "Logs".
 
-Dica: Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer do site dos Correios ter caído ou o seu servidor estar com pouca memoria.
+Dica: Caso apareça no log a mensagem `WP_Error: connect() timed out!` pode acontecer do site dos Correios ter caído ou o seu servidor estar com pouca memória.
 
 = Os métodos de entrega dos Correios não aparecem no carrinho ou durante a finalização? =
 
