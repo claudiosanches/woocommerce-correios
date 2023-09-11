@@ -31,7 +31,7 @@ class WC_Correios_Shipping_Documento_Economico extends WC_Correios_Shipping_Inte
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id           = 'correios-documento-economico';
-		$this->method_title = __( 'Documento Econômico', 'woocommerce-correios' );
+		$this->method_title = __( 'Documento Econômico (Legacy)', 'woocommerce-correios' );
 		$this->more_link    = '';
 
 		parent::__construct( $instance_id );

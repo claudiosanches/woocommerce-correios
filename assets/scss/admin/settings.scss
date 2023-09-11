@@ -1,0 +1,8 @@
+#plugin-correios-settings {
+	display: block;
+
+	@media screen and (min-width: 783px) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

@@ -20,7 +20,7 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	 * Weight limit for this shipping method.
 	 *
 	 * Value based in 01/02/2018 from:
-	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal	 
+	 * https://www.correios.com.br/precos-e-prazos/servicos-nacionais/impresso-normal
 	 *
 	 * @var float
 	 */
@@ -47,19 +47,24 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 	 * @return array
 	 */
 	protected function get_costs() {
-		return apply_filters( 'woocommerce_correios_impresso_urgente_costs', array(
-			'20'  => 1.55,
-			'50'  => 2.15,
-			'100' => 2.95,
-			'150' => 3.60,
-			'200' => 4.20,
-			'250' => 4.95,
-			'300' => 5.55,
-			'350' => 6.20,
-			'400' => 6.80,
-			'450' => 7.50,
-			'500' => 8.10,
-		), $this->id, $this->instance_id );
+		return apply_filters(
+			'woocommerce_correios_impresso_urgente_costs',
+			array(
+				'20'  => 1.55,
+				'50'  => 2.15,
+				'100' => 2.95,
+				'150' => 3.60,
+				'200' => 4.20,
+				'250' => 4.95,
+				'300' => 5.55,
+				'350' => 6.20,
+				'400' => 6.80,
+				'450' => 7.50,
+				'500' => 8.10,
+			),
+			$this->id,
+			$this->instance_id
+		);
 	}
 
 	/**
@@ -90,7 +95,7 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 			return 0;
 		}
 
-		$weight += wc_format_decimal($this->extra_weight);
+		$weight += wc_format_decimal( $this->extra_weight );
 
 		if ( $weight <= $this->shipping_method_weight_limit ) {
 			foreach ( $this->get_costs() as $cost_weights => $costs ) {
@@ -118,10 +123,8 @@ class WC_Correios_Shipping_Impresso_Urgente extends WC_Correios_Shipping_Impress
 			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, sprintf( 'Total cost for %sg and %s: %s', $weight, $this->registry_type, $cost ) );
 			}
-		} else {
-			if ( 'yes' === $this->debug ) {
+		} elseif ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, sprintf( 'The cart weight of %.3f exceeds the shipping method supported weight limit of %.3f', $weight, $this->shipping_method_weight_limit ) );
-			}
 		}
 
 		return $cost;
