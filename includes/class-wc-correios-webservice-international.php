@@ -21,7 +21,7 @@ class WC_Correios_Webservice_International {
 	 *
 	 * @var string
 	 */
-	private $_webservice_base = 'https://cws2.correios.com.br/precoprazoservice/rs/v1/internacional/preco-prazo/';
+	private $webservice_base = 'https://cws2.correios.com.br/precoprazoservice/rs/v1/internacional/preco-prazo/';
 
 	/**
 	 * Shipping method ID.
@@ -176,6 +176,11 @@ class WC_Correios_Webservice_International {
 	 */
 	protected $debug = 'no';
 
+	/**
+	 * Country first city.
+	 *
+	 * @var array
+	 */
 	public $country_first_city = array(
 		'AD' => '00423315',
 		'AE' => '00237089',
@@ -474,7 +479,7 @@ class WC_Correios_Webservice_International {
 				);
 			}
 
-			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $data, true ) );
+			$this->log->add( $this->id, 'Weight and cubage of the order: ' . wc_print_r( $data, true ) );
 		}
 	}
 
@@ -648,7 +653,7 @@ class WC_Correios_Webservice_International {
 	public function get_webservice_url() {
 		return apply_filters(
 			'woocommerce_correios_webservice_international_url',
-			$this->_webservice_base . $this->service . '?',
+			$this->webservice_base . $this->service . '?',
 			$this->id,
 			$this->instance_id,
 			$this->package
@@ -1004,13 +1009,13 @@ class WC_Correios_Webservice_International {
 	protected function is_setted() {
 		$origin_postcode = $this->get_origin_postcode();
 
-		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries() ) || ! empty( $origin_postcode ) || 0 === $this->get_height();
+		return ! empty( $this->service ) || ! empty( $this->destination_country ) || ! in_array( $this->destination_country, $this->get_allowed_countries(), true ) || ! empty( $origin_postcode ) || 0 === $this->get_height();
 	}
 
 	/**
 	 * Get shipping prices.
 	 *
-	 * @return SimpleXMLElement
+	 * @return object
 	 */
 	public function get_shipping() {
 		$shipping = null;
@@ -1051,7 +1056,7 @@ class WC_Correios_Webservice_International {
 			array(
 				'timeout' => 30,
 				'headers' => array(
-					'Authorization' => 'Basic ' . base64_encode( sprintf( '%s:%s', $this->get_login(), $this->get_password() ) ),
+					'Authorization' => 'Basic ' . base64_encode( sprintf( '%s:%s', $this->get_login(), $this->get_password() ) ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 				),
 			)
 		);
@@ -1070,12 +1075,12 @@ class WC_Correios_Webservice_International {
 				}
 			}
 
-			if ( isset( $result->precoProduto ) ) {
+			if ( isset( $result->precoProduto ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				if ( 'yes' === $this->debug ) {
 					$this->log->add( $this->id, 'Correios WebServices response: ' . wc_print_r( $result, true ) );
 				}
 
-				$shipping = $result->precoProduto;
+				$shipping = $result->precoProduto; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			}
 		} elseif ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . wc_print_r( $response, true ) );

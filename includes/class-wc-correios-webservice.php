@@ -21,7 +21,7 @@ class WC_Correios_Webservice {
 	 *
 	 * @var string
 	 */
-	private $_webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
+	private $webservice = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
 
 	/**
 	 * Shipping method ID.
@@ -241,7 +241,7 @@ class WC_Correios_Webservice {
 				);
 			}
 
-			$this->log->add( $this->id, 'Weight and cubage of the order: ' . print_r( $data, true ) );
+			$this->log->add( $this->id, 'Weight and cubage of the order: ' . wc_print_r( $data, true ) );
 		}
 	}
 
@@ -413,7 +413,7 @@ class WC_Correios_Webservice {
 	 * @return string
 	 */
 	public function get_webservice_url() {
-		return apply_filters( 'woocommerce_correios_webservice_url', $this->_webservice, $this->id, $this->instance_id, $this->package );
+		return apply_filters( 'woocommerce_correios_webservice_url', $this->webservice, $this->id, $this->instance_id, $this->package );
 	}
 
 	/**
@@ -514,7 +514,7 @@ class WC_Correios_Webservice {
 	/**
 	 * Get shipping prices.
 	 *
-	 * @return SimpleXMLElement|array
+	 * @return SimpleXMLElement|array24
 	 */
 	public function get_shipping() {
 		$shipping = null;
@@ -570,15 +570,15 @@ class WC_Correios_Webservice {
 				}
 			}
 
-			if ( isset( $result->cServico ) ) {
+			if ( isset( $result->cServico ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				if ( 'yes' === $this->debug ) {
-					$this->log->add( $this->id, 'Correios WebServices response: ' . print_r( $result, true ) );
+					$this->log->add( $this->id, 'Correios WebServices response: ' . wc_print_r( $result, true ) );
 				}
 
-				$shipping = $result->cServico;
+				$shipping = $result->cServico; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			}
 		} elseif ( 'yes' === $this->debug ) {
-				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . print_r( $response, true ) );
+				$this->log->add( $this->id, 'Error accessing the Correios WebServices: ' . wc_print_r( $response, true ) );
 		}
 
 		return $shipping;

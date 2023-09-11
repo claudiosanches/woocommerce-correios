@@ -103,7 +103,7 @@ class WC_Correios_Cws_Connect {
 	protected function add_log( $entry, $code = '' ) {
 		if ( 'yes' === $this->debug ) {
 			$code = $this->escape_sensitive_data( $code );
-			$code = $code ? ' ' . print_r( $code, true ) : ''; // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+			$code = $code ? ' ' . wc_print_r( $code, true ) : '';
 			$this->log->add( $this->id, $entry . $code );
 		}
 	}

@@ -55,6 +55,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'subject'          => array(
 				'title'       => __( 'Subject', 'woocommerce-correios' ),
 				'type'        => 'text',
+				/* translators: %s: email subject */
 				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'woocommerce-correios' ), $this->subject ),
 				'placeholder' => $this->subject,
 				'default'     => '',
@@ -63,6 +64,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'heading'          => array(
 				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
 				'type'        => 'text',
+				/* translators: %s: email heading */
 				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
 				'placeholder' => $this->heading,
 				'default'     => '',
@@ -71,6 +73,7 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'tracking_message' => array(
 				'title'       => __( 'Email Content', 'woocommerce-correios' ),
 				'type'        => 'textarea',
+				/* translators: %s: email message */
 				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
 				'placeholder' => $this->message,
 				'default'     => '',

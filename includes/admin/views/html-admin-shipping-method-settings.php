@@ -24,4 +24,4 @@ echo wp_kses_post( wpautop( $description ) );
 
 require __DIR__ . '/html-admin-help-message.php';
 
-echo $this->get_admin_options_html(); // // WPCS: XSS ok.
+echo $this->get_admin_options_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

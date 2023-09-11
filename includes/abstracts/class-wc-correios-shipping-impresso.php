@@ -74,7 +74,9 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 * @param int $instance_id Shipping zone instance.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		$this->instance_id        = absint( $instance_id );
+		$this->instance_id = absint( $instance_id );
+
+		/* translators: %s: method title */
 		$this->method_description = sprintf( __( '%s is a shipping method from Correios.', 'woocommerce-correios' ), $this->method_title );
 		$this->supports           = array(
 			'shipping-zones',
@@ -143,7 +145,6 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'type'        => 'select',
 				'description' => __( 'Select for which registry type this method will be applied.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
-				'default'     => '',
 				'class'       => 'wc-enhanced-select',
 				'options'     => array(
 					''   => __( '-- Select a registry type --', 'woocommerce-correios' ),
@@ -215,6 +216,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
 				'default'     => 'no',
+				/* translators: %s: method title */
 				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
 			),
 		);

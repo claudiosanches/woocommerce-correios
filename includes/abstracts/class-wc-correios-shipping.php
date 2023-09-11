@@ -484,11 +484,11 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		$shipping = $this->get_rate( $package );
 
-		if ( ! isset( $shipping->Erro ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+		if ( ! isset( $shipping->Erro ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			return;
 		}
 
-		$error_number = (string) $shipping->Erro; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+		$error_number = (string) $shipping->Erro; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		// Exit if have errors.
 		if ( ! in_array( $error_number, $this->get_accepted_error_codes(), true ) ) {
@@ -505,7 +505,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 
 		// Set the shipping rates.
 		$label = $this->title;
-		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+		$cost  = wc_correios_normalize_price( esc_attr( (string) $shipping->Valor ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {
@@ -519,7 +519,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$meta_delivery = array();
 		if ( 'yes' === $this->show_delivery_time ) {
 			$meta_delivery = array(
-				'_delivery_forecast' => intval( $shipping->PrazoEntrega ) + intval( $this->get_additional_time( $package ) ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
+				'_delivery_forecast' => intval( $shipping->PrazoEntrega ) + intval( $this->get_additional_time( $package ) ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			);
 		}
 

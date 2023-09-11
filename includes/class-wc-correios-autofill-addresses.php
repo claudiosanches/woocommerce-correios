@@ -35,7 +35,7 @@ class WC_Correios_Autofill_Addresses {
 	 *
 	 * @var string
 	 */
-	private static $_webservice_url = 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl';
+	private static $webservice_url = 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl';
 
 	/**
 	 * Initialize actions.
@@ -62,7 +62,7 @@ class WC_Correios_Autofill_Addresses {
 	 * @return string
 	 */
 	protected static function get_tracking_addresses_webservice_url() {
-		return apply_filters( 'woocommerce_correios_addresses_webservice_url', self::$_webservice_url );
+		return apply_filters( 'woocommerce_correios_addresses_webservice_url', self::$webservice_url );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class WC_Correios_Autofill_Addresses {
 	protected static function check_if_expired( $last_query ) {
 		$validity = self::get_validity();
 
-		if ( 'forever' !== $validity && strtotime( '+' . $validity . ' months', strtotime( $last_query ) ) < current_time( 'timestamp' ) ) {
+		if ( 'forever' !== $validity && strtotime( '+' . $validity . ' months', strtotime( $last_query ) ) < current_time( 'timestamp' ) ) { // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 			return true;
 		}
 
@@ -160,7 +160,7 @@ class WC_Correios_Autofill_Addresses {
 
 		$address = wp_parse_args( $address, $default );
 
-		$result = $wpdb->insert(
+		$result = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			$wpdb->prefix . self::$table,
 			$address,
 			array( '%s', '%s', '%s', '%s', '%s', '%s' )
@@ -177,7 +177,7 @@ class WC_Correios_Autofill_Addresses {
 	protected static function delete_address( $postcode ) {
 		global $wpdb;
 
-		$wpdb->delete( $wpdb->prefix . self::$table, array( 'postcode' => $postcode ), array( '%s' ) ); // WPCS: db call ok, cache ok.
+		$wpdb->delete( $wpdb->prefix . self::$table, array( 'postcode' => $postcode ), array( '%s' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 	}
 
 	/**
@@ -224,7 +224,7 @@ class WC_Correios_Autofill_Addresses {
 			}
 
 			if ( ! is_null( $address ) ) {
-				self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, print_r( $address, true ) ) );
+				self::logger( sprintf( 'Address for "%s" found successfully: %s', $postcode, wc_print_r( $address, true ) ) );
 			}
 		} else {
 			$connect = new WC_Correios_Cws_Connect();
@@ -266,12 +266,12 @@ class WC_Correios_Autofill_Addresses {
 	 * Ajax autofill endpoint.
 	 */
 	public function ajax_autofill() {
-		if ( empty( $_GET['postcode'] ) ) {
+		if ( empty( $_GET['postcode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			wp_send_json_error( array( 'message' => __( 'Missing postcode paramater.', 'woocommerce-correios' ) ) );
 			exit;
 		}
 
-		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) );
+		$postcode = wc_correios_sanitize_postcode( wp_unslash( $_GET['postcode'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $postcode ) || 8 !== strlen( $postcode ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid postcode.', 'woocommerce-correios' ) ) );

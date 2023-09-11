@@ -24,7 +24,9 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 	 * @param int $instance_id Shipping zone instance ID.
 	 */
 	public function __construct( $instance_id = 0 ) {
-		$this->instance_id        = absint( $instance_id );
+		$this->instance_id = absint( $instance_id );
+
+		/* translators: %s: method title */
 		$this->method_description = sprintf( __( '%s is a international shipping method from Correios.', 'woocommerce-correios' ), $this->method_title );
 		$this->supports           = array(
 			'shipping-zones',
@@ -182,6 +184,7 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'woocommerce-correios' ),
 				'default'     => 'no',
+				/* translators: %s: method title */
 				'description' => sprintf( __( 'Log %s events, such as WebServices requests.', 'woocommerce-correios' ), $this->method_title ) . $this->get_log_link(),
 			),
 		);
@@ -277,7 +280,7 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 
 		$shipping = $this->get_rate( $package );
 
-		if ( empty( $shipping->pcFinal ) ) {
+		if ( empty( $shipping->pcFinal ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			return;
 		}
 
@@ -286,11 +289,11 @@ abstract class WC_Correios_Shipping_International extends WC_Correios_Shipping {
 		if ( 'yes' === $this->show_delivery_time ) {
 			$label .= sprintf(
 				' (%s a %s dias úteis)',
-				sanitize_text_field( (string) $shipping->prazoMinimo ),
-				sanitize_text_field( (string) $shipping->prazoMaximo )
+				sanitize_text_field( (string) $shipping->prazoMinimo ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				sanitize_text_field( (string) $shipping->prazoMaximo ) // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			);
 		}
-		$cost = sanitize_text_field( (float) $shipping->pcFinal );
+		$cost = sanitize_text_field( (float) $shipping->pcFinal ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		// Exit if don't have price.
 		if ( 0 === intval( $cost ) ) {

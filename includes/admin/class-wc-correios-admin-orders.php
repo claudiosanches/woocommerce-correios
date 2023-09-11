@@ -120,7 +120,7 @@ class WC_Correios_Admin_Orders {
 
 		$args = array(
 			'order_id'      => isset( $_REQUEST['order_id'] ) ? intval( $_REQUEST['order_id'] ) : 0,
-			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( $_REQUEST['tracking_code'] ) : '',
+			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['tracking_code'] ) ) : '',
 		);
 
 		$order = wc_get_order( $args['order_id'] );
@@ -140,7 +140,7 @@ class WC_Correios_Admin_Orders {
 
 		$args = array(
 			'order_id'      => isset( $_REQUEST['order_id'] ) ? intval( $_REQUEST['order_id'] ) : 0,
-			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( $_REQUEST['tracking_code'] ) : '',
+			'tracking_code' => isset( $_REQUEST['tracking_code'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['tracking_code'] ) ) : '',
 		);
 
 		wc_correios_update_tracking_code( $args['order_id'], $args['tracking_code'], true );

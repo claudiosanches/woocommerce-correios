@@ -228,8 +228,8 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		);
 
 		if ( isset( $screen->id ) && 'woocommerce_page_wc-settings' === $screen->id ) {
-			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab'];
-			$shipping_zone = isset( $_REQUEST['instance_id'] ) && 0 < intval( $_REQUEST['instance_id'] );
+			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$shipping_zone = isset( $_REQUEST['instance_id'] ) && 0 < intval( $_REQUEST['instance_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( $shipping_tab && $shipping_zone ) {
 				$connect = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );

@@ -4,7 +4,7 @@
  *
  * @author  Claudio_Sanches
  * @package WooCommerce_Correios/Templates
- * @version 3.2.0
+ * @version 4.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,12 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<?php echo wptexturize( wpautop( $tracking_message ) ); ?>
+<?php echo wp_kses_post( wptexturize( wpautop( $tracking_message ) ) ); ?>
 
 <p><?php esc_html_e( 'For your reference, your order details are shown below.', 'woocommerce-correios' ); ?></p>
 
 <?php
 /**
+ * Order details.
+ *
  * @hooked WC_Emails::order_details() Shows the order details table.
  * @hooked WC_Structured_Data::generate_order_data() Generates structured data.
  * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.

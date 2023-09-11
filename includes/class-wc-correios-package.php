@@ -26,9 +26,7 @@ class WC_Correios_Package {
 	/**
 	 * Sets the package.
 	 *
-	 * @param  array $package Package to calcule.
-	 *
-	 * @return array
+	 * @param array $package Package to calcule.
 	 */
 	public function __construct( $package = array() ) {
 		$this->package = $package;

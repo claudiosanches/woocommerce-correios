@@ -16,7 +16,7 @@
     "build:pot": "composer run-script makepot",
     "build": "npm-run-all -s lint:* build:*",
     "lint:js": "eslint assets/js",
-    "lint:php": "",
+    "lint:php": "composer run-script phpcs",
     "lint:scss": "stylelint assets/scss/**/*.scss",
     "scss": "sass --no-source-map --style=compressed assets/scss:assets/css",
     "watch:jsadmin": "npm run babel:admin -- --watch",
