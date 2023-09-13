@@ -44,7 +44,7 @@ class WC_Correios_Shipping_SEDEX_10_Envelope extends WC_Correios_Shipping {
 	 * @return float
 	 */
 	protected function get_declared_value( $package ) {
-		if ( 24 >= $package['contents_cost'] ) {
+		if ( 24.5 > $package['contents_cost'] ) {
 			return 0;
 		}
 
