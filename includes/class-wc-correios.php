@@ -26,6 +26,9 @@ class WC_Correios {
 		if ( class_exists( 'WC_Integration' ) ) {
 			self::includes();
 
+			// Run updates.
+			self::update();
+
 			if ( is_admin() ) {
 				self::admin_includes();
 			}
@@ -82,6 +85,13 @@ class WC_Correios {
 	 */
 	private static function admin_includes() {
 		include_once __DIR__ . '/admin/class-wc-correios-admin-orders.php';
+	}
+
+	/**
+	 * Updates.
+	 */
+	private static function update() {
+		WC_Correios_Install::remove_old_transients();
 	}
 
 	/**

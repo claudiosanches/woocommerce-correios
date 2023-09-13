@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-12T21:29:21-03:00\n"
+"POT-Creation-Date: 2023-09-12T21:35:00-03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: woocommerce-correios\n"
@@ -565,15 +565,15 @@ msgstr ""
 msgid "Correios tracking code."
 msgstr ""
 
-#: includes/class-wc-correios.php:167
+#: includes/class-wc-correios.php:177
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wc-correios.php:168
+#: includes/class-wc-correios.php:178
 msgid "Premium Support"
 msgstr ""
 
-#: includes/class-wc-correios.php:169
+#: includes/class-wc-correios.php:179
 msgid "Contribute"
 msgstr ""
 
