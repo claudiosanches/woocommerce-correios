@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.1.3 - 2023/09/13 =
+
+- Corrida taxa de manuseio que não estava sendo aplicada no método "Correios (Nova API)".
+
 = 4.1.2 - 2023/09/12 =
 
 - Atualizado valor mínimo declarado para R$ 24,5.

@@ -4,7 +4,7 @@ Donate link: https://claudiosanches.com/doacoes/
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 6.3
-Stable tag: 4.1.2
+Stable tag: 4.1.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -182,6 +182,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 4.1.3 - 2023/09/13 =
+
+- Corrida taxa de manuseio que não estava sendo aplicada no método "Correios (Nova API)".
+
 = 4.1.2 - 2023/09/12 =
 
 - Atualizado valor mínimo declarado para R$ 24,5.
@@ -212,7 +216,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Upgrade Notice ==
 
-= 4.1.2 =
+= 4.1.3 =
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -228,3 +232,4 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Removido suporte para versões anteriores ao WooCommerce 3.0.
 - Corrigida a tabela de rastreamento de objeto para ser responsiva.
 - Atualizado valor mínimo declarado para R$ 24,5.
+- Corrida taxa de manuseio que não estava sendo aplicada no método "Correios (Nova API)".
