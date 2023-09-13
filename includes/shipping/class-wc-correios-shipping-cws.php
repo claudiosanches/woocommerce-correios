@@ -362,7 +362,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		}
 
 		// Apply fees.
-		$fee = $this->get_fee( $this->fee, $cost );
+		$fee = $this->get_fee( $this->get_option( 'fee' ), $cost );
 
 		// Display delivery.
 		$meta = array();
