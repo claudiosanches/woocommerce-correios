@@ -24,6 +24,8 @@ class WC_Correios {
 
 		// Checks with WooCommerce is installed.
 		if ( class_exists( 'WC_Integration' ) ) {
+			add_action( 'before_woocommerce_init', array( __CLASS__, 'setup_hpos_compatibility' ) );
+
 			self::includes();
 
 			// Run updates.
@@ -33,7 +35,6 @@ class WC_Correios {
 				self::admin_includes();
 			}
 
-			add_action( 'before_woocommerce_init', array( __CLASS__, 'setup_hpos_compatibility' ) );
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
@@ -48,6 +49,19 @@ class WC_Correios {
 	 */
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( WC_CORREIOS_PLUGIN_FILE ) ) . '/languages/' );
+	}
+
+	/**
+	 * Setup WooCommerce HPOS compatibility.
+	 */
+	public static function setup_hpos_compatibility() {
+		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '7.1', '<' ) ) {
+			return;
+		}
+
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'woocommerce-correios/woocommerce-correios.php', true );
+		}
 	}
 
 	/**
@@ -92,19 +106,6 @@ class WC_Correios {
 	 */
 	private static function update() {
 		WC_Correios_Install::remove_old_transients();
-	}
-
-	/**
-	 * Setup WooCommerce HPOS compatibility.
-	 */
-	public static function setup_hpos_compatibility() {
-		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '7.1', '<' ) ) {
-			return;
-		}
-
-		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'woocommerce-correios/woocommerce-correios.php', true );
-		}
 	}
 
 	/**
