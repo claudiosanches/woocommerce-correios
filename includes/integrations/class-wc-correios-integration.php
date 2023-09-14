@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Integration
  * @since   3.0.0
- * @version 4.1.1
+ * @version 4.1.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -156,8 +156,8 @@ class WC_Correios_Integration extends WC_Integration {
 				'title'       => __( 'Link Correios', 'woocommerce-correios' ),
 				'type'        => 'text',
 				/* translators: %s: Correios URL */
-				'description' => sprintf( __( 'Custom link to display tracking history of objects from Correios. By default uses %s', 'woocommerce-correios' ), '<a href="https://www.linkcorreios.com.br/" target="_blank">https://www.linkcorreios.com.br/<a>' ),
-				'default'     => 'https://www.linkcorreios.com.br/',
+				'description' => sprintf( __( 'Custom link to display tracking history of objects from Correios. By default uses %s', 'woocommerce-correios' ), '<a href="https://www.linkcorreios.com.br/?id=" target="_blank">https://www.linkcorreios.com.br/?id=<a>' ),
+				'default'     => 'https://www.linkcorreios.com.br/?id=',
 			),
 			'autofill_addresses'       => array(
 				'title'       => __( 'Autofill Addresses', 'woocommerce-correios' ),
@@ -347,7 +347,14 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	public function setup_tracking_link_correios( $code ) {
-		return trailingslashit( $this->get_option( 'tracking_link_correios', 'https://www.linkcorreios.com.br/' ) ) . $code;
+		$link = $this->get_option( 'tracking_link_correios', 'https://www.linkcorreios.com.br/?id=' );
+
+		// Set query string.
+		if ( 'https://www.linkcorreios.com.br' === untrailingslashit( $link ) ) {
+			$link = $link . '?id=';
+		}
+
+		return $link . $code;
 	}
 
 	/**
