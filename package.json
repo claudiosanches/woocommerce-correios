@@ -8,7 +8,6 @@
   },
   "scripts": {
     "autoprefixer": "postcss -u --no-map autoprefixer -r assets/css/**/*.css",
-    "commit": "npm install && npm run build && wp-plugin-deploy",
     "babel:admin": "babel assets/js/admin --out-dir assets/js/admin --out-file-extension .min.js --ignore '**/*.min.js'",
     "babel:frontend": "babel assets/js/frontend --out-dir assets/js/frontend --out-file-extension .min.js --ignore '**/*.min.js'",
     "build:css": "npm-run-all -s scss autoprefixer",
@@ -16,6 +15,7 @@
     "build:md": "wp-readme-to-md --screenshot-url=https://ps.w.org/woocommerce-correios/assets/{screenshot}.png",
     "build:pot": "composer run-script makepot",
     "build": "npm-run-all -s lint:* build:*",
+    "commit": "npm install && composer install && npm run build && wp-plugin-deploy",
     "lint:js": "eslint assets/js",
     "lint:php": "composer run-script phpcs",
     "lint:scss": "stylelint assets/scss/**/*.scss",
