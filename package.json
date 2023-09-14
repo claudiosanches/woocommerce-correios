@@ -1,13 +1,14 @@
 {
   "name": "woocommerce-correios",
   "description": "Correios para WooCommerce",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/claudiosanches/woocommerce-correios"
   },
   "scripts": {
     "autoprefixer": "postcss -u --no-map autoprefixer -r assets/css/**/*.css",
+    "commit": "npm install && npm run build && wp-plugin-deploy",
     "babel:admin": "babel assets/js/admin --out-dir assets/js/admin --out-file-extension .min.js --ignore '**/*.min.js'",
     "babel:frontend": "babel assets/js/frontend --out-dir assets/js/frontend --out-file-extension .min.js --ignore '**/*.min.js'",
     "build:css": "npm-run-all -s scss autoprefixer",
