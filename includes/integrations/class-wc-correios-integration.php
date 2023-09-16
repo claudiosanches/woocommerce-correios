@@ -124,7 +124,7 @@ class WC_Correios_Integration extends WC_Integration {
 			'cws_posting_card'         => array(
 				'title'       => __( 'Posting Card', 'woocommerce-correios' ),
 				'type'        => 'text',
-				'description' => __( 'Your Correios Posting Card number.', 'woocommerce-correios' ),
+				'description' => __( 'Your Correios Posting Card number. The number is 10 digits long and starts with two zeros.', 'woocommerce-correios' ),
 				'default'     => '',
 			),
 			'cws_update_services_list' => array(
