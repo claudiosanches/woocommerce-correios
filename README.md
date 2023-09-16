@@ -1,6 +1,6 @@
 # Claudio Sanches - Correios for WooCommerce #
 **Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches/), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior/), [matheuscl](https://profiles.wordpress.org/matheuscl/)  
-**Donate link:** https://claudiosanches.com/doacoes/  
+**Donate link:** https://apoia.se/claudiosanches  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
