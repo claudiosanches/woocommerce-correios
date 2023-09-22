@@ -156,6 +156,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 				'options'     => array(
 					''    => __( 'Not declare', 'woocommerce-correios' ),
 					'019' => __( '(019) Valor Declarado Nacional Premium e Expresso (use for SEDEX)', 'woocommerce-correios' ),
+					'030' => __( '(030) Valor Declarado Internacional (use for Exporta Fácil)', 'woocommerce-correios' ),
 					'064' => __( '(064) Valor Declarado Nacional Standard (use for PAC)', 'woocommerce-correios' ),
 					'065' => __( '(065) Valor Declarado Correios Mini Envios (use for SEDEX Mini)', 'woocommerce-correios' ),
 					'075' => __( '(075) Valor Declarado Expresso RFID (SEDEX)', 'woocommerce-correios' ),
@@ -306,6 +307,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		$calculate->set_package( $package );
 		$calculate->set_origin_postcode( $this->get_option( 'origin_postcode' ) );
 		$calculate->set_destination_postcode( $package['destination']['postcode'] );
+		$calculate->set_destination_country( $package['destination']['country'] );
 
 		if ( '' !== $this->get_option( 'declare_value' ) ) {
 			$calculate->set_declared_value_code( $this->get_option( 'declare_value' ) );
@@ -336,7 +338,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	 */
 	public function calculate_shipping( $package = array() ) {
 		// Check if valid to be calculeted.
-		if ( '' === $package['destination']['postcode'] || 'BR' !== $package['destination']['country'] ) {
+		if ( '' === $package['destination']['postcode'] ) {
 			return;
 		}
 
@@ -367,8 +369,10 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		// Display delivery.
 		$meta = array();
 		if ( ! empty( $shipping['prazo'] ) ) {
+			$delivery_time = isset( $shipping['prazo']['prazoEntrega'] ) ? $shipping['prazo']['prazoEntrega'] : $shipping['prazo']['prazoMaximo']; // (prazoEntrega for national shipping methods; prazoMaximo for the international ones).
+
 			$meta = array(
-				'_delivery_forecast' => intval( $shipping['prazo']['prazoEntrega'] ) + intval( $this->get_additional_time( $package ) ),
+				'_delivery_forecast' => intval( $delivery_time ) + intval( $this->get_additional_time( $package ) ),
 			);
 		}
 

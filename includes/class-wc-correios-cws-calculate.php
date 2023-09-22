@@ -180,6 +180,11 @@ class WC_Correios_Cws_Calculate extends WC_Correios_Webservice {
 			'servicosAdicionais' => array(),
 		);
 
+		// Set additional arguments for international shipping.
+		if ( 'BR' !== $this->get_destination_country() ) {
+			$args['sgPaisDestino'] = $this->get_destination_country();
+		}
+
 		// Set receipt notice, optional, and doesn't works with Carta Registrada.
 		if ( $this->get_receipt_notice() ) {
 			$args['servicosAdicionais'][] = '001';
@@ -215,6 +220,12 @@ class WC_Correios_Cws_Calculate extends WC_Correios_Webservice {
 			'cepDestino' => wc_correios_sanitize_postcode( $this->destination_postcode ),
 			'cepOrigem'  => wc_correios_sanitize_postcode( $this->get_origin_postcode() ),
 		);
+
+		// Set additional arguments for international shipping.
+		if ( 'BR' !== $this->get_destination_country() ) {
+			$args['sgPaisDestino']   = $this->get_destination_country();
+			$args['coCidadeDestino'] = $this->get_destination_city_code();
+		}
 
 		$connect = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );
 		return $connect->get_shipping_time( $args, $this->get_product_code(), $this->get_package() );

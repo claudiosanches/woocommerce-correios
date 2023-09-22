@@ -351,7 +351,7 @@ class WC_Correios_Cws_Connect {
 
 		// Build services list.
 		foreach ( $raw_data['itens'] as $item ) {
-			if ( '3' === strval( $item['coSegmento'] ) ) {
+			if ( '3' === strval( $item['coSegmento'] ) || ( '5' === strval( $item['coSegmento'] ) && 'INTERNACIONAL' === strval( $item['descSegmento'] ) ) ) {
 				$data[ $item['codigo'] ] = $item['descricao'];
 			}
 		}
@@ -385,10 +385,12 @@ class WC_Correios_Cws_Connect {
 			$this->add_log( 'Missing Token! Aborting...' );
 		}
 
+		$shipping_destination = isset( $args['sgPaisDestino'] ) ? 'internacional' : 'nacional';
+
 		$endpoint = array(
 			'preco',
 			'v1',
-			'nacional',
+			$shipping_destination,
 			$product_code,
 		);
 
@@ -446,10 +448,12 @@ class WC_Correios_Cws_Connect {
 			$this->add_log( 'Missing Token! Aborting...' );
 		}
 
+		$shipping_destination = isset( $args['sgPaisDestino'] ) ? 'internacional' : 'nacional';
+
 		$endpoint = array(
 			'prazo',
 			'v1',
-			'nacional',
+			$shipping_destination,
 			$product_code,
 		);
 
