@@ -276,9 +276,32 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	 * @return string
 	 */
 	public function get_product_code() {
+		return $this->get_service_code();
+	}
+
+	/**
+	 * Get Correios service code.
+	 *
+	 * @return string
+	 */
+	public function get_service_code() {
 		$code = $this->get_option( 'product_code' );
 
-		return apply_filters( 'woocommerce_correios_shipping_product_code', $code, $this->id, $this->instance_id );
+		return apply_filters( 'woocommerce_correios_shipping_service_code', $code, $this->id, $this->instance_id );
+	}
+
+	/**
+	 * Get Correios service name.
+	 *
+	 * @return string
+	 */
+	public function get_service_name() {
+		$code    = $this->get_service_code();
+		$connect = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );
+		$list    = $connect->get_available_services();
+		$name    = $list[ $code ] ?? '';
+
+		return apply_filters( 'woocommerce_correios_shipping_service_name', $name, $code, $this->id, $this->instance_id );
 	}
 
 	/**
@@ -302,7 +325,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	protected function get_rate( $package ) {
 		$calculate = new WC_Correios_Cws_Calculate( $this->id, $this->instance_id );
 		$calculate->set_debug( $this->get_option( 'debug' ) );
-		$calculate->set_product_code( $this->get_product_code() );
+		$calculate->set_product_code( $this->get_service_code() );
 		$calculate->set_package( $package );
 		$calculate->set_origin_postcode( $this->get_option( 'origin_postcode' ) );
 		$calculate->set_destination_postcode( $package['destination']['postcode'] );

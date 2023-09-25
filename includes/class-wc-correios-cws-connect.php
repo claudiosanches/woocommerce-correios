@@ -350,9 +350,10 @@ class WC_Correios_Cws_Connect {
 		}
 
 		// Build services list.
+		$segments = apply_filters( 'woocommerce_correios_cws_allowed_segments_ids', array( '3', '6' ) );
 		foreach ( $raw_data['itens'] as $item ) {
-			if ( '3' === strval( $item['coSegmento'] ) ) {
-				$data[ $item['codigo'] ] = $item['descricao'];
+			if ( in_array( strval( $item['coSegmento'] ), $segments, true ) ) {
+				$data[ $item['codigo'] ] = sprintf( '(%1$s) %2$s', $item['codigo'], $item['descricao'] );
 			}
 		}
 

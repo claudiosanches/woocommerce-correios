@@ -10,7 +10,7 @@
  * Text Domain:          woocommerce-correios
  * Domain Path:          /languages
  * WC requires at least: 3.0
- * WC tested up to:      8.0
+ * WC tested up to:      8.1
  *
  * Claudio Sanches - Correios for WooCommerce is free software: you can
  * redistribute it and/or modify it under the terms of the

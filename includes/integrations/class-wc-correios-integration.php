@@ -108,10 +108,9 @@ class WC_Correios_Integration extends WC_Integration {
 				),
 			),
 			'cws_username'             => array(
-				'title'       => __( 'Username', 'woocommerce-correios' ),
+				'title'       => __( 'Portal Meu Correio\'s Username', 'woocommerce-correios' ),
 				'type'        => 'text',
-				'description' => __( 'Your Correios username.', 'woocommerce-correios' ),
-				'desc_tip'    => true,
+				'description' => __( 'Your Portal Meu Correio\'s username.', 'woocommerce-correios' ),
 				'default'     => '',
 			),
 			'cws_access_code'          => array(
