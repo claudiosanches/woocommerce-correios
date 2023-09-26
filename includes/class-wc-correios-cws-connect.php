@@ -376,6 +376,8 @@ class WC_Correios_Cws_Connect {
 			}
 		}
 
+		$data = apply_filters( 'woocommerce_correios_cws_services_list', $data );
+
 		// Save services list.
 		update_option( $option, wp_json_encode( $data ) );
 
@@ -450,7 +452,7 @@ class WC_Correios_Cws_Connect {
 	 *
 	 * @param array $args         List of paramenters.
 	 * @param array $product_code Product code.
-	 * @param array $package WooCommerce shipping package.
+	 * @param array $package      WooCommerce shipping package.
 	 * @return array
 	 */
 	public function get_shipping_time( $args, $product_code, $package ) {
