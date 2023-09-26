@@ -516,9 +516,9 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 		$fee = $this->get_fee( $this->fee, $cost );
 
 		// Display delivery.
-		$meta_delivery = array();
+		$meta = array();
 		if ( 'yes' === $this->show_delivery_time ) {
-			$meta_delivery = array(
+			$meta = array(
 				'_delivery_forecast' => intval( $shipping->PrazoEntrega ) + intval( $this->get_additional_time( $package ) ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			);
 		}
@@ -530,7 +530,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'id'        => $this->id . $this->instance_id,
 				'label'     => $label,
 				'cost'      => (float) $cost + (float) $fee,
-				'meta_data' => $meta_delivery,
+				'meta_data' => $meta,
 			),
 			$this->instance_id,
 			$package

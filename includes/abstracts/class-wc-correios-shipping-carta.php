@@ -262,13 +262,22 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 		// Apply fees.
 		$fee = $this->get_fee( $this->fee, $cost );
 
+		// Display delivery.
+		$meta = array();
+		if ( 'yes' === $this->show_delivery_time ) {
+			$meta = array(
+				'_delivery_forecast' => intval( $this->get_shipping_time( $package ) ) + intval( $this->get_additional_time( $package ) ),
+			);
+		}
+
 		// Create the rate and apply filters.
 		$rate = apply_filters(
 			'woocommerce_correios_' . $this->id . '_rate',
 			array(
-				'id'    => $this->id . $this->instance_id,
-				'label' => $this->title,
-				'cost'  => (float) $cost + (float) $fee,
+				'id'        => $this->id . $this->instance_id,
+				'label'     => $this->title,
+				'cost'      => (float) $cost + (float) $fee,
+				'meta_data' => $meta,
 			),
 			$this->instance_id,
 			$package

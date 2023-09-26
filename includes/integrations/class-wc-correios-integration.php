@@ -399,7 +399,7 @@ class WC_Correios_Integration extends WC_Integration {
 		$list    = $connect->get_available_services( true );
 
 		if ( empty( $list ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unable to retrieve services list!', 'woocommerce-correios' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Unable to retrieve services list! Review the Portal Meu Correio\'s Username, Access Code and Posting Card information, save the settings and try again.', 'woocommerce-correios' ) ) );
 		}
 
 		wp_send_json_success( array( 'message' => __( 'Services list generated successfully!', 'woocommerce-correios' ) ) );
