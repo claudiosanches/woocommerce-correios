@@ -117,7 +117,7 @@ class WC_Correios_Integration extends WC_Integration {
 				'title'       => __( 'Access Code', 'woocommerce-correios' ),
 				'type'        => 'password',
 				/* translators: %s: Correios URL */
-				'description' => sprintf( __( 'Your Correios API Access Code. You can generate an access code in %1$s for production or %2$s for staging.', 'woocommerce-correios' ), '<a href="https://cws.correios.com.br/acesso-componentes" target="_blank">https://cws.correios.com.br/acesso-componentes</a>', '<a href="https://cwshom.correios.com.br/acesso-componentes" target="_blank">https://cwshom.correios.com.br/acesso-componentes</a>' ),
+				'description' => sprintf( __( 'Your Correios API Access Code. You can generate an access code in %1$s for production or %2$s for staging.', 'woocommerce-correios' ), '<a href="https://cws.correios.com.br" target="_blank">https://cws.correios.com.br</a>', '<a href="https://cwshom.correios.com.br" target="_blank">https://cwshom.correios.com.br</a>' ),
 				'default'     => '',
 			),
 			'cws_posting_card'         => array(
