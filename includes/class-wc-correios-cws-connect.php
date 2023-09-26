@@ -221,12 +221,30 @@ class WC_Correios_Cws_Connect {
 	}
 
 	/**
+	 * Get token transient ID.
+	 *
+	 * @return string
+	 */
+	public function get_token_transient_id() {
+		return $this->id . '-' . $this->environment . '-token';
+	}
+
+	/**
+	 * Clean token.
+	 *
+	 * @return bool
+	 */
+	public function clean_token() {
+		return delete_transient( $this->get_token_transient_id() );
+	}
+
+	/**
 	 * Get CWS token.
 	 *
 	 * @return array
 	 */
 	public function get_token() {
-		$transient = $this->id . '-' . $this->environment . '-token';
+		$transient = $this->get_token_transient_id();
 
 		$data = apply_filters( 'woocommerce_correios_cws_default_token', array() );
 		if ( ! empty( $data ) ) {
@@ -304,7 +322,8 @@ class WC_Correios_Cws_Connect {
 		$this->add_log( 'Getting available services list from Correios API...' );
 
 		$token = $this->get_token();
-		if ( empty( $token ) ) {
+		if ( empty( $token ) || empty( $token['cnpj'] ) ) {
+			$this->clean_token();
 			$this->add_log( 'Missing Token! Aborting...' );
 		}
 
