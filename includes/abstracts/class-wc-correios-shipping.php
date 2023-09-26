@@ -80,7 +80,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 * @return string
 	 */
 	protected function get_log_link() {
-		return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+		return ' <a href="' . esc_url( add_query_arg( 'log_file', wc_get_log_file_name( $this->id ), admin_url( 'admin.php?page=wc-status&tab=logs' ) ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
 	}
 
 	/**
