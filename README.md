@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.1.5  
+**Stable tag:** 4.1.6  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -199,6 +199,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 4.1.6 - 2023/09/26 ###
+
+- Corrigido a exibição da estimativa de entrega para métodos offline.
+
 ### 4.1.5 - 2023/09/25 ###
 
 - Adicionado suporte para serviços do tipo "LOG +".
@@ -244,7 +248,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 4.1.5 ###
+### 4.1.6 ###
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -266,3 +270,4 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Corrigido link de log da integração e dos métodos de entrega.
 - Corrigido erros quando token não pode ser gerado com sucesso.
 - Adicionado suporte para WooCommerce 8.1
+- Corrigido a exibição da estimativa de entrega para métodos offline.

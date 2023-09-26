@@ -2,7 +2,7 @@
 	"name": "claudiosanches/woocommerce-correios",
 	"description": "Adds Correios shipping methods to your WooCommerce store.",
 	"homepage": "https://github.com/claudiosanches/woocommerce-correios",
-	"version": "4.1.5",
+	"version": "4.1.6",
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0+",
 	"authors": [
