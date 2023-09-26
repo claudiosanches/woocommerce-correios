@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Integration
  * @since   3.0.0
- * @version 4.1.4
+ * @version 4.1.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

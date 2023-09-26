@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 4.1.5 - 2023/09/25 =
+
+- Adicionado suporte para serviços do tipo "LOG +".
+- Corrigido link de log da integração e dos métodos de entrega.
+- Corrigido erros quando token não pode ser gerado com sucesso.
+- Adicionado suporte para WooCommerce 8.1
+
 = 4.1.4 - 2023/09/13 =
 
 - Atualizado o link para o rastreamento de objeto.

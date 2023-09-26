@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.1.4  
+**Stable tag:** 4.1.5  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -51,7 +51,8 @@ Você pode esclarecer suas dúvidas usando:
 
 ### Requerimentos: ###
 
-- Ter contrato com os Correios.
+- Ter contrato utilizando um CNPJ com os Correios.
+- O contrato com os Correios precisa ser pelo menos no nível Bronze 1 para funcionar com a API.
 
 ### Configuração do plugin ###
 
@@ -198,6 +199,13 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 4.1.5 - 2023/09/25 ###
+
+- Adicionado suporte para serviços do tipo "LOG +".
+- Corrigido link de log da integração e dos métodos de entrega.
+- Corrigido erros quando token não pode ser gerado com sucesso.
+- Adicionado suporte para WooCommerce 8.1
+
 ### 4.1.4 - 2023/09/13 ###
 
 - Atualizado o link para o rastreamento de objeto.
@@ -236,7 +244,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 4.1.4 ###
+### 4.1.5 ###
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -254,3 +262,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Atualizado valor mínimo declarado para R$ 24,5.
 - Corrida taxa de manuseio que não estava sendo aplicada no método "Correios (Nova API)".
 - Atualizado o link para o rastreamento de objeto.
+- Adicionado suporte para serviços do tipo "LOG +".
+- Corrigido link de log da integração e dos métodos de entrega.
+- Corrigido erros quando token não pode ser gerado com sucesso.
+- Adicionado suporte para WooCommerce 8.1

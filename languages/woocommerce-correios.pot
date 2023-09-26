@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 4.1.4\n"
+"Project-Id-Version: Claudio Sanches - Correios for WooCommerce 4.1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-correios\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-13T21:17:32-03:00\n"
+"POT-Creation-Date: 2023-09-25T22:17:21-03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: woocommerce-correios\n"
@@ -51,8 +51,8 @@ msgstr ""
 #: includes/abstracts/class-wc-correios-shipping-international.php:65
 #: includes/abstracts/class-wc-correios-shipping.php:121
 #: includes/emails/class-wc-correios-tracking-email.php:50
-#: includes/integrations/class-wc-correios-integration.php:150
-#: includes/integrations/class-wc-correios-integration.php:168
+#: includes/integrations/class-wc-correios-integration.php:149
+#: includes/integrations/class-wc-correios-integration.php:167
 #: includes/shipping/class-wc-correios-shipping-cws.php:57
 msgid "Enable/Disable"
 msgstr ""
@@ -234,7 +234,7 @@ msgstr ""
 #: includes/abstracts/class-wc-correios-shipping-impresso.php:215
 #: includes/abstracts/class-wc-correios-shipping-international.php:183
 #: includes/abstracts/class-wc-correios-shipping.php:288
-#: includes/integrations/class-wc-correios-integration.php:137
+#: includes/integrations/class-wc-correios-integration.php:136
 #: includes/shipping/class-wc-correios-shipping-cws.php:205
 msgid "Debug Log"
 msgstr ""
@@ -565,15 +565,15 @@ msgstr ""
 msgid "Correios tracking code."
 msgstr ""
 
-#: includes/class-wc-correios.php:177
+#: includes/class-wc-correios.php:178
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wc-correios.php:178
+#: includes/class-wc-correios.php:179
 msgid "Premium Support"
 msgstr ""
 
-#: includes/class-wc-correios.php:179
+#: includes/class-wc-correios.php:180
 msgid "Contribute"
 msgstr ""
 
@@ -685,164 +685,164 @@ msgid "Staging"
 msgstr ""
 
 #: includes/integrations/class-wc-correios-integration.php:111
-msgid "Username"
+msgid "Portal Meu Correio's Username"
 msgstr ""
 
 #: includes/integrations/class-wc-correios-integration.php:113
-msgid "Your Correios username."
+msgid "Your Portal Meu Correio's username."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:118
+#: includes/integrations/class-wc-correios-integration.php:117
 msgid "Access Code"
 msgstr ""
 
 #. translators: %s: Correios URL
-#: includes/integrations/class-wc-correios-integration.php:121
+#: includes/integrations/class-wc-correios-integration.php:120
 msgid "Your Correios API Access Code. You can generate an access code in %1$s for production or %2$s for staging."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:125
+#: includes/integrations/class-wc-correios-integration.php:124
 msgid "Posting Card"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:127
-msgid "Your Correios Posting Card number."
+#: includes/integrations/class-wc-correios-integration.php:126
+msgid "Your Correios Posting Card number. The number is 10 digits long and starts with two zeros."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:131
+#: includes/integrations/class-wc-correios-integration.php:130
 msgid "Generate/Update Services List"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:133
+#: includes/integrations/class-wc-correios-integration.php:132
 msgid "Update Services List"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:134
+#: includes/integrations/class-wc-correios-integration.php:133
 msgid "Generates a list with all services available for your Correios's contract."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:139
+#: includes/integrations/class-wc-correios-integration.php:138
 msgid "Enable logging for Correios API"
 msgstr ""
 
 #. translators: %s: log link
-#: includes/integrations/class-wc-correios-integration.php:142
+#: includes/integrations/class-wc-correios-integration.php:141
 msgid "Log %s events, such as Web Services requests."
 msgstr ""
 
 #. translators: %s: log link
-#: includes/integrations/class-wc-correios-integration.php:142
+#: includes/integrations/class-wc-correios-integration.php:141
 msgid "Correios API"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:145
+#: includes/integrations/class-wc-correios-integration.php:144
 msgid "Tracking History Table"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:147
+#: includes/integrations/class-wc-correios-integration.php:146
 msgid "Displays a table with informations about the shipping in My Account > View Order page. Required username and password that can be obtained with the Correios' commercial area."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:152
+#: includes/integrations/class-wc-correios-integration.php:151
 msgid "Enable Tracking History Table"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:156
+#: includes/integrations/class-wc-correios-integration.php:155
 msgid "Link Correios"
 msgstr ""
 
 #. translators: %s: Correios URL
-#: includes/integrations/class-wc-correios-integration.php:159
+#: includes/integrations/class-wc-correios-integration.php:158
 msgid "Custom link to display tracking history of objects from Correios. By default uses %s"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:163
+#: includes/integrations/class-wc-correios-integration.php:162
 msgid "Autofill Addresses"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:165
+#: includes/integrations/class-wc-correios-integration.php:164
 msgid "Enable address autofill based on zipcode during checkout."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:170
+#: includes/integrations/class-wc-correios-integration.php:169
 msgid "Enable Autofill Addresses"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:174
+#: includes/integrations/class-wc-correios-integration.php:173
 msgid "Postcodes Validity"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:178
+#: includes/integrations/class-wc-correios-integration.php:177
 msgid "Defines how long a postcode will stay saved in the database before a new query."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:180
+#: includes/integrations/class-wc-correios-integration.php:179
 msgid "1 month"
 msgstr ""
 
 #. translators: %s number of months
-#: includes/integrations/class-wc-correios-integration.php:182
-#: includes/integrations/class-wc-correios-integration.php:184
-#: includes/integrations/class-wc-correios-integration.php:186
-#: includes/integrations/class-wc-correios-integration.php:188
-#: includes/integrations/class-wc-correios-integration.php:190
-#: includes/integrations/class-wc-correios-integration.php:192
-#: includes/integrations/class-wc-correios-integration.php:194
-#: includes/integrations/class-wc-correios-integration.php:196
-#: includes/integrations/class-wc-correios-integration.php:198
-#: includes/integrations/class-wc-correios-integration.php:200
-#: includes/integrations/class-wc-correios-integration.php:202
+#: includes/integrations/class-wc-correios-integration.php:181
+#: includes/integrations/class-wc-correios-integration.php:183
+#: includes/integrations/class-wc-correios-integration.php:185
+#: includes/integrations/class-wc-correios-integration.php:187
+#: includes/integrations/class-wc-correios-integration.php:189
+#: includes/integrations/class-wc-correios-integration.php:191
+#: includes/integrations/class-wc-correios-integration.php:193
+#: includes/integrations/class-wc-correios-integration.php:195
+#: includes/integrations/class-wc-correios-integration.php:197
+#: includes/integrations/class-wc-correios-integration.php:199
+#: includes/integrations/class-wc-correios-integration.php:201
 msgid "%d months"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:203
+#: includes/integrations/class-wc-correios-integration.php:202
 msgid "Forever"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:207
+#: includes/integrations/class-wc-correios-integration.php:206
 msgid "Force Autofill"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:209
+#: includes/integrations/class-wc-correios-integration.php:208
 msgid "Enable Force Autofill"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:210
+#: includes/integrations/class-wc-correios-integration.php:209
 msgid "When enabled will autofill all addresses after the user finish to fill the postcode, even if the addresses are already filled."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:214
-#: includes/integrations/class-wc-correios-integration.php:216
+#: includes/integrations/class-wc-correios-integration.php:213
+#: includes/integrations/class-wc-correios-integration.php:215
 msgid "Empty Database"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:217
+#: includes/integrations/class-wc-correios-integration.php:216
 msgid "Delete all the saved postcodes in the database, use this option if you have issues with outdated postcodes."
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:246
+#: includes/integrations/class-wc-correios-integration.php:245
 msgid "Are you sure you want to delete all postcodes from the database?"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:392
-#: includes/integrations/class-wc-correios-integration.php:416
+#: includes/integrations/class-wc-correios-integration.php:391
+#: includes/integrations/class-wc-correios-integration.php:415
 msgid "Missing parameters!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:396
-#: includes/integrations/class-wc-correios-integration.php:421
+#: includes/integrations/class-wc-correios-integration.php:395
+#: includes/integrations/class-wc-correios-integration.php:420
 msgid "Invalid nonce!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:403
+#: includes/integrations/class-wc-correios-integration.php:402
 msgid "Unable to retrieve services list!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:406
+#: includes/integrations/class-wc-correios-integration.php:405
 msgid "Services list generated successfully!"
 msgstr ""
 
-#: includes/integrations/class-wc-correios-integration.php:430
+#: includes/integrations/class-wc-correios-integration.php:429
 msgid "Postcode database emptied successfully!"
 msgstr ""
 
