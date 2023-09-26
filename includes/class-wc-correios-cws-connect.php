@@ -323,8 +323,9 @@ class WC_Correios_Cws_Connect {
 
 		$token = $this->get_token();
 		if ( empty( $token ) || empty( $token['cnpj'] ) ) {
-			$this->clean_token();
 			$this->add_log( 'Missing Token! Aborting...' );
+			$this->clean_token();
+			return $data;
 		}
 
 		$endpoint = array(
@@ -405,6 +406,7 @@ class WC_Correios_Cws_Connect {
 		$token = $this->get_token();
 		if ( empty( $token ) ) {
 			$this->add_log( 'Missing Token! Aborting...' );
+			return $data;
 		}
 
 		$endpoint = array(
@@ -466,6 +468,7 @@ class WC_Correios_Cws_Connect {
 		$token = $this->get_token();
 		if ( empty( $token ) ) {
 			$this->add_log( 'Missing Token! Aborting...' );
+			return $data;
 		}
 
 		$endpoint = array(
@@ -522,6 +525,7 @@ class WC_Correios_Cws_Connect {
 		$token = $this->get_token();
 		if ( empty( $token ) ) {
 			$this->add_log( 'Missing Token! Aborting...' );
+			return $data;
 		}
 
 		$endpoint = array(
@@ -581,6 +585,7 @@ class WC_Correios_Cws_Connect {
 		$token = $this->get_token();
 		if ( empty( $token ) ) {
 			$this->add_log( 'Missing Token! Aborting...' );
+			return $data;
 		}
 
 		$endpoint = array(
