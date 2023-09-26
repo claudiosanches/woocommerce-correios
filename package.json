@@ -19,6 +19,7 @@
     "lint:js": "eslint assets/js",
     "lint:php": "composer run-script phpcs",
     "lint:scss": "stylelint assets/scss/**/*.scss",
+    "lint": "npm-run-all -s lint:*",
     "scss": "sass --no-source-map --style=compressed assets/scss:assets/css",
     "watch:jsadmin": "npm run babel:admin -- --watch",
     "watch:jsfrontend": "npm run babel:frontend -- --watch",
