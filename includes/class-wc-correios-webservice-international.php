@@ -177,6 +177,13 @@ class WC_Correios_Webservice_International {
 	protected $debug = 'no';
 
 	/**
+	 * Log.
+	 *
+	 * @var WC_Logger
+	 */
+	protected $log = null;
+
+	/**
 	 * Country first city.
 	 *
 	 * @var array
