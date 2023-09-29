@@ -123,7 +123,8 @@ class WC_Correios_Integration extends WC_Integration {
 			'cws_posting_card'         => array(
 				'title'       => __( 'Posting Card', 'woocommerce-correios' ),
 				'type'        => 'text',
-				'description' => __( 'Your Correios Posting Card number. The number is 10 digits long and starts with two zeros.', 'woocommerce-correios' ),
+				/* translators: 1: Correios URL */
+				'description' => sprintf( __( 'Your Correios Posting Card number. The number is 10 digits long and starts with two zeros. To check your Posting Card number, go to: %1$s', 'woocommerce-correios' ), '<a href="https://apps.correios.com.br/correiosfacil/verificacao" target="_blank">https://apps.correios.com.br/correiosfacil/verificacao</a>' ),
 				'default'     => '',
 			),
 			'cws_update_services_list' => array(
