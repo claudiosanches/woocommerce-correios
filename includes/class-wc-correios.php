@@ -48,7 +48,23 @@ class WC_Correios {
 	 * Load the plugin text domain for translation.
 	 */
 	public static function load_plugin_textdomain() {
-		load_plugin_textdomain( 'woocommerce-correios', false, dirname( plugin_basename( WC_CORREIOS_PLUGIN_FILE ) ) . '/languages/' );
+		// Try to use the plugins own translation, only available for pt_BR.
+		$locale = apply_filters( 'plugin_locale', determine_locale(), 'woocommerce-correios' );
+
+		if ( 'pt_BR' === $locale ) {
+			unload_textdomain( 'woocommerce-correios' );
+			load_textdomain(
+				'woocommerce-correios',
+				plugin_dir_path( WC_CORREIOS_PLUGIN_FILE ) . '/languages/woocommerce-correios-' . $locale . '.mo'
+			);
+		}
+
+		// Load regular translation from WordPress.
+		load_plugin_textdomain(
+			'woocommerce-correios',
+			false,
+			dirname( plugin_basename( WC_CORREIOS_PLUGIN_FILE ) ) . '/languages'
+		);
 	}
 
 	/**
