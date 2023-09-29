@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 4.1.7 - 2023/09/28 =
+
+- Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
+- Melhorado os logs para incluir apenas a resposta e o cabeçalho da resposta de requisições.
+- Melhorada a descrição dos campos da integração, adicionado link para ajudar os usuários encontrar o número do Cartão de Postagem.
+
 = 4.1.6 - 2023/09/26 =
 
 - Corrigido a exibição da estimativa de entrega para métodos offline.

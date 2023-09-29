@@ -194,7 +194,7 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 				'title'       => __( 'Own Hands', 'woocommerce-correios' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable own hands', 'woocommerce-correios' ),
-				'description' => __( 'This controls whether to add costs of the own hands service', 'woocommerce-correios' ),
+				'description' => __( 'This controls whether to add costs of the own hands service.', 'woocommerce-correios' ),
 				'desc_tip'    => true,
 				'default'     => 'no',
 			),

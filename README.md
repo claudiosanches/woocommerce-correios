@@ -1,10 +1,10 @@
 # Claudio Sanches - Correios for WooCommerce #
 **Contributors:** [claudiosanches](https://profiles.wordpress.org/claudiosanches/), [rodrigoprior](https://profiles.wordpress.org/rodrigoprior/), [matheuscl](https://profiles.wordpress.org/matheuscl/)  
-**Donate link:** https://apoia.se/claudiosanches  
+**Donate link:** https://apoia.se/claudiosanches?utm_source=plugin-correios  
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.1.6  
+**Stable tag:** 4.1.7  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -199,6 +199,12 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
+### 4.1.7 - 2023/09/28 ###
+
+- Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
+- Melhorado os logs para incluir apenas a resposta e o cabeçalho da resposta de requisições.
+- Melhorada a descrição dos campos da integração, adicionado link para ajudar os usuários encontrar o número do Cartão de Postagem.
+
 ### 4.1.6 - 2023/09/26 ###
 
 - Corrigido a exibição da estimativa de entrega para métodos offline.
@@ -248,7 +254,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 4.1.6 ###
+### 4.1.7 ###
 
 - Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
 - Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
@@ -271,3 +277,6 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Corrigido erros quando token não pode ser gerado com sucesso.
 - Adicionado suporte para WooCommerce 8.1
 - Corrigido a exibição da estimativa de entrega para métodos offline.
+- Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
+- Melhorado os logs para incluir apenas a resposta e o cabeçalho da resposta de requisições.
+- Melhorada a descrição dos campos da integração, adicionado link para ajudar os usuários encontrar o número do Cartão de Postagem.
