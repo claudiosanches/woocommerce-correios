@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Emails
  * @since   3.0.0
- * @version 3.2.0
+ * @version 4.1.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,20 +20,18 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * Initialize tracking template.
 	 */
 	public function __construct() {
-		$this->id               = 'correios_tracking';
-		$this->title            = __( 'Correios Tracking Code', 'woocommerce-correios' );
-		$this->customer_email   = true;
-		$this->description      = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
-		$this->heading          = __( 'Your order has been sent', 'woocommerce-correios' );
-		$this->subject          = __( '[{site_title}] Your order {order_number} has been sent by Correios', 'woocommerce-correios' );
-		$this->message          = __( 'Hi there. Your recent order on {site_title} has been sent by Correios.', 'woocommerce-correios' )
-									. PHP_EOL . ' ' . PHP_EOL
-									. __( 'To track your delivery, use the following the tracking code(s): {tracking_code}', 'woocommerce-correios' )
-									. PHP_EOL . ' ' . PHP_EOL
-									. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
-		$this->tracking_message = $this->get_option( 'tracking_message', $this->message );
-		$this->template_html    = 'emails/correios-tracking-code.php';
-		$this->template_plain   = 'emails/plain/correios-tracking-code.php';
+		$this->id             = 'correios_tracking';
+		$this->title          = __( 'Correios Tracking Code', 'woocommerce-correios' );
+		$this->customer_email = true;
+		$this->description    = __( 'This email is sent when configured a tracking code within an order.', 'woocommerce-correios' );
+		$this->template_html  = 'emails/correios-tracking-code.php';
+		$this->template_plain = 'emails/plain/correios-tracking-code.php';
+		$this->placeholders   = array(
+			'{order_number}'  => '',
+			'{order_date}'    => '',
+			'{tracking_code}' => '',
+			'{date}'          => '',
+		);
 
 		// Call parent constructor.
 		parent::__construct();
@@ -42,9 +40,43 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	}
 
 	/**
+	 * Get email subject.
+	 *
+	 * @return string
+	 */
+	public function get_default_subject() {
+		return __( 'Your order #{order_number} has been sent by Correios', 'woocommerce-correios' );
+	}
+
+	/**
+	 * Get email heading.
+	 *
+	 * @return string
+	 */
+	public function get_default_heading() {
+		return __( 'Your order has been sent', 'woocommerce-correios' );
+	}
+
+	/**
+	 * Default tracking message content.
+	 *
+	 * @return string
+	 */
+	public function get_default_tracking_message() {
+		return __( 'Hi there. Your recent order on {site_title} has been sent by Correios.', 'woocommerce-correios' )
+			. PHP_EOL . ' ' . PHP_EOL
+			. __( 'To track your delivery, use the following the tracking code(s): {tracking_code}', 'woocommerce-correios' )
+			. PHP_EOL . ' ' . PHP_EOL
+			. __( 'The delivery service is the responsibility of the Correios, but if you have any questions, please contact us.', 'woocommerce-correios' );
+	}
+
+	/**
 	 * Initialise settings form fields.
 	 */
 	public function init_form_fields() {
+		/* translators: %s: list of placeholders */
+		$placeholder_text  = sprintf( __( 'Available placeholders: %s', 'woocommerce-correios' ), '<code>' . esc_html( implode( '</code>, <code>', array_keys( $this->placeholders ) ) ) . '</code>' );
+
 		$this->form_fields = array(
 			'enabled'          => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce-correios' ),
@@ -55,28 +87,25 @@ class WC_Correios_Tracking_Email extends WC_Email {
 			'subject'          => array(
 				'title'       => __( 'Subject', 'woocommerce-correios' ),
 				'type'        => 'text',
-				/* translators: %s: email subject */
-				'description' => sprintf( __( 'This controls the email subject line. Leave blank to use the default subject: <code>%s</code>.', 'woocommerce-correios' ), $this->subject ),
-				'placeholder' => $this->subject,
-				'default'     => '',
+				'description' => $placeholder_text,
+				'placeholder' => $this->get_default_subject(),
+				'default'     => $this->get_default_subject(),
 				'desc_tip'    => true,
 			),
 			'heading'          => array(
-				'title'       => __( 'Email Heading', 'woocommerce-correios' ),
+				'title'       => __( 'Email heading', 'woocommerce-correios' ),
 				'type'        => 'text',
-				/* translators: %s: email heading */
-				'description' => sprintf( __( 'This controls the main heading contained within the email. Leave blank to use the default heading: <code>%s</code>.', 'woocommerce-correios' ), $this->heading ),
-				'placeholder' => $this->heading,
-				'default'     => '',
+				'description' => $placeholder_text,
+				'placeholder' => $this->get_default_heading(),
+				'default'     => $this->get_default_heading(),
 				'desc_tip'    => true,
 			),
 			'tracking_message' => array(
-				'title'       => __( 'Email Content', 'woocommerce-correios' ),
+				'title'       => __( 'Email content', 'woocommerce-correios' ),
 				'type'        => 'textarea',
-				/* translators: %s: email message */
-				'description' => sprintf( __( 'This controls the initial content of the email. Leave blank to use the default content: <code>%s</code>.', 'woocommerce-correios' ), $this->message ),
-				'placeholder' => $this->message,
-				'default'     => '',
+				'description' => $placeholder_text,
+				'placeholder' => $this->get_default_tracking_message(),
+				'default'     => $this->get_default_tracking_message(),
 				'desc_tip'    => true,
 			),
 			'email_type'       => array(
@@ -85,30 +114,10 @@ class WC_Correios_Tracking_Email extends WC_Email {
 				'description' => __( 'Choose which format of email to send.', 'woocommerce-correios' ),
 				'default'     => 'html',
 				'class'       => 'email_type wc-enhanced-select',
-				'options'     => $this->get_custom_email_type_options(),
+				'options'     => $this->get_email_type_options(),
 				'desc_tip'    => true,
 			),
 		);
-	}
-
-	/**
-	 * Email type options.
-	 *
-	 * @return array
-	 */
-	protected function get_custom_email_type_options() {
-		if ( method_exists( $this, 'get_email_type_options' ) ) {
-			return $this->get_email_type_options();
-		}
-
-		$types = array( 'plain' => __( 'Plain text', 'woocommerce-correios' ) );
-
-		if ( class_exists( 'DOMDocument' ) ) {
-			$types['html']      = __( 'HTML', 'woocommerce-correios' );
-			$types['multipart'] = __( 'Multipart', 'woocommerce-correios' );
-		}
-
-		return $types;
 	}
 
 	/**
@@ -117,7 +126,9 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * @return string
 	 */
 	public function get_tracking_message() {
-		return apply_filters( 'woocommerce_correios_email_tracking_message', $this->format_string( $this->tracking_message ), $this->object );
+		$message = $this->get_option( 'tracking_message', $this->get_default_tracking_message() );
+
+		return apply_filters( 'woocommerce_correios_email_tracking_message', $this->format_string( $message ), $this->object );
 	}
 
 	/**
@@ -128,9 +139,9 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * @return string
 	 */
 	public function get_tracking_code_url( $tracking_code ) {
-		$url = sprintf( '<a href="%s#wc-correios-tracking">%s</a>', $this->object->get_view_order_url(), $tracking_code );
+		$html = sprintf( '<a href="%s#wc-correios-tracking">%s</a>', $this->object->get_view_order_url(), $tracking_code );
 
-		return apply_filters( 'woocommerce_correios_email_tracking_core_url', $url, $tracking_code, $this->object );
+		return apply_filters( 'woocommerce_correios_email_tracking_code_url', $html, $tracking_code, $this->object );
 	}
 
 	/**
@@ -141,15 +152,17 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 * @return string
 	 */
 	public function get_tracking_codes( $tracking_codes ) {
-		$html = '<ul>';
+		if ( 1 < count( $tracking_codes ) ) {
+			$html = '<ul>';
+			foreach ( $tracking_codes as $tracking_code ) {
+				$html .= '<li>' . $this->get_tracking_code_url( $tracking_code ) . '</li>';
+			}
+			$html .= '</ul>';
 
-		foreach ( $tracking_codes as $tracking_code ) {
-			$html .= '<li>' . $this->get_tracking_code_url( $tracking_code ) . '</li>';
+			return $html;
 		}
 
-		$html .= '</ul>';
-
-		return $html;
+		return $this->get_tracking_code_url( $tracking_codes[0] );
 	}
 
 	/**
@@ -167,15 +180,16 @@ class WC_Correios_Tracking_Email extends WC_Email {
 
 		if ( is_object( $order ) ) {
 			$this->object    = $order;
-			$this->recipient = $order->get_billing_email();
+			$this->recipient = $this->object->get_billing_email();
 
 			if ( empty( $tracking_code ) ) {
-				$tracking_codes = wc_correios_get_tracking_codes( $order );
+				$tracking_codes = wc_correios_get_tracking_codes( $this->object );
 			} else {
 				$tracking_codes = array( $tracking_code );
 			}
 
-			$this->placeholders['{order_number}']  = $order->get_order_number();
+			$this->placeholders['{order_number}']  = $this->object->get_order_number();
+			$this->placeholders['{order_date}']    = wc_format_datetime( $this->object->get_date_created() );
 			$this->placeholders['{date}']          = date_i18n( wc_date_format(), time() );
 			$this->placeholders['{tracking_code}'] = $this->get_tracking_codes( $tracking_codes );
 		}
