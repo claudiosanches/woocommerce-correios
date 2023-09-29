@@ -205,6 +205,51 @@ class WC_Correios_Cws_Connect {
 	}
 
 	/**
+	 * Get errors from Correios response.
+	 *
+	 * @param array $response HTTP response.
+	 * @return array
+	 */
+	protected function get_error_message( $response ) {
+		return array(
+			'response' => $response['response'] ?? array(),
+			'body'     => $response['body'] ?? array(),
+		);
+	}
+
+	/**
+	 * Safe remote GET request.
+	 *
+	 * @param string $url   Full URL to request.
+	 * @param string $token Token from Correios API.
+	 * @param string $type  Request type for error logs.
+	 * @return array
+	 */
+	protected function remote_get( $url, $token, $type ) {
+		$response = wp_safe_remote_get(
+			$url,
+			array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $token,
+					'Accept'        => 'application/json',
+				),
+				'timeout' => 30,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$this->add_log( sprintf( 'Failed to fetch %s:', $type ), $response->get_error_message() );
+			return array();
+		}
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			$this->add_log( sprintf( 'Failed to fetch %s:', $type ), $this->get_error_message( $response ) );
+			return array();
+		}
+
+		return $response;
+	}
+
+	/**
 	 * Get token expiration date.
 	 *
 	 * @param array $data Token response data.
@@ -274,11 +319,11 @@ class WC_Correios_Cws_Connect {
 		);
 
 		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to generated token:', $response->get_error_message() );
+			$this->add_log( 'Failed to generate token:', $response->get_error_message() );
 			return array();
 		}
 		if ( ! in_array( wp_remote_retrieve_response_code( $response ), array( 200, 201 ), true ) ) {
-			$this->add_log( 'Failed to generated token:', $response );
+			$this->add_log( 'Failed to generate token:', $this->get_error_message( $response ) );
 			return array();
 		}
 
@@ -341,23 +386,8 @@ class WC_Correios_Cws_Connect {
 		);
 
 		$url      = $this->get_cws_url( join( '/', $endpoint ) . '?page=0&size=500' );
-		$response = wp_safe_remote_get(
-			$url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token['token'],
-					'Accept'        => 'application/json',
-				),
-				'timeout' => 30,
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to get services list:', $response->get_error_message() );
-			return array();
-		}
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			$this->add_log( 'Failed to get services list:', $response );
+		$response = $this->remote_get( $url, $token['token'], 'services list' );
+		if ( empty( $response['body'] ) ) {
 			return array();
 		}
 
@@ -422,23 +452,8 @@ class WC_Correios_Cws_Connect {
 		$args = apply_filters( 'woocommerce_correios_cws_get_shipping_cost_args', $args, $this->method_id, $this->instance_id, $package );
 
 		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
-		$response = wp_safe_remote_get(
-			$url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token['token'],
-					'Accept'        => 'application/json',
-				),
-				'timeout' => 30,
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to get shipping cost:', $response->get_error_message() );
-			return array();
-		}
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			$this->add_log( 'Failed to get shipping cost:', $response );
+		$response = $this->remote_get( $url, $token['token'], 'shipping cost' );
+		if ( empty( $response['body'] ) ) {
 			return array();
 		}
 
@@ -481,23 +496,8 @@ class WC_Correios_Cws_Connect {
 		$args = apply_filters( 'woocommerce_correios_cws_get_shipping_time_args', $args, $this->method_id, $this->instance_id, $package );
 
 		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
-		$response = wp_safe_remote_get(
-			$url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token['token'],
-					'Accept'        => 'application/json',
-				),
-				'timeout' => 30,
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to get shipping time:', $response->get_error_message() );
-			return array();
-		}
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			$this->add_log( 'Failed to get shipping time:', $response );
+		$response = $this->remote_get( $url, $token['token'], 'shipping time' );
+		if ( empty( $response['body'] ) ) {
 			return array();
 		}
 
@@ -541,23 +541,8 @@ class WC_Correios_Cws_Connect {
 
 		$args     = apply_filters( 'woocommerce_correios_cws_get_tracking_history_args', $args, $tracking_codes );
 		$url      = add_query_arg( $args, $this->get_cws_url( join( '/', $endpoint ) ) );
-		$response = wp_safe_remote_get(
-			$url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token['token'],
-					'Accept'        => 'application/json',
-				),
-				'timeout' => 30,
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to get tracking history:', $response->get_error_message() );
-			return array();
-		}
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			$this->add_log( 'Failed to get tracking history:', $response );
+		$response = $this->remote_get( $url, $token['token'], 'tracking history' );
+		if ( empty( $response['body'] ) ) {
 			return array();
 		}
 
@@ -596,23 +581,8 @@ class WC_Correios_Cws_Connect {
 		);
 
 		$url      = $this->get_cws_url( join( '/', $endpoint ) );
-		$response = wp_safe_remote_get(
-			$url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token['token'],
-					'Accept'        => 'application/json',
-				),
-				'timeout' => 30,
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$this->add_log( 'Failed to fetch address:', $response->get_error_message() );
-			return array();
-		}
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			$this->add_log( 'Failed to fetch address:', $response );
+		$response = $this->remote_get( $url, $token['token'], 'address from postcode' );
+		if ( empty( $response['body'] ) ) {
 			return array();
 		}
 
