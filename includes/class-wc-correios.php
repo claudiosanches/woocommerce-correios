@@ -176,8 +176,8 @@ class WC_Correios {
 	public static function plugin_action_links( $links ) {
 		$plugin_links   = array();
 		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=integration&section=correios-integration' ) ) . '">' . __( 'Settings', 'woocommerce-correios' ) . '</a>';
-		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Premium Support', 'woocommerce-correios' ) . '</a>';
-		$plugin_links[] = '<a href="https://apoia.se/claudiosanches" target="_blank" rel="noopener noreferrer">' . __( 'Contribute', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches?utm_source=plugin-correios" target="_blank" rel="noopener noreferrer">' . __( 'Premium Support', 'woocommerce-correios' ) . '</a>';
+		$plugin_links[] = '<a href="https://apoia.se/claudiosanches?utm_source=plugin-correios" target="_blank" rel="noopener noreferrer">' . __( 'Contribute', 'woocommerce-correios' ) . '</a>';
 
 		return array_merge( $plugin_links, $links );
 	}
