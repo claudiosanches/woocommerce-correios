@@ -38,7 +38,7 @@ class WC_Correios {
 			add_filter( 'woocommerce_integrations', array( __CLASS__, 'include_integrations' ) );
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'include_methods' ) );
 			add_filter( 'woocommerce_email_classes', array( __CLASS__, 'include_emails' ) );
-			add_filter( 'plugin_action_links_' . plugin_basename( WC_CORREIOS_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( self::get_main_file() ), array( __CLASS__, 'plugin_action_links' ) );
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}
@@ -55,7 +55,7 @@ class WC_Correios {
 			unload_textdomain( 'woocommerce-correios' );
 			load_textdomain(
 				'woocommerce-correios',
-				plugin_dir_path( WC_CORREIOS_PLUGIN_FILE ) . '/languages/woocommerce-correios-' . $locale . '.mo'
+				self::get_plugin_path() . '/languages/woocommerce-correios-' . $locale . '.mo'
 			);
 		}
 
@@ -63,7 +63,7 @@ class WC_Correios {
 		load_plugin_textdomain(
 			'woocommerce-correios',
 			false,
-			dirname( plugin_basename( WC_CORREIOS_PLUGIN_FILE ) ) . '/languages'
+			dirname( plugin_basename( self::get_main_file() ) ) . '/languages'
 		);
 	}
 
