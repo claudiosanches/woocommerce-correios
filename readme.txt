@@ -4,7 +4,7 @@ Donate link: https://apoia.se/claudiosanches?utm_source=plugin-correios
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
 Tested up to: 6.3
-Stable tag: 4.1.7
+Stable tag: 4.1.8
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -183,6 +183,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 == Changelog ==
 
+= 4.1.8 - 2023/09/29 =
+
+- Corrigido o comportamento da integração de preenchimento de endereço quando os campos da nova API estão preenchidos pela metade.
+
 = 4.1.7 - 2023/09/28 =
 
 - Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
@@ -264,3 +268,4 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 - Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
 - Melhorado os logs para incluir apenas a resposta e o cabeçalho da resposta de requisições.
 - Melhorada a descrição dos campos da integração, adicionado link para ajudar os usuários encontrar o número do Cartão de Postagem.
+- Corrigido o comportamento da integração de preenchimento de endereço quando os campos da nova API estão preenchidos pela metade.

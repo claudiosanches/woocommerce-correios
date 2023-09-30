@@ -6,8 +6,8 @@ msgstr ""
 "WooCommerce - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
 "correios\n"
-"POT-Creation-Date: 2023-09-28T22:44:57-03:00\n"
-"PO-Revision-Date: 2023-09-28 22:50-0300\n"
+"POT-Creation-Date: 2023-09-29T21:56:00-03:00\n"
+"PO-Revision-Date: 2023-09-29 21:56-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -592,12 +592,12 @@ msgstr "Adicionar novo código de rastreamento"
 msgid "Tracking codes:"
 msgstr "Códigos de rastreamento:"
 
-#: includes/class-wc-correios-autofill-addresses.php:273
+#: includes/class-wc-correios-autofill-addresses.php:276
 msgid "Missing postcode paramater."
 msgstr "Faltando parâmetro do CEP."
 
-#: includes/class-wc-correios-autofill-addresses.php:280
-#: includes/class-wc-correios-autofill-addresses.php:287
+#: includes/class-wc-correios-autofill-addresses.php:283
+#: includes/class-wc-correios-autofill-addresses.php:290
 msgid "Invalid postcode."
 msgstr "CEP inválido."
 
@@ -616,15 +616,15 @@ msgstr "Estimativa de entrega"
 msgid "Correios tracking code."
 msgstr "Código de rastreamento dos Correios."
 
-#: includes/class-wc-correios.php:178
+#: includes/class-wc-correios.php:194
 msgid "Settings"
 msgstr "Configurações"
 
-#: includes/class-wc-correios.php:179
+#: includes/class-wc-correios.php:195
 msgid "Premium Support"
 msgstr "Suporte Premium"
 
-#: includes/class-wc-correios.php:180
+#: includes/class-wc-correios.php:196
 msgid "Contribute"
 msgstr "Contribua"
 
@@ -907,17 +907,17 @@ msgstr ""
 msgid "Are you sure you want to delete all postcodes from the database?"
 msgstr "Tem certeza que deseja deletar todos os CEPs do banco de dados?"
 
-#: includes/integrations/class-wc-correios-integration.php:392
-#: includes/integrations/class-wc-correios-integration.php:416
+#: includes/integrations/class-wc-correios-integration.php:393
+#: includes/integrations/class-wc-correios-integration.php:417
 msgid "Missing parameters!"
 msgstr "Faltando parâmetros!"
 
-#: includes/integrations/class-wc-correios-integration.php:396
-#: includes/integrations/class-wc-correios-integration.php:421
+#: includes/integrations/class-wc-correios-integration.php:397
+#: includes/integrations/class-wc-correios-integration.php:422
 msgid "Invalid nonce!"
 msgstr "Nonce inválido!"
 
-#: includes/integrations/class-wc-correios-integration.php:403
+#: includes/integrations/class-wc-correios-integration.php:404
 msgid ""
 "Unable to retrieve services list! Review the Portal Meu Correio's Username, "
 "Access Code and Posting Card information, save the settings and try again."
@@ -926,11 +926,11 @@ msgstr ""
 "Nome de Usuário do Portal Meu Correios, Código de Acesso e Cartão de "
 "Postagem, salve as configurações e tente novamente."
 
-#: includes/integrations/class-wc-correios-integration.php:406
+#: includes/integrations/class-wc-correios-integration.php:407
 msgid "Services list generated successfully!"
 msgstr "Lista de serviços gerada com sucesso!"
 
-#: includes/integrations/class-wc-correios-integration.php:430
+#: includes/integrations/class-wc-correios-integration.php:431
 msgid "Postcode database emptied successfully!"
 msgstr "O banco de dados de CEPs foi limpo com sucesso!"
 

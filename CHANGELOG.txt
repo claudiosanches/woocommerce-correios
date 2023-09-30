@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.1.8 - 2023/09/29 =
+
+- Corrigido o comportamento da integração de preenchimento de endereço quando os campos da nova API estão preenchidos pela metade.
+
 = 4.1.7 - 2023/09/28 =
 
 - Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
