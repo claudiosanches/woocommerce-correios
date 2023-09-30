@@ -296,7 +296,8 @@ class WC_Correios_Integration extends WC_Integration {
 	public function setup_cws_status() {
 		$data = $this->setup_cws_user_data();
 		$data = array_filter( $data );
-		return ! empty( $data );
+
+		return ! empty( $data['username'] ) && ! empty( $data['access_code'] ) && ! empty( $data['posting_card'] );
 	}
 
 	/**
