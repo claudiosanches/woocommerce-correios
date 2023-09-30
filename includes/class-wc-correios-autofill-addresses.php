@@ -72,7 +72,7 @@ class WC_Correios_Autofill_Addresses {
 	 */
 	protected static function logger( $data ) {
 		if ( apply_filters( 'woocommerce_correios_cws_debug', false ) ) {
-			$logger = new WC_Logger();
+			$logger = wc_get_logger();
 			$logger->add( 'correios-autofill-addresses', $data );
 		}
 	}
@@ -232,14 +232,17 @@ class WC_Correios_Autofill_Addresses {
 		} else {
 			$connect = new WC_Correios_Cws_Connect();
 			$data    = $connect->get_address_from_postcode( $postcode );
-			$address = new stdClass();
 
-			$address->postcode     = $data['cep'];
-			$address->address      = $data['logradouro'];
-			$address->city         = $data['localidade'];
-			$address->neighborhood = $data['bairro'];
-			$address->state        = $data['uf'];
-			$address->last_query   = current_time( 'mysql' );
+			if ( $data ) {
+				$address = new stdClass();
+
+				$address->postcode     = $data['cep'];
+				$address->address      = $data['logradouro'];
+				$address->city         = $data['localidade'];
+				$address->neighborhood = $data['bairro'];
+				$address->state        = $data['uf'];
+				$address->last_query   = current_time( 'mysql' );
+			}
 		}
 
 		return $address;
