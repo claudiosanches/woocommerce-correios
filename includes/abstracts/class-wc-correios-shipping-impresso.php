@@ -101,7 +101,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 
 		// Active logs.
 		if ( 'yes' === $this->debug ) {
-			$this->log = new WC_Logger();
+			$this->log = wc_get_logger();
 		}
 
 		// Save admin options.
