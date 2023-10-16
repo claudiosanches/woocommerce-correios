@@ -21,14 +21,14 @@ abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 	 *
 	 * @var string
 	 */
-	protected $shipping_class = '';
+	public $shipping_class = '';
 
 	/**
 	 * Log.
 	 *
 	 * @var WC_Logger
 	 */
-	protected $log = null;
+	public $log = null;
 
 	/**
 	 * Initialize Carta Registrada.

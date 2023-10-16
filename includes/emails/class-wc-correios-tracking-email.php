@@ -21,14 +21,14 @@ class WC_Correios_Tracking_Email extends WC_Email {
 	 *
 	 * @var string
 	 */
-	protected $message = '';
+	public $message = '';
 
 	/**
 	 * Tracking message.
 	 *
 	 * @var string
 	 */
-	protected $tracking_message = '';
+	public $tracking_message = '';
 
 	/**
 	 * Initialize tracking template.

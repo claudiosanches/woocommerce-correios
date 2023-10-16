@@ -73,7 +73,7 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	 *
 	 * @var string
 	 */
-	protected $registry_type = '';
+	public $registry_type = '';
 
 	/**
 	 * Initialize Impresso shipping method.

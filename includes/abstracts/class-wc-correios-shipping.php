@@ -37,112 +37,112 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	 *
 	 * @var string
 	 */
-	protected $origin_postcode = '';
+	public $origin_postcode = '';
 
 	/**
 	 * Shipping class ID.
 	 *
 	 * @var int
 	 */
-	protected $shipping_class_id = -1;
+	public $shipping_class_id = -1;
 
 	/**
 	 * Show delivery time.
 	 *
 	 * @var string
 	 */
-	protected $show_delivery_time = '';
+	public $show_delivery_time = '';
 
 	/**
 	 * Additional time.
 	 *
 	 * @var string
 	 */
-	protected $additional_time = '';
+	public $additional_time = '';
 
 	/**
 	 * Receipt notice.
 	 *
 	 * @var string
 	 */
-	protected $receipt_notice = '';
+	public $receipt_notice = '';
 
 	/**
 	 * Own hands.
 	 *
 	 * @var string
 	 */
-	protected $own_hands = '';
+	public $own_hands = '';
 
 	/**
 	 * Declare value.
 	 *
 	 * @var string
 	 */
-	protected $declare_value = '';
+	public $declare_value = '';
 
 	/**
 	 * Custom code.
 	 *
 	 * @var string
 	 */
-	protected $custom_code = '';
+	public $custom_code = '';
 
 	/**
 	 * Service type.
 	 *
 	 * @var string
 	 */
-	protected $service_type = '';
+	public $service_type = '';
 
 	/**
 	 * Login.
 	 *
 	 * @var string
 	 */
-	protected $login = '';
+	public $login = '';
 
 	/**
 	 * Password.
 	 *
 	 * @var string
 	 */
-	protected $password = '';
+	public $password = '';
 
 	/**
 	 * Minimum height.
 	 *
 	 * @var float
 	 */
-	protected $minimum_height = 0;
+	public $minimum_height = 0;
 
 	/**
 	 * Minimum width.
 	 *
 	 * @var float
 	 */
-	protected $minimum_width = 0;
+	public $minimum_width = 0;
 
 	/**
 	 * Minimum length.
 	 *
 	 * @var float
 	 */
-	protected $minimum_length = 0;
+	public $minimum_length = 0;
 
 	/**
 	 * Extra weigth.
 	 *
 	 * @var float
 	 */
-	protected $extra_weight = 0;
+	public $extra_weight = 0;
 
 	/**
 	 * Debug.
 	 *
 	 * @var string
 	 */
-	protected $debug = 'no';
+	public $debug = 'no';
 
 	/**
 	 * More link.
