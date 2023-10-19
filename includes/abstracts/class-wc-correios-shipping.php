@@ -33,6 +33,125 @@ abstract class WC_Correios_Shipping extends WC_Shipping_Method {
 	protected $corporate_code = '';
 
 	/**
+	 * Origin postcode.
+	 *
+	 * @var string
+	 */
+	public $origin_postcode = '';
+
+	/**
+	 * Shipping class ID.
+	 *
+	 * @var int
+	 */
+	public $shipping_class_id = -1;
+
+	/**
+	 * Show delivery time.
+	 *
+	 * @var string
+	 */
+	public $show_delivery_time = '';
+
+	/**
+	 * Additional time.
+	 *
+	 * @var string
+	 */
+	public $additional_time = '';
+
+	/**
+	 * Receipt notice.
+	 *
+	 * @var string
+	 */
+	public $receipt_notice = '';
+
+	/**
+	 * Own hands.
+	 *
+	 * @var string
+	 */
+	public $own_hands = '';
+
+	/**
+	 * Declare value.
+	 *
+	 * @var string
+	 */
+	public $declare_value = '';
+
+	/**
+	 * Custom code.
+	 *
+	 * @var string
+	 */
+	public $custom_code = '';
+
+	/**
+	 * Service type.
+	 *
+	 * @var string
+	 */
+	public $service_type = '';
+
+	/**
+	 * Login.
+	 *
+	 * @var string
+	 */
+	public $login = '';
+
+	/**
+	 * Password.
+	 *
+	 * @var string
+	 */
+	public $password = '';
+
+	/**
+	 * Minimum height.
+	 *
+	 * @var float
+	 */
+	public $minimum_height = 0;
+
+	/**
+	 * Minimum width.
+	 *
+	 * @var float
+	 */
+	public $minimum_width = 0;
+
+	/**
+	 * Minimum length.
+	 *
+	 * @var float
+	 */
+	public $minimum_length = 0;
+
+	/**
+	 * Extra weigth.
+	 *
+	 * @var float
+	 */
+	public $extra_weight = 0;
+
+	/**
+	 * Debug.
+	 *
+	 * @var string
+	 */
+	public $debug = 'no';
+
+	/**
+	 * More link.
+	 *
+	 * @var string
+	 */
+	public $more_link = '';
+
+	/**
 	 * Initialize the Correios shipping method.
 	 *
 	 * @param int $instance_id Shipping zone instance ID.

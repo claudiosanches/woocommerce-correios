@@ -17,6 +17,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Correios_Tracking_Email extends WC_Email {
 
 	/**
+	 * Message.
+	 *
+	 * @var string
+	 */
+	public $message = '';
+
+	/**
+	 * Tracking message.
+	 *
+	 * @var string
+	 */
+	public $tracking_message = '';
+
+	/**
 	 * Initialize tracking template.
 	 */
 	public function __construct() {

@@ -69,6 +69,13 @@ abstract class WC_Correios_Shipping_Impresso extends WC_Correios_Shipping_Carta 
 	protected $reasonable_registry_weight_limit = 2000.000;
 
 	/**
+	 * Registry type.
+	 *
+	 * @var string
+	 */
+	public $registry_type = '';
+
+	/**
 	 * Initialize Impresso shipping method.
 	 *
 	 * @param int $instance_id Shipping zone instance.

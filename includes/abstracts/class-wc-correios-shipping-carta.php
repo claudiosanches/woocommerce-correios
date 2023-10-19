@@ -17,6 +17,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class WC_Correios_Shipping_Carta extends WC_Correios_Shipping {
 
 	/**
+	 * Shipping class.
+	 *
+	 * @var string
+	 */
+	public $shipping_class = '';
+
+	/**
+	 * Log.
+	 *
+	 * @var WC_Logger
+	 */
+	public $log = null;
+
+	/**
 	 * Initialize Carta Registrada.
 	 *
 	 * @param int $instance_id Shipping zone instance.
