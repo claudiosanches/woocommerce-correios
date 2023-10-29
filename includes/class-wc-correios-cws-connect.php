@@ -4,7 +4,7 @@
  *
  * @package WooCommerce_Correios/Classes/Webservice/Connect
  * @since   4.0.0
- * @version 4.1.1
+ * @version 4.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -266,6 +266,30 @@ class WC_Correios_Cws_Connect {
 	}
 
 	/**
+	 * Filter services by segment.
+	 *
+	 * @param array    $raw_data Raw data.
+	 * @param string[] $segments List of segments.
+	 * @return array
+	 */
+	protected function filter_services( $raw_data, $segments = array() ) {
+		$data = array();
+
+		foreach ( $raw_data as $item ) {
+			if (
+				( $segments && ! in_array( strval( $item['coSegmento'] ), $segments, true ) )
+				|| ! isset( $item['codigo'] )
+			) {
+				continue;
+			}
+
+			$data[ $item['codigo'] ] = sprintf( '(%1$s) %2$s', $item['codigo'], $item['descricao'] );
+		}
+
+		return apply_filters( 'woocommerce_correios_cws_services_list', $data );
+	}
+
+	/**
 	 * Get token transient ID.
 	 *
 	 * @return string
@@ -344,15 +368,16 @@ class WC_Correios_Cws_Connect {
 	/**
 	 * Get available services.
 	 *
-	 * @param bool $update Update/regenerate list.
+	 * @param bool     $update Update/regenerate list.
+	 * @param string[] $segments List of segments.
 	 * @return array
 	 */
-	public function get_available_services( $update = false ) {
+	public function get_available_services( $update = false, $segments = array() ) {
 		$option = 'woocommerce_correios_cws_services_list';
 
-		$data = apply_filters( 'woocommerce_correios_cws_default_services', array() );
+		$data = apply_filters( 'woocommerce_correios_cws_default_services', array(), $segments );
 		if ( ! empty( $data ) ) {
-			return $data;
+			return $this->filter_services( $data, $segments );
 		}
 
 		if ( false === $update ) {
@@ -360,7 +385,7 @@ class WC_Correios_Cws_Connect {
 			$data = json_decode( $data, true );
 
 			if ( ! empty( $data ) ) {
-				return $data;
+				return $this->filter_services( $data, $segments );
 			}
 		}
 
@@ -370,7 +395,7 @@ class WC_Correios_Cws_Connect {
 		if ( empty( $token ) || empty( $token['cnpj'] ) ) {
 			$this->add_log( 'Missing Token! Aborting...' );
 			$this->clean_token();
-			return $data;
+			return $this->filter_services( $data, $segments );
 		}
 
 		$endpoint = array(
@@ -392,40 +417,32 @@ class WC_Correios_Cws_Connect {
 		}
 
 		$raw_data = json_decode( $response['body'], true );
-		$data     = array();
 
 		if ( empty( $raw_data['itens'] ) ) {
 			$this->add_log( 'No available services found:', $response );
-			return $data;
+			return array();
 		}
 
-		// Build services list.
-		$segments = apply_filters( 'woocommerce_correios_cws_allowed_segments_ids', array( '3', '6' ) );
-		foreach ( $raw_data['itens'] as $item ) {
-			if ( in_array( strval( $item['coSegmento'] ), $segments, true ) ) {
-				$data[ $item['codigo'] ] = sprintf( '(%1$s) %2$s', $item['codigo'], $item['descricao'] );
-			}
-		}
-
-		$data = apply_filters( 'woocommerce_correios_cws_services_list', $data );
+		$data = $raw_data['itens'];
 
 		// Save services list.
 		update_option( $option, wp_json_encode( $data ) );
 
 		$this->add_log( 'Services list generated:', $data );
 
-		return $data;
+		return $this->filter_services( $data, $segments );
 	}
 
 	/**
 	 * Get shipping cost.
 	 *
-	 * @param array $args         List of paramenters.
-	 * @param array $product_code Product code.
-	 * @param array $package      WooCommerce shipping package.
+	 * @param array  $args         List of parameters.
+	 * @param array  $product_code Product code.
+	 * @param array  $package      WooCommerce shipping package.
+	 * @param string $api_type    API type.
 	 * @return array
 	 */
-	public function get_shipping_cost( $args, $product_code, $package ) {
+	public function get_shipping_cost( $args, $product_code, $package, $api_type = 'nacional' ) {
 		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_cost', array(), $args, $this->method_id, $this->instance_id, $package );
 		if ( ! empty( $data ) ) {
 			return $data;
@@ -442,7 +459,7 @@ class WC_Correios_Cws_Connect {
 		$endpoint = array(
 			'preco',
 			'v1',
-			'nacional',
+			$api_type,
 			$product_code,
 		);
 
@@ -467,12 +484,13 @@ class WC_Correios_Cws_Connect {
 	/**
 	 * Get shipping time.
 	 *
-	 * @param array $args         List of paramenters.
-	 * @param array $product_code Product code.
-	 * @param array $package      WooCommerce shipping package.
+	 * @param array  $args         List of paramentes.
+	 * @param array  $product_code Product code.
+	 * @param array  $package      WooCommerce shipping package.
+	 * @param string $api_type    API type.
 	 * @return array
 	 */
-	public function get_shipping_time( $args, $product_code, $package ) {
+	public function get_shipping_time( $args, $product_code, $package, $api_type = 'nacional' ) {
 		$data = apply_filters( 'woocommerce_correios_cws_pre_get_shipping_time', array(), $args, $this->method_id, $this->instance_id, $package );
 		if ( ! empty( $data ) ) {
 			return $data;
@@ -489,7 +507,7 @@ class WC_Correios_Cws_Connect {
 		$endpoint = array(
 			'prazo',
 			'v1',
-			'nacional',
+			$api_type,
 			$product_code,
 		);
 

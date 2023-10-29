@@ -105,6 +105,12 @@ class WC_Correios {
 		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-carta.php';
 		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-impresso.php';
 		include_once __DIR__ . '/abstracts/class-wc-correios-shipping-international.php';
+
+		// New API shipping methods.
+		include_once __DIR__ . '/shipping/class-wc-correios-shipping-cws.php';
+		include_once __DIR__ . '/shipping/class-wc-correios-shipping-cws-international.php';
+
+		// Load deprecated methods.
 		foreach ( glob( plugin_dir_path( __FILE__ ) . '/shipping/*.php' ) as $filename ) {
 			include_once $filename;
 		}
@@ -145,6 +151,7 @@ class WC_Correios {
 	 */
 	public static function include_methods( $methods ) {
 		$methods['correios-cws']                              = 'WC_Correios_Shipping_Cws';
+		$methods['correios-cws-international']                = 'WC_Correios_Shipping_Cws_International';
 		$methods['correios-carta-registrada']                 = 'WC_Correios_Shipping_Carta_Registrada';
 		$methods['correios-impresso-normal']                  = 'WC_Correios_Shipping_Impresso_Normal';
 		$methods['correios-impresso-urgente']                 = 'WC_Correios_Shipping_Impresso_Urgente';
