@@ -6,8 +6,8 @@ msgstr ""
 "WooCommerce - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
 "correios\n"
-"POT-Creation-Date: 2023-09-29T21:56:00-03:00\n"
-"PO-Revision-Date: 2023-09-29 21:56-0300\n"
+"POT-Creation-Date: 2023-10-29T18:26:36-03:00\n"
+"PO-Revision-Date: 2023-10-29 18:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -39,114 +39,114 @@ msgid "https://claudiosanches.com"
 msgstr "https://claudiosanches.com"
 
 #. translators: %s: method title
-#: includes/abstracts/class-wc-correios-shipping-carta.php:28
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:80
-#: includes/abstracts/class-wc-correios-shipping.php:43
+#: includes/abstracts/class-wc-correios-shipping-carta.php:42
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:87
+#: includes/abstracts/class-wc-correios-shipping.php:162
 msgid "%s is a shipping method from Correios."
 msgstr "%s é um método de entrega dos Correios."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:66
+#: includes/abstracts/class-wc-correios-shipping-carta.php:80
 msgid "-- Select a shipping class --"
 msgstr "-- Selecione uma classe de entrega --"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:82
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:117
+#: includes/abstracts/class-wc-correios-shipping-carta.php:96
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:124
 #: includes/abstracts/class-wc-correios-shipping-international.php:65
-#: includes/abstracts/class-wc-correios-shipping.php:121
-#: includes/emails/class-wc-correios-tracking-email.php:82
+#: includes/abstracts/class-wc-correios-shipping.php:240
+#: includes/emails/class-wc-correios-tracking-email.php:96
 #: includes/integrations/class-wc-correios-integration.php:150
 #: includes/integrations/class-wc-correios-integration.php:168
-#: includes/shipping/class-wc-correios-shipping-cws.php:57
+#: includes/shipping/class-wc-correios-shipping-cws.php:194
 msgid "Enable/Disable"
 msgstr "Habilitar/Desabilitar"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:84
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:119
+#: includes/abstracts/class-wc-correios-shipping-carta.php:98
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:126
 #: includes/abstracts/class-wc-correios-shipping-international.php:67
-#: includes/abstracts/class-wc-correios-shipping.php:123
-#: includes/shipping/class-wc-correios-shipping-cws.php:59
+#: includes/abstracts/class-wc-correios-shipping.php:242
+#: includes/shipping/class-wc-correios-shipping-cws.php:196
 msgid "Enable this shipping method"
 msgstr "Ativar este método de envio"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:88
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:123
+#: includes/abstracts/class-wc-correios-shipping-carta.php:102
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:130
 #: includes/abstracts/class-wc-correios-shipping-international.php:71
-#: includes/abstracts/class-wc-correios-shipping.php:127
-#: includes/shipping/class-wc-correios-shipping-cws.php:63
+#: includes/abstracts/class-wc-correios-shipping.php:246
+#: includes/shipping/class-wc-correios-shipping-cws.php:200
 msgid "Title"
 msgstr "Título"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:90
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:125
+#: includes/abstracts/class-wc-correios-shipping-carta.php:104
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:132
 #: includes/abstracts/class-wc-correios-shipping-international.php:73
-#: includes/abstracts/class-wc-correios-shipping.php:129
-#: includes/shipping/class-wc-correios-shipping-cws.php:65
+#: includes/abstracts/class-wc-correios-shipping.php:248
+#: includes/shipping/class-wc-correios-shipping-cws.php:202
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isto controla o título que o usuário vê durante o checkout."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:95
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:130
+#: includes/abstracts/class-wc-correios-shipping-carta.php:109
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:137
 #: includes/abstracts/class-wc-correios-shipping-international.php:78
-#: includes/abstracts/class-wc-correios-shipping.php:134
-#: includes/shipping/class-wc-correios-shipping-cws.php:81
+#: includes/abstracts/class-wc-correios-shipping.php:253
+#: includes/shipping/class-wc-correios-shipping-cws.php:218
 msgid "Behavior Options"
 msgstr "Opções de comportamento"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:100
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:135
+#: includes/abstracts/class-wc-correios-shipping-carta.php:114
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:142
 #: includes/abstracts/class-wc-correios-shipping-international.php:91
-#: includes/abstracts/class-wc-correios-shipping.php:147
-#: includes/shipping/class-wc-correios-shipping-cws.php:94
+#: includes/abstracts/class-wc-correios-shipping.php:266
+#: includes/shipping/class-wc-correios-shipping-cws.php:231
 msgid "Shipping Class"
 msgstr "Classe de entrega"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:102
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:137
+#: includes/abstracts/class-wc-correios-shipping-carta.php:116
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:144
 msgid "Select for which shipping class this method will be applied."
 msgstr "Selecione uma classe de entrega para qual este método sera aplicado."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:109
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:157
+#: includes/abstracts/class-wc-correios-shipping-carta.php:123
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:164
 #: includes/abstracts/class-wc-correios-shipping-international.php:100
-#: includes/abstracts/class-wc-correios-shipping.php:156
-#: includes/shipping/class-wc-correios-shipping-cws.php:103
+#: includes/abstracts/class-wc-correios-shipping.php:275
+#: includes/shipping/class-wc-correios-shipping-cws.php:240
 msgid "Delivery Time"
 msgstr "Tempo de entrega"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:111
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:159
+#: includes/abstracts/class-wc-correios-shipping-carta.php:125
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:166
 #: includes/abstracts/class-wc-correios-shipping-international.php:102
-#: includes/abstracts/class-wc-correios-shipping.php:158
-#: includes/shipping/class-wc-correios-shipping-cws.php:105
+#: includes/abstracts/class-wc-correios-shipping.php:277
+#: includes/shipping/class-wc-correios-shipping-cws.php:242
 msgid "Show estimated delivery time"
 msgstr "Exibir estimativa de entrega"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:112
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:160
+#: includes/abstracts/class-wc-correios-shipping-carta.php:126
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:167
 #: includes/abstracts/class-wc-correios-shipping-international.php:103
-#: includes/abstracts/class-wc-correios-shipping.php:159
-#: includes/shipping/class-wc-correios-shipping-cws.php:106
+#: includes/abstracts/class-wc-correios-shipping.php:278
+#: includes/shipping/class-wc-correios-shipping-cws.php:243
 msgid "Display the estimated delivery time in working days."
 msgstr "Exibir o tempo estimado de entrega em dias úteis."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:117
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:165
+#: includes/abstracts/class-wc-correios-shipping-carta.php:131
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:172
 msgid "Delivery Days"
 msgstr "Dias para entregar"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:119
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:167
+#: includes/abstracts/class-wc-correios-shipping-carta.php:133
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:174
 msgid "Working days to the estimated delivery."
 msgstr "Estimativa em dias úteis para a entrega."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:125
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:173
+#: includes/abstracts/class-wc-correios-shipping-carta.php:139
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:180
 #: includes/abstracts/class-wc-correios-shipping-international.php:171
 msgid "Extra Weight (g)"
 msgstr "Peso extra (g)"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:127
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:175
+#: includes/abstracts/class-wc-correios-shipping-carta.php:141
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:182
 #: includes/abstracts/class-wc-correios-shipping-international.php:173
 msgid ""
 "Extra weight in grams to add to the package total when quoting shipping "
@@ -155,138 +155,138 @@ msgstr ""
 "Peso extra em gramas para adicionar ao total da embalagem ao cotar os custos "
 "de entrega."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:132
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:180
+#: includes/abstracts/class-wc-correios-shipping-carta.php:146
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:187
 #: includes/abstracts/class-wc-correios-shipping-international.php:108
-#: includes/abstracts/class-wc-correios-shipping.php:172
-#: includes/shipping/class-wc-correios-shipping-cws.php:119
+#: includes/abstracts/class-wc-correios-shipping.php:291
+#: includes/shipping/class-wc-correios-shipping-cws.php:256
 msgid "Handling Fee"
 msgstr "Taxa de manuseio"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:134
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:182
+#: includes/abstracts/class-wc-correios-shipping-carta.php:148
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:189
 #: includes/abstracts/class-wc-correios-shipping-international.php:110
-#: includes/abstracts/class-wc-correios-shipping.php:174
-#: includes/shipping/class-wc-correios-shipping-cws.php:121
+#: includes/abstracts/class-wc-correios-shipping.php:293
+#: includes/shipping/class-wc-correios-shipping-cws.php:258
 msgid ""
 "Enter an amount, e.g. 2.50, or a percentage, e.g. 5%. Leave blank to disable."
 msgstr ""
 "Digite um valor, por exemplo: 2.50, ou uma porcentagem, por exemplo, 5%. "
 "Deixe em branco para desabilitar."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:140
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:188
+#: includes/abstracts/class-wc-correios-shipping-carta.php:154
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:195
 #: includes/abstracts/class-wc-correios-shipping-international.php:116
-#: includes/abstracts/class-wc-correios-shipping.php:180
-#: includes/shipping/class-wc-correios-shipping-cws.php:127
+#: includes/abstracts/class-wc-correios-shipping.php:299
+#: includes/shipping/class-wc-correios-shipping-cws.php:264
 msgid "Optional Services"
 msgstr "Serviços opcionais"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:142
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:190
+#: includes/abstracts/class-wc-correios-shipping-carta.php:156
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:197
 #: includes/abstracts/class-wc-correios-shipping-international.php:118
-#: includes/abstracts/class-wc-correios-shipping.php:182
-#: includes/shipping/class-wc-correios-shipping-cws.php:129
+#: includes/abstracts/class-wc-correios-shipping.php:301
+#: includes/shipping/class-wc-correios-shipping-cws.php:266
 msgid ""
 "Use these options to add the value of each service provided by the Correios."
 msgstr ""
 "Utilize estas opções para adicionar o valor de cada serviço prestado pelos "
 "Correios."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:146
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:194
-#: includes/abstracts/class-wc-correios-shipping.php:186
-#: includes/shipping/class-wc-correios-shipping-cws.php:133
+#: includes/abstracts/class-wc-correios-shipping-carta.php:160
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:201
+#: includes/abstracts/class-wc-correios-shipping.php:305
+#: includes/shipping/class-wc-correios-shipping-cws.php:270
 msgid "Receipt Notice"
 msgstr "Aviso de recebimento"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:148
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:196
-#: includes/abstracts/class-wc-correios-shipping.php:188
-#: includes/shipping/class-wc-correios-shipping-cws.php:135
+#: includes/abstracts/class-wc-correios-shipping-carta.php:162
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:203
+#: includes/abstracts/class-wc-correios-shipping.php:307
+#: includes/shipping/class-wc-correios-shipping-cws.php:272
 msgid "Enable receipt notice"
 msgstr "Ativar aviso de recebimento"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:149
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:197
-#: includes/abstracts/class-wc-correios-shipping.php:189
-#: includes/shipping/class-wc-correios-shipping-cws.php:136
+#: includes/abstracts/class-wc-correios-shipping-carta.php:163
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:204
+#: includes/abstracts/class-wc-correios-shipping.php:308
+#: includes/shipping/class-wc-correios-shipping-cws.php:273
 msgid "This controls whether to add costs of the receipt notice service."
 msgstr ""
 "Isto controla se deve adicionar o custo do serviço de aviso de recebimento."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:154
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:202
-#: includes/abstracts/class-wc-correios-shipping.php:194
-#: includes/shipping/class-wc-correios-shipping-cws.php:141
+#: includes/abstracts/class-wc-correios-shipping-carta.php:168
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:209
+#: includes/abstracts/class-wc-correios-shipping.php:313
+#: includes/shipping/class-wc-correios-shipping-cws.php:278
 msgid "Own Hands"
 msgstr "Mão própria"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:156
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:204
-#: includes/abstracts/class-wc-correios-shipping.php:196
-#: includes/shipping/class-wc-correios-shipping-cws.php:143
+#: includes/abstracts/class-wc-correios-shipping-carta.php:170
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:211
+#: includes/abstracts/class-wc-correios-shipping.php:315
+#: includes/shipping/class-wc-correios-shipping-cws.php:280
 msgid "Enable own hands"
 msgstr "Ativar mão própria"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:157
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:205
-#: includes/abstracts/class-wc-correios-shipping.php:197
-#: includes/shipping/class-wc-correios-shipping-cws.php:144
+#: includes/abstracts/class-wc-correios-shipping-carta.php:171
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:212
+#: includes/abstracts/class-wc-correios-shipping.php:316
+#: includes/shipping/class-wc-correios-shipping-cws.php:281
 msgid "This controls whether to add costs of the own hands service."
 msgstr "Isto controla se deve adicionar o custo do serviço de mão própria."
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:162
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:210
+#: includes/abstracts/class-wc-correios-shipping-carta.php:176
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:217
 #: includes/abstracts/class-wc-correios-shipping-international.php:178
-#: includes/abstracts/class-wc-correios-shipping.php:283
-#: includes/shipping/class-wc-correios-shipping-cws.php:200
+#: includes/abstracts/class-wc-correios-shipping.php:402
+#: includes/shipping/class-wc-correios-shipping-cws.php:330
 msgid "Testing"
 msgstr "Teste"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:167
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:215
+#: includes/abstracts/class-wc-correios-shipping-carta.php:181
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:222
 #: includes/abstracts/class-wc-correios-shipping-international.php:183
-#: includes/abstracts/class-wc-correios-shipping.php:288
+#: includes/abstracts/class-wc-correios-shipping.php:407
 #: includes/integrations/class-wc-correios-integration.php:137
-#: includes/shipping/class-wc-correios-shipping-cws.php:205
+#: includes/shipping/class-wc-correios-shipping-cws.php:335
 msgid "Debug Log"
 msgstr "Log de depuração"
 
-#: includes/abstracts/class-wc-correios-shipping-carta.php:169
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:217
+#: includes/abstracts/class-wc-correios-shipping-carta.php:183
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:224
 #: includes/abstracts/class-wc-correios-shipping-international.php:185
-#: includes/abstracts/class-wc-correios-shipping.php:290
-#: includes/shipping/class-wc-correios-shipping-cws.php:207
+#: includes/abstracts/class-wc-correios-shipping.php:409
+#: includes/shipping/class-wc-correios-shipping-cws.php:337
 msgid "Enable logging"
 msgstr "Habilitar log"
 
 #. translators: %s: method title
-#: includes/abstracts/class-wc-correios-shipping-carta.php:172
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:220
+#: includes/abstracts/class-wc-correios-shipping-carta.php:186
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:227
 #: includes/abstracts/class-wc-correios-shipping-international.php:188
-#: includes/abstracts/class-wc-correios-shipping.php:293
-#: includes/shipping/class-wc-correios-shipping-cws.php:210
+#: includes/abstracts/class-wc-correios-shipping.php:412
+#: includes/shipping/class-wc-correios-shipping-cws.php:340
 msgid "Log %s events, such as WebServices requests."
 msgstr "Registra os eventos do(a) %s, como requisições no WebService."
 
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:144
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:151
 msgid "Registry Type"
 msgstr "Tipo de registro"
 
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:146
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:153
 msgid "Select for which registry type this method will be applied."
 msgstr "Selecione qual o tipo de registro que este método irá aplicar."
 
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:150
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:157
 msgid "-- Select a registry type --"
 msgstr "-- Selecione um tipo de registro --"
 
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:151
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:158
 msgid "Registro Nacional"
 msgstr "Registro Nacional"
 
-#: includes/abstracts/class-wc-correios-shipping-impresso.php:152
+#: includes/abstracts/class-wc-correios-shipping-impresso.php:159
 msgid "Registro Módico"
 msgstr "Registro Módico"
 
@@ -296,38 +296,38 @@ msgid "%s is a international shipping method from Correios."
 msgstr "%s é um método de entrega internacional dos Correios."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:83
-#: includes/abstracts/class-wc-correios-shipping.php:139
-#: includes/shipping/class-wc-correios-shipping-cws.php:86
+#: includes/abstracts/class-wc-correios-shipping.php:258
+#: includes/shipping/class-wc-correios-shipping-cws.php:223
 msgid "Origin Postcode"
 msgstr "CEP de origem"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:85
-#: includes/abstracts/class-wc-correios-shipping.php:141
-#: includes/shipping/class-wc-correios-shipping-cws.php:88
+#: includes/abstracts/class-wc-correios-shipping.php:260
+#: includes/shipping/class-wc-correios-shipping-cws.php:225
 msgid "The postcode of the location your packages are delivered from."
 msgstr "O CEP de onde as suas encomendas serão enviadas."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:93
-#: includes/abstracts/class-wc-correios-shipping.php:149
-#: includes/shipping/class-wc-correios-shipping-cws.php:96
+#: includes/abstracts/class-wc-correios-shipping.php:268
+#: includes/shipping/class-wc-correios-shipping-cws.php:233
 msgid "If necessary, select a shipping class to apply this method."
 msgstr ""
 "Se necessário, selecione uma classe de envio para aplicar neste método."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:122
-#: includes/abstracts/class-wc-correios-shipping.php:202
-#: includes/shipping/class-wc-correios-shipping-cws.php:149
+#: includes/abstracts/class-wc-correios-shipping.php:321
+#: includes/shipping/class-wc-correios-shipping-cws.php:286
 msgid "Declare Value for Insurance"
 msgstr "Declarar valor para seguro"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:124
-#: includes/abstracts/class-wc-correios-shipping.php:204
-#: includes/shipping/class-wc-correios-shipping-cws.php:151
+#: includes/abstracts/class-wc-correios-shipping.php:323
+#: includes/shipping/class-wc-correios-shipping-cws.php:288
 msgid "Enable declared value"
 msgstr "Ativar valor declarado"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:125
-#: includes/abstracts/class-wc-correios-shipping.php:205
+#: includes/abstracts/class-wc-correios-shipping.php:324
 msgid ""
 "This controls if the price of the package must be declared for insurance "
 "purposes."
@@ -348,134 +348,134 @@ msgid "Password"
 msgstr "Senha"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:139
-#: includes/abstracts/class-wc-correios-shipping.php:244
+#: includes/abstracts/class-wc-correios-shipping.php:363
 msgid "Your Correios password."
 msgstr "Sua senha nos Correios."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:144
-#: includes/abstracts/class-wc-correios-shipping.php:249
-#: includes/shipping/class-wc-correios-shipping-cws.php:166
+#: includes/abstracts/class-wc-correios-shipping.php:368
+#: includes/shipping/class-wc-correios-shipping-cws.php:296
 msgid "Package Standard"
 msgstr "Pacote Padrão"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:146
-#: includes/abstracts/class-wc-correios-shipping.php:251
-#: includes/shipping/class-wc-correios-shipping-cws.php:168
+#: includes/abstracts/class-wc-correios-shipping.php:370
+#: includes/shipping/class-wc-correios-shipping-cws.php:298
 msgid "Minimum measure for your shipping packages."
 msgstr "Dimensões mínimas para suas encomendas."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:150
-#: includes/abstracts/class-wc-correios-shipping.php:255
-#: includes/shipping/class-wc-correios-shipping-cws.php:172
+#: includes/abstracts/class-wc-correios-shipping.php:374
+#: includes/shipping/class-wc-correios-shipping-cws.php:302
 msgid "Minimum Height (cm)"
 msgstr "Altura mínima (cm)"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:152
-#: includes/abstracts/class-wc-correios-shipping.php:257
-#: includes/shipping/class-wc-correios-shipping-cws.php:174
+#: includes/abstracts/class-wc-correios-shipping.php:376
+#: includes/shipping/class-wc-correios-shipping-cws.php:304
 msgid "Minimum height of your shipping packages. Correios needs at least 2cm."
 msgstr ""
 "Altura mínima para as suas encomendas. Os Correios pedem que seja menos com "
 "2cm."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:157
-#: includes/abstracts/class-wc-correios-shipping.php:262
-#: includes/shipping/class-wc-correios-shipping-cws.php:179
+#: includes/abstracts/class-wc-correios-shipping.php:381
+#: includes/shipping/class-wc-correios-shipping-cws.php:309
 msgid "Minimum Width (cm)"
 msgstr "Largura mínima (cm)"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:159
-#: includes/abstracts/class-wc-correios-shipping.php:264
-#: includes/shipping/class-wc-correios-shipping-cws.php:181
+#: includes/abstracts/class-wc-correios-shipping.php:383
+#: includes/shipping/class-wc-correios-shipping-cws.php:311
 msgid "Minimum width of your shipping packages. Correios needs at least 11cm."
 msgstr ""
 "Largura mínima para as suas encomendas. Os Correios pedem que seja menos com "
 "11cm."
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:164
-#: includes/abstracts/class-wc-correios-shipping.php:269
-#: includes/shipping/class-wc-correios-shipping-cws.php:186
+#: includes/abstracts/class-wc-correios-shipping.php:388
+#: includes/shipping/class-wc-correios-shipping-cws.php:316
 msgid "Minimum Length (cm)"
 msgstr "Comprimento mínimo (cm)"
 
 #: includes/abstracts/class-wc-correios-shipping-international.php:166
-#: includes/abstracts/class-wc-correios-shipping.php:271
-#: includes/shipping/class-wc-correios-shipping-cws.php:188
+#: includes/abstracts/class-wc-correios-shipping.php:390
+#: includes/shipping/class-wc-correios-shipping-cws.php:318
 msgid "Minimum length of your shipping packages. Correios needs at least 16cm."
 msgstr ""
 "Comprimento mínimo para as suas encomendas. Os Correios pedem que seja menos "
 "com 16cm."
 
-#: includes/abstracts/class-wc-correios-shipping.php:83
+#: includes/abstracts/class-wc-correios-shipping.php:202
 #: includes/integrations/class-wc-correios-integration.php:87
 msgid "View logs."
 msgstr "Ver logs."
 
-#: includes/abstracts/class-wc-correios-shipping.php:104
+#: includes/abstracts/class-wc-correios-shipping.php:223
 msgid "Any Shipping Class"
 msgstr "Qualquer classe de entrega"
 
-#: includes/abstracts/class-wc-correios-shipping.php:105
+#: includes/abstracts/class-wc-correios-shipping.php:224
 msgid "No Shipping Class"
 msgstr "Nenhuma classe de entrega"
 
-#: includes/abstracts/class-wc-correios-shipping.php:164
-#: includes/shipping/class-wc-correios-shipping-cws.php:111
+#: includes/abstracts/class-wc-correios-shipping.php:283
+#: includes/shipping/class-wc-correios-shipping-cws.php:248
 msgid "Additional Days"
 msgstr "Dias adicionais"
 
-#: includes/abstracts/class-wc-correios-shipping.php:166
-#: includes/shipping/class-wc-correios-shipping-cws.php:113
+#: includes/abstracts/class-wc-correios-shipping.php:285
+#: includes/shipping/class-wc-correios-shipping-cws.php:250
 msgid "Additional working days to the estimated delivery."
 msgstr "Dias úteis adicionais para a estimativa de entrega."
 
-#: includes/abstracts/class-wc-correios-shipping.php:210
+#: includes/abstracts/class-wc-correios-shipping.php:329
 msgid "Service Options"
 msgstr "Opções de serviços"
 
-#: includes/abstracts/class-wc-correios-shipping.php:215
+#: includes/abstracts/class-wc-correios-shipping.php:334
 msgid "Service Code"
 msgstr "Código do serviço"
 
-#: includes/abstracts/class-wc-correios-shipping.php:217
+#: includes/abstracts/class-wc-correios-shipping.php:336
 msgid "Service code, use this for custom codes."
 msgstr "Código do serviço, utilize isto para código personalizados."
 
-#: includes/abstracts/class-wc-correios-shipping.php:223
+#: includes/abstracts/class-wc-correios-shipping.php:342
 msgid "Service Type"
 msgstr "Tipo de serviço"
 
-#: includes/abstracts/class-wc-correios-shipping.php:225
+#: includes/abstracts/class-wc-correios-shipping.php:344
 msgid "Choose between conventional or corporate service."
 msgstr "Escolha entre o serviço convencional ou corporativo."
 
-#: includes/abstracts/class-wc-correios-shipping.php:230
+#: includes/abstracts/class-wc-correios-shipping.php:349
 msgid "Conventional"
 msgstr "Convencional"
 
-#: includes/abstracts/class-wc-correios-shipping.php:231
+#: includes/abstracts/class-wc-correios-shipping.php:350
 msgid "Corporate"
 msgstr "Corporativo"
 
-#: includes/abstracts/class-wc-correios-shipping.php:235
+#: includes/abstracts/class-wc-correios-shipping.php:354
 msgid "Administrative Code"
 msgstr "Código administrativo"
 
-#: includes/abstracts/class-wc-correios-shipping.php:237
+#: includes/abstracts/class-wc-correios-shipping.php:356
 msgid "Your Correios login. It's usually your CNPJ."
 msgstr "O seu login nos Correios. Geralmente o seu CNPJ."
 
-#: includes/abstracts/class-wc-correios-shipping.php:242
+#: includes/abstracts/class-wc-correios-shipping.php:361
 msgid "Administrative Password"
 msgstr "Senha administrativa"
 
-#: includes/abstracts/class-wc-correios-shipping.php:276
-#: includes/shipping/class-wc-correios-shipping-cws.php:193
+#: includes/abstracts/class-wc-correios-shipping.php:395
+#: includes/shipping/class-wc-correios-shipping-cws.php:323
 msgid "Extra Weight (kg)"
 msgstr "Peso extra (kg)"
 
-#: includes/abstracts/class-wc-correios-shipping.php:278
-#: includes/shipping/class-wc-correios-shipping-cws.php:195
+#: includes/abstracts/class-wc-correios-shipping.php:397
+#: includes/shipping/class-wc-correios-shipping-cws.php:325
 msgid ""
 "Extra weight in kilograms to add to the package total when quoting shipping "
 "costs."
@@ -616,41 +616,41 @@ msgstr "Estimativa de entrega"
 msgid "Correios tracking code."
 msgstr "Código de rastreamento dos Correios."
 
-#: includes/class-wc-correios.php:194
+#: includes/class-wc-correios.php:201
 msgid "Settings"
 msgstr "Configurações"
 
-#: includes/class-wc-correios.php:195
+#: includes/class-wc-correios.php:202
 msgid "Premium Support"
 msgstr "Suporte Premium"
 
-#: includes/class-wc-correios.php:196
+#: includes/class-wc-correios.php:203
 msgid "Contribute"
 msgstr "Contribua"
 
-#: includes/emails/class-wc-correios-tracking-email.php:24
+#: includes/emails/class-wc-correios-tracking-email.php:38
 msgid "Correios Tracking Code"
 msgstr "Código de rastreio dos Correios"
 
-#: includes/emails/class-wc-correios-tracking-email.php:26
+#: includes/emails/class-wc-correios-tracking-email.php:40
 msgid "This email is sent when configured a tracking code within an order."
 msgstr ""
 "Este e-mail é enviado quando configurado um código de rastreamento dentro de "
 "um pedido."
 
-#: includes/emails/class-wc-correios-tracking-email.php:48
+#: includes/emails/class-wc-correios-tracking-email.php:62
 msgid "Your order #{order_number} has been sent by Correios"
 msgstr "Seu pedido #{order_number} foi enviado pelos Correios"
 
-#: includes/emails/class-wc-correios-tracking-email.php:57
+#: includes/emails/class-wc-correios-tracking-email.php:71
 msgid "Your order has been sent"
 msgstr "O seu pedido foi enviado"
 
-#: includes/emails/class-wc-correios-tracking-email.php:66
+#: includes/emails/class-wc-correios-tracking-email.php:80
 msgid "Hi there. Your recent order on {site_title} has been sent by Correios."
 msgstr "Olá. Seu pedido recente em {site_title} foi enviado pelos Correios."
 
-#: includes/emails/class-wc-correios-tracking-email.php:68
+#: includes/emails/class-wc-correios-tracking-email.php:82
 msgid ""
 "To track your delivery, use the following the tracking code(s): "
 "{tracking_code}"
@@ -658,7 +658,7 @@ msgstr ""
 "Para acompanhar a entrega, use o seguinte código de rastreamento: "
 "{tracking_code}"
 
-#: includes/emails/class-wc-correios-tracking-email.php:70
+#: includes/emails/class-wc-correios-tracking-email.php:84
 msgid ""
 "The delivery service is the responsibility of the Correios, but if you have "
 "any questions, please contact us."
@@ -667,31 +667,31 @@ msgstr ""
 "alguma dúvida, entre em contato conosco."
 
 #. translators: %s: list of placeholders
-#: includes/emails/class-wc-correios-tracking-email.php:78
+#: includes/emails/class-wc-correios-tracking-email.php:92
 msgid "Available placeholders: %s"
 msgstr "Conteúdos de marcação disponíveis: %s"
 
-#: includes/emails/class-wc-correios-tracking-email.php:84
+#: includes/emails/class-wc-correios-tracking-email.php:98
 msgid "Enable this email notification"
 msgstr "Habilitar esse e-mail de notificação"
 
-#: includes/emails/class-wc-correios-tracking-email.php:88
+#: includes/emails/class-wc-correios-tracking-email.php:102
 msgid "Subject"
 msgstr "Assunto"
 
-#: includes/emails/class-wc-correios-tracking-email.php:96
+#: includes/emails/class-wc-correios-tracking-email.php:110
 msgid "Email heading"
 msgstr "Cabeçalho do e-mail"
 
-#: includes/emails/class-wc-correios-tracking-email.php:104
+#: includes/emails/class-wc-correios-tracking-email.php:118
 msgid "Email content"
 msgstr "Conteúdo do e-mail"
 
-#: includes/emails/class-wc-correios-tracking-email.php:112
+#: includes/emails/class-wc-correios-tracking-email.php:126
 msgid "Email type"
 msgstr "Tipo do e-mail"
 
-#: includes/emails/class-wc-correios-tracking-email.php:114
+#: includes/emails/class-wc-correios-tracking-email.php:128
 msgid "Choose which format of email to send."
 msgstr "Escolha o formato de e-mail para enviar."
 
@@ -938,19 +938,61 @@ msgstr "O banco de dados de CEPs foi limpo com sucesso!"
 msgid "Carta Registrada"
 msgstr "Carta Registrada"
 
-#: includes/shipping/class-wc-correios-shipping-cws.php:34
+#: includes/shipping/class-wc-correios-shipping-cws-international.php:39
+msgid "Correios International (New API)"
+msgstr "Correios Internacional (Nova API)"
+
+#: includes/shipping/class-wc-correios-shipping-cws-international.php:40
+msgid "Correios International shipping method."
+msgstr "Método de envio dos Correios Internacional."
+
+#: includes/shipping/class-wc-correios-shipping-cws-international.php:63
+#: includes/shipping/class-wc-correios-shipping-cws.php:102
+msgid "Not declare"
+msgstr "Não declarar"
+
+#: includes/shipping/class-wc-correios-shipping-cws-international.php:64
+msgid "(030) Valor Declarado Internacional"
+msgstr "(030) Valor Declarado Internacional"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:46
 msgid "Correios (New API)"
 msgstr "Correios (Nova API)"
 
-#: includes/shipping/class-wc-correios-shipping-cws.php:35
+#: includes/shipping/class-wc-correios-shipping-cws.php:47
 msgid "Correios shipping method."
 msgstr "Método de envio dos Correios."
 
 #: includes/shipping/class-wc-correios-shipping-cws.php:70
+#: includes/shipping/class-wc-correios-shipping-cws.php:214
+msgid "Select a service..."
+msgstr "Selecione um serviço..."
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:103
+msgid "(019) Valor Declarado Nacional Premium e Expresso (use for SEDEX)"
+msgstr "(019) Valor Declarado Nacional Premium e Expresso (utilize para SEDEX)"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:104
+msgid "(064) Valor Declarado Nacional Standard (use for PAC)"
+msgstr "(064) Valor Declarado Nacional Standard (utilize para PAC)"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:105
+msgid "(065) Valor Declarado Correios Mini Envios (use for SEDEX Mini)"
+msgstr "(065) Valor Declarado Correios Mini Envios (utilize para o SEDEX Mini)"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:106
+msgid "(075) Valor Declarado Expresso RFID (SEDEX)"
+msgstr "(075) Valor Declarado Expresso RFID (SEDEX)"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:107
+msgid "(076) Valor Declarado Standard RFID (PAC)"
+msgstr "(076) Valor Declarado Standard RFID (PAC)"
+
+#: includes/shipping/class-wc-correios-shipping-cws.php:207
 msgid "Service"
 msgstr "Serviço"
 
-#: includes/shipping/class-wc-correios-shipping-cws.php:72
+#: includes/shipping/class-wc-correios-shipping-cws.php:209
 msgid ""
 "Select a service. It list all services available for your contract with "
 "Correios."
@@ -958,41 +1000,12 @@ msgstr ""
 "Selecione um serviço. Aqui esta uma lista de todos os serviços disponíveis "
 "para o seu contrato com os Correios."
 
-#: includes/shipping/class-wc-correios-shipping-cws.php:77
-#: includes/shipping/class-wc-correios-shipping-cws.php:226
-msgid "Select a service..."
-msgstr "Selecione um serviço..."
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:152
+#: includes/shipping/class-wc-correios-shipping-cws.php:289
 msgid ""
 "This controls how the price of the package must be declared for insurance "
 "purposes."
 msgstr ""
 "Isto controla como o preço do pacote deve ser declarado para fins de seguro."
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:157
-msgid "Not declare"
-msgstr "Não declarar"
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:158
-msgid "(019) Valor Declarado Nacional Premium e Expresso (use for SEDEX)"
-msgstr "(019) Valor Declarado Nacional Premium e Expresso (utilize para SEDEX)"
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:159
-msgid "(064) Valor Declarado Nacional Standard (use for PAC)"
-msgstr "(064) Valor Declarado Nacional Standard (utilize para PAC)"
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:160
-msgid "(065) Valor Declarado Correios Mini Envios (use for SEDEX Mini)"
-msgstr "(065) Valor Declarado Correios Mini Envios (utilize para o SEDEX Mini)"
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:161
-msgid "(075) Valor Declarado Expresso RFID (SEDEX)"
-msgstr "(075) Valor Declarado Expresso RFID (SEDEX)"
-
-#: includes/shipping/class-wc-correios-shipping-cws.php:162
-msgid "(076) Valor Declarado Standard RFID (PAC)"
-msgstr "(076) Valor Declarado Standard RFID (PAC)"
 
 #: includes/shipping/class-wc-correios-shipping-documento-economico.php:34
 msgid "Documento Econômico (Legacy)"

@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.1.8  
+**Stable tag:** 4.2.0  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -32,7 +32,7 @@ Confira o nosso guia de instalação e configuração do Correios na aba [Instal
 
 - WooCommerce 3.0 ou posterior para funcionar.
 - Integrado com a [API nova dos Correios](https://www.correios.com.br/atendimento/developers).
-- Compativel com o [Link Correios](https://www.linkcorreios.com.br/).
+- Compatível com o [Link Correios](https://www.linkcorreios.com.br/).
 
 ### Dúvidas? ###
 
@@ -64,11 +64,11 @@ Você pode esclarecer suas dúvidas usando:
 4. Ainda nesta página você pode clicar em "Atualizar lista de serviços" para baixar a lista de serviços dos Correios disponíveis no seu contrato.
 5. Finalmente vá até "WooCommerce" > "Configurações" > "Entrega" e crie/edite uma area de entrega para entregas no Brasil.
 6. Adicione o método de entrega "Correios (Nova API)".
-7. Clique para editar o métedo e selecione o "Serviço" que será usado. Por exemplo "PAC CONTRATO AG" ou "SEDEX CONTRATO AG" (os serviços são baixados na etapa 4 deste guia).
+7. Clique para editar o método e selecione o "Serviço" que será usado. Por exemplo "PAC CONTRATO AG" ou "SEDEX CONTRATO AG" (os serviços são baixados na etapa 4 deste guia).
 8. Finalmente termine de configurar as outras opções conforme a sua necessidade e salve o método de entrega.
 9. Pronto, tudo configurado.
 
-Para garantir que tudo esta funcionando tenha certeza de configurar o peso e médidas dos produtos em cada um deles, veja mais detalhes na sessão seguinte.
+Para garantir que tudo esta funcionando tenha certeza de configurar o peso e medidas dos produtos em cada um deles, veja mais detalhes na sessão seguinte.
 
 ### Configurações dos produtos ###
 
@@ -168,7 +168,7 @@ Se ainda não foi capaz de solucionar o problema, copie o conteúdo do arquivo d
 
 ### Dúvidas sobre o funcionamento do plugin? ###
 
-Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios/#new-post), vou responder conforme eu tenho tempo livre e caso sua dúvida for relacionada com o funcionamento deste plguin.
+Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](https://wordpress.org/support/plugin/woocommerce-correios/#new-post), vou responder conforme eu tenho tempo livre e caso sua dúvida for relacionada com o funcionamento deste plugin.
 
 ## Screenshots ##
 
@@ -198,6 +198,11 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 
 ## Changelog ##
+
+### 4.2.0 - 2023/10/29 ###
+
+- Implementação de método de entrega internacional.
+- Melhorada compatibilidade com PHP 8.2.
 
 ### 4.1.8 - 2023/09/29 ###
 
@@ -258,30 +263,7 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 4.1.7 ###
+### 4.2.0 ###
 
-- Implementação da nova API dos Correios para calculo do valor de entrega, estimativa de entrega, rastreamento de objeto e de busca de endereço por CEP.
-- Um novo método de entrega chamado "Correios (Nova API)" foi adicionado.
-- Atualizado valor mínimo declarado para 24 reais.
-- Melhorada exibição das datas da tabela de rastreamento de objeto.
-- Corrigido auto preenchimento de endereço quando a cidade tem apenas um CEP, prevenindo de remover o nome da rua e o bairro.
-- Atualizado peso máximo e valores do Impresso Normal.
-- Atualizado os preços de Carta Registrada.
-- Correções gerais de estabilidade e prevenindo erros no WP.
-- Adicionado suporte para WooCommerce High-Performance Order Storage.
-- Corrigida a validade do token dos Correios.
-- Adicionada mensagem para avisar quando a API dos Correios não esta configurada corretamente.
-- Removido suporte para versões anteriores ao WooCommerce 3.0.
-- Corrigida a tabela de rastreamento de objeto para ser responsiva.
-- Atualizado valor mínimo declarado para R$ 24,5.
-- Corrida taxa de manuseio que não estava sendo aplicada no método "Correios (Nova API)".
-- Atualizado o link para o rastreamento de objeto.
-- Adicionado suporte para serviços do tipo "LOG +".
-- Corrigido link de log da integração e dos métodos de entrega.
-- Corrigido erros quando token não pode ser gerado com sucesso.
-- Adicionado suporte para WooCommerce 8.1
-- Corrigido a exibição da estimativa de entrega para métodos offline.
-- Corrigido o assunto do e-mail do código de rastreamento que não era exibido as vezes.
-- Melhorado os logs para incluir apenas a resposta e o cabeçalho da resposta de requisições.
-- Melhorada a descrição dos campos da integração, adicionado link para ajudar os usuários encontrar o número do Cartão de Postagem.
-- Corrigido o comportamento da integração de preenchimento de endereço quando os campos da nova API estão preenchidos pela metade.
+- Implementação de método de entrega internacional.
+- Melhorada compatibilidade com PHP 8.2.

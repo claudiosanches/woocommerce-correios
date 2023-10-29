@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 4.2.0 - 2023/10/29 =
+
+- Implementação de método de entrega internacional.
+- Melhorada compatibilidade com PHP 8.2.
+
 = 4.1.8 - 2023/09/29 =
 
 - Corrigido o comportamento da integração de preenchimento de endereço quando os campos da nova API estão preenchidos pela metade.
@@ -66,7 +71,7 @@
 - Correção dos links que levam para a página de rastreio de encomenda.
 - Corrigido problema com código incorreto vindo do Webservice dos Correios impossibilitando mostrar o frete corretamente.
 - Atualizado valores do Impresso normal, Registro Módico e Registro Nacional para tabela de 01/08/2018.
-- Corrigido os valores de altura e comprimento que estavamos trocados.
+- Corrigido os valores de altura e comprimento que estavam trocados.
 
 = 3.7.1 - 2018/05/11 =
 
@@ -104,7 +109,7 @@
 = 3.4.0 - 2017/05/13 =
 
 - Adicionado novamente links para os códigos de rastreamento na detalhes do pedido no admin.
-- Adicionado novos links com código de rastreamneto na lista de pedidos no admin.
+- Adicionado novos links com código de rastreamento na lista de pedidos no admin.
 - Corrigido códigos de rastreamento que ainda não foram atualizados na página de detalhes do pedido em "Minha conta".
 
 = 3.3.0 - 2017/05/05 =
@@ -119,7 +124,7 @@
 
 = 3.2.1 - 2017/03/08 =
 
-- Corrigida compatiblidade com PHP 5.2 e 5.3 na nova ferramenta de cadastro de código de rastreamento.
+- Corrigida compatibilidade com PHP 5.2 e 5.3 na nova ferramenta de cadastro de código de rastreamento.
 
 = 3.2.0 - 2017/03/07 =
 
@@ -135,7 +140,7 @@
 
 = 3.1.6 - 2017/01/05 =
 
-- Declara valor para os métodos de sedex apenas se o total do pacote for mais do que 17 reais.
+- Declara valor para os métodos de SEDEX apenas se o total do pacote for mais do que 17 reais.
 - Adicionada opção manual para estimativa de entrega para os métodos de Impresso e Carta Registrada.
 - Corrigida mensagens de alerta do plugin para serem exibidas apenas na página do carrinho.
 
