@@ -4,12 +4,10 @@
  *
  * @package WooCommerce_Correios/Classes/Shipping
  * @since   4.0.0
- * @version 4.1.1
+ * @version 4.2.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Correios Webservice API shipping method class.
@@ -24,9 +22,23 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	public $shipping_class_id = '';
 
 	/**
-	 * Initialize Documento Econômico.
+	 * Segments.
 	 *
-	 * @param int $instance_id Shipping zone instance.
+	 * @var string[]
+	 */
+	protected $segments = array( '3', '6' );
+
+	/**
+	 * API type.
+	 *
+	 * @var string
+	 */
+	protected $api_type = 'nacional';
+
+	/**
+	 * Initialize the Correios shipping method.
+	 *
+	 * @param int $instance_id Shipping method instance ID.
 	 */
 	public function __construct( $instance_id = 0 ) {
 		$this->id                 = 'correios-cws';
@@ -46,6 +58,131 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		$this->shipping_class_id = (int) $this->get_option( 'shipping_class_id', '-1' );
 
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
+	}
+
+	/**
+	 * Load services list only in shipping settings page.
+	 *
+	 * @return array
+	 */
+	protected function load_services_list() {
+		$default = array(
+			'' => __( 'Select a service...', 'woocommerce-correios' ),
+		);
+
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return $default;
+		}
+
+		$screen = get_current_screen();
+
+		if ( isset( $screen->id ) && 'woocommerce_page_wc-settings' === $screen->id ) {
+			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$shipping_zone = isset( $_REQUEST['instance_id'] ) && 0 < intval( $_REQUEST['instance_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( $shipping_tab && $shipping_zone ) {
+				$connect  = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );
+				$segments = apply_filters( 'woocommerce_correios_cws_allowed_segments_ids', $this->segments );
+				$list     = $connect->get_available_services( false, $segments );
+
+				return $default + $list;
+			}
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Get declaration options.
+	 *
+	 * @return array<string,string>
+	 */
+	protected function get_declaration_options() {
+		return array(
+			''    => __( 'Not declare', 'woocommerce-correios' ),
+			'019' => __( '(019) Valor Declarado Nacional Premium e Expresso (use for SEDEX)', 'woocommerce-correios' ),
+			'064' => __( '(064) Valor Declarado Nacional Standard (use for PAC)', 'woocommerce-correios' ),
+			'065' => __( '(065) Valor Declarado Correios Mini Envios (use for SEDEX Mini)', 'woocommerce-correios' ),
+			'075' => __( '(075) Valor Declarado Expresso RFID (SEDEX)', 'woocommerce-correios' ),
+			'076' => __( '(076) Valor Declarado Standard RFID (PAC)', 'woocommerce-correios' ),
+		);
+	}
+
+	/**
+	 * Get the declared value from the package.
+	 *
+	 * @param  array $package Cart package.
+	 * @return float
+	 */
+	protected function get_declared_value( $package ) {
+		if ( 24.5 > $package['contents_cost'] ) {
+			return 0;
+		}
+
+		return $package['contents_cost'];
+	}
+
+	/**
+	 * Get additional time.
+	 *
+	 * @param  array $package Package data.
+	 *
+	 * @return array
+	 */
+	protected function get_additional_time( $package = array() ) {
+		return apply_filters( 'woocommerce_correios_shipping_additional_time', $this->get_option( 'additional_time' ), $package );
+	}
+
+	/**
+	 * Check if it's possible to calculate the shipping.
+	 *
+	 * @param  array $package Cart package.
+	 * @return bool
+	 */
+	protected function can_be_calculated( $package ) {
+		if ( empty( $package['destination']['postcode'] ) ) {
+			return false;
+		}
+
+		return 'BR' === $package['destination']['country'];
+	}
+
+	/**
+	 * Get shipping rate.
+	 *
+	 * @param  array $package Cart package.
+	 *
+	 * @return array
+	 */
+	protected function get_rate( $package ) {
+		$calculate = new WC_Correios_Cws_Calculate( $this->id, $this->instance_id );
+		$calculate->set_debug( $this->get_option( 'debug' ) );
+		$calculate->set_product_code( $this->get_service_code() );
+		$calculate->set_package( $package );
+		$calculate->set_origin_postcode( $this->get_option( 'origin_postcode' ) );
+		$calculate->set_destination_postcode( $package['destination']['postcode'] );
+		$calculate->set_destination_country( $package['destination']['country'] );
+
+		if ( '' !== $this->get_option( 'declare_value' ) ) {
+			$calculate->set_declared_value_code( $this->get_option( 'declare_value' ) );
+			$calculate->set_declared_value( $this->get_declared_value( $package ) );
+		}
+
+		$calculate->set_own_hands( 'yes' === $this->get_option( 'own_hands' ) ? 'S' : 'N' );
+		$calculate->set_receipt_notice( 'yes' === $this->get_option( 'receipt_notice' ) ? 'S' : 'N' );
+
+		$calculate->set_minimum_height( $this->get_option( 'minimum_height' ) );
+		$calculate->set_minimum_width( $this->get_option( 'minimum_width' ) );
+		$calculate->set_minimum_length( $this->get_option( 'minimum_length' ) );
+		$calculate->set_extra_weight( $this->get_option( 'extra_weight', '0' ) );
+
+		$shipping = $calculate->get_shipping( $this->api_type );
+
+		if ( 'yes' === $this->get_option( 'show_delivery_time' ) && ! empty( $shipping['pcFinal'] ) ) {
+			$shipping['prazo'] = $calculate->get_time( $this->api_type );
+		}
+
+		return $shipping;
 	}
 
 	/**
@@ -153,14 +290,7 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 				'desc_tip'    => true,
 				'class'       => 'wc-enhanced-select',
 				'default'     => '',
-				'options'     => array(
-					''    => __( 'Not declare', 'woocommerce-correios' ),
-					'019' => __( '(019) Valor Declarado Nacional Premium e Expresso (use for SEDEX)', 'woocommerce-correios' ),
-					'064' => __( '(064) Valor Declarado Nacional Standard (use for PAC)', 'woocommerce-correios' ),
-					'065' => __( '(065) Valor Declarado Correios Mini Envios (use for SEDEX Mini)', 'woocommerce-correios' ),
-					'075' => __( '(075) Valor Declarado Expresso RFID (SEDEX)', 'woocommerce-correios' ),
-					'076' => __( '(076) Valor Declarado Standard RFID (PAC)', 'woocommerce-correios' ),
-				),
+				'options'     => $this->get_declaration_options(),
 			),
 			'package_standard'   => array(
 				'title'       => __( 'Package Standard', 'woocommerce-correios' ),
@@ -217,57 +347,12 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	}
 
 	/**
-	 * Load services list only in shipping settings page.
-	 *
-	 * @return array
-	 */
-	protected function load_services_list() {
-		$default = array(
-			'' => __( 'Select a service...', 'woocommerce-correios' ),
-		);
-
-		if ( ! function_exists( 'get_current_screen' ) ) {
-			return $default;
-		}
-
-		$screen = get_current_screen();
-
-		if ( isset( $screen->id ) && 'woocommerce_page_wc-settings' === $screen->id ) {
-			$shipping_tab  = isset( $_REQUEST['tab'] ) && 'shipping' === $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$shipping_zone = isset( $_REQUEST['instance_id'] ) && 0 < intval( $_REQUEST['instance_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-			if ( $shipping_tab && $shipping_zone ) {
-				$connect = new WC_Correios_Cws_Connect( $this->id, $this->instance_id );
-				$list    = $connect->get_available_services();
-
-				return $default + $list;
-			}
-		}
-
-		return $default;
-	}
-
-	/**
 	 * Correios options page.
 	 */
 	public function admin_options() {
 		$cws_needs_setup = 1 >= count( $this->instance_form_fields['product_code']['options'] );
 
 		include WC_Correios::get_plugin_path() . 'includes/admin/views/html-admin-shipping-method-settings.php';
-	}
-
-	/**
-	 * Get the declared value from the package.
-	 *
-	 * @param  array $package Cart package.
-	 * @return float
-	 */
-	protected function get_declared_value( $package ) {
-		if ( 24.5 > $package['contents_cost'] ) {
-			return 0;
-		}
-
-		return $package['contents_cost'];
 	}
 
 	/**
@@ -305,61 +390,13 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 	}
 
 	/**
-	 * Get additional time.
-	 *
-	 * @param  array $package Package data.
-	 *
-	 * @return array
-	 */
-	protected function get_additional_time( $package = array() ) {
-		return apply_filters( 'woocommerce_correios_shipping_additional_time', $this->get_option( 'additional_time' ), $package );
-	}
-
-	/**
-	 * Get shipping rate.
-	 *
-	 * @param  array $package Cart package.
-	 *
-	 * @return array
-	 */
-	protected function get_rate( $package ) {
-		$calculate = new WC_Correios_Cws_Calculate( $this->id, $this->instance_id );
-		$calculate->set_debug( $this->get_option( 'debug' ) );
-		$calculate->set_product_code( $this->get_service_code() );
-		$calculate->set_package( $package );
-		$calculate->set_origin_postcode( $this->get_option( 'origin_postcode' ) );
-		$calculate->set_destination_postcode( $package['destination']['postcode'] );
-
-		if ( '' !== $this->get_option( 'declare_value' ) ) {
-			$calculate->set_declared_value_code( $this->get_option( 'declare_value' ) );
-			$calculate->set_declared_value( $this->get_declared_value( $package ) );
-		}
-
-		$calculate->set_own_hands( 'yes' === $this->get_option( 'own_hands' ) ? 'S' : 'N' );
-		$calculate->set_receipt_notice( 'yes' === $this->get_option( 'receipt_notice' ) ? 'S' : 'N' );
-
-		$calculate->set_minimum_height( $this->get_option( 'minimum_height' ) );
-		$calculate->set_minimum_width( $this->get_option( 'minimum_width' ) );
-		$calculate->set_minimum_length( $this->get_option( 'minimum_length' ) );
-		$calculate->set_extra_weight( $this->get_option( 'extra_weight', '0' ) );
-
-		$shipping = $calculate->get_shipping();
-
-		if ( 'yes' === $this->get_option( 'show_delivery_time' ) && ! empty( $shipping['pcFinal'] ) ) {
-			$shipping['prazo'] = $calculate->get_time();
-		}
-
-		return $shipping;
-	}
-
-	/**
 	 * Calculates the shipping rate.
 	 *
 	 * @param array $package Order package.
 	 */
 	public function calculate_shipping( $package = array() ) {
-		// Check if valid to be calculeted.
-		if ( '' === $package['destination']['postcode'] || 'BR' !== $package['destination']['country'] ) {
+		// Check if the package can be calculated.
+		if ( ! $this->can_be_calculated( $package ) ) {
 			return;
 		}
 
@@ -390,8 +427,11 @@ class WC_Correios_Shipping_Cws extends WC_Correios_Shipping {
 		// Display delivery.
 		$meta = array();
 		if ( ! empty( $shipping['prazo'] ) ) {
+			// Uses prazoEntrega for national shipping methods and prazoMaximo for international shipping methods.
+			$delivery_time = isset( $shipping['prazo']['prazoEntrega'] ) ? $shipping['prazo']['prazoEntrega'] : $shipping['prazo']['prazoMaximo'];
+
 			$meta = array(
-				'_delivery_forecast' => intval( $shipping['prazo']['prazoEntrega'] ) + intval( $this->get_additional_time( $package ) ),
+				'_delivery_forecast' => intval( $delivery_time ) + intval( $this->get_additional_time( $package ) ),
 			);
 		}
 
