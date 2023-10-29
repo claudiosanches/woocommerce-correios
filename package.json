@@ -18,6 +18,7 @@
     "commit": "npm install && composer install && npm run build && wp-plugin-deploy",
     "lint:js": "eslint assets/js",
     "lint:php": "composer run-script phpcs",
+    "fix:php": "composer run-script phpcbf",
     "lint:scss": "stylelint assets/scss/**/*.scss",
     "lint": "npm-run-all -s lint:*",
     "scss": "sass --no-source-map --style=compressed assets/scss:assets/css",

@@ -28,6 +28,9 @@
         "phpcs": [
             "phpcs --standard=phpcs.ruleset.xml"
         ],
+        "phpcbf": [
+            "phpcbf --standard=phpcs.ruleset.xml"
+        ],
         "makepot": [
             "wp i18n make-pot . languages/woocommerce-correios.pot --exclude=vendor/node_modules"
         ]
