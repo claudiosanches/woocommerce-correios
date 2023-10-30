@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.2.2 - 2013/10/30 =
+
+- Corrigida conversão de peso para gramas.
+
 = 4.2.1 - 2013/10/29 =
 
 - Adicionado suporte para WooCommerce 8.2+.
