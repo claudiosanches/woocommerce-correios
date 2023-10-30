@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.2.1 - 2013/10/29 =
+
+- Adicionado suporte para WooCommerce 8.2+.
+
 = 4.2.0 - 2023/10/29 =
 
 - Implementação de método de entrega internacional.
