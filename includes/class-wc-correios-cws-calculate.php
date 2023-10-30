@@ -373,7 +373,7 @@ class WC_Correios_Cws_Calculate extends WC_Correios_Webservice {
 	 * @return float
 	 */
 	public function get_weight() {
-		return $this->float_to_string( wc_get_weight( $this->weight + $this->extra_weight, 'g', 'kg' ) );
+		return wc_get_weight( $this->weight + $this->extra_weight, 'g' );
 	}
 
 	/**
