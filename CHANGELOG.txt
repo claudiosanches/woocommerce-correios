@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 4.2.3 - 2023/11/08 =
+
+- Corrigido um erro relacionado a lista de serviços desatualizada que impedia editar o método de entrega.
+- Atualizada a mensagem do e-mail para deixar claro que estimativa de entrega começa apenas depois do envio do produto.
+
 = 4.2.2 - 2013/10/30 =
 
 - Corrigida conversão de peso para gramas.

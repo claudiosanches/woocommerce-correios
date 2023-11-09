@@ -6,8 +6,8 @@ msgstr ""
 "WooCommerce - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
 "correios\n"
-"POT-Creation-Date: 2023-10-29T18:26:36-03:00\n"
-"PO-Revision-Date: 2023-10-29 18:29-0300\n"
+"POT-Creation-Date: 2023-11-08T23:43:23-03:00\n"
+"PO-Revision-Date: 2023-11-08 23:48-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -603,10 +603,10 @@ msgstr "CEP inválido."
 
 #. translators: 1: shipping method name 2: days to delivery
 #: includes/class-wc-correios-orders.php:40
-msgid "%1$s (delivery within %2$d working day after paid)"
-msgid_plural "%1$s (delivery within %2$d working days after paid)"
-msgstr[0] "%1$s (entrega dentro de %2$d dia útil, após o pagamento)"
-msgstr[1] "%1$s (entrega dentro de %2$d dias úteis, após o pagamento)"
+msgid "%1$s (delivery within %2$d working day after sending)"
+msgid_plural "%1$s (delivery within %2$d working days after sending)"
+msgstr[0] "%1$s (entrega dentro de %2$d dia útil, após o envio)"
+msgstr[1] "%1$s (entrega dentro de %2$d dias úteis, após o envio)"
 
 #: includes/class-wc-correios-orders.php:57
 msgid "Delivery forecast"

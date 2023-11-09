@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.2.2  
+**Stable tag:** 4.2.3  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -199,11 +199,16 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Changelog ##
 
-### 4.2.2 - 2013/10/30 ###
+### 4.2.3 - 2023/11/08 ###
+
+- Corrigido um erro relacionado a lista de serviços desatualizada que impedia editar o método de entrega.
+- Atualizada a mensagem do e-mail para deixar claro que estimativa de entrega começa apenas depois do envio do produto.
+
+### 4.2.2 - 2023/10/30 ###
 
 - Corrigida conversão de peso para gramas.
 
-### 4.2.1 - 2013/10/29 ###
+### 4.2.1 - 2023/10/29 ###
 
 - Adicionado suporte para WooCommerce 8.2+.
 
@@ -271,8 +276,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 ## Upgrade Notice ##
 
-### 4.2.2 ###
+### 4.2.3 ###
 
+- Corrigido um erro relacionado a lista de serviços desatualizada que impedia editar o método de entrega.
+- Atualizada a mensagem do e-mail para deixar claro que estimativa de entrega começa apenas depois do envio do produto.
 - Corrigida conversão de peso para gramas.
 - Adicionado suporte para WooCommerce 8.2+.
 - Implementação de método de entrega internacional.
