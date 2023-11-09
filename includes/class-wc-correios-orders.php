@@ -37,7 +37,7 @@ class WC_Correios_Orders {
 
 			if ( $total ) {
 				/* translators: 1: shipping method name 2: days to delivery */
-				$names[] = sprintf( _n( '%1$s (delivery within %2$d working day after paid)', '%1$s (delivery within %2$d working days after paid)', $total, 'woocommerce-correios' ), $shipping_method->get_name(), $total );
+				$names[] = sprintf( _n( '%1$s (delivery within %2$d working day after sending)', '%1$s (delivery within %2$d working days after sending)', $total, 'woocommerce-correios' ), $shipping_method->get_name(), $total );
 			} else {
 				$names[] = $shipping_method->get_name();
 			}
