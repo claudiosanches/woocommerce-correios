@@ -127,7 +127,7 @@ class WC_Correios {
 	 * Updates.
 	 */
 	private static function update() {
-		WC_Correios_Install::remove_old_transients();
+		WC_Correios_Install::maybe_update();
 	}
 
 	/**

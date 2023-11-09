@@ -33,15 +33,27 @@ class WC_Correios_Install {
 	}
 
 	/**
-	 * Remove old transients.
+	 * Maybe update.
 	 */
-	public static function remove_old_transients() {
+	public static function maybe_update() {
 		$version = self::get_version();
 
-		if ( version_compare( $version, '4.0', '<=' ) ) {
-			delete_transient( 'correios-cwsstaging-token' );
-			delete_transient( 'correios-cwsproduction-token' );
+		if ( version_compare( $version, '4.2.3', '<' ) ) {
+			self::upgrade_to_423();
 			self::update_version();
 		}
+	}
+
+	/**
+	 * Upgrade to 4.2.3.
+	 */
+	private static function upgrade_to_423() {
+		// Remove old transients.
+		delete_transient( 'correios-cwsstaging-token' );
+		delete_transient( 'correios-cwsproduction-token' );
+
+		// Update service list.
+		$connect = new WC_Correios_Cws_Connect();
+		$connect->get_available_services( true );
 	}
 }
