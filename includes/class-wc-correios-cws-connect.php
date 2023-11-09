@@ -277,7 +277,8 @@ class WC_Correios_Cws_Connect {
 
 		foreach ( $raw_data as $item ) {
 			if (
-				( $segments && ! in_array( strval( $item['coSegmento'] ), $segments, true ) )
+				! isset( $item['coSegmento'] )
+				|| ( $segments && ! in_array( strval( $item['coSegmento'] ), $segments, true ) )
 				|| ! isset( $item['codigo'] )
 			) {
 				continue;
