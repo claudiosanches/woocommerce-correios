@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.2.5 - 2024/02/17 =
+
+- Declarado suporte para WooCommerce 8.6 e WordPress 6.4.
+
 = 4.2.4 - 2024/02/17 =
 
 - Corrigida compatibilidade com WooCommerce 8.6+.

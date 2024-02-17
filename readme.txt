@@ -3,8 +3,8 @@ Contributors: claudiosanches, rodrigoprior, matheuscl
 Donate link: https://apoia.se/claudiosanches?utm_source=plugin-correios
 Tags: shipping, delivery, woocommerce, correios
 Requires at least: 4.0
-Tested up to: 6.3
-Stable tag: 4.2.4
+Tested up to: 6.4
+Stable tag: 4.2.5
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -182,6 +182,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 8. Exemplo da tabela do histórico de rastreamento que é exibida no lugar do alerta acima quando ativada a opção "Tabela do histórico de rastreamento" nas configurações de integração.
 
 == Changelog ==
+
+= 4.2.5 - 2024/02/17 =
+
+- Declarado suporte para WooCommerce 8.6 e WordPress 6.4.
 
 = 4.2.4 - 2024/02/17 =
 
