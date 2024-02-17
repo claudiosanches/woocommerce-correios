@@ -84,7 +84,7 @@ class WC_Correios_Integration extends WC_Integration {
 	 * @return string
 	 */
 	protected function get_log_link() {
-		return ' <a href="' . esc_url( add_query_arg( 'log_file', wc_get_log_file_name( $this->id ), admin_url( 'admin.php?page=wc-status&tab=logs' ) ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
+		return ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs' ) ) . '">' . __( 'View logs.', 'woocommerce-correios' ) . '</a>';
 	}
 
 	/**
