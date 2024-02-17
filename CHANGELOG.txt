@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.2.4 - 2024/02/17 =
+
+- Corrigida compatibilidade com WooCommerce 8.6+.
+
 = 4.2.3 - 2023/11/08 =
 
 - Corrigido um erro relacionado a lista de serviços desatualizada que impedia editar o método de entrega.

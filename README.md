@@ -4,7 +4,7 @@
 **Tags:** shipping, delivery, woocommerce, correios  
 **Requires at least:** 4.0  
 **Tested up to:** 6.3  
-**Stable tag:** 4.2.3  
+**Stable tag:** 4.2.4  
 **Requires PHP:** 5.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -198,6 +198,10 @@ Em caso de dúvidas, basta abrir um tópico no [fórum de suporte do plugin](htt
 
 
 ## Changelog ##
+
+### 4.2.4 - 2024/02/17 ###
+
+- Corrigida compatibilidade com WooCommerce 8.6+.
 
 ### 4.2.3 - 2023/11/08 ###
 
